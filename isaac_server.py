@@ -9,23 +9,23 @@ from scipy.spatial.transform import Rotation
 # omni-isaaclab
 from omni.isaac.lab.app import AppLauncher
 
-import cli_args
+import isaac.scripts.isaac_cli_args as isaac_cli_args
 
 # add argparse arguments
-parser = argparse.ArgumentParser(description="This script demonstrates how to collect data from the matterport dataset.")
+parser = argparse.ArgumentParser(description="Server for reading data from Isaac Lab agent and issuing action commands")
 parser.add_argument("--episode_index", default=0, type=int, help="Episode index.")
 
-parser.add_argument("--task", type=str, default="go2_matterport", help="Name of the task.")
+parser.add_argument("--task", type=str, default="go2_matterport_vision", help="Name of the task.")
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments to simulate.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--video", action="store_true", default=False, help="Record videos during training.")
 parser.add_argument("--video_length", type=int, default=2000, help="Length of the recorded video (in steps).")
-parser.add_argument("--history_length", default=0, type=int, help="Length of history buffer.")
+parser.add_argument("--history_length", default=9, type=int, help="Length of history buffer.")
 parser.add_argument("--use_cnn", action="store_true", default=None, help="Name of the run folder to resume from.")
 parser.add_argument("--arm_fixed", action="store_true", default=False, help="Fix the robot's arms.")
 parser.add_argument("--use_rnn", action="store_true", default=False, help="Use RNN in the actor-critic model.")
 
-cli_args.add_rsl_rl_args(parser)
+isaac_cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 # parser.add_argument("--draw_pointcloud", action="store_true", default=False, help="DRaw pointlcoud.")
 args_cli = parser.parse_args()
@@ -58,8 +58,8 @@ from omni.isaac.lab_tasks.utils.wrappers.rsl_rl import (
 from omni.isaac.vlnce.config import *
 from omni.isaac.vlnce.utils import ASSETS_DIR, RslRlVecEnvHistoryWrapper, VLNEnvWrapper
 
-from protocol import *
-from planner import *
+from utils.protocol import *
+from utils.planner import *
 
 def quat_wxyz_to_xyzw(quat):
     return np.array([quat[1], quat[2], quat[3], quat[0]])
@@ -127,9 +127,9 @@ else:
     env = RslRlVecEnvWrapper(env)
 
 
-agent_cfg: RslRlOnPolicyRunnerCfg = cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
+agent_cfg: RslRlOnPolicyRunnerCfg = isaac_cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
 
-log_root_path = os.path.join(os.path.dirname(__file__),"../logs", "rsl_rl", agent_cfg.experiment_name)
+log_root_path = os.path.join(os.path.dirname(__file__),"isaac/logs", "rsl_rl", agent_cfg.experiment_name)
 log_root_path = os.path.abspath(log_root_path)
 # import pdb; pdb.set_trace()
 resume_path = get_checkpoint_path(log_root_path, args_cli.load_run, agent_cfg.load_checkpoint)
@@ -178,8 +178,8 @@ cfg2 = VisualizationMarkersCfg(
      
 
 
-from server import run_server,format_data
-from planner import Planner
+from utils.server import run_server,format_data
+from utils.planner import Planner
 vel_command = np.array([0,0,0.0])
 use_planner = False
 planner = Planner(cruise_vel=1.2,max_vw=2)

@@ -8,9 +8,9 @@ from collections import deque
 import math
 import pygame.colordict
 
-from protocol import *
+from utils.protocol import *
 from argparse import ArgumentParser
-from planner import fit_smoothing_spline
+from utils.planner import fit_smoothing_spline
 HFOV = 72
 #preprogrammed waypoints to execute by pressing enter.
 # WAYPOINTS = np.array([
@@ -26,7 +26,8 @@ MAGNIFICATION_OPTIONS = [1,2,4,6,8]
 magnification_choice = 3
 
 parser = ArgumentParser()
-parser.add_argument("--host",type=str,default='localhost')
+parser.description = "Welcome to the robot client for the SG VLN project"
+parser.add_argument("--host",type=str,default='localhost',help="the host name of the remote robot server")
 args = parser.parse_args()
 pygame.init()
 BORDER = 30
@@ -102,7 +103,7 @@ def draw_compass_arrow(
     surface.blit(rotated_arrow, arrow_rect)
 clock = pygame.time.Clock()
 
-from socket_client import request_sensor_data,send_action_message,request_planner_state
+from utils.socket_client import request_sensor_data,send_action_message,request_planner_state
 
 run = True
 data = None

@@ -6,7 +6,7 @@ import time
 import numpy as np
 import cv2 # For dummy image generation
 import traceback
-from protocol import *
+from utils.protocol import *
 import jsonpickle
 import json
 # --- Configuration ---

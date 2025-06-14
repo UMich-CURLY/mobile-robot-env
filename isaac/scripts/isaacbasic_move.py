@@ -9,13 +9,13 @@ import numpy as np
 # omni-isaaclab
 from omni.isaac.lab.app import AppLauncher
 
-import cli_args
+import isaac.scripts.isaac_cli_args as isaac_cli_args
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="This script demonstrates how to collect data from the matterport dataset.")
 parser.add_argument("--episode_index", default=0, type=int, help="Episode index.")
 
-parser.add_argument("--task", type=str, default="go2_matterport", help="Name of the task.")
+parser.add_argument("--task", type=str, default="go2_matterport_vision", help="Name of the task.")
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments to simulate.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--video", action="store_true", default=False, help="Record videos during training.")
@@ -25,7 +25,7 @@ parser.add_argument("--use_cnn", action="store_true", default=None, help="Name o
 parser.add_argument("--arm_fixed", action="store_true", default=False, help="Fix the robot's arms.")
 parser.add_argument("--use_rnn", action="store_true", default=False, help="Use RNN in the actor-critic model.")
 
-cli_args.add_rsl_rl_args(parser)
+isaac_cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 # parser.add_argument("--draw_pointcloud", action="store_true", default=False, help="DRaw pointlcoud.")
 args_cli = parser.parse_args()
@@ -110,7 +110,7 @@ else:
     env = RslRlVecEnvWrapper(env)
 
 
-agent_cfg: RslRlOnPolicyRunnerCfg = cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
+agent_cfg: RslRlOnPolicyRunnerCfg = isaac_cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
 
 log_root_path = os.path.join(os.path.dirname(__file__),"../logs", "rsl_rl", agent_cfg.experiment_name)
 log_root_path = os.path.abspath(log_root_path)
@@ -135,7 +135,7 @@ env.unwrapped.sim.set_camera_view(eye=cam_eye, target=cam_target)
 
 obs, infos = env.reset()
 
-from server import run_server
+from utils.server import run_server
 
 
 
