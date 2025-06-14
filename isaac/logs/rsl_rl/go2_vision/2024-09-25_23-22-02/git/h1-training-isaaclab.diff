@@ -1,0 +1,347 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/observations.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	heightmap_images/
+	output.mp4
+	robot_rgb_images/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+index d73dd89..075925b 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+@@ -15,7 +15,8 @@ from omni.isaac.lab.managers import SceneEntityCfg
+ from omni.isaac.lab.terrains import TerrainImporterCfg, TerrainGeneratorCfg, FlatPatchSamplingCfg
+ import omni.isaac.lab.terrains as terrain_gen
+ from omni.isaac.lab.scene import InteractiveSceneCfg
+-from omni.isaac.lab.sensors import ContactSensorCfg, RayCasterCfg, patterns, RayCasterCameraCfg
++from omni.isaac.lab.sensors import ContactSensorCfg, RayCasterCfg, patterns, RayCasterCameraCfg, CameraCfg
++# from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
+ from omni.isaac.lab.actuators import ImplicitActuatorCfg, DelayedPDActuatorCfg
+ from omni.isaac.lab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR#, ROBOT_DIR
+ from omni.isaac.lab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+@@ -150,23 +151,23 @@ Go2_Vision_TERRAINS_CFG = TerrainGeneratorCfg(
+         #     proportion=0.1, gap_width_range=(0.5, 1.0), platform_width=2.0
+         # ),
+         "hf_pyramid_slope": terrain_gen.HfPyramidSlopedTerrainCfg(
+-            proportion=0.05, slope_range=(0.0, 0.2), platform_width=2.0, border_width=0.25
++            proportion=0.05, slope_range=(0.0, 0.3), platform_width=2.0, border_width=0.25
+         ),
+         "hf_pyramid_slope_inv": terrain_gen.HfInvertedPyramidSlopedTerrainCfg(
+-            proportion=0.05, slope_range=(0.0, 0.2), platform_width=2.0, border_width=0.25 
++            proportion=0.05, slope_range=(0.0, 0.3), platform_width=2.0, border_width=0.25 
+         ),
+         "init_pos": terrain_gen.HfDiscreteObstaclesTerrainCfg(
+-            proportion=0.3, 
++            proportion=0.2, 
+             num_obstacles=8,
+             obstacle_height_mode="fixed",
+-            obstacle_height_range=(0.3, 2.0), obstacle_width_range=(0.2, 1.0), 
+-            platform_width=0.25
++            obstacle_height_range=(0.3, 2.0), obstacle_width_range=(0.4, 1.0), 
++            platform_width=0.0
+         ),
+     },
+ )
+ for sub_terrain_name, sub_terrain_cfg in Go2_Vision_TERRAINS_CFG.sub_terrains.items():
+     sub_terrain_cfg.flat_patch_sampling = {
+-        sub_terrain_name: FlatPatchSamplingCfg(num_patches=2, patch_radius=[0.01,0.1,0.3, 0.5,0.7, 1.0,1.2, 1.5], max_height_diff=0.5)
++        sub_terrain_name: FlatPatchSamplingCfg(num_patches=2, patch_radius=[0.01,0.1,0.2,0.3, 0.4, 0.5,0.6, 0.7, 1.0,1.2, 1.5], max_height_diff=0.3)
+     }
+ 
+ 
+@@ -221,6 +222,14 @@ class Go2VisionSceneCfg(InteractiveSceneCfg):
+         debug_vis=True,
+         mesh_prim_paths=["/World/ground"],
+     )
++    # rgb_camera = CameraCfg(
++    #     prim_path="{ENV_REGEX_NS}/Robot/Head_upper/rgb_camera",
++    #     offset=CameraCfg.OffsetCfg(pos=(0.0, 0.0, 0.5), rot=(0.183,-0.683,0.683,-0.183)),
++    #     spawn=sim_utils.PinholeCameraCfg(horizontal_aperture=87.0),
++    #     width=960,
++    #     height=960,
++    #     data_types=["rgb"],
++    # )
+     contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, track_air_time=True)
+ 
+     # lights
+@@ -397,6 +406,16 @@ class ObservationsCfg:
+             self.enable_corruption = False
+             self.concatenate_terms = True
+ 
++    @configclass
++    class VisionCfg(ObsGroup):
++        rgb_image = ObsTerm(
++            func=mdp.isaac_camera_data, 
++            params={"sensor_cfg": SceneEntityCfg("rgb_camera"), "data_type": "rgb"})
++
++        def __post_init__(self):
++            self.enable_corruption = False
++            self.concatenate_terms = False
++
+     # observation groups
+     policy: PolicyCfg = PolicyCfg()
+     proprio: ProprioCfg = ProprioCfg()
+@@ -426,9 +445,11 @@ class Go2VisionRoughEnvCfg(Go2BaseRoughEnvCfg):
+ 
+         # update sensor period
+         self.scene.height_scanner.update_period = self.sim.dt * self.decimation
+-        self.scene.lidar_sensor.update_period = self.sim.dt * self.decimation
++        self.scene.lidar_sensor.update_period = self.sim.dt * self.decimation#* 13 # 0.005*13 = 0.065 
++        # self.scene.rgb_camera.update_period = self.sim.dt 
+         self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 1.0)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
++        self.commands.base_velocity.debug_vis = False
+         self.events.reset_base = EventTerm(
+             func=mdp.reset_root_state_from_terrain,
+             mode="reset",
+@@ -444,10 +465,26 @@ class Go2VisionRoughEnvCfg(Go2BaseRoughEnvCfg):
+                 },
+             },
+         )
++    #     self.events.reset_base = EventTerm(
++    #     func=mdp.reset_root_state_uniform,
++    #     mode="reset",
++    #     params={
++    #         "pose_range": {"x": (-0.0, 0.0), "y": (-0.0, 0.0), "yaw": (-3.14, 3.14)},
++    #         "velocity_range": {
++    #             "x": (-0.5, 0.5),
++    #             "y": (-0.0, 0.0),
++    #             "z": (-0.0, 0.0),
++    #             "roll": (-0.5, 0.5),
++    #             "pitch": (-0.5, 0.5),
++    #             "yaw": (-0.5, 0.5),
++    #         },
++    #     },
++    # )
+         # import pdb; pdb.set_trace()
+         # self.commands.base_velocity.ranges.ang_vel_z = (-0.5, 0.5)
+-        self.rewards.feet_air_time.weight = 0.01
++        self.rewards.feet_air_time.weight = 0.02
+         self.rewards.action_rate_l2.weight = -0.04
++        self.rewards.track_ang_vel_z_exp.weight = 1.5
+ 
+ 
+ @configclass
+@@ -455,7 +492,7 @@ class Go2VisionRoughEnvCfg_PLAY(Go2VisionRoughEnvCfg):
+     def __post_init__(self):
+         # post init of parent
+         super().__post_init__()
+-
++        # self.episode_length_s = 5
+         # make a smaller scene for play
+         self.scene.num_envs = 50
+         self.scene.env_spacing = 2.5
+@@ -477,7 +514,8 @@ class Go2VisionRoughEnvCfg_PLAY(Go2VisionRoughEnvCfg):
+         # Commands
+         self.commands.base_velocity.ranges.lin_vel_x = (0.6, 0.6)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+-        self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
++        self.commands.base_velocity.ranges.ang_vel_z = (0.0, 0.0)
++        self.commands.base_velocity.rel_standing_envs = 0.0
+         # self.commands.base_velocity.heading_commands = False
+ 
+         # self.events.base_external_force_torque=None
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/observations.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/observations.py
+index 506ec0d..4db854e 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/observations.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/observations.py
+@@ -26,15 +26,18 @@ from viplanner.config import VIPlannerSemMetaHandler
+ import omni.isaac.lab.utils.math as math_utils
+ from omni.isaac.lab.assets import Articulation, RigidObject
+ 
++from scipy.ndimage import maximum_filter, distance_transform_edt
++from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+ from .actions import NavigationAction, VLMActions, VLMActionsGPT
+ import matplotlib.pyplot as plt
+ import cv2
++import numpy as np
+ 
+ if TYPE_CHECKING:
+     from omni.isaac.lab.envs.base_env import BaseEnv
+     from omni.isaac.lab.envs import ManagerBasedEnv
+ 
+-
++frame_count = 0
+ def matterport_raycast_camera_data(env: BaseEnv, sensor_cfg: SceneEntityCfg, data_type: str) -> torch.Tensor:
+     """Images generated by the raycast camera."""
+     # extract the used quantities (to enable type-hinting)
+@@ -74,12 +77,23 @@ def isaac_camera_data(env: BaseEnv, sensor_cfg: SceneEntityCfg, data_type: str)
+     else:
+         # import ipdb; ipdb.set_trace()
+         rgb_image = sensor.output[data_type].clone().cpu().numpy()[0,:,:,:]
++        rgb_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
+         # # depth_image_size = (output.shape[2], output.shape[3])
+         # output_clone = output.clone().reshape(env.num_envs, depth_image_size[0], depth_image_size[1])[0,:,:]
+         # window_name = "RGB Image"
+         # cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+         # cv2.imshow(window_name, rgb_image)
+         # cv2.waitKey(1)
++        global frame_count
++        frame_count += 1
++        if frame_count % 50 == 0:
++            image_name = "image_" + str(frame_count) + ".png"
++            folder_name = "robot_rgb_images"
++            if not os.path.exists(folder_name):
++                os.makedirs(folder_name)
++            image_path = os.path.join(folder_name, image_name)
++            cv2.imwrite(image_path, rgb_image)
++
+         return sensor.output[data_type].clone()
+ 
+ def process_depth_image(env: BaseEnv, sensor_cfg: SceneEntityCfg, data_type: str, visualize=False) -> torch.Tensor:
+@@ -287,8 +301,9 @@ range_y = [-0.8, 0.8+1e-9]
+ range_z = [0.0, 5.0]
+ 
+ from collections import deque
++import matplotlib.gridspec as gridspec
+ # Create a deque with a maximum length of 10
+-prev_height_maps = deque(maxlen=10)
++prev_height_maps = deque(maxlen=2)
+ 
+ def height_map_lidar(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, offset: float = 0.5) -> torch.Tensor:
+     """Height scan from the given sensor w.r.t. the sensor's frame.
+@@ -337,7 +352,7 @@ def height_map_lidar(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, offset: f
+     env_indices = torch.arange(num_envs, device=hit_vec_lidar_frame.device).unsqueeze(1).expand_as(valid_indices)
+     flat_env_indices = env_indices[valid_indices]
+ 
+-    map_2_5D = torch.full((num_envs, len(x_bins), len(y_bins)), float('0.0'), device=hit_vec_lidar_frame.device)
++    map_2_5D = torch.full((num_envs, len(x_bins), len(y_bins)), float('inf'), device=hit_vec_lidar_frame.device)
+     linear_indices = flat_env_indices * len(x_bins) * len(y_bins) + x_indices * len(y_bins) + y_indices
+ 
+     # Subtract the offset and apply dropout
+@@ -347,31 +362,104 @@ def height_map_lidar(env: ManagerBasedEnv, sensor_cfg: SceneEntityCfg, offset: f
+     #     print("map_2_5D: ", map_2_5D)
+     #     import pdb; pdb.set_trace()
+     # assert torch.all(linear_indices >= 0) and torch.all(linear_indices < map_2_5D.view(-1).size(0)), "Index out of bounds"
+-    map_2_5D = map_2_5D.view(-1).scatter_reduce_(0, linear_indices, z_filtered, reduce="amax").view(num_envs,-1) - offset
++    # import pdb; pdb.set_trace()
++    map_2_5D = map_2_5D.view(-1).scatter_reduce_(0, linear_indices, z_filtered, reduce="amin").view(num_envs,len(x_bins), len(y_bins)) - offset
++    map_2_5D = torch.where(map_2_5D < 0.05, torch.tensor(0.0, device=map_2_5D.device), map_2_5D)
++    # # # Append the cloned map to the deque
++    # prev_height_maps.append(map_2_5D.clone())
++    # height_maps_hist = list(prev_height_maps)
++
++    # # # Calculate the maximum value for each pixel across the last ten frames
++    # max_across_frames = torch.max(torch.stack(height_maps_hist), dim=0)[0]
++    map_2_5D = torch.where(torch.isinf(map_2_5D), torch.tensor(0.0, device=map_2_5D.device), map_2_5D)
++    # Apply maximum pooling with a kernel size of 3
++    max_across_frames = F.max_pool2d(map_2_5D.unsqueeze(0), kernel_size=3, stride=1, padding=1).squeeze()
++    # min_pooled_frames = -F.max_pool2d(-map_2_5D.unsqueeze(0), kernel_size=3, stride=1, padding=1).squeeze()
++    # max_across_frames = min_pooled_frames
++    # max_across_frames = torch.where(torch.isinf(max_across_frames), torch.tensor(0.0, device=max_across_frames.device), max_across_frames)
++    global frame_count
++    # if frame_count % 50 == 0:
++    #     # # Convert the map to a numpy array
++    #     map_np = map_2_5D[0].cpu().numpy()
++    #     # Convert the maximum filtered map to a numpy array
++    #     max_across_frames_np = max_across_frames.cpu().numpy()
++    #     # # Convert the map to a numpy array
++    #     # map_np = map_2_5D[0].cpu().numpy()
++    #     # # Convert the maximum filtered map to a numpy array
++    #     # max_across_frames_np = max_across_frames.cpu().numpy()
++
++    #     # Rotate the images by 180 degrees
++    #     map_np_rotated = np.rot90(map_np, 2)
++    #     max_across_frames_np_rotated = np.rot90(max_across_frames_np, 2)
++    #     # Concatenate the rotated images horizontally
++    #     # concatenated_image = np.concatenate((map_np_rotated, np.ones((map_np_rotated.shape[0], 5)), max_across_frames_np_rotated), axis=1)
++    #     # # Concatenate the rotated images horizontally
++    #     # concatenated_image = np.concatenate((map_np_rotated, max_across_frames_np_rotated), axis=1)
++
++    #     # # Rest of the code...
++
++    #     # # Concatenate the original map and the maximum filtered map horizontally
++    #     # concatenated_image = np.concatenate((map_np, max_across_frames_np), axis=1)
++
++    #     # Create a figure with a GridSpec layout to handle the colorbar placement
++    #     fig = plt.figure(figsize=(10, 4))
++    #     gs = gridspec.GridSpec(1, 3, width_ratios=[1, 1, 0.05])  # Third column for colorbar
++
++    #     # Create two subplots for the images
++    #     ax1 = fig.add_subplot(gs[0, 0])
++    #     ax2 = fig.add_subplot(gs[0, 1])
++
++    #     # Turn off axis ticks and labels for both subplots
++    #     ax1.set_xticks([])
++    #     ax1.set_yticks([])
++    #     ax2.set_xticks([])
++    #     ax2.set_yticks([])
++
++    #     # Plot the first map
++    #     im1 = ax1.imshow(map_np_rotated, cmap='viridis', origin='lower', vmin=0, vmax=0.5)
++
++    #     # Plot the second map
++    #     im2 = ax2.imshow(max_across_frames_np_rotated, cmap='viridis', origin='lower', vmin=0, vmax=0.5)
++
++    #     # Add a colorbar beside the two subplots, outside of the figure
++    #     cbar = fig.colorbar(im1, cax=fig.add_axes([0.92, 0.2, 0.02, 0.6]))  # [left, bottom, width, height]
++    #     cbar.set_label('Height Map Value')
++    #     cbar.set_ticks(np.linspace(0, 0.5, 3))
++
++    #     # Adjust layout to minimize white space and ensure colorbar fits correctly
++    #     plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.05, wspace=0.1)
++
++    #     # Convert the plot to an image
++    #     canvas = FigureCanvas(fig)
++    #     canvas.draw()
++    #     img = np.frombuffer(canvas.tostring_rgb(), dtype='uint8')
++    #     img = img.reshape(canvas.get_width_height()[::-1] + (3,))
++
++    #     # Resize the image to match the video frame size
++    #     # img_resized = cv2.resize(img, (640, 480))
++
++    #     # Convert RGB to BGR for OpenCV
++    #     img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
++        
++    #     image_name = "heightmap_image_" + str(frame_count) + ".png"
++    #     folder_name = "heightmap_images"
++    #     if not os.path.exists(folder_name):
++    #         os.makedirs(folder_name)
++    #     image_path = os.path.join(folder_name, image_name)
++    #     cv2.imwrite(image_path, img_bgr)
++
++    # # Display the concatenated image
++    # cv2.imshow("Concatenated Map", img_bgr)
++    # cv2.waitKey(1)
+ 
+-    # Append the cloned map to the deque
+-    prev_height_maps.append(map_2_5D.clone())
+-    height_maps_hist = list(prev_height_maps)
+ 
+-    # Calculate the maximum value for each pixel across the last ten frames
+-    max_across_frames = torch.max(torch.stack(height_maps_hist), dim=0)[0]
+ 
+-    
+-    # # # # import pdb; pdb.set_trace()
+-    # # # # # Reshape map_2_5D to 2D image
+-    # image = map_2_5D[0].cpu().numpy().reshape(len(x_bins), len(y_bins))
+ 
+-    # # # Visualization (optional)
+-    # image = max_across_frames[0].cpu().numpy().reshape(len(x_bins), len(y_bins))
+ 
+-    # image = (image * 255).astype(int)
+-    # image = image.astype('uint8')
+ 
+-    # cv2.imshow("Height Map", image)
+-    # cv2.waitKey(1)
+-    # cv2.destroyAllWindows()
++    output=max_across_frames.view(num_envs, -1)
+ 
+-    output = (max_across_frames * (torch.rand(map_2_5D.shape, device=map_2_5D.device) > 0.05))
++    # output = (max_across_frames * (torch.rand(map_2_5D.shape, device=map_2_5D.device) > 0.05))
+ 
+     # print("output: ", output)
+ 

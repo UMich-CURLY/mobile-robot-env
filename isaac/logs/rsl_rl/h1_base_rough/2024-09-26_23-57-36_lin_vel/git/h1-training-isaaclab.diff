@@ -1,0 +1,1191 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/__init__.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py
+	new file:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_matterport_cfg.py
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/config/importer_cfg.py
+	modified:   isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/matterport_importer.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_base_cfg.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py
+	modified:   isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/events.py
+	modified:   isaaclab/standalone/play_low_matterport_keyboard.py
+	modified:   isaaclab/standalone/play_matterport_navila.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.vscode/settings.json
+	isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/fail_scene.txt
+	isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/utils.py
+	matterport_eval.mp4
+	output.mp4
+	robots/.thumbs/
+	robots/go2_minimal.usd
+	rsl_rl/rsl_rl/modules/actor_critic_lidar_recurrent.py
+ 
+
+
+--- git diff ---
+diff --git a/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/config/importer_cfg.py b/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/config/importer_cfg.py
+index 4123c66..bc1e3f6 100644
+--- a/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/config/importer_cfg.py
++++ b/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/config/importer_cfg.py
+@@ -79,3 +79,5 @@ class MatterportImporterCfg(TerrainImporterCfg):
+     asset_converter: AssetConverterContext = asset_converter_cfg
+ 
+     groundplane: bool = True
++
++    origins = [0.0, 0.0, 0.0]
+diff --git a/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/matterport_importer.py b/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/matterport_importer.py
+index ddf4dba..2b6301c 100644
+--- a/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/matterport_importer.py
++++ b/isaaclab/extension/omni.isaac.matterport/omni/isaac/matterport/domains/matterport_importer.py
+@@ -10,6 +10,8 @@ import builtins
+ 
+ # python
+ import os
++from numpy import dtype
++import numpy as np
+ from typing import TYPE_CHECKING
+ 
+ # omni
+@@ -21,6 +23,8 @@ import omni.isaac.core.utils.stage as stage_utils
+ import omni.isaac.lab.sim as sim_utils
+ from omni.isaac.core.simulation_context import SimulationContext
+ from omni.isaac.lab.terrains import TerrainImporter
++from omni.isaac.lab.utils.warp import convert_to_warp_mesh
++from .utils import find_flat_patches
+ 
+ if TYPE_CHECKING:
+     from omni.isaac.matterport.config import MatterportImporterCfg
+@@ -31,6 +35,8 @@ from omni.isaac.core.utils import extensions
+ extensions.enable_extension("omni.kit.asset_converter")
+ import omni.kit.asset_converter as converter
+ 
++from pxr import Usd, UsdGeom
++
+ 
+ class MatterportConverter:
+     def __init__(self, input_obj: str, context: converter.impl.AssetConverterContext) -> None:
+@@ -79,8 +85,9 @@ class MatterportImporter(TerrainImporter):
+         # create a dict of meshes
+         self.meshes = dict()
+         self.warp_meshes = dict()
++        self._terrain_flat_patches = dict()
+         self.env_origins = None
+-        self.terrain_origins = None
++        self.terrain_origins = self.cfg.origins
+ 
+         # import the world
+         if not self.cfg.terrain_type == "matterport":
+@@ -102,6 +109,7 @@ class MatterportImporter(TerrainImporter):
+ 
+         # Converter
+         self.converter: MatterportConverter = MatterportConverter(self.cfg.obj_filepath, self.cfg.asset_converter)
++        # self.get_flat_patches(self.cfg.origins)
+         return
+ 
+     async def load_world_async(self) -> None:
+@@ -113,6 +121,58 @@ class MatterportImporter(TerrainImporter):
+         # Now we are ready!
+         carb.log_info("[INFO]: Setup complete...")
+         return
++    
++
++    def get_flat_patches(self, origin=[0.0, 0.0, 0.4]) -> None:
++        """
++        Get the flat patches for the environment
++        """
++
++        # get the flat patches
++        mesh_path = "/World/matterport/Matterport/mesh"
++        mesh_prim = prim_utils.get_prim_at_path(mesh_path)
++
++        # import pdb; pdb.set_trace()
++        if mesh_prim:
++            mesh = UsdGeom.Mesh(mesh_prim)
++                    
++            # Get the mesh data
++            vertices = mesh.GetPointsAttr().Get()
++            faces= mesh.GetFaceVertexIndicesAttr().Get()
++            vertices_np = np.array(vertices, dtype=np.float32)
++            faces_np = np.array(faces, dtype=np.int32)
++
++            self.meshes["matterport"] = mesh
++            device = "cuda" if "cuda" in self.device else "cpu"
++            self.warp_meshes["matterport"] = convert_to_warp_mesh(vertices_np, faces_np, device=device)
++
++        else:
++            assert False, f"Could not find mesh at path {mesh_path}"
++
++
++        num_patches = 5  # Set the number of patches you want to find
++        patch_radius = 0.3  # Set the radius for the patches
++        # origin = np.array([15.068599700927734, 4.4848198890686035, 0.4])  # Set the origin for the search
++        x_range = (-0.1, 0.1)  # Set the x range for the search
++        y_range = (-0.1, 0.1)  # Set the y range for the search
++        z_range = (-0.6, 0.0)  # Set the z range for the search
++        max_height_diff = 0.05  # Set the maximum height difference
++        # import pdb; pdb.set_trace()
++
++        flat_patches = find_flat_patches(
++            wp_mesh=self.warp_meshes["matterport"],
++            num_patches=num_patches,
++            patch_radius=patch_radius,
++            origin=origin,
++            x_range=x_range,
++            y_range=y_range,
++            z_range=z_range,
++            max_height_diff=max_height_diff,
++            raycast_height=origin[2] + 1.0,
++        )
++
++        self._terrain_flat_patches['init_pos'] = flat_patches
++
+ 
+     def load_world(self) -> None:
+         """Function called when clicking load button"""
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_base_cfg.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_base_cfg.py
+index 475d814..38e7b41 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_base_cfg.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_base_cfg.py
+@@ -80,7 +80,7 @@ UNITREE_GO2_CFG = ArticulationCfg(
+         ),
+     ),
+     init_state=ArticulationCfg.InitialStateCfg(
+-        pos=(0.0, 0.0, 0.5),
++        pos=(0.0, 0.0, 0.4),
+         joint_pos={
+             ".*L_hip_joint": 0.1,
+             ".*R_hip_joint": -0.1,
+@@ -288,8 +288,6 @@ class ObservationsCfg:
+         #     noise=Unoise(n_min=-0.05, n_max=0.05),
+         # )
+         base_rpy = ObsTerm(func=mdp.base_rpy, noise=Unoise(n_min=-0.1, n_max=0.1))
+-        
+-        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
+         joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
+         joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
+         actions = ObsTerm(func=mdp.last_action)
+@@ -475,7 +473,7 @@ class Go2BaseRoughEnvCfg(ManagerBasedRLEnvCfg):
+         self.rewards.undesired_contacts = None
+         self.rewards.dof_torques_l2.weight = -0.0002
+         self.rewards.track_lin_vel_xy_exp.weight = 1.5
+-        self.rewards.track_ang_vel_z_exp.weight = 0.75
++        self.rewards.track_ang_vel_z_exp.weight = 1.0
+         self.rewards.dof_acc_l2.weight = -2.5e-7
+         # self.rewards.dof_pos_limits.weight = -0.0001
+ 
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+index d73dd89..eac94ec 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/go2/go2_low_vision_cfg.py
+@@ -34,7 +34,7 @@ from omni.isaac.lab_tasks.utils.wrappers.rsl_rl import (
+ )
+ 
+ 
+-from .go2_low_base_cfg import Go2BaseRoughEnvCfg
++from .go2_low_base_cfg import Go2BaseRoughEnvCfg, CustomGo2RewardsCfg
+ 
+ @configclass
+ class Go2VisionRoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
+@@ -150,17 +150,17 @@ Go2_Vision_TERRAINS_CFG = TerrainGeneratorCfg(
+         #     proportion=0.1, gap_width_range=(0.5, 1.0), platform_width=2.0
+         # ),
+         "hf_pyramid_slope": terrain_gen.HfPyramidSlopedTerrainCfg(
+-            proportion=0.05, slope_range=(0.0, 0.2), platform_width=2.0, border_width=0.25
++            proportion=0.05, slope_range=(0.0, 0.1), platform_width=2.0, border_width=0.25
+         ),
+         "hf_pyramid_slope_inv": terrain_gen.HfInvertedPyramidSlopedTerrainCfg(
+-            proportion=0.05, slope_range=(0.0, 0.2), platform_width=2.0, border_width=0.25 
++            proportion=0.05, slope_range=(0.0, 0.1), platform_width=2.0, border_width=0.25 
+         ),
+         "init_pos": terrain_gen.HfDiscreteObstaclesTerrainCfg(
+-            proportion=0.3, 
++            proportion=0.5, 
+             num_obstacles=8,
+             obstacle_height_mode="fixed",
+-            obstacle_height_range=(0.3, 2.0), obstacle_width_range=(0.2, 1.0), 
+-            platform_width=0.25
++            obstacle_height_range=(0.3, 2.0), obstacle_width_range=(0.25, 1.0), 
++            platform_width=1.0
+         ),
+     },
+ )
+@@ -427,23 +427,34 @@ class Go2VisionRoughEnvCfg(Go2BaseRoughEnvCfg):
+         # update sensor period
+         self.scene.height_scanner.update_period = self.sim.dt * self.decimation
+         self.scene.lidar_sensor.update_period = self.sim.dt * self.decimation
+-        self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 1.0)
++        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.8)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+-        self.events.reset_base = EventTerm(
+-            func=mdp.reset_root_state_from_terrain,
+-            mode="reset",
+-            params={
+-                "pose_range": {"x": (-0.0, 0.0), "y": (-0.0, 0.0), "yaw": (-3.14, 3.14)},
+-                "velocity_range": {
+-                    "x": (-0.5, 0.5),
+-                    "y": (0.0, 0.0),
+-                    "z": (0.0, 0.0),
+-                    "roll": (-0.5, 0.5),
+-                    "pitch": (-0.5, 0.5),
+-                    "yaw": (-0.5, 0.5),
+-                },
++        # self.events.reset_base = EventTerm(
++        #     func=mdp.reset_root_state_from_terrain,
++        #     mode="reset",
++        #     params={
++        #         "pose_range": {"x": (-0.0, 0.0), "y": (-0.0, 0.0), "yaw": (-3.14, 3.14)},
++        #         "velocity_range": {
++        #             "x": (-0.2, 0.2),
++        #             "y": (0.0, 0.0),
++        #             "z": (0.0, 0.0),
++        #             "roll": (0.0, 0.0),
++        #             "pitch": (0.0, 0.0),
++        #             "yaw": (-0.0, 0.0),
++        #         },
++        #     },
++        # )
++        self.events.reset_base.params = {
++            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
++            "velocity_range": {
++                "x": (0.0, 0.0),
++                "y": (0.0, 0.0),
++                "z": (0.0, 0.0),
++                "roll": (0.0, 0.0),
++                "pitch": (0.0, 0.0),
++                "yaw": (0.0, 0.0),
+             },
+-        )
++        }
+         # import pdb; pdb.set_trace()
+         # self.commands.base_velocity.ranges.ang_vel_z = (-0.5, 0.5)
+         self.rewards.feet_air_time.weight = 0.01
+@@ -475,9 +486,9 @@ class Go2VisionRoughEnvCfg_PLAY(Go2VisionRoughEnvCfg):
+         self.events.actuator_gains = None
+ 
+         # Commands
+-        self.commands.base_velocity.ranges.lin_vel_x = (0.6, 0.6)
++        self.commands.base_velocity.ranges.lin_vel_x = (0.1, 0.1)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+-        self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
++        self.commands.base_velocity.ranges.ang_vel_z = (0.5, 0.5)
+         # self.commands.base_velocity.heading_commands = False
+ 
+         # self.events.base_external_force_torque=None
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/__init__.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/__init__.py
+index f1d5025..9c35acf 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/__init__.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/__init__.py
+@@ -5,6 +5,7 @@ from .h1_low_cfg import H1RoughEnvCfg, H1RoughEnvCfg_PLAY
+ from .h1_low_vision_cfg import H1VisionRoughEnvCfg, H1VisionRoughEnvCfg_PLAY, H1VisionRoughPPORunnerCfg
+ from .h1_low_2dof_cfg import H12DoFRoughEnvCfg, H12DoFRoughEnvCfg_PLAY, H12DoFRoughPPORunnerCfg
+ from .test_h1_matterport_cfg import TestH1MatterportCfg
++from .h1_matterport_cfg import H1MatterportEnvCfg
+ 
+ ##
+ # Register Gym environments.
+@@ -100,7 +101,7 @@ gym.register(
+ 
+ 
+ gym.register(
+-    id="h1_matterport",
++    id="h1_matterport_test",
+     entry_point="omni.isaac.lab.envs:ManagerBasedRLEnv",
+     disable_env_checker=True,
+     kwargs={
+@@ -108,3 +109,13 @@ gym.register(
+         "rsl_rl_cfg_entry_point": H1RoughPPORunnerCfg
+     },
+ )
++
++gym.register(
++    id="h1_matterport",
++    entry_point="omni.isaac.lab.envs:ManagerBasedRLEnv",
++    disable_env_checker=True,
++    kwargs={
++        "env_cfg_entry_point": H1MatterportEnvCfg,
++        "rsl_rl_cfg_entry_point": H1RoughPPORunnerCfg
++    },
++)
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py
+index 9b8f7bc..68119c3 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_low_base_cfg.py
+@@ -17,7 +17,7 @@ from omni.isaac.lab.managers import RewardTermCfg as RewTerm
+ from omni.isaac.lab.managers import SceneEntityCfg
+ from omni.isaac.lab.managers import TerminationTermCfg as DoneTerm
+ from omni.isaac.lab.scene import InteractiveSceneCfg
+-from omni.isaac.lab.sensors import ContactSensorCfg
++from omni.isaac.lab.sensors import ContactSensorCfg, RayCasterCfg
+ from omni.isaac.lab.terrains import TerrainImporterCfg, TerrainGeneratorCfg, FlatPatchSamplingCfg
+ import omni.isaac.lab.terrains as terrain_gen
+ from omni.isaac.lab.utils import configclass
+@@ -50,12 +50,14 @@ class H1RoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
+     num_steps_per_env = 32
+     max_iterations = 50000
+     save_interval = 500
+-    experiment_name = "h1_base_rough"
++    experiment_name = "h1_base"
+     empirical_normalization = False
+     policy = RslRlPpoActorCriticCfg(
+         init_noise_std=1.0,
+         actor_hidden_dims=[512, 256, 128],
+         critic_hidden_dims=[512, 256, 128],
++        # actor_hidden_dims=[128, 128, 64],
++        # critic_hidden_dims=[128, 128, 64],
+         activation="elu",
+         class_name="ActorCritic",
+     )
+@@ -89,11 +91,8 @@ BASE_TERRAIN_CFG = TerrainGeneratorCfg(
+         # "boxes": terrain_gen.MeshRandomGridTerrainCfg(
+         #     proportion=0.2, grid_width=0.45, grid_height_range=(0.05, 0.2), platform_width=2.0
+         # ),
+-        "flat": terrain_gen.MeshPlaneTerrainCfg(
+-            proportion=0.5
+-        ),
+         "random_rough": terrain_gen.HfRandomUniformTerrainCfg(
+-            proportion=0.5, noise_range=(0.02, 0.10), noise_step=0.02, border_width=0.25
++            proportion=0.2, noise_range=(0.02, 0.10), noise_step=0.02, border_width=0.25
+         ),
+     },
+ )
+@@ -139,7 +138,14 @@ class BaseSceneCfg(InteractiveSceneCfg):
+         ),
+     )
+     
+-    height_scanner = None
++    height_scanner = RayCasterCfg(
++        prim_path="{ENV_REGEX_NS}/Robot/pelvis",
++        offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 20.0)),
++        attach_yaw_only=True,
++        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
++        debug_vis=False,
++        mesh_prim_paths=["/World/ground"],
++    )
+     # camera
+     lidar_sensor = None
+ 
+@@ -156,7 +162,7 @@ class ObservationsCfg:
+         """Observations for policy group."""
+ 
+         # observation terms (order preserved)
+-        # base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
++        base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
+         base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
+         projected_gravity = ObsTerm(
+             func=mdp.projected_gravity,
+@@ -172,8 +178,31 @@ class ObservationsCfg:
+             self.enable_corruption = True
+             self.concatenate_terms = True
+ 
++    @configclass
++    class CriticObsCfg(ObsGroup):
++        """Observations for critic group."""
++
++        # observation terms (order preserved)
++        base_lin_vel = ObsTerm(func=mdp.base_lin_vel, noise=Unoise(n_min=-0.1, n_max=0.1))
++        base_ang_vel = ObsTerm(func=mdp.base_ang_vel, noise=Unoise(n_min=-0.2, n_max=0.2))
++        projected_gravity = ObsTerm(func=mdp.projected_gravity, noise=Unoise(n_min=-0.05, n_max=0.05))
++        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
++        joint_pos = ObsTerm(func=mdp.joint_pos_rel, noise=Unoise(n_min=-0.01, n_max=0.01))
++        joint_vel = ObsTerm(func=mdp.joint_vel_rel, noise=Unoise(n_min=-1.5, n_max=1.5))
++        actions = ObsTerm(func=mdp.last_action)
++        height_scan = ObsTerm(
++            func=mdp.height_scan,
++            params={"sensor_cfg": SceneEntityCfg("height_scanner")},
++            clip=(-1.0, 1.0),
++        )
++
++        def __post_init__(self):
++            self.enable_corruption = False
++            self.concatenate_terms = True
++
+     # observation groups
+     policy: PolicyCfg = PolicyCfg()
++    critic: CriticObsCfg = CriticObsCfg()
+ 
+ ## 
+ # Actions
+@@ -249,6 +278,46 @@ class EventCfg:
+ 
+ @configclass
+ class RewardsCfg:
++    # termination_penalty = RewTerm(func=mdp.is_terminated, weight=-200.0)
++    # lin_vel_z_l2 = None
++    # track_lin_vel_xy_exp = RewTerm(
++    #     func=mdp.track_lin_vel_xy_exp,
++    #     weight=1.0,
++    #     params={"command_name": "base_velocity", "std": 0.5},
++    # )
++    # track_ang_vel_z_exp = RewTerm(
++    #     func=mdp.track_ang_vel_z_exp, weight=1.0, params={"command_name": "base_velocity", "std": 0.5}
++    # )
++    # feet_air_time = RewTerm(
++    #     func=mdp.feet_air_time_positive_biped,
++    #     weight=0.25,
++    #     params={
++    #         "command_name": "base_velocity",
++    #         "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
++    #         "threshold": 0.4,
++    #     },
++    # )
++    # feet_slide = RewTerm(
++    #     func=mdp.feet_slide,
++    #     weight=-0.25,
++    #     params={
++    #         "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
++    #         "asset_cfg": SceneEntityCfg("robot", body_names=".*ankle_link"),
++    #     },
++    # )
++    # # Penalize ankle joint limits
++    # dof_pos_limits = RewTerm(
++    #     func=mdp.joint_pos_limits, weight=-1.0, params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*_ankle")}
++    # )
++    # # Penalize deviation from default of the joints that are not essential for locomotion
++    # joint_deviation_hip = RewTerm(
++    #     func=mdp.joint_deviation_l1,
++    #     weight=-0.2,
++    #     params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_hip_yaw", ".*_hip_roll"])},
++    # )
++    # joint_deviation_torso = RewTerm(
++    #     func=mdp.joint_deviation_l1, weight=-0.1, params={"asset_cfg": SceneEntityCfg("robot", joint_names="torso")}
++    # )
+     # -- task
+     termination_penalty = RewTerm(func=mdp.is_terminated, weight=-200.0)
+     track_lin_vel_xy_exp = RewTerm(
+@@ -266,7 +335,7 @@ class RewardsCfg:
+     action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
+     feet_air_time = RewTerm(
+         func=mdp.feet_air_time_positive_biped,
+-        weight=2.0,
++        weight=2.5,
+         params={
+             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
+             "command_name": "base_velocity",
+@@ -275,17 +344,17 @@ class RewardsCfg:
+     )
+     joint_deviation_hip = RewTerm(
+         func=mdp.joint_deviation_l1,
+-        weight=-0.4,
++        weight=-0.1,
+         params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*hip.*"])},
+     )
+-    # joint_deviation_toes = RewTerm(
+-    #     func=mdp.joint_deviation_l1,
+-    #     weight=-0.01,
+-    #     params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*ankle.*"])},
+-    # )
++    joint_deviation_toes = RewTerm(
++        func=mdp.joint_deviation_l1,
++        weight=-0.01,
++        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*ankle.*"])},
++    )
+     joint_deviation_arms = RewTerm(
+         func=mdp.joint_deviation_l1,
+-        weight=-0.5,
++        weight=-0.1,
+         params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_shoulder_.*", ".*_elbow"])},
+     )
+     joint_deviation_torso = RewTerm(
+@@ -338,8 +407,8 @@ class H1BaseRoughEnvCfg(ManagerBasedRLEnvCfg):
+     commands: CommandsCfg = CommandsCfg()
+     # MDP settings
+     # rewards: RewardsCfg = RewardsCfg2DoF()
+-    # rewards: RewardsCfg = H1Rewards()
+     rewards: RewardsCfg = H1Rewards()
++    # rewards: RewardsCfg = RewardsCfg()
+     terminations: TerminationsCfg = TerminationsCfg()
+     events: EventCfg = EventCfg()
+     curriculum: CurriculumCfg = CurriculumCfg()
+@@ -350,6 +419,7 @@ class H1BaseRoughEnvCfg(ManagerBasedRLEnvCfg):
+         self.decimation = 4
+         self.episode_length_s = 20.0
+         # simulation settings
++        self.sim.render_interval = 4
+         self.sim.dt = 0.005
+         self.sim.disable_contact_processing = True
+         self.sim.physics_material = self.scene.terrain.physics_material
+@@ -381,7 +451,6 @@ class H1BaseRoughEnvCfg(ManagerBasedRLEnvCfg):
+         self.rewards.dof_torques_l2.weight = 0.0
+         self.rewards.action_rate_l2.weight = -0.005
+         self.rewards.dof_acc_l2.weight = -1.25e-7
+-        self.rewards.feet_air_time.weight = 1.0
+ 
+         # Commands
+         self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
+@@ -394,8 +463,8 @@ class H1BaseRoughEnvCfg(ManagerBasedRLEnvCfg):
+         if self.scene.lidar_sensor is not None:
+             self.scene.lidar_sensor.update_period = 4 * self.sim.dt
+         self.scene.contact_forces.update_period = self.sim.dt
+-        # if self.scene.height_scanner is not None:
+-        #     self.scene.height_scanner.update_period = self.decimation * self.sim.dt
++        if self.scene.height_scanner is not None:
++            self.scene.height_scanner.update_period = self.decimation * self.sim.dt
+         if self.scene.contact_forces is not None:
+             self.scene.contact_forces.update_period = self.sim.dt
+ 
+@@ -428,7 +497,7 @@ class H1BaseRoughEnvCfg_PLAY(H1BaseRoughEnvCfg):
+             self.scene.terrain.terrain_generator.num_cols = 5
+             self.scene.terrain.terrain_generator.curriculum = False
+ 
+-        self.commands.base_velocity.ranges.lin_vel_x = (0.1, 1.0)
++        self.commands.base_velocity.ranges.lin_vel_x = (0.5, 1.0)
+         self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
+         self.commands.base_velocity.ranges.heading = (0.0, 0.0)
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_matterport_cfg.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_matterport_cfg.py
+new file mode 100644
+index 0000000..e9f1a47
+--- /dev/null
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/config/h1/h1_matterport_cfg.py
+@@ -0,0 +1,419 @@
++# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
++# Author: Pascal Roth
++# All rights reserved.
++#
++# SPDX-License-Identifier: BSD-3-Clause
++
++import os
++
++import omni.isaac.viplanner.viplanner.mdp as mdp
++from omni.isaac.lab.envs import ManagerBasedRLEnvCfg
++from omni.isaac.lab.managers import ObservationGroupCfg as ObsGroup
++from omni.isaac.lab.managers import ObservationTermCfg as ObsTerm
++from omni.isaac.lab.managers import RewardTermCfg as RewTerm
++from omni.isaac.lab.managers import CurriculumTermCfg as CurrTerm
++# from omni.isaac.lab.managers import RandomizationTermCfg as RandTerm
++from omni.isaac.lab.managers import EventTermCfg as EventTerm
++from omni.isaac.lab.managers import SceneEntityCfg
++from omni.isaac.lab.managers import TerminationTermCfg as DoneTerm
++from omni.isaac.lab.utils import configclass
++# from omni.isaac.lab.utils.assets import LOCAL_ISAAC_DIR
++from omni.isaac.lab.utils.assets import ISAACLAB_NUCLEUS_DIR
++from omni.isaac.lab.terrains import TerrainImporterCfg, TerrainGeneratorCfg
++import omni.isaac.lab.terrains as terrain_gen
++import omni.isaac.lab.terrains.height_field as hf_gen
++from omni.isaac.matterport.config import MatterportImporterCfg
++import omni.isaac.lab.sim as sim_utils
++from omni.isaac.lab.assets import AssetBaseCfg
++from omni.isaac.lab.scene import InteractiveSceneCfg
++from omni.isaac.lab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
++from omni.isaac.viplanner.utils import UnRealImporterCfg, MatterportRayCasterCameraCfg
++from omni.isaac.lab.sensors.ray_caster import RayCasterCameraCfg, patterns
++# from .h1_low_cfg import EventCfg
++# from omni.isaac.lab.terrains.config.rough import ROUGH_TERRAINS_CFG
++
++
++from omni.isaac.lab_assets import H1_MINIMAL_CFG  # isort: skip
++
++import math
++
++from omni.isaac.lab_tasks.utils.wrappers.rsl_rl import (
++    RslRlOnPolicyRunnerCfg,
++    RslRlPpoActorCriticCfg,
++    RslRlPpoAlgorithmCfg,
++)
++
++
++ROUGH_TERRAINS_CFG = TerrainGeneratorCfg(
++    size=(8.0, 8.0),
++    border_width=20.0,
++    num_rows=10,
++    num_cols=20,
++    horizontal_scale=0.1,
++    vertical_scale=0.005,
++    slope_threshold=0.75,
++    use_cache=False,
++    sub_terrains={
++        "pyramid_stairs": terrain_gen.MeshPyramidStairsTerrainCfg(
++            proportion=0.2,
++            step_height_range=(0.1, 0.3),
++            step_width=0.3,
++            platform_width=3.0,
++            border_width=1.0,
++            holes=False,
++        ),
++        "pyramid_stairs_inv": terrain_gen.MeshInvertedPyramidStairsTerrainCfg(
++            proportion=0.2,
++            step_height_range=(0.1, 0.3),
++            step_width=0.3,
++            platform_width=3.0,
++            border_width=1.0,
++            holes=False,
++        ),
++        "boxes": terrain_gen.MeshRandomGridTerrainCfg(
++            proportion=0.2, grid_width=0.45, grid_height_range=(0.05, 0.2), platform_width=2.0
++        ),
++        "random_rough": terrain_gen.HfRandomUniformTerrainCfg(
++            proportion=0.2, noise_range=(0.02, 0.10), noise_step=0.02, border_width=0.25
++        ),
++        "hf_pyramid_slope": terrain_gen.HfPyramidSlopedTerrainCfg(
++            proportion=0.05, slope_range=(0.0, 0.4), platform_width=2.0, border_width=0.25
++        ),
++        "hf_pyramid_slope_inv": terrain_gen.HfInvertedPyramidSlopedTerrainCfg(
++            proportion=0.05, slope_range=(0.0, 0.4), platform_width=2.0, border_width=0.25
++        ),
++        "obstacles": hf_gen.HfDiscreteObstaclesTerrainCfg(
++            proportion=0.1,
++            size=(8.0, 8.0),
++            horizontal_scale=0.1,
++            vertical_scale=0.005,
++            border_width=0.0,
++            num_obstacles=5,
++            obstacle_height_mode="fixed",
++            obstacle_width_range=(0.25, 0.75),
++            obstacle_height_range=(1.0, 2.0),
++            platform_width=1.5,
++    )
++    },
++)
++"""Rough terrains configuration."""
++
++
++##
++# Scene configuration
++##
++@configclass
++class TerrainSceneCfg(InteractiveSceneCfg):
++    """Configuration for the terrain scene with a legged robot."""
++
++    # ground terrain
++    terrain = MatterportImporterCfg(
++        prim_path="/World/matterport",
++        terrain_type="matterport",
++        physics_material=sim_utils.RigidBodyMaterialCfg(
++            friction_combine_mode="multiply",
++            restitution_combine_mode="multiply",
++            static_friction=1.0,
++            dynamic_friction=1.0,
++        ),
++        # obj_filepath="/home/zhaojing/h1-training-isaaclab/assets/matterport/29hnd4uzFmX/29hnd4uzFmX/matterport_mesh/04eb2788768d40a38d35d876a02e9624/04eb2788768d40a38d35d876a02e9624.usd",
++        obj_filepath="/home/zhaojing/h1-training-isaaclab/assets/matterport/5q7pvUzZiYa/matterport_mesh/d7a2911178dd48e89d6a23afb09cbc11/d7a2911178dd48e89d6a23afb09cbc11.usd",
++        groundplane=False,
++    )
++
++    # robots
++    robot = H1_MINIMAL_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
++    robot.init_state.pos = (9.1, 3.8, 0.4)
++    robot.init_state.rot = (0.7, 0.0, 0.0, 0.)
++
++    # sensors
++    height_scanner = RayCasterCfg(
++        prim_path="{ENV_REGEX_NS}/Robot/pelvis",
++        offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.5)),
++        attach_yaw_only=True,
++        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
++        debug_vis=True,
++        mesh_prim_paths=["/World/matterport"],
++    )
++    contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, track_air_time=True, debug_vis=False)
++    # lights
++    light = AssetBaseCfg(
++        prim_path="/World/light",
++        spawn=sim_utils.DistantLightCfg(
++            color=(1.0, 1.0, 1.0),
++            intensity=1000.0,
++        ),
++    )
++    disk_1 = AssetBaseCfg(
++        prim_path="/World/disk_1",
++        spawn=sim_utils.DiskLightCfg(
++            color=(1.0, 1.0, 1.0),
++            intensity=10000.0,
++            radius=30.0,
++        ),
++    )
++    disk_1.init_state.pos = (0, 0, 2.0)
++    # # camera
++    # lidar_sensor = MatterportRayCasterCameraCfg(
++    #     prim_path="{ENV_REGEX_NS}/Robot/pelvis",
++    #     # mesh_prim_paths=["/home/yji/Biped/biped_vision/viplanner/assets/bowl_toy_origin.ply"],
++    #     # mesh_prim_paths=["/World/ground"],
++    #     # update_period=0.1,
++    #     # offset=RayCasterCameraCfg.OffsetCfg(pos=(0.60, 0.0, 0.0), rot=(-0.5, 0.5, -0.5, 0.5)),
++    #     # offset=RayCasterCameraCfg.OffsetCfg(pos=(0.00, 0.0, 0.3), rot=(0.579, -0.579, 0.406, -0.406)),
++    #     offset=MatterportRayCasterCameraCfg.OffsetCfg(pos=(0.00, 0.0, 0.3), rot=(0,1.0,0.0,0.0)),
++    #     data_types=["distance_to_image_plane"],
++    #     debug_vis=True,
++    #     pattern_cfg=patterns.PinholeCameraPatternCfg(
++    #         focal_length=24.0,  #24.0
++    #         horizontal_aperture=46.0,#87,#20.955,
++    #         height=15,
++    #         width=15,
++    #     ),
++    #     # max_distance=10,
++    #     # mesh_prim_paths=["/home/zhaojing/h1-training-isaaclab/assets/matterport/29hnd4uzFmX/29hnd4uzFmX/poisson_meshes/29hnd4uzFmX.ply"]
++    #     mesh_prim_paths=["/home/zhaojing/h1-training-isaaclab/assets/matterport/5q7pvUzZiYa/poisson_meshes/5q7pvUzZiYa.ply"]
++    # )
++    rgb_camera = CameraCfg(
++        prim_path="{ENV_REGEX_NS}/Robot/pelvis/rgb_camera",
++        offset=CameraCfg.OffsetCfg(pos=(0.0, 0.0, 0.67), rot=(0.7, 0.0, 0.7, 0.0)),
++        spawn=sim_utils.PinholeCameraCfg(horizontal_aperture=54.0),
++        width=512,
++        height=512,
++        data_types=["rgb"],
++    )
++    viz_rgb_camera = CameraCfg(
++        prim_path="{ENV_REGEX_NS}/Robot/pelvis/viz_rgb_camera",
++        offset=CameraCfg.OffsetCfg(pos=(-1.0, 0.0, 0.67), rot=(0.7, 0.0, 0.7, 0.0)),
++        spawn=sim_utils.PinholeCameraCfg(horizontal_aperture=90.0),
++        width=512,
++        height=512,
++        data_types=["rgb"],
++    )
++
++
++##
++# MDP settings
++##
++
++@configclass
++class RewardsCfg:
++    # -- task
++    termination_penalty = RewTerm(func=mdp.is_terminated, weight=-200.0)
++    track_lin_vel_xy_exp = RewTerm(
++        func=mdp.track_lin_vel_xy_exp, weight=2.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
++    )
++    track_ang_vel_z_exp = RewTerm(
++        func=mdp.track_ang_vel_z_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
++    )
++    # -- penalties
++    lin_vel_z_l2 = RewTerm(func=mdp.lin_vel_z_l2, weight=-2.0)
++    ang_vel_xy_l2 = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.05)
++    dof_torques_l2 = RewTerm(func=mdp.joint_torques_l2, weight=-5.0e-6)
++    dof_acc_l2 = RewTerm(func=mdp.joint_acc_l2, weight=-5e-8)
++    action_rate_l2 = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
++    feet_air_time = RewTerm(
++        func=mdp.feet_air_time_positive_biped,
++        weight=2.0,
++        params={
++            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
++            "command_name": "base_velocity",
++            "threshold": 0.3,
++        },
++    )
++    feet_slide = RewTerm(
++        func=mdp.feet_slide,
++        weight=-0.1,
++        params={
++            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*ankle_link"),
++            "asset_cfg": SceneEntityCfg("robot", body_names=".*ankle_link"),
++        },
++    )
++    # Penalize ankle joint limits
++    dof_pos_limits = RewTerm(
++        func=mdp.joint_pos_limits, weight=-1.0, params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*_ankle")}
++    )
++    joint_deviation_hip = RewTerm(
++        func=mdp.joint_deviation_l1,
++        weight=-0.4,
++        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*hip.*"])},
++    )
++    joint_deviation_toes = RewTerm(
++        func=mdp.joint_deviation_l1,
++        weight=-0.1,
++        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*ankle.*"])},
++    )
++    joint_deviation_arms = RewTerm(
++        func=mdp.joint_deviation_l1,
++        weight=-0.2,
++        params={"asset_cfg": SceneEntityCfg("robot", joint_names=[".*_shoulder_.*", ".*_elbow"])},
++    )
++    joint_deviation_torso = RewTerm(
++        func=mdp.joint_deviation_l1, weight=-0.1, params={"asset_cfg": SceneEntityCfg("robot", joint_names="torso")}
++    )
++
++
++@configclass
++class ActionsCfg:
++    """Action specifications for the MDP."""
++
++    joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.5, use_default_offset=True)
++
++
++@configclass
++class ObservationsCfg:
++    """Observation specifications for the MDP."""
++
++    @configclass
++    class PolicyCfg(ObsGroup):
++        """Observations for policy group."""
++
++        # observation terms (order preserved)
++        base_lin_vel = ObsTerm(func=mdp.base_lin_vel)
++        base_ang_vel = ObsTerm(func=mdp.base_ang_vel)
++        projected_gravity = ObsTerm(func=mdp.projected_gravity)
++        
++        velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
++        joint_pos = ObsTerm(func=mdp.joint_pos_rel)
++        joint_vel = ObsTerm(func=mdp.joint_vel_rel)
++        actions = ObsTerm(func=mdp.last_action)
++        # height_scan = ObsTerm(
++        #     func=mdp.height_scan,
++        #     params={"sensor_cfg": SceneEntityCfg("height_scanner")},
++        #     clip=(-1.0, 1.0),
++        # )
++        # depth_measurement = ObsTerm(
++        #     func=mdp.process_lidar,
++        #     params={"sensor_cfg": SceneEntityCfg("lidar_sensor"), "data_type": "distance_to_image_plane"},
++        # )
++
++        def __post_init__(self):
++            self.enable_corruption = True
++            self.concatenate_terms = True
++
++    @configclass
++    class CameraObsCfg(ObsGroup):
++        """Observations for camera group."""
++
++        # observation terms (order preserved)
++        # depth_measurement = ObsTerm(
++        #     func=mdp.process_depth_image,
++        #     params={"sensor_cfg": SceneEntityCfg("lidar_sensor"), "data_type": "distance_to_image_plane"},
++        # )
++        rgb_measurement = ObsTerm(
++            func=mdp.isaac_camera_data,
++            params={"sensor_cfg": SceneEntityCfg("rgb_camera"), "data_type": "rgb"},
++        )
++
++        def __post_init__(self):
++            self.enable_corruption = False
++            self.concatenate_terms = True
++    
++    @configclass
++    class VizCameraObsCfg(ObsGroup):
++        """Observations for camera group."""
++
++        # observation terms (order preserved)
++        # depth_measurement = ObsTerm(
++        #     func=mdp.process_depth_image,
++        #     params={"sensor_cfg": SceneEntityCfg("lidar_sensor"), "data_type": "distance_to_image_plane"},
++        # )
++        rgb_measurement = ObsTerm(
++            func=mdp.isaac_camera_data,
++            params={"sensor_cfg": SceneEntityCfg("viz_rgb_camera"), "data_type": "rgb"},
++        )
++
++        def __post_init__(self):
++            self.enable_corruption = False
++            self.concatenate_terms = True
++    # observation groups
++    policy: PolicyCfg = PolicyCfg()
++    camera_obs: CameraObsCfg = CameraObsCfg()
++    viz_camera_obs: VizCameraObsCfg = VizCameraObsCfg()
++
++@configclass
++class CurriculumCfg:
++    """Curriculum terms for the MDP."""
++
++    terrain_levels = CurrTerm(func=mdp.terrain_levels_vel)
++
++@configclass
++class TerminationsCfg:
++    """Termination terms for the MDP."""
++
++    time_out = DoneTerm(func=mdp.time_out, time_out=True)
++    base_contact = DoneTerm(
++        func=mdp.illegal_contact,
++        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="torso_link"), "threshold": 1.0},
++    )
++
++
++@configclass
++class CommandsCfg:
++    """Command specifications for the MDP."""
++
++    base_velocity = mdp.UniformVelocityCommandCfg(
++        asset_name="robot",
++        resampling_time_range=(10.0, 10.0),
++        rel_standing_envs=0.02,
++        rel_heading_envs=1.0,
++        heading_command=True,
++        heading_control_stiffness=0.5,
++        debug_vis=True,
++        ranges=mdp.UniformVelocityCommandCfg.Ranges(
++            lin_vel_x=(-1.0, 1.0), lin_vel_y=(-1.0, 1.0), ang_vel_z=(-1.0, 1.0), heading=(-math.pi, math.pi)
++        ),
++    )
++
++##
++# Environment configuration
++##
++
++@configclass
++class H1MatterportEnvCfg(ManagerBasedRLEnvCfg):
++    """Configuration for the locomotion velocity-tracking environment."""
++
++    # Basic settings
++    observations: ObservationsCfg = ObservationsCfg()
++    actions: ActionsCfg = ActionsCfg()
++    commands: CommandsCfg = CommandsCfg()
++    # managers
++    terminations: TerminationsCfg = TerminationsCfg()
++    # events: EventCfg = EventCfg()
++    rewards: RewardsCfg = RewardsCfg()
++    scene: TerrainSceneCfg = TerrainSceneCfg(num_envs=4096, env_spacing=2.5)
++    curriculum: CurriculumCfg = CurriculumCfg()
++
++    def __post_init__(self):
++        """Post initialization."""
++        # general settings
++        self.decimation = 4  # 20->10 Hz, 4->50 Hz
++        self.episode_length_s = 200000.0
++        # simulation settings
++        self.sim.dt = 0.005
++        self.sim.render_interval = 4
++        self.sim.disable_contact_processing = True
++        self.sim.physics_material.static_friction = 1.0
++        self.sim.physics_material.dynamic_friction = 1.0
++        self.sim.physics_material.friction_combine_mode = "max"
++        self.sim.physics_material.restitution_combine_mode = "max"
++        # update sensor update periods
++        # we tick all the sensors based on the smallest update period (physics update period)
++        # self.scene.height_scanner.update_period = 4 * self.sim.dt  # should we low-level decimation
++        # self.scene.lidar_sensor.update_period = 4*self.sim.dt
++        self.scene.contact_forces.update_period = self.sim.dt
++        # self.scene.terrain.terrain_type = "plane"
++        # self.scene.terrain.terrain_generator = None
++        # self.rewards.flat_orientation_l2.weight = -5.0
++        # self.rewards.dof_torques_l2.weight = -2.5e-5
++        # self.rewards.feet_air_time.weight = 0.5
++        # self.scene.height_scanner = None
++        # self.observations.policy.height_scan = None
++        self.curriculum.terrain_levels = None
++
++        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
++        self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
++        self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
++
++        self.viewer.eye = (5, 12, 5)
++        self.viewer.lookat = (5, 0, 0.0)
+diff --git a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/events.py b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/events.py
+index 7f95548..85a28f6 100644
+--- a/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/events.py
++++ b/isaaclab/extension/omni.isaac.viplanner/omni/isaac/viplanner/viplanner/mdp/events.py
+@@ -45,4 +45,76 @@ def reset_camera_pos_uniform(
+     orientations = math_utils.quat_mul(quat_w, orientations_delta)
+ 
+     # set into the physics simulation
+-    camera.set_world_poses(positions, orientations, env_ids=env_ids, convention="world")
+\ No newline at end of file
++    camera.set_world_poses(positions, orientations, env_ids=env_ids, convention="world")
++
++
++def reset_root_state_from_matterport_terrain(
++    env: ManagerBasedEnv,
++    env_ids: torch.Tensor,
++    pose_range: dict[str, tuple[float, float]],
++    velocity_range: dict[str, tuple[float, float]],
++    asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
++):
++    """Reset the asset root state by sampling a random valid pose from the terrain.
++
++    This function samples a random valid pose(based on flat patches) from the terrain and sets the root state
++    of the asset to this position. The function also samples random velocities from the given ranges and sets them
++    into the physics simulation.
++
++    The function takes a dictionary of position and velocity ranges for each axis and rotation:
++
++    * :attr:`pose_range` - a dictionary of pose ranges for each axis. The keys of the dictionary are ``roll``,
++      ``pitch``, and ``yaw``. The position is sampled from the flat patches of the terrain.
++    * :attr:`velocity_range` - a dictionary of velocity ranges for each axis and rotation. The keys of the dictionary
++      are ``x``, ``y``, ``z``, ``roll``, ``pitch``, and ``yaw``.
++
++    The values are tuples of the form ``(min, max)``. If the dictionary does not contain a particular key,
++    the position is set to zero for that axis.
++
++    Note:
++        The function expects the terrain to have valid flat patches under the key "init_pos". The flat patches
++        are used to sample the random pose for the robot.
++
++    Raises:
++        ValueError: If the terrain does not have valid flat patches under the key "init_pos".
++    """
++    # access the used quantities (to enable type-hinting)
++    asset: RigidObject | Articulation = env.scene[asset_cfg.name]
++    terrain: TerrainImporter = env.scene.terrain
++
++    # obtain all flat patches corresponding to the valid poses
++    valid_positions: torch.Tensor = terrain.flat_patches.get("init_pos")
++    if valid_positions is None:
++        raise ValueError(
++            "The event term 'reset_root_state_from_terrain' requires valid flat patches under 'init_pos'."
++            f" Found: {list(terrain.flat_patches.keys())}"
++        )
++
++    # get the nearest valid position
++    pos_dis = torch.cdist(asset.data.default_root_state[env_ids, :3], valid_positions)
++    ids = torch.argmin(pos_dis, dim=1)
++    positions = valid_positions[ids]
++    # ids = torch.randint(0, valid_positions.shape[0], size=(1,), device=env.device)
++    # positions = valid_positions[ids]
++    positions += asset.data.default_root_state[env_ids, :3]
++
++    # sample random orientations
++    range_list = [pose_range.get(key, (0.0, 0.0)) for key in ["roll", "pitch", "yaw"]]
++    ranges = torch.tensor(range_list, device=asset.device)
++    rand_samples = math_utils.sample_uniform(ranges[:, 0], ranges[:, 1], (len(env_ids), 3), device=asset.device)
++
++    # convert to quaternions
++    orientations = asset.data.default_root_state[env_ids, 3:7]
++
++    # sample random velocities
++    range_list = [velocity_range.get(key, (0.0, 0.0)) for key in ["x", "y", "z", "roll", "pitch", "yaw"]]
++    ranges = torch.tensor(range_list, device=asset.device)
++    rand_samples = math_utils.sample_uniform(ranges[:, 0], ranges[:, 1], (len(env_ids), 6), device=asset.device)
++
++    velocities = asset.data.default_root_state[env_ids, 7:13] + rand_samples
++
++    print("positions: ", positions)
++    print("orientations: ", orientations)
++    # set into the physics simulation
++    asset.write_root_pose_to_sim(torch.cat([positions, orientations], dim=-1), env_ids=env_ids)
++    asset.write_root_velocity_to_sim(velocities, env_ids=env_ids)
+\ No newline at end of file
+diff --git a/isaaclab/standalone/play_low_matterport_keyboard.py b/isaaclab/standalone/play_low_matterport_keyboard.py
+index 1c65d53..51a613b 100644
+--- a/isaaclab/standalone/play_low_matterport_keyboard.py
++++ b/isaaclab/standalone/play_low_matterport_keyboard.py
+@@ -55,9 +55,13 @@ from omni.isaac.lab_tasks.utils.wrappers.rsl_rl import (
+     RslRlVecEnvWrapper,
+ )
+ 
+-from omni.viplanner.config import *
++from omni.isaac.viplanner.config import *
++# from omni.isaac.viplanner.config.go2.go2_matterport_cfg import reference_paths
+ from omni.isaac.lab.devices.keyboard import Se2Keyboard
+-from omni.viplanner.utils import RslRlVecEnvHistoryWrapper
++from omni.isaac.viplanner.utils import RslRlVecEnvHistoryWrapper
++
++import omni.isaac.lab.sim as sim_utils
++from omni.isaac.lab.markers import VisualizationMarkers, VisualizationMarkersCfg
+ 
+ 
+ def quat2eulers(q0, q1, q2, q3):
+@@ -81,6 +85,19 @@ def quat2eulers(q0, q1, q2, q3):
+     return roll, pitch, yaw
+ 
+ 
++def define_markers() -> VisualizationMarkers:
++    """Define path markers with various different shapes."""
++    marker_cfg = VisualizationMarkersCfg(
++        prim_path="/Visuals/pathMarkers",
++        markers={
++            "waypoint": sim_utils.SphereCfg(
++                radius=0.1,
++                visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 1.0, 0.0)),
++            ),
++        },
++    )
++    return VisualizationMarkers(marker_cfg)
++
+ 
+ def main():
+     """Play with RSL-RL agent."""
+@@ -134,6 +151,14 @@ def main():
+ 
+     # set the camera view
+     env.unwrapped.sim.set_camera_view(eye=cam_eye, target=cam_target)
++
++    # # create markers
++    # my_visualizer = define_markers()
++
++
++    # reference_paths_tensor = torch.tensor([(waypoint[0], -waypoint[2], waypoint[1]) for waypoint in reference_paths], device=obs.device)
++    
++
+     # simulate environment
+     while simulation_app.is_running():
+         # run everything in inference mode
+@@ -143,15 +168,17 @@ def main():
+             if num_count % 10 == 0:
+                 print("vel_command_keyboard: ", vel_command_keyboard)
+             # import pdb; pdb.set_trace()
+-            assert torch.allclose(env.unwrapped.command_manager._terms['base_velocity'].vel_command_b, torch.tensor([0., 0., 0.], device = obs.device))
++            # assert torch.allclose(env.unwrapped.command_manager._terms['base_velocity'].vel_command_b, torch.tensor([0., 0., 0.], device = obs.device))
+             # env.command_manager._terms['base_velocity'].vel_command_b[0,:] = commands
+             # obs[:,9:12] = commands_key
+-            # obs[:,9:12] = torch.tensor([vel_command_keyboard[0], vel_command_keyboard[1], vel_command_keyboard[2]], device = obs.device)
++            obs[:,9:12] = torch.tensor([vel_command_keyboard[0], vel_command_keyboard[1], vel_command_keyboard[2]], device = obs.device)
+             # agent stepping
+             actions = policy(obs)
+ 
+-            # robot_pos_w = env.unwrapped.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
+-            # robot_quat_w = env.unwrapped.scene["robot"].data.root_quat_w[0].detach().cpu().numpy()
++            robot_pos_w = env.unwrapped.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
++            robot_quat_w = env.unwrapped.scene["robot"].data.root_quat_w[0].detach().cpu().numpy()
++            print("robot quat: ", robot_quat_w)
++            print("robot pos: ", robot_pos_w)
+             # roll, pitch, yaw = quat2eulers(robot_quat_w[0], robot_quat_w[1], robot_quat_w[2], robot_quat_w[3])
+             # cam_eye = (robot_pos_w[0] - 0.8 * math.sin(-yaw), robot_pos_w[1] - 0.8 * math.cos(-yaw), robot_pos_w[2] + 0.8)
+             # cam_target = (robot_pos_w[0], robot_pos_w[1], robot_pos_w[2])
+@@ -160,6 +187,8 @@ def main():
+             # env stepping
+             obs, _, _, _ = env.step(actions)
+ 
++            # my_visualizer.visualize(reference_paths_tensor)
++
+             num_count += 1
+     # close the simulator
+     env.close()
+diff --git a/isaaclab/standalone/play_matterport_navila.py b/isaaclab/standalone/play_matterport_navila.py
+index 252b1f5..779e0a6 100644
+--- a/isaaclab/standalone/play_matterport_navila.py
++++ b/isaaclab/standalone/play_matterport_navila.py
+@@ -223,7 +223,7 @@ def eval_model(args, all_frames, model, model_name, tokenizer, image_processor):
+     if outputs.endswith(stop_str):
+         outputs = outputs[: -len(stop_str)]
+     outputs = outputs.strip()
+-    print(outputs)
++
+     return outputs
+ 
+ 
+@@ -389,16 +389,16 @@ def main():
+     # simulate environment
+     while simulation_app.is_running():
+         # run everything in inference mode
+-        # with torch.inference_mode():
+-        #     if num_count == counts_to_go:
+-        #         # import pdb; pdb.set_trace()
+-        #         vel_cmd_str = eval_model(args_cli, rgb_obses, model, model_name, tokenizer, image_processor)
+-        #         commands, counts_to_go = get_vel_command(vel_cmd_str)
+-        #         env_steps_to_go = counts_to_go / (
+-        #             env.unwrapped.cfg.sim.dt * env.unwrapped.cfg.decimation
+-        #         )
+-        #         print(f"Command: {commands}, Steps to go: {env_steps_to_go}")
+-        #         num_count = 0
++        with torch.inference_mode():
++            if num_count == counts_to_go:
++                # import pdb; pdb.set_trace()
++                vel_cmd_str = eval_model(args_cli, rgb_obses, model, model_name, tokenizer, image_processor)
++                commands, counts_to_go = get_vel_command(vel_cmd_str)
++                env_steps_to_go = counts_to_go / (
++                    env.unwrapped.cfg.sim.dt * env.unwrapped.cfg.decimation
++                )
++                print(f"Command: {commands}, Steps to go: {env_steps_to_go}")
++                num_count = 0
+         # import pdb; pdb.set_trace()
+         # assert torch.allclose(env.unwrapped.command_manager._terms['base_velocity'].vel_command_b, torch.tensor([0., 0., 0.], device = obs.device))
+         # env.command_manager._terms['base_velocity'].vel_command_b[0,:] = commands
+@@ -424,8 +424,8 @@ def main():
+ 
+         num_count += 1
+ 
+-        if num_count > 100:
+-            break
++        # if num_count > 100:
++        #     break
+ 
+     # # Assuming rgb_obses is a list of RGB frames.
+     # width, height, _ = rgb_obses[0].shape

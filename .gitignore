@@ -194,4 +194,4 @@ cython_debug/
 .cursorindexingignore
 
 #datasets 
-./VLN-CE-Isaac/isaaclab_exts/omni.isaac.vlnce/assets/*
+./isaac/isaaclab_exts/omni.isaac.vlnce/assets/
