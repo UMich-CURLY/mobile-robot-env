@@ -61,6 +61,7 @@ class SensorDataManager:
         self.useplanner = None
         self.planner = pl.Planner(max_vx=0.3,min_vx=-0.2,max_vy = 0.2,max_vw=0.3,cruise_vel=0.5)
 
+        self.distance = 5
     def rgb_callback(self, msg: CompressedImage):
         try:
             cv_img = self.cv_bridge.compressed_imgmsg_to_cv2(
@@ -123,8 +124,8 @@ class SensorDataManager:
             o = pose['orientation']
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
             vx,vy,vw = self.planner.step(position['x'],position['y'],yaw)
-            distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
-            if(distance<0.7):
+            self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
+            if(self.distance<0.7):
                 vx = 0
             publish_lcm(vx, vy, vw)
             
@@ -233,6 +234,8 @@ def main(args=None):
     
     def action_callback(message):
         if message.type == 'VEL':
+            if(data_manager.distance<0.7):
+                message.x = 0
             publish_lcm(message.x,message.y,message.omega)
             print(message)
             data_manager.useplanner = False
