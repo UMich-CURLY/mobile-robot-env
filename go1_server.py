@@ -14,6 +14,8 @@ import struct
 import base64
 from utils.server import run_server,format_data,compress_payload
 from utils.pcd import get_distance
+from scipy.spatial.transform import Rotation
+import utils.planner as pl
 # --- Configuration ---
 SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
 SOCKET_PORT = 12345
@@ -25,6 +27,7 @@ from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_r
 LCM_URL     = "udpm://239.255.76.67:7667?ttl=255"
 LCM_CHANNEL = "rc_command_relay"
 
+collision_threshold = 0.6
 
 lc = lcm.LCM(LCM_URL)
 
@@ -78,9 +81,12 @@ class SensorDataManager:
             depth      = cv2.imdecode(
                         np.frombuffer(png_bytes, np.uint8),
                         cv2.IMREAD_UNCHANGED)  
+
             # depth = self.cv_bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
             with self.lock:
                 self.latest_depth_cv_image = depth
+                self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
+
             self.check_data_ready()
         except Exception as e:
             self.logger.error(f'Depth callback error: {e}')
@@ -105,6 +111,8 @@ class SensorDataManager:
         self.publish_planner_action()
 
     def check_data_ready(self):
+        # print(self.distance)
+
         if not self.data_ready:
             with self.lock:
                 if self.latest_rgb_cv_image is not None and \
@@ -114,8 +122,8 @@ class SensorDataManager:
                     self.logger.info("Initial set of sensor data received. Server is ready for client requests.")
     
     def publish_planner_action(self):
-        if hasattr(self,'_last_publish_time'):
-            print("last publish time:", time.time() - self._last_publish_time)
+        # if hasattr(self,'_last_publish_time'):
+        #     print("last publish time:", time.time() - self._last_publish_time)
         self._last_publish_time = time.time()
 
         if self.data_ready and self.useplanner:
@@ -124,8 +132,7 @@ class SensorDataManager:
             o = pose['orientation']
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
             vx,vy,vw = self.planner.step(position['x'],position['y'],yaw)
-            self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
-            if(self.distance<0.7):
+            if(self.distance<collision_threshold):
                 vx = 0
             publish_lcm(vx, vy, vw)
             
@@ -213,9 +220,6 @@ class SensorServerNode(Node):
 
         self.frame_count += 1
 
-from scipy.spatial.transform import Rotation
-import planner as pl
-
 def main(args=None):
     rclpy.init(args=args)
     
@@ -234,7 +238,7 @@ def main(args=None):
     
     def action_callback(message):
         if message.type == 'VEL':
-            if(data_manager.distance<0.7):
+            if(data_manager.distance<collision_threshold):
                 message.x = 0
             publish_lcm(message.x,message.y,message.omega)
             print(message)
@@ -251,12 +255,13 @@ def main(args=None):
             data_manager.planner.update_waypoints(translations[:,:2])
 
     def planner_callback():
+        col = int(data_manager.distance<collision_threshold)
         try:
             planner = data_manager.planner
             ex,ey,_ = planner.get_tracking_error()
-            return {'err_x':ex,'err_y':ey,"cmd_x":planner.cmd_x,"cmd_y":planner.cmd_y,"cmd_w":planner.cmd_w}
+            return {'err_x':ex,'err_y':ey,"cmd_x":planner.cmd_x,"cmd_y":planner.cmd_y,"cmd_w":planner.cmd_w,"collision":col}
         except:
-            return {}
+            return {"collision":col}
     
     # Start socket server in a separate thread
     # Pass the logger from the ROS node to the socket thread for consistent logging
