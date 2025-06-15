@@ -150,7 +150,7 @@ class Planner:
 
         cmd_w = cmd_w*self.Kp_w #Proportional control
         if(len(self.wps>3)):
-            cmd_w+=self._dtheta_ds(x,y)*cmd_x#/(1+2*np.abs(cmd_w)) #feedforward control
+            cmd_w+=self._dtheta_ds(x,y)*cmd_x/(1+2*np.abs(cmd_w)) #feedforward control
         self.cmd_x,self.cmd_y,self.cmd_w = np.clip(cmd_x,self.min_vx,self.max_vx),np.clip(cmd_y,-self.max_vy,self.max_vy),np.clip(cmd_w,-self.max_vw,self.max_vw)
         print("planning")
         return self.cmd_x,self.cmd_y,self.cmd_w

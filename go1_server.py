@@ -27,11 +27,13 @@ from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_r
 LCM_URL     = "udpm://239.255.76.67:7667?ttl=255"
 LCM_CHANNEL = "rc_command_relay"
 
-collision_threshold = 0.6
+collision_threshold = 0.4
 
 lc = lcm.LCM(LCM_URL)
-
+x,y,w = 0,0,0
 def publish_lcm(lin_x,lin_y,yaw):
+    global x,y,w
+    x,y,w = lin_x,lin_y,yaw
     lcm_msg = rc_command_lcmt_relay()
     lcm_msg.mode = 0
     lcm_msg.left_stick  = [lin_y, lin_x]
@@ -62,7 +64,7 @@ class SensorDataManager:
         self.init_rotmat = None
 
         self.useplanner = None
-        self.planner = pl.Planner(max_vx=0.3,min_vx=-0.2,max_vy = 0.2,max_vw=0.3,cruise_vel=0.5)
+        self.planner = pl.Planner(max_vx=1,min_vx=-0.2,max_vy = 0.1,max_vw=1,cruise_vel=0.6,Kp_w=2.5)
 
         self.distance = 5
     def rgb_callback(self, msg: CompressedImage):
@@ -86,7 +88,8 @@ class SensorDataManager:
             with self.lock:
                 self.latest_depth_cv_image = depth
                 self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
-
+                if(self.distance<collision_threshold):
+                    publish_lcm(np.clip(x,-0.5,0),y,w)
             self.check_data_ready()
         except Exception as e:
             self.logger.error(f'Depth callback error: {e}')
@@ -133,7 +136,7 @@ class SensorDataManager:
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
             vx,vy,vw = self.planner.step(position['x'],position['y'],yaw)
             if(self.distance<collision_threshold):
-                vx = 0
+                vx = np.clip(vx,-0.5,0)
             publish_lcm(vx, vy, vw)
             
     def get_latest_data(self):
@@ -239,7 +242,8 @@ def main(args=None):
     def action_callback(message):
         if message.type == 'VEL':
             if(data_manager.distance<collision_threshold):
-                message.x = 0
+                message.x = np.clip(message.x,-0.5,0)
+
             publish_lcm(message.x,message.y,message.omega)
             print(message)
             data_manager.useplanner = False
@@ -259,7 +263,7 @@ def main(args=None):
         try:
             planner = data_manager.planner
             ex,ey,_ = planner.get_tracking_error()
-            return {'err_x':ex,'err_y':ey,"cmd_x":planner.cmd_x,"cmd_y":planner.cmd_y,"cmd_w":planner.cmd_w,"collision":col}
+            return {'err_x':ex,'err_y':ey,"vx":planner.cmd_x,"vy":planner.cmd_y,"w":planner.cmd_w,"collision":col}
         except:
             return {"collision":col}
     
