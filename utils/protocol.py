@@ -11,4 +11,13 @@ class WaypointMessage():
         self.x = [] #list of
         self.y = []
 
-message_types = [VelMessage,WaypointMessage]
+
+class HabitatMessage():
+    type = "HABITAT"
+    action_names = ["STOP","FORWARD","LEFT","RIGHT","LOOPUP","LOOKDOWN"]
+    def __init__self(self,action):
+        self.number = action
+    def __repr__(self):
+        return HabitatMessage.action_names[self.action_names]
+
+message_types = [VelMessage,WaypointMessage,HabitatMessage]

@@ -102,6 +102,10 @@ with gzip.open(dataset_file_name, "rt") as f:
 
 
 udf_file = os.path.join(ASSETS_DIR, f"matterport_usd/{env_cfg.scene_id}/{env_cfg.scene_id}.usd")
+udf_file = "/home/avery/Documents/test.usd"
+udf_file = "/home/avery/Downloads/env.usd"
+# udf_file = "/home/avery/Downloads/factory.usd"
+
 if os.path.exists(udf_file):
     env_cfg.scene.terrain.obj_filepath = udf_file #this loads the filepath to the mesh and textures for the rooms.
 else:
@@ -109,12 +113,13 @@ else:
 if "go2" in args_cli.task:
     env_cfg.scene.robot.init_state.pos = (episode["start_position"][0], episode["start_position"][1], episode["start_position"][2]+0.2)
   
+    env_cfg.scene.robot.init_state.pos = (0, 0, 0+0.2)
 
 print("scene_id: ", env_cfg.scene_id)
 print("robot_init_pos: ", env_cfg.scene.robot.init_state.pos)
 print(env_cfg)
 # initialize environment and low-level policy
-env = gym.make(args_cli.task, cfg=env_cfg, render_mode='performance')
+env = gym.make(args_cli.task, cfg=env_cfg)#, render_mode='performance')
 
 # env.env.physics_dt = 0.01 #0.005
 print(env.env.step_dt)

@@ -16,10 +16,27 @@ HFOV = 72
 # WAYPOINTS = np.array([
 # [0,0],[0.5,-0.3],[1,0.2],[1.5,0],[2,-0.2],[2.5,0]
 # ])
-
 WAYPOINTS = np.array([
-[0,0]
-])
+ [ 0.         , 0.        ],
+ [ 0.64484999 , 0.00898335],
+ [ 0.98256157 , 0.00693384],
+ [ 1.1899422  , 0.14765533],
+ [ 1.34841325 , 0.50032   ],
+ [ 1.60909961 , 0.71981093],
+ [ 1.96884275 , 0.81072732],
+ [ 2.21724862 , 0.66540045],
+ [ 2.48945878 , 0.48726669],
+ [ 2.60769912 , 0.23764456],
+ [ 2.54893836 ,-0.07430095],
+ [ 2.34404152 ,-0.36827063],
+ [ 2.11184586 ,-0.39968225],
+ [ 1.85050507 ,-0.32115638],
+ [ 1.46089797 ,-0.2089194 ],
+ [ 1.26725344 ,-0.35803746]])
+# WAYPOINTS = np.array([
+
+# [0,0]
+# ])
 
 
 MAGNIFICATION_OPTIONS = [1,2,4,6,8]
@@ -158,12 +175,15 @@ while run:
                 WAYPOINTS = WAYPOINTS[:1]
             if event.key == pygame.K_RETURN:
                 print("executing preprgrammed trajectory:")
-                translations = np.hstack((WAYPOINTS,np.ones((len(WAYPOINTS),1))*0.2,np.ones((len(WAYPOINTS),1)))) @  curr_T.T# @ np.linalg.inv(init_T).T 
-                
-                waypointmsg.x = translations[:,0]
-                waypointmsg.y = translations[:,1] #invert it because z is positive right, but y is positive left.
+                if(WAYPOINTS.shape[0]>1):
+                    translations = np.hstack((WAYPOINTS,np.ones((len(WAYPOINTS),1))*0.2,np.ones((len(WAYPOINTS),1)))) @  curr_T.T# @ np.linalg.inv(init_T).T 
+                    
+                    waypointmsg.x = translations[:,0]
+                    waypointmsg.y = translations[:,1] #invert it because z is positive right, but y is positive left.
 
-                send_action_message(waypointmsg, host=args.host)
+                    send_action_message(waypointmsg, host=args.host)
+                else:
+                    print("not enough points, skipping")
                 continue
             if event.key == pygame.K_m:
                 magnification_choice+=1
@@ -172,6 +192,9 @@ while run:
                 magnification_choice-=1
                 magnification_choice%=len(MAGNIFICATION_OPTIONS)
             send_action_message(VelMessage(vx,vy,omg), host=args.host)
+
+            if event.key == pygame.K_o:
+                print(WAYPOINTS)
             
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
@@ -256,7 +279,7 @@ while run:
         pcd  = np.stack([depth_image,-px,py],axis=-1)
         #generalized mean
         power = -50
-        distances = np.linalg.norm(pcd,axis=2) #depth image to distance image.\
+        distances = np.linalg.norm(pcd,axis=2)[:220,:] #depth image to distance image.\
         mean_distance = (np.sum(distances**power)/640/480)**(1/power)#np.mean(distances)
 
 

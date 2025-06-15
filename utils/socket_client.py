@@ -152,6 +152,7 @@ def request_planner_state(host = SERVER_HOST):
     # 4. Deserialize
     payload = json.loads(json_payload)
     return payload
+
 def main():
     print("Agent Socket Client Started")
     while True:
@@ -192,7 +193,6 @@ def main():
                         print(f"  Cannot display depth image with dtype {depth_image.dtype} automatically.")
                 else:
                     print("  Depth Image: None")
-
                 if pose:
                     p = pose['pose']['position']
                     o = pose['pose']['orientation']

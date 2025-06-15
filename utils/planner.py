@@ -79,7 +79,7 @@ def get_goal(wps,distance,x,y,lookahead):
     target_idx =  index+lookahead_idx
     return target_idx
 class Planner:
-    def __init__(self,lookahead =0.1,max_vx = 2,min_vx=-0.2,max_vy=0,max_vw=2,cruise_vel=0.8):
+    def __init__(self,lookahead =0.1,max_vx = 2,min_vx=-0.2,max_vy=0,max_vw=2,cruise_vel=0.8,Kp_x = 1,Kp_w = 2):
         self.wps = None
         self.lookahead = lookahead
         self.max_vx,self.max_vy,self.max_vw = max_vx,max_vy,max_vw
@@ -87,6 +87,9 @@ class Planner:
         self.cruise_vel = cruise_vel
 
         self.xgoal,self.ygoal,self.thetagoal = None,None,None
+
+        self.Kp_x = Kp_x
+        self.Kp_w = Kp_w
     def update_waypoints(self,waypoints):
         self.wps,self.theta,self.distance = fit_smoothing_spline(waypoints,n=1600)
     #gets the
@@ -117,7 +120,6 @@ class Planner:
         if(target_heading<-np.pi):
             target_heading+=np.pi*2
         w1 =(ddx*ddx+ddy*ddy)*2
-
         w2 = 0
         if idx>1590: #prioritize correction when not close to target
             w2 = 1
@@ -134,13 +136,22 @@ class Planner:
         self.xgoal,self.ygoal,self.thetagoal = x,y,theta # keep track of current target
 
         cmd_x,cmd_y,cmd_w = self._step(x,y,theta,self.lookahead)
+        
+        t_vec = np.array([cmd_x,cmd_y])
+        u_vec = t_vec/np.linalg.norm(t_vec)
+        
+        e_vec = t_vec - u_vec*self.lookahead
+
+        cmd_x,cmd_y = u_vec*self.cruise_vel+e_vec*self.Kp_x #feedforward and feedback
+
+
         cmd_x/=(1+10*np.abs(cmd_w)) #slow down if the turning loop can't keep up
 
-        cmd_x,cmd_y,cmd_w = cmd_x/self.lookahead*self.cruise_vel,cmd_y/self.lookahead*self.cruise_vel,cmd_w*2 #Proportional control
+        cmd_w = cmd_w*self.Kp_w #Proportional control
         if(len(self.wps>3)):
             cmd_w+=self._dtheta_ds(x,y)*cmd_x#/(1+2*np.abs(cmd_w)) #feedforward control
         self.cmd_x,self.cmd_y,self.cmd_w = np.clip(cmd_x,self.min_vx,self.max_vx),np.clip(cmd_y,-self.max_vy,self.max_vy),np.clip(cmd_w,-self.max_vw,self.max_vw)
-
+        print("planning")
         return self.cmd_x,self.cmd_y,self.cmd_w
 # --- Main part of the script ---
 if __name__ == "__main__":
