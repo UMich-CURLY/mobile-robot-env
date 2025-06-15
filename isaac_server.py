@@ -244,6 +244,8 @@ init_pos = None
 init_quat = None
 init_mat = None
 
+collision = False
+
 def data_callback():
     global rgb,depth,position,quat,init_pos,init_quat,init_mat
     if init_pos is None:
@@ -254,12 +256,12 @@ def data_callback():
 
 def planner_callback():
 
-    global planner,use_planner
+    global planner,use_planner,collision
     try:
         ex,ey,_ = planner.get_tracking_error()
-        return {'err_x':ex,'err_y':ey,"cmd_x":planner.cmd_x,"cmd_y":planner.cmd_y,"cmd_w":planner.cmd_w}
+        return {'err_x':ex,'err_y':ey,"vx":planner.cmd_x,"vy":planner.cmd_y,"w":planner.cmd_w,"collision":collision}
     except:
-        return {}
+        return {"collision":collision}
 from threading import Thread
 
 server_thread = Thread(target=run_server,kwargs={"data_cb":data_callback,"action_cb":action_callback,"planner_cb":planner_callback})
@@ -314,8 +316,11 @@ try:
         #     print(fps)
         i+=1
         distance = get_distance(depth.astype(float)/1000.0)
+        collision = False
         if(distance<0.7):
+            collision = True
             vel_command[0]=0
+            planner.cmd_x = 0
         # print("robot_pos %s robot ori %s" % (str(robot_pos),str(robot_ori_full_quat)))
         # robot_ori_full_rpy = math_utils.euler_xyz_from_quat(robot_ori_full_quat)
         

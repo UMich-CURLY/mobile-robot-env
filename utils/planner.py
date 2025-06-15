@@ -90,6 +90,7 @@ class Planner:
 
         self.Kp_x = Kp_x
         self.Kp_w = Kp_w
+
     def update_waypoints(self,waypoints):
         self.wps,self.theta,self.distance = fit_smoothing_spline(waypoints,n=1600)
     #gets the

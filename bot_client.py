@@ -243,7 +243,8 @@ while run:
                 planner_message+=value
                 planner_message+=" | "
         else:
-            planner_message= f"[TELEOP] x: {vx:+.2f} y: {vy:+.2f} z: {omg:+.2f}"
+            collision = my_dict.get("collision",None)
+            planner_message= f"[TELEOP] x: {vx:+.2f} y: {vy:+.2f} z: {omg:+.2f} | proximity warning: {collision}"
         # decimal_places = 3
         # rounded_dict = {k: round(v, decimal_places) if isinstance(v, float) else v for k, v in my_dict.items()}
         # print(rounded_dict)
