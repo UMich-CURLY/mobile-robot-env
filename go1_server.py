@@ -13,6 +13,7 @@ import threading
 import struct
 import base64
 from utils.server import run_server,format_data,compress_payload
+from utils.pcd import get_distance
 # --- Configuration ---
 SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
 SOCKET_PORT = 12345
@@ -42,7 +43,7 @@ def publish_lcm(lin_x,lin_y,yaw):
     lcm_msg.right_lower_right_switch = 0
 
     lc.publish(LCM_CHANNEL, lcm_msg.encode())
-    
+
 class SensorDataManager:
     """Holds the latest sensor data and provides thread-safe access."""
     def __init__(self, logger):
@@ -122,6 +123,9 @@ class SensorDataManager:
             o = pose['orientation']
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
             vx,vy,vw = self.planner.step(position['x'],position['y'],yaw)
+            distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
+            if(distance<0.7):
+                vx = 0
             publish_lcm(vx, vy, vw)
             
     def get_latest_data(self):

@@ -60,6 +60,7 @@ from omni.isaac.vlnce.utils import ASSETS_DIR, RslRlVecEnvHistoryWrapper, VLNEnv
 
 from utils.protocol import *
 from utils.planner import *
+from utils.pcd import get_distance
 
 def quat_wxyz_to_xyzw(quat):
     return np.array([quat[1], quat[2], quat[3], quat[0]])
@@ -102,8 +103,7 @@ with gzip.open(dataset_file_name, "rt") as f:
 
 
 udf_file = os.path.join(ASSETS_DIR, f"matterport_usd/{env_cfg.scene_id}/{env_cfg.scene_id}.usd")
-udf_file = "/home/avery/Documents/test.usd"
-udf_file = "/home/avery/Downloads/env.usd"
+# udf_file = "/home/avery/Downloads/env.usd"
 # udf_file = "/home/avery/Downloads/factory.usd"
 
 if os.path.exists(udf_file):
@@ -113,7 +113,7 @@ else:
 if "go2" in args_cli.task:
     env_cfg.scene.robot.init_state.pos = (episode["start_position"][0], episode["start_position"][1], episode["start_position"][2]+0.2)
   
-    env_cfg.scene.robot.init_state.pos = (0, 0, 0+0.2)
+    # env_cfg.scene.robot.init_state.pos = (0, 0, 0+0.2)
 
 print("scene_id: ", env_cfg.scene_id)
 print("robot_init_pos: ", env_cfg.scene.robot.init_state.pos)
@@ -276,6 +276,7 @@ try:
         depth_image = infos['observations']['depth_obs'][0,0,:,:].clone().detach()*1000
         depth = depth_image.cpu().numpy().astype(np.uint16)
 
+
         # save_path_rgb = os.path.join(os.getcwd(), "rgb_image"+str(it-start_it)+".png")
 
         # proprio_go2 = infos['observations']['policy'].clone().detach().cpu().numpy()
@@ -312,6 +313,9 @@ try:
 
         #     print(fps)
         i+=1
+        distance = get_distance(depth.astype(float)/1000.0)
+        if(distance<0.7):
+            vel_command[0]=0
         # print("robot_pos %s robot ori %s" % (str(robot_pos),str(robot_ori_full_quat)))
         # robot_ori_full_rpy = math_utils.euler_xyz_from_quat(robot_ori_full_quat)
         
