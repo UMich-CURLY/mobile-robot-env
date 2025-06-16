@@ -1,0 +1,231 @@
+import time
+from pathlib import Path
+from typing import Optional, Tuple, Dict, Any
+
+import cv2
+import numpy as np
+try:
+    # Import pyrealsense2 with the full module path to avoid name clashes
+    import pyrealsense2.pyrealsense2 as rs  # type: ignore
+except ImportError as exc:
+    raise ImportError(
+        "pyrealsense2 is required for rs2_utils but was not found. "
+        "Install with `pip install pyrealsense2` and ensure a RealSense SDK "
+        "is available on the system.") from exc
+
+
+# -----------------------------------------------------------------------------
+# Helper functions (largely adopted from rs2_test.py)
+# -----------------------------------------------------------------------------
+
+def _load_json_preset(device: rs.device, json_path: Path) -> None:
+    """Upload a depth-camera JSON preset (requires advanced-mode)."""
+    if not json_path or not json_path.is_file():
+        print(f"[WARN] JSON preset not found: {json_path}")
+        return
+
+    adv = rs.rs400_advanced_mode(device)
+    if not adv.is_enabled():
+        print("[INFO] Enabling advanced mode …")
+        adv.toggle_advanced_mode(True)
+        time.sleep(2)  # Wait for reconnect
+        # Re-acquire handle
+        ctx = rs.context()
+        sn = device.get_info(rs.camera_info.serial_number)
+        device = next(d for d in ctx.devices
+                      if d.get_info(rs.camera_info.serial_number) == sn)
+        adv = rs.rs400_advanced_mode(device)
+
+    adv.load_json(json_path.read_text())
+    print(f"[INFO] Loaded JSON preset from {json_path}")
+
+
+def _reset_device(serial: Optional[str]) -> None:
+    """Perform a hardware reset on the RealSense device with the given serial."""
+    ctx = rs.context()
+    devices = ctx.devices
+    if not devices:
+        print("[WARN] No RealSense devices found for reset.")
+        return
+
+    target = None
+    if serial:
+        for d in devices:
+            if d.get_info(rs.camera_info.serial_number) == serial:
+                target = d
+                break
+        if target is None:
+            print(f"[WARN] Device with serial {serial} not found for reset.")
+            return
+    else:
+        if len(devices) == 1:
+            target = devices[0]
+        else:
+            print("[WARN] Multiple devices present, specify serial to reset a specific one.")
+            return
+
+    sn = target.get_info(rs.camera_info.serial_number)
+    print(f"[INFO] Resetting RealSense device {sn} …")
+    target.hardware_reset()
+    time.sleep(3)  # Allow USB re-enumeration
+
+
+# -----------------------------------------------------------------------------
+# Core RealSense System wrapper
+# -----------------------------------------------------------------------------
+class RealSenseSystem:
+    """Convenience wrapper that starts D435/D455 (color + depth) and optional
+    T265 (pose) pipelines and exposes a unified `grab_frames` interface.
+
+    Attributes
+    ----------
+    has_pose : bool
+        Indicates whether pose data is expected/available (T265 present).
+    """
+
+    def __init__(
+        self,
+        d435_serial: Optional[str] = None,
+        t265_serial: Optional[str] = None,
+        *,
+        width: int = 640,
+        height: int = 480,
+        fps: int = 30,
+        json_preset: Optional[str] = None,
+        reset_before_start: bool = False,
+    ) -> None:
+        # Optional resets first (prevents "resource busy" errors)
+        if reset_before_start:
+            if d435_serial:
+                _reset_device(d435_serial)
+            if t265_serial:
+                _reset_device(t265_serial)
+
+        # ---------------- D435 / depth cam ----------------
+        self.d435_pipeline: Optional[rs.pipeline] = None
+        self.align: Optional[rs.align] = None
+        if d435_serial is not None:
+            self.d435_pipeline = rs.pipeline()
+            cfg = rs.config()
+            cfg.enable_device(d435_serial)
+            cfg.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
+            cfg.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
+            profile = self.d435_pipeline.start(cfg)
+            # Align depth to color for convenience
+            self.align = rs.align(rs.stream.color)
+            if json_preset:
+                _load_json_preset(profile.get_device(), Path(json_preset))
+            print("[INFO] D435/D455 pipeline started.")
+        else:
+            print("[INFO] No D435 serial specified – skipping color/depth stream.")
+
+        # ---------------- T265 / pose cam -----------------
+        self.t265_pipeline: Optional[rs.pipeline] = None
+        if t265_serial is not None:
+            self.t265_pipeline = rs.pipeline()
+            cfg = rs.config()
+            cfg.enable_device(t265_serial)
+            cfg.enable_stream(rs.stream.pose)
+            self.t265_pipeline.start(cfg)
+            print("[INFO] T265 pipeline started (pose).")
+        else:
+            print("[INFO] No T265 serial specified – skipping pose stream.")
+
+        self.has_pose: bool = self.t265_pipeline is not None
+        # Caches for latest frames (thread-safe access not handled here)
+        self._last_color: Optional[np.ndarray] = None
+        self._last_depth: Optional[np.ndarray] = None
+        self._last_pose: Optional[Dict[str, Any]] = None
+
+    # ---------------------------------------------------------------------
+    def _fetch_d435_frames(self, timeout_ms: int = 500) -> Tuple[Optional[np.ndarray], Optional[np.ndarray]]:
+        if self.d435_pipeline is None:
+            return None, None
+        frames = self.d435_pipeline.wait_for_frames(timeout_ms)
+        if self.align is not None:
+            frames = self.align.process(frames)
+        depth_frame = frames.get_depth_frame()
+        color_frame = frames.get_color_frame()
+        if not depth_frame or not color_frame:
+            return None, None
+        depth_img = np.asanyarray(depth_frame.get_data())  # uint16 depth in mm
+        color_img = np.asanyarray(color_frame.get_data())  # BGR
+        return color_img, depth_img
+
+    def _fetch_t265_pose(self) -> Optional[Dict[str, Any]]:
+        if self.t265_pipeline is None:
+            return None
+        frames = self.t265_pipeline.poll_for_frames()
+        if not frames:
+            return None
+        pose_frame = frames.get_pose_frame()
+        if not pose_frame:
+            return None
+        data = pose_frame.get_pose_data()
+        pose_dict = {
+            "header": {
+                "stamp_sec": int(time.time()),
+                "stamp_nanosec": int((time.time_ns()) % 1_000_000_000),
+                "frame_id": "t265_odom",
+            },
+            "pose": {
+                "position": {
+                    "x": data.translation.x,
+                    "y": data.translation.y,
+                    "z": data.translation.z,
+                },
+                "orientation": {
+                    "x": data.rotation.x,
+                    "y": data.rotation.y,
+                    "z": data.rotation.z,
+                    "w": data.rotation.w,
+                },
+            },
+        }
+        return pose_dict
+
+    # ---------------------------------------------------------------------
+    def grab_frames(self) -> Tuple[Optional[np.ndarray], Optional[np.ndarray], Optional[Dict[str, Any]]]:
+        """Blocking fetch of the latest frames (color, depth, pose).
+
+        Returns
+        -------
+        color_img : np.ndarray | None
+            BGR image or `None` if unavailable.
+        depth_img : np.ndarray | None
+            uint16 depth image (millimetres) or `None`.
+        pose_dict : dict | None
+            Pose dictionary (same format as ROS2 message in go1_server) or `None`.
+        """
+        color, depth = self._fetch_d435_frames()
+        pose = self._fetch_t265_pose() if self.has_pose else None
+        # Update caches (could be None)
+        if color is not None:
+            self._last_color = color
+        if depth is not None:
+            self._last_depth = depth
+        if pose is not None:
+            self._last_pose = pose
+        # Fallback to last known if current fetch failed (non-blocking semantics)
+        return (
+            self._last_color,
+            self._last_depth,
+            self._last_pose,
+        )
+
+    # ---------------------------------------------------------------------
+    def stop(self) -> None:
+        if self.d435_pipeline is not None:
+            self.d435_pipeline.stop()
+        if self.t265_pipeline is not None:
+            self.t265_pipeline.stop()
+        print("[INFO] RealSense pipelines stopped.")
+
+    # ---------------------------------------------------------------------
+    def __del__(self):
+        # Ensure resources are released when the object is garbage-collected.
+        try:
+            self.stop()
+        except Exception:
+            # Suppress any exceptions during interpreter shutdown.
+            pass 

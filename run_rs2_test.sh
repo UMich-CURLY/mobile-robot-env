@@ -1,0 +1,1 @@
+python3.8 rs2_test.py both --d435-serial 827312072741 --t265-serial 146322110342 --pose-only --json /home/unitree/HighAccuracyPreset.json --d435-no-gui
