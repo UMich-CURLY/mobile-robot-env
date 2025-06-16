@@ -155,21 +155,69 @@ def main() -> None:
 
     data_manager = SensorDataManagerRS2(logger)
 
-    # Thread that continuously polls RealSense and updates the data manager
-    def acquisition_loop():
+    # ------------------------------------------------------------------
+    # Separate acquisition threads for RGB-D and pose
+    # ------------------------------------------------------------------
+
+    def rgbd_loop():
+        start_ts = time.time()
+        frames = 0
         while True:
             try:
-                rgb, depth, pose = rs_system.grab_frames()
-                data_manager.update(rgb, depth, pose)
-            except Exception as exc:
-                logger.error(f"Error in acquisition loop: {exc}")
-                time.sleep(0.1)
+                color, depth = rs_system.get_rgbd()
+                if color is None or depth is None:
+                    continue  # wait for valid frame
 
-    acquisition_thread = threading.Thread(target=acquisition_loop, daemon=True)
-    acquisition_thread.start()
+                data_manager.update(color, depth, None)
+
+                frames += 1
+                now = time.time()
+                if now - start_ts >= 1.0:
+                    fps = frames / (now - start_ts)
+                    print(f"[RGBD] FPS: {fps:.1f}")
+                    frames = 0
+                    start_ts = now
+            except Exception as exc:
+                logger.error(f"RGBD thread error: {exc}")
+                time.sleep(0.05)
+
+    def pose_loop():
+        start_ts = time.time()
+        frames = 0
+        while True:
+            try:
+                pose = rs_system.get_pose()
+                if pose is None:
+                    time.sleep(0.005)
+                    continue
+
+                data_manager.update(None, None, pose)
+
+                frames += 1
+                now = time.time()
+                if now - start_ts >= 1.0:
+                    fps = frames / (now - start_ts)
+                    print(f"[Pose] FPS: {fps:.1f}")
+                    frames = 0
+                    start_ts = now
+            except Exception as exc:
+                logger.error(f"Pose thread error: {exc}")
+                time.sleep(0.05)
+
+    threading.Thread(target=rgbd_loop, daemon=True).start()
+    threading.Thread(target=pose_loop, daemon=True).start()
 
     # Callbacks for socket server (re-use utils.server implementation)
     def data_callback():
+        now = time.time()
+        if not hasattr(data_callback, "_last_ts"):
+            data_callback._last_ts = now  # type: ignore
+        else:
+            dt = now - data_callback._last_ts  # type: ignore
+            if dt > 0:
+                print(f"[Socket] Request FPS: {1.0 / dt:.1f}")
+            data_callback._last_ts = now  # type: ignore
+
         data = data_manager.get_latest_data()
         if data is None:
             return {"success": False, "message": "Data not ready"}

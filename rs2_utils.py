@@ -228,4 +228,153 @@ class RealSenseSystem:
             self.stop()
         except Exception:
             # Suppress any exceptions during interpreter shutdown.
-            pass 
+            pass
+
+    # ---------------------------------------------------------------------
+    def poll_once(self) -> Tuple[Optional[np.ndarray], Optional[np.ndarray], Optional[Dict[str, Any]]]:
+        """Non-blocking update of cached frames.
+
+        This method queries the pipelines with `poll_for_frames()` which returns
+        immediately (or `None`) if no new frames are available. When new frames
+        do arrive, the internal caches (`_last_color`, `_last_depth`,
+        `_last_pose`) are updated. The method always returns the *current*
+        cached values – thus callers can call it at high frequency to keep the
+        cache fresh while obtaining the latest available data at any time.
+        """
+
+        # Initialise FPS tracking attrs on first call
+        if not hasattr(self, "_fps_last_ts"):
+            self._fps_last_ts = time.time()
+            self._fps_frames = 0
+
+        new_rgb = False  # flag for FPS counting
+
+        # ---------------- D435 ----------------
+        if self.d435_pipeline is not None:
+            frames = self.d435_pipeline.poll_for_frames()
+            if frames:
+                if self.align is not None:
+                    frames = self.align.process(frames)
+                depth_frame = frames.get_depth_frame()
+                color_frame = frames.get_color_frame()
+                if depth_frame and color_frame:
+                    self._last_depth = np.asanyarray(depth_frame.get_data())
+                    self._last_color = np.asanyarray(color_frame.get_data())
+                    new_rgb = True
+
+        # ---------------- T265 ----------------
+        if self.t265_pipeline is not None:
+            frames = self.t265_pipeline.poll_for_frames()
+            if frames:
+                pose_frame = frames.get_pose_frame()
+                if pose_frame:
+                    data = pose_frame.get_pose_data()
+                    self._last_pose = {
+                        "header": {
+                            "stamp_sec": int(time.time()),
+                            "stamp_nanosec": int((time.time_ns()) % 1_000_000_000),
+                            "frame_id": "t265_odom",
+                        },
+                        "pose": {
+                            "position": {
+                                "x": data.translation.x,
+                                "y": data.translation.y,
+                                "z": data.translation.z,
+                            },
+                            "orientation": {
+                                "x": data.rotation.x,
+                                "y": data.rotation.y,
+                                "z": data.rotation.z,
+                                "w": data.rotation.w,
+                            },
+                        },
+                    }
+
+        # ---------------- FPS logging ----------------
+        if new_rgb:
+            self._fps_frames += 1
+            now = time.time()
+            duration = now - self._fps_last_ts
+            if duration >= 1.0:
+                fps_val = self._fps_frames / duration
+                print(f"[RealSense] Capture FPS: {fps_val:.1f}")
+                self._fps_frames = 0
+                self._fps_last_ts = now
+
+        return self._last_color, self._last_depth, self._last_pose
+
+    # ---------------------------------------------------------------------
+    def get_rgbd(self, timeout_ms: int = 5000) -> Tuple[Optional[np.ndarray], Optional[np.ndarray]]:
+        """Blocking wait for the next aligned RGB-D frame pair.
+
+        This is intended for a dedicated thread that only interacts with the
+        D435/D455 pipeline. Internally uses `wait_for_frames()` so the call
+        blocks until a new set of frames is available (or until `timeout_ms`).
+        """
+        if self.d435_pipeline is None:
+            return None, None
+
+        frames = self.d435_pipeline.wait_for_frames(timeout_ms)
+        if self.align is not None:
+            frames = self.align.process(frames)
+
+        depth_frame = frames.get_depth_frame()
+        color_frame = frames.get_color_frame()
+        if not depth_frame or not color_frame:
+            return None, None
+
+        color_img = np.asanyarray(color_frame.get_data())
+        depth_img = np.asanyarray(depth_frame.get_data())
+
+        # Update caches
+        self._last_color = color_img
+        self._last_depth = depth_img
+
+        return color_img, depth_img
+
+    # ---------------------------------------------------------------------
+    def get_pose(self, timeout_ms: int = 0) -> Optional[Dict[str, Any]]:
+        """Fetch the latest pose frame from T265.
+
+        If `timeout_ms` is 0 (default) the method uses `poll_for_frames()` and
+        returns immediately if no new pose is available. For a blocking wait
+        specify a positive timeout—the function will call `wait_for_frames()`.
+        """
+        if self.t265_pipeline is None:
+            return None
+
+        if timeout_ms == 0:
+            frames = self.t265_pipeline.poll_for_frames()
+            if not frames:
+                return None
+        else:
+            frames = self.t265_pipeline.wait_for_frames(timeout_ms)
+
+        pose_frame = frames.get_pose_frame()
+        if not pose_frame:
+            return None
+
+        data = pose_frame.get_pose_data()
+        pose_dict = {
+            "header": {
+                "stamp_sec": int(time.time()),
+                "stamp_nanosec": int((time.time_ns()) % 1_000_000_000),
+                "frame_id": "t265_odom",
+            },
+            "pose": {
+                "position": {
+                    "x": data.translation.x,
+                    "y": data.translation.y,
+                    "z": data.translation.z,
+                },
+                "orientation": {
+                    "x": data.rotation.x,
+                    "y": data.rotation.y,
+                    "z": data.rotation.z,
+                    "w": data.rotation.w,
+                },
+            },
+        }
+
+        self._last_pose = pose_dict
+        return pose_dict 

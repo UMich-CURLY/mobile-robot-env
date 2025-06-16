@@ -156,9 +156,9 @@ while run:
             if event.key == pygame.K_s:
                 vx = -0.5
             if event.key == pygame.K_a:               
-                omg = 1
+                omg = 0.5
             if event.key == pygame.K_d:
-                omg = -1
+                omg = -0.5
             if event.key == pygame.K_q:
                 vy = -0.5
             if event.key == pygame.K_e:
@@ -174,12 +174,13 @@ while run:
             if event.key == pygame.K_DELETE:
                 WAYPOINTS = WAYPOINTS[:1]
             if event.key == pygame.K_RETURN:
-                print("executing preprgrammed trajectory:")
+                print("executing preprgrammed trajectory")
                 if(WAYPOINTS.shape[0]>1):
+                    print(f"Waypoint number: {WAYPOINTS.shape}")
                     translations = np.hstack((WAYPOINTS,np.ones((len(WAYPOINTS),1))*0.2,np.ones((len(WAYPOINTS),1)))) @  curr_T.T# @ np.linalg.inv(init_T).T 
                     
-                    waypointmsg.x = translations[:,0]
-                    waypointmsg.y = translations[:,1] #invert it because z is positive right, but y is positive left.
+                    waypointmsg.x = translations[:,0].tolist()
+                    waypointmsg.y = translations[:,1].tolist() #invert it because z is positive right, but y is positive left.
 
                     send_action_message(waypointmsg, host=args.host)
                 else:
@@ -231,7 +232,10 @@ while run:
 
 
     try:
+        start_ts = time.time()
         data = request_sensor_data(args.host)
+        end_ts = time.time()
+        # print(f"[Request] Time: {end_ts - start_ts:.3f}s")
         my_dict = request_planner_state(args.host)
         formatted_dict = {key: f"{value:+.2f}" for key, value in my_dict.items()}
         if(translations is not None):
@@ -281,7 +285,9 @@ while run:
         #generalized mean
         power = -50
         distances = np.linalg.norm(pcd,axis=2)[:220,:] #depth image to distance image.\
+        distances = distances[distances>0.1]
         mean_distance = (np.sum(distances**power)/640/480)**(1/power)#np.mean(distances)
+        end_ts = time.time()
 
 
         # print(f"mean distance {mean_distance}")

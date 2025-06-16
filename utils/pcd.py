@@ -1,5 +1,5 @@
 import numpy as np
-def get_distance(depth_image,hfov=72,p = -50):
+def get_distance(depth_image,hfov=72,p=-50):
     cw = np.arctan(hfov/2/180*np.pi)
     ch = cw/640*480
     yv, xv = np.meshgrid(np.linspace(-ch,ch,480),np.linspace(-cw,cw,640), indexing='ij')

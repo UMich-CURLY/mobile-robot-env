@@ -1,0 +1,327 @@
+import multiprocessing as mp
+import time
+import logging
+from typing import Optional, Dict, Any
+
+import numpy as np
+
+from utils.server import run_server, compress_payload
+from utils.pcd import get_distance
+import utils.planner as pl
+
+from rs2_utils import RealSenseSystem
+
+import lcm
+from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_relay
+from scipy.spatial.transform import Rotation
+
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
+D435_SERIAL = "827312072741"  # Update with your serial; None to auto-select
+T265_SERIAL = "146322110342"
+FRAME_WIDTH = 640
+FRAME_HEIGHT = 480
+FPS = 30
+ALIGN_PRESET_PATH: Optional[str] = None
+
+LCM_URL = "udpm://239.255.76.67:7667?ttl=255"
+LCM_CHANNEL = "rc_command_relay"
+collision_threshold = 0.4  # metres
+
+# ---------------------------------------------------------------------------
+# LCM helper
+# ---------------------------------------------------------------------------
+lc = lcm.LCM(LCM_URL)
+_latest_cmd_x = _latest_cmd_y = _latest_cmd_w = 0.0
+
+def publish_lcm(vx: float, vy: float, w: float) -> None:
+    global _latest_cmd_x, _latest_cmd_y, _latest_cmd_w
+    _latest_cmd_x, _latest_cmd_y, _latest_cmd_w = vx, vy, w
+    msg = rc_command_lcmt_relay()
+    msg.mode = 0
+    msg.left_stick = [vy, vx]  # (Y, X)
+    msg.right_stick = [w, 0.0]
+    msg.knobs = [0.0, 0.0]
+    msg.left_upper_switch = msg.left_lower_left_switch = msg.left_lower_right_switch = 0
+    msg.right_upper_switch = msg.right_lower_left_switch = msg.right_lower_right_switch = 0
+    lc.publish(LCM_CHANNEL, msg.encode())
+
+# ---------------------------------------------------------------------------
+# Worker processes
+# ---------------------------------------------------------------------------
+
+def rgbd_capture_proc(raw_q: mp.Queue, d435_serial: Optional[str], width: int, height: int, fps: int, preset_path: Optional[str]):
+    """Capture raw RGB-D frames (no alignment) and push latest to queue."""
+    rs = RealSenseSystem(
+        d435_serial=d435_serial,
+        t265_serial=None,
+        width=width,
+        height=height,
+        fps=fps,
+        json_preset=preset_path,
+        reset_before_start=False,
+    )
+    # Disable automatic alignment inside RealSenseSystem for this process
+    rs.align = None  # type: ignore
+
+    frame_cnt = 0
+    t0 = time.time()
+    while True:
+        color, depth = rs.get_rgbd()
+        if color is None or depth is None:
+            continue
+        # Maintain only latest frame in queue
+        while not raw_q.empty():
+            try:
+                raw_q.get_nowait()
+            except mp.queues.Empty:
+                break
+        raw_q.put({"color": color, "depth": depth, "ts": time.time_ns()})
+        frame_cnt += 1
+        now = time.time()
+        if now - t0 >= 1.0:
+            fps_val = frame_cnt / (now - t0)
+            print(f"[RGBD Capture] FPS: {fps_val:.1f}")
+            frame_cnt = 0
+            t0 = now
+
+
+def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
+    """Process RGB-D frames, update shared distance Value, push latest RGB-D to main queue."""
+    # Create a standalone align helper using pyrealsense2
+    import pyrealsense2.pyrealsense2 as rs
+    align = rs.align(rs.stream.color)
+
+    frame_cnt = 0
+    t0 = time.time()
+
+    while True:
+        data = raw_q.get()  # Blocking
+        color = data["color"]
+        depth = data["depth"]
+
+        # NOTE: Proper alignment would need RealSense frames; here we simply pass through.
+        aligned_color = color  # already same resolution
+        aligned_depth = depth  # for simplicity, assume aligned
+
+        dist = 5.0
+        try:
+            dist = get_distance(aligned_depth.astype(float) / 1000.0)
+        except Exception:
+            pass
+
+        # Update shared distance value
+        dist_val.value = dist
+
+        # Keep only latest in processed_q
+        while not processed_q.empty():
+            try:
+                processed_q.get_nowait()
+            except mp.queues.Empty:
+                break
+        processed_q.put({"color": aligned_color, "depth": aligned_depth, "distance": dist, "ts": data["ts"]})
+
+        frame_cnt += 1
+        now = time.time()
+        if now - t0 >= 1.0:
+            fps_val = frame_cnt / (now - t0)
+            print(f"[RGBD Proc] FPS: {fps_val:.1f}")
+            frame_cnt = 0
+            t0 = now
+
+
+def pose_capture_proc(pose_q: mp.Queue, t265_serial: Optional[str]):
+    rs = RealSenseSystem(
+        d435_serial=None,
+        t265_serial=t265_serial,
+        reset_before_start=False,
+    )
+    frame_cnt = 0
+    t0 = time.time()
+
+    while True:
+        pose = rs.get_pose(timeout_ms=1000)
+        if pose is None:
+            continue
+        while not pose_q.empty():
+            try:
+                pose_q.get_nowait()
+            except mp.queues.Empty:
+                break
+        pose_q.put({"pose": pose, "ts": time.time_ns()})
+        frame_cnt += 1
+        now = time.time()
+        if now - t0 >= 1.0:
+            fps_val = frame_cnt / (now - t0)
+            print(f"[Pose Capture] FPS: {fps_val:.1f}")
+            frame_cnt = 0
+            t0 = now
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main():
+    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s: %(message)s")
+    logger = logging.getLogger("go1_server_rs2_mp")
+
+    mp.set_start_method("spawn", force=True)
+
+    raw_q: mp.Queue = mp.Queue(maxsize=1)
+    processed_q: mp.Queue = mp.Queue(maxsize=1)
+    pose_q: mp.Queue = mp.Queue(maxsize=1)
+
+    distance_shared = mp.Value('d', 5.0)
+
+    procs = [
+        mp.Process(target=rgbd_capture_proc, args=(raw_q, D435_SERIAL, FRAME_WIDTH, FRAME_HEIGHT, FPS, ALIGN_PRESET_PATH), daemon=True),
+        mp.Process(target=process_rgbd, args=(raw_q, processed_q, distance_shared), daemon=True),
+        mp.Process(target=pose_capture_proc, args=(pose_q, T265_SERIAL), daemon=True),
+    ]
+
+    for p in procs:
+        p.start()
+
+    # Planner and state
+    planner = pl.Planner(max_vx=1, min_vx=-0.2, max_vy=0.1, max_vw=1, cruise_vel=0.6, Kp_w=2.5)
+    use_planner = False
+
+    latest_color: Optional[np.ndarray] = None
+    latest_depth: Optional[np.ndarray] = None
+    latest_pose: Optional[Dict[str, Any]] = None
+    latest_distance: float = 5.0
+
+    def refresh_latest():
+        nonlocal latest_color, latest_depth, latest_pose, latest_distance
+        try:
+            while True:
+                aligned_data = processed_q.get_nowait()
+                latest_color = aligned_data["color"]
+                latest_depth = aligned_data["depth"]
+                latest_distance = aligned_data.get("distance", latest_distance)
+        except mp.queues.Empty:
+            pass
+        try:
+            while True:
+                pose_data = pose_q.get_nowait()
+                latest_pose = pose_data["pose"]
+        except mp.queues.Empty:
+            pass
+
+    # ------------------------------------------------------------------
+    # Socket callbacks
+    # ------------------------------------------------------------------
+    def data_callback():
+        # FPS tracking for client requests
+        now = time.time()
+        if not hasattr(data_callback, "_start_ts"):
+            data_callback._start_ts = now  # type: ignore
+            data_callback._cnt = 0  # type: ignore
+        data_callback._cnt += 1  # type: ignore
+        elapsed = now - data_callback._start_ts  # type: ignore
+        if elapsed >= 1.0:
+            fps_val = data_callback._cnt / elapsed  # type: ignore
+            print(f"[Socket] Request FPS: {fps_val:.1f}")
+            data_callback._cnt = 0  # type: ignore
+            data_callback._start_ts = now  # type: ignore
+
+        start_ts = time.time()
+        refresh_latest()
+        end_ts = time.time()
+        if latest_color is None or latest_depth is None or latest_pose is None:
+            return {"success": False, "message": "Data not ready"}
+        payload = {
+            "rgb_image": latest_color,
+            "depth_image": latest_depth,
+            "pose": latest_pose,
+            "timestamp_server_ns": time.time_ns(),
+            "success": True,
+            "message": "data from go1 robot (RealSense mp)",
+        }
+        start_ts = time.time()
+        compressed_payload = compress_payload(payload)
+        end_ts = time.time()
+        print(f"[Compress] Time: {end_ts - start_ts:.3f}s")
+        return compressed_payload
+
+    def action_callback(message):
+        nonlocal use_planner
+        refresh_latest()
+        if message.type == 'VEL':
+            if latest_distance < collision_threshold:
+                message.x = np.clip(message.x, -0.5, 0)
+            publish_lcm(message.x, message.y, message.omega)
+            use_planner = False
+        elif message.type == 'WAYPOINT':
+            waypoints = np.vstack((message.x, message.y)).T
+            translations = np.hstack((waypoints, np.ones((len(waypoints), 1)) * 0.2))
+            planner.update_waypoints(translations[:, :2])
+            use_planner = True
+
+    def planner_callback():
+        nonlocal use_planner
+        refresh_latest()
+        col = int(latest_distance < collision_threshold)
+        try:
+            if not use_planner:
+                return {"collision": col}
+            ex, ey, _ = planner.get_tracking_error()
+            return {
+                "err_x": ex,
+                "err_y": ey,
+                "vx": planner.cmd_x,
+                "vy": planner.cmd_y,
+                "w": planner.cmd_w,
+                "collision": col,
+            }
+        except Exception as e:
+            print("[Planner] Error: ",e)
+            return {"collision": col}
+
+    # ---------------- Planner Thread (200 Hz) ----------------
+    def planner_loop():
+        nonlocal use_planner, latest_pose, latest_distance
+        import numpy as np
+        while True:
+            try:
+                if use_planner and latest_pose is not None:
+                    pose = latest_pose["pose"]
+                    pos = pose["position"]
+                    o = pose["orientation"]
+                    yaw = Rotation.from_quat([o["x"], o["y"], o["z"], o["w"]]).as_euler('zyx')[0]
+
+                    vx, vy, vw = planner.step(pos["x"], pos["y"], yaw)
+
+                    if latest_distance < collision_threshold:
+                        vx = 0.0
+                        vy = np.clip(vy, -np.inf, 0.0)
+
+                    publish_lcm(vx, vy, vw)
+                time.sleep(0.005) # 200 Hz
+            except Exception as e:
+                raise
+                print(f"[Planner Loop] Error: {e}")
+        exit()
+
+    import threading
+    server_thread = threading.Thread(target=run_server, kwargs={"data_cb": data_callback, "action_cb": action_callback, "planner_cb": planner_callback}, daemon=True)
+    server_thread.start()
+
+    threading.Thread(target=planner_loop, daemon=True).start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt – shutting down.")
+    finally:
+        server_thread.join(timeout=1)
+        for p in procs:
+            p.terminate()
+            p.join()
+
+
+if __name__ == "__main__":
+    main() 

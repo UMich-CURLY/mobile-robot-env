@@ -41,14 +41,13 @@ def decompress_payload(compressed_payload_dict):
     decompressed_dict = compressed_payload_dict.copy()
 
     # Decompress RGB Image
-    if decompressed_dict.get('rgb_image_compressed_format') == 'png' and \
-       isinstance(decompressed_dict.get('rgb_image'), bytes):
+    if isinstance(decompressed_dict.get('rgb_image'), bytes):
         encoded_bytes = decompressed_dict['rgb_image']
         # Convert bytes back to NumPy array for imdecode
         np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
         rgb_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
         if rgb_image_np is not None:
-            decompressed_dict['rgb_image'] = rgb_image_np
+            decompressed_dict['rgb_image'] = rgb_image_np[:,:,::-1]
             # Optionally, verify against stored shape/dtype if they were sent
             # stored_shape = decompressed_dict.get('rgb_image_shape')
             # stored_dtype = decompressed_dict.get('rgb_image_dtype')
@@ -57,7 +56,7 @@ def decompress_payload(compressed_payload_dict):
             # if stored_dtype and str(rgb_image_np.dtype) != stored_dtype:
             #     print(f"Warning: Decompressed RGB dtype {rgb_image_np.dtype} differs from original {stored_dtype}")
         else:
-            print("Warning: RGB image PNG decoding failed.")
+            print("Warning: RGB image decoding failed.")
             decompressed_dict['rgb_image'] = None # Or handle error
         # Clean up compression-specific keys
         decompressed_dict.pop('rgb_image_compressed_format', None)

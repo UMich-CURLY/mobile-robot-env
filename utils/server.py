@@ -51,14 +51,14 @@ def compress_payload(payload_dict):
     # Compress RGB Image
     if 'rgb_image' in compressed_dict and isinstance(compressed_dict['rgb_image'], np.ndarray):
         rgb_image_np = compressed_dict['rgb_image']
-        success, encoded_image = cv2.imencode('.png', rgb_image_np)
+        success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 90])
         if success:
             compressed_dict['rgb_image'] = encoded_image.tobytes() # Store as bytes
             # Store metadata for potential precise reconstruction if imdecode isn't enough
             # (though for PNG and typical image types, it usually is)
             compressed_dict['rgb_image_shape'] = rgb_image_np.shape
             compressed_dict['rgb_image_dtype'] = str(rgb_image_np.dtype)
-            compressed_dict['rgb_image_compressed_format'] = 'png'
+            compressed_dict['rgb_image_compressed_format'] = 'jpg'
         else:
             print("Warning: RGB image PNG encoding failed.")
             # Optionally, remove the key or send uncompressed with a flag
@@ -199,8 +199,9 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
                 # print(message_type.type)
                 # print(header.strip())
                 if(message_type.type == header.strip()):
-                    print(request_str[payload_index:])
-                    action_cb(jsonpickle.decode(request_str[payload_index:].strip()))
+                    # print(request_str[payload_index:])
+                    data = jsonpickle.decode(request_str[payload_index:].strip())
+                    action_cb(data)
                     return 
 
             print(f"[{time.strftime('%H:%M:%S')}] Unknown request '{request_str}' from {client_address}. Sending error.")
