@@ -116,7 +116,7 @@ class RealSenseSystem:
             if json_preset:
                 _load_json_preset(profile.get_device(), Path(json_preset))
             print("[INFO] D435/D455 pipeline started.")
-        else:
+        elif t265_serial is not None:
             print("[INFO] No D435 serial specified – skipping color/depth stream.")
 
         # ---------------- T265 / pose cam -----------------
@@ -128,7 +128,7 @@ class RealSenseSystem:
             cfg.enable_stream(rs.stream.pose)
             self.t265_pipeline.start(cfg)
             print("[INFO] T265 pipeline started (pose).")
-        else:
+        elif d435_serial is not None:
             print("[INFO] No T265 serial specified – skipping pose stream.")
 
         self.has_pose: bool = self.t265_pipeline is not None
@@ -313,8 +313,16 @@ class RealSenseSystem:
         """
         if self.d435_pipeline is None:
             return None, None
+        while True:
+            try:
+                frames = self.d435_pipeline.wait_for_frames(timeout_ms)
+                if frames:
+                    break 
+            except Exception as e:
+                print(f"[RealSense] D435 Error: {e}")
+                time.sleep(0.01)
+                continue
 
-        frames = self.d435_pipeline.wait_for_frames(timeout_ms)
         if self.align is not None:
             frames = self.align.process(frames)
 
@@ -355,6 +363,8 @@ class RealSenseSystem:
             return None
 
         data = pose_frame.get_pose_data()
+        # change (x: right, z: backward, y: up)
+        # to x: forward, y: left, z: up
         pose_dict = {
             "header": {
                 "stamp_sec": int(time.time()),
@@ -363,14 +373,14 @@ class RealSenseSystem:
             },
             "pose": {
                 "position": {
-                    "x": data.translation.x,
-                    "y": data.translation.y,
-                    "z": data.translation.z,
+                    "x": -data.translation.z,
+                    "y": -data.translation.x,
+                    "z": data.translation.y,
                 },
                 "orientation": {
-                    "x": data.rotation.x,
-                    "y": data.rotation.y,
-                    "z": data.rotation.z,
+                    "x": -data.rotation.z,
+                    "y": -data.rotation.x,
+                    "z": data.rotation.y,
                     "w": data.rotation.w,
                 },
             },

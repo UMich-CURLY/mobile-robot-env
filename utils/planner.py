@@ -93,7 +93,6 @@ class Planner:
 
     def update_waypoints(self,waypoints):
         self.wps,self.theta,self.distance = fit_smoothing_spline(waypoints,n=1600)
-    #gets the
     def _dtheta_ds(self,x,y):
         idx = get_goal(self.wps,self.distance,x,y,self.lookahead)
         if(idx==len(self.wps)-1):

@@ -9,6 +9,7 @@ import traceback
 from utils.protocol import *
 import jsonpickle
 import json
+import multiprocessing as mp
 # --- Configuration ---
 SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
 SOCKET_PORT = 12345      # Same port as your client expects
@@ -226,18 +227,21 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
         # print(f"[{time.strftime('%H:%M:%S')}] Closing connection with {client_address}")
         client_socket.close()
 
-def run_server(data_cb=lambda:None,action_cb=lambda:None,planner_cb = lambda:None):
+def run_server(data_cb=lambda:None,action_cb=lambda:None,planner_cb = lambda:None,stop_flag = None):
     """Main server loop to listen for and handle connections."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Allow address reuse immediately after server closes
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    if stop_flag is None:
+        stop_flag = mp.Value('b', False)
     
     try:
         server_socket.bind((SOCKET_HOST, SOCKET_PORT))
         server_socket.listen(5) # Allow up to 5 queued connections
         print(f"{SERVER_NAME} listening on {SOCKET_HOST}:{SOCKET_PORT}...")
 
-        while True:
+        while not stop_flag.value:
             try:
                 client_socket, client_address = server_socket.accept()
                 # For simplicity, handling client sequentially. 
