@@ -174,6 +174,7 @@ def main():
     pose_q: mp.Queue = mp.Queue(maxsize=1)
 
     distance_shared = mp.Value('d', 5.0)
+    stop_flag = mp.Value('b', False)
 
     procs = [
         mp.Process(target=rgbd_capture_proc, args=(raw_q, D435_SERIAL, FRAME_WIDTH, FRAME_HEIGHT, FPS, ALIGN_PRESET_PATH), daemon=True),
@@ -185,7 +186,9 @@ def main():
         p.start()
 
     # Planner and state
-    planner = pl.Planner(max_vx=1, min_vx=-0.2, max_vy=0.1, max_vw=1, cruise_vel=0.6, Kp_w=2.5)
+    planner = pl.Planner(max_vx=1, min_vx=-0.5, max_vy=0.5, max_vw=1, cruise_vel=0.6, Kp_w=2.0)
+    direct_control_velocity = (0.0, 0.0, 0.0)
+    direct_control_ts = time.time()
     use_planner = False
 
     latest_color: Optional[np.ndarray] = None
@@ -247,13 +250,12 @@ def main():
         return compressed_payload
 
     def action_callback(message):
-        nonlocal use_planner
+        nonlocal use_planner, direct_control_velocity, direct_control_ts
         refresh_latest()
         if message.type == 'VEL':
-            if latest_distance < collision_threshold:
-                message.x = np.clip(message.x, -0.5, 0)
-            publish_lcm(message.x, message.y, message.omega)
+            direct_control_velocity = (message.x, message.y, message.omega)
             use_planner = False
+            direct_control_ts = time.time()
         elif message.type == 'WAYPOINT':
             waypoints = np.vstack((message.x, message.y)).T
             translations = np.hstack((waypoints, np.ones((len(waypoints), 1)) * 0.2))
@@ -261,7 +263,7 @@ def main():
             use_planner = True
 
     def planner_callback():
-        nonlocal use_planner
+        nonlocal use_planner, stop_flag
         refresh_latest()
         col = int(latest_distance < collision_threshold)
         try:
@@ -282,8 +284,10 @@ def main():
 
     # ---------------- Planner Thread (200 Hz) ----------------
     def planner_loop():
-        nonlocal use_planner, latest_pose, latest_distance
+        nonlocal use_planner, latest_pose, latest_distance, direct_control_velocity, direct_control_ts
         import numpy as np
+        planner_loop._last_ts = time.time()
+        count = 0
         while True:
             try:
                 if use_planner and latest_pose is not None:
@@ -293,26 +297,44 @@ def main():
                     yaw = Rotation.from_quat([o["x"], o["y"], o["z"], o["w"]]).as_euler('zyx')[0]
 
                     vx, vy, vw = planner.step(pos["x"], pos["y"], yaw)
-
-                    if latest_distance < collision_threshold:
-                        vx = 0.0
-                        vy = np.clip(vy, -np.inf, 0.0)
-
-                    publish_lcm(vx, vy, vw)
-                time.sleep(0.005) # 200 Hz
+                else:
+                    if time.time() - direct_control_ts < 0.5:
+                        vx, vy, vw = direct_control_velocity
+                    else:
+                        vx, vy, vw = 0.0, 0.0, 0.0
+                max_acc_x = 0.4
+                max_acc_y = 0.2
+                vx_limit =  np.sqrt(max(latest_distance-collision_threshold, 0)*2*max_acc_x)
+                vy_limit =  np.sqrt(max(latest_distance-collision_threshold, 0)*2*max_acc_y)
+                vx_limit = min(vx_limit, planner.max_vx)
+                vy_limit = min(vy_limit, planner.max_vy)
+                vx = np.clip(vx, planner.min_vx, vx_limit)
+                vy = np.clip(vy, -vy_limit, vy_limit)
+                if latest_distance < collision_threshold:
+                    vw = np.clip(vw, -0.5, 0.5)
+                publish_lcm(vx, vy, vw)
+                if count % 20 == 0:
+                    print(f"[Planner Loop] vx: {vx}, vy: {vy}, vw: {vw}, distance: {latest_distance}")
+                sleep_time = max(0.005 - (time.time() - planner_loop._last_ts), 0.0)
+                time.sleep(sleep_time) # 200 Hz
+                count += 1
+                planner_loop._last_ts = time.time()
             except Exception as e:
-                raise
                 print(f"[Planner Loop] Error: {e}")
-        exit()
+                import traceback
+                traceback.print_exc()
+                stop_flag.value = True
 
     import threading
-    server_thread = threading.Thread(target=run_server, kwargs={"data_cb": data_callback, "action_cb": action_callback, "planner_cb": planner_callback}, daemon=True)
+    server_thread = threading.Thread(target=run_server, kwargs={"data_cb": data_callback, "action_cb": action_callback, "planner_cb": planner_callback, "stop_flag": stop_flag}, daemon=True)
     server_thread.start()
 
     threading.Thread(target=planner_loop, daemon=True).start()
 
     try:
         while True:
+            if stop_flag.value:
+                break
             time.sleep(1)
     except KeyboardInterrupt:
         logger.info("Keyboard interrupt – shutting down.")

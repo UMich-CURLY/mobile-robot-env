@@ -12,7 +12,6 @@ from go1_gym_deploy.utils.command_profile import *
 from go1_gym_deploy.envs.depth_backbone import *
 from copy import copy, deepcopy
 
-
 import pathlib
 
 lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=255")

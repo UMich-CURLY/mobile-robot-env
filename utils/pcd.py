@@ -9,6 +9,6 @@ def get_distance(depth_image,hfov=72,p=-50):
 
     pcd  = np.stack([depth_image,-px,py],axis=-1) # robot frame pointcloud, H x W x 3 (xyz)
     #generalized mean
-    distances = np.linalg.norm(pcd,axis=2)[:220,:] #depth image to distance image.\
+    distances = np.linalg.norm(pcd,axis=2)[:300,:] #depth image to distance image.\
     distances = distances[distances>0.1]
     return (np.sum(distances**p)/640/480)**(1/p)#np.mean(distances)

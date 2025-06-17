@@ -12,7 +12,6 @@ from go1_gym_deploy.lcm_types.state_estimator_lcmt import state_estimator_lcmt
 from go1_gym_deploy.lcm_types.camera_message_lcmt import camera_message_lcmt
 from go1_gym_deploy.lcm_types.camera_message_rect_wide import camera_message_rect_wide
 
-
 def get_rpy_from_quaternion(q):
     w, x, y, z = q
     r = np.arctan2(2 * (w * x + y * z), 1 - 2 * (x ** 2 + y ** 2))
@@ -114,6 +113,8 @@ class StateEstimator:
         self.legdata_state_subscription = self.lc.subscribe("leg_control_data", self._legdata_cb)
         self.rc_command_subscription = self.lc.subscribe("rc_command_relay", self._rc_command_relay_cb)
         self.rc_command_subscription = self.lc.subscribe("rc_command", self._rc_command_cb)
+
+        self._last_relay_time = 0
 
         if use_cameras:
             for cam_id in [1, 2, 3, 4, 5]:
@@ -298,6 +299,8 @@ class StateEstimator:
 
     def _rc_command_cb(self, channel, data):
 
+        # this is always called even if remote is off
+
         msg = rc_command_lcmt.decode(data)
 
 
@@ -308,10 +311,17 @@ class StateEstimator:
         self.right_lower_left_switch_pressed = ((msg.right_lower_left_switch and not self.right_lower_left_switch) or self.right_lower_left_switch_pressed)
         self.right_lower_right_switch_pressed = ((msg.right_lower_right_switch and not self.right_lower_right_switch) or self.right_lower_right_switch_pressed)
 
+        # clear relay command if no message received for 0.1s
+        if time.time() - self._last_relay_time > 0.1:
+            self.relay_left_stick = [0, 0] # clear relay command
+            self.relay_right_stick = [0, 0] # clear relay command
+
+        # use rc command if no relay command
         self.mode = msg.mode
         relay_val = abs(self.relay_left_stick[0]) + abs(self.relay_left_stick[1]) + abs(self.relay_right_stick[0]) + abs(self.relay_right_stick[1])
         rc_val = abs(msg.right_stick[0]) + abs(msg.right_stick[1]) + abs(msg.left_stick[0]) + abs(msg.left_stick[1])
         print(f"relay_val: {relay_val}, rc_val: {rc_val}")
+        # print(f"rc_command: {msg.right_stick}, {msg.left_stick}")
         if relay_val<0.01:
             if rc_val>0.01:
                 self.right_stick = msg.right_stick
@@ -332,7 +342,10 @@ class StateEstimator:
 
     def _rc_command_relay_cb(self, channel, data):
 
+        # this is only called if server is on
+
         msg = rc_command_lcmt_relay.decode(data)
+        self._last_relay_time = time.time()
 
 
         self.left_upper_switch_pressed = ((msg.left_upper_switch and not self.left_upper_switch) or self.left_upper_switch_pressed)
@@ -354,7 +367,7 @@ class StateEstimator:
         # self.right_lower_left_switch = msg.right_lower_left_switch
         # self.right_lower_right_switch = msg.right_lower_right_switch
 
-        print("command from relay: ", self.right_stick, self.left_stick)
+        # print("command from relay: ", self.right_stick, self.left_stick)
 
 
     def _camera_cb(self, channel, data):
