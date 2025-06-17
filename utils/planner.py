@@ -139,12 +139,14 @@ class Planner:
         cmd_x,cmd_y,cmd_w = self._step(x,y,theta,self.lookahead)
         
         t_vec = np.array([cmd_x,cmd_y])
-        u_vec = t_vec/np.linalg.norm(t_vec)
+        t_norm = np.linalg.norm(t_vec)
+        if(t_norm<0.05):
+            u_vec = np.array([0,0])
+        else:
+            u_vec = t_vec/t_norm
         
-        e_vec = t_vec - u_vec*self.lookahead
-
+        e_vec = u_vec*max(t_norm-self.lookahead,0)
         cmd_x,cmd_y = u_vec*self.cruise_vel+e_vec*self.Kp_x #feedforward and feedback
-
 
         cmd_x/=(1+10*np.abs(cmd_w)) #slow down if the turning loop can't keep up
 

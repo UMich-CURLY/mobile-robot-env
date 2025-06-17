@@ -142,6 +142,8 @@ from copy import deepcopy
 waypointmsg = WaypointMessage()
 translations = None
 while run:
+    if translations is None:
+        send_action_message(VelMessage(vx,vy,omg), host=args.host)
 
     clock.tick(60)
     for event in pygame.event.get():
@@ -192,7 +194,6 @@ while run:
             if event.key == pygame.K_n:
                 magnification_choice-=1
                 magnification_choice%=len(MAGNIFICATION_OPTIONS)
-            send_action_message(VelMessage(vx,vy,omg), host=args.host)
 
             if event.key == pygame.K_o:
                 print(WAYPOINTS)
@@ -238,7 +239,7 @@ while run:
         # print(f"[Request] Time: {end_ts - start_ts:.3f}s")
         my_dict = request_planner_state(args.host)
         formatted_dict = {key: f"{value:+.2f}" for key, value in my_dict.items()}
-        if(translations is not None):
+        if translations is not None:
             planner_message = "[PLANNER] "
 
             for key,value in formatted_dict.items():
@@ -284,7 +285,7 @@ while run:
         pcd  = np.stack([depth_image,-px,py],axis=-1)
         #generalized mean
         power = -50
-        distances = np.linalg.norm(pcd,axis=2)[:220,:] #depth image to distance image.\
+        distances = np.linalg.norm(pcd,axis=2)[:300,:] #depth image to distance image.\
         distances = distances[distances>0.1]
         mean_distance = (np.sum(distances**power)/640/480)**(1/power)#np.mean(distances)
         end_ts = time.time()
@@ -303,9 +304,9 @@ while run:
         curr_T[:3,3] = np.array([p['x'],p['y'],p['z']])
         curr_T = deepcopy(curr_T)
         random_indices = np.random.choice(480*640, size=100, replace=False)
-        rotated_pcd = pcd.reshape((-1,3))[random_indices] @ curr_T[:3,:3].T
-
-
+        sampled_pcd = pcd.reshape((-1,3))[random_indices]
+        rotated_pcd = sampled_pcd @ curr_T[:3,:3].T
+        
 
         curr_yaw = Rotation.from_matrix(curr_T[:3,:3]).as_euler('zyx')[0]
         if init_T is None:
