@@ -324,7 +324,8 @@ class StateEstimator:
         # print(f"rc_command: {msg.right_stick}, {msg.left_stick}")
         if relay_val<0.01:
             if rc_val>0.01:
-                self.right_stick = msg.right_stick
+                
+                self.right_stick = [-msg.right_stick[0],msg.right_stick[1]]
                 self.left_stick = msg.left_stick
             else:
                 self.right_stick = [0, 0]
