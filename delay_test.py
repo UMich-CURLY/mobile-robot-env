@@ -23,7 +23,6 @@ T265_SERIAL = "146322110342"
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 FPS = 30
-# ALIGN_PRESET_PATH: Optional[str] = "/home/curlynuc/ros2_ws/src/realsense-ros/realsense2_camera/launch/HighAccuracyPreset.json"
 ALIGN_PRESET_PATH: Optional[str] = "/home/unitree/HighAccuracyPreset.json"
 
 LCM_URL = "udpm://239.255.76.67:7667?ttl=255"
@@ -202,34 +201,31 @@ def main():
 
     def refresh_latest():
         nonlocal latest_color, latest_depth, latest_pose, latest_distance, rgbd_ts, pose_list, pose_ts_list
-        while True:
-            try:
-                while True:
-                    aligned_data = processed_q.get_nowait()
-                    latest_color = aligned_data["color"]
-                    latest_depth = aligned_data["depth"]
-                    latest_distance = aligned_data.get("distance", latest_distance)
-                    rgbd_ts = aligned_data["ts"]
-            except mp.queues.Empty:
-                pass
-            try:
-                while True:
-                    pose_data = pose_q.get_nowait()
-                    pose_list.append(pose_data["pose"])
-                    pose_ts_list.append(pose_data["ts"])
-            except mp.queues.Empty:
-                pass
-            pose_list = pose_list[-1000:]
-            pose_ts_list = pose_ts_list[-1000:]
-            time_diff = np.abs(np.array(pose_ts_list) - rgbd_ts)
-            latest_pose = pose_list[np.argmin(time_diff)]
-            print(f"[Refresh] time diff: {time_diff.min()}")
-            print(pose_ts_list[0]-rgbd_ts, pose_ts_list[-1]-rgbd_ts)
-            print(len(pose_list), len(pose_ts_list))
-            if pose_ts_list[-1]-rgbd_ts<0:
-                print("ERROR: no aligned pose found for the latest frame!!!!\n\n\n\n\n\n")
-            else:
-                break
+        try:
+            while True:
+                aligned_data = processed_q.get_nowait()
+                latest_color = aligned_data["color"]
+                latest_depth = aligned_data["depth"]
+                latest_distance = aligned_data.get("distance", latest_distance)
+                rgbd_ts = aligned_data["ts"]
+        except mp.queues.Empty:
+            pass
+        try:
+            while True:
+                pose_data = pose_q.get_nowait()
+                pose_list.append(pose_data["pose"])
+                pose_ts_list.append(pose_data["ts"])
+        except mp.queues.Empty:
+            pass
+        pose_list = pose_list[-1000:]
+        pose_ts_list = pose_ts_list[-1000:]
+        time_diff = np.abs(np.array(pose_ts_list) - rgbd_ts)
+        latest_pose = pose_list[np.argmin(time_diff)]
+        print(f"[Refresh] time diff: {time_diff.min()}")
+        print(pose_ts_list[0]-rgbd_ts, pose_ts_list[-1]-rgbd_ts)
+        print(len(pose_list), len(pose_ts_list))
+        if pose_ts_list[-1]-rgbd_ts<0:
+            print("ERROR: no aligned pose found for the latest frame!!!!\n\n\n\n\n\n")
 
     # ------------------------------------------------------------------
     # Socket callbacks

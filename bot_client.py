@@ -162,9 +162,9 @@ while run:
             if event.key == pygame.K_d:
                 omg = -0.5
             if event.key == pygame.K_q:
-                vy = -0.5
-            if event.key == pygame.K_e:
                 vy = 0.5
+            if event.key == pygame.K_e:
+                vy = -0.5
             if event.key == pygame.K_SPACE:
                 vx,vy,omg = vx*2,vy*2,omg*2
             if event.key == pygame.K_BACKSPACE:

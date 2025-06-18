@@ -156,56 +156,52 @@ def main() -> None:
     data_manager = SensorDataManagerRS2(logger)
 
     # ------------------------------------------------------------------
-    # Separate acquisition threads for RGB-D and pose
+    # Sequential acquisition loop (single thread)
     # ------------------------------------------------------------------
 
-    def rgbd_loop():
-        start_ts = time.time()
-        frames = 0
-        while True:
-            try:
-                color, depth = rs_system.get_rgbd()
-                if color is None or depth is None:
-                    continue  # wait for valid frame
+    rgbd_frames = 0
+    pose_frames = 0
+    rgbd_start_ts = time.time()
+    pose_start_ts = time.time()
 
-                data_manager.update(color, depth, None)
+    def acquisition_step():
+        nonlocal rgbd_frames, pose_frames, rgbd_start_ts, pose_start_ts
 
-                frames += 1
+        # -------- RGB-D --------
+        try:
+            rgbd = rs_system.get_rgbd()
+            if rgbd is not None and len(rgbd) >= 2:
+                color, depth = rgbd[0], rgbd[1]
+                if color is not None and depth is not None:
+                    data_manager.update(color, depth, None)
+                    rgbd_frames += 1
+                    now = time.time()
+                    if now - rgbd_start_ts >= 1.0:
+                        fps = rgbd_frames / (now - rgbd_start_ts)
+                        print(f"[RGBD] FPS: {fps:.1f}")
+                        rgbd_frames = 0
+                        rgbd_start_ts = now
+            rgbd_ts = rgbd[2]
+        except Exception as exc:
+            logger.error(f"RGBD acquisition error: {exc}")
+
+        # -------- Pose --------
+        try:
+            pose_result = rs_system.get_pose(timeout_ms=500)
+            if pose_result is not None:
+                pose_dict, _ = pose_result  # ignore timestamp
+                data_manager.update(None, None, pose_dict)
+                pose_frames += 1
                 now = time.time()
-                if now - start_ts >= 1.0:
-                    fps = frames / (now - start_ts)
-                    print(f"[RGBD] FPS: {fps:.1f}")
-                    frames = 0
-                    start_ts = now
-            except Exception as exc:
-                logger.error(f"RGBD thread error: {exc}")
-                time.sleep(0.05)
-
-    def pose_loop():
-        start_ts = time.time()
-        frames = 0
-        while True:
-            try:
-                pose = rs_system.get_pose()
-                if pose is None:
-                    time.sleep(0.005)
-                    continue
-
-                data_manager.update(None, None, pose)
-
-                frames += 1
-                now = time.time()
-                if now - start_ts >= 1.0:
-                    fps = frames / (now - start_ts)
+                if now - pose_start_ts >= 1.0:
+                    fps = pose_frames / (now - pose_start_ts)
                     print(f"[Pose] FPS: {fps:.1f}")
-                    frames = 0
-                    start_ts = now
-            except Exception as exc:
-                logger.error(f"Pose thread error: {exc}")
-                time.sleep(0.05)
-
-    threading.Thread(target=rgbd_loop, daemon=True).start()
-    threading.Thread(target=pose_loop, daemon=True).start()
+                    pose_frames = 0
+                    pose_start_ts = now
+            pose_ts = pose_result[1]
+        except Exception as exc:
+            logger.error(f"Pose acquisition error: {exc}")
+        print(f"time diff: {pose_ts - rgbd_ts}")
 
     # Callbacks for socket server (re-use utils.server implementation)
     def data_callback():
@@ -266,7 +262,9 @@ def main() -> None:
 
     try:
         while server_thread.is_alive():
-            time.sleep(0.5)
+            acquisition_step()
+            # Small sleep to yield execution and avoid busy-wait
+            time.sleep(0.005)
     except KeyboardInterrupt:
         logger.info("Keyboard interrupt received – shutting down.")
     finally:

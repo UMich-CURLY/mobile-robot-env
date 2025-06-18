@@ -223,6 +223,7 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
         print(f"[{time.strftime('%H:%M:%S')}] Socket timeout for {client_address}.")
     except Exception as e:
         print(f"[{time.strftime('%H:%M:%S')}] Error handling client {client_address}: {e}")
+        raise
     finally:
         # print(f"[{time.strftime('%H:%M:%S')}] Closing connection with {client_address}")
         client_socket.close()
