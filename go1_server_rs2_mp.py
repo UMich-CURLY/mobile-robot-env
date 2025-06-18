@@ -4,6 +4,7 @@ import logging
 from typing import Optional, Dict, Any
 
 import numpy as np
+import threading
 
 from utils.server import run_server, compress_payload
 from utils.pcd import get_distance
@@ -194,48 +195,50 @@ def main():
 
     latest_color: Optional[np.ndarray] = None
     latest_depth: Optional[np.ndarray] = None
-    pose_list = []
-    pose_ts_list = []
+    pose_list: list = []  # stores dicts
+    pose_ts_list: list = []  # stores timestamps (float)
     latest_pose: Optional[Dict[str, Any]] = None
     latest_distance: float = 5.0
-    rgbd_ts = 0
+    rgbd_ts: float = 0.0
 
-    def refresh_latest():
-        nonlocal latest_color, latest_depth, latest_pose, latest_distance, rgbd_ts, pose_list, pose_ts_list
-        f_rgbd = open("time_rgbd.txt", "w")
-        f_pose = open("time_pose.txt", "w")
+    # Thread-safe access to shared data
+    data_lock = threading.Lock()
+
+    def rgbd_worker():
+        nonlocal latest_color, latest_depth, latest_distance, rgbd_ts
         while True:
-            try:
-                while True:
-                    aligned_data = processed_q.get_nowait()
-                    latest_color = aligned_data["color"]
-                    latest_depth = aligned_data["depth"]
-                    latest_distance = aligned_data.get("distance", latest_distance)
-                    rgbd_ts = aligned_data["ts"]
-                    f_rgbd.write(f"{rgbd_ts}\n")
-            except mp.queues.Empty:
-                pass
-            try:
-                while True:
-                    pose_data = pose_q.get_nowait()
-                    pose_list.append(pose_data["pose"])
-                    pose_ts_list.append(pose_data["ts"])
-                    f_pose.write(f"{pose_data['ts']}\n")
-            except mp.queues.Empty:
-                pass
-            pose_list = pose_list[-1000:]
-            pose_ts_list = pose_ts_list[-1000:]
-            time_diff = np.abs(np.array(pose_ts_list) - rgbd_ts)
-            latest_pose = pose_list[np.argmin(time_diff)]
-            print(f"[Refresh] time diff: {time_diff.min()}")
-            print(pose_ts_list[0]-rgbd_ts, pose_ts_list[-1]-rgbd_ts)
-            print(len(pose_list), len(pose_ts_list))
-            if pose_ts_list[-1]-rgbd_ts<0:
-                print("ERROR: no aligned pose found for the latest frame!!!!\n\n\n\n\n\n")
-            else:
-                break
-        f_rgbd.close()
-        f_pose.close()
+            aligned_data = processed_q.get()  # blocks until next frame
+            with data_lock:
+                latest_color = aligned_data["color"]
+                latest_depth = aligned_data["depth"]
+                latest_distance = aligned_data.get("distance", latest_distance)
+                rgbd_ts = aligned_data["ts"]
+
+    def pose_worker():
+        nonlocal pose_list, pose_ts_list, latest_pose, rgbd_ts
+        import numpy as np  # local import to avoid issues with spawn
+        while True:
+            pose_data = pose_q.get()
+            with data_lock:
+                pose_list.append(pose_data["pose"])
+                pose_ts_list.append(pose_data["ts"])
+
+                # Keep only the latest 1000 poses
+                if len(pose_list) > 1000:
+                    pose_list = pose_list[-1000:]
+                    pose_ts_list = pose_ts_list[-1000:]
+
+                # Align pose to current RGB-D timestamp if available
+                if rgbd_ts != 0 and len(pose_ts_list) > 0:
+                    diffs = np.array(pose_ts_list) - rgbd_ts
+                    offset = -100.0
+                    idx = int(np.argmin(np.abs(diffs-offset)))
+                    latest_pose = pose_list[idx]
+                    print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
+
+    threading.Thread(target=rgbd_worker, daemon=True).start()
+    threading.Thread(target=pose_worker, daemon=True).start()
+
     # ------------------------------------------------------------------
     # Socket callbacks
     # ------------------------------------------------------------------
@@ -253,9 +256,6 @@ def main():
             data_callback._cnt = 0  # type: ignore
             data_callback._start_ts = now  # type: ignore
 
-        start_ts = time.time()
-        refresh_latest()
-        end_ts = time.time()
         if latest_color is None or latest_depth is None or latest_pose is None:
             return {"success": False, "message": "Data not ready"}
         payload = {
@@ -274,7 +274,6 @@ def main():
 
     def action_callback(message):
         nonlocal use_planner, direct_control_velocity, direct_control_ts
-        refresh_latest()
         print(f"[Action] Message: {message}")
         if message.type == 'VEL':
             direct_control_velocity = (message.x, message.y, message.omega)
@@ -288,7 +287,6 @@ def main():
 
     def planner_callback():
         nonlocal use_planner, stop_flag
-        refresh_latest()
         col = int(latest_distance < collision_threshold)
         try:
             if not use_planner:
@@ -337,8 +335,8 @@ def main():
                 if latest_distance < collision_threshold:
                     vw = np.clip(vw, -0.5, 0.5)
                 publish_lcm(vx, -vy, vw)
-                if count % 20 == 0:
-                    print(f"[Planner Loop] vx: {vx}, vy: {vy}, vw: {vw}, distance: {latest_distance}")
+                # if count % 20 == 0:
+                    # print(f"[Planner Loop] vx: {vx}, vy: {vy}, vw: {vw}, distance: {latest_distance}")
                 sleep_time = max(0.005 - (time.time() - planner_loop._last_ts), 0.0)
                 time.sleep(sleep_time) # 200 Hz
                 count += 1
@@ -349,7 +347,6 @@ def main():
                 traceback.print_exc()
                 stop_flag.value = True
 
-    import threading
     server_thread = threading.Thread(target=run_server, kwargs={"data_cb": data_callback, "action_cb": action_callback, "planner_cb": planner_callback, "stop_flag": stop_flag}, daemon=True)
     server_thread.start()
 

@@ -64,7 +64,7 @@ class SensorDataManager:
         self.init_rotmat = None
 
         self.useplanner = None
-        self.planner = pl.Planner(max_vx=1,min_vx=-0.2,max_vy = 0.1,max_vw=1,cruise_vel=0.6,Kp_w=2.5)
+        self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
 
         self.distance = 5
     def rgb_callback(self, msg: CompressedImage):
@@ -82,7 +82,8 @@ class SensorDataManager:
             png_bytes = msg.data[12:]
             depth      = cv2.imdecode(
                         np.frombuffer(png_bytes, np.uint8),
-                        cv2.IMREAD_UNCHANGED)  
+                        cv2.IMREAD_UNCHANGED) 
+            print("depth ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
 
             # depth = self.cv_bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
             with self.lock:
@@ -97,6 +98,7 @@ class SensorDataManager:
 
     def pose_callback(self, msg: Odometry):
         with self.lock:
+            print("pose ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
             self.latest_pose_dict = {
                 "header": {
                     "stamp_sec": msg.header.stamp.sec,

@@ -111,14 +111,15 @@ class RealSenseSystem:
             cfg.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
             cfg.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
             profile = self.d435_pipeline.start(cfg)
+            depth_sensor = profile.get_device().first_depth_sensor()
+            scale = depth_sensor.get_depth_scale()
+            print("[INFO] depth scale: ", scale)
             # Align depth to color for convenience
             self.align = rs.align(rs.stream.color)
             if json_preset:
                 print(f"[INFO] Loading JSON preset from {json_preset}")
                 _load_json_preset(profile.get_device(), Path(json_preset))
             print("[INFO] D435/D455 pipeline started.")
-        elif t265_serial is not None:
-            print("[INFO] No D435 serial specified – skipping color/depth stream.")
 
         # ---------------- T265 / pose cam -----------------
         self.t265_pipeline: Optional[rs.pipeline] = None
@@ -129,8 +130,6 @@ class RealSenseSystem:
             cfg.enable_stream(rs.stream.pose)
             self.t265_pipeline.start(cfg)
             print("[INFO] T265 pipeline started (pose).")
-        elif d435_serial is not None:
-            print("[INFO] No T265 serial specified – skipping pose stream.")
 
         self.has_pose: bool = self.t265_pipeline is not None
         # Caches for latest frames (thread-safe access not handled here)
@@ -372,6 +371,10 @@ class RealSenseSystem:
 
         pose_frame = frames.get_pose_frame()
         frames_ts = pose_frame.get_timestamp()
+        if not hasattr(self, "_init_ts"):
+            self._init_ts = time.time()
+            self._init_ts_pose = frames_ts
+        # print(f"[Pose] time diff: {frames_ts - self._init_ts_pose}, time.time(): {time.time() - self._init_ts}")
         # print("pose_frame.get_timestamp()", pose_frame.get_timestamp(), flush=True)
         if not pose_frame:
             return None
