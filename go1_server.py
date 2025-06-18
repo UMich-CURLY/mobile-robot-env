@@ -148,7 +148,7 @@ class SensorDataManager:
                 "rgb_image": self.latest_rgb_cv_image.copy() if self.latest_rgb_cv_image is not None else None,
                 "depth_image": self.latest_depth_cv_image.copy() if self.latest_depth_cv_image is not None else None,
                 "pose": self.latest_pose_dict.copy() if self.latest_pose_dict is not None else None,
-                "timestamp_server_ns": time.time_ns()
+                "timestamp_server_ns": time.time()*1e9
             }
 
     def _compressed_depth_to_image(self, msg, frame_id='camera_depth_frame'):

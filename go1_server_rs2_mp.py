@@ -202,6 +202,8 @@ def main():
 
     def refresh_latest():
         nonlocal latest_color, latest_depth, latest_pose, latest_distance, rgbd_ts, pose_list, pose_ts_list
+        f_rgbd = open("time_rgbd.txt", "w")
+        f_pose = open("time_pose.txt", "w")
         while True:
             try:
                 while True:
@@ -210,6 +212,7 @@ def main():
                     latest_depth = aligned_data["depth"]
                     latest_distance = aligned_data.get("distance", latest_distance)
                     rgbd_ts = aligned_data["ts"]
+                    f_rgbd.write(f"{rgbd_ts}\n")
             except mp.queues.Empty:
                 pass
             try:
@@ -217,6 +220,7 @@ def main():
                     pose_data = pose_q.get_nowait()
                     pose_list.append(pose_data["pose"])
                     pose_ts_list.append(pose_data["ts"])
+                    f_pose.write(f"{pose_data['ts']}\n")
             except mp.queues.Empty:
                 pass
             pose_list = pose_list[-1000:]
@@ -230,7 +234,8 @@ def main():
                 print("ERROR: no aligned pose found for the latest frame!!!!\n\n\n\n\n\n")
             else:
                 break
-
+        f_rgbd.close()
+        f_pose.close()
     # ------------------------------------------------------------------
     # Socket callbacks
     # ------------------------------------------------------------------
