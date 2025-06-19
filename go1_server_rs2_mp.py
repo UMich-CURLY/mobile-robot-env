@@ -12,6 +12,7 @@ import utils.planner as pl
 
 from rs2_utils import RealSenseSystem
 import pyrealsense2.pyrealsense2 as rs
+import cv2
 
 import lcm
 from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_relay
@@ -214,6 +215,7 @@ def main():
     def pose_worker():
         nonlocal pose_list, pose_ts_list, latest_pose, rgbd_ts
         import numpy as np  # local import to avoid issues with spawn
+        count = 0
         while True:
             pose_data = pose_q.get()
             with data_lock:
@@ -228,12 +230,13 @@ def main():
                 # Align pose to current RGB-D timestamp if available
                 if rgbd_ts != 0 and len(pose_ts_list) > 0:
                     diffs = np.array(pose_ts_list) - rgbd_ts
-                    offset = -100.0
                     offset = 0
                     idx = int(np.argmin(np.abs(diffs-offset)))
+                    idx=-60 # decided by trial
                     latest_pose = pose_list[idx]
-                    latest_pose = pose_list[-1]
-                    print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
+                    if count % 20 == 0:
+                        print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
+                count += 1
 
     threading.Thread(target=rgbd_worker, daemon=True).start()
     threading.Thread(target=pose_worker, daemon=True).start()
