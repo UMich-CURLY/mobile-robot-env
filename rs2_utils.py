@@ -144,7 +144,7 @@ class RealSenseSystem:
                 _reset_device(d435_serial)
             if t265_serial:
                 _reset_device(t265_serial)
-            # set_global_time_enabled(True)
+            set_global_time_enabled(True)
 
         # ---------------- D435 / depth cam ----------------
         self.d435_pipeline: Optional[rs.pipeline] = None
@@ -374,7 +374,10 @@ class RealSenseSystem:
 
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
-        frames_ts = depth_frame.get_timestamp()
+        raw_frames_ts = depth_frame.get_timestamp()
+        if not hasattr(self, "_init_depth_ts"):
+            self._init_depth_ts = raw_frames_ts
+        frames_ts = raw_frames_ts - self._init_depth_ts + time.time()
         # frames_ts = depth_frame.get_frame_metadata(rs.frame_metadata_value.backend_timestamp)*1000 
         #backend timestamp is same as system? except need *1000
 
@@ -418,14 +421,14 @@ class RealSenseSystem:
         # frames_ts = time.time()
 
         pose_frame = frames.get_pose_frame()
-        frames_ts = pose_frame.get_timestamp()
+        raw_frames_ts = pose_frame.get_timestamp()
         #backend_timestamp,frame_timestamp,sensor_timestamp,time_of_arrival
         # frames_ts = pose_frame.get_frame_metadata(rs.frame_metadata_value.frame_timestamp)
         # print(f"pose_ts {frames_ts}")
 
-        if not hasattr(self, "_init_ts"):
-            self._init_ts = time.time()
-            self._init_ts_pose = frames_ts
+        if not hasattr(self, "_init_pose_ts"):
+            self._init_pose_ts = raw_frames_ts
+        frames_ts = raw_frames_ts - self._init_pose_ts + time.time()
         # print(f"[Pose] time diff: {frames_ts - self._init_ts_pose}, time.time(): {time.time() - self._init_ts}")
         # print("pose_frame.get_timestamp()", pose_frame.get_timestamp(), flush=True)
         if not pose_frame:

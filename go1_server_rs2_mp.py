@@ -11,6 +11,7 @@ from utils.pcd import get_distance
 import utils.planner as pl
 
 from rs2_utils import RealSenseSystem
+import pyrealsense2.pyrealsense2 as rs
 
 import lcm
 from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_relay
@@ -55,22 +56,22 @@ def publish_lcm(vx: float, vy: float, w: float) -> None:
 
 def rgbd_capture_proc(raw_q: mp.Queue, d435_serial: Optional[str], width: int, height: int, fps: int, preset_path: Optional[str]):
     """Capture raw RGB-D frames (no alignment) and push latest to queue."""
-    rs = RealSenseSystem(
+    rs_system = RealSenseSystem(
         d435_serial=d435_serial,
         t265_serial=None,
         width=width,
         height=height,
         fps=fps,
         json_preset=preset_path,
-        reset_before_start=True,
+        reset_before_start=False,
     )
     # Disable automatic alignment inside RealSenseSystem for this process
-    rs.align = None  # type: ignore
+    rs_system.align = rs.align(rs.stream.color)
 
     frame_cnt = 0
     t0 = time.time()
     while True:
-        color, depth, frame_ts = rs.get_rgbd()
+        color, depth, frame_ts = rs_system.get_rgbd()
         if color is None or depth is None:
             continue
         # Maintain only latest frame in queue
@@ -91,9 +92,6 @@ def rgbd_capture_proc(raw_q: mp.Queue, d435_serial: Optional[str], width: int, h
 
 def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
     """Process RGB-D frames, update shared distance Value, push latest RGB-D to main queue."""
-    # Create a standalone align helper using pyrealsense2
-    import pyrealsense2.pyrealsense2 as rs
-    align = rs.align(rs.stream.color)
 
     frame_cnt = 0
     t0 = time.time()
@@ -103,7 +101,6 @@ def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
         color = data["color"]
         depth = data["depth"]
 
-        # NOTE: Proper alignment would need RealSense frames; here we simply pass through.
         aligned_color = color  # already same resolution
         aligned_depth = depth  # for simplicity, assume aligned
 
@@ -134,7 +131,7 @@ def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
 
 
 def pose_capture_proc(pose_q: mp.Queue, t265_serial: Optional[str]):
-    rs = RealSenseSystem(
+    rs_system = RealSenseSystem(
         d435_serial=None,
         t265_serial=t265_serial,
         reset_before_start=False,
@@ -143,7 +140,7 @@ def pose_capture_proc(pose_q: mp.Queue, t265_serial: Optional[str]):
     t0 = time.time()
 
     while True:
-        pose, frames_ts = rs.get_pose(timeout_ms=1000)
+        pose, frames_ts = rs_system.get_pose(timeout_ms=1000)
         if pose is None:
             continue
         # while not pose_q.empty():
@@ -235,6 +232,7 @@ def main():
                     offset = 0
                     idx = int(np.argmin(np.abs(diffs-offset)))
                     latest_pose = pose_list[idx]
+                    latest_pose = pose_list[-1]
                     print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
 
     threading.Thread(target=rgbd_worker, daemon=True).start()
