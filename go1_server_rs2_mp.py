@@ -62,7 +62,7 @@ def rgbd_capture_proc(raw_q: mp.Queue, d435_serial: Optional[str], width: int, h
         height=height,
         fps=fps,
         json_preset=preset_path,
-        reset_before_start=False,
+        reset_before_start=True,
     )
     # Disable automatic alignment inside RealSenseSystem for this process
     rs.align = None  # type: ignore
@@ -232,6 +232,7 @@ def main():
                 if rgbd_ts != 0 and len(pose_ts_list) > 0:
                     diffs = np.array(pose_ts_list) - rgbd_ts
                     offset = -100.0
+                    offset = 0
                     idx = int(np.argmin(np.abs(diffs-offset)))
                     latest_pose = pose_list[idx]
                     print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
