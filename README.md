@@ -13,7 +13,7 @@ To use the navigation agent, one of the two robot servers must be first started 
 python3 isaac_server.py --episode_index <episode_index>
 
 ### Real World:
-python3 [text](go1_server_rs2_mp.py)
+python3 go1_server_rs2_mp.py
 
 ### Navigation Agent:
 python3 remote_main.py --host <server host name>
