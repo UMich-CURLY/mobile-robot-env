@@ -52,6 +52,7 @@ ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
 screen_width, screen_height = 640*2+BORDER*3, 720+20
 window = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
 pygame.display.set_caption("SG-VLN WEBSOCKET CLIENT")
+view_rgb = True
 
 def pilImageToSurface(pilImage):
     return pygame.image.fromstring(
@@ -298,6 +299,8 @@ while run:
             if event.key == pygame.K_n:
                 magnification_choice-=1
                 magnification_choice%=len(MAGNIFICATION_OPTIONS)
+            if event.key == pygame.K_i:
+                view_rgb = not view_rgb
 
             if event.key == pygame.K_o:
                 print(WAYPOINTS)
@@ -464,9 +467,10 @@ while run:
             spline,_,_ = fit_smoothing_spline(translations[:,:2],n=100)
             for i in range(1,len(spline)):
                 pygame.draw.line(screen, pygame.Color('green'),(spline[i-1,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER, (spline[i,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER,1) 
-        # pygameSurface = pilImageToSurface(Image.fromarray(rgb_image,mode='RGB'))
-
-        pygameSurface = pilImageToSurface(depth_to_pil_rgb(depth_image))
+        if view_rgb:
+            pygameSurface = pilImageToSurface(Image.fromarray(rgb_image,mode='RGB'))
+        else:
+            pygameSurface = pilImageToSurface(depth_to_pil_rgb(depth_image))
 
 
         screen.blit(pygameSurface, (BORDER,BORDER))
