@@ -11,7 +11,7 @@ import pygame.colordict
 from utils.protocol import *
 from argparse import ArgumentParser
 from utils.planner import fit_smoothing_spline
-HFOV = 54
+HFOV = 54.7
 #preprogrammed waypoints to execute by pressing enter.
 # WAYPOINTS = np.array([
 # [0,0],[0.5,-0.3],[1,0.2],[1.5,0],[2,-0.2],[2.5,0]
