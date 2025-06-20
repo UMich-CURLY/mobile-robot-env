@@ -9,18 +9,22 @@ The navigation agent then acts as a client that connects to the robot server, re
 ## Operation
 To use the navigation agent, one of the two robot servers must be first started as following:
 
-### Isaac Lab:
+'''
+# Isaac Lab:
 python3 isaac_server.py --episode_index <episode_index>
-
-### Real World:
+# Real World:
 python3 go1_server_rs2_mp.py
+'''
 
-### Navigation Agent:
+## Navigation Agent:
+'''
 python3 remote_main.py --host <server host name>
+'''
 
 Once the agent is started, you would be prompted to enter the object goal for navigation. To start a new episode without restarting the agent, type reset and press enter. 
 
 ### Debugging Tool:
 To validate that the server is working correctly, a gui client is provided which offers visualization of sensor data and teleoperation. It can be started with the following command:
-
+```
 python3 mapping_client.py --host <server host name>
+```
