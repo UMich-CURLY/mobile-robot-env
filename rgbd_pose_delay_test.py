@@ -31,7 +31,8 @@ ALIGN_PRESET_PATH: Optional[str] = "/home/unitree/HighAccuracyPreset.json"
 
 LCM_URL = "udpm://239.255.76.67:7667?ttl=255"
 LCM_CHANNEL = "rc_command_relay"
-collision_threshold = 0.6  # metres
+collision_threshold = 0.4  # metres
+
 
 # ---------------------------------------------------------------------------
 # LCM helper
@@ -69,24 +70,75 @@ def rgbd_capture_proc(raw_q: mp.Queue, d435_serial: Optional[str], width: int, h
     # Disable automatic alignment inside RealSenseSystem for this process
     rs_system.align = rs.align(rs.stream.color)
 
+    # ------------------------------------------------------------------
+    # Optical-flow configuration (movement detection)
+    # ------------------------------------------------------------------
+    prev_gray: Optional[np.ndarray] = None        # previous grayscale frame
+    prev_pts: Optional[np.ndarray] = None         # feature points from previous frame
+    last_motion_ts: float = 0.0            # last timestamp printed for RGB movement
+    motion_threshold_px: float = 2.0             # mean pixel displacement threshold
+    motion_cooldown: float = 5.0                 # seconds to suppress further prints
+    motion_ts = 0.0
+
     frame_cnt = 0
     t0 = time.time()
     while True:
         color, depth, frame_ts = rs_system.get_rgbd()
         if color is None or depth is None:
             continue
+
+        # ---------------- Optical flow & movement detection ----------------
+        gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
+
+        if prev_gray is not None:
+            # Re-initialise tracking points if necessary
+            if prev_pts is None or len(prev_pts) < 50:
+                prev_pts = cv2.goodFeaturesToTrack(prev_gray, maxCorners=200, qualityLevel=0.01,
+                                                  minDistance=7, blockSize=7)
+
+            if prev_pts is not None:
+                next_pts, status, _err = cv2.calcOpticalFlowPyrLK(
+                    prev_gray, gray, prev_pts, None,
+                    winSize=(15, 15), maxLevel=2,
+                    criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03)
+                )
+
+                if next_pts is not None and status is not None:
+                    good_new = next_pts[status.flatten() == 1]
+                    good_old = prev_pts[status.flatten() == 1]
+
+                    if len(good_new) > 0:
+                        displacement = good_new - good_old
+                        mean_movement = float(np.mean(np.linalg.norm(displacement, axis=1)))
+
+                        now_ts = time.time()
+                        if (
+                            mean_movement > motion_threshold_px and
+                            (now_ts - last_motion_ts) > motion_cooldown
+                        ):
+                            print(f"[RGB Movement] ts: {frame_ts:.3f}, mean disp: {mean_movement:.2f} px")
+                            last_motion_ts = now_ts
+                            motion_ts = frame_ts
+
+                    # Prepare for next iteration
+                    prev_pts = good_new.reshape(-1, 1, 2) if len(good_new) > 0 else None
+
+        # Update previous frame regardless
+        prev_gray = gray
+
         # Maintain only latest frame in queue
-        while not raw_q.empty():
-            try:
-                raw_q.get_nowait()
-            except mp.queues.Empty:
-                break
-        raw_q.put({"color": color, "depth": depth, "ts": frame_ts})
+        # while not raw_q.empty():
+        #     try:
+        #         raw_q.get_nowait()
+        #     except mp.queues.Empty:
+        #         break
+        raw_q.put({"color": color, "depth": depth, "ts": frame_ts, "motion_ts": motion_ts})
+        motion_ts = 0.0
         frame_cnt += 1
         now = time.time()
         if now - t0 >= 1.0:
             fps_val = frame_cnt / (now - t0)
-            print(f"[RGBD Capture] FPS: {fps_val:.1f}")
+            # print(f"[RGBD Capture] FPS: {fps_val:.1f}")
             frame_cnt = 0
             t0 = now
 
@@ -120,7 +172,7 @@ def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
                 processed_q.get_nowait()
             except mp.queues.Empty:
                 break
-        processed_q.put({"color": aligned_color, "depth": aligned_depth, "distance": dist, "ts": data["ts"]})
+        processed_q.put({"color": aligned_color, "depth": aligned_depth, "distance": dist, "ts": data["ts"], "motion_ts": data.get("motion_ts", 0.0)})
 
         frame_cnt += 1
         now = time.time()
@@ -186,7 +238,7 @@ def main():
         p.start()
 
     # Planner and state
-    planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0, max_vw=0.4, cruise_vel=0.4, Kp_x=0.5, Kp_w=0.5)
+    planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
     direct_control_velocity = (0.0, 0.0, 0.0)
     direct_control_ts = time.time()
     use_planner = False
@@ -199,11 +251,26 @@ def main():
     latest_distance: float = 5.0
     rgbd_ts: float = 0.0
 
+    movement_ts_rgbd = 0.0
+    movement_ts_pose = 0.0
+    movement_ts_rgbd_updated = False
+    movement_ts_pose_updated = False
+
     # Thread-safe access to shared data
     data_lock = threading.Lock()
 
+
+    def align_test_worker():
+        nonlocal movement_ts_rgbd, movement_ts_rgbd_updated, movement_ts_pose, movement_ts_pose_updated
+        while True:
+            if movement_ts_rgbd_updated and movement_ts_pose_updated:
+                print(f"[Align Test] {movement_ts_rgbd - movement_ts_pose}")
+                movement_ts_rgbd_updated = False
+                movement_ts_pose_updated = False
+            time.sleep(0.001)
+
     def rgbd_worker():
-        nonlocal latest_color, latest_depth, latest_distance, rgbd_ts
+        nonlocal latest_color, latest_depth, latest_distance, rgbd_ts, movement_ts_rgbd, movement_ts_rgbd_updated
         while True:
             aligned_data = processed_q.get()  # blocks until next frame
             with data_lock:
@@ -211,13 +278,46 @@ def main():
                 latest_depth = aligned_data["depth"]
                 latest_distance = aligned_data.get("distance", latest_distance)
                 rgbd_ts = aligned_data["ts"]
+                motion_ts = aligned_data.get("motion_ts", 0.0)
+                if motion_ts > 0.0:
+                    print(f"[RGBD Movement] motion_ts: {motion_ts}")
+                    movement_ts_rgbd = motion_ts
+                    movement_ts_rgbd_updated = True
 
     def pose_worker():
-        nonlocal pose_list, pose_ts_list, latest_pose, rgbd_ts
+        nonlocal pose_list, pose_ts_list, latest_pose, rgbd_ts, movement_ts_pose, movement_ts_pose_updated
         import numpy as np  # local import to avoid issues with spawn
+        # ---------------- Yaw-based movement detection ----------------
+        prev_yaw: Optional[float] = None
+        last_yaw_print_ts: float = 0.0
+        yaw_threshold_rad: float = 0.001  # ~2.9 degrees
+        yaw_cooldown: float = 5.0        # seconds between prints
         count = 0
         while True:
             pose_data = pose_q.get()
+
+            # Compute current yaw from quaternion (zyx intrinsic euler)
+            try:
+                o = pose_data["pose"]["pose"]["orientation"]
+                yaw_curr = Rotation.from_quat([o["x"], o["y"], o["z"], o["w"]]).as_euler('zyx')[0]
+            except Exception as e:
+                print(f"[Yaw Movement] Error: {e}")
+                yaw_curr = None
+
+            # Detect significant yaw change
+            if yaw_curr is not None and prev_yaw is not None:
+                import math
+                dyaw = abs((yaw_curr - prev_yaw + math.pi) % (2 * math.pi) - math.pi)
+                now_ts = time.time()
+                if dyaw > yaw_threshold_rad and (now_ts - last_yaw_print_ts) > yaw_cooldown:
+                    print(f"[Yaw Movement] ts: {pose_data['ts']:.3f}, Δyaw: {dyaw:.3f} rad")
+                    movement_ts_pose = pose_data["ts"]
+                    movement_ts_pose_updated = True
+                    last_yaw_print_ts = now_ts
+
+            if yaw_curr is not None:
+                prev_yaw = yaw_curr
+
             with data_lock:
                 pose_list.append(pose_data["pose"])
                 pose_ts_list.append(pose_data["ts"])
@@ -230,14 +330,15 @@ def main():
                 # Align pose to current RGB-D timestamp if available
                 if rgbd_ts != 0 and len(pose_ts_list) > 0:
                     diffs = np.array(pose_ts_list) - rgbd_ts
-                    offset = 60
+                    offset = 0
                     idx = int(np.argmin(np.abs(diffs-offset)))
-                    # idx=-42 # decided by trial
+                    idx=-60 # decided by trial
                     latest_pose = pose_list[idx]
-                    if count % 100 == 0:
-                        print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
+                    # if count % 20 == 0:
+                    #     print(f"[Pose Worker] diffs: {diffs[idx]} @ {idx}, offset: {offset}")
                 count += 1
 
+    threading.Thread(target=align_test_worker, daemon=True).start()
     threading.Thread(target=rgbd_worker, daemon=True).start()
     threading.Thread(target=pose_worker, daemon=True).start()
 
@@ -247,15 +348,14 @@ def main():
     def data_callback():
         # FPS tracking for client requests
         now = time.time()
-        print(f"[Data Callback] now: {now}")
         if not hasattr(data_callback, "_start_ts"):
             data_callback._start_ts = now  # type: ignore
             data_callback._cnt = 0  # type: ignore
         data_callback._cnt += 1  # type: ignore
         elapsed = now - data_callback._start_ts  # type: ignore
-        if elapsed >= 3.0:
+        if elapsed >= 1.0:
             fps_val = data_callback._cnt / elapsed  # type: ignore
-            print(f"[Socket] Request FPS: {fps_val:.1f}")
+            # print(f"[Socket] Request FPS: {fps_val:.1f}")
             data_callback._cnt = 0  # type: ignore
             data_callback._start_ts = now  # type: ignore
 
@@ -272,11 +372,12 @@ def main():
         start_ts = time.time()
         compressed_payload = compress_payload(payload)
         end_ts = time.time()
-        # print(f"[Compress] Time: {end_ts - start_ts:.3f}s")
+        print(f"[Compress] Time: {end_ts - start_ts:.3f}s")
         return compressed_payload
 
     def action_callback(message):
         nonlocal use_planner, direct_control_velocity, direct_control_ts
+        print(f"[Action] Message: {message}")
         if message.type == 'VEL':
             direct_control_velocity = (message.x, message.y, message.omega)
             use_planner = False

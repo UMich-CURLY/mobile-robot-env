@@ -98,27 +98,41 @@ def request_sensor_data(host = SERVER_HOST):
     # print("Connected to server.")
 
     # 1. Send request
+    start_time = time.time()
     client_socket.sendall(REQUEST_MESSAGE)
+    end_time = time.time()
+    print(f"[Request] Time: {end_time - start_time:.3f}s")
     # print(f"Sent request: {REQUEST_MESSAGE.decode()}")
 
     # 2. Receive the length of the pickled data (8 bytes, unsigned long long)
-    raw_msglen = recv_all(client_socket, 8)
-    if not raw_msglen:
+    start_time = time.time()
+    header = recv_all(client_socket, 8)
+    end_time = time.time()
+    print(f"[Recv Len] Time: {end_time - start_time:.3f}s")
+    if not header:
         print("Connection closed by server before sending data length.")
         return None 
     
-    msglen = struct.unpack('>Q', raw_msglen)[0]
-    # print(f"Expecting pickled data of length: {msglen} bytes")
 
     # 3. Receive the pickled data
+    start_time = time.time()
+    msglen = struct.unpack('>Q', header)[0]
     pickled_payload = recv_all(client_socket, msglen)
+    end_time = time.time()
+    print(f"[Recv] Time: {end_time - start_time:.3f}s")
     if not pickled_payload:
         print("Connection closed by server before sending full payload.")
         return None
 
     # 4. Deserialize
+    start_time = time.time()
     payload = pickle.loads(pickled_payload)
+    end_time = time.time()
+    print(f"[Deserialize] Time: {end_time - start_time:.3f}s")
+    start_time = time.time()
     payload = decompress_payload(payload)
+    end_time = time.time()
+    print(f"[Decompress] Time: {end_time - start_time:.3f}s")
 
     return payload
 
@@ -134,15 +148,13 @@ def request_planner_state(host = SERVER_HOST):
     # print(f"Sent request: {REQUEST_MESSAGE.decode()}")
 
     # 2. Receive the length of the pickled data (8 bytes, unsigned long long)
-    raw_msglen = recv_all(client_socket, 8)
-    if not raw_msglen:
+    header = recv_all(client_socket, 8)
+    if not header:
         print("Connection closed by server before sending data length.")
         return None 
     
-    msglen = struct.unpack('>Q', raw_msglen)[0]
-    # print(f"Expecting pickled data of length: {msglen} bytes")
-
     # 3. Receive the pickled data
+    msglen = struct.unpack('>Q', header)[0]
     json_payload = recv_all(client_socket, msglen).decode()
     if not json_payload:
         print("Connection closed by server before sending full payload.")
