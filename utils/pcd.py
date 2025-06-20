@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-def get_distance(depth_image,hfov=72,p=-50):
+def get_distance(depth_image,hfov=54.7,p=-30):
     # resize depth image to 320x240
     depth_image = cv2.resize(depth_image, (320, 240))
     height, width = depth_image.shape
@@ -14,6 +14,6 @@ def get_distance(depth_image,hfov=72,p=-50):
 
     pcd  = np.stack([depth_image,-px,py],axis=-1) # robot frame pointcloud, H x W x 3 (xyz)
     #generalized mean
-    distances = np.linalg.norm(pcd,axis=2)[:0.6*height,:] #depth image to distance image.\
+    distances = np.linalg.norm(pcd,axis=2)[:int(0.6*height),:] #depth image to distance image.\
     distances = distances[distances>0.1]
     return (np.sum(distances**p)/width/height)**(1/p)#np.mean(distances)

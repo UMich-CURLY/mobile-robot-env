@@ -196,6 +196,7 @@ def pose_capture_proc(pose_q: mp.Queue, t265_serial: Optional[str]):
         pose, frames_ts = rs_system.get_pose(timeout_ms=1000)
         if pose is None:
             continue
+
         # while not pose_q.empty():
         #     try:
         #         pose_q.get_nowait()

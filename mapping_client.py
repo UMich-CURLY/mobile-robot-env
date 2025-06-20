@@ -11,7 +11,7 @@ import pygame.colordict
 from utils.protocol import *
 from argparse import ArgumentParser
 from utils.planner import fit_smoothing_spline
-HFOV = 54
+HFOV = 54.7
 #preprogrammed waypoints to execute by pressing enter.
 # WAYPOINTS = np.array([
 # [0,0],[0.5,-0.3],[1,0.2],[1.5,0],[2,-0.2],[2.5,0]
@@ -394,10 +394,10 @@ while run:
         mean_distance = (np.sum(distances**power)/640/480)**(1/power)#np.mean(distances)
         end_ts = time.time()
 
+        from utils.pcd import get_distance
+        mean_distance = get_distance(data.get("depth_image").astype(float)/1000.0,HFOV)
+        print(f"mean distance: {mean_distance}")
 
-        # print(f"mean distance {mean_distance}")
-        # print(f"weighted distance: {}")
-        # print(f"min distance {np.min(distances[depth_image.reshape((-1))>0.05])}")
 
         pose = data.get("pose")
         p = pose['pose']['position']

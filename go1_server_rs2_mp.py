@@ -31,7 +31,7 @@ ALIGN_PRESET_PATH: Optional[str] = "/home/unitree/HighAccuracyPreset.json"
 
 LCM_URL = "udpm://239.255.76.67:7667?ttl=255"
 LCM_CHANNEL = "rc_command_relay"
-collision_threshold = 0.6  # metres
+collision_threshold = 0.4  # metres
 
 # ---------------------------------------------------------------------------
 # LCM helper
@@ -108,7 +108,8 @@ def process_rgbd(raw_q: mp.Queue, processed_q: mp.Queue, dist_val: mp.Value):
         dist = 5.0
         try:
             dist = get_distance(aligned_depth.astype(float) / 1000.0)
-        except Exception:
+        except Exception as e:
+            print(f"[RGBD Proc] Error: {e}")
             pass
 
         # Update shared distance value
@@ -139,11 +140,34 @@ def pose_capture_proc(pose_q: mp.Queue, t265_serial: Optional[str]):
     )
     frame_cnt = 0
     t0 = time.time()
+    last_pose = None
+    init_pose = np.eye(4)
 
     while True:
         pose, frames_ts = rs_system.get_pose(timeout_ms=1000)
         if pose is None:
             continue
+
+        curr_pos = pose["pose"]["position"]
+        curr_quat = pose["pose"]["orientation"]
+        curr_pos = np.array([curr_pos["x"], curr_pos["y"], curr_pos["z"]])
+        curr_quat = np.array([curr_quat["x"], curr_quat["y"], curr_quat["z"], curr_quat["w"]])
+        curr_pose = np.eye(4)
+        curr_pose[:3, :3] = Rotation.from_quat(curr_quat).as_matrix()
+        curr_pose[:3, 3] = curr_pos
+        if last_pose is not None:
+            relative_pose = curr_pose @ np.linalg.inv(last_pose)
+            pos_diff = np.linalg.norm(relative_pose[:3, 3])
+            if pos_diff > 0.3:
+                init_pose = relative_pose @ init_pose
+                print(f"!!!!!!")
+                print(f"Drift detected! Position difference: {pos_diff}m")
+                print(f"!!!!!!")
+        last_pose = curr_pose
+        curr_pose_fixed = np.linalg.inv(init_pose) @ curr_pose
+        pose["pose"]["position"] = {"x": curr_pose_fixed[0, 3], "y": curr_pose_fixed[1, 3], "z": curr_pose_fixed[2, 3]}
+        curr_quat_fixed = Rotation.from_matrix(curr_pose_fixed[:3, :3]).as_quat()
+        pose["pose"]["orientation"] = {"x": curr_quat_fixed[0], "y": curr_quat_fixed[1], "z": curr_quat_fixed[2], "w": curr_quat_fixed[3]}
         # while not pose_q.empty():
         #     try:
         #         pose_q.get_nowait()
@@ -186,7 +210,7 @@ def main():
         p.start()
 
     # Planner and state
-    planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0, max_vw=0.4, cruise_vel=0.4, Kp_x=0.5, Kp_w=0.5)
+    planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.5, cruise_vel=0.4, Kp_x=0.5, Kp_w=0.5)
     direct_control_velocity = (0.0, 0.0, 0.0)
     direct_control_ts = time.time()
     use_planner = False
@@ -290,6 +314,8 @@ def main():
     def planner_callback():
         nonlocal use_planner, stop_flag
         col = int(latest_distance < collision_threshold)
+        if col:
+            print(f"[Planner] collision: {latest_distance}")
         try:
             if not use_planner:
                 return {"collision": col}
