@@ -481,7 +481,8 @@ while run:
 
 
         draw_compass_arrow(screen,ROBOT_VIS_CENTER[0],ROBOT_VIS_CENTER[1],curr_yaw)
-        distance_text = font.render(f"[INFO] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | E2E latency: {latency_ms:04} ms | fps: {clock.get_fps():.1f}",True,(255,255,255))
+
+        distance_text = font.render(f"[INFO] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | fps: {clock.get_fps():.1f} | E2E latency: {latency_ms:04} ms",True,(255,255,255))
         screen.blit(distance_text,(BORDER,480+BORDER*2))
         # create a text surface object,
         # on which text is drawn on it.
