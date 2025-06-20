@@ -1,0 +1,1 @@
+docker compose run --name sg_vln -P vln

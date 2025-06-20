@@ -1,0 +1,1 @@
+zip -0 -r dump.zip . -x "*sg.json" -x "*.png" -x "*.npy"

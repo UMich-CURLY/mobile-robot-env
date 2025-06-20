@@ -1,0 +1,2 @@
+scp /media/sdd1/shrey/vln_game_singularity.sif junzhewu@greatlakes.arc-ts.umich.edu:/scratch/junzhewu_root/junzhewu0/shared_data/
+scp Dockerfile junzhewu@greatlakes.arc-ts.umich.edu:/scratch/junzhewu_root/junzhewu0/shared_data/

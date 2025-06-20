@@ -1,0 +1,47 @@
+services:
+    vln:
+        image: curly/sg_vln:habitat3.3
+        restart: always
+        container_name: sg_vln
+        entrypoint: zsh
+        environment:
+            - ACCEPT_EULA=Y
+            - PRIVACY_CONSENT=Y
+            - VNC_PASSWORD=curly
+            - RESOLUTION=1920x1080
+            # - DISPLAY=${DISPLAY}
+            # - QT_GRAPHICSSYSTEM=native
+            # - NVIDIA_DRIVER_CAPABILITIES=all
+            # - TERM=xterm-256color
+            # - XAUTHORITY
+        ports:
+            - "5903:5900"
+            # - "6080:80"
+        volumes:
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/cache/kit:/isaac-sim/kit/cache:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/cache/ov:$HOME/.cache/ov:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/cache/pip:$HOME/.cache/pip:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/cache/glcache:$HOME/.cache/nvidia/GLCache:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/cache/computecache:$HOME/.nv/ComputeCache:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/logs:$HOME/.nvidia-omniverse/logs:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/data:$HOME/.local/share/ov/data:rw
+            # - $HOME/Projects/VLN/isaac_sim/isaac_files/documents:$HOME/Documents:rw
+            - /home/huyu/junzhe/Projects:/root/Projects:rw
+            - /home/huyu/junzhe/datasets:/data:rw
+            - /mnt/workspace/datasets/habitat_datasets:/mnt/workspace/datasets/habitat_datasets:rw
+            # - /mnt/workspace/users/huyu/junzhe/VLN_dump:/root/Projects/VLN/ext_dump/:rw
+            # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+            # - $HOME/.Xauthority:/root/.Xauthority:rw
+            - .zshrc:/root/.zshrc:rw
+            - .zsh_history:/root/.zsh_history:rw
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities: [ gpu ]
