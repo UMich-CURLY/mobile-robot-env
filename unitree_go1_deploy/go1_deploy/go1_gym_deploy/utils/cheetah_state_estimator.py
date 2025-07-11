@@ -319,7 +319,7 @@ class StateEstimator:
         self.mode = msg.mode
         relay_val = abs(self.relay_left_stick[0]) + abs(self.relay_left_stick[1]) + abs(self.relay_right_stick[0]) + abs(self.relay_right_stick[1])
         rc_val = abs(msg.right_stick[0]) + abs(msg.right_stick[1]) + abs(msg.left_stick[0]) + abs(msg.left_stick[1])
-        print(f"relay_val: {relay_val}, rc_val: {rc_val}")
+        # print(f"relay_val: {relay_val}, rc_val: {rc_val}")
         # print(f"rc_command: {msg.right_stick}, {msg.left_stick}")
         if relay_val<0.01:
             if rc_val>0.01:
@@ -356,6 +356,7 @@ class StateEstimator:
         self.right_lower_right_switch_pressed = ((msg.right_lower_right_switch and not self.right_lower_right_switch) or self.right_lower_right_switch_pressed)
 
         self.mode = msg.mode
+        print(f"relay command: {msg.left_stick,msg.right_stick}")
         self.relay_left_stick = msg.left_stick
         self.relay_right_stick = msg.right_stick
         self.right_stick = msg.right_stick

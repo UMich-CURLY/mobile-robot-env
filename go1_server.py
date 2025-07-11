@@ -65,7 +65,7 @@ class SensorDataManager:
         self.init_quat = None
         self.init_rotmat = None
 
-        self.useplanner = None
+        self.useplanner = False
         self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
 
         self.distance = 5
@@ -80,6 +80,7 @@ class SensorDataManager:
             self.logger.error(f'RGB callback error: {e}')
 
     def depth_callback(self, msg: CompressedImage):
+        global x,y,w
         try:
             png_bytes = msg.data[12:]
             depth      = cv2.imdecode(
@@ -162,7 +163,7 @@ class SensorDataManager:
             x,y,w = self.planner.step(position['x'],position['y'],yaw)
             if(self.distance<collision_threshold):
                 vx = np.clip(vx,-0.5,0)
-        publish_lcm(x, y, w)
+            publish_lcm(x, y, w)
         
             
     def get_latest_data(self):
@@ -293,12 +294,22 @@ def main(args=None):
             return {'err_x':ex,'err_y':ey,"vx":planner.cmd_x,"vy":planner.cmd_y,"w":planner.cmd_w,"collision":col}
         except:
             return {"collision":col}
+        
+    def lcm_sender():
+        global x,y,w
+        while True:
+            if not data_manager.useplanner:
+                publish_lcm(x,y,w)
+                time.sleep(0.05)
     
     # Start socket server in a separate thread
     # Pass the logger from the ROS node to the socket thread for consistent logging
 
     server_thread = threading.Thread(target=run_server,kwargs={"data_cb":data_callback,"action_cb":action_callback,"planner_cb":planner_callback})
+    publishing_thread = threading.Thread(target=lcm_sender)
+    
     server_thread.start()
+    publishing_thread.start()
 
     try:
         rclpy.spin(sensor_server_ros_node)

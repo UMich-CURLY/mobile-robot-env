@@ -13,3 +13,12 @@ cd ~/ORB-SLAM3-STEREO-FIXED && ros2 run orbslam3 realsense_direct Vocabulary/ORB
 ## Policy:
 on nuc run:
 sudo ip route add 224.0.0.0/4 dev eno1 metric 80 
+
+on nx run:
+sudo ip route add 224.0.0.0/4 dev eth0
+
+then run on nx:
+
+cd ~/unitree_go1_deploy/unitree_legged_sdk/build && ./lcm_position
+
+cd $HOME/mobile-robot-server/unitree_go1_deploy/go1_deploy/go1_gym_deploy/scripts && /usr/bin/python3 deploy.py
