@@ -114,6 +114,7 @@ class RealSenseSystem:
             # Align depth to color for convenience
             self.align = rs.align(rs.stream.color)
             if json_preset:
+                print(f"[INFO] Loading JSON preset from {json_preset}")
                 _load_json_preset(profile.get_device(), Path(json_preset))
             print("[INFO] D435/D455 pipeline started.")
         elif t265_serial is not None:
@@ -317,6 +318,7 @@ class RealSenseSystem:
             try:
                 frames = self.d435_pipeline.wait_for_frames(timeout_ms)
                 if frames:
+                    # frames_ts = time.time()
                     break 
             except Exception as e:
                 print(f"[RealSense] D435 Error: {e}")
@@ -328,6 +330,15 @@ class RealSenseSystem:
 
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
+        frames_ts = depth_frame.get_timestamp()
+        # print("--------------------------------")
+        # print("color_frame.get_timestamp()", color_frame.get_timestamp())
+        # print("color_frame.get_frame_timestamp_domain()", color_frame.get_frame_timestamp_domain())
+        # print("depth_frame.get_timestamp()", depth_frame.get_timestamp())
+        # print("time_of_arrival", depth_frame.get_frame_metadata(rs.frame_metadata_value.time_of_arrival))
+
+        # print("depth_frame.get_frame_timestamp_domain()", depth_frame.get_frame_timestamp_domain())
+        # print("--------------------------------")
         if not depth_frame or not color_frame:
             return None, None
 
@@ -338,7 +349,7 @@ class RealSenseSystem:
         self._last_color = color_img
         self._last_depth = depth_img
 
-        return color_img, depth_img
+        return color_img, depth_img, frames_ts
 
     # ---------------------------------------------------------------------
     def get_pose(self, timeout_ms: int = 0) -> Optional[Dict[str, Any]]:
@@ -357,8 +368,11 @@ class RealSenseSystem:
                 return None
         else:
             frames = self.t265_pipeline.wait_for_frames(timeout_ms)
+        # frames_ts = time.time()
 
         pose_frame = frames.get_pose_frame()
+        frames_ts = pose_frame.get_timestamp()
+        # print("pose_frame.get_timestamp()", pose_frame.get_timestamp(), flush=True)
         if not pose_frame:
             return None
 
@@ -387,4 +401,4 @@ class RealSenseSystem:
         }
 
         self._last_pose = pose_dict
-        return pose_dict 
+        return pose_dict, frames_ts

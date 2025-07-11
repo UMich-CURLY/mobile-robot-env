@@ -3,6 +3,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
 from rclpy.qos import qos_profile_sensor_data
 from nav_msgs.msg import Odometry
+from geometry_msgs.msg import PoseStamped
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
@@ -34,6 +35,7 @@ x,y,w = 0,0,0
 def publish_lcm(lin_x,lin_y,yaw):
     global x,y,w
     x,y,w = lin_x,lin_y,yaw
+    print(f"publishing {lin_x} {lin_y} {yaw}")
     lcm_msg = rc_command_lcmt_relay()
     lcm_msg.mode = 0
     lcm_msg.left_stick  = [lin_y, lin_x]
@@ -82,21 +84,42 @@ class SensorDataManager:
             png_bytes = msg.data[12:]
             depth      = cv2.imdecode(
                         np.frombuffer(png_bytes, np.uint8),
-                        cv2.IMREAD_UNCHANGED)  
+                        cv2.IMREAD_UNCHANGED) 
+            # print("depth ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
 
             # depth = self.cv_bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
             with self.lock:
                 self.latest_depth_cv_image = depth
                 self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
                 if(self.distance<collision_threshold):
-                    publish_lcm(np.clip(x,-0.5,0),y,w)
+                    x = np.clip(x,-0.5,0)
             self.check_data_ready()
         except Exception as e:
             self.logger.error(f'Depth callback error: {e}')
 
 
-    def pose_callback(self, msg: Odometry):
+    # def pose_callback(self, msg: Odometry):
+    #     with self.lock:
+    #         print("pose ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
+    #         self.latest_pose_dict = {
+    #             "header": {
+    #                 "stamp_sec": msg.header.stamp.sec,
+    #                 "stamp_nanosec": msg.header.stamp.nanosec,
+    #                 "frame_id": msg.header.frame_id
+    #             },
+    #             "pose": {
+    #                 "position": {"x": msg.pose.pose.position.x, "y": msg.pose.pose.position.y, "z": msg.pose.pose.position.z},
+    #                 "orientation": {"x": msg.pose.pose.orientation.x, "y": msg.pose.pose.orientation.y,
+    #                                 "z": msg.pose.pose.orientation.z, "w": msg.pose.pose.orientation.w}
+    #             }
+    #         }
+    #     # self.logger.info('Received Pose', throttle_duration_sec=5)
+    #     self.check_data_ready()
+    #     self.publish_planner_action()
+
+    def pose_callback(self, msg: PoseStamped):
         with self.lock:
+            # print("pose ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
             self.latest_pose_dict = {
                 "header": {
                     "stamp_sec": msg.header.stamp.sec,
@@ -104,9 +127,10 @@ class SensorDataManager:
                     "frame_id": msg.header.frame_id
                 },
                 "pose": {
-                    "position": {"x": msg.pose.pose.position.x, "y": msg.pose.pose.position.y, "z": msg.pose.pose.position.z},
-                    "orientation": {"x": msg.pose.pose.orientation.x, "y": msg.pose.pose.orientation.y,
-                                    "z": msg.pose.pose.orientation.z, "w": msg.pose.pose.orientation.w}
+                    # The path is now simpler: msg.pose instead of msg.pose.pose
+                    "position": {"x": msg.pose.position.x, "y": msg.pose.position.y, "z": msg.pose.position.z},
+                    "orientation": {"x": msg.pose.orientation.x, "y": msg.pose.orientation.y,
+                                    "z": msg.pose.orientation.z, "w": msg.pose.orientation.w}
                 }
             }
         # self.logger.info('Received Pose', throttle_duration_sec=5)
@@ -125,6 +149,7 @@ class SensorDataManager:
                     self.logger.info("Initial set of sensor data received. Server is ready for client requests.")
     
     def publish_planner_action(self):
+        global x,y,w
         # if hasattr(self,'_last_publish_time'):
         #     print("last publish time:", time.time() - self._last_publish_time)
         self._last_publish_time = time.time()
@@ -134,10 +159,11 @@ class SensorDataManager:
             position = pose['position']
             o = pose['orientation']
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
-            vx,vy,vw = self.planner.step(position['x'],position['y'],yaw)
+            x,y,w = self.planner.step(position['x'],position['y'],yaw)
             if(self.distance<collision_threshold):
                 vx = np.clip(vx,-0.5,0)
-            publish_lcm(vx, vy, vw)
+        publish_lcm(x, y, w)
+        
             
     def get_latest_data(self):
         with self.lock:
@@ -148,7 +174,7 @@ class SensorDataManager:
                 "rgb_image": self.latest_rgb_cv_image.copy() if self.latest_rgb_cv_image is not None else None,
                 "depth_image": self.latest_depth_cv_image.copy() if self.latest_depth_cv_image is not None else None,
                 "pose": self.latest_pose_dict.copy() if self.latest_pose_dict is not None else None,
-                "timestamp_server_ns": time.time_ns()
+                "timestamp_server_ns": time.time()*1e9
             }
 
     def _compressed_depth_to_image(self, msg, frame_id='camera_depth_frame'):
@@ -182,8 +208,8 @@ class SensorServerNode(Node):
         self.depth_subscriber = self.create_subscription(
             CompressedImage, '/camera/aligned_depth_to_color/image_raw/compressedDepth', self.data_manager.depth_callback, 10)
         self.pose_subscriber = self.create_subscription(
-            Odometry,
-            '/camera/pose/sample',
+            PoseStamped,
+            '/orb_slam3/camera_pose',
             self.data_manager.pose_callback,
             qos_profile_sensor_data) 
 
@@ -240,11 +266,12 @@ def main(args=None):
         return compress_payload(sensor_data)
     
     def action_callback(message):
+        global x,y,w
         if message.type == 'VEL':
             if(data_manager.distance<collision_threshold):
                 message.x = np.clip(message.x,-0.5,0)
 
-            publish_lcm(message.x,message.y,message.omega)
+            x,y,w = message.x,message.y,message.omega
             print(message)
             data_manager.useplanner = False
             # print(f"position: {position} quat: {quat}")
