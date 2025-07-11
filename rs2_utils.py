@@ -17,6 +17,54 @@ except ImportError as exc:
 # -----------------------------------------------------------------------------
 # Helper functions (largely adopted from rs2_test.py)
 # -----------------------------------------------------------------------------
+def set_global_time_enabled(enable: bool):
+    """
+    Sets the RS2_OPTION_GLOBAL_TIME_ENABLED on compatible sensors.
+
+    Args:
+        enable (bool): True to enable global time, False to disable.
+    """
+    ctx = rs.context()
+    devices = ctx.query_devices()
+
+    if not devices:
+        print("No RealSense device connected.")
+        return
+
+    for dev in devices:
+        print(f"Device: {dev.get_info(rs.camera_info.name)} (Serial: {dev.get_info(rs.camera_info.serial_number)})")
+        found_sensor_for_option = False
+        for sensor in dev.query_sensors():
+            sensor_name = sensor.get_info(rs.camera_info.name)
+            if sensor.supports(rs.option.global_time_enabled):
+                found_sensor_for_option = True
+                print(f"  Sensor '{sensor_name}' supports global_time_enabled.")
+                try:
+                    current_value = sensor.get_option(rs.option.global_time_enabled)
+                    print(f"    Current global_time_enabled: {bool(current_value)}")
+
+                    desired_value = 1.0 if enable else 0.0
+                    if current_value != desired_value:
+                        try:
+                            sensor.set_option(rs.option.global_time_enabled, desired_value)
+                        except Exception as e:
+                            print(f"    Error setting global_time_enabled on '{sensor_name}': {e}")
+                            continue
+                        new_value = sensor.get_option(rs.option.global_time_enabled)
+                        print(f"    Set global_time_enabled to: {bool(new_value)}")
+                        if bool(new_value) != enable:
+                            print(f"    WARNING: Failed to set global_time_enabled to {enable} on {sensor_name}.")
+                    else:
+                        print(f"    global_time_enabled is already set to: {bool(current_value)}")
+
+                except Exception as e:
+                    print(f"    Error setting global_time_enabled on '{sensor_name}': {e}")
+            else:
+                print(f"  Sensor '{sensor_name}' does NOT support global_time_enabled.")
+        
+        if not found_sensor_for_option:
+            print(f"  No sensor on this device supports global_time_enabled.")
+        print("-" * 30)
 
 def _load_json_preset(device: rs.device, json_path: Path) -> None:
     """Upload a depth-camera JSON preset (requires advanced-mode)."""
@@ -100,6 +148,7 @@ class RealSenseSystem:
                 _reset_device(d435_serial)
             if t265_serial:
                 _reset_device(t265_serial)
+            # set_global_time_enabled(False)
 
         # ---------------- D435 / depth cam ----------------
         self.d435_pipeline: Optional[rs.pipeline] = None
@@ -111,14 +160,15 @@ class RealSenseSystem:
             cfg.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
             cfg.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
             profile = self.d435_pipeline.start(cfg)
+            depth_sensor = profile.get_device().first_depth_sensor()
+            scale = depth_sensor.get_depth_scale()
+            print("[INFO] depth scale: ", scale)
             # Align depth to color for convenience
             self.align = rs.align(rs.stream.color)
             if json_preset:
                 print(f"[INFO] Loading JSON preset from {json_preset}")
                 _load_json_preset(profile.get_device(), Path(json_preset))
             print("[INFO] D435/D455 pipeline started.")
-        elif t265_serial is not None:
-            print("[INFO] No D435 serial specified – skipping color/depth stream.")
 
         # ---------------- T265 / pose cam -----------------
         self.t265_pipeline: Optional[rs.pipeline] = None
@@ -129,8 +179,6 @@ class RealSenseSystem:
             cfg.enable_stream(rs.stream.pose)
             self.t265_pipeline.start(cfg)
             print("[INFO] T265 pipeline started (pose).")
-        elif d435_serial is not None:
-            print("[INFO] No T265 serial specified – skipping pose stream.")
 
         self.has_pose: bool = self.t265_pipeline is not None
         # Caches for latest frames (thread-safe access not handled here)
@@ -330,7 +378,14 @@ class RealSenseSystem:
 
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
-        frames_ts = depth_frame.get_timestamp()
+        raw_frames_ts = depth_frame.get_timestamp()
+        if not hasattr(self, "_init_depth_ts"):
+            self._init_depth_ts = raw_frames_ts
+        # frames_ts = raw_frames_ts - self._init_depth_ts + time.time()
+        frames_ts = raw_frames_ts
+        # frames_ts = depth_frame.get_frame_metadata(rs.frame_metadata_value.backend_timestamp)*1000 
+        #backend timestamp is same as system? except need *1000
+
         # print("--------------------------------")
         # print("color_frame.get_timestamp()", color_frame.get_timestamp())
         # print("color_frame.get_frame_timestamp_domain()", color_frame.get_frame_timestamp_domain())
@@ -371,7 +426,16 @@ class RealSenseSystem:
         # frames_ts = time.time()
 
         pose_frame = frames.get_pose_frame()
-        frames_ts = pose_frame.get_timestamp()
+        raw_frames_ts = pose_frame.get_timestamp()
+        #backend_timestamp,frame_timestamp,sensor_timestamp,time_of_arrival
+        # frames_ts = pose_frame.get_frame_metadata(rs.frame_metadata_value.frame_timestamp)
+        # print(f"pose_ts {frames_ts}")
+
+        if not hasattr(self, "_init_pose_ts"):
+            self._init_pose_ts = raw_frames_ts
+        frames_ts = raw_frames_ts
+        # frames_ts = raw_frames_ts - self._init_pose_ts + time.time()
+        # print(f"[Pose] time diff: {frames_ts - self._init_ts_pose}, time.time(): {time.time() - self._init_ts}")
         # print("pose_frame.get_timestamp()", pose_frame.get_timestamp(), flush=True)
         if not pose_frame:
             return None
@@ -389,7 +453,7 @@ class RealSenseSystem:
                 "position": {
                     "x": -data.translation.z,
                     "y": -data.translation.x,
-                    "z": data.translation.y,
+                    "z": data.translation.y, 
                 },
                 "orientation": {
                     "x": -data.rotation.z,

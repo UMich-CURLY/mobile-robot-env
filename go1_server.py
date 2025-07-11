@@ -66,7 +66,7 @@ class SensorDataManager:
         self.init_rotmat = None
 
         self.useplanner = None
-        self.planner = pl.Planner(max_vx=1,min_vx=-0.2,max_vy = 0.1,max_vw=1,cruise_vel=0.6,Kp_w=2.5)
+        self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
 
         self.distance = 5
     def rgb_callback(self, msg: CompressedImage):
@@ -174,6 +174,7 @@ class SensorDataManager:
                 "rgb_image": self.latest_rgb_cv_image.copy() if self.latest_rgb_cv_image is not None else None,
                 "depth_image": self.latest_depth_cv_image.copy() if self.latest_depth_cv_image is not None else None,
                 "pose": self.latest_pose_dict.copy() if self.latest_pose_dict is not None else None,
+                "timestamp_server_ns": time.time()*1e9
                 "timestamp_server_ns": time.time()*1e9
             }
 

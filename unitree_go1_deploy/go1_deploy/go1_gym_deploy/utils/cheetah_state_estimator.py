@@ -311,9 +311,9 @@ class StateEstimator:
         self.right_lower_right_switch_pressed = ((msg.right_lower_right_switch and not self.right_lower_right_switch) or self.right_lower_right_switch_pressed)
 
         # clear relay command if no message received for 0.1s
-        # if time.time() - self._last_relay_time > 0.1:
-        #     self.relay_left_stick = [0, 0] # clear relay command
-        #     self.relay_right_stick = [0, 0] # clear relay command
+        if time.time() - self._last_relay_time > 0.5:
+            self.relay_left_stick = [0, 0] # clear relay command
+            self.relay_right_stick = [0, 0] # clear relay command
 
         # use rc command if no relay command
         self.mode = msg.mode

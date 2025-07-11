@@ -52,7 +52,7 @@ def compress_payload(payload_dict):
     # Compress RGB Image
     if 'rgb_image' in compressed_dict and isinstance(compressed_dict['rgb_image'], np.ndarray):
         rgb_image_np = compressed_dict['rgb_image']
-        success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 90])
+        success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
         if success:
             compressed_dict['rgb_image'] = encoded_image.tobytes() # Store as bytes
             # Store metadata for potential precise reconstruction if imdecode isn't enough
@@ -159,7 +159,7 @@ def format_data(rgb,depth,position,quat):
     }
     )
 
-def handle_client_connection(client_socket, client_address,sensor_data_payload=None,action_cb = None,planner_state = None):
+def handle_client_connection(client_socket, client_address, data_cb=None, action_cb = None, planner_cb = None):
     """Handles a single client connection."""
     # print(f"[{time.strftime('%H:%M:%S')}] Accepted connection from {client_address}")
     try:
@@ -173,6 +173,7 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
         # print(f"[{time.strftime('%H:%M:%S')}] Received request: '{request_str}' from {client_address}")
 
         if request_str == "GET_SENSOR_DATA":
+            sensor_data_payload = data_cb()
             if(sensor_data_payload is None):
                 sensor_data_payload = generate_dummy_data()
             
@@ -181,18 +182,17 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
             pickled_payload = pickle.dumps(sensor_data_payload)
             payload_len = len(pickled_payload)
 
-            # Send the length of the pickled data first (unsigned long long - 8 bytes, network byte order)
-            client_socket.sendall(struct.pack('>Q', payload_len))
             # Send the pickled data
-            client_socket.sendall(pickled_payload)
+            header = struct.pack('>Q', payload_len)
+            client_socket.sendall(header+pickled_payload)
             # print(f"[{time.strftime('%H:%M:%S')}] Sent {payload_len} bytes of sensor data to {client_address}.")
         elif request_str == "GET_PLANNER_STATE":
+            planner_state = planner_cb()
             json_payload = json.dumps(planner_state)
             payload_len = len(json_payload)
-            # Send the length of the pickled data first (unsigned long long - 8 bytes, network byte order)
-            client_socket.sendall(struct.pack('>Q', payload_len))
             # Send the pickled data
-            client_socket.sendall(json_payload.encode())
+            header = struct.pack('>Q', payload_len)
+            client_socket.sendall(header+json_payload.encode())
         else:
             header = request_str.split()[0]
             payload_index = len(header)+1
@@ -214,8 +214,8 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
             }
             pickled_error = pickle.dumps(error_payload)
             error_len = len(pickled_error)
-            client_socket.sendall(struct.pack('>Q', error_len))
-            client_socket.sendall(pickled_error)
+            header = struct.pack('>Q', error_len)
+            client_socket.sendall(header+pickled_error)
 
     except ConnectionResetError:
         print(f"[{time.strftime('%H:%M:%S')}] Client {client_address} reset the connection.")
@@ -228,7 +228,7 @@ def handle_client_connection(client_socket, client_address,sensor_data_payload=N
         # print(f"[{time.strftime('%H:%M:%S')}] Closing connection with {client_address}")
         client_socket.close()
 
-def run_server(data_cb=lambda:None,action_cb=lambda:None,planner_cb = lambda:None,stop_flag = None):
+def run_server(data_cb=lambda:None,action_cb=lambda:None, planner_cb = lambda:None,stop_flag = None):
     """Main server loop to listen for and handle connections."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Allow address reuse immediately after server closes
@@ -251,7 +251,7 @@ def run_server(data_cb=lambda:None,action_cb=lambda:None,planner_cb = lambda:Non
                 # client_thread.daemon = True # So threads exit when main program exits
                 # client_thread.start()
                 if(data_cb is not None):
-                    handle_client_connection(client_socket, client_address,data_cb(),action_cb,planner_cb()) # Sequential handling
+                    handle_client_connection(client_socket, client_address,data_cb,action_cb,planner_cb) # Sequential handling
                 else:
                     handle_client_connection(client_socket, client_address)
             except socket.timeout: # server_socket.accept() can timeout if set

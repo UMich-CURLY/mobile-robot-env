@@ -11,7 +11,7 @@ import pygame.colordict
 from utils.protocol import *
 from argparse import ArgumentParser
 from utils.planner import fit_smoothing_spline
-HFOV = 54
+HFOV = 54.7
 #preprogrammed waypoints to execute by pressing enter.
 # WAYPOINTS = np.array([
 # [0,0],[0.5,-0.3],[1,0.2],[1.5,0],[2,-0.2],[2.5,0]
@@ -52,6 +52,7 @@ ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
 screen_width, screen_height = 640*2+BORDER*3, 720+20
 window = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
 pygame.display.set_caption("SG-VLN WEBSOCKET CLIENT")
+view_rgb = True
 
 def pilImageToSurface(pilImage):
     return pygame.image.fromstring(
@@ -298,6 +299,8 @@ while run:
             if event.key == pygame.K_n:
                 magnification_choice-=1
                 magnification_choice%=len(MAGNIFICATION_OPTIONS)
+            if event.key == pygame.K_i:
+                view_rgb = not view_rgb
 
             if event.key == pygame.K_o:
                 print(WAYPOINTS)
@@ -394,10 +397,10 @@ while run:
         mean_distance = (np.sum(distances**power)/640/480)**(1/power)#np.mean(distances)
         end_ts = time.time()
 
+        from utils.pcd import get_distance
+        mean_distance = get_distance(data.get("depth_image").astype(float)/1000.0,HFOV)
+        print(f"mean distance: {mean_distance}")
 
-        # print(f"mean distance {mean_distance}")
-        # print(f"weighted distance: {}")
-        # print(f"min distance {np.min(distances[depth_image.reshape((-1))>0.05])}")
 
         pose = data.get("pose")
         p = pose['pose']['position']
@@ -464,9 +467,10 @@ while run:
             spline,_,_ = fit_smoothing_spline(translations[:,:2],n=100)
             for i in range(1,len(spline)):
                 pygame.draw.line(screen, pygame.Color('green'),(spline[i-1,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER, (spline[i,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER,1) 
-        # pygameSurface = pilImageToSurface(Image.fromarray(rgb_image,mode='RGB'))
-
-        pygameSurface = pilImageToSurface(depth_to_pil_rgb(depth_image))
+        if view_rgb:
+            pygameSurface = pilImageToSurface(Image.fromarray(rgb_image,mode='RGB'))
+        else:
+            pygameSurface = pilImageToSurface(depth_to_pil_rgb(depth_image))
 
 
         screen.blit(pygameSurface, (BORDER,BORDER))
@@ -481,7 +485,8 @@ while run:
 
 
         draw_compass_arrow(screen,ROBOT_VIS_CENTER[0],ROBOT_VIS_CENTER[1],curr_yaw)
-        distance_text = font.render(f"[INFO] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | E2E latency: {latency_ms:04} ms | fps: {clock.get_fps():.1f}",True,(255,255,255))
+
+        distance_text = font.render(f"[INFO] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | fps: {clock.get_fps():.1f} | E2E latency: {latency_ms:04} ms",True,(255,255,255))
         screen.blit(distance_text,(BORDER,480+BORDER*2))
         # create a text surface object,
         # on which text is drawn on it.
