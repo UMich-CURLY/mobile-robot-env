@@ -66,8 +66,8 @@ class SensorDataManager:
         self.init_rotmat = None
 
         self.useplanner = False
-        self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
-
+        # self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
+        self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.1, max_vw=0.5, cruise_vel=0.4, Kp_x=0.5, Kp_w=0.5)
         self.distance = 5
     def rgb_callback(self, msg: CompressedImage):
         try:
@@ -163,7 +163,7 @@ class SensorDataManager:
             x,y,w = self.planner.step(position['x'],position['y'],yaw)
             if(self.distance<collision_threshold):
                 vx = np.clip(vx,-0.5,0)
-            publish_lcm(x, y, w)
+            publish_lcm(x, -y, w)
         
             
     def get_latest_data(self):
@@ -299,7 +299,7 @@ def main(args=None):
         global x,y,w
         while True:
             if not data_manager.useplanner:
-                publish_lcm(x,y,w)
+                publish_lcm(x,-y,w)
                 time.sleep(0.05)
     
     # Start socket server in a separate thread

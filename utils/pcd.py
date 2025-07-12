@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 def get_distance(depth_image,hfov=54.7,p=-30):
     # resize depth image to 320x240
-    depth_image = cv2.resize(depth_image, (320, 240))
+    # depth_image = cv2.resize(depth_image, (320, 240))
     height, width = depth_image.shape
 
     cw = np.arctan(hfov/2/180*np.pi)

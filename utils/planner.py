@@ -155,7 +155,7 @@ class Planner:
         # else:
         #     cmd_x, cmd_y = t_vec*self.Kp_x
 
-        # cmd_x/=(1+10*np.abs(cmd_w)) #slow down if the turning loop can't keep up
+        cmd_x/=(1+2*np.abs(cmd_w)) #slow down if the turning loop can't keep up
 
         cmd_w = cmd_w*self.Kp_w #Proportional control
         if len(self.wps)>3:
