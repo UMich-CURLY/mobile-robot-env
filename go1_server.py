@@ -162,7 +162,7 @@ class SensorDataManager:
             yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
             x,y,w = self.planner.step(position['x'],position['y'],yaw)
             if(self.distance<collision_threshold):
-                vx = np.clip(vx,-0.5,0)
+                x = np.clip(x,-0.5,0)
             publish_lcm(x, -y, w)
         
             
