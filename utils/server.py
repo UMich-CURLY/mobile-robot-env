@@ -6,7 +6,7 @@ import time
 import numpy as np
 import cv2 # For dummy image generation
 import traceback
-from utils.protocol import *
+from robot_env.utils.protocol import *
 import jsonpickle
 import json
 import multiprocessing as mp
@@ -194,7 +194,7 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
             header = struct.pack('>Q', payload_len)
             client_socket.sendall(header+json_payload.encode())
         else:
-            header = request_str.split()[0]
+            header = request_str.split(' ')[0]
             payload_index = len(header)+1
             for message_type in message_types:
                 # print(message_type.type)
@@ -202,7 +202,7 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
                 if(message_type.type == header.strip()):
                     # print(request_str[payload_index:])
                     data = jsonpickle.decode(request_str[payload_index:].strip())
-                    action_cb(data)
+                    action_cb(header.strip(),data)
                     return 
 
             print(f"[{time.strftime('%H:%M:%S')}] Unknown request '{request_str}' from {client_address}. Sending error.")

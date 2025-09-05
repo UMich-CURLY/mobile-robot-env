@@ -468,7 +468,7 @@ while run:
             for i in range(1,len(spline)):
                 pygame.draw.line(screen, pygame.Color('green'),(spline[i-1,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER, (spline[i,:2]-curr_T[:2,3])*np.array([1,-1])*scale+ROBOT_VIS_CENTER,1) 
         if view_rgb:
-            pygameSurface = pilImageToSurface(Image.fromarray(rgb_image,mode='RGB'))
+            pygameSurface = pilImageToSurface(Image.fromarray(rgb_image[:,:,::-1],mode='RGB'))
         else:
             pygameSurface = pilImageToSurface(depth_to_pil_rgb(depth_image))
 
