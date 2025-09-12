@@ -1,17 +1,10 @@
-# cd pohsun/SG-VLN/robot_env
-# python isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/home_scenes/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
+# python isaac_lab_server_spot_4.py --enable_cameras --scene_folder /data/isaac_scenes_v1/ --episode_path episodes/test.json
 # Isaac Lab version of Spot robot server with Matterport scene
-<<<<<<< HEAD
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-=======
->>>>>>> 9f52174433f0c00f4114e6a92bd80a2f6298b3cf
 
 
 import argparse
-import sys
 import os
+import sys
 import numpy as np
 import torch
 import omni
@@ -19,47 +12,44 @@ import io
 import time
 import math
 from threading import Thread
-
-# from path_navmesh import usd_utils
-sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh")
+from pathlib import Path
 
 # start simulation
 from isaaclab.app import AppLauncher
 
 # Add command line arguments
 parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot with USD scene")
-parser.add_argument("--num_envs", type=int, default=1, help="Number of environments")
-parser.add_argument("--seed", type=int, default=None, help="Random seed")
-parser.add_argument("--scene_path", type=str, default="/home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd", help="Path to USD scene file")
-parser.add_argument("--robot_pos", type=str, default="-152, 90, 1", help="Robot initial position (x,y,z)")
-parser.add_argument("--navmesh_path", type=str, help="Path to preloaded navmesh obj file") #/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
 
-sys.path.append("/home/junzhewu/pohsun/IsaacLab/")
-import scripts.reinforcement_learning.rsl_rl.cli_args as cli_args  # isort: skip
-cli_args.add_rsl_rl_args(parser)
+import utils.rsl_rl_cli_args as rsl_rl_cli_args  # isort: skip
+import utils.vln_args as vln_cli_args
+
+rsl_rl_cli_args.add_rsl_rl_args(parser)
+vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args_cli = parser.parse_args()
+
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
+
 import carb, os
 settings = carb.settings.get_settings()
 
 MDL_DIRS = [
-    "/home/junzhewu/data/isaac_scenes_v1/grscenes_home/Materials",
-    "/home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/Materials",
+    "/home/junzhewu/data/isaac_scenes_v1/home_scenes/Materials",
+    "/home/junzhewu/data/isaac_scenes_v1/grscenes/Materials",
 ]
 settings.set("/rtx/materials/mdl/searchPaths", MDL_DIRS)
 settings.set("/rtx/mdl/searchPaths", MDL_DIRS)
 settings.set("/rtx/materials/mdl/shader_search_paths", MDL_DIRS)
-settings.set_bool("/rtx/translucency/enabled", True)
+
 
 # Isaac Lab imports
 from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf
-import utils.navmesh_utils as navmesh_utils
+import carb
 import isaaclab.sim as sim_utils
 from isaaclab.assets import ArticulationCfg, AssetBaseCfg
 from isaaclab.scene import InteractiveScene, InteractiveSceneCfg
@@ -85,10 +75,9 @@ RL_LIBRARY = "rsl_rl"
 
 # Local imports
 from utils.server import run_server, format_data
+from utils.episode import VLNEpisodes
+from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-
-# Parse robot position
-robot_pos = [float(x) for x in args_cli.robot_pos.split(',')]
 
 # Global variables
 first_step = True
@@ -129,97 +118,61 @@ server_thread = Thread(target=run_server, kwargs={
 })
 server_thread.daemon = True
 server_thread.start()
+print("[INFO] Socket server started")
 
 # Main simulation loop
-print("[INFO]: Setup complete...")
 
-# --- setup environment --- #
+# load episodes
+episode_list = VLNEpisodes.from_json(args_cli.episode_path, args_cli.episode_type)
+current_episode = episode_list[0]
+
+# setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
-env_cfg.load_usd(args_cli.scene_path)
+scene_folder = Path(args_cli.scene_folder)
+# env_cfg.load_usd(args_cli.scene_path)
+env_cfg.load_usd(scene_folder / current_episode["scene_path"])
+
+env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
+env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
+
 env_cfg.sim.device = args_cli.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
-print("[INFO]: Env setup complete...")
 
-env_cfg.scene.robot.init_state.pos = robot_pos
-env_cfg.scene.robot.init_state.rot = (1.0, 0.0, 0.0, 0.0)
-
-agent_cfg: RslRlOnPolicyRunnerCfg = cli_args.parse_rsl_rl_cfg(TASK, args_cli)
+agent_cfg: RslRlOnPolicyRunnerCfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args_cli)
 env = RslRlVecEnvWrapper(manager_env)
 ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args_cli.device)
 checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
 ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args_cli.device)
 
+all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
+env = VLNEnvWrapper(env, policy, "spot", current_episode, measure_names=all_measures)
+print("[INFO] Env setup complete")
 
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if first_step or reset_needed:
         obs, _ = env.reset()
-        if env_cfg.usd_path is not None:
+        scene_scale = current_episode["scene_scale"]
+        if scene_scale != 1.0:
             terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')
-            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(0.01, 0.01, 0.01))
-            
-        # ----- Path planning using navmesh ----- #
-        navmesh_file = args_cli.navmesh_path
-        
-        # Initialize navmesh interface
-        navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
-        
-        # Setup navmesh from scene
-        if navmesh_file is None:
-            selected_paths = ["/World/ground/terrain"]
-            navmeshInterface.setup_navmesh(selected_paths)        
-        else:
-            navmeshInterface.setup_navmesh_from_file(navmesh_file)
-
-        # Build the navmesh
-        navmeshInterface.build_navmesh({
-            "cellSize": 0.3,
-            "cellHeight": 0.2,
-            "agentHeight": 0.5,
-            "agentRadius": 0.6,
-            "agentMaxClimb": 0.5,
-            "agentMaxSlope": 45.0,
-            "regionMinSize": 8,
-            "regionMergeSize": 20,
-            "edgeMaxLen": 12.0,
-            "edgeMaxError": 1.3,
-            "vertsPerPoly": 6.0,
-            "detailSampleDist": 6.0,
-            "detailSampleMaxError": 1.0,
-            "partitionType": 0
-        })
-        
-        # Visualize the navmesh
-        navmeshInterface.visualize_navmesh()
- 
-        # Find path between two points
-        s = [-88.731, -40.245, 0.230012]
-        e = [-55.9802, -57.2265, 0.318986]
-        navmeshInterface.get_path_from_two_points(s, e)
-        # ----- End of path planning using navmesh ----- #
-
+            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
         first_step = False
         reset_needed = False
-        root_state = torch.tensor([s + [1.0, 0.0, 0.0, 0.0]], device=args_cli.device, dtype=torch.float32)
-        manager_env.scene["robot"].write_root_pose_to_sim(root_state)
         print(f"[INFO]: Resetting robot state..")
-
 
     with torch.inference_mode():
         # Policy forward pass
-        command = torch.tensor([[base_command[0], base_command[1], base_command[2]]], device=args_cli.device, dtype=torch.float32)
-        action = policy(obs)
-        obs, _, _, _ = env.step(action)
-        obs[:, 9:12] = command
-        # print('command: ', command)
+        vel_command = torch.tensor([base_command], device=args_cli.device, dtype=torch.float32)
+        obs, _, done, info = env.step(vel_command)
+        # action = policy(obs)
+        # obs, _, _, _ = env.step(action)
+        # obs[:, 9:12] = command
+        print('command: ', vel_command)
 
-    # print("random start: ", s)
-    # print("random goal: ", e)
-    # print(f"Path from robot to random goal: {navmeshInterface.path_points}")
-    # ----- Capture camera data and robot pose ----- #
+    # --- Capture camera data and robot pose ---
     # Get camera data
     rgb_t = manager_env.scene["pov_camera"].data.output['rgb'] 
     rgb_np = rgb_t[0].cpu().numpy()[..., :3].astype(np.uint8)

@@ -13,7 +13,7 @@ from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.managers import RewardTermCfg, SceneEntityCfg
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.terrains import TerrainImporterCfg
-from isaaclab.sensors import CameraCfg
+from isaaclab.sensors import CameraCfg, TiledCameraCfg
 from isaaclab.utils import configclass
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
@@ -377,6 +377,7 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.scene.height_scanner = None
 
     def load_usd(self, usd_path: str):
+        usd_path = str(usd_path)
         self.usd_path = usd_path
         self.scene.terrain = TerrainImporterCfg(
             prim_path="/World/ground",
@@ -399,7 +400,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
         self.commands.base_velocity.ranges.heading = (-1.0, 1.0)
 
         # set the camera
-        self.scene.pov_camera = CameraCfg(
+        self.scene.pov_camera = TiledCameraCfg(
             prim_path="{ENV_REGEX_NS}/Robot/body/Camera",
             update_period=0.1,  # 10 Hz
             height=480,
@@ -416,7 +417,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
                 convention="world",
             ),
         )
-        self.scene.third_person_camera = CameraCfg(
+        self.scene.third_person_camera = TiledCameraCfg(
             prim_path="{ENV_REGEX_NS}/Robot/body/ThirdPersonCamera",
             update_period=0.1,  # 10 Hz
             height=480,

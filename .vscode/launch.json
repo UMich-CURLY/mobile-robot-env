@@ -7,11 +7,15 @@
             "request": "launch",
             "program": "${file}",
             "args": [
-                "--enable_cameras"
+                "--enable_cameras",
+                "--scene_folder",
+                "/data/isaac_scenes_v1/",
+                "--episode_path",
+                "episodes/test.json"
             ],
             "console": "integratedTerminal",
             "env": {
-                "DISPLAY": ":2"
+                "DISPLAY": ":1"
             }
         }
     ]
