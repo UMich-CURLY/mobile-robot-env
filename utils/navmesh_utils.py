@@ -1,0 +1,548 @@
+from collections import defaultdict
+import os
+import numpy as np
+import omni.physx
+
+import pyrecast as rd
+
+from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt
+import omni
+
+# Import usd_utils functionality
+# def traverse_instanced_children(prim):
+#     """Get every Prim child beneath `prim`, even if `prim` is instanced.
+
+#     Important:
+#         If `prim` is instanced, any child that this function yields will
+#         be an instance proxy.
+
+#     Args:
+#         prim (`pxr.Usd.Prim`): Some Prim to check for children.
+
+#     Yields:
+#         `pxr.Usd.Prim`: The children of `prim`.
+
+#     """
+#     for child in prim.GetFilteredChildren(Usd.TraverseInstanceProxies()):
+#         yield child
+
+#         for subchild in traverse_instanced_children(child):
+#             yield subchild
+
+# def parent_and_children_as_mesh(parent_prim):
+
+#     if UsdGeom.Imageable(parent_prim).ComputeVisibility() == UsdGeom.Tokens.invisible:
+#         return [], []
+#     if parent_prim.IsA(UsdGeom.Mesh):
+#         points, faces = get_mesh(parent_prim)
+#         return points, faces
+    
+#     found_meshes = []
+#     for x in traverse_instanced_children(parent_prim):
+#         # Check if prim is visible in the scene or not
+#         if UsdGeom.Imageable(x).ComputeVisibility() == UsdGeom.Tokens.invisible:
+#             continue
+#         if x.IsA(UsdGeom.Mesh):
+#             found_meshes.append(x)
+
+#     # children = parent_prim.GetAllChildren()
+#     # children = [child.GetPrimPath() for child in children]
+#     # points, faces = get_mesh(children)
+#     points, faces = get_mesh(found_meshes)
+    
+#     return points, faces
+
+# def children_as_mesh(stage, parent_prim):
+#     children = parent_prim.GetAllChildren()
+#     children = [child.GetPrimPath() for child in children]
+#     points, faces = get_mesh(stage, children)
+    
+#     return points, faces
+
+
+def get_all_stage_mesh(stage, prims):
+
+    found_meshes = []
+
+    # For each selected prim, go through its children and figure out if they are meshes
+    for prim in prims:
+        if UsdGeom.Imageable(prim).ComputeVisibility() == UsdGeom.Tokens.invisible:
+            continue
+
+        if prim.IsA(UsdGeom.Mesh):
+            found_meshes.append(prim)
+            continue
+        # Traverse the scene graph and print the paths of prims, including instance proxies
+        for x in Usd.PrimRange(prim, Usd.TraverseInstanceProxies()):
+            if UsdGeom.Imageable(x).ComputeVisibility() == UsdGeom.Tokens.invisible:
+                continue
+            if x.IsA(UsdGeom.Mesh):
+                found_meshes.append(x)
+    # print("Length of found meshes: ", len(found_meshes))
+    points, faces = get_mesh(found_meshes)
+   
+    return points, faces
+
+def get_mesh(objs):
+
+    points, faces = [],[]
+    i = 0
+    loss = 0
+    for obj in objs:
+        f_offset = len(points)
+        # f, p = convert_to_mesh(obj)#usd_stage.GetPrimAtPath(obj))
+        f, p = meshconvert(obj)#usd_stage.GetPrimAtPath(obj))
+        
+        """ Added by Po-Hsun """
+        if(len(p) == 0 or len(f) == 0):
+            # print("points len: ", len(p))
+            # print("faces len: ", len(f))
+            loss +=1
+            continue
+        """ Ended by Po-Hsun """
+        # print("points shape: ", p.shape)
+        # print("faces shape: ", f.shape)
+        points.extend(p)
+        faces.extend(f+f_offset)
+        # faces.extend([[idx + f_offset for idx in tri] for tri in f]) # changed by Po-Hsun
+        print("index: ", i)
+        i += 1
+
+    print("loss mesh: ", loss)
+    return points, faces
+
+def meshconvert(prim):
+
+    # Create an XformCache object to efficiently compute world transforms
+    xform_cache = UsdGeom.XformCache()
+
+    # Get the mesh schema
+    mesh = UsdGeom.Mesh(prim)
+    
+    # Get verts and triangles
+    tris = mesh.GetFaceVertexIndicesAttr().Get()
+    if not tris:
+        return [], []
+    tris_cnt = mesh.GetFaceVertexCountsAttr().Get()
+
+    # Get the vertices in local space
+    points_attr = mesh.GetPointsAttr()
+    local_points = points_attr.Get()
+    
+    # Convert the VtVec3fArray to a NumPy array
+    points_np = np.array(local_points, dtype=np.float64)
+    
+    # Add a fourth component (with value 1.0) to make the points homogeneous
+    num_points = len(local_points)
+    ones = np.ones((num_points, 1), dtype=np.float64)
+    points_np = np.hstack((points_np, ones))
+
+    # Compute the world transform for this prim
+    world_transform = xform_cache.GetLocalToWorldTransform(prim)
+
+    # Convert the GfMatrix to a NumPy array
+    matrix_np = np.array(world_transform, dtype=np.float64).reshape((4, 4))
+
+    # Transform all vertices to world space using matrix multiplication
+    world_points = np.dot(points_np, matrix_np)
+
+    tri_list = convert_to_triangle_mesh(tris, tris_cnt)
+    # tri_list = tri_list.flatten()
+
+    world_points = world_points[:,:3]
+
+    return tri_list, world_points
+
+def convert_to_triangle_mesh(FaceVertexIndices, FaceVertexCounts):
+    """
+    Convert a list of vertices and a list of faces into a triangle mesh.
+    
+    A list of triangle faces, where each face is a list of indices of the vertices that form the face.
+    """
+    
+    # Parse the face vertex indices into individual face lists based on the face vertex counts.
+
+    faces = []
+    start = 0
+    for count in FaceVertexCounts:
+        end = start + count
+        face = FaceVertexIndices[start:end]
+        faces.append(face)
+        start = end
+
+    # Convert all faces to triangles
+    triangle_faces = []
+    for face in faces:
+        if len(face) < 3:
+            newface = []  # Invalid face
+        elif len(face) == 3:
+            newface = [face]  # Already a triangle
+        else:
+            # Fan triangulation: pick the first vertex and connect it to all other vertices
+            v0 = face[0]
+            newface = [[v0, face[i], face[i + 1]] for i in range(1, len(face) - 1)]
+
+        triangle_faces.extend(newface)
+    
+    return np.array(triangle_faces)
+
+
+# def create_geompoints(boid_positions):
+#     '''create and manage geompoints representing agents
+
+#     Parameters
+#     ----------
+#     stage_path : str, optional
+#         if not set, will use /World/Points, by default None
+#     color : (r,g,b), optional
+#         if not set, will make color red, by default None
+#     '''
+    
+#     stage_loc = "/World/Points"
+
+#     stage = omni.usd.get_context().get_stage()
+#     agent_point_prim = UsdGeom.Points.Define(stage, stage_loc)
+#     agent_point_prim.CreatePointsAttr()
+
+#     agent_point_prim.CreateDisplayColorAttr()
+#     # For RTX renderers, this only works for UsdGeom.Tokens.constant
+#     color_primvar = agent_point_prim.CreateDisplayColorPrimvar(UsdGeom.Tokens.constant)
+    
+#     point_color = (1, 0, 0)
+#     color_primvar.Set([point_color])
+    
+#     boid_positions = Vt.Vec3fArray.FromNumpy(np.asarray(boid_positions, dtype=float))
+
+#     set_positions(agent_point_prim, boid_positions)
+
+
+# def set_positions(agent_point_prim, positions):
+    
+#     agent_point_prim.GetPointsAttr().Set(positions)
+
+
+def create_curve(nodes, prim_path="/World/Path", color=(1, 0, 0), width=np.array([1.0], dtype=float) ):
+    '''Create and draw a BasisCurve on the stage following the nodes'''
+
+    stage = omni.usd.get_context().get_stage()
+    prim = UsdGeom.BasisCurves.Define(stage, prim_path)
+    prim.CreatePointsAttr(nodes)
+
+    # Set the number of curve verts to be the same as the number of points we have
+    curve_verts = prim.CreateCurveVertexCountsAttr()
+    curve_verts.Set([len(nodes)])
+
+    # Set the curve type to linear so that each node is connected to the next
+    type_attr = prim.CreateTypeAttr()
+    type_attr.Set('linear')
+    type_attr = prim.GetTypeAttr().Get()
+    # Set the width of the curve
+
+    width_attr = prim.CreateWidthsAttr(width)
+    # width_attr = prim.CreateWidthsAttr(Vt.Vec2fArray(1, [width, width]))
+
+    if len(width) == 1:
+        width =  Vt.FloatArray.FromNumpy(np.asarray([width for x in range(len(nodes))]))
+    else:
+        width = Vt.FloatArray.FromNumpy(width)
+
+    width_attr.Set(width)
+
+    # color_primvar = prim.CreateDisplayColorPrimvar(UsdGeom.Tokens.constant)
+    UsdGeom.Primvar(prim.GetDisplayColorAttr()).SetInterpolation("constant")
+    prim.GetDisplayColorAttr().Set([color])
+
+
+
+def create_mesh(prim_path, points, indices, colors=None, opacity=None, use_prevsrf=True):
+    '''
+    Create a mesh in USD
+    '''
+
+    time = Usd.TimeCode.Default()
+    stage = omni.usd.get_context().get_stage()
+
+    mesh = UsdGeom.Mesh.Define(stage, prim_path)
+    mesh.GetPointsAttr().Set(points, time)
+    mesh.GetFaceVertexIndicesAttr().Set(indices, time)
+    mesh.GetFaceVertexCountsAttr().Set([3] * len(indices), time)
+
+    if use_prevsrf:
+
+        mtl_path = Sdf.Path(f"/World/Looks/PreviewSurface_{prim_path.split('/')[-1]}")
+
+        mtl = UsdShade.Material.Define(stage, mtl_path)
+        shader = UsdShade.Shader.Define(stage, mtl_path.AppendPath("Shader"))
+        shader.CreateIdAttr("UsdPreviewSurface")
+        shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(colors) 
+        shader.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(opacity)
+        shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(0.0)
+        shader.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(0.0)
+        shader.CreateInput("ior", Sdf.ValueTypeNames.Float).Set(1.0)
+        mtl.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
+            
+        # Bind the mesh
+        UsdShade.MaterialBindingAPI(mesh).Bind(mtl)
+
+    # Opacity seems to be broken
+    else:
+        UsdGeom.Primvar(mesh.GetDisplayColorAttr()).SetInterpolation("constant")
+        UsdGeom.Primvar(mesh.GetDisplayOpacityAttr()).SetInterpolation("constant")
+        if colors:
+            mesh.GetDisplayColorAttr().Set(colors, time)
+        if opacity:
+            mesh.GetDisplayOpacityAttr().Set(opacity, time)
+
+    return prim_path
+
+
+
+class NavmeshInterface:
+    def __init__(self, up_axis='Y', stage=None): 
+        self.navmesh = rd.Navmesh()
+        self.built = False
+        self.input_prim = None
+        self.input_vert = None
+        self.input_tri = None
+        self.random_points = None
+        self.wall_outline = []
+        self.settings = {}
+        self.path_points = None
+        self.stage = stage
+
+        # if z_up is true, we will need to do some conversion before sending to 
+        # recast, then, we will convert it back to y_up (all functions will need to do that)
+        if up_axis == 'Z': self.z_up = True
+        else: self.z_up = False  
+
+    """ ----- Main functions for navmesh setup, building, visualization, pathfinding ----- """
+    def setup_navmesh(self, selected_paths):
+        self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
+        self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim)
+        if len(self.input_vert) == 0:
+            print('[INFO]: No mesh found')
+        print("[INFO]: Loading navmesh from vertices and triangles, will take a while, please wait.")
+        self.input_vert = self._convert_up_axis(self.input_vert)
+        self.navmesh.load_mesh(self.input_vert, self.input_tri)
+        print("[INFO]: Loaded navmesh from vertices and triangles")
+
+    def setup_navmesh_from_file(self, navmesh_file):
+        print("[INFO]: Loading navmesh from obj file, will take a while, please wait.")
+        self.navmesh._navmesh.load_obj(navmesh_file)
+        print("[INFO]: Loaded navmesh from obj file")
+
+    def visualize_navmesh(self):
+        if self.built:
+            v, t, = self.get_navmesh_polygons()
+            v = v.flatten()
+            # create a usd color of blue with transparency
+            color = Gf.Vec3f(0.051208995, 0.774935, 0.94585985)
+            opacity = 0.89
+            create_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
+            print("[INFO]: Visualized navmesh")
+        else:
+            print('[WARNING]: Navmesh not built') 
+
+    def get_path_from_two_points(self, start, end):
+        """
+        Input: start, end are lists of points [x, y, z]
+        """
+        self.path_points = self.find_paths([start], [end])
+        print(f"Path from robot to goal: {self.path_points}")
+        create_curve(self.path_points)
+        print("[INFO]: Path planning complete...")
+
+    def get_path_from_two_random_points(self):
+        """
+        Get a path between two random points on the navmesh
+        """
+        s, e = self.get_random_points(2)
+        self.path_points = self.find_paths([s], [e])
+        print(f"Path from random start to random goal: {self.path_points}")
+        create_curve(self.path_points)
+
+    def build_navmesh(self, settings={}):
+        self.navmesh.build_navmesh(settings)
+        self.built = True
+        print("[INFO]: Navmesh built")
+    """ ----- End of main functions for navmesh setup, building, visualization, pathfinding ----- """
+
+
+    """ ----- Navmesh helper functions ----- """
+    # ----- Helper functions for up axis conversion ----- #
+    def _convert_up_axis(self, vertices, inverse=False):
+        '''
+        Convert all data between navmesh interface and end-user to be in the correct up axis
+
+        pyrecast assumes y-up, so only change when z-up is true
+        inverse = True will convert y-up output back to z-up
+        '''
+        if self.z_up == False:
+            return vertices
+        
+        vertices = np.array(vertices)
+        v_copy = np.empty(shape=vertices.shape)
+        if inverse:
+            # Convert data we have been given in y-up into the z-up of scene (e.g. output from recast)
+            v_copy[:, 0], v_copy[:, 1], v_copy[:, 2] = vertices[:, 0], -vertices[:, 2], vertices[:, 1]
+        else: 
+            # Convert the up axis from Y to Z
+            v_copy[:, 0], v_copy[:, 1], v_copy[:, 2] = vertices[:, 0], vertices[:, 2], -vertices[:, 1]
+
+        vertices = v_copy
+        return vertices
+
+    # ----- Helper functions for getting random points ----- #
+    def get_random_points(self, num_points):
+        if not self.built:
+            return None
+        self.random_points = self.navmesh.get_random_points(num_points)
+        
+        # Check if we need to convert the up axis
+        self.random_points = self._convert_up_axis(self.random_points, inverse=True)
+        
+        return self.random_points
+
+    # ----- Helper functions for finding path on navmesh ----- #
+    def find_paths(self, starts, ends):
+
+        starts = [self._convert_up_axis(starts)]
+        ends = [self._convert_up_axis(ends)]
+
+        paths = self.navmesh.find_paths(starts, ends)
+        path_pnts = np.asarray(paths).reshape(-1, 3)
+        path_pnts = self._convert_up_axis(path_pnts, inverse=True)
+
+        return path_pnts
+    
+    # ----- Helper functions for getting navmesh polygons ----- #
+    def get_navmesh_polygons(self):
+        trivert,_,_ = self.navmesh.get_navmesh_polygons()
+        trivert = np.asarray(trivert).reshape(-1,3)
+
+        print(f'Got navmesh')
+
+        v = trivert
+        t = []
+        for i in range(0, len(trivert), 3):
+            t.append([i,i+1,i+2])
+        self.navmesh_v = np.array(v, dtype=np.float32)
+        self.navmesh_t = np.array(t, dtype=np.int32)
+
+        self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
+
+        return self.navmesh_v, self.navmesh_t
+    
+
+    # def load_mesh(self, prim):
+    #     self.input_vert, self.input_tri  = parent_and_children_as_mesh(prim)
+    #     print("Loaded mesh with ", len(self.input_vert), " vertices and ", len(self.input_tri), " triangles")
+    #     self.input_prim = prim
+        
+    #     self.input_vert = self._convert_up_axis(self.input_vert)
+    #     print("Converted up axis")
+    #     self.navmesh.load_mesh(self.input_vert, self.input_tri)
+    #     print("Loaded mesh into recast")
+
+    # def get_navmesh_raw_contours(self):
+    #     rawvert, rawpolygons, _ = self.navmesh.get_navmesh_raw_contours()
+    #     rawvert = self._convert_up_axis(rawvert, inverse=True)
+    #     return rawvert, rawpolygons
+
+    # def get_navmesh_contours(self):
+    #     vert, _, _ = self.navmesh.get_navmesh_contours()
+
+    #     vert = np.asarray(vert).reshape(-1, 3)
+    #     # Convert if needed
+    #     vert = self._convert_up_axis(vert, inverse=True)
+        
+    #     edges = [[i, i+1] for i in range(0, len(vert)-1, 2)]
+    #     self.contour_verts = vert
+    #     self.contour_edges = edges
+
+    #     return self.contour_verts, self.contour_edges
+
+    # def make_walls(self, vertices, edges, height):
+
+    #     # Extrude the walls up
+    #     vertices = np.array(vertices)  # Ensure vertices are a NumPy array
+    #     vertices = self._convert_up_axis(vertices)
+    #     extruded_vertices = np.copy(vertices)
+    #     extruded_vertices[:, 1] += height  # Add height to the z-coordinate
+    #     side_triangles = []
+
+    #     # Go through each edge and create two triangles (square wall)
+    #     for edge in edges:
+    #         i, j = edge
+    #         A = vertices[i]
+    #         B = vertices[j]
+    #         A_prime = extruded_vertices[i]
+    #         B_prime = extruded_vertices[j]
+
+    #         triangle1 = [A, B, B_prime]
+    #         triangle2 = [A, B_prime, A_prime]
+    #         side_triangles.extend([triangle1, triangle2])
+
+    #     # Do the welding and extrusion
+    #     self.side_triangles = side_triangles
+    #     # Make faces
+    #     faces = []
+    #     verts = []
+    #     tri = 0
+    #     for i, face in enumerate(side_triangles):
+    #         for v in face:
+    #             verts.append(v)
+    #         faces.append([tri, tri+1, tri+2])
+    #         tri += 3
+
+    #     # weld faces and vertices to remove duplicates 
+    #     faces = np.asarray(faces)
+    #     v, inverse_indices = np.unique(verts, axis=0, return_inverse=True)
+    #     t = inverse_indices[faces.flatten()].reshape(faces.shape)
+
+    #     self.wall_v = v
+    #     self.wall_t = t 
+
+    #     return v, t
+
+    # def make_outline(self):
+    #     # Go through the edges and make individual lines, it is what it is
+
+    #     width = np.array([0.2], dtype=float)
+    #     color = (0.8,0.8,0.8)
+
+    #     for idx, edge in enumerate(self.contour_edges):
+    #         i, j = edge
+    #         A = self.contour_verts[i]
+    #         B = self.contour_verts[j]
+    #         self.wall_outline.append([tuple(A), tuple(B)])
+
+    #     for idx, curve in enumerate(self.wall_outline):
+    #         create_curve(curve, prim_path=f"/World/Outline/WallOutline{idx}", width=width, color=color)
+
+    # def get_selected_prim(self):
+    #     self.stage = omni.usd.get_context().get_stage()
+
+    #     # Get the selections from the stage
+    #     self._usd_context = omni.usd.get_context()
+    #     self._selection = self._usd_context.get_selection()
+    #     selected_paths = self._selection.get_selected_prim_paths()
+    #     # Expects a list, so take first selection
+    #     self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
+
+
+    #     self.input_vert, self.input_tri = get_all_stage_mesh(self.stage , self.input_prim)
+
+    #     if len(self.input_vert) == 0:
+    #         print('No mesh found')
+    #         return False
+        
+    #     #Convert the up axis if needed
+    #     self.input_vert = self._convert_up_axis(self.input_vert)
+        
+    #     self.navmesh.load_mesh(self.input_vert, self.input_tri)
+    #     return True
+
+    # def get_navmesh_triangles(self):
+    #     triangles = self.navmesh.get_navmesh_triangles()
+    #     return triangles
