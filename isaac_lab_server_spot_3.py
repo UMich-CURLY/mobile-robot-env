@@ -21,7 +21,7 @@ from isaaclab.app import AppLauncher
 parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot with USD scene")
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments")
 parser.add_argument("--seed", type=int, default=None, help="Random seed")
-parser.add_argument("--scene_path", type=str, default="/home/junzhewu/data/isaac_scenes_v1/home_scenes/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd", help="Path to USD scene file")
+parser.add_argument("--scene_path", type=str, default="/home/junzhewu/data/isaac_scenes_v1/grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd", help="Path to USD scene file")
 parser.add_argument("--robot_pos", type=str, default="7.5799,0.06484971195459366,1", help="Robot initial position (x,y,z)")
 
 

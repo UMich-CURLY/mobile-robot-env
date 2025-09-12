@@ -408,7 +408,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
             spawn=sim_utils.PinholeCameraCfg(
                 focal_length=24.0,
                 horizontal_aperture=20.955,
-                clipping_range=(0.1, 1000.0),
+                clipping_range=(1, 1000.0),
             ),
             offset=CameraCfg.OffsetCfg(
                 pos=(-1.0, 0.0, 0.5),
@@ -425,10 +425,10 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
             spawn=sim_utils.PinholeCameraCfg(
                 focal_length=24.0,
                 horizontal_aperture=20.955,
-                clipping_range=(0.1, 1000.0),
+                clipping_range=(1, 1000.0),
             ),
             offset=CameraCfg.OffsetCfg(
-                pos=(-5.0, 0.0, 0.0),
+                pos=(-2.5, 0.0, 0.0),
                 rot=(1, 0, 0, 0),
                 convention="world",
             ),

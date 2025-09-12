@@ -6,7 +6,7 @@ import time
 import numpy as np
 import cv2 # For dummy image generation
 import traceback
-from robot_env.utils.protocol import *
+from utils.protocol import * # robot_env.utils.protocol
 import jsonpickle
 import json
 import multiprocessing as mp

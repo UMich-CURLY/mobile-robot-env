@@ -1,0 +1,44 @@
+{
+    "MV5M25QKTKJZ2AABAAAAAEI8_usd": {
+            "painting/model_c2f451d6a37c4f238e602cc2c217f7a8_0": [
+                {
+                    "start_point": [
+                        38.09, 110.54
+                    ],
+                    "target_point": [
+                        3.5,
+                        2,
+                        0.7
+                    ],
+                    "distance": 6.309567648538856,
+                    "path": [
+                        [
+                            34.55,108.71
+                        ],
+                        [
+                            13.14, 97.57
+                        ]
+                        
+                    ],
+                    "dialogue": [
+                        {
+                            "role": "human",
+                            "dialog": "Can you find the clothes that have a pillow above them?"
+                        },
+                        {
+                            "role": "action",
+                            "node": "clothes/model_c2f451d6a37c4f238e602cc2c217f7a8_0"
+                        },
+                        {
+                            "role": "robot",
+                            "dialog": "Is this the target clothing item you are looking for"
+                        },
+                        {
+                            "role": "human",
+                            "dialog": "Yes, this is the target clothing item I am looking for"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
