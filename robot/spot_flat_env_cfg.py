@@ -64,7 +64,7 @@ class SpotCommandsCfg:
         rel_standing_envs=0.1,
         rel_heading_envs=0.0,
         heading_command=False,
-        debug_vis=True,
+        debug_vis=False,
         ranges=mdp.UniformVelocityCommandCfg.Ranges(
             lin_vel_x=(-2.0, 3.0), lin_vel_y=(-1.5, 1.5), ang_vel_z=(-2.0, 2.0)
         ),
@@ -108,7 +108,7 @@ class SpotObservationsCfg:
     @configclass
     class CameraPolicyCfg(ObsGroup):
 
-        pov_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "rgb"})
+        pov_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "rgb", "normalize": False})
         pov_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "distance_to_image_plane"})
         # third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb"})
 
@@ -296,9 +296,13 @@ class SpotTerminationsCfg:
     """Termination terms for the MDP."""
 
     # time_out = DoneTerm(func=mdp.time_out, time_out=True)
-    body_contact = DoneTerm(
-        func=mdp.illegal_contact,
-        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=["body", ".*leg"]), "threshold": 1.0},
+    # body_contact = DoneTerm(
+    #     func=mdp.illegal_contact,
+    #     params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=["body", ".*leg"]), "threshold": 5.0},
+    # )
+    bad_orientation = DoneTerm(
+        func=mdp.bad_orientation,
+        params={"limit_angle": 0.8},
     )
     # terrain_out_of_bounds = DoneTerm(
     #     func=mdp.terrain_out_of_bounds,

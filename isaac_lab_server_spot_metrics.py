@@ -153,7 +153,7 @@ class InNOutSim:
         self._input = carb.input.acquire_input_interface()
         self._keyboard = omni.appwindow.get_default_app_window().get_keyboard()
         self._sub_keyboard = self._input.subscribe_to_keyboard_events(self._keyboard, self._on_keyboard_event)
-        T = 1
+        T = 2
         R = 2
         self._key_to_control = {
             "UP": torch.tensor([T, 0.0, 0.0], device=self.device),

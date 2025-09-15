@@ -10,12 +10,12 @@ class VLNEnvWrapper:
     """Wrapper to configure an :class:`ManagerBasedRLEnv` instance to VLN environment."""
 
     def __init__(self, env: ManagerBasedRLEnv, 
-                 low_level_policy, task_name, 
+                 low_level_policy, robot_name, 
                  episode, max_length=10000,
                  measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
         ):
         self.env = env
-        self.task_name = task_name
+        self.robot_name = robot_name
         self.episode = episode
         self.measure_names = measure_names
         self.viewport = get_viewport_from_window_name("Viewport")
@@ -60,22 +60,17 @@ class VLNEnvWrapper:
         self.low_level_obs = low_level_obs
         zero_cmd = torch.tensor([0., 0., 0.], device=low_level_obs.device)
 
-        if "go2" in self.task_name:
-            warmup_steps = 100
-        elif "h1" or "g1" in self.task_name:
-            warmup_steps = 200
-        else:
-            warmup_steps = 50
+        # warmup_steps = 50
 
-        for i in range(warmup_steps):
-            if i % 10 == 0 or i == warmup_steps - 1:
-                print(f"Warmup step {i}/{warmup_steps}...")
+        # for i in range(warmup_steps):
+        #     if i % 10 == 0 or i == warmup_steps - 1:
+        #         print(f"Warmup step {i}/{warmup_steps}...")
 
-            self.update_command(zero_cmd)
-            actions = self.low_level_policy(self.low_level_obs)
-            low_level_obs, _, _, infos = self.env.step(actions)
-            self.low_level_obs = low_level_obs
-            self.low_level_action = actions
+        #     self.update_command(zero_cmd)
+        #     actions = self.low_level_policy(self.low_level_obs)
+        #     low_level_obs, _, _, infos = self.env.step(actions)
+        #     self.low_level_obs = low_level_obs
+        #     self.low_level_action = actions
 
         self.env_step, self.same_pos_count = 0, 0
 
