@@ -12,7 +12,7 @@ from isaaclab.managers import ObservationGroupCfg as ObsGroup
 from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.managers import RewardTermCfg, SceneEntityCfg
 from isaaclab.managers import TerminationTermCfg as DoneTerm
-from isaaclab.terrains import TerrainImporterCfg
+from isaaclab.terrains import TerrainImporterCfg, TerrainImporter
 from isaaclab.sensors import CameraCfg, TiledCameraCfg
 from isaaclab.utils import configclass
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
@@ -384,8 +384,8 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
             terrain_type="usd",
             usd_path=usd_path,
             physics_material=self._physics_material,
-        )
-
+        )       
+        
 class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
     def __post_init__(self) -> None:
         # post init of parent

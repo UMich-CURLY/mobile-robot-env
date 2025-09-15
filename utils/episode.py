@@ -7,6 +7,8 @@ class VLNEpisodes():
         self.data = [{
             "episode_id": "",
             "scene_id": "",
+            "scene_path": "",
+            "scene_type": "",
             "instruction": "",
             "goal_instances": [],
             "goal_locations": [],

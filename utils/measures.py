@@ -121,7 +121,6 @@ class PathLength(Measure):
         )
         self._previous_position = current_position
 
-
 class DistanceToGoal(Measure):
     """The measure calculates a distance towards the goal."""
 
@@ -133,10 +132,10 @@ class DistanceToGoal(Measure):
         super().__init__(env, episode, **kwargs)
 
         self._previous_position: Optional[Tuple[float, float, float]] = None
-        self._gt_waypoints: Optional[
+        self._ref_path: Optional[
             List[Tuple[float, float, float]]
-        ] = episode["gt_locations"]
-        self._kdtree = KDTree(self._gt_waypoints)
+        ] = episode["goals"][0]["reference_path"]
+        self._kdtree = KDTree(self._ref_path)
     
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
         return self.cls_uuid
@@ -154,8 +153,8 @@ class DistanceToGoal(Measure):
         total_distance = closest_distance
         
         # Add the distance between waypoints from the closest waypoint to the goal
-        for i in range(closest_waypoint_idx, len(self._gt_waypoints) - 1):
-            total_distance += euclidean_distance(self._gt_waypoints[i], self._gt_waypoints[i + 1])
+        for i in range(closest_waypoint_idx, len(self._ref_path) - 1):
+            total_distance += euclidean_distance(self._ref_path[i], self._ref_path[i + 1])
     
         return total_distance
 
@@ -202,6 +201,9 @@ class SPL(Measure):
 
     def reset_metric(self, *args: Any, **kwargs: Any):
 
+        self.measure_manager.check_measure_dependencies(
+            self.cls_uuid, [DistanceToGoal.cls_uuid]
+        )
         self._previous_position = self.get_robot_position()
         self._agent_episode_distance = 0.0
         self._start_end_episode_distance = self.measure_manager.measures[
@@ -234,6 +236,39 @@ class SPL(Measure):
             )
         )
 
+class SoftSPL(SPL):
+    r"""Soft SPL
+
+    Similar to spl with a relaxed soft-success criteria. Instead of a boolean
+    success is now calculated as 1 - (ratio of distance covered to target).
+    """
+    cls_uuid: str = "soft_spl"
+
+    def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
+        return self.cls_uuid
+
+    def update_metric(self, *args: Any, **kwargs: Any):
+        current_position = self.get_robot_position()
+        distance_to_target = self.measure_manager.measures[
+            DistanceToGoal.cls_uuid
+        ].get_metric()
+
+        ep_soft_success = max(
+            0, (1 - distance_to_target / self._start_end_episode_distance)
+        )
+
+        self._agent_episode_distance += self._euclidean_distance(
+            current_position, self._previous_position
+        )
+
+        self._previous_position = current_position
+
+        self._metric = ep_soft_success * (
+            self._start_end_episode_distance
+            / max(
+                self._start_end_episode_distance, self._agent_episode_distance
+            )
+        )
 
 class Success(Measure):
     r"""Whether or not the agent succeeded at its task

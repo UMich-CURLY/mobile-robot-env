@@ -1,4 +1,9 @@
 from isaaclab.envs import ManagerBasedRLEnv
+from utils.measures import add_measurement
+from utils.vis import visualize_path
+from omni.kit.viewport.utility import get_viewport_from_window_name
+import isaaclab.sim as sim_utils
+from pxr import Gf
 import torch
 
 class VLNEnvWrapper:
@@ -13,6 +18,7 @@ class VLNEnvWrapper:
         self.task_name = task_name
         self.episode = episode
         self.measure_names = measure_names
+        self.viewport = get_viewport_from_window_name("Viewport")
 
         self.env_step = 0
         self.max_length = max_length
@@ -34,11 +40,22 @@ class VLNEnvWrapper:
         """
         return self.env.unwrapped
 
-    def set_measures(self):
-        self.measure_manager = add_measurement(self.env, self.episode, self.measure_names)
-
     def reset(self) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
+        # set viewport
+        self.viewport.set_active_camera("/World/envs/env_0/Robot/body/ThirdPersonCamera")
+        terrain_prim = self.env.unwrapped.scene.stage.GetPrimAtPath('/World/ground/terrain')
+
+        # set collider
+        if self.episode.get("collider", False):
+            collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
+            sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
+
+        # set scene scale
+        scene_scale = self.episode.get("scene_scale", 1.0)
+        if scene_scale != 1.0:
+            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
+
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
         zero_cmd = torch.tensor([0., 0., 0.], device=low_level_obs.device)
@@ -51,7 +68,7 @@ class VLNEnvWrapper:
             warmup_steps = 50
 
         for i in range(warmup_steps):
-            if i % 100 == 0 or i == warmup_steps - 1:
+            if i % 10 == 0 or i == warmup_steps - 1:
                 print(f"Warmup step {i}/{warmup_steps}...")
 
             self.update_command(zero_cmd)
@@ -61,14 +78,31 @@ class VLNEnvWrapper:
             self.low_level_action = actions
 
         self.env_step, self.same_pos_count = 0, 0
-        
-        self.set_measures()
+
+        self.measure_manager = add_measurement(self.env, self.episode, self.measure_names)
+
         self.measure_manager.reset_measures()
         measurements = self.measure_manager.get_measurements()
         infos["measurements"] = measurements
 
         self.prev_pos = self.env.unwrapped.scene["robot"].data.root_pos_w[0].detach()
 
+        # set viewer camera
+        # if self.episode["scene_type"] == "nvidia":
+        #     self.env.unwrapped.viewer.set_camera_position(self.episode["start_position"])
+        #     self.env.unwrapped.viewer.set_camera_rotation(self.episode["start_rotation"])
+        #     self.env.unwrapped.viewer.set_camera_fov(60)
+        #     self.env.unwrapped.viewer.set_camera_near_clip(0.1)
+
+        # visualize ref path
+        for goal in self.episode["goals"]:
+            ref_path = goal["reference_path"]
+            visualize_path(
+                self.env.unwrapped.unwrapped,
+                ref_path,
+                target_xyz=goal["location"]
+            )
+        # log
         obs = infos["observations"][self.high_level_obs_key]
         return obs, infos
     
