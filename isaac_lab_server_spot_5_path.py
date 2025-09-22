@@ -1,10 +1,10 @@
 # cd pohsun/SG-VLN/robot_env
-# python isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/utils/pyrecast/navmesh_grscene_home.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+# python isaac_lab_server_spot_5_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_5_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_5_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/utils/pyrecast/navmesh_gr_home.obj
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_5_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
 # Isaac Lab version of Spot robot server with Matterport scene
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/SG-VLN/navmesh_morning_parking.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_5_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/SG-VLN/navmesh_morning_parking.usd
 
 
 import argparse
@@ -18,9 +18,6 @@ import time
 import math
 from threading import Thread
 
-# from path_navmesh import usd_utils
-sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh")
-
 # start simulation
 from isaaclab.app import AppLauncher
 
@@ -29,10 +26,12 @@ parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot wi
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments")
 parser.add_argument("--seed", type=int, default=None, help="Random seed")
 parser.add_argument("--scene_path", type=str, default="/home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd", help="Path to USD scene file")
-parser.add_argument("--robot_pos", type=str, default="7.5799,0.06484971195459366,1", help="Robot initial position (x,y,z)") # -152, 90, 1
+parser.add_argument("--robot_pos", type=str, default="0.5, 0.5, 1", help="Robot initial position (x,y,z)") # -152, 90, 1
 parser.add_argument("--navmesh_path", type=str, default=None, help="Path to preloaded navmesh obj file") #/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
 
 sys.path.append("/home/junzhewu/pohsun/IsaacLab/")
+sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env")
+sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh")
 import scripts.reinforcement_learning.rsl_rl.cli_args as cli_args  # isort: skip
 cli_args.add_rsl_rl_args(parser)
 
@@ -43,7 +42,8 @@ args_cli = parser.parse_args()
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
-import carb, os
+import carb
+
 settings = carb.settings.get_settings()
 
 MDL_DIRS = [
@@ -56,8 +56,7 @@ settings.set("/rtx/materials/mdl/shader_search_paths", MDL_DIRS)
 settings.set_bool("/rtx/translucency/enabled", True)
 
 # Isaac Lab imports
-from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf
-import utils.navmesh_utils as navmesh_utils
+from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf, Sdf
 import isaaclab.sim as sim_utils
 from isaaclab.assets import ArticulationCfg, AssetBaseCfg
 from isaaclab.scene import InteractiveScene, InteractiveSceneCfg
@@ -71,6 +70,25 @@ from isaaclab.utils.math import quat_from_euler_xyz
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab.managers import SceneEntityCfg
+
+# Pyrecast navmesh imports
+import utils.navmesh_utils as navmesh_utils
+
+# Omniverse navmesh imports
+import omni.kit.app
+# ext_manager = omni.kit.app.get_app().get_extension_manager()
+# ext_manager.add_path("/home/junzhewu/.local/share/ov/data/Kit/Isaac-Sim Full/4.5/exts/3")
+import omni.usd, omni.kit
+from isaacsim.core.utils.extensions import enable_extension
+enable_extension("omni.anim.navigation.bundle")
+from omni.anim.navigation.core import NavMeshSettings
+import omni.anim.navigation.core as nav
+simulation_app.update()
+
+settings.set(NavMeshSettings.AGENT_HEIGHT_SETTING_PATH, 61)
+settings.set(NavMeshSettings.AGENT_RADIUS_SETTING_PATH, 55)
+settings.set(NavMeshSettings.AGENT_MAX_STEP_HEIGHT_SETTING_PATH, 10)
+settings.set(NavMeshSettings.AGENT_MAX_FLOOR_SLOPE_SETTING_PATH, 45)
 
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
@@ -156,48 +174,100 @@ while simulation_app.is_running():
     if first_step or reset_needed:
         obs, _ = env.reset()
         if env_cfg.usd_path is not None:
-            # pass 
+            pass
             terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')
             terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(0.01, 0.01, 0.01))
             
         # ----- Path planning using navmesh ----- #
-        navmesh_file = args_cli.navmesh_path
-        
-        # Initialize navmesh interface
-        navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+        ## ----- Omniverse Navmesh ----- ##
+        prim = env.unwrapped.scene.stage.GetPrimAtPath("/World/ground/terrain")
+        if prim.IsA(UsdGeom.Xformable):
+            print("Is Xformable")
 
-        # Setup navmesh from scene
-        if navmesh_file is None:
-            selected_paths = ["/World/ground/terrain"]
-            navmeshInterface.setup_navmesh(selected_paths)        
+        print("Creating navmesh volume..")
+        omni.kit.commands.execute(
+            "CreateNavMeshVolumeCommand",
+            parent_prim_path = Sdf.Path("/World/ground/terrain"),
+            volume_type = 0,
+            layer=env.unwrapped.scene.stage.GetRootLayer()
+        )
+
+        for prim in env.unwrapped.scene.stage.Traverse():
+            if prim.GetTypeName() == "NavMeshVolume":
+                print(f"NavMeshVolume prim found: {prim.GetPath()}")
+                parent_prim = prim.GetParent()
+                print("Parent prim path:", parent_prim.GetPath())
+
+        inav = nav.acquire_interface()
+        print("Start baking navmesh")
+        inav.start_navmesh_baking()
+        while inav.is_navmesh_baking():
+            print("Still baking navmesh...")
+            time.sleep(1)
+        print("Finish baking navmesh")
+        navmesh = inav.get_navmesh()
+        start = env_cfg.scene.robot.init_state.pos
+        start_c = carb.Float3(start[0], start[1], start[2])
+        goal_position = [0, 0, 1]
+        end_c = carb.Float3(goal_position[0], goal_position[1], goal_position[2])
+        print("Agent start: ", start)
+        print("Agent goal: ", goal_position)
+        if navmesh:
+            navmesh_path = navmesh.query_shortest_path(start_pos=start_c, end_pos=end_c)
+            if navmesh_path:
+                path_points = navmesh_path.get_points()
         else:
-            navmeshInterface.setup_navmesh_from_file(navmesh_file)
+            print("No navmesh found")
+        print("Navmesh path points: ", path_points)
 
-        # Build the navmesh
-        navmeshInterface.build_navmesh({
-            "cellSize": 0.1,
-            "cellHeight": 0.1,
-            "agentHeight": 0.61,
-            "agentRadius": 0.55,
-            "agentMaxClimb": 0.1,
-            "agentMaxSlope": 26.0,
-            "regionMinSize": 0.5,
-            "regionMergeSize": 1,
-            "edgeMaxLen": 5.0,
-            "edgeMaxError": 1.3,
-            "vertsPerPoly": 6.0,
-            "detailSampleDist": 1.0,
-            "detailSampleMaxError": 1.0,
-            "partitionType": 0
-        })
+        ## ----- Pyrecast Navmesh ----- ##
+        # navmesh_file = args_cli.navmesh_path
         
-        # Visualize the navmesh
-        navmeshInterface.visualize_navmesh()
-        # navmeshInterface.get_path_from_two_random_points()
+        # # Initialize navmesh interface
+        # navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+        # # navmeshInterface.load_navmesh_usd("/home/junzhewu/pohsun/SG-VLN/navmesh_morning_parking.usd")
+
+        # # Setup navmesh from scene
+        # if navmesh_file is None:
+        #     prim_path = "/World/ground/terrain"
+        #     prim = manager_env.scene.stage.GetPrimAtPath(prim_path)
+        #     selected_paths = [prim_path]
+        #     navmeshInterface.setup_navmesh(selected_paths)    
+        #     # navmeshInterface.setup_navmesh_from_prim(prim)  
+        # else:
+        #     navmeshInterface.setup_navmesh_from_file(navmesh_file)
+
+        # # Build the navmesh
+        # navmeshInterface.build_navmesh({
+        #     "cellSize": 0.1,
+        #     "cellHeight": 0.2,
+        #     "agentHeight": 0.5,
+        #     "agentRadius": 0.6,
+        #     "agentMaxClimb": 0.5,
+        #     "agentMaxSlope": 45.0,
+        #     "regionMinSize": 8,
+        #     "regionMergeSize": 20,
+        #     "edgeMaxLen": 12.0,
+        #     "edgeMaxError": 1.3,
+        #     "vertsPerPoly": 2.0,
+        #     "detailSampleDist": 1.0,
+        #     "detailSampleMaxError": 1.0,
+        #     "partitionType": 0
+        # })
+        
+        # # Visualize the navmesh
+        # navmeshInterface.visualize_navmesh()
+ 
+        # save_path = "navmesh_morning_parking.usd"
+        # navmeshInterface.save_navmesh_usd(save_path)
+
         # Find path between two points
-        s = [-88.731, -40.245, 0.230012]
-        e = [-55.9802, -57.2265, 0.318986]
-        navmeshInterface.get_path_from_two_points(s, e)
+        # s = [-88.731, -40.245, 0.230012]
+        # e = [-55.9802, -57.2265, 0.318986]
+        # navmeshInterface.get_path_from_two_points(s, e)
+
+        # # Find path between two random points
+        # navmeshInterface.get_path_from_two_random_points()
         # ----- End of path planning using navmesh ----- #
 
         first_step = False

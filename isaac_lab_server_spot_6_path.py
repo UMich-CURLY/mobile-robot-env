@@ -1,12 +1,10 @@
-# cd pohsun/SG-VLN/robot_env
-# python isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_flatten/park_morning/park_morning_edit.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh/pyrecast/navmesh_morning_parking.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAADA8_usd/start_result_navigation.usd --navmesh_path /home/junzhewu/pohsun/SG-VLN/robot_env/utils/pyrecast/navmesh_grscene_home.obj
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
-# Isaac Lab version of Spot robot server with Matterport scene
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_4_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/SG-VLN/navmesh_morning_parking.usd
-
-
+### Major changes:
+# 1. Remove people from scene
+# 2. Test navmesh generation using Py310RecastDetour
+### Usage:
+# cd pohsun/SG-VLN
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_6_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_6_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
 import argparse
 import sys
 import os
@@ -18,6 +16,7 @@ import time
 import math
 from threading import Thread
 
+start_time = time.time()
 # from path_navmesh import usd_utils
 sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh")
 
@@ -137,6 +136,32 @@ env_cfg.load_usd(args_cli.scene_path)
 env_cfg.sim.device = args_cli.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
+# remove people from scene
+# def remove_people_folders(stage):
+#     """
+#     Recursively find and remove all folders/prim named 'person' in the stage.
+#     """
+#     for prim in stage.TraverseAll():
+#         if prim.GetName().lower() == "person":
+#             prim_path = prim.GetPath()
+#             person_prim = stage.GetPrimAtPath(prim_path)
+#             # Traverse children under person
+#             for child in list(person_prim.GetChildren()):
+#                 # Check if the prim actually has references
+#                 refs = child.GetReferences()
+#                 if refs:
+#                     print(f"Clearing references for {child.GetPath()}")
+#                     refs.ClearReferences()
+                
+#                 # Remove the child prim itself
+#                 print(f"Removing prim {child.GetPath()}")
+#                 stage.RemovePrim(child.GetPath())
+
+#             # Finally remove the folder
+#             print(f"Removing 'person' folder: {prim_path}")
+#             stage.RemovePrim(prim_path)
+#     print("[INFO]: Done removing all 'person' folders in the stage.")
+# remove_people_folders(stage = manager_env.scene.stage)
 print("[INFO]: Env setup complete...")
 
 env_cfg.scene.robot.init_state.pos = robot_pos
@@ -156,9 +181,9 @@ while simulation_app.is_running():
     if first_step or reset_needed:
         obs, _ = env.reset()
         if env_cfg.usd_path is not None:
-            # pass 
-            terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')
-            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(0.01, 0.01, 0.01))
+            pass
+            # terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')
+            # terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(1.3, 1.3, 1.3))
             
         # ----- Path planning using navmesh ----- #
         navmesh_file = args_cli.navmesh_path
@@ -169,35 +194,44 @@ while simulation_app.is_running():
         # Setup navmesh from scene
         if navmesh_file is None:
             selected_paths = ["/World/ground/terrain"]
-            navmeshInterface.setup_navmesh(selected_paths)        
+            # navmeshInterface.setup_navmesh(selected_paths)      
+            navmeshInterface.setup_navmesh_test(selected_paths)  
         else:
             navmeshInterface.setup_navmesh_from_file(navmesh_file)
 
         # Build the navmesh
-        navmeshInterface.build_navmesh({
-            "cellSize": 0.1,
-            "cellHeight": 0.1,
-            "agentHeight": 0.61,
-            "agentRadius": 0.55,
-            "agentMaxClimb": 0.1,
-            "agentMaxSlope": 26.0,
-            "regionMinSize": 0.5,
-            "regionMergeSize": 1,
-            "edgeMaxLen": 5.0,
-            "edgeMaxError": 1.3,
-            "vertsPerPoly": 6.0,
-            "detailSampleDist": 1.0,
-            "detailSampleMaxError": 1.0,
-            "partitionType": 0
-        })
-        
+        # navmeshInterface.build_navmesh({
+        #     "cellSize": 0.1,
+        #     "cellHeight": 0.1,
+        #     "agentHeight": 0.61, # 0.61 # 0.3
+        #     "agentRadius": 0.55, # 0.55 # 0.3
+        #     "agentMaxClimb": 0.1,
+        #     "agentMaxSlope": 26.0,
+        #     "regionMinSize": 1,
+        #     "regionMergeSize": 1,
+        #     "edgeMaxLen": 5.0,
+        #     "edgeMaxError": 1.3,
+        #     "vertsPerPoly": 6.0,
+        #     "detailSampleDist": 1.0,
+        #     "detailSampleMaxError": 1.0,
+        #     "partitionType": 0
+        # }) 
+        navmeshInterface.build_navmesh_test()
+
+        end_time = time.time()
+        print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
         # Visualize the navmesh
-        navmeshInterface.visualize_navmesh()
-        # navmeshInterface.get_path_from_two_random_points()
+        navmeshInterface.visualize_navmesh_test()
+
         # Find path between two points
-        s = [-88.731, -40.245, 0.230012]
-        e = [-55.9802, -57.2265, 0.318986]
-        navmeshInterface.get_path_from_two_points(s, e)
+        # s = [-88.731, -40.245, 0.230012]
+        # e = [-55.9802, -57.2265, 0.318986]
+        # navmeshInterface.get_path_from_two_points(s, e)
+        start = [-20.0, 0.0, -20.0]
+        end = [20.0, 0.0, 20.0]
+        path = navmeshInterface.nm.pathfind_straight(start, end)
+
+        # navmeshInterface.get_path_from_two_random_points()
         # ----- End of path planning using navmesh ----- #
 
         first_step = False

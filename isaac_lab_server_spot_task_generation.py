@@ -1,14 +1,8 @@
+# python isaac_lab_server_spot_metrics.py --enable_cameras --scene_folder /data/isaac_scenes_v1/ --episode_path episodes/test.json
+# python isaac_lab_server_spot_sample.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --episode_path episodes/test.json
 
 import argparse
-import os
-import sys
-import numpy as np
 import torch
-import omni
-import io
-import time
-import math
-from threading import Thread
 from pathlib import Path
 
 # start simulation
@@ -53,28 +47,11 @@ settings.set("/rtx/materials/mdl/searchPaths", MDL_DIRS)
 settings.set("/rtx/mdl/searchPaths", MDL_DIRS)
 settings.set("/rtx/materials/mdl/shader_search_paths", MDL_DIRS)
 
-# Isaac Lab imports
-from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf
-import isaaclab.sim as sim_utils
-from isaaclab.assets import ArticulationCfg, AssetBaseCfg
-from isaaclab.scene import InteractiveScene, InteractiveSceneCfg
-from isaaclab.terrains import TerrainImporterCfg
-from isaaclab.actuators import ImplicitActuatorCfg
-from isaaclab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
-from isaaclab.utils import configclass
-from isaaclab.sim import SimulationContext, PhysicsMaterialCfg
-from isaaclab.utils.math import quat_from_euler_xyz
-from isaaclab.managers import TerminationTermCfg as DoneTerm
-import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab.managers import SceneEntityCfg
-
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
 from rsl_rl.runners import OnPolicyRunner
 from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
 from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
-from omni.kit.viewport.utility import get_viewport_from_window_name
 
 TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
@@ -82,18 +59,16 @@ RL_LIBRARY = "rsl_rl"
 # Local imports
 from utils.episode import VLNEpisodes
 from utils.vln_env_wrapper import VLNEnvWrapper
-
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-
-from utils.server import run_server, format_data
 from utils.innout_sim import InNOutSim
+from utils.task_generator import TaskGenerator
 
 # Main simulation loop
 
+
 # load episodes
-episode_list = VLNEpisodes.from_json(args.episode_path, args.episode_type)
-episode_list = list(episode_list.keys())
-current_episode = episode_list[0]
+episode_list = VLNEpisodes.from_task_config(args.tg_config_path, args.tg_config_name)
+current_episode = episode_list[args.test_id]
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -103,14 +78,14 @@ env_cfg.load_usd(scene_folder / current_episode["scene_path"])
 
 env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
 env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
-env_cfg.scene.num_envs = args.num_envs
+
 # env_cfg.viewer.cam_prim_path = '/World/pov_camera'
 
 env_cfg.sim.device = args.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
 
-agent_cfg: RslRlOnPolicyRunnerCfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
+agent_cfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
 env = RslRlVecEnvWrapper(manager_env)
 ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
 checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
@@ -118,19 +93,22 @@ ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", current_episode, measure_names=all_measures)
+env = VLNEnvWrapper(env, policy, "spot", current_episode, measure_names=all_measures)
 print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
+task_generator = TaskGenerator(args, env, in_n_out_sim, "episodes/task_config.yaml")
 
 sim_init = False
 
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
-start_time = time.time()
-frame_count = 0
 while simulation_app.is_running():
     if not sim_init:
+        tg_success = task_generator.reset()
+        if tg_success:
+            # test episode
+            # save episode
         obs, _ = env.reset()
         sim_init = True
         print(f"[INFO]: Resetting robot state..")
@@ -138,13 +116,9 @@ while simulation_app.is_running():
     with torch.inference_mode():
         # Policy forward pass
         obs, reward, done, info = env.step(in_n_out_sim.commands)
+        print("measures: ", info["measurements"])
         in_n_out_sim.update_obs(obs, manager_env)
-        # print("measures: ", info["measurements"])
-        # print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
-    frame_count += 1
-    if frame_count % 100 == 0:
-        print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {frame_count / (time.time() - start_time):.2f}")
-        start_time = time.time()
-        frame_count = 0
+        task_generator.step()
+        print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
 
 simulation_app.close()

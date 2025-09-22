@@ -111,14 +111,6 @@ class InNOutSim:
         self.set_up_keyboard()
         self.start_server()
 
-        # generate tasks
-        self.traverse_objects()
-    
-    def traverse_objects(self):
-        objects = self.manager_env.scene["objects"]
-        for object in objects:
-            print(object.name)
-
     # Socket server integration (control Spot via external commands)
     def action_callback(self, msg_type, message):
         # Expect messages of type 'VEL' with fields x, y, omega

@@ -2,20 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "Task Generation",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/isaac_lab_server_spot_task_generation.py",
+            "console": "integratedTerminal",
             "args": [
                 "--enable_cameras",
                 "--scene_folder",
-                "/data/isaac_scenes_v1/",
+                "${home}/data/isaac_scenes_v1",
                 "--episode_path",
-                "episodes/test.json"
+                "${workspaceFolder}/episodes/test.json",
+                "--tg_config_path",
+                "${workspaceFolder}/episodes/task_config.yaml",
+                "--tg_config_name",
+                "virtual_community",
+                "--test_id",
+                "virtual_community_0"
             ],
-            "console": "integratedTerminal",
             "env": {
-                "DISPLAY": ":1"
+                "DISPLAY": ":2"
             }
         }
     ]

@@ -195,3 +195,5 @@ cython_debug/
 
 #datasets 
 ./isaac/isaaclab_exts/omni.isaac.vlnce/assets/
+results/
+*.obj

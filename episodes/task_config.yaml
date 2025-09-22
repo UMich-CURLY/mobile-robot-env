@@ -1,0 +1,26 @@
+task:
+  type: object_nav
+scene:
+  nvidia_park:
+    path: nvidia_edit/park/park_morning_edit.usd
+    type: nvidia
+    scale: 1.0
+    collider: true
+    episodes:
+      number: 30
+      goals:
+        mailbox: "MailboxType.*"
+        park_bench: "ParkBench.*"
+        hydrant: "Hydrant_.*"
+  virtual_community:
+    path: virtual_community/AMSTERDAM/AMSTERDAM.usd
+    type: vc
+    scale: 1.0
+    collider: true
+    detect_ground: true
+    episodes:
+      number: 30
+      goals:
+        street_lamp: "Street_Lamp.*"
+        city_bench: "City_Bench.*"
+        tree: "Tree.*"

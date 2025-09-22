@@ -1,7 +1,6 @@
 from isaaclab.envs import ManagerBasedRLEnv
 from utils.measures import add_measurement
 from utils.vis import visualize_path
-from omni.kit.viewport.utility import get_viewport_from_window_name
 import isaaclab.sim as sim_utils
 from pxr import Gf
 import torch
@@ -9,7 +8,7 @@ import torch
 class VLNEnvWrapper:
     """Wrapper to configure an :class:`ManagerBasedRLEnv` instance to VLN environment."""
 
-    def __init__(self, env: ManagerBasedRLEnv, 
+    def __init__(self, args, env: ManagerBasedRLEnv, 
                  low_level_policy, robot_name, 
                  episode, max_length=10000,
                  measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
@@ -18,13 +17,15 @@ class VLNEnvWrapper:
         self.robot_name = robot_name
         self.episode = episode
         self.measure_names = measure_names
-        self.viewport = get_viewport_from_window_name("Viewport")
+        self.args = args
 
         self.env_step = 0
         self.max_length = max_length
 
         self.high_level_obs_key = "camera"
-        assert self.high_level_obs_key in self.env.observation_space.spaces.keys() # CHECK this
+        if not self.args.disable_camera:
+             # check if camera observation is available
+            assert self.high_level_obs_key in self.env.observation_space.spaces.keys()
 
         self.low_level_policy = low_level_policy
         self.low_level_action = None
@@ -42,8 +43,6 @@ class VLNEnvWrapper:
 
     def reset(self) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
-        # set viewport
-        self.viewport.set_active_camera("/World/envs/env_0/Robot/body/ThirdPersonCamera")
         terrain_prim = self.env.unwrapped.scene.stage.GetPrimAtPath('/World/ground/terrain')
 
         # set collider
@@ -98,7 +97,10 @@ class VLNEnvWrapper:
                 target_xyz=goal["location"]
             )
         # log
-        obs = infos["observations"][self.high_level_obs_key]
+        if not self.args.disable_camera:
+            obs = infos["observations"][self.high_level_obs_key]
+        else:
+            obs = []
         return obs, infos
     
     def update_command(self, command) -> None:
@@ -131,7 +133,10 @@ class VLNEnvWrapper:
 
         low_level_obs, reward, done, info = self.env.step(low_level_action)
         self.low_level_obs = low_level_obs
-        obs = info["observations"][self.high_level_obs_key]
+        if not self.args.disable_camera:
+            obs = info["observations"][self.high_level_obs_key]
+        else:
+            obs = []
         self.env_step += 1
 
         self.measure_manager.update_measures()
