@@ -9,24 +9,6 @@ import sys
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)  # also flush errors immediately
 
-def clean_mesh(obj):
-    """Clean mesh: remove doubles and loose geometry."""
-    mesh = obj.data
-    bm = bmesh.new()
-    bm.from_mesh(mesh)
-
-    # Remove doubles (merge by distance)
-    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.0001)
-
-    # Delete loose vertices
-    loose_verts = [v for v in bm.verts if not v.link_edges]
-    if loose_verts:
-        bmesh.ops.delete(bm, geom=loose_verts, context='VERTS')
-
-    bm.to_mesh(mesh)
-    bm.free()
-
-
 def export_usd(output_usd_path):
     """Export current Blender scene to USD."""
     try:
@@ -77,24 +59,15 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
     processed_meshes = set()
     for obj in bpy.context.scene.objects:
         if obj.type == 'MESH' and obj.data not in processed_meshes:
-            base_name = obj.name.split(".")[0]
-            obj.name = base_name
-            if obj.data:
-                obj.data.name = base_name
-
-            prim_path = obj.get("usd_prim_path", None)
-            if prim_path:
-                print(f"Preserving prim path: {prim_path}")
-            else:
-                print(f"⚠️ Object {obj.name} has no usd_prim_path — may export with Blender name")
-                
+            
             processed_meshes.add(obj.data)
             # print(f"Processing mesh object: {obj.name}")
             
             # Count number of faces
             face_count = len(obj.data.polygons)
             original_face_count += face_count
-            if face_count < 500 or len(obj.data.vertices) == 0:
+            if face_count < 500:
+                decimated_face_count += face_count
                 continue
             # print(f"Number of faces: {face_count}")
 
@@ -108,8 +81,6 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
             decimate_modifier.use_dissolve_boundaries = False
 
             # Apply the modifier
-            # Using bpy.ops.object.modifier_apply(modifier="Modifier Name") can fail in scripts.
-            # A more robust method is to use the object.convert() operator.
             bpy.ops.object.modifier_apply(modifier="Decimate_Faces")
             
             # Count number of faces after decimation
@@ -124,14 +95,14 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
     export_usd(output_usd_path)
 
 def decimate_all_usd_in_folder(input_folder, ratio=0.1):
-    """Recursively decimate all 'instance.usd' files in a folder."""
+    """Recursively decimate all 'instance_renamed.usd' files in a folder."""
     usd_files = []
     for root, dirs, files in os.walk(input_folder):
-        if "instance_decimated.usd" in files:
+        if "instance_renamed_decimated.usd" in files:
             print(f"[SKIP] Already decimated: {root}")
             continue
         for file in files:
-            if file.endswith('instance.usd'):
+            if file.endswith('instance_renamed.usd'):
                 usd_files.append(os.path.join(root, file))
 
     print(f"[INFO] Found {len(usd_files)} USD files in folder: {input_folder}")
@@ -149,7 +120,7 @@ def decimate_all_usd_in_folder(input_folder, ratio=0.1):
 if __name__ == "__main__":
     
     # Params:
-    input_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models2"
+    input_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
     decimation_ratio = 0.1
 
     # Main function call

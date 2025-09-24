@@ -1,4 +1,6 @@
 # blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/decimate_usd_face_blender.py
+## Author: Po-Hsun Chang
+## Contact: pohsun@umich.edu
 
 import bpy
 import os
@@ -43,6 +45,7 @@ def decimate_usd(input_usd_path, output_usd_path, ratio=0.1):
             face_count = len(obj.data.polygons)
             original_face_count += face_count
             if face_count < 500:
+                decimated_face_count += face_count
                 continue
             print(f"Number of faces: {face_count}")
 
@@ -90,10 +93,9 @@ def decimate_usd(input_usd_path, output_usd_path, ratio=0.1):
 if __name__ == "__main__":
     # Define your input and output file paths
     # Replace these with the actual paths on your system.
-    # input_file = "/home/junzhewu/pohsun/data_decimated/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/models"
-    # output_file = "/home/junzhewu/pohsun/data_decimated/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/models"
-    input_file = "/home/junzhewu/pohsun/data_decimated/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/models/object/others/shelf/e5f88faae77da38aad5c86c1015dc458/instance.usd"
-    output_file = "/home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/shelf_decimated.usd"
+    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cabinet/035b9ab88885025898b7b188650fb896/"
+    input_file = model_folder + "instance_renamed.usd"
+    output_file = model_folder + "instance_decimated.usd"
 
     # Optional: Adjust the decimation ratio (0.0 to 1.0)
     # A smaller value means more reduction.

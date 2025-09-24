@@ -1,0 +1,98 @@
+# ../IsaacLab/isaaclab.sh -p /home/junzhewu/pohsun/SG-VLN/robot_env/make_usd_prim_unique.py
+
+import os
+from pxr import Usd, Sdf
+# import omni.kit.commands
+# import omni.kit
+
+def make_unique_name(name, existing):
+    """
+    If 'name' exists in existing set, append a suffix to make it unique.
+    """
+    if name not in existing:
+        existing.add(name)
+        return name
+    i = 1
+    while f"{name}_{i}" in existing:
+        i += 1
+    unique_name = f"{name}_{i}"
+    existing.add(unique_name)
+    return unique_name
+
+def limit_name_length(name, max_length=60):
+    """
+    Limit name length to max_length characters.
+    If name is longer, truncate and add hash suffix to maintain uniqueness.
+    """
+    if len(name) <= max_length:
+        return name, False
+    return name[:max_length], True
+
+def rename_prims(stage):
+    """
+    Recursively rename all prims in the stage to ensure unique names.
+    Uses omni.kit.commands.MovePrim to safely handle references/payloads.
+    """
+    existing_names = set()
+    existing_names.add("Looks")
+    existing_names.add("Materials")
+    prim_paths = [prim.GetPath() for prim in stage.Traverse() if '/Root/Looks' not in str(prim.GetPath()) and '/Root/Materials' not in str(prim.GetPath()) and 'Looks/WorldGridMaterial' not in str(prim.GetPath())]
+    
+    prim_paths.reverse()
+    for path in prim_paths:
+        prim = stage.GetPrimAtPath(path)
+        # omni.kit.commands.execute(“MovePrim”, path_from=path, path_to=pathTo)
+        if not prim.IsValid():
+            # print(f"Invalid prim at path: {path}")
+            # print("prim name:", prim.GetName())
+            continue
+
+        old_name = prim.GetName()
+        old_name, name_pruned = limit_name_length(old_name)
+        # print("original path:", prim.GetPath())
+        new_name = make_unique_name(old_name, existing_names)
+
+        if old_name != new_name or name_pruned:
+            parent_path = prim.GetPath().GetParentPath()
+            new_path = parent_path.AppendChild(new_name)
+            # print("new path:", new_path)
+            # Copy Mesh spec to new path
+            Sdf.CopySpec(stage.GetRootLayer(), prim.GetPath(), stage.GetRootLayer(), new_path)
+
+            # Remove old Mesh
+            stage.RemovePrim(prim.GetPath())
+
+            # print(f"Renamed Mesh: {prim.GetPath()} -> {new_path}")
+
+
+def process_usd_file(usd_path, output_usd_path):
+    """
+    Open a USD file in Isaac Lab, rename all prims uniquely, and save to a new USD file.
+    """
+    stage = Usd.Stage.Open(usd_path)
+    if not stage:
+        print(f"Failed to open USD stage: {usd_path}")
+        return
+
+    rename_prims(stage)
+
+    # Save to a new USD file
+    stage.GetRootLayer().Export(output_usd_path)
+    print(f"Saved renamed USD: {output_usd_path}")
+
+def make_name_unique_all_usds(models_folder):
+    """
+    Iterate through all subfolders in models_folder,
+    find 'instance.usd' files, rename prims uniquely, and save as 'instance_renamed.usd'.
+    """
+    for root_dir, dirs, files in os.walk(models_folder):
+        if "instance.usd" in files:
+            usd_path = os.path.join(root_dir, "instance.usd")
+            renamed_usd_path = os.path.join(root_dir, "instance_renamed.usd")
+            print(f"Processing USD: {usd_path}")
+            process_usd_file(usd_path, renamed_usd_path)
+
+if __name__ == "__main__":
+    # Set your folder path containing USDs
+    models_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
+    make_name_unique_all_usds(models_folder)
