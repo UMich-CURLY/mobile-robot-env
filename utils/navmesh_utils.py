@@ -3,8 +3,7 @@ import os
 import numpy as np
 import omni.physx
 
-import pyrecast as rd
-import PyRecastDetour as navmod
+import PyRecastDetour as pyrecast
 
 from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt, UsdUtils
 import omni
@@ -32,7 +31,6 @@ def traverse_instanced_children(prim):
             yield subchild
 
 def parent_and_children_as_mesh(parent_prim):
-
     if UsdGeom.Imageable(parent_prim).ComputeVisibility() == UsdGeom.Tokens.invisible:
         return [], []
     if parent_prim.IsA(UsdGeom.Mesh):
@@ -86,7 +84,6 @@ def get_all_stage_mesh(stage, prims):
     return points, faces
 
 def get_mesh(objs):
-
     points, faces = [],[]
     i = 0
     loss = 0
@@ -192,40 +189,6 @@ def convert_to_triangle_mesh(FaceVertexIndices, FaceVertexCounts):
     
     return np.array(triangle_faces)
 
-
-# def create_geompoints(boid_positions):
-#     '''create and manage geompoints representing agents
-
-#     Parameters
-#     ----------
-#     stage_path : str, optional
-#         if not set, will use /World/Points, by default None
-#     color : (r,g,b), optional
-#         if not set, will make color red, by default None
-#     '''
-    
-#     stage_loc = "/World/Points"
-
-#     stage = omni.usd.get_context().get_stage()
-#     agent_point_prim = UsdGeom.Points.Define(stage, stage_loc)
-#     agent_point_prim.CreatePointsAttr()
-
-#     agent_point_prim.CreateDisplayColorAttr()
-#     # For RTX renderers, this only works for UsdGeom.Tokens.constant
-#     color_primvar = agent_point_prim.CreateDisplayColorPrimvar(UsdGeom.Tokens.constant)
-    
-#     point_color = (1, 0, 0)
-#     color_primvar.Set([point_color])
-    
-#     boid_positions = Vt.Vec3fArray.FromNumpy(np.asarray(boid_positions, dtype=float))
-
-#     set_positions(agent_point_prim, boid_positions)
-
-
-# def set_positions(agent_point_prim, positions):
-    
-#     agent_point_prim.GetPointsAttr().Set(positions)
-
 def create_points(nodes, prim_path="/World/Points", color=Gf.Vec3f(0.0, 1.0, 1.0), width=np.array([1.0], dtype=float) ):
     '''Create and draw a Points on the stage following the nodes'''
     stage = omni.usd.get_context().get_stage()
@@ -309,11 +272,8 @@ def create_mesh(prim_path, points, indices, colors=None, opacity=None, use_prevs
 
     return prim_path
 
-
-
 class NavmeshInterface:
     def __init__(self, up_axis='Y', stage=None): 
-        self.navmesh = rd.Navmesh()
         self.built = False
         self.input_prim = None
         self.input_vert = None
@@ -325,68 +285,11 @@ class NavmeshInterface:
         self.stage = stage
         self.start_pos = None
         self.end_pos = None
-        self.nm = navmod.Navmesh()
+        self.nm = pyrecast.Navmesh()
 
         # if z_up is true, we will need to do some conversion before sending to 
         # recast, then, we will convert it back to y_up (all functions will need to do that)
-        if up_axis == 'Z': self.z_up = True
-        else: self.z_up = False  
-
-    """ ----- Main functions for navmesh setup, building, visualization, pathfinding ----- """
-    def setup_navmesh(self, selected_paths):
-        self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
-        self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim)
-        if len(self.input_vert) == 0:
-            print('[INFO]: No mesh found')
-        print("[INFO]: Loading navmesh from vertices and triangles, will take a while, please wait.")
-        self.input_vert = self._convert_up_axis(self.input_vert)
-        self.navmesh.load_mesh(self.input_vert, self.input_tri)
-        print("[INFO]: Loaded navmesh from vertices and triangles")
-
-    def setup_navmesh_from_prim(self, prim):
-        self.load_mesh(prim)
-        print("[INFO]: Loaded navmesh from selected prim")
-
-    def setup_navmesh_from_file(self, navmesh_file):
-        print("[INFO]: Loading navmesh from obj file, will take a while, please wait.")
-        self.navmesh._navmesh.load_obj(navmesh_file)
-        print("[INFO]: Loaded navmesh from obj file")
-
-    def visualize_navmesh(self):
-        if self.built:
-            v, t, = self.get_navmesh_polygons()
-            v = v.flatten()
-            # create a usd color of blue with transparency
-            color = Gf.Vec3f(0.051208995, 0.774935, 0.94585985)
-            opacity = 0.89
-            create_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
-            print("[INFO]: Visualized navmesh")
-        else:
-            print('[WARNING]: Navmesh not built') 
-
-    # def save_navmesh_usd(self, save_path):
-    #     prim_path = "/World/ground/navmeshmesh"
-    #     export_prim_to_file(path=save_path, source_prim_path=prim_path, stage=self.stage)
-        
-    #     print("[INFO]: Exported navmesh to", save_path)
-
-    # def load_navmesh_usd(self, load_path):
-    #     mesh_stage = Usd.Stage.Open(load_path)
-
-    #     # Grab the prim you saved (check what path it lives under in the file)
-    #     mesh_prim = self.stage.DefinePrim("/World/ground/navmesh", "mesh")
-
-    #     # Reference your saved mesh USD
-    #     mesh_prim.GetReferences().AddReference(load_path)
-
-    def get_path_from_two_points(self, start, end):
-        """
-        Input: start, end are lists of points [x, y, z]
-        """
-        self.path_points = self.find_paths([start], [end])
-        print(f"Path from robot to goal: {self.path_points}")
-        create_curve(self.path_points)
-        print("[INFO]: Path planning complete...")
+        self.z_up = up_axis == 'Z'
 
     def is_path_valid(self):
         if self.path_points is None:
@@ -398,27 +301,8 @@ class NavmeshInterface:
             print("[WARNING]: Path does not match start or end position")
             return False
         return True
-    
-    def get_path_from_two_random_points(self):
-        """
-        Get a path between two random points on the navmesh
-        """
-        while not self.is_path_valid():
-            self.start_pos, self.end_pos = self.get_random_points(2)
-            self.path_points = self.find_paths([self.start_pos], [self.end_pos])
-            print(f"Path from random start to random goal: {self.path_points}")
-        
-        create_curve(self.path_points)
 
-    def build_navmesh(self, settings={}):
-        self.navmesh.build_navmesh(settings)
-        self.built = True
-
-        print("[INFO]: Navmesh built")
-    """ ----- End of main functions for navmesh setup, building, visualization, pathfinding ----- """
-
-    """ ----- Test navmesh using PyRecastDetour"""
-    def setup_navmesh_test(self, selected_paths):
+    def setup_navmesh(self, selected_paths):
         self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
         self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim)
         if len(self.input_vert) == 0:
@@ -427,12 +311,8 @@ class NavmeshInterface:
         self.input_vert = self._convert_up_axis(self.input_vert)
 
         print(f'bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
-        ## test with Py310RecastDetour ##
         verts_flat = []
         for vertex in self.input_vert:
-            # print("vertex dtype: ", type(vertex))   # numpy.ndarray
-            # print("vertex shape: ", vertex.shape)   #(3,)
-            # cur_verts_flat = vertex.flatten().tolist()
             verts_flat.extend(vertex)
         # Convert faces to the format expected by init_by_raw
         # The example shows faces as [3, v0, v1, v2, 3, v0, v1, v2, ...]
@@ -446,11 +326,9 @@ class NavmeshInterface:
 
         # Initialize the navmesh with raw data
         self.nm.init_by_raw(verts_flat, faces_flat)
-        print(f'raw verts shape: {np.array(verts_flat).shape}')
-        print(f'raw faces shape: {np.array(faces_flat).shape[0]//4}')
-        print("[INFO]: Loaded navmesh from vertices and triangles")
+        print(f"[INFO]: Loaded navmesh from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4}') triangles")
 
-    def build_navmesh_test(self, settings={}):
+    def build_navmesh(self, settings={}):
         settings = self.nm.get_settings()
         # These mirror Sample::resetCommonSettings defaults
         settings["cellSize"] = 0.08
@@ -469,15 +347,15 @@ class NavmeshInterface:
         # nvidia
         settings["cellSize"] = 100.
         settings["cellHeight"] = 100.
-        settings["agentHeight"] = 0.61
-        settings["agentRadius"] = 0.55
-        settings["agentMaxClimb"] = 0.1
+        settings["agentHeight"] = 61
+        settings["agentRadius"] = 55
+        settings["agentMaxClimb"] = 100
         settings["agentMaxSlope"] = 26.0
         self.nm.set_settings(settings)
         # Try watershed (0) like default demo; if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)
         self.nm.build_navmesh()
-        v, t, = self.get_navmesh_polygons_test()
+        v, t, = self.get_navmesh_polygons()
         print(f'v shape: {v.shape}')
         print(f't shape: {t.shape}')
         self.built = v.shape[0] > 0
@@ -486,9 +364,9 @@ class NavmeshInterface:
         if not self.built:
             print('[WARNING]: Failed to build navmesh')
 
-    def visualize_navmesh_test(self):
+    def visualize_navmesh(self):
         if self.built:
-            v, t, = self.get_navmesh_polygons_test()
+            v, t, = self.navmesh_v, self.navmesh_t
             v = v.flatten()
             # create a usd color of blue with transparency
             color = Gf.Vec3f(0.051208995, 0.774935, 0.94585985)
@@ -498,12 +376,10 @@ class NavmeshInterface:
         else:
             print('[WARNING]: Navmesh not built') 
 
-
-    def get_navmesh_polygons_test(self):
+    def get_navmesh_polygons(self):
         trivert, polygon_indices, polygon_sizes = self.nm.get_navmesh_polygonization()
         trivert = np.asarray(trivert).reshape(-1,3)
 
-        print(f'Got navmesh')
         # Parse polygon_indices using polygon_sizes
         t = []
         index_offset = 0
@@ -533,7 +409,7 @@ class NavmeshInterface:
 
         return self.navmesh_v, self.navmesh_t
     
-    def get_path_from_two_points_test(self, start, end):
+    def find_paths(self, start, end, visualize=False):
         """
         Input: start, end are lists of points [x, y, z]
         """
@@ -542,31 +418,37 @@ class NavmeshInterface:
         start_flat = start[0].flatten().tolist()
         end_flat = end[0].flatten().tolist()
 
-        path_pnts = self.nm.pathfind_straight(start_flat, end_flat, 1)
+        print(f"start={start}")
+        print(f"end={end}")
+        print(f"start_flat={start_flat}")
+        print(f"end_flat={end_flat}")
+
+        path_points = self.nm.pathfind_straight(start_flat, end_flat, 1)
+        print(f"Path points: {len(path_points)}")
         
         # Convert the flat list to 3D points and then to Gf.Vec3f format
-        if path_pnts and len(path_pnts) >= 3:
-            # Reshape flat list [x1,y1,z1,x2,y2,z2,...] to [[x1,y1,z1],[x2,y2,z2],...]
-            path_points_3d = np.array(path_pnts).reshape(-1, 3)
-            # Convert back to z-up if needed
-            path_points_3d = self._convert_up_axis(path_points_3d, inverse=True)
-            # Convert to Gf.Vec3f format expected by USD
-            self.path_points = [Gf.Vec3f(float(pt[0]), float(pt[1]), float(pt[2])) for pt in path_points_3d]
-            
-            print(f"Path from robot to goal: ", self.path_points)
-            create_curve(self.path_points)
-            print("[INFO]: Path planning complete...")
+        if path_points and len(path_points) >= 3:
+            path_points_vis = np.array(path_points).reshape(-1, 3)
+            path_points_vis = self._convert_up_axis(path_points_vis, inverse=True)
+            path_points_vis = [Gf.Vec3f(float(pt[0]), float(pt[1]), float(pt[2])) for pt in path_points_vis]
+            if visualize:
+                create_curve(path_points_vis, width=np.array([20], dtype=float))
+            return path_points
         else:
             print("[WARNING]: No valid path found")
-            self.path_points = []
+            return []
 
-    def save_navmesh_test(self, save_path):
-        self.nm.save_navmesh(save_path)
+    def save_navmesh(self, save_path):
         print("[INFO]: Exported navmesh to", save_path)
+        self.nm.save_navmesh(save_path)
 
-    def load_navmesh_test(self, load_path):
-        self.nm.load_navmesh(load_path)
+    def load_navmesh(self, load_path):
         print("[INFO]: Loaded navmesh from", load_path)
+        self.nm.load_navmesh(load_path)
+        self.built = True
+        print(self.nm.get_log())
+        print("[INFO]: Updating navmesh polygons")
+        self.get_navmesh_polygons()
 
     """ ----- Navmesh helper functions ----- """
     # ----- Helper functions for up axis conversion ----- #
@@ -593,7 +475,7 @@ class NavmeshInterface:
         return vertices
 
     # ----- Helper functions for getting random points ----- #
-    def sample_random_points(self, num_points):
+    def sample_random_points(self, num_points, visualize=False):
         if not self.built:
             print("[WARNING]: Navmesh not built")
             return None
@@ -606,151 +488,7 @@ class NavmeshInterface:
         weights = weights[:,:,np.newaxis].repeat(3, axis=2)
         vertices = np.average(v[random_poly], weights=weights, axis=1)
         print(f'random points: {vertices}')
-
-        create_points(vertices, prim_path='/World/RandomPoints', width=np.array([0.3], dtype=float))
+        if visualize:
+            create_points(vertices, prim_path='/World/RandomPoints', width=np.array([30], dtype=float))
 
         return vertices
-
-    # ----- Helper functions for finding path on navmesh ----- #
-    def find_paths(self, starts, ends, searchSize=[10.0,10.0,10.0], pathMode=2, pathStyle=0):
-
-        starts = [self._convert_up_axis(starts)]
-        ends = [self._convert_up_axis(ends)]
-
-        paths = self.navmesh.find_paths(starts, ends, searchSize=[10.0,10.0,10.0], pathMode=2, pathStyle=0)
-        path_pnts = np.asarray(paths).reshape(-1, 3)
-        path_pnts = self._convert_up_axis(path_pnts, inverse=True)
-
-        return path_pnts
-    
-    # ----- Helper functions for getting navmesh polygons ----- #
-    def get_navmesh_polygons(self):
-        trivert,_,_ = self.navmesh.get_navmesh_polygons()
-        trivert = np.asarray(trivert).reshape(-1,3)
-
-        print(f'Got navmesh')
-
-        v = trivert
-        t = []
-        for i in range(0, len(trivert), 3):
-            t.append([i,i+1,i+2])
-        self.navmesh_v = np.array(v, dtype=np.float32)
-        self.navmesh_t = np.array(t, dtype=np.int32)
-
-        self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
-
-        return self.navmesh_v, self.navmesh_t
-    
-
-    def load_mesh(self, prim):
-        self.input_vert, self.input_tri  = parent_and_children_as_mesh(prim)
-        print("Loaded mesh with ", len(self.input_vert), " vertices and ", len(self.input_tri), " triangles")
-        self.input_prim = prim
-        
-        self.input_vert = self._convert_up_axis(self.input_vert)
-        print("Converted up axis")
-        self.navmesh.load_mesh(self.input_vert, self.input_tri)
-        print("Loaded mesh into recast")
-
-    # def get_navmesh_raw_contours(self):
-    #     rawvert, rawpolygons, _ = self.navmesh.get_navmesh_raw_contours()
-    #     rawvert = self._convert_up_axis(rawvert, inverse=True)
-    #     return rawvert, rawpolygons
-
-    # def get_navmesh_contours(self):
-    #     vert, _, _ = self.navmesh.get_navmesh_contours()
-
-    #     vert = np.asarray(vert).reshape(-1, 3)
-    #     # Convert if needed
-    #     vert = self._convert_up_axis(vert, inverse=True)
-        
-    #     edges = [[i, i+1] for i in range(0, len(vert)-1, 2)]
-    #     self.contour_verts = vert
-    #     self.contour_edges = edges
-
-    #     return self.contour_verts, self.contour_edges
-
-    # def make_walls(self, vertices, edges, height):
-
-    #     # Extrude the walls up
-    #     vertices = np.array(vertices)  # Ensure vertices are a NumPy array
-    #     vertices = self._convert_up_axis(vertices)
-    #     extruded_vertices = np.copy(vertices)
-    #     extruded_vertices[:, 1] += height  # Add height to the z-coordinate
-    #     side_triangles = []
-
-    #     # Go through each edge and create two triangles (square wall)
-    #     for edge in edges:
-    #         i, j = edge
-    #         A = vertices[i]
-    #         B = vertices[j]
-    #         A_prime = extruded_vertices[i]
-    #         B_prime = extruded_vertices[j]
-
-    #         triangle1 = [A, B, B_prime]
-    #         triangle2 = [A, B_prime, A_prime]
-    #         side_triangles.extend([triangle1, triangle2])
-
-    #     # Do the welding and extrusion
-    #     self.side_triangles = side_triangles
-    #     # Make faces
-    #     faces = []
-    #     verts = []
-    #     tri = 0
-    #     for i, face in enumerate(side_triangles):
-    #         for v in face:
-    #             verts.append(v)
-    #         faces.append([tri, tri+1, tri+2])
-    #         tri += 3
-
-    #     # weld faces and vertices to remove duplicates 
-    #     faces = np.asarray(faces)
-    #     v, inverse_indices = np.unique(verts, axis=0, return_inverse=True)
-    #     t = inverse_indices[faces.flatten()].reshape(faces.shape)
-
-    #     self.wall_v = v
-    #     self.wall_t = t 
-
-    #     return v, t
-
-    # def make_outline(self):
-    #     # Go through the edges and make individual lines, it is what it is
-
-    #     width = np.array([0.2], dtype=float)
-    #     color = (0.8,0.8,0.8)
-
-    #     for idx, edge in enumerate(self.contour_edges):
-    #         i, j = edge
-    #         A = self.contour_verts[i]
-    #         B = self.contour_verts[j]
-    #         self.wall_outline.append([tuple(A), tuple(B)])
-
-    #     for idx, curve in enumerate(self.wall_outline):
-    #         create_curve(curve, prim_path=f"/World/Outline/WallOutline{idx}", width=width, color=color)
-
-    # def get_selected_prim(self):
-    #     self.stage = omni.usd.get_context().get_stage()
-
-    #     # Get the selections from the stage
-    #     self._usd_context = omni.usd.get_context()
-    #     self._selection = self._usd_context.get_selection()
-    #     selected_paths = self._selection.get_selected_prim_paths()
-    #     # Expects a list, so take first selection
-    #     self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
-
-
-    #     self.input_vert, self.input_tri = get_all_stage_mesh(self.stage , self.input_prim)
-
-    #     if len(self.input_vert) == 0:
-    #         print('No mesh found')
-    #         return False
-        
-    #     #Convert the up axis if needed
-    #     self.input_vert = self._convert_up_axis(self.input_vert)
-        
-    #     self.navmesh.load_mesh(self.input_vert, self.input_tri)
-    #     return True
-
-    # def get_navmesh_triangles(self):
-    #     triangles = self.navmesh.get_navmesh_triangles()
-    #     return triangles

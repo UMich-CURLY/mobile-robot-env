@@ -1,0 +1,71 @@
+{
+    "MV5M25QKTKJZ2AABAAAAAEI8_usd": {
+            "painting/model_c2f451d6a37c4f238e602cc2c217f7a8_0": [
+                {
+                    "start_point": [
+                        0.9,
+                        -1.8
+                    ],
+                    "target_point": [
+                        3.5,
+                        2,
+                        0.7
+                    ],
+                    "distance": 6.309567648538856,
+                    "path": [
+                        [
+                            0.9,
+                            -1.8
+                        ],
+                        [
+                            0.8,
+                            -1
+                        ],
+                        [
+                            1,
+                            0
+                        ],
+                        [
+                            1,
+                            1
+                        ],
+                        [
+                            1,
+                            2
+                        ],
+                        [
+                            2,
+                            2
+                        ],
+                        [
+                            3,
+                            2
+                        ],
+                        [
+                            3.2,
+                            2
+                        ]
+                        
+                    ],
+                    "dialogue": [
+                        {
+                            "role": "human",
+                            "dialog": "Can you find the clothes that have a pillow above them?"
+                        },
+                        {
+                            "role": "action",
+                            "node": "clothes/model_c2f451d6a37c4f238e602cc2c217f7a8_0"
+                        },
+                        {
+                            "role": "robot",
+                            "dialog": "Is this the target clothing item you are looking for"
+                        },
+                        {
+                            "role": "human",
+                            "dialog": "Yes, this is the target clothing item I am looking for"
+                        }
+                    ]
+                }
+            ]
+        }
+    }

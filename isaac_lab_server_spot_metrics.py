@@ -17,7 +17,7 @@ from isaaclab.app import AppLauncher
 # Add command line arguments
 parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot with USD scene")
 
-import utils.rsl_rl_cli_args as rsl_rl_cli_args  # isort: skip
+import utils.rsl_rl_cli_args as rsl_rl_cli_args
 import utils.vln_args as vln_cli_args
 import utils.wpfollowing_args as wpfollowing_cli_args
 
