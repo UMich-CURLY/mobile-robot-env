@@ -3,9 +3,12 @@
 # 2. Test navmesh generation using Py310RecastDetour
 ### Usage:
 # cd pohsun/SG-VLN
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_6_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_6_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_6_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
+# DISPLAY=:2 python isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
+# DISPLAY=:2 python isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_edit/park/park_morning_edit.usd
+# DISPLAY=:2 python isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
 import argparse
 import sys
 import os
@@ -17,7 +20,6 @@ import time
 import math
 from threading import Thread
 
-start_time = time.time()
 # from path_navmesh import usd_utils
 sys.path.append("/home/junzhewu/pohsun/SG-VLN/robot_env/path_navmesh")
 
@@ -193,7 +195,7 @@ while simulation_app.is_running():
         manager_env.scene["robot"].write_root_pose_to_sim(root_state)
         print(f"[INFO]: Resetting robot state..")
         
-    if step_count % 100 == 0:
+    if step_count == 100:
         # ----- Path planning using navmesh ----- #
         navmesh_file = args_cli.navmesh_path
 
@@ -225,8 +227,8 @@ while simulation_app.is_running():
         #     "detailSampleMaxError": 1.0,
         #     "partitionType": 0
         # }) 
+        start_time = time.time()
         navmeshInterface.build_navmesh_test()
-
         end_time = time.time()
         print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
         # Visualize the navmesh
@@ -236,9 +238,10 @@ while simulation_app.is_running():
         # s = [-88.731, -40.245, 0.230012]
         # e = [-55.9802, -57.2265, 0.318986]
         # navmeshInterface.get_path_from_two_points(s, e)
-        start = [-1.0, -3.0, 0.6]
-        end = [3.0, 2.0, 0.6]
+        start = [-1.0, -3.0, 0.3]
+        end = [3.0, 2.0, 0.3]
         navmeshInterface.get_path_from_two_points_test(start, end)
+        navmeshInterface.sample_random_points(1000)
         navmeshInterface.save_navmesh_test(temp_path)
         # navmeshInterface.get_path_from_two_random_points()
         # ----- End of path planning using navmesh ----- #
