@@ -112,7 +112,7 @@ class VLNEnvWrapper:
         # make sure command is a tensor on the same device as low_level_obs
         if not torch.is_tensor(command):
             command = torch.tensor(command, device=self.env.unwrapped.device)
-
+        self.low_level_obs = self.low_level_obs.clone()
         self.low_level_obs[:, 9:12] = command
 
     def step(self, action) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:

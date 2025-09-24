@@ -2,7 +2,7 @@
     {
         "scene_id": "nv_park",
         "episode_id": "nv_park_0",
-        "scene_scale": 1.0,
+        "scene_scale": 0.01,
         "scene_path": "nvidia_edit/park/park_morning_edit.usd",
         "scene_type": "nvidia",
         "collider": true,
@@ -11,12 +11,14 @@
             {
                 "instance": "table",
                 "type": "object",
-                "location": [-50.37,-19.45, 0.6],
+                "location": [-60.37,-19.45, 0.6],
                 "radius": 0.5,
                 "reference_path": [
+                    [-38.51, -17.94, 0.6],
                     [-52.37,-19.45, 0.6],
                     [-52.37,-3.48, 0.6],
-                    [-60.77,-3.48, 0.6]
+                    [-60.77,-3.48, 0.6],
+                    [-60.37,-19.45, 0.6]
                 ]
             }
         ],

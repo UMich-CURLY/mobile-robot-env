@@ -19,9 +19,13 @@ parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot wi
 
 import utils.rsl_rl_cli_args as rsl_rl_cli_args  # isort: skip
 import utils.vln_args as vln_cli_args
+import utils.wpfollowing_args as wpfollowing_cli_args
 
 rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
+wpfollowing_cli_args.add_wpfollowing_args(parser)
+
+
 
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
@@ -30,6 +34,7 @@ sim_start_time = time.time()
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
 simulation_app = app_launcher.app
+
 
 # Enable Extension
 from isaacsim.core.utils.extensions import enable_extension
@@ -58,6 +63,9 @@ from isaaclab.utils.math import quat_from_euler_xyz
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab.managers import SceneEntityCfg
+from utils.path_following_utils import visualize_path, follow_waypoints, load_plan
+
+
 
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
@@ -114,6 +122,21 @@ in_n_out_sim = InNOutSim(args, env)
 
 sim_init = False
 
+if args.use_plan:
+    plan = load_plan(args.episode_path, args.scene_folder, args.test_id, args.base_height)
+    waypoints_world = plan["path"][::args.waypoint_stride]
+    visualize_path(manager_env, waypoints_world, target_xyz=plan["target"])
+else:
+    waypoints_world = None
+
+current_wp_idx = 0
+if args.use_plan:
+    waypoints_world = current_episode["goals"][0]["reference_path"][::args.waypoint_stride]
+    target = current_episode["goals"][0]["location"]
+    visualize_path(manager_env, waypoints_world, target_xyz=target)
+else:
+    waypoints_world = None
+
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 start_time = time.time()
@@ -139,5 +162,12 @@ while simulation_app.is_running():
     if frame_count % 100 == 0:
         print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {100 / (time.time() - start_time):.2f}")
         start_time = time.time()
+    if args.use_plan and waypoints_world:
+        command, current_wp_idx = follow_waypoints(
+            manager_env, policy, obs, args.device, waypoints_world, current_wp_idx
+        )
+        obs, _, _, _ = env.step(command)  
+
+
 
 simulation_app.close()

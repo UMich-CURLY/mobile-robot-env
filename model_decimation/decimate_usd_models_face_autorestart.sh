@@ -5,16 +5,16 @@
 ## Contact: pohsun@umich.edu
 
 # Step 1: Run renaming script using IsaacLab
-PRE_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py"
-echo "=== Running IsaacLab preprocessing at $(date) ==="
-python $PRE_SCRIPT
-PRE_STATUS=$?
+# PRE_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py"
+# echo "=== Running IsaacLab preprocessing at $(date) ==="
+# python $PRE_SCRIPT
+# PRE_STATUS=$?
 
-if [ $PRE_STATUS -ne 0 ]; then
-    echo ">>> IsaacLab preprocessing failed (exit $PRE_STATUS). Aborting."
-    exit 1
-fi
-echo "=== IsaacLab preprocessing finished successfully ==="
+# if [ $PRE_STATUS -ne 0 ]; then
+#     echo ">>> IsaacLab preprocessing failed (exit $PRE_STATUS). Aborting."
+#     exit 1
+# fi
+# echo "=== IsaacLab preprocessing finished successfully ==="
 
 # Step 2: Run face decimation in Blender with auto-restart on crash or hang
 SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py"
@@ -53,14 +53,14 @@ while true; do
 done
 
 # Step 3: Run replacing decimated mesh to renamed usd in IsaacLab
-POST_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py"
-echo "=== Running post-processing at $(date) ==="
-python "$POST_SCRIPT"
-POST_STATUS=$?
+# POST_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py"
+# echo "=== Running post-processing at $(date) ==="
+# python "$POST_SCRIPT"
+# POST_STATUS=$?
 
-if [ $POST_STATUS -ne 0 ]; then
-    echo ">>> Post-processing script failed (exit $POST_STATUS)."
-    exit 1
-fi
+# if [ $POST_STATUS -ne 0 ]; then
+#     echo ">>> Post-processing script failed (exit $POST_STATUS)."
+#     exit 1
+# fi
 
-echo "=== Pipeline completed successfully at $(date) ==="
+# echo "=== Pipeline completed successfully at $(date) ==="
