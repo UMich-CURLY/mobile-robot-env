@@ -2,6 +2,7 @@ from isaaclab.envs import ManagerBasedRLEnv
 from utils.measures import add_measurement
 from utils.vis import visualize_path
 import isaaclab.sim as sim_utils
+import isaacsim.core.utils.bounds as bounds_utils
 from pxr import Gf
 import torch
 
@@ -36,29 +37,31 @@ class VLNEnvWrapper:
     @property
     def unwrapped(self) -> ManagerBasedRLEnv:
         """Returns the base environment of the wrapper.
-
-        This will be the bare :class:`gymnasium.Env` environment, underneath all layers of wrappers.
         """
         return self.env.unwrapped
 
     def reset(self) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
-        terrain_prim = self.env.unwrapped.scene.stage.GetPrimAtPath('/World/ground/terrain')
 
-        # set collider
-        if self.episode.get("collider", False):
-            collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
-            sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
-
-        # set scene scale
-        scene_scale = self.episode.get("scene_scale", 1.0)
-        if scene_scale != 1.0:
-            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
-
+        # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
         zero_cmd = torch.tensor([0., 0., 0.], device=low_level_obs.device)
 
+
+        # set collider and scene scale
+        terrain_prim = self.env.unwrapped.scene.stage.GetPrimAtPath('/World/ground/terrain')
+        if self.episode.get("collider", False):
+            collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
+            sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
+        scene_scale = self.episode.get("scene_scale", 1.0)
+        # if scene_scale != 1.0:
+        terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
+        if self.episode.get("align_ground", False):
+            bb_cache = bounds_utils.create_bbox_cache()
+            min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[terrain_prim.GetPrimPath()])
+            print(f"Bounding box: min_x: {min_x}, min_y: {min_y}, min_z: {min_z}, max_x: {max_x}, max_y: {max_y}, max_z: {max_z}")
+            terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
         # warmup_steps = 50
 
         # for i in range(warmup_steps):

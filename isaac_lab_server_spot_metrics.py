@@ -26,7 +26,7 @@ vln_cli_args.add_vln_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 
-
+sim_start_time = time.time()
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
 simulation_app = app_launcher.app
@@ -39,19 +39,9 @@ simulation_app.update()
 
 import carb, os
 settings = carb.settings.get_settings()
-
-MDL_DIRS = [
-    args.scene_folder + "/grscenes_home/Materials",
-    args.scene_folder + "/grscenes_commercial/Materials",
-    args.scene_folder + "/nvidia_edit/Materials",
-    args.scene_folder + "/nvidia/Materials",
-    args.scene_folder + "/umich/Materials",
-    args.scene_folder + "/virtual_community/Materials",
-    args.scene_folder + "/vc/Materials",
-]
-settings.set("/rtx/materials/mdl/searchPaths", MDL_DIRS)
-settings.set("/rtx/mdl/searchPaths", MDL_DIRS)
-settings.set("/rtx/materials/mdl/shader_search_paths", MDL_DIRS)
+settings.set("/renderer/multiGPU/enabled", False)
+settings.set("/renderer/activeGpu", 0)
+settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
 
 # Isaac Lab imports
 from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf
@@ -92,8 +82,7 @@ from utils.innout_sim import InNOutSim
 
 # load episodes
 episode_list = VLNEpisodes.from_json(args.episode_path, args.episode_type)
-episode_list = list(episode_list.keys())
-current_episode = episode_list[0]
+current_episode = episode_list[args.test_id]
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -129,6 +118,7 @@ sim_init = False
 print("[INFO]: Starting simulation")
 start_time = time.time()
 frame_count = 0
+end_time = 0
 while simulation_app.is_running():
     if not sim_init:
         obs, _ = env.reset()
@@ -142,9 +132,12 @@ while simulation_app.is_running():
         # print("measures: ", info["measurements"])
         # print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
     frame_count += 1
+    if frame_count == 1:
+        first_frame_time = time.time()
+        print(f"[INFO]: First frame time: {first_frame_time - sim_start_time:.2f}s")
+        pass
     if frame_count % 100 == 0:
-        print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {frame_count / (time.time() - start_time):.2f}")
+        print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {100 / (time.time() - start_time):.2f}")
         start_time = time.time()
-        frame_count = 0
 
 simulation_app.close()

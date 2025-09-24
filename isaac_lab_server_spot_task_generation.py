@@ -29,7 +29,8 @@ simulation_app = app_launcher.app
 from isaacsim.core.utils.extensions import enable_extension
 enable_extension("omni.anim.navigation.bundle")
 simulation_app.update()
-
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+print(f"ISAAC_NUCLEUS_DIR: {ISAAC_NUCLEUS_DIR}")
 
 import carb, os
 settings = carb.settings.get_settings()
@@ -65,9 +66,9 @@ from utils.task_generator import TaskGenerator
 
 # Main simulation loop
 
-
 # load episodes
-episode_list = VLNEpisodes.from_task_config(args.tg_config_path, args.tg_config_name)
+task_generator = TaskGenerator(args)
+episode_list = task_generator.generate_test_episodes()
 current_episode = episode_list[args.test_id]
 
 # setup environment
@@ -75,7 +76,6 @@ env_cfg = SpotFlatEnvCfg_PLAY()
 scene_folder = Path(args.scene_folder)
 # env_cfg.load_usd(args.scene_path)
 env_cfg.load_usd(scene_folder / current_episode["scene_path"])
-
 env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
 env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
 
@@ -93,11 +93,10 @@ ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(env, policy, "spot", current_episode, measure_names=all_measures)
+env = VLNEnvWrapper(args, env, policy, "spot", current_episode, measure_names=all_measures)
 print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
-task_generator = TaskGenerator(args, env, in_n_out_sim, "episodes/task_config.yaml")
 
 sim_init = False
 
@@ -105,8 +104,8 @@ sim_init = False
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if not sim_init:
-        tg_success = task_generator.reset()
-        if tg_success:
+        tg_success = task_generator.reset(env, current_episode["scene_id"])
+        # if tg_success:
             # test episode
             # save episode
         obs, _ = env.reset()
@@ -116,9 +115,9 @@ while simulation_app.is_running():
     with torch.inference_mode():
         # Policy forward pass
         obs, reward, done, info = env.step(in_n_out_sim.commands)
-        print("measures: ", info["measurements"])
+        # print("measures: ", info["measurements"])
         in_n_out_sim.update_obs(obs, manager_env)
-        task_generator.step()
-        print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
+        # task_generator.step()
+        # print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
 
 simulation_app.close()

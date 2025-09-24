@@ -1,7 +1,7 @@
 [
     {
-        "scene_id": "park_morning",
-        "episode_index": 0,
+        "scene_id": "nv_park",
+        "episode_id": "nv_park_0",
         "scene_scale": 1.0,
         "scene_path": "nvidia_edit/park/park_morning_edit.usd",
         "scene_type": "nvidia",

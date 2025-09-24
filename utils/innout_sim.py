@@ -4,6 +4,7 @@ import numpy as np
 import carb
 from threading import Thread
 import omni
+from omni.kit.viewport.utility import get_viewport_from_window_name
 
 class InNOutSim:
     def __init__(self, args, env):
@@ -23,6 +24,9 @@ class InNOutSim:
         self.commands_source = 'server'
         self.robot_index = 0
         self.viewport = get_viewport_from_window_name("Viewport")
+        if self.args.headless:
+            print("[INFO] Headless mode, disabling viewport updates")
+            self.viewport.updates_enabled = False
         self.viewport_third_person = True
         self.update_viewer()
 
@@ -76,8 +80,8 @@ class InNOutSim:
 
     _obs_index = 0
     def update_obs(self, obs, manager_env):
-        np.save(f"results/obs_{self._obs_index}.npy", obs.cpu().numpy())
-        self._obs_index = self._obs_index%100+1
+        # np.save(f"results/obs_{self._obs_index}.npy", obs.cpu().numpy())
+        # self._obs_index = self._obs_index%100+1
         # only publish the first robot's obs for now
         try:
             self._latest_rgb = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)

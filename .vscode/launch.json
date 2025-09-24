@@ -10,19 +10,48 @@
             "args": [
                 "--enable_cameras",
                 "--scene_folder",
-                "${home}/data/isaac_scenes_v1",
+                "/data/isaac_scenes_v1",
                 "--episode_path",
                 "${workspaceFolder}/episodes/test.json",
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
-                "--tg_config_name",
-                "virtual_community",
                 "--test_id",
-                "virtual_community_0"
+                "vc_berlin"
             ],
             "env": {
-                "DISPLAY": ":2"
+                // "DISPLAY": ":2"
             }
+        },
+        {
+            "name": "Warmup",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/warmup.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--dirs",
+                "/data/isaac_scenes_v1",
+                "--enable_cameras"
+            ],
+            "env": {
+                // "DISPLAY": ":2"
+            }
+        },
+        {
+            "name": "Metrics",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--scene_folder",
+                "/data/isaac_scenes_v1",
+                "--episode_path",
+                "${workspaceFolder}/episodes/test.json",
+                "--test_id",
+                "nv_park_0",
+                "--enable_cameras"
+            ]
         }
     ]
 }
