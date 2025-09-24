@@ -1,9 +1,11 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py -- --input_folder /path/to/folder
 
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
 
 import os
+import sys
+import argparse
 from pxr import Usd, UsdGeom, UsdShade, Sdf, Tf
 import time
 
@@ -56,7 +58,6 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     # Save the modified original stage as the output
     stage_orig.GetRootLayer().Export(output_usd_path)
     print(f"✅ Exported USD with original hierarchy/materials and swapped mesh geometry: {output_usd_path}")
-    time.sleep(0.5)
 
 
 def swap_all_decimated_meshes_in_folder(models_folder):
@@ -64,6 +65,8 @@ def swap_all_decimated_meshes_in_folder(models_folder):
     Iterate through all subfolders in models_folder, find instance.usd and
     corresponding instance_decimated.usd, and swap mesh geometry.
     """
+    processed_count = 0
+    
     for root, dirs, files in os.walk(models_folder):
         # Only process folders containing 'instance_renamed.usd' and 'instance_renamed_decimated.usd'
         if 'instance_renamed_decimated.usd' in files and 'instance_renamed.usd' in files:
@@ -74,18 +77,33 @@ def swap_all_decimated_meshes_in_folder(models_folder):
             if os.path.exists(decimated_usd):
                 print(f"[INFO] Swapping meshes: {decimated_usd} -> {original_usd}")
                 swap_mesh_geometry(original_usd, decimated_usd, output_usd)
+                processed_count += 1
             else:
                 print(f"[WARNING] No decimated USD found for {original_usd}, skipping.")
-
-        
-
-
+    
+    print(f"[INFO] Processing complete. Total USD files processed: {processed_count}")
 
 # --- SCRIPT USAGE EXAMPLE ---
 if __name__ == "__main__":
-
-    # Params:
-    input_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
-
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Replace mesh geometry in USD files with decimated versions")
+    parser.add_argument("--input_folder", 
+                        type=str, 
+                        required=True,
+                        help="Path to the input folder containing USD files to process")
+    
+    args = parser.parse_args()
+    
+    # Use parsed arguments
+    input_folder = args.input_folder
+    
+    print(f"[INFO] Input folder: {input_folder}")
+    print(f"[INFO] Starting mesh replacement process...")
+    
+    # Validate input folder exists
+    if not os.path.exists(input_folder):
+        print(f"[ERROR] Input folder does not exist: {input_folder}")
+        sys.exit(1)
+    
     # Main function call
     swap_all_decimated_meshes_in_folder(input_folder)

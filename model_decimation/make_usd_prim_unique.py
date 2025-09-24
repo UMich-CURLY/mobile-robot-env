@@ -1,9 +1,11 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py --input_folder /path/to/folder
 
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
 
 import os
+import sys
+import argparse
 from pxr import Usd, Sdf
 # import omni.kit.commands
 # import omni.kit
@@ -44,7 +46,7 @@ def rename_prims(stage):
     prim_paths.reverse()
     for path in prim_paths:
         prim = stage.GetPrimAtPath(path)
-        # omni.kit.commands.execute(“MovePrim”, path_from=path, path_to=pathTo)
+        # omni.kit.commands.execute("MovePrim", path_from=path, path_to=pathTo)
         if not prim.IsValid():
             # print(f"Invalid prim at path: {path}")
             # print("prim name:", prim.GetName())
@@ -83,12 +85,12 @@ def process_usd_file(usd_path, output_usd_path):
     stage.GetRootLayer().Export(output_usd_path)
     print(f"Saved renamed USD: {output_usd_path}")
 
-def make_name_unique_all_usds(models_folder):
+def make_name_unique_all_usds(input_folder):
     """
-    Iterate through all subfolders in models_folder,
+    Iterate through all subfolders in input_folder,
     find 'instance.usd' files, rename prims uniquely, and save as 'instance_renamed.usd'.
     """
-    for root_dir, dirs, files in os.walk(models_folder):
+    for root_dir, dirs, files in os.walk(input_folder):
         if "instance.usd" in files:
             usd_path = os.path.join(root_dir, "instance.usd")
             renamed_usd_path = os.path.join(root_dir, "instance_renamed.usd")
@@ -96,6 +98,24 @@ def make_name_unique_all_usds(models_folder):
             process_usd_file(usd_path, renamed_usd_path)
 
 if __name__ == "__main__":
-    # Set your folder path containing USDs
-    models_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
-    make_name_unique_all_usds(models_folder)
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Make USD prim names unique by adding suffixes and limiting length")
+    parser.add_argument("--input_folder", 
+                        type=str, 
+                        required=True,
+                        help="Path to the input folder containing USD files to process")
+    
+    args = parser.parse_args()
+    
+    # Use parsed arguments
+    input_folder = args.input_folder
+    
+    print(f"Processing USD files in folder: {input_folder}")
+    
+    # Validate input folder exists
+    if not os.path.exists(input_folder):
+        print(f"Error: Input folder does not exist: {input_folder}")
+        sys.exit(1)
+    
+    # Main function call
+    make_name_unique_all_usds(input_folder)
