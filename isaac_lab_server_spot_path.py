@@ -1,13 +1,13 @@
 ### Major changes:
 # 1. Remove people from scene
-# 2. Test navmesh generation using Py310RecastDetour
+# 2. Test navmesh generation using PyRecastDetour
 ### Usage:
 # cd pohsun/SG-VLN
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
-# DISPLAY=:2 python isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
-# DISPLAY=:2 python isaac_lab_server_spot_7_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_edit/park/park_morning_edit.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
+# DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
+# DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_edit/park/park_morning_edit.usd
 # python isaac_lab_server_spot_path.py --enable_cameras --scene_path /data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
 import argparse
 import sys
@@ -70,6 +70,11 @@ from isaaclab.managers import TerminationTermCfg as DoneTerm
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab.managers import SceneEntityCfg
 
+
+
+
+
+
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
 from rsl_rl.runners import OnPolicyRunner
@@ -100,6 +105,12 @@ env_cfg.load_usd(args_cli.scene_path)
 env_cfg.sim.device = args_cli.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
+
+
+# Initialize navmesh interface
+navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+
+
 # remove people from scene
 # def remove_people_folders(stage):
 #     """
@@ -138,6 +149,7 @@ checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
 ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args_cli.device)
 
+
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 step_count = 0
@@ -159,9 +171,6 @@ while simulation_app.is_running():
         # ----- Path planning using navmesh ----- #
         navmesh_file = args_cli.navmesh_path
 
-        # Initialize navmesh interface
-        navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
-
         # Setup navmesh from scene
         if navmesh_file is None:
             selected_paths = ["/World/ground/terrain"]
@@ -179,9 +188,11 @@ while simulation_app.is_running():
         navmeshInterface.visualize_navmesh()
 
         # Find path between two points
-        points = navmeshInterface.sample_random_points(1000, visualize=True)
+        points = navmeshInterface.sample_random_points(1000)
+        navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=80.)
         for i in range(50):
-            navmeshInterface.find_paths(points[2*i], points[2*i+1], visualize=True)
+            path = navmeshInterface.find_paths(points[2*i], points[2*i+1])
+            navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=40.)
         if navmesh_file is None:
             navmeshInterface.save_navmesh("episodes/navmesh.bin")
 

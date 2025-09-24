@@ -189,17 +189,22 @@ def convert_to_triangle_mesh(FaceVertexIndices, FaceVertexCounts):
     
     return np.array(triangle_faces)
 
-def create_points(nodes, prim_path="/World/Points", color=Gf.Vec3f(0.0, 1.0, 1.0), width=np.array([1.0], dtype=float) ):
+def create_points(nodes, prim_path="/World/Points", color=(0.0, 1.0, 1.0), width=2.0):
     '''Create and draw a Points on the stage following the nodes'''
     stage = omni.usd.get_context().get_stage()
     prim = UsdGeom.Points.Define(stage, prim_path)
     prim.CreatePointsAttr(nodes)
-    prim.CreateWidthsAttr(width)
-    prim.CreateDisplayColorAttr([color]*len(nodes))
+    prim.CreateWidthsAttr(np.array([width], dtype=float))
+    prim.CreateDisplayColorAttr([color])
 
-
-def create_curve(nodes, prim_path="/World/Path", color=(1, 0, 0), width=np.array([0.2], dtype=float) ):
+def create_curve(path, prim_path="/World/Path", color=(1, 0, 0), width=1.0 ):
     '''Create and draw a BasisCurve on the stage following the nodes'''
+
+    if len(path) <= 1:
+        print('[WARNING]: No valid path to visualize')
+        return
+
+    nodes = [Gf.Vec3f(float(pt[0]), float(pt[1]), float(pt[2])) for pt in path]
 
     stage = omni.usd.get_context().get_stage()
     prim = UsdGeom.BasisCurves.Define(stage, prim_path)
@@ -215,13 +220,9 @@ def create_curve(nodes, prim_path="/World/Path", color=(1, 0, 0), width=np.array
     type_attr = prim.GetTypeAttr().Get()
     # Set the width of the curve
 
-    width_attr = prim.CreateWidthsAttr(width)
-    # width_attr = prim.CreateWidthsAttr(Vt.Vec2fArray(1, [width, width]))
+    width_attr = prim.CreateWidthsAttr(np.array([width], dtype=float))
 
-    if len(width) == 1:
-        width =  Vt.FloatArray.FromNumpy(np.asarray([width for x in range(len(nodes))]))
-    else:
-        width = Vt.FloatArray.FromNumpy(width)
+    width =  Vt.FloatArray.FromNumpy(np.asarray([width for x in range(len(nodes))]))
 
     width_attr.Set(width)
 
@@ -345,12 +346,12 @@ class NavmeshInterface:
         settings["detailSampleDist"] = 1.0
         settings["detailSampleMaxError"] = 1.0
         # nvidia
-        settings["cellSize"] = 100.
-        settings["cellHeight"] = 100.
-        settings["agentHeight"] = 61
-        settings["agentRadius"] = 55
-        settings["agentMaxClimb"] = 100
-        settings["agentMaxSlope"] = 26.0
+        # settings["cellSize"] = 100.
+        # settings["cellHeight"] = 100.
+        # settings["agentHeight"] = 61
+        # settings["agentRadius"] = 55
+        # settings["agentMaxClimb"] = 100
+        # settings["agentMaxSlope"] = 26.0
         self.nm.set_settings(settings)
         # Try watershed (0) like default demo; if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)
@@ -409,34 +410,21 @@ class NavmeshInterface:
 
         return self.navmesh_v, self.navmesh_t
     
-    def find_paths(self, start, end, visualize=False):
+    def find_paths(self, start, end):
         """
         Input: start, end are lists of points [x, y, z]
         """
-        start = [self._convert_up_axis([start])]
-        end = [self._convert_up_axis([end])]
-        start_flat = start[0].flatten().tolist()
-        end_flat = end[0].flatten().tolist()
+        start = self._convert_up_axis([start])[0]
+        end = self._convert_up_axis([end])[0]
 
-        print(f"start={start}")
-        print(f"end={end}")
-        print(f"start_flat={start_flat}")
-        print(f"end_flat={end_flat}")
-
-        path_points = self.nm.pathfind_straight(start_flat, end_flat, 1)
-        print(f"Path points: {len(path_points)}")
+        path_points = self.nm.pathfind_straight(start, end, 1)
+        path_points = np.array(path_points).reshape(-1, 3)
+        path_points = self._convert_up_axis(path_points, inverse=True)
+        print(f"Path points: {path_points.shape}")
         
-        # Convert the flat list to 3D points and then to Gf.Vec3f format
-        if path_points and len(path_points) >= 3:
-            path_points_vis = np.array(path_points).reshape(-1, 3)
-            path_points_vis = self._convert_up_axis(path_points_vis, inverse=True)
-            path_points_vis = [Gf.Vec3f(float(pt[0]), float(pt[1]), float(pt[2])) for pt in path_points_vis]
-            if visualize:
-                create_curve(path_points_vis, width=np.array([20], dtype=float))
-            return path_points
-        else:
+        if path_points.shape[0] <= 1:
             print("[WARNING]: No valid path found")
-            return []
+        return path_points
 
     def save_navmesh(self, save_path):
         print("[INFO]: Exported navmesh to", save_path)
@@ -475,8 +463,8 @@ class NavmeshInterface:
         return vertices
 
     # ----- Helper functions for getting random points ----- #
-    def sample_random_points(self, num_points, visualize=False):
-        if not self.built:
+    def sample_random_points(self, num_points):
+        if not self.built or self.navmesh_v.shape[0] == 0:
             print("[WARNING]: Navmesh not built")
             return None
 
@@ -488,7 +476,5 @@ class NavmeshInterface:
         weights = weights[:,:,np.newaxis].repeat(3, axis=2)
         vertices = np.average(v[random_poly], weights=weights, axis=1)
         print(f'random points: {vertices}')
-        if visualize:
-            create_points(vertices, prim_path='/World/RandomPoints', width=np.array([30], dtype=float))
 
         return vertices
