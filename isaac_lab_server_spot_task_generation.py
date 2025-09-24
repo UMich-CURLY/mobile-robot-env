@@ -66,6 +66,8 @@ from utils.task_generator import TaskGenerator
 
 # Main simulation loop
 
+
+
 # load episodes
 task_generator = TaskGenerator(args)
 episode_list = task_generator.generate_test_episodes()
@@ -75,7 +77,7 @@ current_episode = episode_list[args.test_id]
 env_cfg = SpotFlatEnvCfg_PLAY()
 scene_folder = Path(args.scene_folder)
 # env_cfg.load_usd(args.scene_path)
-env_cfg.load_usd(scene_folder / current_episode["scene_path"])
+# env_cfg.load_usd(scene_folder / current_episode["scene_path"])
 env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
 env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
 
@@ -98,13 +100,43 @@ print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
 
+
+# Setup UI
+from utils.ui import SimWindow
+from isaacsim.gui.components import ui_utils
+import omni.ui as ui
+
+ui_window = SimWindow(manager_env)
+ui_elements = ui_window.ui_elements
+
+with ui_elements["main_frame"]:
+    with ui.CollapsableFrame("Navmesh Settings"):
+        ui_elements["usd_path"] = ui_utils.str_builder(
+            "USD Path",
+            use_folder_picker=True,
+            default_val=args.scene_folder,
+            folder_dialog_title="Select Scene USD",
+            bookmark_path=args.scene_folder
+        )
+        ui_elements["scene_scale"] = ui_utils.combo_floatfield_slider_builder("Scene Scale")[0]
+        ui_utils.btn_builder("Load Scene", lambda: in_n_out_sim.load_scene(ui_elements["usd_path"].model.as_string))
+    # with omni.ui.CollapsableFrame("Navmesh Settings"):
+    #     ui_window.create_float_drag("cellSize", 0.1, 100.0, 0.1, 1.0)
+    #     ui_window.create_float_drag("cellHeight", 0.1, 10.0, 0.1, 1.0)
+    #     ui_window.create_button("Build Navmesh", "Go!", lambda: build_navmesh())
+
+def build_navmesh():
+    print("[INFO]: Building navmesh...")
+    print("cellSize: ", ui_window.values["cellSize"])
+    print("cellHeight: ", ui_window.values["cellHeight"])
+
 sim_init = False
 
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if not sim_init:
-        tg_success = task_generator.reset(env, current_episode["scene_id"])
+        # tg_success = task_generator.reset(env, current_episode["scene_id"])
         # if tg_success:
             # test episode
             # save episode

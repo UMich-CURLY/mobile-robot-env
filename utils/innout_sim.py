@@ -39,6 +39,12 @@ class InNOutSim:
     
     def traverse_objects(self):
         prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
+    
+    def load_scene(self, usd_path):
+        manager_env = self.manager_env
+        manager_env.stage.RemovePrim(manager_env.scene.terrain.terrain_prim_paths[0])
+        manager_env.scene.terrain.terrain_prim_paths = []
+        manager_env.scene.terrain.import_usd("terrain", usd_path)
 
     # Socket server integration (control Spot via external commands)
     def action_callback(self, msg_type, message):
