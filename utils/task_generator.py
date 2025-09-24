@@ -5,25 +5,26 @@ from scipy.spatial import KDTree
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__+'/..')) + "/path_navmesh")
-# from utils import navmesh_utils
+from utils import navmesh_utils
 import numpy as np
 from utils.episode import VLNEpisodes
 
 class TaskGenerator:
-    def __init__(self, args, env, sim, config_path):
+    def __init__(self, args):
         self.args = args
+        self.task_config = yaml.load(open(args.tg_config_path, 'r'), Loader=yaml.FullLoader)
+    
+    def reset(self, env, scene_id):
+        # bind objects
         self.env = env
-        self.sim = sim
         self.manager_env = env.unwrapped.unwrapped
-        self.task_config = yaml.load(open(config_path, 'r'), Loader=yaml.FullLoader)
-        self.episode_config = self.task_config['scene']['nvidia_park']['episodes']
+        # load scene config
+        self.episode_config = self.task_config['scene'][scene_id]['episodes']
         self.episode_goals = self.episode_config['goals']
         self.num_episodes = self.episode_config['number']
-    
-    def reset(self):
-        self.load_scene()
+        # generate task
         self.parse_scene()
-        # self.generate_navmesh()
+        self.generate_navmesh()
         return True
 
     def parse_scene(self):
@@ -45,7 +46,8 @@ class TaskGenerator:
         navmesh_path = self.args.navmesh_path
         navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=self.manager_env.scene.stage)
         self.navmesh_interface = navmesh_interface
-        if os.path.exists(navmesh_path):
+        navmesh_exists = navmesh_path is not None and os.path.exists(navmesh_path)
+        if navmesh_exists:
             navmesh_interface.setup_navmesh_from_file(navmesh_path)
         else:
             selected_paths = ["/World/ground/terrain"]
@@ -68,6 +70,9 @@ class TaskGenerator:
             "detailSampleMaxError": 1.0,
             "partitionType": 0
         })
+
+        # if not navmesh_exists:
+
 
         # Visualize the navmesh
         navmesh_interface.visualize_navmesh()
@@ -95,12 +100,40 @@ class TaskGenerator:
 
         print(f'Sampled {len(self.sampled_traj)} trajectories')
     
+    def generate_test_episodes(self):
+        task_config = self.task_config
+        test_episodes = VLNEpisodes()
+        data = []
+        for i, scene_id in enumerate(task_config["scene"].keys()):
+            scene = task_config["scene"][scene_id]
+            episode = test_episodes.get_default_data()
+            episode["scene_id"] = scene_id
+            episode["episode_id"] = scene_id
+            episode["scene_path"] = scene["path"]
+            episode["scene_type"] = scene["type"]
+            episode["scene_scale"] = scene.get("scale", 1.0)
+            episode["collider"] = scene.get("collider", True)
+            episode["align_ground"] = scene.get("align_ground", True)
+            data.append(episode)
+        test_episodes.data = data
+        self.test_episodes = test_episodes
+        return self.test_episodes
+    
     def generate_episodes(self):
-        episodes = VLNEpisodes()
-        for i, traj in enumerate(self.sampled_traj):
-            episodes.data.append({
-                'scene_id': self.scene_id,
-                'episode_index': i,
-                
-            })
-        return episodes
+        task_config = self.task_config
+        test_episodes = VLNEpisodes()
+        data = []
+        for i, scene_id in enumerate(task_config["scene"].keys()):
+            scene = task_config["scene"][scene_id]
+            episode = test_episodes.get_default_data()
+            episode["scene_id"] = scene_id
+            episode["episode_id"] = scene_id
+            episode["scene_path"] = scene["path"]
+            episode["scene_type"] = scene["type"]
+            episode["scene_scale"] = scene.get("scale", 1.0)
+            episode["collider"] = scene.get("collider", True)
+            episode["align_ground"] = scene.get("align_ground", True)
+            data.append(episode)
+        test_episodes.data = data
+        self.test_episodes = test_episodes
+        return self.test_episodes
