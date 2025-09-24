@@ -1,4 +1,7 @@
-# ../IsaacLab/isaaclab.sh -p /home/junzhewu/pohsun/SG-VLN/robot_env/make_usd_prim_unique.py
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py
+
+## Author: Po-Hsun Chang
+## Contact: pohsun@umich.edu
 
 import os
 from pxr import Usd, Sdf

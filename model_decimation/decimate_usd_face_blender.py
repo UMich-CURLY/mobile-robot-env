@@ -1,4 +1,5 @@
-# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/decimate_usd_face_blender.py
+# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_face_blender.py
+
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
 

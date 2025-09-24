@@ -1,4 +1,7 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/replace_mesh_in_usd.py
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_mesh_in_usd.py
+
+## Author: Po-Hsun Chang
+## Contact: pohsun@umich.edu
 
 import os
 from pxr import Usd, UsdGeom, UsdShade, Sdf, Tf

@@ -1,4 +1,7 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/replace_usd_models_isaac.py
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py
+
+## Author: Po-Hsun Chang
+## Contact: pohsun@umich.edu
 
 import os
 from pxr import Usd, UsdGeom, UsdShade, Sdf, Tf
