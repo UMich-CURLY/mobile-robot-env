@@ -90,7 +90,7 @@ from pathlib import Path
 import isaacsim.core.utils.prims as prims_utils
 
 # Local imports
-from utils.episode import VLNEpisodes
+from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
 
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
@@ -104,7 +104,7 @@ RL_LIBRARY = "rsl_rl"
 # Main simulation loop
 
 # load episodes
-episode_list = VLNEpisodes()
+episode_list = VLNEpisode()
 current_episode = episode_list[0]
 
 # setup environment
@@ -128,12 +128,12 @@ ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", current_episode, measure_names=all_measures)
+env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
 
-obs, _ = env.reset()
+obs, _ = env.reset(current_episode)
 for frame_count in range(50):
     _ = env.step(in_n_out_sim.commands)
 
@@ -161,7 +161,7 @@ def test_single(scene_abs_path):
     for frame_count in range(100):
         with torch.inference_mode():
             if not sim_init:
-                obs, _ = env.reset()
+                obs, _ = env.reset(current_episode)
                 sim_init = True
                 print(f"[INFO]: Resetting robot state..")
             obs, reward, done, info = env.step(in_n_out_sim.commands)

@@ -78,7 +78,7 @@ TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
 
 # Local imports
-from utils.episode import VLNEpisodes
+from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
 
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
@@ -89,7 +89,7 @@ from utils.innout_sim import InNOutSim
 # Main simulation loop
 
 # load episodes
-episode_list = VLNEpisodes.from_json(args.episode_path, args.episode_type)
+episode_list = VLNEpisode.from_json(args.episode_path, args.episode_type)
 current_episode = episode_list[args.test_id]
 
 # setup environment
@@ -115,7 +115,7 @@ ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", current_episode, measure_names=all_measures)
+env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
@@ -144,7 +144,7 @@ frame_count = 0
 end_time = 0
 while simulation_app.is_running():
     if not sim_init:
-        obs, _ = env.reset()
+        obs, _ = env.reset(current_episode)
         sim_init = True
         print(f"[INFO]: Resetting robot state..")
 

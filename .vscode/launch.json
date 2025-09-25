@@ -16,7 +16,7 @@
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_id",
-                "vc_berlin"
+                "test_generator"
             ],
             "env": {
                 // "DISPLAY": ":2"
@@ -66,10 +66,25 @@
                 // "/data/isaac_scenes_v1/nvidia_edit/park_morning/park_morning_edit.usd",
                 "--navmesh_path",
                 "${workspaceFolder}/episodes/navmesh.bin"
-            ],
-            "env": {
-                "DISPLAY": ":2"
-            }
+            ]
+        },
+        {
+            "name": "Test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/isaac_lab_server_test.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--enable_cameras",
+                "--scene_folder",
+                "/data/isaac_scenes_v1/",
+                "--navmesh_path",
+                "${workspaceFolder}/episodes/navmesh.bin",
+                "--episode_path",
+                "${workspaceFolder}/episodes/test.json",
+                "--test_id",
+                "nv_park_0",
+            ]
         }
     ]
 }

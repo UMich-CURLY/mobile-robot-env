@@ -62,13 +62,15 @@ from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.innout_sim import InNOutSim
+from utils.task_generator import TaskGenerator
 
 # Main simulation loop
 
 
 
 # load episodes
-episode_list = VLNEpisode.from_json(args.episode_path, args.episode_type)
+task_generator = TaskGenerator(args)
+episode_list = task_generator.generate_test_episodes()
 current_episode = episode_list[args.test_id]
 
 # setup environment
@@ -98,11 +100,41 @@ print("[INFO] Env setup complete")
 
 in_n_out_sim = InNOutSim(args, env)
 
+
+# Setup UI
+from utils.ui import SimWindow
+from isaacsim.gui.components import ui_utils
+import omni.ui as ui
+
+ui_window = SimWindow(manager_env)
+ui_elements = ui_window.ui_elements
+
+with ui_elements["main_frame"]:
+    with ui.CollapsableFrame("Navmesh Settings"):
+        ui_elements["usd_path"] = ui_utils.str_builder(
+            "USD Path",
+            use_folder_picker=True,
+            default_val=args.scene_folder,
+            folder_dialog_title="Select Scene USD",
+            bookmark_path=args.scene_folder
+        )
+        ui_elements["scene_scale"] = ui_utils.combo_floatfield_slider_builder("Scene Scale")[0]
+        ui_utils.btn_builder("Load Scene", lambda: in_n_out_sim.load_scene(ui_elements["usd_path"].model.as_string))
+    # with omni.ui.CollapsableFrame("Navmesh Settings"):
+    #     ui_window.create_float_drag("cellSize", 0.1, 100.0, 0.1, 1.0)
+    #     ui_window.create_float_drag("cellHeight", 0.1, 10.0, 0.1, 1.0)
+    #     ui_window.create_button("Build Navmesh", "Go!", lambda: build_navmesh())
+
+def build_navmesh():
+    print("[INFO]: Building navmesh...")
+    print("cellSize: ", ui_window.values["cellSize"])
+    print("cellHeight: ", ui_window.values["cellHeight"])
+
 sim_init = False
 
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
-for i in range(30):
+while simulation_app.is_running():
     if not sim_init:
         # tg_success = task_generator.reset(env, current_episode["scene_id"])
         # if tg_success:
@@ -117,21 +149,7 @@ for i in range(30):
         obs, reward, done, info = env.step(in_n_out_sim.commands)
         # print("measures: ", info["measurements"])
         in_n_out_sim.update_obs(obs, manager_env)
+        # task_generator.step()
+        # print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
 
-in_n_out_sim.load_scene(scene_folder / current_episode["scene_path"])
-
-for i in range(1000):
-    if not sim_init:
-        # tg_success = task_generator.reset(env, current_episode["scene_id"])
-        # if tg_success:
-            # test episode
-            # save episode
-        obs, _ = env.reset(current_episode)
-        sim_init = True
-        print(f"[INFO]: Resetting robot state..")
-
-    with torch.inference_mode():
-        # Policy forward pass
-        obs, reward, done, info = env.step(in_n_out_sim.commands)
-        # print("measures: ", info["measurements"])
-        in_n_out_sim.update_obs(obs, manager_env)
+simulation_app.close()
