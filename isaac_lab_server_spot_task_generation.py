@@ -37,19 +37,6 @@ print(f"ISAAC_NUCLEUS_DIR: {ISAAC_NUCLEUS_DIR}")
 import carb, os
 settings = carb.settings.get_settings()
 
-MDL_DIRS = [
-    args.scene_folder + "/grscenes_home/Materials",
-    args.scene_folder + "/grscenes_commercial/Materials",
-    args.scene_folder + "/nvidia_edit/Materials",
-    args.scene_folder + "/nvidia/Materials",
-    args.scene_folder + "/umich/Materials",
-    args.scene_folder + "/virtual_community/Materials",
-    args.scene_folder + "/vc/Materials",
-]
-settings.set("/rtx/materials/mdl/searchPaths", MDL_DIRS)
-settings.set("/rtx/mdl/searchPaths", MDL_DIRS)
-settings.set("/rtx/materials/mdl/shader_search_paths", MDL_DIRS)
-
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
 from rsl_rl.runners import OnPolicyRunner
@@ -184,7 +171,7 @@ ui_config_map = {
     "scene_id": ("scene_id", choice_func(task_generator.scene_id_list)),
     "usd_path": ("path", [
         lambda x: x.as_string.replace(args.scene_folder+"/", "").replace(args.scene_folder, ""),
-        lambda x, y: x.set_value(str(Path(args.scene_folder) / y))
+        lambda x, y: x.set_value(str(scene_folder / y))
     ]),
     "navmesh_preset": ("navmesh_preset", choice_func(task_generator.navmesh_preset_list)),
     "scene_scale": ("scene_scale", float_func),
@@ -261,26 +248,27 @@ def build_navmesh():
     test_navmesh()
 
 def load_navmesh():
-    navmesh_path = str(Path(args.scene_folder) / current_episode["path"] / f"../{current_episode['scene_id']}_navmesh.bin")
+    navmesh_path = str(scene_folder / f"navmesh/{current_episode['scene_id']}_navmesh.bin")
     navmeshInterface.load_navmesh(navmesh_path)
     test_navmesh()
 
 def test_navmesh():
     navmeshInterface.visualize_navmesh()
     points = navmeshInterface.sample_random_points(1000)
-    navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=80.)
+    navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
     for i in range(50):
         path = navmeshInterface.find_paths(points[2*i], points[2*i+1])
-        navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=40.)
+        navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
 
 def save_navmesh():
-    navmesh_path = str(Path(args.scene_folder) / current_episode["path"] / f"../{current_episode['scene_id']}_navmesh.bin")
-    os.makedirs(Path(navmesh_path).parent, exist_ok=True)
+    os.makedirs(scene_folder / "navmesh", exist_ok=True)
+    navmesh_path = str(scene_folder / f"navmesh/{current_episode['scene_id']}_navmesh.bin")
     navmeshInterface.save_navmesh(navmesh_path)
 
 def teleport_robot():
-    current_episode["start_position"] = navmeshInterface.sample_random_points(1)[0]
-    env.reset(current_episode)
+    # current_episode["start_position"] = navmeshInterface.sample_random_points(1)[0]
+    # env.reset(current_episode)
+    robot_root_state = manager_env.scene.robot
 
 def generate_cube():
     prim_selection = omni.usd.get_context().get_selection()
