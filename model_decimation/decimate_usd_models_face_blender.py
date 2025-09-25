@@ -1,4 +1,4 @@
-# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py
+# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py -- --input_folder /path/to/folder --ratio 0.1
 
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
@@ -7,8 +7,9 @@ import bpy
 import os
 import bmesh
 from pxr import Usd, UsdGeom
-
 import sys
+import argparse
+
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)  # also flush errors immediately
 
@@ -121,10 +122,32 @@ def decimate_all_usd_in_folder(input_folder, ratio=0.1):
 
 # --- SCRIPT ENTRY POINT ---
 if __name__ == "__main__":
-    
-    # Params:
-    input_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
-    decimation_ratio = 0.1
+    # Parse command line arguments
+    # Note: When running with Blender, arguments after '--' are passed to the script
+    argv = sys.argv
+    if "--" in argv:
+        argv = argv[argv.index("--") + 1:]  # Get arguments after '--'
+    else:
+        argv = []
 
+    parser = argparse.ArgumentParser(description="Recursively decimate all USD files in a folder using Blender")
+    parser.add_argument("--input_folder", 
+                        type=str, 
+                        required=True,
+                        help="Path to the input folder containing USD files to decimate")
+    parser.add_argument("--ratio", 
+                        type=float, 
+                        default=0.1,
+                        help="Decimation ratio (default: 0.1)")
+
+    args = parser.parse_args(argv)
+    
+    # Use parsed arguments
+    input_folder = args.input_folder
+    decimation_ratio = args.ratio
+    
+    print(f"[INFO] Input folder: {input_folder}")
+    print(f"[INFO] Decimation ratio: {decimation_ratio}")
+    
     # Main function call
     decimate_all_usd_in_folder(input_folder, decimation_ratio)

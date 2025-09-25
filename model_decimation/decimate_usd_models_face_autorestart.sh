@@ -4,28 +4,46 @@
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
 
-# Step 1: Run renaming script using IsaacLab
-# PRE_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py"
-# echo "=== Running IsaacLab preprocessing at $(date) ==="
-# python $PRE_SCRIPT
-# PRE_STATUS=$?
+# Check if input folder argument is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <input_folder>"
+    echo "Example: $0 /home/junzhewu/pohsun/data_decimated/grscenes_commercial/models"
+    exit 1
+fi
 
-# if [ $PRE_STATUS -ne 0 ]; then
-#     echo ">>> IsaacLab preprocessing failed (exit $PRE_STATUS). Aborting."
-#     exit 1
-# fi
-# echo "=== IsaacLab preprocessing finished successfully ==="
+INPUT_FOLDER="$1"
+
+# Validate input folder exists
+if [ ! -d "$INPUT_FOLDER" ]; then
+    echo "Error: Input folder does not exist: $INPUT_FOLDER"
+    exit 1
+fi
+
+echo "Processing USD models in folder: $INPUT_FOLDER"
+
+# Step 1: Run renaming script using IsaacLab
+PRE_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/make_usd_prim_unique.py"
+echo "=== Running IsaacLab preprocessing at $(date) ==="
+python "$PRE_SCRIPT" --input_folder "$INPUT_FOLDER"
+PRE_STATUS=$?
+
+if [ $PRE_STATUS -ne 0 ]; then
+    echo ">>> IsaacLab preprocessing failed (exit $PRE_STATUS). Aborting."
+    exit 1
+fi
+echo "=== IsaacLab preprocessing finished successfully ==="
 
 # Step 2: Run face decimation in Blender with auto-restart on crash or hang
 SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py"
 LOG="blender_run.log"
-MAX_IDLE=10   # seconds of no output before killing
+MAX_IDLE=5   # seconds of no output before killing
 MEM_LIMIT="7G"  # memory limit for Blender process
+RATIO=0.1  # default decimation ratio
 
 while true; do
     echo "=== Starting Blender job at $(date) ==="
     : > "$LOG"   # truncate old log
-    systemd-run --user --scope -p MemoryMax="$MEM_LIMIT" blender --background --python "$SCRIPT" >"$LOG" 2>&1 &
+    systemd-run --user --scope -p MemoryMax=$MEM_LIMIT blender --background --python "$SCRIPT" -- --input_folder "$INPUT_FOLDER" --ratio $RATIO >"$LOG" 2>&1 &
     PID=$!
 
     while kill -0 $PID 2>/dev/null; do
@@ -53,14 +71,14 @@ while true; do
 done
 
 # Step 3: Run replacing decimated mesh to renamed usd in IsaacLab
-# POST_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py"
-# echo "=== Running post-processing at $(date) ==="
-# python "$POST_SCRIPT"
-# POST_STATUS=$?
+POST_SCRIPT="/home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py"
+echo "=== Running post-processing at $(date) ==="
+python "$POST_SCRIPT" --input_folder "$INPUT_FOLDER"
+POST_STATUS=$?
 
-# if [ $POST_STATUS -ne 0 ]; then
-#     echo ">>> Post-processing script failed (exit $POST_STATUS)."
-#     exit 1
-# fi
+if [ $POST_STATUS -ne 0 ]; then
+    echo ">>> Post-processing script failed (exit $POST_STATUS)."
+    exit 1
+fi
 
-# echo "=== Pipeline completed successfully at $(date) ==="
+echo "=== Pipeline completed successfully at $(date) ==="
