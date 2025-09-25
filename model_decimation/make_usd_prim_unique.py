@@ -91,6 +91,9 @@ def make_name_unique_all_usds(input_folder):
     find 'instance.usd' files, rename prims uniquely, and save as 'instance_renamed.usd'.
     """
     for root_dir, dirs, files in os.walk(input_folder):
+        if "instance_renamed.usd" in files:
+            print(f"[SKIP] Already renamed: {root_dir}")
+            continue
         if "instance.usd" in files:
             usd_path = os.path.join(root_dir, "instance.usd")
             renamed_usd_path = os.path.join(root_dir, "instance_renamed.usd")

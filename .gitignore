@@ -197,3 +197,4 @@ cython_debug/
 ./isaac/isaaclab_exts/omni.isaac.vlnce/assets/
 results/
 *.obj
+*.bin

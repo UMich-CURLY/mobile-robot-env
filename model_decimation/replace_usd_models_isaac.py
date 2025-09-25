@@ -29,7 +29,8 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     # Build a name-to-prim map for decimated meshes
     dec_mesh_map = {}
     for prim in stage_dec.Traverse():
-        dec_mesh_map[prim.GetName()] = prim
+        if prim.IsA(UsdGeom.Mesh):
+            dec_mesh_map[prim.GetName()] = prim
 
     # For each mesh in the original, if a decimated mesh with the same name exists, swap geometry
     total_faces_original = 0

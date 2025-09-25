@@ -1,4 +1,4 @@
-# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py -- --input_folder /path/to/folder --ratio 0.1
+# blender --background --python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/decimate_usd_models_face_blender.py -- --input_folder "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/" --ratio 0.1
 
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
@@ -70,14 +70,16 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
             # Count number of faces
             face_count = len(obj.data.polygons)
             original_face_count += face_count
+            # print(f"Number of faces: {face_count}")
             if face_count < 500:
                 decimated_face_count += face_count
+                # print(f"Number of faces after decimation: {face_count}")
                 continue
-            # print(f"Number of faces: {face_count}")
 
             # Select the object and make it active
             bpy.context.view_layer.objects.active = obj
             obj.select_set(True)
+            bpy.ops.object.make_single_user(type='ALL', object=True, obdata=True)
 
             # Add the Decimate modifier
             decimate_modifier = obj.modifiers.new(name="Decimate_Faces", type='DECIMATE')

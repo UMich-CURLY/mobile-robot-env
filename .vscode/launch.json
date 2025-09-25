@@ -62,11 +62,14 @@
             "args": [
                 "--enable_cameras",
                 "--scene_path",
-                "/data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd",
+                "/home/junzhewu/data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd",
                 // "/data/isaac_scenes_v1/nvidia_edit/park_morning/park_morning_edit.usd",
                 "--navmesh_path",
                 "${workspaceFolder}/episodes/navmesh.bin"
-            ]
+            ],
+            "env": {
+                "DISPLAY": ":2"
+            }
         }
     ]
 }

@@ -2,7 +2,7 @@ from collections import defaultdict
 import os
 import numpy as np
 import omni.physx
-
+from tqdm import tqdm
 import PyRecastDetour as pyrecast
 
 from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt, UsdUtils
@@ -85,33 +85,19 @@ def get_all_stage_mesh(stage, prims):
 
 def get_mesh(objs):
     points, faces = [],[]
-    i = 0
-    loss = 0
-    for obj in objs:
+
+    for i, obj in tqdm(enumerate(objs)):
         f_offset = len(points)
         # f, p = convert_to_mesh(obj)#usd_stage.GetPrimAtPath(obj))
         f, p = meshconvert(obj)#usd_stage.GetPrimAtPath(obj))
         p = np.array(p)
         f = np.array(f)
-        # print("p.shape: ", p.shape)
-        # print("f.shape: ", f.shape)
-        """ Added by Po-Hsun """
-        # if(len(p) == 0 or len(f) == 0):
-        #     # print("points len: ", len(p))
-        #     # print("faces len: ", len(f))
-        #     print("Prim path unable to form navmesh:", obj.GetPath())
-        #     print("len points: ", len(p), " len faces: ", len(f))
-        #     loss +=1
-        #     continue
-        """ Ended by Po-Hsun """
+
         # print("points shape: ", p.shape)  n x 3
         # print("faces shape: ", f.shape)   n x 3
         points.extend(p)
         faces.extend(f + f_offset)
-        print("index: ", i)
-        i += 1
-
-    print("loss mesh: ", loss)
+  
     return points, faces
 
 def meshconvert(prim):

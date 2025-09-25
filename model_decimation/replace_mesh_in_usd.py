@@ -22,8 +22,9 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     # Build a name-to-prim map for decimated meshes
     dec_mesh_map = {}
     for prim in stage_dec.Traverse():
-        dec_mesh_map[prim.GetName()] = prim
-        # print("decimated prim path:", prim.GetPath())
+        if prim.IsA(UsdGeom.Mesh):
+            dec_mesh_map[prim.GetName()] = prim
+            print("decimated prim path:", prim.GetPath())
     print("hash:", dec_mesh_map.keys())
     total_faces_original = 0
     total_faces_swapped = 0
@@ -73,9 +74,12 @@ def count_total_faces_in_instance(stage):
 # --- Example usage ---
 if __name__ == "__main__":
 
-    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cabinet/035b9ab88885025898b7b188650fb896/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/6e68fc1f50c5abe1bba216e802f4f9b5/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/21a639160bd5d0ab8cf540f6ef1b8097/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/696d892c2eb446175aca62eca638904d/"
+    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/1795c86fd1d93d5be331ca29f2563cf1/"
     original_usd = model_folder + "instance_renamed.usd"
-    decimated_usd = model_folder + "instance_decimated.usd"
+    decimated_usd = model_folder + "instance_decimated_test.usd"
     output_usd = model_folder + "instance_test.usd"
 
     # Print face count in original

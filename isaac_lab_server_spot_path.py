@@ -4,7 +4,7 @@
 ### Usage:
 # cd pohsun/SG-VLN
 # ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/data_decimated/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
-# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+# ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
 # ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
 # DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
 # DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_edit/park/park_morning_edit.usd

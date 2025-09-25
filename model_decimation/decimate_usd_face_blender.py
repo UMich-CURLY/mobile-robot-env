@@ -45,14 +45,17 @@ def decimate_usd(input_usd_path, output_usd_path, ratio=0.1):
             # Count number of faces
             face_count = len(obj.data.polygons)
             original_face_count += face_count
+            print(f"Number of faces: {face_count}")
             if face_count < 500:
                 decimated_face_count += face_count
+                print(f"Number of faces after decimation: {face_count}")
                 continue
-            print(f"Number of faces: {face_count}")
+            
 
             # Select the object and make it active
             bpy.context.view_layer.objects.active = obj
             obj.select_set(True)
+            bpy.ops.object.make_single_user(type='ALL', object=True, obdata=True)
 
             # Add the Decimate modifier
             decimate_modifier = obj.modifiers.new(name="Decimate_Faces", type='DECIMATE')
@@ -83,7 +86,8 @@ def decimate_usd(input_usd_path, output_usd_path, ratio=0.1):
                                 export_materials=False,
                                 export_animation=False,
                                 export_uvmaps=True,
-                                use_instancing=True)
+                                use_instancing=True,
+                            )
     except Exception as e:
         print(f"Error exporting USD file: {e}")
         return
@@ -94,9 +98,12 @@ def decimate_usd(input_usd_path, output_usd_path, ratio=0.1):
 if __name__ == "__main__":
     # Define your input and output file paths
     # Replace these with the actual paths on your system.
-    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cabinet/035b9ab88885025898b7b188650fb896/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/21a639160bd5d0ab8cf540f6ef1b8097/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/6e68fc1f50c5abe1bba216e802f4f9b5/"
+    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/696d892c2eb446175aca62eca638904d/"
+    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/1795c86fd1d93d5be331ca29f2563cf1/"
     input_file = model_folder + "instance_renamed.usd"
-    output_file = model_folder + "instance_decimated.usd"
+    output_file = model_folder + "instance_decimated_test.usd"
 
     # Optional: Adjust the decimation ratio (0.0 to 1.0)
     # A smaller value means more reduction.
