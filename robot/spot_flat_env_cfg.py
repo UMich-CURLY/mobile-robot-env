@@ -362,6 +362,12 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         )
+        self.load_generator()
+
+        # no height scan
+        self.scene.height_scanner = None
+
+    def load_generator(self):
         self.scene.terrain = TerrainImporterCfg(
             prim_path="/World/ground",
             terrain_type="generator",
@@ -377,9 +383,6 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
             debug_vis=True,
         )
 
-        # no height scan
-        self.scene.height_scanner = None
-
     def load_usd(self, usd_path: str):
         usd_path = str(usd_path)
         self.usd_path = usd_path
@@ -388,7 +391,8 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
             terrain_type="usd",
             usd_path=usd_path,
             physics_material=self._physics_material,
-        )       
+            env_spacing=self.scene.env_spacing,
+        )
         
 class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
     def __post_init__(self) -> None:

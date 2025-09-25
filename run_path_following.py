@@ -212,7 +212,7 @@ if args_cli.use_plan and waypoints_world:
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if first_step or reset_needed:
-        obs, _ = env.reset()
+        obs, _ = env.reset(current_episode)
 
         if env_cfg.usd_path is not None:
             terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')

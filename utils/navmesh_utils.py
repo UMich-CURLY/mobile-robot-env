@@ -281,16 +281,40 @@ class NavmeshInterface:
         self.input_tri = None
         self.random_points = None
         self.wall_outline = []
-        self.settings = {}
         self.path_points = None
         self.stage = stage
         self.start_pos = None
         self.end_pos = None
         self.nm = pyrecast.Navmesh()
-
+        settings = self.nm.get_settings()
+        settings["cellSize"] = 0.08
+        settings["cellHeight"] = 0.1
+        settings["agentHeight"] = 0.3
+        settings["agentRadius"] = 0.3
+        settings["agentMaxClimb"] = 0.05
+        settings["agentMaxSlope"] = 26.0
+        settings["regionMinSize"] = 0.5
+        settings["regionMergeSize"] = 0.5
+        settings["edgeMaxLen"] = 5.0
+        settings["edgeMaxError"] = 1.3
+        settings["vertsPerPoly"] = 6.0
+        settings["detailSampleDist"] = 1.0
+        settings["detailSampleMaxError"] = 1.0
+        self.settings = settings
         # if z_up is true, we will need to do some conversion before sending to 
         # recast, then, we will convert it back to y_up (all functions will need to do that)
         self.z_up = up_axis == 'Z'
+    
+    def _snake_to_camel(self, s):
+        parts = s.split('_')
+        return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
+    
+    def _camel_to_snake(self, s):
+        return ''.join(['_' + char.lower() if char.isupper() else char for char in s]).lstrip('_')
+
+    def update_settings(self, settings):
+        for key, value in settings.items():
+            self.settings[self._snake_to_camel(key)] = value
 
     def is_path_valid(self):
         if self.path_points is None:
@@ -329,31 +353,9 @@ class NavmeshInterface:
         self.nm.init_by_raw(verts_flat, faces_flat)
         print(f"[INFO]: Loaded navmesh from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4}') triangles")
 
-    def build_navmesh(self, settings={}):
-        settings = self.nm.get_settings()
-        # These mirror Sample::resetCommonSettings defaults
-        settings["cellSize"] = 0.08
-        settings["cellHeight"] = 0.1
-        settings["agentHeight"] = 0.3
-        settings["agentRadius"] = 0.3
-        settings["agentMaxClimb"] = 0.05
-        settings["agentMaxSlope"] = 26.0
-        settings["regionMinSize"] = 0.5
-        settings["regionMergeSize"] = 0.5
-        settings["edgeMaxLen"] = 5.0
-        settings["edgeMaxError"] = 1.3
-        settings["vertsPerPoly"] = 6.0
-        settings["detailSampleDist"] = 1.0
-        settings["detailSampleMaxError"] = 1.0
-        # nvidia
-        # settings["cellSize"] = 100.
-        # settings["cellHeight"] = 100.
-        # settings["agentHeight"] = 61
-        # settings["agentRadius"] = 55
-        # settings["agentMaxClimb"] = 100
-        # settings["agentMaxSlope"] = 26.0
-        self.nm.set_settings(settings)
-        # Try watershed (0) like default demo; if it fails, switch to monotone (1)
+    def build_navmesh(self):
+        self.nm.set_settings(self.settings)
+        # Try watershed (0); if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)
         self.nm.build_navmesh()
         v, t, = self.get_navmesh_polygons()

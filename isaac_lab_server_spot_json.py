@@ -284,7 +284,7 @@ def world_to_body(dx, dy, yaw):
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if first_step or reset_needed:
-        obs, _ = env.reset()
+        obs, _ = env.reset(current_episode)
 
         # Optional: terrain rescale (matches your original)
         # if env_cfg.usd_path is not None:

@@ -2,8 +2,10 @@
 # python isaac_lab_server_spot_sample.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --episode_path episodes/test.json
 
 import argparse
+import json
 import torch
 from pathlib import Path
+import time
 
 # start simulation
 from isaaclab.app import AppLauncher
@@ -58,20 +60,20 @@ TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
 
 # Local imports
-from utils.episode import VLNEpisodes
+from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.innout_sim import InNOutSim
 from utils.task_generator import TaskGenerator
+import utils.navmesh_utils as navmesh_utils
 
 # Main simulation loop
 
-
-
 # load episodes
 task_generator = TaskGenerator(args)
-episode_list = task_generator.generate_test_episodes()
-current_episode = episode_list[args.test_id]
+task_config = task_generator.task_config
+scene_config = task_generator.get_scene_config(args.test_id)
+current_episode = VLNEpisode(scene_config)
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -95,40 +97,211 @@ ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", current_episode, measure_names=all_measures)
+env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
-
+navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
 in_n_out_sim = InNOutSim(args, env)
 
 
 # Setup UI
 from utils.ui import SimWindow
-from isaacsim.gui.components import ui_utils
+import utils.ui_utils as ui_utils
 import omni.ui as ui
+import omni.usd
+import isaacsim.core.utils.prims as prim_utils
+import isaacsim.core.utils.bounds as bounds_utils
+import isaaclab.sim as sim_utils
 
 ui_window = SimWindow(manager_env)
 ui_elements = ui_window.ui_elements
 
-with ui_elements["main_frame"]:
-    with ui.CollapsableFrame("Navmesh Settings"):
+with ui_elements["main_stack"]:
+    with ui_window.create_frame("Scene Settings"):
+        ui_elements["scene_id"] = ui_utils.dropdown_builder(
+            "Scene Id",
+            items=task_generator.scene_id_list,
+            on_clicked_fn=lambda x: update_ui("scene_id", x)
+        )
+        ui_utils.btn_builder("Save Scene Settings", text="Save", on_clicked_fn=lambda: save_settings("scene"))
         ui_elements["usd_path"] = ui_utils.str_builder(
             "USD Path",
             use_folder_picker=True,
             default_val=args.scene_folder,
             folder_dialog_title="Select Scene USD",
-            bookmark_path=args.scene_folder
+            bookmark_label="Scene Folder",
+            bookmark_path=args.scene_folder,
         )
-        ui_elements["scene_scale"] = ui_utils.combo_floatfield_slider_builder("Scene Scale")[0]
-        ui_utils.btn_builder("Load Scene", lambda: in_n_out_sim.load_scene(ui_elements["usd_path"].model.as_string))
-    # with omni.ui.CollapsableFrame("Navmesh Settings"):
-    #     ui_window.create_float_drag("cellSize", 0.1, 100.0, 0.1, 1.0)
-    #     ui_window.create_float_drag("cellHeight", 0.1, 10.0, 0.1, 1.0)
-    #     ui_window.create_button("Build Navmesh", "Go!", lambda: build_navmesh())
+        ui_elements["scene_scale"] = ui_utils.combo_floatfield_slider_builder(
+            "Scene Scale",
+            default_val=1.0,
+            min=0.01,
+            max=100,
+            step=0.01,
+        )[0]
+        ui_elements["collider"] = ui_utils.cb_builder("Collider", default_val=True)
+        ui_elements["align_ground"] = ui_utils.cb_builder("Align Ground", default_val=True)
+        ui_utils.btn_builder("Load Scene", text="Load", on_clicked_fn=lambda: load_scene())
+    with ui_window.create_frame("Navmesh Settings", collapsed=True):
+        for key, value in navmeshInterface.settings.items():
+            key = navmeshInterface._camel_to_snake(key)
+            ui_elements[f"navmesh_settings_{key}"] = ui_utils.combo_floatfield_slider_builder(
+                key,
+                default_val=value,
+                min=0.01*value,
+                max=100*value,
+                step=0.001,
+            )[0]
+        ui_utils.btn_builder("Navmesh Config", text="Save", on_clicked_fn=lambda: save_settings("navmesh_config"))
+    with ui_window.create_frame("Navmesh Tools"):
+        ui_elements["navmesh_preset"] = ui_utils.dropdown_builder(
+            "Navmesh Preset",
+            items=task_generator.navmesh_preset_list,
+            on_clicked_fn=lambda x: update_ui("navmesh_preset", x)
+        )
+        ui_utils.btn_builder("Build Navmesh", text="Build", on_clicked_fn=lambda: build_navmesh())
+        ui_utils.btn_builder("Load Navmesh", text="Load", on_clicked_fn=lambda: load_navmesh())
+        ui_utils.btn_builder("Save Navmesh", text="Save", on_clicked_fn=lambda: save_navmesh())
+        ui_utils.btn_builder("Test Navmesh", text="Test", on_clicked_fn=lambda: test_navmesh())
+        ui_utils.btn_builder("Teleport Robot", text="Teleport", on_clicked_fn=lambda: teleport_robot())
+        ui_utils.btn_builder("Generate Cube", text="Generate", on_clicked_fn=lambda: generate_cube())
+    with ui_window.create_frame("Episode Settings"):
+        # ui_elements["scene_type"] = ui_utils.str_builder("Scene Type", default_val=current_episode["scene_type"])
+        # episode number
+        ui_elements["episode_number"] = ui_utils.int_builder("Episode Number", default_val=30)
+        ui_elements["goal_rules"] = ui_utils.str_builder("Episode Goals", default_val="mailbox, park_bench, hydrant")
+        ui_utils.btn_builder("Generate Episode", text="Generate")
+
+# ui_name: (config_name, [getter_func, setter_func])
+str_func = [lambda x: x.as_string, lambda x, y: x.set_value(y)]
+int_func = [lambda x: x.as_int, lambda x, y: x.set_value(y)]
+float_func = [lambda x: x.as_float, lambda x, y: x.set_value(y)]
+bool_func = [lambda x: x.as_bool, lambda x, y: x.set_value(y)]
+choice_func = lambda item_list: [
+    lambda x: item_list[x.get_item_value_model().as_int],
+    lambda x, y: x.get_item_value_model().set_value(item_list.index(y))
+]
+ui_config_map = {
+    "scene_id": ("scene_id", choice_func(task_generator.scene_id_list)),
+    "usd_path": ("path", [
+        lambda x: x.as_string.replace(args.scene_folder+"/", "").replace(args.scene_folder, ""),
+        lambda x, y: x.set_value(str(Path(args.scene_folder) / y))
+    ]),
+    "navmesh_preset": ("navmesh_preset", choice_func(task_generator.navmesh_preset_list)),
+    "scene_scale": ("scene_scale", float_func),
+    "collider": ("collider", bool_func),
+    "align_ground": ("align_ground", bool_func),
+    "episode_number": ("episode_number", int_func),
+    "goal_rules": ("goal_rules", [
+        lambda x: json.loads(x.as_string),
+        lambda x, y: x.set_value(json.dumps(y))
+    ]),
+}
+navmesh_settings_map = {x: (x.replace("navmesh_settings_", ""), float_func) for x in ui_elements.keys() if x.startswith("navmesh_settings_")}
+
+def get_ui_value(map, key):
+    try:
+        getter_func, setter_func = map[key][1]
+        print(f"[INFO]: Get {key} value: {getter_func(ui_elements[key])}")
+        return getter_func(ui_elements[key])
+    except:
+        print(f"[ERROR]: Failed to get value for {key}")
+        import traceback
+        traceback.print_exc()
+
+def set_ui_value(map, key, value):
+    try:
+        getter_func, setter_func = map[key][1]
+        setter_func(ui_elements[key], value)
+        print(f"[INFO]: Set {key} value: {value}")
+    except:
+        print(f"[ERROR]: Failed to set value for {key}")
+        import traceback
+        traceback.print_exc()
+
+def update_ui(settings_type, selected_value):
+    if settings_type == "navmesh_preset":
+        preset_name = selected_value
+        for key, (value, _) in navmesh_settings_map.items():
+            set_ui_value(navmesh_settings_map, key, task_config['navmesh'][preset_name][value])
+    elif settings_type == "scene_id":
+        scene_id = selected_value
+        new_scene_config = task_generator.get_scene_config(scene_id)
+        for key, (value, _) in ui_config_map.items():
+            set_ui_value(ui_config_map, key, new_scene_config[value])
+        # update_ui("navmesh_preset", new_scene_config["navmesh_preset"])
+
+def save_settings(settings_type):
+    if settings_type == "navmesh_runtime":
+        for key, (value, _) in navmesh_settings_map.items():
+            value_camel = navmeshInterface._snake_to_camel(key)
+            navmeshInterface.settings[value_camel] = get_ui_value(navmesh_settings_map, key)
+    elif settings_type == "navmesh_config":
+        preset_name = get_ui_value(ui_config_map, "navmesh_preset")
+        for key, (value, _) in navmesh_settings_map.items():
+            task_config['navmesh'][preset_name][value] = get_ui_value(navmesh_settings_map, key)
+    elif settings_type == "scene":
+        for key, (value, _) in ui_config_map.items():
+            scene_config[value] = get_ui_value(ui_config_map, key)
+            task_generator.update_config(scene_config)
+        task_generator.save_config(args.tg_config_path)
+
+def load_scene():
+    for key, (value, _) in ui_config_map.items():
+        current_episode[value] = get_ui_value(ui_config_map, key)
+    env.reset(current_episode)
 
 def build_navmesh():
-    print("[INFO]: Building navmesh...")
-    print("cellSize: ", ui_window.values["cellSize"])
-    print("cellHeight: ", ui_window.values["cellHeight"])
+    save_settings("navmesh_runtime")
+    selected_paths = ["/World/ground/terrain"]
+    start_time = time.time()
+    navmeshInterface.setup_navmesh(selected_paths)
+    navmeshInterface.build_navmesh()
+    end_time = time.time()
+    print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
+    test_navmesh()
+
+def load_navmesh():
+    navmesh_path = str(Path(args.scene_folder) / current_episode["path"] / f"../{current_episode['scene_id']}_navmesh.bin")
+    navmeshInterface.load_navmesh(navmesh_path)
+    test_navmesh()
+
+def test_navmesh():
+    navmeshInterface.visualize_navmesh()
+    points = navmeshInterface.sample_random_points(1000)
+    navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=80.)
+    for i in range(50):
+        path = navmeshInterface.find_paths(points[2*i], points[2*i+1])
+        navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=40.)
+
+def save_navmesh():
+    navmesh_path = str(Path(args.scene_folder) / current_episode["path"] / f"../{current_episode['scene_id']}_navmesh.bin")
+    os.makedirs(Path(navmesh_path).parent, exist_ok=True)
+    navmeshInterface.save_navmesh(navmesh_path)
+
+def teleport_robot():
+    current_episode["start_position"] = navmeshInterface.sample_random_points(1)[0]
+    env.reset(current_episode)
+
+def generate_cube():
+    prim_selection = omni.usd.get_context().get_selection()
+    selected_prim_paths = prim_selection.get_selected_prim_paths()
+    # create a cube for first selected prim
+    if len(selected_prim_paths) > 0:
+        prim_path = selected_prim_paths[0]
+        cube_path = "/World/Cube"
+        # remove cube if it exists
+        if prim_utils.get_prim_at_path(cube_path):
+            prim_utils.delete_prim(cube_path)
+        prim = omni.usd.get_context().get_stage().GetPrimAtPath(prim_path)
+        bb_cache = bounds_utils.create_bbox_cache()
+        min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[prim_path])
+        cfg_cube = sim_utils.CuboidCfg(size=[1.0, 1.0, 1.0])
+        position = [(min_x+max_x)/2, (min_y+max_y)/2, (min_z+max_z)/2]
+        cfg_cube.func("/World/Cube", cfg_cube, translation=list(position))
+    else:
+        print("[ERROR]: No prim selected")
+
+update_ui("scene_id", current_episode["scene_id"])
 
 sim_init = False
 
@@ -136,11 +309,7 @@ sim_init = False
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     if not sim_init:
-        # tg_success = task_generator.reset(env, current_episode["scene_id"])
-        # if tg_success:
-            # test episode
-            # save episode
-        obs, _ = env.reset()
+        obs, _ = env.reset(current_episode)
         sim_init = True
         print(f"[INFO]: Resetting robot state..")
 

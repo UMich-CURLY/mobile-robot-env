@@ -1,4 +1,6 @@
+from pathlib import Path
 from isaaclab.envs import ManagerBasedRLEnv
+from isaaclab.terrains import TerrainImporter
 from utils.measures import add_measurement
 from utils.vis import visualize_path
 import isaaclab.sim as sim_utils
@@ -7,17 +9,18 @@ from pxr import Gf
 import torch
 
 class VLNEnvWrapper:
-    """Wrapper to configure an :class:`ManagerBasedRLEnv` instance to VLN environment."""
+    """Wrapper to configure an :class:`RslRlVecEnvWrapper` instance to VLN environment."""
 
-    def __init__(self, args, env: ManagerBasedRLEnv, 
-                 low_level_policy, robot_name, 
-                 episode, max_length=10000,
+    def __init__(self, args, env, 
+                 low_level_policy, robot_name, max_length=10000,
                  measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
         ):
         self.env = env
+        self.manager_env = env.unwrapped
+        self.scene = self.manager_env.scene
         self.robot_name = robot_name
-        self.episode = episode
         self.measure_names = measure_names
+        self.usd_path = None
         self.args = args
 
         self.env_step = 0
@@ -38,26 +41,43 @@ class VLNEnvWrapper:
     def unwrapped(self) -> ManagerBasedRLEnv:
         """Returns the base environment of the wrapper.
         """
-        return self.env.unwrapped
+        return self.manager_env
 
-    def reset(self) -> tuple[torch.Tensor, dict]:
+    def reset(self, episode=None) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
+        if episode is not None:
+            self.episode = episode
+        else:
+            if self.episode is None:
+                raise ValueError("Episode is not set")
+
+        # load scene
+        if self.usd_path != self.episode["path"]:
+            while len(self.scene.terrain.terrain_prim_paths) > 0:
+                self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
+                self.scene.terrain.terrain_prim_paths.pop(0)
+            if self.episode["path"] == "generator":
+                self.manager_env.cfg.load_generator()
+                self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
+                self.scene.terrain.terrain_prim_paths.append("/World/ground/terrain")
+            else:
+                self.manager_env.cfg.load_usd(str(Path(self.args.scene_folder) / self.episode["path"]))
+                self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
 
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
         zero_cmd = torch.tensor([0., 0., 0.], device=low_level_obs.device)
 
-
         # set collider and scene scale
-        terrain_prim = self.env.unwrapped.scene.stage.GetPrimAtPath('/World/ground/terrain')
-        if self.episode.get("collider", False):
+        terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
+        if self.episode.get("collider", True):
             collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
             sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
         scene_scale = self.episode.get("scene_scale", 1.0)
         # if scene_scale != 1.0:
         terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
-        if self.episode.get("align_ground", False):
+        if self.episode.get("align_ground", True):
             bb_cache = bounds_utils.create_bbox_cache()
             min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[terrain_prim.GetPrimPath()])
             print(f"Bounding box: min_x: {min_x}, min_y: {min_y}, min_z: {min_z}, max_x: {max_x}, max_y: {max_y}, max_z: {max_z}")
@@ -82,23 +102,8 @@ class VLNEnvWrapper:
         measurements = self.measure_manager.get_measurements()
         infos["measurements"] = measurements
 
-        self.prev_pos = self.env.unwrapped.scene["robot"].data.root_pos_w[0].detach()
+        self.prev_pos = self.scene["robot"].data.root_pos_w[0].detach()
 
-        # set viewer camera
-        # if self.episode["scene_type"] == "nvidia":
-        #     self.env.unwrapped.viewer.set_camera_position(self.episode["start_position"])
-        #     self.env.unwrapped.viewer.set_camera_rotation(self.episode["start_rotation"])
-        #     self.env.unwrapped.viewer.set_camera_fov(60)
-        #     self.env.unwrapped.viewer.set_camera_near_clip(0.1)
-
-        # visualize ref path
-        for goal in self.episode["goals"]:
-            ref_path = goal["reference_path"]
-            visualize_path(
-                self.env.unwrapped.unwrapped,
-                ref_path,
-                target_xyz=goal["location"]
-            )
         # log
         if not self.args.disable_camera:
             obs = infos["observations"][self.high_level_obs_key]
@@ -111,7 +116,7 @@ class VLNEnvWrapper:
 
         # make sure command is a tensor on the same device as low_level_obs
         if not torch.is_tensor(command):
-            command = torch.tensor(command, device=self.env.unwrapped.device)
+            command = torch.tensor(command, device=self.manager_env.device)
         self.low_level_obs = self.low_level_obs.clone()
         self.low_level_obs[:, 9:12] = command
 
@@ -153,8 +158,8 @@ class VLNEnvWrapper:
         return obs, reward, done, info
     
     def check_same_pos(self) -> bool:
-        curr_pos = self.env.unwrapped.scene["robot"].data.root_pos_w[0].detach()
-        robot_vel = torch.norm(self.env.unwrapped.scene["robot"].data.root_vel_w[0].detach())
+        curr_pos = self.scene["robot"].data.root_pos_w[0].detach()
+        robot_vel = torch.norm(self.scene["robot"].data.root_vel_w[0].detach())
         if torch.norm(curr_pos - self.prev_pos) < 0.01 and robot_vel < 0.1:
             self.same_pos_count += 1
         else:

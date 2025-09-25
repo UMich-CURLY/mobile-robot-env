@@ -1,4 +1,3 @@
-# check https://github.com/isaac-sim/IsaacSim/blob/main/source/extensions/isaacsim.gui.components/isaacsim/gui/components/ui_utils.py
 import asyncio
 import os
 import weakref
@@ -7,8 +6,9 @@ from typing import TYPE_CHECKING
 
 import isaacsim
 import omni.kit.app
-
 import omni.ui as ui
+from isaacsim.gui.components import ui_utils
+from isaacsim.gui.components.style import get_style
 
 LABEL_WIDTH = 120
 SPACING = 4
@@ -23,7 +23,7 @@ class SimWindow:
 
         # create window for UI
         self.ui_window = ui.Window(
-            window_name, width=400, height=500, visible=True, dock_preference=ui.DockPreference.RIGHT_TOP
+            window_name, width=300, height=500, visible=True, dock_preference=ui.DockPreference.RIGHT_TOP
         )
         # dock next to properties window
         asyncio.ensure_future(self._dock_window(window_title=self.ui_window.title))
@@ -33,9 +33,12 @@ class SimWindow:
         self.ui_elements = dict()
         # create main frame
         self.ui_elements["main_frame"] = self.ui_window.frame
+        with self.ui_elements["main_frame"]:
+            self.ui_elements["main_stack"] = ui.VStack(style=get_style(), spacing=5, height=0)
     
-    def create_group(self, name):
-        with ui.CollapsableFrame():
+    def create_frame(self, name, collapsed=False):
+        with ui.CollapsableFrame(name, collapsed=collapsed):
+            return ui.VStack(style=get_style(), spacing=5, height=0)
             
 
     def __del__(self):
@@ -45,28 +48,6 @@ class SimWindow:
             self.ui_window.visible = False
             self.ui_window.destroy()
             self.ui_window = None
-
-    def create_float_drag(self, name, min, max, step, default_value):
-        with ui.HStack():
-            ui.Label(name, width=LABEL_WIDTH)
-            def on_value_changed(model):
-                self.values[name] = model.as_float
-                print(f"[{name}] value: {model.as_float}")
-            self.ui_elements[name] = ui.FloatDrag(name=name, min=min, max=max, step=step)
-            self.ui_elements[name].model.set_value(default_value)
-            self.ui_elements[name].model.add_value_changed_fn(on_value_changed)
-            self.values[name] = default_value
-            isaacsim.gui.components.ui_utils.add_line_rect_flourish()
-    
-    def create_button(self, name, text, clicked_fn: callable):
-        with ui.HStack():
-            ui.Label(name, width=LABEL_WIDTH)
-            self.ui_elements[name] = ui.Button(
-                name=name,
-                text=text,
-                clicked_fn=clicked_fn,
-            )
-            isaacsim.gui.components.ui_utils.add_line_rect_flourish()
 
     async def _dock_window(self, window_title):
         """Docks the custom UI window to the property window."""
