@@ -111,7 +111,7 @@ def decimate_all_usd_in_folder(input_folder, ratio=0.1):
             if file.endswith('instance_renamed.usd'):
                 usd_files.append(os.path.join(root, file))
 
-    print(f"[INFO] Found {len(usd_files)} USD files in folder: {input_folder}")
+    print(f"TERMINAL: Found {len(usd_files)} USD files in folder: {input_folder}")
 
     for idx, usd_path in enumerate(usd_files, 1):
         output_path = os.path.splitext(usd_path)[0] + "_decimated.usd"
