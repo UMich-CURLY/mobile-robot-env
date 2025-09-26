@@ -347,7 +347,6 @@ class NavmeshInterface:
         v, t, = self.get_navmesh_polygons()
         print(f'v shape: {v.shape}')
         print(f't shape: {t.shape}')
-        self.built = v.shape[0] > 0
         log = self.nm.get_log()
         print(log)
         if not self.built:
@@ -396,6 +395,7 @@ class NavmeshInterface:
 
         self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
 
+        self.built = self.navmesh_v.shape[0] > 0
         return self.navmesh_v, self.navmesh_t
     
     def find_paths(self, start, end):

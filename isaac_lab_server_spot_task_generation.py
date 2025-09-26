@@ -47,7 +47,7 @@ TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
 
 # Local imports
-from utils.episode import VLNEpisode
+from utils.episode import VLNEpisode, save_episodes
 from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.innout_sim import InNOutSim
@@ -67,8 +67,8 @@ env_cfg = SpotFlatEnvCfg_PLAY()
 scene_folder = Path(args.scene_folder)
 # env_cfg.load_usd(args.scene_path)
 # env_cfg.load_usd(scene_folder / current_episode["scene_path"])
-env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
-env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
+# env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
+# env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
 
 # env_cfg.viewer.cam_prim_path = '/World/pov_camera'
 
@@ -86,7 +86,7 @@ policy = ppo_runner.get_inference_policy(device=args.device)
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
-navmeshInterface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
 in_n_out_sim = InNOutSim(args, env)
 
 
@@ -129,8 +129,13 @@ with ui_elements["main_stack"]:
         ui_elements["align_ground"] = ui_utils.cb_builder("Align Ground", default_val=True)
         ui_utils.btn_builder("Load Scene", text="Load", on_clicked_fn=lambda: load_scene())
     with ui_window.create_frame("Navmesh Settings", collapsed=True):
-        for key, value in navmeshInterface.settings.items():
-            key = navmeshInterface._camel_to_snake(key)
+        ui_elements["navmesh_preset"] = ui_utils.dropdown_builder(
+            "Navmesh Preset",
+            items=task_generator.navmesh_preset_list,
+            on_clicked_fn=lambda x: update_ui("navmesh_preset", x)
+        )
+        for key, value in navmesh_interface.settings.items():
+            key = navmesh_interface._camel_to_snake(key)
             ui_elements[f"navmesh_settings_{key}"] = ui_utils.combo_floatfield_slider_builder(
                 key,
                 default_val=value,
@@ -140,11 +145,6 @@ with ui_elements["main_stack"]:
             )[0]
         ui_utils.btn_builder("Navmesh Config", text="Save", on_clicked_fn=lambda: save_settings("navmesh_config"))
     with ui_window.create_frame("Navmesh Tools"):
-        ui_elements["navmesh_preset"] = ui_utils.dropdown_builder(
-            "Navmesh Preset",
-            items=task_generator.navmesh_preset_list,
-            on_clicked_fn=lambda x: update_ui("navmesh_preset", x)
-        )
         ui_utils.btn_builder("Build Navmesh", text="Build", on_clicked_fn=lambda: build_navmesh())
         ui_utils.btn_builder("Load Navmesh", text="Load", on_clicked_fn=lambda: load_navmesh())
         ui_utils.btn_builder("Save Navmesh", text="Save", on_clicked_fn=lambda: save_navmesh())
@@ -156,7 +156,7 @@ with ui_elements["main_stack"]:
         # episode number
         ui_elements["episode_number"] = ui_utils.int_builder("Episode Number", default_val=30)
         ui_elements["goal_rules"] = ui_utils.str_builder("Episode Goals", default_val="mailbox, park_bench, hydrant")
-        ui_utils.btn_builder("Generate Episode", text="Generate")
+        ui_utils.btn_builder("Generate Episode", text="Generate", on_clicked_fn=lambda: generate_episodes())
 
 # ui_name: (config_name, [getter_func, setter_func])
 str_func = [lambda x: x.as_string, lambda x, y: x.set_value(y)]
@@ -220,17 +220,18 @@ def update_ui(settings_type, selected_value):
 def save_settings(settings_type):
     if settings_type == "navmesh_runtime":
         for key, (value, _) in navmesh_settings_map.items():
-            value_camel = navmeshInterface._snake_to_camel(key)
-            navmeshInterface.settings[value_camel] = get_ui_value(navmesh_settings_map, key)
+            value_camel = navmesh_interface._snake_to_camel(key)
+            navmesh_interface.settings[value_camel] = get_ui_value(navmesh_settings_map, key)
     elif settings_type == "navmesh_config":
         preset_name = get_ui_value(ui_config_map, "navmesh_preset")
         for key, (value, _) in navmesh_settings_map.items():
             task_config['navmesh'][preset_name][value] = get_ui_value(navmesh_settings_map, key)
+        task_generator.save_config()
     elif settings_type == "scene":
         for key, (value, _) in ui_config_map.items():
             scene_config[value] = get_ui_value(ui_config_map, key)
             task_generator.update_config(scene_config)
-        task_generator.save_config(args.tg_config_path)
+        task_generator.save_config()
 
 def load_scene():
     for key, (value, _) in ui_config_map.items():
@@ -241,34 +242,39 @@ def build_navmesh():
     save_settings("navmesh_runtime")
     selected_paths = ["/World/ground/terrain"]
     start_time = time.time()
-    navmeshInterface.setup_navmesh(selected_paths)
-    navmeshInterface.build_navmesh()
+    navmesh_interface.setup_navmesh(selected_paths)
+    navmesh_interface.build_navmesh()
     end_time = time.time()
     print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
     test_navmesh()
 
 def load_navmesh():
     navmesh_path = str(scene_folder / f"navmesh/{current_episode['scene_id']}_navmesh.bin")
-    navmeshInterface.load_navmesh(navmesh_path)
+    navmesh_interface.load_navmesh(navmesh_path)
     test_navmesh()
 
 def test_navmesh():
-    navmeshInterface.visualize_navmesh()
-    points = navmeshInterface.sample_random_points(1000)
+    navmesh_interface.visualize_navmesh()
+    points = navmesh_interface.sample_random_points(1000)
     navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
     for i in range(50):
-        path = navmeshInterface.find_paths(points[2*i], points[2*i+1])
+        path = navmesh_interface.find_paths(points[2*i], points[2*i+1])
         navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
 
 def save_navmesh():
     os.makedirs(scene_folder / "navmesh", exist_ok=True)
     navmesh_path = str(scene_folder / f"navmesh/{current_episode['scene_id']}_navmesh.bin")
-    navmeshInterface.save_navmesh(navmesh_path)
+    navmesh_interface.save_navmesh(navmesh_path)
 
 def teleport_robot():
-    # current_episode["start_position"] = navmeshInterface.sample_random_points(1)[0]
+    # current_episode["start_position"] = navmesh_interface.sample_random_points(1)[0]
     # env.reset(current_episode)
-    robot_root_state = manager_env.scene.robot
+    robot_root_state = manager_env.scene["robot"].data.default_root_state.clone()
+    random_pos = navmesh_interface.sample_random_points(robot_root_state.shape[0])
+    random_pos[:, 2] += 0.6
+    robot_root_state[:, 0:3] = torch.tensor(random_pos, device=args.device)
+    manager_env.scene["robot"].write_root_state_to_sim(robot_root_state)
+    manager_env.scene.reset()
 
 def generate_cube():
     prim_selection = omni.usd.get_context().get_selection()
@@ -288,6 +294,13 @@ def generate_cube():
         cfg_cube.func("/World/Cube", cfg_cube, translation=list(position))
     else:
         print("[ERROR]: No prim selected")
+
+def generate_episodes():
+    save_settings("scene")
+    save_settings("navmesh_config")
+    save_settings("navmesh_runtime")
+    episodes = task_generator.generate_episodes(env, current_episode["scene_id"], navmesh_interface)
+    save_episodes(episodes, f"episodes/{current_episode['scene_id']}.json")
 
 update_ui("scene_id", current_episode["scene_id"])
 

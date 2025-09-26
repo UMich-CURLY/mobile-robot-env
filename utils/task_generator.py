@@ -1,15 +1,15 @@
 from copy import deepcopy
 import json
+from pathlib import Path
 import yaml
 import os
 import re
 from scipy.spatial import KDTree
 import sys
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__+'/..')) + "/path_navmesh")
-from utils import navmesh_utils
+import time
 import numpy as np
 from utils.episode import VLNEpisode
+import utils.navmesh_utils as navmesh_utils
 
 class TaskGenerator:
     """
@@ -58,32 +58,25 @@ class TaskGenerator:
                 scene_type_config[key] = scene_config[key]
             if key in scene_name_config:
                 scene_name_config[key] = scene_config[key]
-        # update special keys
-        scene_name_config['goal_rules'] = json.loads(scene_config['goal_rules'])
         
     def save_config(self):
         with open(self.args.tg_config_path, "w") as f:
             yaml.dump(self.task_config, f)
 
-    def generate_episodes(self, env, scene_id):
+    def generate_episodes(self, env, scene_id, navmesh_interface):
         # bind objects
         self.env = env
         self.manager_env = env.manager_env
+        self.navmesh_interface = navmesh_interface
         # load scene config
         self.scene_config = self.get_scene_config(scene_id)
+        self.num_episodes = self.scene_config['episode_number']
         # generate task
         self.parse_scene()
-        self.generate_navmesh()
-        return []
-    
-    def save_config(self, config_type, ui_elements):
-        navmesh_path = self.args.navmesh_path
-        if config_type == "navmesh":
-            pass
-        with open(navmesh_path, "w") as f:
-            yaml.dump(self.task_config, f)
+        self.sample_episodes()
+        return self.generated_episodes
 
-    def parse_scene(self, scene_config):
+    def parse_scene(self):
         # find target prims
         self.prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
         print(f'Loaded {len(self.prim_list)} prims')
@@ -98,60 +91,61 @@ class TaskGenerator:
             print(f'{goal}: Found {len(goal_prim)} prims')
         # self.goal_kd_tree = KDTree(self.goal_positions.values())
     
-    def generate_navmesh(self):
-        navmesh_path = self.args.navmesh_path
-        navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=self.manager_env.scene.stage)
-        self.navmesh_interface = navmesh_interface
-        navmesh_exists = navmesh_path is not None and os.path.exists(navmesh_path)
-        if navmesh_exists:
-            navmesh_interface.setup_navmesh_from_file(navmesh_path)
+    def sample_episodes(self):
+        navmesh_interface = self.navmesh_interface
+        scene_folder = Path(self.args.scene_folder)
+        navmesh_path = str(scene_folder / f"navmesh/{self.scene_config['scene_id']}_navmesh.bin")
+        if os.path.exists(navmesh_path):
+            navmesh_interface.load_navmesh(navmesh_path)
         else:
             selected_paths = ["/World/ground/terrain"]
+            start_time = time.time()
             navmesh_interface.setup_navmesh(selected_paths)
-
-        # Build the navmesh
-        navmesh_interface.build_navmesh({
-            "cellSize": 0.2,
-            "cellHeight": 0.2,
-            "agentHeight": 0.61,
-            "agentRadius": 0.55,
-            "agentMaxClimb": 0.1,
-            "agentMaxSlope": 26.0,
-            "regionMinSize": 4,
-            "regionMergeSize": 20,
-            "edgeMaxLen": 5.0,
-            "edgeMaxError": 1.3,
-            "vertsPerPoly": 6.0,
-            "detailSampleDist": 6.0,
-            "detailSampleMaxError": 1.0,
-            "partitionType": 0
-        })
-
-        # if not navmesh_exists:
-
+            navmesh_interface.build_navmesh()
+            end_time = time.time()
+            print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
+            navmesh_interface.save_navmesh(navmesh_path)
 
         # Visualize the navmesh
         navmesh_interface.visualize_navmesh()
-        
-        # sample random points
-        self.random_points = navmesh_interface.get_random_points(self.num_episodes*10)
-        navmesh_utils.create_points(self.random_points, prim_path='/World/RandomPoints')
 
-        self.sampled_traj = []
-        while len(self.sampled_traj) < self.num_episodes:
+        # sample random points
+        self.random_points = navmesh_interface.sample_random_points(self.num_episodes*10)
+        navmesh_utils.create_points(self.random_points, prim_path="/World/RandomPoints", width=0.8)
+
+        self.generated_episodes = []
+        while len(self.generated_episodes) < self.num_episodes:
             start = self.random_points[np.random.randint(0, len(self.random_points))]
             random_goal = np.random.choice(list(self.goal_dict.keys()))
-            random_goal_pos = self.goal_dict[random_goal]['pos']
-            end = random_goal_pos[np.random.randint(0, len(random_goal_pos))]
-            path = self.navmesh_interface.find_paths([start], [end], searchSize=[1000.0,1000.0,1000.0])
-            if len(path) > 0:
-                dist_to_start = np.linalg.norm(start - path[0])
-                dist_to_end = np.linalg.norm(end - path[-1])
-                if dist_to_start > 3.0 or dist_to_end > 3.0:
-                    continue
-                print(f'dist_to_start: {dist_to_start}, dist_to_end: {dist_to_end}')
-                self.sampled_traj.append(path)
-                navmesh_utils.create_curve(path, prim_path=f'/World/Path_{random_goal}{len(self.sampled_traj)}')
+            goal_pos_list = self.goal_dict[random_goal]['pos']
+            goal_prim_list = self.goal_dict[random_goal]['prim']
+            goals = []
+            for goal_pos, goal_prim in zip(goal_pos_list, goal_prim_list):
+                # we use the position calculated with bounding box instead
+                prim_path = goal_prim.GetPrimPath()
+                goal_pos = self.env.get_prim_position(prim_path)
+                path = navmesh_interface.find_paths(start, goal_pos)
+                if len(path) > 0:
+                    dist_to_start = np.linalg.norm(start - path[0])
+                    dist_to_end = np.linalg.norm(goal_pos - path[-1])
+                    if dist_to_start > 1.0 or dist_to_end > 1.0:
+                        continue
+                    print(f'dist_to_start: {dist_to_start}, dist_to_end: {dist_to_end}')
+                    goals.append({
+                        'instance': str(prim_path),
+                        'type': 'object',
+                        'location': goal_pos,
+                        'radius': self.env.get_prim_radius(prim_path),
+                        'reference_path': path.tolist()
+                    })
+                navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
+            episode = VLNEpisode(
+                data=self.scene_config,
+                instruction=random_goal,
+                goals=goals,
+                start_position=start.tolist(),
+                start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
+            )
+            self.generated_episodes.append(episode)
 
-
-        print(f'Sampled {len(self.sampled_traj)} trajectories')
+        print(f'Generated {len(self.generated_episodes)} episodes')
