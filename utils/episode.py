@@ -30,7 +30,7 @@ class VLNEpisode(dict):
                     ]
                 }
             ],
-            "start_position": [0.0, 0.0, 0.0],
+            "start_position": [0.0, 0.0, 0.6],
             "start_rotation": [1.0, 0.0, 0.0, 0.0],
         })
         if data is not None:
@@ -54,5 +54,5 @@ class VLNEpisode(dict):
             raise NotImplementedError("GRScenes format is not implemented yet")
     
 
-def save_to_json(episodes, json_path):
+def save_episodes(episodes, json_path):
     json.dump(episodes, open(json_path, 'w'), indent=4)

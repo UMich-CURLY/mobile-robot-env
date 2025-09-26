@@ -42,6 +42,31 @@ class VLNEnvWrapper:
         """Returns the base environment of the wrapper.
         """
         return self.manager_env
+    
+    def get_prim_bounding_box(self, prim_path):
+        """Return min_x, min_y, min_z, max_x, max_y, max_z of the prim."""
+        prim = self.scene.stage.GetPrimAtPath(prim_path)
+        if prim is None:
+            raise ValueError(f"Prim at path {prim_path} not found")
+        bb_cache = bounds_utils.create_bbox_cache()
+        return bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[prim_path])
+
+    def get_prim_position(self, prim_path):
+        """Return position of the prim (center of the bounding box)."""
+        min_x, min_y, min_z, max_x, max_y, max_z = self.get_prim_bounding_box(prim_path)
+        return (min_x + max_x) / 2, (min_y + max_y) / 2, (min_z + max_z) / 2
+
+    def get_prim_radius(self, prim_path):
+        """Return radius of the prim."""
+        min_x, min_y, min_z, max_x, max_y, max_z = self.get_prim_bounding_box(prim_path)
+        return max(max_x - min_x, max_y - min_y, max_z - min_z) / 2
+
+    def get_prim_orientation(self, prim_path):
+        """Return orientation of the prim."""
+        prim = self.scene.stage.GetPrimAtPath(prim_path)
+        if prim is None:
+            raise ValueError(f"Prim at path {prim_path} not found")
+        return prim.GetAttribute('xformOp:orient').Get()
 
     def reset(self, episode=None) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
@@ -63,6 +88,11 @@ class VLNEnvWrapper:
             else:
                 self.manager_env.cfg.load_usd(str(Path(self.args.scene_folder) / self.episode["path"]))
                 self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
+
+        robot_root_state = self.scene["robot"].data.default_root_state.clone()
+        robot_root_state[:, 0:3] = torch.tensor(episode["start_position"], device=self.args.device)
+        robot_root_state[:, 3:7] = torch.tensor(episode["start_rotation"], device=self.args.device)
+        self.scene["robot"].write_root_state_to_sim(robot_root_state)
 
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
