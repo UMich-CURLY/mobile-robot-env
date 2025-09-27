@@ -109,13 +109,11 @@ class TaskGenerator:
         # Visualize the navmesh
         navmesh_interface.visualize_navmesh()
 
-        # sample random points
-        self.random_points = navmesh_interface.sample_random_points(self.num_episodes*10)
-        navmesh_utils.create_points(self.random_points, prim_path="/World/RandomPoints", width=0.8)
-
         self.generated_episodes = []
         while len(self.generated_episodes) < self.num_episodes:
-            start = self.random_points[np.random.randint(0, len(self.random_points))]
+            # sample random points
+            random_points = navmesh_interface.sample_random_points(1)
+            start = random_points[0]
             random_goal = np.random.choice(list(self.goal_dict.keys()))
             goal_pos_list = self.goal_dict[random_goal]['pos']
             goal_prim_list = self.goal_dict[random_goal]['prim']
@@ -138,7 +136,6 @@ class TaskGenerator:
                         'radius': self.env.get_prim_radius(prim_path),
                         'reference_path': path.tolist()
                     })
-                navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
             episode = VLNEpisode(
                 data=self.scene_config,
                 instruction=random_goal,
@@ -146,6 +143,9 @@ class TaskGenerator:
                 start_position=start.tolist(),
                 start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
             )
-            self.generated_episodes.append(episode)
+            if len(goals) > 0:
+                navmesh_utils.create_points(random_points, prim_path="/World/RandomPoints", width=0.8)
+                navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
+                self.generated_episodes.append(episode)
 
         print(f'Generated {len(self.generated_episodes)} episodes')

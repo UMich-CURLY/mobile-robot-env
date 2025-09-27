@@ -3,7 +3,8 @@
 ##                      to decimate the number of faces.
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
-## Usage: ./decimate_usd_models_face_autorestart.sh <input_folder>
+## Usage: ./decimate_usd_models_face_autorestart.sh "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/"
+# pkill -9 -f "python.*decimate_usd_models_face_blender.py"
 
 # Check if input folder argument is provided
 if [ $# -eq 0 ]; then

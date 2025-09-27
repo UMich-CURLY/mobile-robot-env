@@ -1,4 +1,4 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py -- --input_folder /path/to/folder
+# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py --input_folder "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/"
 
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
@@ -17,6 +17,15 @@ def count_total_faces_in_mesh_prim(prim):
         total_faces += len(face_counts)
     return total_faces
 
+def get_parent_prim_name(prim):
+    """Get the parent prim name."""
+    parent_path = prim.GetPath().GetParentPath()
+    if parent_path == Sdf.Path.absoluteRootPath:
+        return None  # No parent (root prim)
+    
+    parent_prim = prim.GetStage().GetPrimAtPath(parent_path)
+    return parent_prim.GetName() if parent_prim else None
+
 def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
 
     stage_orig = Usd.Stage.Open(original_usd_path)
@@ -30,7 +39,12 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     dec_mesh_map = {}
     for prim in stage_dec.Traverse():
         if prim.IsA(UsdGeom.Mesh):
-            dec_mesh_map[prim.GetName()] = prim
+            parent_prim_name = get_parent_prim_name(prim)
+            if parent_prim_name is not None:
+                if str(parent_prim_name) in prim.GetName():
+                    dec_mesh_map[parent_prim_name] = prim
+                else:
+                    dec_mesh_map[prim.GetName()] = prim
 
     # For each mesh in the original, if a decimated mesh with the same name exists, swap geometry
     total_faces_original = 0

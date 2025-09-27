@@ -14,6 +14,15 @@ def count_total_faces_in_mesh_prim(prim):
         total_faces += len(face_counts)
     return total_faces
 
+def get_parent_prim_name(prim):
+    """Get the parent prim name."""
+    parent_path = prim.GetPath().GetParentPath()
+    if parent_path == Sdf.Path.absoluteRootPath:
+        return None  # No parent (root prim)
+    
+    parent_prim = prim.GetStage().GetPrimAtPath(parent_path)
+    return parent_prim.GetName() if parent_prim else None
+
 def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
 
     stage_orig = Usd.Stage.Open(original_usd_path)
@@ -23,7 +32,12 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     dec_mesh_map = {}
     for prim in stage_dec.Traverse():
         if prim.IsA(UsdGeom.Mesh):
-            dec_mesh_map[prim.GetName()] = prim
+            parent_prim_name = get_parent_prim_name(prim)
+            if parent_prim_name is not None:
+                if str(parent_prim_name) in prim.GetName():
+                    dec_mesh_map[parent_prim_name] = prim
+                else:
+                    dec_mesh_map[prim.GetName()] = prim
             print("decimated prim path:", prim.GetPath())
     print("hash:", dec_mesh_map.keys())
     total_faces_original = 0
@@ -56,8 +70,8 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     print(f"[INFO] Total faces in original meshes: {total_faces_original}")
     print(f"[INFO] Total faces in swapped meshes: {total_faces_swapped}")
     # Save the modified original stage as the output
-    stage_orig.GetRootLayer().Export(output_usd_path)
-    print(f"✅ Exported USD with original hierarchy/materials and swapped mesh geometry: {output_usd_path}")
+    # stage_orig.GetRootLayer().Export(output_usd_path)
+    # print(f"✅ Exported USD with original hierarchy/materials and swapped mesh geometry: {output_usd_path}")
 
 
 def count_total_faces_in_instance(stage):
@@ -74,12 +88,24 @@ def count_total_faces_in_instance(stage):
 # --- Example usage ---
 if __name__ == "__main__":
 
-    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/6e68fc1f50c5abe1bba216e802f4f9b5/"
-    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/21a639160bd5d0ab8cf540f6ef1b8097/"
-    #model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/696d892c2eb446175aca62eca638904d/"
-    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/1795c86fd1d93d5be331ca29f2563cf1/"
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/6e68fc1f50c5abe1bba216e802f4f9b5/"    #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/cup/21a639160bd5d0ab8cf540f6ef1b8097/"    #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/696d892c2eb446175aca62eca638904d/"  #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/layout/articulated/door/1795c86fd1d93d5be331ca29f2563cf1/"  #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/other/8191e4ec3b12f984b21c41e51fdcf227/"  # pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/other/c46e3cbf468f3e93984f04c520906a1e/"  # pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/other/b5d8a56fa883235854cf5c55bbe5b33e/" #pass after change
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/other/18ab9b1865008243a53eab7843ae9494/"  #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/bed/465984ae0faf3c53f854307579d909e9/"    # pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/bottle/9bfa0bc6db0af285dc94db3f174b1421/" #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/keyboard/2c70045a715abaebe8949db0f331a132/" #pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/others/curtain/263e513c536034a3bad82c79faf68d92/"    # pass after change
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/articulated/desk/016e82cbde23fa6840907536f52d9d83/"  # pass
+    # model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/articulated/shoppingtrolley/b56246535d34aa6a84cca37a1d105447/" # pass after change
+    model_folder = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/object/articulated/refrigerator/07e0ddb233eee0d2e3eae00b7e28afa8/"  # pass after change
+
     original_usd = model_folder + "instance_renamed.usd"
-    decimated_usd = model_folder + "instance_decimated_test.usd"
+    decimated_usd = model_folder + "instance_renamed_decimated.usd"
     output_usd = model_folder + "instance_test.usd"
 
     # Print face count in original

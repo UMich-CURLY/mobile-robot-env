@@ -155,7 +155,7 @@ print("[INFO]: Starting simulation")
 step_count = 0
 while simulation_app.is_running():
     if first_step or reset_needed:
-        obs, _ = env.reset(current_episode)
+        obs, _ = env.reset()
         if env_cfg.usd_path is not None:
             pass
             # terrain_prim = manager_env.scene.stage.GetPrimAtPath('/World/ground/terrain')
