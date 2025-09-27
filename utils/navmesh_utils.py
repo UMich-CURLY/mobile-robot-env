@@ -337,7 +337,7 @@ class NavmeshInterface:
 
         # Initialize the navmesh with raw data
         self.nm.init_by_raw(verts_flat, faces_flat)
-        print(f"[INFO]: Loaded navmesh from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4}') triangles")
+        print(f"[INFO]: Loaded geometry from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4} triangles")
 
     def build_navmesh(self):
         self.nm.set_settings(self.settings)

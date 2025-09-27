@@ -151,6 +151,7 @@ with ui_elements["main_stack"]:
         ui_utils.btn_builder("Test Navmesh", text="Test", on_clicked_fn=lambda: test_navmesh())
         ui_utils.btn_builder("Teleport Robot", text="Teleport", on_clicked_fn=lambda: teleport_robot())
         ui_utils.btn_builder("Generate Cube", text="Generate", on_clicked_fn=lambda: generate_cube())
+        ui_utils.btn_builder("Clear Visualization", text="Clear", on_clicked_fn=lambda: clear_visualization())
     with ui_window.create_frame("Episode Settings"):
         # ui_elements["scene_type"] = ui_utils.str_builder("Scene Type", default_val=current_episode["scene_type"])
         # episode number
@@ -220,7 +221,7 @@ def update_ui(settings_type, selected_value):
 def save_settings(settings_type):
     if settings_type == "navmesh_runtime":
         for key, (value, _) in navmesh_settings_map.items():
-            value_camel = navmesh_interface._snake_to_camel(key)
+            value_camel = navmesh_interface._snake_to_camel(value).replace("agent", "")
             navmesh_interface.settings[value_camel] = get_ui_value(navmesh_settings_map, key)
     elif settings_type == "navmesh_config":
         preset_name = get_ui_value(ui_config_map, "navmesh_preset")
@@ -256,10 +257,11 @@ def load_navmesh():
 def test_navmesh():
     navmesh_interface.visualize_navmesh()
     points = navmesh_interface.sample_random_points(1000)
-    navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
-    for i in range(50):
-        path = navmesh_interface.find_paths(points[2*i], points[2*i+1])
-        navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
+    if points is not None:
+        navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
+        for i in range(50):
+            path = navmesh_interface.find_paths(points[2*i], points[2*i+1])
+            navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
 
 def save_navmesh():
     os.makedirs(scene_folder / "navmesh", exist_ok=True)
@@ -294,6 +296,16 @@ def generate_cube():
         cfg_cube.func("/World/Cube", cfg_cube, translation=list(position))
     else:
         print("[ERROR]: No prim selected")
+
+def remove_prim(rule):
+    prim_list = prim_utils.find_matching_prim_paths(rule)
+    for prim_path in prim_list:
+        prim_utils.delete_prim(prim_path)
+
+def clear_visualization():
+    remove_prim("/World/RandomPoints")
+    remove_prim("/World/Path_*")
+    remove_prim("/World/ground/navmeshmesh")
 
 def generate_episodes():
     save_settings("scene")
