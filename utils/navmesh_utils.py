@@ -86,7 +86,7 @@ def get_all_stage_mesh(stage, prims):
 def get_mesh(objs):
     points, faces = [],[]
 
-    for i, obj in tqdm(enumerate(objs)):
+    for i, obj in tqdm(enumerate(objs), total=len(objs)):
         f_offset = len(points)
         # f, p = convert_to_mesh(obj)#usd_stage.GetPrimAtPath(obj))
         f, p = meshconvert(obj)#usd_stage.GetPrimAtPath(obj))
@@ -318,10 +318,13 @@ class NavmeshInterface:
         self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim)
         if len(self.input_vert) == 0:
             print('[INFO]: No mesh found')
+        self.input_vert = np.array(self.input_vert)
+        print(f'bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
+        if np.any(np.isnan(self.input_vert)):
+            print("[WARNING]: NaNs found in input vertices")
         print("[INFO]: Loading navmesh from vertices and triangles, will take a while, please wait.")
         self.input_vert = self._convert_up_axis(self.input_vert)
 
-        print(f'bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
         verts_flat = []
         for vertex in self.input_vert:
             verts_flat.extend(vertex)
@@ -337,7 +340,7 @@ class NavmeshInterface:
 
         # Initialize the navmesh with raw data
         self.nm.init_by_raw(verts_flat, faces_flat)
-        print(f"[INFO]: Loaded navmesh from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4}') triangles")
+        print(f"[INFO]: Loaded navmesh from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4} triangles")
 
     def build_navmesh(self):
         self.nm.set_settings(self.settings)

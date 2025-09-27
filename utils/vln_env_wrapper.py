@@ -80,7 +80,13 @@ class VLNEnvWrapper:
         if self.usd_path != self.episode["path"]:
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
+                while self.scene.stage.GetPrimAtPath(self.scene.terrain.terrain_prim_paths[0]).IsValid():
+                    zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
+                    self.update_command(zero_cmd)
+                    actions = self.low_level_policy(self.low_level_obs)
+                    low_level_obs, _, _, infos = self.env.step(actions)
                 self.scene.terrain.terrain_prim_paths.pop(0)
+            print(f"Waiting for scene {self.episode['path']} to be loaded...")
             if self.episode["path"] == "generator":
                 self.manager_env.cfg.load_generator()
                 self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
@@ -97,7 +103,6 @@ class VLNEnvWrapper:
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
-        zero_cmd = torch.tensor([0., 0., 0.], device=low_level_obs.device)
 
         # set collider and scene scale
         terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
