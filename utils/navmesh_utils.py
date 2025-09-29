@@ -60,7 +60,7 @@ def children_as_mesh(stage, parent_prim):
     return points, faces
 
 
-def get_all_stage_mesh(stage, prims):
+def get_all_stage_mesh(stage, prims, exclude_paths=[]):
 
     found_meshes = []
 
@@ -69,12 +69,17 @@ def get_all_stage_mesh(stage, prims):
         if UsdGeom.Imageable(prim).ComputeVisibility() == UsdGeom.Tokens.invisible:
             continue
 
+        if prim.GetPath() in exclude_paths:
+            continue
+
         if prim.IsA(UsdGeom.Mesh):
             found_meshes.append(prim)
             continue
         # Traverse the scene graph and print the paths of prims, including instance proxies
         for x in Usd.PrimRange(prim, Usd.TraverseInstanceProxies()):
             if UsdGeom.Imageable(x).ComputeVisibility() == UsdGeom.Tokens.invisible:
+                continue
+            if x.GetPath() in exclude_paths:
                 continue
             if x.IsA(UsdGeom.Mesh):
                 found_meshes.append(x)
@@ -313,9 +318,9 @@ class NavmeshInterface:
             return False
         return True
 
-    def setup_navmesh(self, selected_paths):
+    def setup_navmesh(self, selected_paths, exclude_paths):
         self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
-        self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim)
+        self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim, exclude_paths=exclude_paths)
         if len(self.input_vert) == 0:
             print('[INFO]: No mesh found')
         self.input_vert = np.array(self.input_vert)

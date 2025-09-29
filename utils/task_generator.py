@@ -30,6 +30,7 @@ class TaskGenerator:
     def parse_config(self, task_config):
         self.scene_id_list = []
         self.navmesh_preset_list = [*task_config['navmesh'].keys()]
+        self.rule_pattern_list = ["path", "name"]
         for scene_type, scene in task_config['scene'].items():
             self.scene_id_list.extend([f'{scene_type}_{x}' for x in scene['episodes'].keys()])
 
@@ -71,8 +72,12 @@ class TaskGenerator:
         # load scene config
         self.scene_config = self.get_scene_config(scene_id)
         self.num_episodes = self.scene_config['episode_number']
+        self.rule_pattern = self.scene_config['rule_pattern']
         # generate task
-        self.parse_scene()
+        total_goal_found = self.parse_scene()
+        if total_goal_found == 0:
+            print(f'[ERROR]: No goal found')
+            return []
         self.sample_episodes()
         return self.generated_episodes
 
@@ -81,15 +86,28 @@ class TaskGenerator:
         self.prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
         print(f'Loaded {len(self.prim_list)} prims')
         self.goal_dict = {}
+        total_goal_found = 0
         for goal, goal_rule in self.scene_config['goal_rules'].items():
-            goal_prim = [x for x in self.prim_list if re.search(goal_rule, x.GetName())]
+            if self.rule_pattern == "path":
+                # Convert prim path to string and normalize path separators
+                goal_prim = []
+                for x in self.prim_list:
+                    prim_path_str = str(x.GetPrimPath()).replace('\\', '/')
+                    if re.search(goal_rule, prim_path_str):
+                        goal_prim.append(x)
+                        print(f"  Matched: {prim_path_str}")
+            else:
+                goal_prim = [x for x in self.prim_list if re.search(goal_rule, x.GetName())]
             goal_prim = [x for x in goal_prim if x.HasAttribute('xformOp:translate')]
             self.goal_dict[goal] = {
                 'prim': goal_prim,
                 'pos': [list(x.GetAttribute('xformOp:translate').Get()) for x in goal_prim]
             }
             print(f'{goal}: Found {len(goal_prim)} prims')
+            total_goal_found += len(goal_prim)
+        print(f'Total goal found: {total_goal_found}')
         # self.goal_kd_tree = KDTree(self.goal_positions.values())
+        return total_goal_found
     
     def sample_episodes(self):
         navmesh_interface = self.navmesh_interface
@@ -136,14 +154,14 @@ class TaskGenerator:
                         'radius': self.env.get_prim_radius(prim_path),
                         'reference_path': path.tolist()
                     })
-            episode = VLNEpisode(
-                data=self.scene_config,
-                instruction=random_goal,
-                goals=goals,
-                start_position=start.tolist(),
-                start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
-            )
             if len(goals) > 0:
+                episode = VLNEpisode(
+                    data=self.scene_config,
+                    instruction=random_goal,
+                    goals=goals,
+                    start_position=start.tolist(),
+                    start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
+                )
                 navmesh_utils.create_points(random_points, prim_path="/World/RandomPoints", width=0.8)
                 navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
                 self.generated_episodes.append(episode)

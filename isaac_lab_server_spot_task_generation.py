@@ -57,10 +57,14 @@ import utils.navmesh_utils as navmesh_utils
 # Main simulation loop
 
 # load episodes
-task_generator = TaskGenerator(args)
-task_config = task_generator.task_config
-scene_config = task_generator.get_scene_config(args.test_id)
-current_episode = VLNEpisode(scene_config)
+def load_task_config(args):
+    task_generator = TaskGenerator(args)
+    task_config = task_generator.task_config
+    scene_config = task_generator.get_scene_config(args.test_id)
+    current_episode = VLNEpisode(scene_config)
+    return task_generator, task_config, scene_config, current_episode
+
+task_generator, task_config, scene_config, current_episode = load_task_config(args)
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -110,6 +114,7 @@ with ui_elements["main_stack"]:
             on_clicked_fn=lambda x: update_ui("scene_id", x)
         )
         ui_utils.btn_builder("Save Scene Settings", text="Save", on_clicked_fn=lambda: save_settings("scene"))
+        ui_utils.btn_builder("ReLoad Task Config", text="ReLoad", on_clicked_fn=lambda: reload_config())
         ui_elements["usd_path"] = ui_utils.str_builder(
             "USD Path",
             use_folder_picker=True,
@@ -156,7 +161,12 @@ with ui_elements["main_stack"]:
         # ui_elements["scene_type"] = ui_utils.str_builder("Scene Type", default_val=current_episode["scene_type"])
         # episode number
         ui_elements["episode_number"] = ui_utils.int_builder("Episode Number", default_val=30)
-        ui_elements["goal_rules"] = ui_utils.str_builder("Episode Goals", default_val="mailbox, park_bench, hydrant")
+        ui_elements["rule_pattern"] = ui_utils.dropdown_builder(
+            "Rule Pattern",
+            items=task_generator.rule_pattern_list,
+            on_clicked_fn=lambda x: save_settings("scene_runtime")
+        )
+        # ui_elements["goal_rules"] = ui_utils.str_builder("Episode Goals", default_val="mailbox, park_bench, hydrant")
         ui_utils.btn_builder("Generate Episode", text="Generate", on_clicked_fn=lambda: generate_episodes())
 
 # ui_name: (config_name, [getter_func, setter_func])
@@ -179,10 +189,11 @@ ui_config_map = {
     "collider": ("collider", bool_func),
     "align_ground": ("align_ground", bool_func),
     "episode_number": ("episode_number", int_func),
-    "goal_rules": ("goal_rules", [
-        lambda x: json.loads(x.as_string),
-        lambda x, y: x.set_value(json.dumps(y))
-    ]),
+    "rule_pattern": ("rule_pattern", choice_func(task_generator.rule_pattern_list)),
+    # "goal_rules": ("goal_rules", [
+    #     lambda x: json.loads(x.as_string),
+    #     lambda x, y: x.set_value(json.dumps(y))
+    # ]),
 }
 navmesh_settings_map = {x: (x.replace("navmesh_settings_", ""), float_func) for x in ui_elements.keys() if x.startswith("navmesh_settings_")}
 
@@ -206,6 +217,13 @@ def set_ui_value(map, key, value):
         import traceback
         traceback.print_exc()
 
+def reload_config():
+    global task_generator, task_config, scene_config, current_episode
+    task_generator, task_config, scene_config, current_episode = load_task_config(args)
+    update_ui("scene_id", current_episode["scene_id"])
+    update_ui("navmesh_preset", scene_config["navmesh_preset"])
+    print("[INFO]: Task config reloaded")
+
 def update_ui(settings_type, selected_value):
     if settings_type == "navmesh_preset":
         preset_name = selected_value
@@ -216,7 +234,6 @@ def update_ui(settings_type, selected_value):
         new_scene_config = task_generator.get_scene_config(scene_id)
         for key, (value, _) in ui_config_map.items():
             set_ui_value(ui_config_map, key, new_scene_config[value])
-        # update_ui("navmesh_preset", new_scene_config["navmesh_preset"])
 
 def save_settings(settings_type):
     if settings_type == "navmesh_runtime":
@@ -233,17 +250,19 @@ def save_settings(settings_type):
             scene_config[value] = get_ui_value(ui_config_map, key)
             task_generator.update_config(scene_config)
         task_generator.save_config()
+    elif settings_type == "scene_runtime":
+        for key, (value, _) in ui_config_map.items():
+            current_episode[value] = get_ui_value(ui_config_map, key)
 
 def load_scene():
-    for key, (value, _) in ui_config_map.items():
-        current_episode[value] = get_ui_value(ui_config_map, key)
+    save_settings("scene_runtime")
     env.reset(current_episode)
 
 def build_navmesh():
     save_settings("navmesh_runtime")
     selected_paths = ["/World/ground/terrain"]
     start_time = time.time()
-    navmesh_interface.setup_navmesh(selected_paths)
+    navmesh_interface.setup_navmesh(selected_paths, scene_config["navmesh_exclude"])
     navmesh_interface.build_navmesh()
     end_time = time.time()
     print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
@@ -309,6 +328,7 @@ def clear_visualization():
 
 def generate_episodes():
     save_settings("scene")
+    save_settings("scene_runtime")
     save_settings("navmesh_config")
     save_settings("navmesh_runtime")
     episodes = task_generator.generate_episodes(env, current_episode["scene_id"], navmesh_interface)
