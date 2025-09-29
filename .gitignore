@@ -198,3 +198,4 @@ cython_debug/
 results/
 *.obj
 *.bin
+*.etli
