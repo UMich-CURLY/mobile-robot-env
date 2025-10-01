@@ -45,7 +45,7 @@ scene:
           sink: sink/model_[^/]*/Instance$
           trash_can: trash_can/model_[^/]*/Instance$
         navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+          - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
         rule_pattern: path
@@ -60,6 +60,7 @@ scene:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
           park_bench: ParkBench.*
+        navmesh_exclude: []
         navmesh_preset: outdoor
         path: nvidia_edit/park/park_morning_edit.usd
         rule_pattern: name
@@ -69,8 +70,10 @@ scene:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
           park_bench: ParkBench.*
+        navmesh_exclude: []
         navmesh_preset: outdoor
         path: nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
+        rule_pattern: name
     scene_scale: 0.009999999776482582
   test:
     align_ground: true
@@ -80,8 +83,9 @@ scene:
         episode_number: 30
         goal_rules:
           mesh: mesh
+        navmesh_exclude: []
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+        path: generator
         rule_pattern: name
     scene_scale: 1.0
   vc:
@@ -94,6 +98,7 @@ scene:
           city_bench: City_Bench.*
           street_lamp: Street_Lamp.*
           tree: Tree.*
+        navmesh_exclude: []
         navmesh_preset: default
         path: virtual_community/BERLIN/BERLIN.usd
         rule_pattern: name

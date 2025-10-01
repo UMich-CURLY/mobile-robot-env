@@ -262,7 +262,7 @@ def build_navmesh():
     save_settings("navmesh_runtime")
     selected_paths = ["/World/ground/terrain"]
     start_time = time.time()
-    navmesh_interface.setup_navmesh(selected_paths, scene_config["navmesh_exclude"])
+    navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []))
     navmesh_interface.build_navmesh()
     end_time = time.time()
     print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
