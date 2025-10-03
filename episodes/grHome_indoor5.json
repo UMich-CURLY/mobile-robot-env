@@ -1,0 +1,3491 @@
+[
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -5.780149936676025,
+                        0.14485451579093933,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -5.78014979915299,
+            0.14485451301320557,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        -3.7523133754730225,
+                        2.5506491661071777,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        -3.7523133754730225,
+                        2.5506491661071777,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        -3.7523133754730225,
+                        2.5506491661071777,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -3.7523133765503767,
+            2.5506490930530714,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        3.9983580112457275,
+                        -1.7946157455444336,
+                        0.08625532686710358
+                    ],
+                    [
+                        3.8274807929992676,
+                        -1.5705318450927734,
+                        0.08625532686710358
+                    ],
+                    [
+                        3.587480068206787,
+                        -1.3305320739746094,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.5474801063537598,
+                        -0.6905322074890137,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            3.9983580997056816,
+            -1.79461577763823,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2bd879cacdece77f5a4bb784ba36edff_0/Instance",
+                "type": "object",
+                "location": [
+                    6.440765856037661,
+                    4.490367899632453,
+                    0.2602499941829592
+                ],
+                "radius": 0.2602499941829592,
+                "reference_path": [
+                    [
+                        6.33390474319458,
+                        4.935790538787842,
+                        0.08625532686710358
+                    ],
+                    [
+                        6.227480411529541,
+                        4.909467697143555,
+                        0.08625532686710358
+                    ],
+                    [
+                        6.0994462966918945,
+                        4.685407638549805,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            6.3339047555899,
+            4.935790337767629,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -4.665696620941162,
+                        -0.7111334204673767,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -4.665696770501565,
+            -0.7111334253541177,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        2.0984721183776855,
+                        4.251626491546631,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.1474804878234863,
+                        1.6294679641723633,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        2.0984721183776855,
+                        4.251626491546631,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        2.0984721183776855,
+                        4.251626491546631,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.098472116362274,
+            4.251626397614968,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        2.9498143196105957,
+                        0.5031673312187195,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.9498142777581298,
+            0.5031673513522245,
+            0.08625532686710359
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        2.593371629714966,
+                        0.9831426739692688,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.5933715242412587,
+            0.9831426522011818,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -2.242396116256714,
+                        -0.5620600581169128,
+                        0.08625532686710358
+                    ],
+                    [
+                        -2.012519359588623,
+                        -0.850532054901123,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -2.242396216013345,
+            -0.5620600615487346,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        0.4040776491165161,
+                        2.634587526321411,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        0.4040776491165161,
+                        2.634587526321411,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        0.4040776491165161,
+                        2.634587526321411,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            0.4040776550226089,
+            2.6345875566088024,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "bed",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/bed/model_1b2d265ab592dcf8343ed69d3475fb06_0/Instance",
+                "type": "object",
+                "location": [
+                    -4.352814593299369,
+                    -4.138924911699636,
+                    0.3211354746531173
+                ],
+                "radius": 0.982785315594034,
+                "reference_path": [
+                    [
+                        -4.292247772216797,
+                        -3.76759672164917,
+                        0.5862553119659424
+                    ],
+                    [
+                        -4.335233688354492,
+                        -4.015858173370361,
+                        0.5862553119659424
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -4.292247706432777,
+            -3.7675966297977506,
+            0.5862553119659424
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        1.9429686069488525,
+                        1.101978063583374,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        1.9429686069488525,
+                        1.101978063583374,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        1.9429686069488525,
+                        1.101978063583374,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.9429685934647252,
+            1.101978043403565,
+            0.08625532686710359
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -4.953269958496094,
+                        2.6159660816192627,
+                        0.08625532686710358
+                    ],
+                    [
+                        -2.8125195503234863,
+                        2.589467763900757,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.9325194358825684,
+                        2.589467763900757,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        2.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -4.953269900606596,
+            2.615966000271372,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        1.4916616678237915,
+                        0.9915024638175964,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        1.4916616678237915,
+                        0.9915024638175964,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        1.4916616678237915,
+                        0.9915024638175964,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.491661620479738,
+            0.9915024398933936,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        0.10042273253202438,
+                        0.30996939539909363,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            0.10042273263025864,
+            0.3099693986450513,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        2.293248176574707,
+                        3.6406006813049316,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.1474804878234863,
+                        3.469467878341675,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.2932481219147856,
+            3.6406007900057564,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -2.4118692874908447,
+                        0.37364324927330017,
+                        0.08625532686710358
+                    ],
+                    [
+                        -2.012519359588623,
+                        -0.850532054901123,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -2.4118691757985844,
+            0.37364324378625857,
+            0.08625532686710359
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -1.6913021802902222,
+                        3.678338050842285,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -1.6913022147555279,
+            3.678338018361456,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -6.0395708084106445,
+                        0.6932586431503296,
+                        0.08625532686710358
+                    ],
+                    [
+                        -5.292519569396973,
+                        -0.050531864166259766,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -6.039571016580305,
+            0.6932586465325401,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        3.6509947776794434,
+                        -1.198074460029602,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.5474801063537598,
+                        -0.6905322074890137,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            3.6509948120451257,
+            -1.1980744418010418,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        1.6301664113998413,
+                        1.122387409210205,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        1.6301664113998413,
+                        1.122387409210205,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        1.6301664113998413,
+                        1.122387409210205,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.6301664611751978,
+            1.1223874404821699,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        1.9195908308029175,
+                        4.1218743324279785,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.9195908050887864,
+            4.121874356992533,
+            0.08625532686710359
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        2.7165966033935547,
+                        0.9257405400276184,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        2.7165966033935547,
+                        0.9257405400276184,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        2.7165966033935547,
+                        0.9257405400276184,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.716596504745928,
+            0.9257405185090966,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        3.399909019470215,
+                        2.586653709411621,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            3.3999089765619415,
+            2.5866536954842685,
+            0.08625532686710359
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        0.5270503759384155,
+                        -0.6063034534454346,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.7074804306030273,
+                        0.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.347480297088623,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        0.5270503759384155,
+                        -0.6063034534454346,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.0525193214416504,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        0.5270503759384155,
+                        -0.6063034534454346,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            0.5270503481492432,
+            -0.6063034486700443,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        1.3257415294647217,
+                        -0.9692922830581665,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.9474806785583496,
+                        -0.6905322074890137,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.7074804306030273,
+                        -0.4505319595336914,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.7074804306030273,
+                        0.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.347480297088623,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        1.3257415294647217,
+                        -0.9692922830581665,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.9474806785583496,
+                        -0.6905322074890137,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        1.3257415294647217,
+                        -0.9692922830581665,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.325741507225965,
+            -0.9692922980401463,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        -0.01791411079466343,
+                        -1.3292236328125,
+                        0.08625532686710358
+                    ],
+                    [
+                        0.7074804306030273,
+                        0.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.347480297088623,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        -0.01791411079466343,
+                        -1.3292236328125,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.4125194549560547,
+                        -0.050531864166259766,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.0525193214416504,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        -0.01791411079466343,
+                        -1.3292236328125,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -0.017914110806304524,
+            -1.3292236248974956,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "table",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_a5b5a6c7c01650448e60f61b16313301_0/Instance",
+                "type": "object",
+                "location": [
+                    1.953926556326337,
+                    -0.11099413751908768,
+                    0.3499999921768904
+                ],
+                "radius": 0.5999999865889549,
+                "reference_path": [
+                    [
+                        -5.068153381347656,
+                        -0.054678477346897125,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5874810218811035,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.227480411529541,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        2.467480182647705,
+                        0.42946767807006836,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_42efdfb1287bfdbe329c99168989511e_0/Instance",
+                "type": "object",
+                "location": [
+                    -1.67500226256078,
+                    1.2786139714207492,
+                    0.2199999950826167
+                ],
+                "radius": 0.23002192072846972,
+                "reference_path": [
+                    [
+                        -5.068153381347656,
+                        -0.054678477346897125,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.4125194549560547,
+                        -0.6905322074890137,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.4125194549560547,
+                        -0.050531864166259766,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.0525193214416504,
+                        0.8294677734375,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.313677430152893,
+                        1.0377311706542969,
+                        0.08625532686710358
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Meshes/Furnitures/table/model_2e3c1e91b9a0530ee25ace335a47084f_0/Instance",
+                "type": "object",
+                "location": [
+                    -3.2998553256862198,
+                    -0.2071298344093158,
+                    0.18679699582476175
+                ],
+                "radius": 0.48573064556373513,
+                "reference_path": [
+                    [
+                        -5.068153381347656,
+                        -0.054678477346897125,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.6125192642211914,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        -3.2998552322387695,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -5.068153166262413,
+            -0.054678475731034855,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -5.755795955657959,
+                        -1.68165922164917,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -5.755795919861718,
+            -1.6816591992355874,
+            0.08625532686710356
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    },
+    {
+        "scene_id": "grHome_indoor5",
+        "scene_type": "grHome",
+        "episode_id": 0,
+        "path": "grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd",
+        "scene_scale": 0.009999999776482582,
+        "collider": true,
+        "align_ground": false,
+        "navmesh": "default",
+        "instruction": "toilet",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Meshes/Animation/toilet/model_ac974753ec7b0ac0082b26915de55a00_0/Instance",
+                "type": "object",
+                "location": [
+                    -0.43996254016602204,
+                    4.857578491424652,
+                    0.33356299254428606
+                ],
+                "radius": 0.3914218728027672,
+                "reference_path": [
+                    [
+                        -2.4594504833221436,
+                        -0.9264183640480042,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.692519187927246,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.2125191688537598,
+                        -1.1705322265625,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        -1.0105319023132324,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        1.0694680213928223,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        1.3094677925109863,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.747480869293213,
+                        2.1894679069519043,
+                        0.08625532686710358
+                    ],
+                    [
+                        1.5074801445007324,
+                        2.4294679164886475,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        2.6694679260253906,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        2.909467935562134,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.3725194931030273,
+                        3.8694677352905273,
+                        0.08625532686710358
+                    ],
+                    [
+                        -1.132519245147705,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.7325196266174316,
+                        4.109467506408691,
+                        0.08625532686710358
+                    ],
+                    [
+                        -0.5920052528381348,
+                        4.097364902496338,
+                        0.08625532686710358
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -2.4594504855509363,
+            -0.9264183561391571,
+            0.08625532686710358
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "bed": "bed/model_[^/]*/Instance$",
+            "couch": "couch/model_[^/]*/Instance$",
+            "refrigerator": "refrigerator/model_[^/]*/Instance$",
+            "table": "table/model_[^/]*/Instance$",
+            "toilet": "toilet/model_[^/]*/Instance$"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "path"
+    }
+]
