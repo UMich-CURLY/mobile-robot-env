@@ -72,7 +72,7 @@ class TaskGenerator:
         # load scene config
         self.scene_config = self.get_scene_config(scene_id)
         self.num_episodes = self.scene_config['episode_number']
-        self.rule_pattern = self.scene_config['rule_pattern']
+        self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
         # generate task
         total_goal_found = self.parse_scene()
         if total_goal_found == 0:
