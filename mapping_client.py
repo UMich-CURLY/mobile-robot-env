@@ -130,7 +130,7 @@ lastx = 0
 lasty = 0
 
 points = deque(np.zeros((0,2),dtype = float),maxlen=3000)
-vx,vy,omg = 0,0,0
+vx,vy,vw = 0,0,0
 
 init_T = None
 curr_T = None
@@ -248,7 +248,7 @@ def depth_to_pil_rgb(depth_array,
     return pil_image
 while run:
     if translations is None:
-        send_action_message(VelMessage(vx,vy,omg), host=args.host)
+        send_action_message(VelMessage(vx,vy,vw), host=args.host)
 
     clock.tick(60)
     for event in pygame.event.get():
@@ -257,21 +257,25 @@ while run:
         if event.type == pygame.KEYDOWN:
             translations = None
 
+            vx_min = 1.0
+            vy_min = 1.0
+            vw_min = 1.0
+
             # print(Rotation.from_matrix(curr_T[:3,:3]).as_quat())
             if event.key == pygame.K_w:
-                vx = 0.5
+                vx = vx_min
             if event.key == pygame.K_s:
-                vx = -0.5
+                vx = -vx_min
             if event.key == pygame.K_a:               
-                omg = 0.5
+                vw = vw_min
             if event.key == pygame.K_d:
-                omg = -0.5
+                vw = -vw_min
             if event.key == pygame.K_q:
-                vy = 0.5
+                vy = vy_min
             if event.key == pygame.K_e:
-                vy = -0.5
+                vy = -vy_min
             if event.key == pygame.K_SPACE:
-                vx,vy,omg = vx*2,vy*2,omg*2
+                vx,vy,vw = vx*vx_min,vy*vy_min,vw*vw_min
             if event.key == pygame.K_BACKSPACE:
                 if(WAYPOINTS.shape[0]>1):
                     WAYPOINTS = WAYPOINTS[:-1]
@@ -311,17 +315,17 @@ while run:
             if event.key == pygame.K_s:
                 vx = 0
             if event.key == pygame.K_a:               
-                omg = 0
+                vw = 0
             if event.key == pygame.K_d:
-                omg = 0
+                vw = 0
             if event.key == pygame.K_q:
                 vy = 0
             if event.key == pygame.K_e:
                 vy = 0
             if event.key == pygame.K_SPACE:
-                vx,vy,omg = vx/2,vy/2,omg/2
+                vx,vy,vw = vx/2,vy/2,vw/2
             
-            send_action_message(VelMessage(vx,vy,omg),args.host)
+            send_action_message(VelMessage(vx,vy,vw),args.host)
         
         if event.type ==  pygame.MOUSEBUTTONDOWN:
             mx,my = (np.array(pygame.mouse.get_pos())-ROBOT_VIS_CENTER*window.get_width()/screen_width-np.array([window.get_rect().x,window.get_rect().y]))*np.array([1,-1])/scale/window.get_width()*screen_width
@@ -356,7 +360,7 @@ while run:
                 planner_message+=" | "
         else:
             collision = my_dict.get("collision",None)
-            planner_message= f"[TELEOP] x: {vx:+.2f} y: {vy:+.2f} z: {omg:+.2f} | proximity warning: {collision}"
+            planner_message= f"[TELEOP] x: {vx:+.2f} y: {vy:+.2f} z: {vw:+.2f} | proximity warning: {collision}"
         # decimal_places = 3
         # rounded_dict = {k: round(v, decimal_places) if isinstance(v, float) else v for k, v in my_dict.items()}
         # print(rounded_dict)
