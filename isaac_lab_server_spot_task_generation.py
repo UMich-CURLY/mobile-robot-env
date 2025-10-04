@@ -28,11 +28,11 @@ app_launcher = AppLauncher(args)
 simulation_app = app_launcher.app
 
 # Enable Extension
-from isaacsim.core.utils.extensions import enable_extension
-enable_extension("omni.anim.navigation.bundle")
-simulation_app.update()
-from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
-print(f"ISAAC_NUCLEUS_DIR: {ISAAC_NUCLEUS_DIR}")
+# from isaacsim.core.utils.extensions import enable_extension
+# enable_extension("omni.anim.navigation.bundle")
+# simulation_app.update()
+# from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+# print(f"ISAAC_NUCLEUS_DIR: {ISAAC_NUCLEUS_DIR}")
 
 import carb, os
 settings = carb.settings.get_settings()

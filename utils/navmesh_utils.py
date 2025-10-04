@@ -324,10 +324,10 @@ class NavmeshInterface:
         if len(self.input_vert) == 0:
             print('[INFO]: No mesh found')
         self.input_vert = np.array(self.input_vert)
-        print(f'bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
+        print(f"[INFO]: Loaded {len(self.input_vert)} vertices and {len(self.input_tri)} triangles")
+        print(f'[INFO]: bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
         if np.any(np.isnan(self.input_vert)):
             print("[WARNING]: NaNs found in input vertices")
-        print("[INFO]: Loading navmesh from vertices and triangles, will take a while, please wait.")
         self.input_vert = self._convert_up_axis(self.input_vert)
 
         verts_flat = []
@@ -344,8 +344,9 @@ class NavmeshInterface:
             faces_flat.extend(cur_faces_flat)
 
         # Initialize the navmesh with raw data
+        print("[INFO]: Loading geometry from vertices and triangles. This will take a while, please wait.")
         self.nm.init_by_raw(verts_flat, faces_flat)
-        print(f"[INFO]: Loaded geometry from {np.array(verts_flat).shape[0]//3} vertices and {np.array(faces_flat).shape[0]//4} triangles")
+        print(f"[INFO]: Geometry loaded")
 
     def build_navmesh(self):
         self.nm.set_settings(self.settings)
@@ -416,7 +417,7 @@ class NavmeshInterface:
         path_points = self.nm.pathfind_straight(start, end, 1)
         path_points = np.array(path_points).reshape(-1, 3)
         path_points = self._convert_up_axis(path_points, inverse=True)
-        print(f"Path points: {path_points.shape}")
+        # print(f"Path points: {path_points.shape}")
         
         if path_points.shape[0] <= 1:
             print("[WARNING]: No valid path found")
@@ -471,6 +472,6 @@ class NavmeshInterface:
         weights = np.random.rand(random_poly.shape[0]*3).reshape(-1, 3)
         weights = weights[:,:,np.newaxis].repeat(3, axis=2)
         vertices = np.average(v[random_poly], weights=weights, axis=1)
-        print(f'random points: {vertices}')
+        # print(f'random points: {vertices}')
 
         return vertices

@@ -9,7 +9,6 @@ from scipy.spatial.transform import Rotation
 # omni-isaaclab
 from isaaclab.app import AppLauncher
 
-import isaac.scripts.isaac_cli_args as isaac_cli_args
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="Server for reading data from Isaac Lab agent and issuing action commands")
@@ -29,7 +28,6 @@ parser.add_argument("--use_rnn", action="store_true", default=False, help="Use R
 parser.add_argument("--usd_path", type=str, required=True, help="Absolute path to the USD scene file to edit.")
 parser.add_argument("--load_timeout", type=float, default=600.0, help="Max seconds to wait for /Looks or stage to finish loading.")
 
-isaac_cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 # parser.add_argument("--draw_pointcloud", action="store_true", default=False, help="DRaw pointlcoud.")
 args_cli = parser.parse_args()
@@ -123,7 +121,8 @@ def remove_paint_tools(stage: Usd.Stage) -> int:
     - Exclude `UsdShade.Material` and `UsdShade.Shader` to avoid deleting materials/shaders
     """
     to_remove_paths = []
-    for prim in Usd.PrimRange(stage.GetPseudoRoot()):
+    prim_list = [x for x in stage.Traverse()]
+    for prim in prim_list:
         if not prim or not prim.IsValid():
             continue
         name_lower = prim.GetName().lower()
@@ -134,7 +133,10 @@ def remove_paint_tools(stage: Usd.Stage) -> int:
     # Remove deepest paths first to avoid removing parents before children
     to_remove_paths.sort(key=lambda p: len(str(p).split('/')), reverse=True)
     for path in to_remove_paths:
+        print(f"Removing {path}")
         stage.RemovePrim(path)
+        if stage.GetPrimAtPath(path).IsValid():
+            print(f"Failed to remove {path}")
 
     return len(to_remove_paths)
 
@@ -175,7 +177,8 @@ def scale_material_uvs(stage: Usd.Stage, factor: float = 100.0) -> int:
         "scaleUV",
     )
 
-    for prim in Usd.PrimRange(stage.GetPseudoRoot()):
+    prim_list = [x for x in stage.Traverse()]
+    for prim in prim_list:
         if not prim or not prim.IsValid():
             continue
         if prim.GetTypeName() != "Shader":
@@ -201,6 +204,11 @@ def scale_material_uvs(stage: Usd.Stage, factor: float = 100.0) -> int:
             if not inp:
                 continue
             val = inp.Get()
+            # if str(shader.GetPath()).startswith("/World/References/Reference_Brownstone5Row_Yard/Looks/Facade_Brick_Grey"):
+            #     print(f"scale: {val}")
+            #     continue
+            if val is not None and val[0] > 0.2:
+                continue
             new_val = _scale_value(val)
             if new_val is not None:
                 inp.Set(new_val)
@@ -285,7 +293,12 @@ def run_update():
     _ensure_world_xform(stage, world_path)
     if scale_scene(stage, world_path, scale=0.01):
         print("Applied world scale 0.01 to /World.")
-    did_copy_looks = _copy_looks_under_world(stage, src_looks_path, dst_looks_path)
+    
+    try:
+        did_copy_looks = _copy_looks_under_world(stage, src_looks_path, dst_looks_path)
+    except Exception as e:
+        print(e)
+        did_copy_looks = False
     updated = 0
     if did_copy_looks:
         updated = _rebind_world_materials_to_world_looks(stage, world_path, src_looks_path, dst_looks_path)

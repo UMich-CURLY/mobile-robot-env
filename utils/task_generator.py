@@ -103,7 +103,7 @@ class TaskGenerator:
                 'prim': goal_prim,
                 'pos': [list(x.GetAttribute('xformOp:translate').Get()) for x in goal_prim]
             }
-            print(f'{goal}: Found {len(goal_prim)} prims')
+            print(f'{goal}: Found {len(goal_prim)} {goal}')
             total_goal_found += len(goal_prim)
         print(f'Total goal found: {total_goal_found}')
         # self.goal_kd_tree = KDTree(self.goal_positions.values())
