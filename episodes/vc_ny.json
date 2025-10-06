@@ -91,7 +91,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 1,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -210,7 +210,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 2,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -833,7 +833,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 3,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -905,7 +905,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 4,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -1170,7 +1170,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 5,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -1583,7 +1583,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 6,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -1933,7 +1933,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 7,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2027,7 +2027,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 8,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2144,7 +2144,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 9,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2236,7 +2236,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 10,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2318,7 +2318,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 11,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2573,7 +2573,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 12,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2640,7 +2640,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 13,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2747,7 +2747,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 14,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2844,7 +2844,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 15,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -2906,7 +2906,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 16,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3015,7 +3015,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 17,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3087,7 +3087,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 18,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3194,7 +3194,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 19,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3321,7 +3321,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 20,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3418,7 +3418,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 21,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3520,7 +3520,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 22,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -3587,7 +3587,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 23,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -4005,7 +4005,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 24,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -4438,7 +4438,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 25,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -4888,7 +4888,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 26,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -4945,7 +4945,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 27,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -5032,7 +5032,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 28,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,
@@ -5129,7 +5129,7 @@
     {
         "scene_id": "vc_ny",
         "scene_type": "vc",
-        "episode_id": 0,
+        "episode_id": 29,
         "path": "virtual_community/NY/NY_with_road_objects_modified.usd",
         "scene_scale": 1.0,
         "collider": true,

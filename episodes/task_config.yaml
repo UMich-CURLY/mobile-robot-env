@@ -80,7 +80,7 @@ scene:
         navmesh_exclude:
         - /World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere
         navmesh_preset: default
-        path: nvidia_edit/park/apartment_flatten_edit.usd
+        path: nvidia/park/apartment_flatten_edit.usd
         rule_pattern: name
       city1:
         episode_number: 30
@@ -92,7 +92,7 @@ scene:
           trash_can: TrashCan.*
         navmesh_exclude: []
         navmesh_preset: outdoor
-        path: nvidia_edit/city1/city1_flatten_edit.usd
+        path: nvidia/city1/city1_flatten_edit.usd
         rule_pattern: name
       city2:
         episode_number: 30
@@ -106,7 +106,7 @@ scene:
         - /World/ground/terrain/Ground/HorizonRT
         - /World/ground/terrain/Ground/HorizonRT_01
         navmesh_preset: outdoor
-        path: nvidia_edit/city2/city2_flatten_edit.usd
+        path: nvidia/city2/city2_flatten_edit.usd
         rule_pattern: name
       parkmorning:
         episode_number: 30
@@ -118,7 +118,7 @@ scene:
           trash_can: TrashCan.*
         navmesh_exclude: []
         navmesh_preset: outdoor
-        path: nvidia_edit/park/park_morning_flatten_edit.usd
+        path: nvidia/park/park_morning_flatten_edit.usd
         rule_pattern: name
       parknight:
         episode_number: 30
@@ -131,7 +131,7 @@ scene:
         navmesh_exclude:
         - /World/ground/terrain/sky_NightSky/AxisNorth/SkySphere/Sphere
         navmesh_preset: outdoor
-        path: nvidia_edit/park/park_night_flatten_edit.usd
+        path: nvidia/park/park_night_flatten_edit.usd
         rule_pattern: name
       parktest:
         episode_number: 30

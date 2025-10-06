@@ -76,7 +76,7 @@ scene:
           park_bench: ParkBench.*
         navmesh_exclude: []
         navmesh_preset: outdoor
-        path: nvidia_edit/park/park_morning_edit.usd
+        path: nvidia/park/park_morning_edit.usd
         rule_pattern: name
       parktest:
         episode_number: 30

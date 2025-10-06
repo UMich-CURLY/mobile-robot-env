@@ -113,7 +113,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 1,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -202,7 +202,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 2,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -301,7 +301,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 3,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -462,7 +462,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 4,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -531,7 +531,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 5,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -637,7 +637,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 6,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -716,7 +716,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 7,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -775,7 +775,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 8,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -911,7 +911,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 9,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1022,7 +1022,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 10,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1128,7 +1128,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 11,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1244,7 +1244,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 12,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1338,7 +1338,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 13,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1412,7 +1412,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 14,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1486,7 +1486,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 15,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1580,7 +1580,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 16,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1686,7 +1686,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 17,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1760,7 +1760,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 18,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1844,7 +1844,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 19,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -1923,7 +1923,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 20,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2039,7 +2039,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 21,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2165,7 +2165,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 22,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2239,7 +2239,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 23,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2345,7 +2345,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 24,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2404,7 +2404,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 25,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2493,7 +2493,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 26,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2644,7 +2644,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 27,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2770,7 +2770,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 28,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
@@ -2871,7 +2871,7 @@
     {
         "scene_id": "grHome_indoor2",
         "scene_type": "grHome",
-        "episode_id": 0,
+        "episode_id": 29,
         "path": "grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd",
         "scene_scale": 0.009999999776482582,
         "collider": true,
