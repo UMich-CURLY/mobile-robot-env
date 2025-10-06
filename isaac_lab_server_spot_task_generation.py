@@ -1,5 +1,5 @@
-# python isaac_lab_server_spot_metrics.py --enable_cameras --scene_folder /data/isaac_scenes_v1/ --episode_path episodes/test.json
-# python isaac_lab_server_spot_sample.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --episode_path episodes/test.json
+# python isaac_lab_server_spot_task_generation.py --enable_cameras --scene_folder /data/isaac_scenes_v1/
+# python isaac_lab_server_spot_task_generation.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --tg_config_path episodes/task_config.yaml --test_id test_generator
 
 import argparse
 import json
@@ -36,6 +36,12 @@ simulation_app = app_launcher.app
 
 import carb, os
 settings = carb.settings.get_settings()
+# settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
+# settings.set("/rtx/reflections/enabled", True)
+# settings.set("/rtx/translucency/enabled", True)
+# settings.set("/rtx-flags/ecoMode/enabled", True)
+
+
 
 # Isaac Lab pretrained spot policy 
 from isaaclab.envs import ManagerBasedRLEnv
@@ -57,14 +63,14 @@ import utils.navmesh_utils as navmesh_utils
 # Main simulation loop
 
 # load episodes
-def load_task_config(args):
+def load_task_config(args, scene_id):
     task_generator = TaskGenerator(args)
     task_config = task_generator.task_config
-    scene_config = task_generator.get_scene_config(args.test_id)
+    scene_config = task_generator.get_scene_config(scene_id)
     current_episode = VLNEpisode(scene_config)
     return task_generator, task_config, scene_config, current_episode
 
-task_generator, task_config, scene_config, current_episode = load_task_config(args)
+task_generator, task_config, scene_config, current_episode = load_task_config(args, args.test_id)
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -219,21 +225,27 @@ def set_ui_value(map, key, value):
 
 def reload_config():
     global task_generator, task_config, scene_config, current_episode
-    task_generator, task_config, scene_config, current_episode = load_task_config(args)
-    update_ui("scene_id", current_episode["scene_id"])
+    previous_scene_id = current_episode["scene_id"]
+    task_generator, task_config, scene_config, current_episode = load_task_config(args, previous_scene_id)
+    update_ui("scene_id", previous_scene_id)
     update_ui("navmesh_preset", scene_config["navmesh_preset"])
-    print("[INFO]: Task config reloaded")
+    print("[INFO] Task config reloaded")
 
 def update_ui(settings_type, selected_value):
+    global scene_config
     if settings_type == "navmesh_preset":
         preset_name = selected_value
         for key, (value, _) in navmesh_settings_map.items():
             set_ui_value(navmesh_settings_map, key, task_config['navmesh'][preset_name][value])
     elif settings_type == "scene_id":
         scene_id = selected_value
-        new_scene_config = task_generator.get_scene_config(scene_id)
+        scene_config = task_generator.get_scene_config(scene_id)
+        current_episode = VLNEpisode(scene_config)
         for key, (value, _) in ui_config_map.items():
-            set_ui_value(ui_config_map, key, new_scene_config[value])
+            set_ui_value(ui_config_map, key, scene_config[value])
+        print("[INFO] Loaded goal rules:", scene_config["goal_rules"])
+        print("[INFO] Loaded excluded paths:", scene_config["navmesh_exclude"])
+
 
 def save_settings(settings_type):
     if settings_type == "navmesh_runtime":
@@ -332,6 +344,7 @@ def generate_episodes():
     save_settings("navmesh_config")
     save_settings("navmesh_runtime")
     episodes = task_generator.generate_episodes(env, current_episode["scene_id"], navmesh_interface)
+    print(task_generator.scene_config)
     save_episodes(episodes, f"episodes/{current_episode['scene_id']}.json")
 
 update_ui("scene_id", current_episode["scene_id"])

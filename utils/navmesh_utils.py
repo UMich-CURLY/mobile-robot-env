@@ -98,6 +98,15 @@ def get_mesh(objs):
         p = np.array(p)
         f = np.array(f)
 
+        if len(p) == 0:
+            continue
+
+        if p.max()-p.min() > 1000:
+            print(f"[WARNING]: Large mesh found: {obj.GetPath()}, Max: {p.max()}, Min: {p.min()}")
+
+        if p.max()>1000 or p.min()<-1000:
+            print(f"[WARNING]: Remote mesh found: {obj.GetPath()}, Max: {p.max()}, Min: {p.min()}")
+
         # print("points shape: ", p.shape)  n x 3
         # print("faces shape: ", f.shape)   n x 3
         points.extend(p)

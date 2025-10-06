@@ -1,0 +1,4740 @@
+[
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.59580993652344,
+                        -10.657108306884766,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.59581179703733,
+            -10.657108546086835,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -53.1251220703125,
+                        -2.672529458999634,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -53.1251220703125,
+                        -2.672529458999634,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -53.1251220703125,
+                        -2.672529458999634,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -13.883285522460938,
+                        -13.419353485107422,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -12.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -53.12512154713887,
+            -2.672529407250764,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -53.899253845214844,
+                        -7.359529495239258,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -53.899253845214844,
+                        -7.359529495239258,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -53.89925198015156,
+            -7.359529512852252,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -52.59988021850586,
+                        10.4298095703125,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -52.59988021850586,
+                        10.4298095703125,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -52.59988021850586,
+                        10.4298095703125,
+                        -10.0
+                    ],
+                    [
+                        -46.68328094482422,
+                        9.460643768310547,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -5.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -6.6993560791015625,
+                        -10.0
+                    ],
+                    [
+                        -13.323284149169922,
+                        -11.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.59987969417713,
+            10.42980918445511,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -17.130268096923828,
+                        -6.8928680419921875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -53.48328399658203,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.04328155517578,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -17.130268096923828,
+                        -6.8928680419921875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -17.130268096923828,
+                        -6.8928680419921875,
+                        -10.0
+                    ],
+                    [
+                        -14.683284759521484,
+                        -11.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -17.130268569325782,
+            -6.892868182122521,
+            -10.000000000000002
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -41.38429641723633,
+                        -16.861942291259766,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -53.48328399658203,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.04328155517578,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -41.38429641723633,
+                        -16.861942291259766,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -41.38429641723633,
+                        -16.861942291259766,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -13.883285522460938,
+                        -13.419353485107422,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -12.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -41.38429724080007,
+            -16.861941593485003,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -43.504005432128906,
+                        -20.520736694335938,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -40.203285217285156,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -43.504005432128906,
+                        -20.520736694335938,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -40.203285217285156,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -43.50400424968023,
+            -20.52073623797758,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -12.764487266540527,
+                        -10.803581237792969,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -12.764487266540527,
+                        -10.803581237792969,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -12.764487034559233,
+            -10.803581047687384,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -65.5801010131836,
+                        -14.69189453125,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02/MailboxType01",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -65.5801010131836,
+                        -14.69189453125,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -65.58010114116723,
+            -14.691894113251848,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -51.64328384399414,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        5.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -51.64328384399414,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        5.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -14.683284759521484,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -24.043285369873047,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -28.141437530517578,
+                        7.69916296005249,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -14.683284759521484,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -24.043285369873047,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -28.141436793677947,
+            7.699163119727442,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -52.8451042175293,
+                        5.456319808959961,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -52.8451042175293,
+                        5.456319808959961,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.845105040612765,
+            5.456319740165669,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -52.30139923095703,
+                        5.879644393920898,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.30140100651343,
+            5.879644581469942,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -13.276862144470215,
+                        0.5537921786308289,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        1.6206436157226562,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        3.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -13.323284149169922,
+                        3.5406436920166016,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.64328384399414,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        5.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -13.276862144470215,
+                        0.5537921786308289,
+                        -10.0
+                    ],
+                    [
+                        -15.243282318115234,
+                        -5.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -13.276862144470215,
+                        0.5537921786308289,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -5.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -6.6993560791015625,
+                        -10.0
+                    ],
+                    [
+                        -13.323284149169922,
+                        -11.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -13.276862319670284,
+            0.5537921839035128,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -66.31792449951172,
+                        -19.158803939819336,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -15.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -66.68328094482422,
+                        -14.779354095458984,
+                        -10.0
+                    ],
+                    [
+                        -65.64328002929688,
+                        -14.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02/MailboxType01",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -66.31792449951172,
+                        -19.158803939819336,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -15.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -66.68328094482422,
+                        -14.779354095458984,
+                        -10.0
+                    ],
+                    [
+                        -65.64328002929688,
+                        -14.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -66.31792382907099,
+            -19.158804009346955,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -36.65028762817383,
+                        -20.19892692565918,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -36.65028762817383,
+                        -20.19892692565918,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -36.65028696982411,
+            -20.19892730983872,
+            -9.999999999999996
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -15.188594818115234,
+                        -13.913949012756348,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -53.48328399658203,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.04328155517578,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -15.188594818115234,
+                        -13.913949012756348,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -15.188594818115234,
+                        -13.913949012756348,
+                        -10.0
+                    ],
+                    [
+                        -13.883285522460938,
+                        -13.419353485107422,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -12.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -15.1885951554046,
+            -13.913949071317372,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -13.201919555664062,
+                        -11.247641563415527,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -13.201919555664062,
+                        -11.247641563415527,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -13.201919286614213,
+            -11.247641516651052,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -5.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -15.163284301757812,
+                        0.8206443786621094,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.083282470703125,
+                        -5.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -15.163284301757812,
+                        0.8206443786621094,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -30.45166778564453,
+                        -20.11797332763672,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -30.45166851066351,
+            -20.11797425364539,
+            -10.000000000000002
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -67.5478286743164,
+                        7.088776111602783,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -8.379354476928711,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -13.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02/MailboxType01",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -67.5478286743164,
+                        7.088776111602783,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -8.379354476928711,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -13.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -67.54783070771678,
+            7.088776176963023,
+            -10.000000000000002
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "light_switch",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Brownstone01/Geometry/Lighting_Devices",
+                "type": "object",
+                "location": [
+                    -38.818829623063706,
+                    -11.146509934571903,
+                    -5.061340747594712
+                ],
+                "radius": 7.532261936390501,
+                "reference_path": [
+                    [
+                        -36.95833206176758,
+                        -10.795957565307617,
+                        -5.899999618530273
+                    ],
+                    [
+                        -37.0032844543457,
+                        -10.939353942871094,
+                        -5.899999618530273
+                    ],
+                    [
+                        -37.243282318115234,
+                        -11.17935562133789,
+                        -5.899999618530273
+                    ],
+                    [
+                        -37.48328399658203,
+                        -11.17935562133789,
+                        -5.899999618530273
+                    ],
+                    [
+                        -38.81882858276367,
+                        -11.146510124206543,
+                        -5.061340808868408
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -36.95833292527875,
+            -10.795957406836523,
+            -5.899999618530274
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -37.551883697509766,
+                        -21.141515731811523,
+                        -10.0
+                    ],
+                    [
+                        -36.44328308105469,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -37.551883697509766,
+                        -21.141515731811523,
+                        -10.0
+                    ],
+                    [
+                        -36.44328308105469,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -37.55188328497836,
+            -21.141515778752392,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -53.083282470703125,
+                        -11.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -53.083282470703125,
+                        -11.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -54.57475662231445,
+                        -13.721203804016113,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -54.57475800215241,
+            -13.72120356412863,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -54.33525085449219,
+                        -13.892370223999023,
+                        -10.0
+                    ],
+                    [
+                        -53.083282470703125,
+                        -11.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -53.083282470703125,
+                        -9.979354858398438,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -53.48328399658203,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.04328155517578,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -54.33525085449219,
+                        -13.892370223999023,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -54.33525085449219,
+                        -13.892370223999023,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -13.883285522460938,
+                        -13.419353485107422,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -12.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -54.335248997054734,
+            -13.892370557829715,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -65.4090576171875,
+                        8.531654357910156,
+                        -10.0
+                    ],
+                    [
+                        -67.00328063964844,
+                        6.740644454956055,
+                        -10.0
+                    ],
+                    [
+                        -67.00328063964844,
+                        4.980644226074219,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -8.379354476928711,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -13.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_02/MailboxType01",
+                "type": "object",
+                "location": [
+                    -65.90356634158576,
+                    -14.08310979243842,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -65.4090576171875,
+                        8.531654357910156,
+                        -10.0
+                    ],
+                    [
+                        -67.00328063964844,
+                        6.740644454956055,
+                        -10.0
+                    ],
+                    [
+                        -67.00328063964844,
+                        4.980644226074219,
+                        -10.0
+                    ],
+                    [
+                        -66.92327880859375,
+                        -8.379354476928711,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -13.739356994628906,
+                        -10.0
+                    ],
+                    [
+                        -65.40328216552734,
+                        -14.083109855651855,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -65.40905513252896,
+            8.531653991432004,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -52.89993667602539,
+                        2.7513797283172607,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -52.89993667602539,
+                        2.7513797283172607,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -35.80328369140625,
+                        -20.219356536865234,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.459354400634766,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.89993720661391,
+            2.7513796537316364,
+            -10.000000000000002
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "light_switch",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Brownstone01/Geometry/Lighting_Devices",
+                "type": "object",
+                "location": [
+                    -38.818829623063706,
+                    -11.146509934571903,
+                    -5.061340747594712
+                ],
+                "radius": 7.532261936390501,
+                "reference_path": [
+                    [
+                        -37.28908157348633,
+                        -11.297639846801758,
+                        -5.899999618530273
+                    ],
+                    [
+                        -38.81882858276367,
+                        -11.146510124206543,
+                        -5.061340808868408
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -37.28908190902217,
+            -11.297639812081874,
+            -5.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "hydrant",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_09",
+                "type": "object",
+                "location": [
+                    -53.79589065070991,
+                    -9.290048766847365,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -30.222455978393555,
+                        -16.720571517944336,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -53.16328430175781,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -53.48328399658203,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.04328155517578,
+                        -8.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -54.36328125,
+                        -9.290048599243164,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_21",
+                "type": "object",
+                "location": [
+                    -40.4319603517791,
+                    -20.672091391084525,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -30.222455978393555,
+                        -16.720571517944336,
+                        -10.0
+                    ],
+                    [
+                        -40.68328094482422,
+                        -20.059356689453125,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.379356384277344,
+                        -10.0
+                    ],
+                    [
+                        -41.00328063964844,
+                        -20.672090530395508,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Hydrant/Hydrant_23",
+                "type": "object",
+                "location": [
+                    -14.055463182694123,
+                    -12.786325409707208,
+                    -9.387478577911615
+                ],
+                "radius": 0.8094583645096263,
+                "reference_path": [
+                    [
+                        -30.222455978393555,
+                        -16.720571517944336,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -13.883285522460938,
+                        -13.419353485107422,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.483283996582031,
+                        -12.619354248046875,
+                        -10.0
+                    ],
+                    [
+                        -13.63566780090332,
+                        -12.436494827270508,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -30.222456668182268,
+            -16.720571029967378,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mailbox",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -25.466821670532227,
+                        -15.531713485717773,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/Mailbox/MailboxType01_06/MailboxType01",
+                "type": "object",
+                "location": [
+                    -36.09523101042916,
+                    -20.767973011154318,
+                    -9.328411994686498
+                ],
+                "radius": 0.6715899889560788,
+                "reference_path": [
+                    [
+                        -25.466821670532227,
+                        -15.531713485717773,
+                        -10.0
+                    ],
+                    [
+                        -35.0032844543457,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -35.243282318115234,
+                        -19.819355010986328,
+                        -10.0
+                    ],
+                    [
+                        -35.56328201293945,
+                        -20.767972946166992,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -25.466821530507318,
+            -15.531713218268374,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.64328384399414,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        5.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -18.12328338623047,
+                        5.220643997192383,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.64328384399414,
+                        5.540644645690918,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        5.3006439208984375,
+                        -10.0
+                    ],
+                    [
+                        -51.88328552246094,
+                        2.9806442260742188,
+                        -10.0
+                    ],
+                    [
+                        -50.36328125,
+                        0.5806446075439453,
+                        -10.0
+                    ],
+                    [
+                        -50.12328338623047,
+                        0.34064483642578125,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -14.683284759521484,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -24.043285369873047,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -16.2099609375,
+                        -6.8672966957092285,
+                        -10.0
+                    ],
+                    [
+                        -14.683284759521484,
+                        -13.019355773925781,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -14.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -13.003284454345703,
+                        -16.699356079101562,
+                        -10.0
+                    ],
+                    [
+                        -13.243282318115234,
+                        -16.939353942871094,
+                        -10.0
+                    ],
+                    [
+                        -24.043285369873047,
+                        -19.57935333251953,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -16.209961874965646,
+            -6.867296929698962,
+            -9.999999999999998
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "nv_apartment",
+        "scene_type": "nv",
+        "episode_id": 0,
+        "path": "nvidia_edit/park/apartment_flatten_edit.usd",
+        "scene_scale": 0.01,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "trash_can",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_01/TrashCan",
+                "type": "object",
+                "location": [
+                    -48.010397206588564,
+                    -0.9796306697582109,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -51.96328353881836,
+                        -1.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -51.72328186035156,
+                        -1.099355697631836,
+                        -10.0
+                    ],
+                    [
+                        -48.322181701660156,
+                        -0.5119556188583374,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_02/TrashCan",
+                "type": "object",
+                "location": [
+                    -14.586528383670267,
+                    1.0653638645325985,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -18.443283081054688,
+                        -15.33935546875,
+                        -10.0
+                    ],
+                    [
+                        -18.203285217285156,
+                        -15.099353790283203,
+                        -10.0
+                    ],
+                    [
+                        -15.124290466308594,
+                        1.1325857639312744,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/BrownstoneSite/BrownstoneSite_Props/TrashCan/TrashCan_06/TrashCan",
+                "type": "object",
+                "location": [
+                    -23.76627918848684,
+                    -20.15401292117736,
+                    -9.634537115144688
+                ],
+                "radius": 0.36497922223107704,
+                "reference_path": [
+                    [
+                        -47.0534553527832,
+                        -15.508158683776855,
+                        -10.0
+                    ],
+                    [
+                        -24.22327995300293,
+                        -19.849348068237305,
+                        -10.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -47.053454274045244,
+            -15.508158587602729,
+            -10.0
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "hydrant": "Hydrant_.*",
+            "light_switch": "Lighting_Devices.*",
+            "mailbox": "MailboxType.*",
+            "stair": "Stairs_411731_0411731_35336",
+            "stove": ".*Stove.*",
+            "trash_can": "TrashCan.*"
+        },
+        "navmesh_exclude": [
+            "/World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere"
+        ],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    }
+]

@@ -68,6 +68,46 @@ scene:
     align_ground: true
     collider: true
     episodes:
+      apartment:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          light_switch: Lighting_Devices.*
+          mailbox: MailboxType.*
+          stair: Stairs_411731_0411731_35336
+          stove: .*Stove.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere
+        navmesh_preset: default
+        path: nvidia_edit/park/apartment_flatten_edit.usd
+        rule_pattern: name
+      city1:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude: []
+        navmesh_preset: outdoor
+        path: nvidia_edit/city1/city1_flatten_edit.usd
+        rule_pattern: name
+      city2:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/Ground/HorizonRT
+        - /World/ground/terrain/Ground/HorizonRT_01
+        navmesh_preset: outdoor
+        path: nvidia_edit/city2/city2_flatten_edit.usd
+        rule_pattern: name
       parkmorning:
         episode_number: 30
         goal_rules:
@@ -79,6 +119,19 @@ scene:
         navmesh_exclude: []
         navmesh_preset: outdoor
         path: nvidia_edit/park/park_morning_flatten_edit.usd
+        rule_pattern: name
+      parknight:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/sky_NightSky/AxisNorth/SkySphere/Sphere
+        navmesh_preset: outdoor
+        path: nvidia_edit/park/park_night_flatten_edit.usd
         rule_pattern: name
       parktest:
         episode_number: 30

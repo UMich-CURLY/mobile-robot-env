@@ -11,6 +11,15 @@ import numpy as np
 from utils.episode import VLNEpisode
 import utils.navmesh_utils as navmesh_utils
 
+# UI
+from utils.ui import SimWindow
+import utils.ui_utils as ui_utils
+import omni.ui as ui
+import omni.usd
+import isaacsim.core.utils.prims as prim_utils
+import isaacsim.core.utils.bounds as bounds_utils
+import isaaclab.sim as sim_utils
+
 class TaskGenerator:
     """
     Task Generator for InNOut benchmark.
@@ -84,6 +93,7 @@ class TaskGenerator:
     def parse_scene(self):
         # find target prims
         self.prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
+        # [x for x in self.prim_list if str(x.GetPath()).startswith("/World/ground/terrain/Brownstone03/Geometry/Specialty_Equipment/")]
         print(f'Loaded {len(self.prim_list)} prims')
         self.goal_dict = {}
         total_goal_found = 0
@@ -98,14 +108,12 @@ class TaskGenerator:
                         print(f"  Matched: {prim_path_str}")
             else:
                 goal_prim = [x for x in self.prim_list if re.search(goal_rule, x.GetName())]
-            goal_prim = [x for x in goal_prim if x.HasAttribute('xformOp:translate')]
             self.goal_dict[goal] = {
                 'prim': goal_prim,
-                'pos': [list(x.GetAttribute('xformOp:translate').Get()) for x in goal_prim]
             }
-            print(f'{goal}: Found {len(goal_prim)} {goal}')
+            print(f'[INFO]: Found {len(goal_prim)} {goal}')
             total_goal_found += len(goal_prim)
-        print(f'Total goal found: {total_goal_found}')
+        print(f'[INFO]: Total goal found: {total_goal_found}')
         # self.goal_kd_tree = KDTree(self.goal_positions.values())
         return total_goal_found
     
@@ -118,7 +126,7 @@ class TaskGenerator:
         else:
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths)
+            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []))
             navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
@@ -133,10 +141,9 @@ class TaskGenerator:
             random_points = navmesh_interface.sample_random_points(1)
             start = random_points[0]
             random_goal = np.random.choice(list(self.goal_dict.keys()))
-            goal_pos_list = self.goal_dict[random_goal]['pos']
             goal_prim_list = self.goal_dict[random_goal]['prim']
             goals = []
-            for goal_pos, goal_prim in zip(goal_pos_list, goal_prim_list):
+            for goal_prim in goal_prim_list:
                 # we use the position calculated with bounding box instead
                 prim_path = goal_prim.GetPrimPath()
                 goal_pos = self.env.get_prim_position(prim_path)
@@ -146,7 +153,7 @@ class TaskGenerator:
                     dist_to_end = np.linalg.norm(goal_pos - path[-1])
                     if dist_to_start > 1.0 or dist_to_end > 1.0:
                         continue
-                    print(f'dist_to_start: {dist_to_start}, dist_to_end: {dist_to_end}')
+                    print(f'[INFO]: dist_to_start: {dist_to_start}, dist_to_end: {dist_to_end}')
                     goals.append({
                         'instance': str(prim_path),
                         'type': 'object',
@@ -166,4 +173,13 @@ class TaskGenerator:
                 navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
                 self.generated_episodes.append(episode)
 
-        print(f'Generated {len(self.generated_episodes)} episodes')
+        print(f'[INFO]: Generated {len(self.generated_episodes)} episodes')
+
+# class TaskGeneratorUI:
+#     def __init__(self, manager_env):
+#         self.manager_env = manager_env
+    
+#     def setup_ui(self):
+#         manager_env = self.manager_env
+
+        

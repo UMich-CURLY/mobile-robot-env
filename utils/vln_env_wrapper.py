@@ -95,6 +95,20 @@ class VLNEnvWrapper:
                 self.manager_env.cfg.load_usd(str(Path(self.args.scene_folder) / self.episode["path"]))
                 self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
 
+        # check if skylight exists in scene
+        # traverse all prims in scene
+        disable_default_light = False
+        prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
+        for prim in prim_list:
+            from_usd = str(prim.GetPath()).startswith("/World/ground/terrain")
+            is_domelight = prim.GetTypeName() == "DomeLight"
+            if from_usd and is_domelight:
+                disable_default_light = True
+                break
+        dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
+        dome_light.SetActive(not disable_default_light)
+
+        # reset robot position
         robot_root_state = self.scene["robot"].data.default_root_state.clone()
         robot_root_state[:, 0:3] = torch.tensor(episode["start_position"], device=self.args.device)
         robot_root_state[:, 3:7] = torch.tensor(episode["start_rotation"], device=self.args.device)

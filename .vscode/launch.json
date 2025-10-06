@@ -10,16 +10,14 @@
             "args": [
                 "--enable_cameras",
                 "--scene_folder",
-                "/data/isaac_scenes_v1",
-                "--episode_path",
-                "${workspaceFolder}/episodes/test.json",
+                "/home/junzhewu/data/isaac_scenes_v1",
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_id",
-                "test_generator"
+                "nv_apartment"
             ],
             "env": {
-                // "DISPLAY": ":2"
+                "DISPLAY": ":2"
             }
         },
         {
