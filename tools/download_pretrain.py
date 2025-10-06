@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser(
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(parser)
 # parse the arguments
-args_cli = parser.parse_args()
+args = parser.parse_args()
 
 # launch omniverse app
 app_launcher = AppLauncher(args_cli)

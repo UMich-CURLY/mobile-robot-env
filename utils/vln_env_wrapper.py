@@ -108,15 +108,16 @@ class VLNEnvWrapper:
         dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
         dome_light.SetActive(not disable_default_light)
 
+        # reset low-level environment
+        low_level_obs, infos = self.env.reset()
+        self.low_level_obs = low_level_obs
+
         # reset robot position
         robot_root_state = self.scene["robot"].data.default_root_state.clone()
         robot_root_state[:, 0:3] = torch.tensor(episode["start_position"], device=self.args.device)
         robot_root_state[:, 3:7] = torch.tensor(episode["start_rotation"], device=self.args.device)
-        self.scene["robot"].write_root_state_to_sim(robot_root_state)
-
-        # reset low-level environment
-        low_level_obs, infos = self.env.reset()
-        self.low_level_obs = low_level_obs
+        robot_root_state[:, 2] += 0.6
+        self.manager_env.scene["robot"].write_root_state_to_sim(robot_root_state)
 
         # set collider and scene scale
         terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')

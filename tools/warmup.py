@@ -30,7 +30,7 @@ from isaaclab.app import AppLauncher
 rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
 AppLauncher.add_app_launcher_args(parser)
-args = parser.parse_args()
+args = vln_cli_args.parse_args(parser)
 
 # Check cli args
 if not args.files and not args.dirs:

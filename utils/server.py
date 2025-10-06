@@ -12,7 +12,7 @@ import json
 import multiprocessing as mp
 # --- Configuration ---
 SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
-SOCKET_PORT = 12345      # Same port as your client expects
+SOCKET_PORT = 12357      # Same port as your client expects
 SERVER_NAME = "StandaloneSensorActionServer"
 
 # --- Global frame counter for dummy data ---
@@ -133,7 +133,7 @@ def generate_dummy_data():
     }
     )
 
-def format_data(rgb,depth,position,quat):
+def format_data(rgb,depth,position,quat, scenario):
     timestamp_ns = time.time_ns()
 
     pose_dict = {
@@ -155,7 +155,8 @@ def format_data(rgb,depth,position,quat):
         "pose": pose_dict,
         "timestamp_server_ns": timestamp_ns, # Server-side timestamp when data was packed
         "success": True,
-        "message": f"Dummy data generated successfully by {SERVER_NAME}."
+        "message": f"Dummy data generated successfully by {SERVER_NAME}.",
+        "scenario": scenario
     }
     )
 

@@ -96,7 +96,7 @@ from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 
 from utils.server import run_server, format_data
-from utils.innout_sim import InNOutSim
+from utils.sim import VLNSim
 
 TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
@@ -131,11 +131,11 @@ all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "Or
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
-in_n_out_sim = InNOutSim(args, env)
+vln_sim = VLNSim(args, env)
 
 obs, _ = env.reset(current_episode)
 for frame_count in range(50):
-    _ = env.step(in_n_out_sim.commands)
+    _ = env.step(vln_sim.commands)
 
 def test_single(scene_abs_path):
     """Main simulation loop"""
@@ -146,8 +146,8 @@ def test_single(scene_abs_path):
     with open(log_file, "a+") as f:
         f.write(f"Removing old terrain\n")
     # with torch.inference_mode():
-    #     env.step(in_n_out_sim.commands)
-    #     env.step(in_n_out_sim.commands)
+    #     env.step(vln_sim.commands)
+    #     env.step(vln_sim.commands)
     
     start_time = 0
     total_start_time = time.time()
@@ -164,7 +164,7 @@ def test_single(scene_abs_path):
                 obs, _ = env.reset(current_episode)
                 sim_init = True
                 print(f"[INFO]: Resetting robot state..")
-            obs, reward, done, info = env.step(in_n_out_sim.commands)
+            obs, reward, done, info = env.step(vln_sim.commands)
         if frame_count==50:
             start_time = time.time()
     with open(log_file, "a+") as f:

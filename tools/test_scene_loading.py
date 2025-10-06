@@ -18,7 +18,7 @@ rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
-args = parser.parse_args()
+args = vln_cli_args.parse_args(parser)
 
 
 # Launch Isaac Lab app
@@ -38,7 +38,7 @@ settings = carb.settings.get_settings()
 MDL_DIRS = [
     args.scene_folder + "/grscenes_home/Materials",
     args.scene_folder + "/grscenes_commercial/Materials",
-    args.scene_folder + "/nvidia_edit/Materials",
+    args.scene_folder + "/nvidia/Materials",
     args.scene_folder + "/nvidia/Materials",
     args.scene_folder + "/umich/Materials",
     args.scene_folder + "/virtual_community/Materials",
@@ -61,7 +61,7 @@ RL_LIBRARY = "rsl_rl"
 from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-from utils.innout_sim import InNOutSim
+from utils.sim import VLNSim
 
 # Main simulation loop
 
@@ -69,7 +69,7 @@ from utils.innout_sim import InNOutSim
 
 # load episodes
 episode_list = VLNEpisode.from_json(args.episode_path, args.episode_type)
-current_episode = episode_list[args.test_id]
+current_episode = next(x for x in episode_list if x.episode_label == args.test_id)
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
@@ -96,7 +96,7 @@ all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "Or
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
-in_n_out_sim = InNOutSim(args, env)
+vln_sim = VLNSim(args, env)
 
 sim_init = False
 
@@ -114,11 +114,11 @@ for i in range(30):
 
     with torch.inference_mode():
         # Policy forward pass
-        obs, reward, done, info = env.step(in_n_out_sim.commands)
+        obs, reward, done, info = env.step(vln_sim.commands)
         # print("measures: ", info["measurements"])
-        in_n_out_sim.update_obs(obs, manager_env)
+        vln_sim.update_obs(obs, manager_env, current_episode)
 
-in_n_out_sim.load_scene(scene_folder / current_episode["scene_path"])
+vln_sim.load_scene(scene_folder / current_episode["scene_path"])
 
 for i in range(1000):
     if not sim_init:
@@ -132,6 +132,6 @@ for i in range(1000):
 
     with torch.inference_mode():
         # Policy forward pass
-        obs, reward, done, info = env.step(in_n_out_sim.commands)
+        obs, reward, done, info = env.step(vln_sim.commands)
         # print("measures: ", info["measurements"])
-        in_n_out_sim.update_obs(obs, manager_env)
+        vln_sim.update_obs(obs, manager_env, current_episode)

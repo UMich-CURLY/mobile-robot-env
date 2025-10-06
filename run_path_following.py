@@ -46,7 +46,7 @@ sys.path.append("/home/junzhewu/pohsun/IsaacLab/")
 import scripts.reinforcement_learning.rsl_rl.cli_args as cli_args  # isort: skip
 cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
-args_cli = parser.parse_args()
+args = parser.parse_args()
 
 app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app

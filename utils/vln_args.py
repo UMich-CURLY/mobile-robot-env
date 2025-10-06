@@ -1,6 +1,7 @@
-import argparse
+import os
+import dotenv
 
-def add_vln_args(parser: argparse.ArgumentParser):
+def add_vln_args(parser):
     arg_group = parser.add_argument_group("VLN benchmark", description="Arguments for VLN benchmark.")
     arg_group.add_argument("--episode_type", type=str, default="default", help="Type of the episode.", choices=["default", "grscenes"])
     arg_group.add_argument("--episode_path", type=str, default=None, help="Path to the episode JSON file.")
@@ -11,3 +12,11 @@ def add_vln_args(parser: argparse.ArgumentParser):
     arg_group.add_argument("--test_id", type=str, default="test_generator", help="Test specific episode id.")
     arg_group = parser.add_argument_group("Task Generation")
     arg_group.add_argument("--tg_config_path", type=str, default="episodes/task_config.yaml", help="Path to the task config file.")
+
+def parse_args(parser):
+    args = parser.parse_args()
+    dotenv.load_dotenv()
+    if args.scene_folder is None:
+        args.scene_folder = os.getenv("SCENE_FOLDER")
+        print(f"Using scene folder from .env: {args.scene_folder}")
+    return args

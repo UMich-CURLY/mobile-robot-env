@@ -6,7 +6,7 @@ from threading import Thread
 import omni
 from omni.kit.viewport.utility import get_viewport_from_window_name
 
-class InNOutSim:
+class VLNSim:
     def __init__(self, args, env):
         self.args = args
         self.device = args.device
@@ -14,10 +14,13 @@ class InNOutSim:
         self.manager_env = env.unwrapped.unwrapped
         
         # Shared buffers for server callbacks
-        self._latest_rgb = None
-        self._latest_depth = None
-        self._latest_position = None
-        self._latest_quat_wxyz = None
+        self._latest_data = {
+            "rgb": None,
+            "depth": None,
+            "position": None,
+            "quat_wxyz": None,
+            "scenario": None,
+        }
 
         # simulation
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
@@ -45,10 +48,11 @@ class InNOutSim:
             print("ERROR: Waypoints not supported yet")
 
     def data_callback(self):
-        if self._latest_rgb is None or self._latest_depth is None or self._latest_position is None or self._latest_quat_wxyz is None:
-            print("Data missing")
-            return None
-        return format_data(self._latest_rgb, self._latest_depth, self._latest_position, self._latest_quat_wxyz)
+        for key in self._latest_data:
+            if self._latest_data[key] is None:
+                print(f"[Warning] socket server data missing for key: {key}")
+                return None
+        return format_data(self._latest_data["rgb"], self._latest_data["depth"], self._latest_data["position"], self._latest_data["quat_wxyz"], self._latest_data["scenario"])
 
     def planner_callback(self):
         # No onboard planner state here
@@ -74,18 +78,19 @@ class InNOutSim:
         print("[INFO] Socket server started")
 
     _obs_index = 0
-    def update_obs(self, obs, manager_env):
+    def update_obs(self, obs, manager_env, current_episode):
         # np.save(f"results/obs_{self._obs_index}.npy", obs.cpu().numpy())
         # self._obs_index = self._obs_index%100+1
         # only publish the first robot's obs for now
         try:
-            self._latest_rgb = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
+            self._latest_data["rgb"] = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
             depth = obs[0, :, :, 3].cpu().numpy()
             depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
             depth = np.clip(depth, 0, 65535).astype(np.uint16)
-            self._latest_depth = depth
-            self._latest_position = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
-            self._latest_quat_wxyz = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
+            self._latest_data["depth"] = depth
+            self._latest_data["position"] = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
+            self._latest_data["quat_wxyz"] = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
+            self._latest_data["scenario"] = current_episode["instruction"]
         except Exception as e:
             print(f"Error updating obs: {e}")
             import traceback

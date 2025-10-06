@@ -85,7 +85,14 @@ def decompress_payload(compressed_payload_dict):
 def send_action_message(msg,host = SERVER_HOST):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
-    client_socket.connect((host, SERVER_PORT))
+    while True:
+        try:
+            client_socket.connect((host, SERVER_PORT))
+        except Exception as e:
+            print(f"Waiting for server to be ready: {e}")
+            time.sleep(1)
+        else:
+            break
     # print("Connected to server.")
     message = msg.type+" "+jsonpickle.encode(msg)
     client_socket.sendall(message.encode())

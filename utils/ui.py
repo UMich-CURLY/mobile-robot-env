@@ -36,6 +36,27 @@ class SimWindow:
         with self.ui_elements["main_frame"]:
             self.ui_elements["main_stack"] = ui.VStack(style=get_style(), spacing=5, height=0)
     
+
+    def get_ui_value(self, map, key):
+        try:
+            getter_func, setter_func = map[key][1]
+            print(f"[INFO]: Get {key} value: {getter_func(self.ui_elements[key])}")
+            return getter_func(self.ui_elements[key])
+        except:
+            print(f"[ERROR]: Failed to get value for {key}")
+            import traceback
+            traceback.print_exc()
+
+    def set_ui_value(self, map, key, value):
+        try:
+            getter_func, setter_func = map[key][1]
+            setter_func(self.ui_elements[key], value)
+            print(f"[INFO]: Set {key} value: {value}")
+        except:
+            print(f"[ERROR]: Failed to set value for {key}")
+            import traceback
+            traceback.print_exc()
+
     def create_frame(self, name, collapsed=False):
         with ui.CollapsableFrame(name, collapsed=collapsed):
             return ui.VStack(style=get_style(), spacing=5, height=0)
@@ -63,3 +84,18 @@ class SimWindow:
         if custom_window and property_window:
             custom_window.dock_in(property_window, ui.DockPosition.SAME, 1.0)
             custom_window.focus()
+
+
+str_func = [lambda x: x.as_string, lambda x, y: x.set_value(y)]
+int_func = [lambda x: x.as_int, lambda x, y: x.set_value(y)]
+float_func = [lambda x: x.as_float, lambda x, y: x.set_value(y)]
+bool_func = [lambda x: x.as_bool, lambda x, y: x.set_value(y)]
+choice_func = lambda item_list: [
+    lambda x: item_list[x.get_item_value_model().as_int],
+    lambda x, y: x.get_item_value_model().set_value(item_list.index(y))
+]
+xyz_func = [lambda x: [x[i].as_float for i in range(3)], lambda x, y: [x[i].set_value(y[i]) for i in range(3)]]
+
+def set_text(x, y):
+    x.text = y
+label_func = [lambda x: x.text, lambda x, y: set_text(x, y)]

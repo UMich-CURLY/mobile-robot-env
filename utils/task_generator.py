@@ -165,6 +165,7 @@ class TaskGenerator:
                 episode = VLNEpisode(
                     data=self.scene_config,
                     instruction=random_goal,
+                    episode_id=len(self.generated_episodes),
                     goals=goals,
                     start_position=start.tolist(),
                     start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation

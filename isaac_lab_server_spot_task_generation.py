@@ -20,7 +20,7 @@ rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
-args = parser.parse_args()
+args = vln_cli_args.parse_args(parser)
 
 
 # Launch Isaac Lab app
@@ -56,7 +56,7 @@ RL_LIBRARY = "rsl_rl"
 from utils.episode import VLNEpisode, save_episodes
 from utils.vln_env_wrapper import VLNEnvWrapper
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-from utils.innout_sim import InNOutSim
+from utils.sim import VLNSim
 from utils.task_generator import TaskGenerator
 import utils.navmesh_utils as navmesh_utils
 
@@ -75,13 +75,8 @@ task_generator, task_config, scene_config, current_episode = load_task_config(ar
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
 scene_folder = Path(args.scene_folder)
-# env_cfg.load_usd(args.scene_path)
-# env_cfg.load_usd(scene_folder / current_episode["scene_path"])
-# env_cfg.scene.robot.init_state.pos = current_episode["start_position"]
-# env_cfg.scene.robot.init_state.rot = current_episode["start_rotation"]      
 
-# env_cfg.viewer.cam_prim_path = '/World/pov_camera'
-
+env_cfg.scene.num_envs = args.num_envs
 env_cfg.sim.device = args.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
@@ -97,19 +92,18 @@ all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "Or
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
-in_n_out_sim = InNOutSim(args, env)
+vln_sim = VLNSim(args, env)
 
 
 # Setup UI
-from utils.ui import SimWindow
+import utils.ui as sim_ui
 import utils.ui_utils as ui_utils
-import omni.ui as ui
 import omni.usd
 import isaacsim.core.utils.prims as prim_utils
 import isaacsim.core.utils.bounds as bounds_utils
 import isaaclab.sim as sim_utils
 
-ui_window = SimWindow(manager_env)
+ui_window = sim_ui.SimWindow(manager_env)
 ui_elements = ui_window.ui_elements
 
 with ui_elements["main_stack"]:
@@ -176,52 +170,24 @@ with ui_elements["main_stack"]:
         ui_utils.btn_builder("Generate Episode", text="Generate", on_clicked_fn=lambda: generate_episodes())
 
 # ui_name: (config_name, [getter_func, setter_func])
-str_func = [lambda x: x.as_string, lambda x, y: x.set_value(y)]
-int_func = [lambda x: x.as_int, lambda x, y: x.set_value(y)]
-float_func = [lambda x: x.as_float, lambda x, y: x.set_value(y)]
-bool_func = [lambda x: x.as_bool, lambda x, y: x.set_value(y)]
-choice_func = lambda item_list: [
-    lambda x: item_list[x.get_item_value_model().as_int],
-    lambda x, y: x.get_item_value_model().set_value(item_list.index(y))
-]
 ui_config_map = {
-    "scene_id": ("scene_id", choice_func(task_generator.scene_id_list)),
+    "scene_id": ("scene_id", sim_ui.choice_func(task_generator.scene_id_list)),
     "usd_path": ("path", [
         lambda x: x.as_string.replace(args.scene_folder+"/", "").replace(args.scene_folder, ""),
         lambda x, y: x.set_value(str(scene_folder / y))
     ]),
-    "navmesh_preset": ("navmesh_preset", choice_func(task_generator.navmesh_preset_list)),
-    "scene_scale": ("scene_scale", float_func),
-    "collider": ("collider", bool_func),
-    "align_ground": ("align_ground", bool_func),
-    "episode_number": ("episode_number", int_func),
-    "rule_pattern": ("rule_pattern", choice_func(task_generator.rule_pattern_list)),
+    "navmesh_preset": ("navmesh_preset", sim_ui.choice_func(task_generator.navmesh_preset_list)),
+    "scene_scale": ("scene_scale", sim_ui.float_func),
+    "collider": ("collider", sim_ui.bool_func),
+    "align_ground": ("align_ground", sim_ui.bool_func),
+    "episode_number": ("episode_number", sim_ui.int_func),
+    "rule_pattern": ("rule_pattern", sim_ui.choice_func(task_generator.rule_pattern_list)),
     # "goal_rules": ("goal_rules", [
     #     lambda x: json.loads(x.as_string),
     #     lambda x, y: x.set_value(json.dumps(y))
     # ]),
 }
-navmesh_settings_map = {x: (x.replace("navmesh_settings_", ""), float_func) for x in ui_elements.keys() if x.startswith("navmesh_settings_")}
-
-def get_ui_value(map, key):
-    try:
-        getter_func, setter_func = map[key][1]
-        print(f"[INFO]: Get {key} value: {getter_func(ui_elements[key])}")
-        return getter_func(ui_elements[key])
-    except:
-        print(f"[ERROR]: Failed to get value for {key}")
-        import traceback
-        traceback.print_exc()
-
-def set_ui_value(map, key, value):
-    try:
-        getter_func, setter_func = map[key][1]
-        setter_func(ui_elements[key], value)
-        print(f"[INFO]: Set {key} value: {value}")
-    except:
-        print(f"[ERROR]: Failed to set value for {key}")
-        import traceback
-        traceback.print_exc()
+navmesh_settings_map = {x: (x.replace("navmesh_settings_", ""), sim_ui.float_func) for x in ui_elements.keys() if x.startswith("navmesh_settings_")}
 
 def reload_config():
     global task_generator, task_config, scene_config, current_episode
@@ -236,13 +202,13 @@ def update_ui(settings_type, selected_value):
     if settings_type == "navmesh_preset":
         preset_name = selected_value
         for key, (value, _) in navmesh_settings_map.items():
-            set_ui_value(navmesh_settings_map, key, task_config['navmesh'][preset_name][value])
+            ui_window.set_ui_value(navmesh_settings_map, key, task_config['navmesh'][preset_name][value])
     elif settings_type == "scene_id":
         scene_id = selected_value
         scene_config = task_generator.get_scene_config(scene_id)
         current_episode = VLNEpisode(scene_config)
         for key, (value, _) in ui_config_map.items():
-            set_ui_value(ui_config_map, key, scene_config[value])
+            ui_window.set_ui_value(ui_config_map, key, scene_config[value])
         print("[INFO] Loaded goal rules:", scene_config["goal_rules"])
         print("[INFO] Loaded excluded paths:", scene_config["navmesh_exclude"])
 
@@ -251,20 +217,20 @@ def save_settings(settings_type):
     if settings_type == "navmesh_runtime":
         for key, (value, _) in navmesh_settings_map.items():
             value_camel = navmesh_interface._snake_to_camel(value).replace("agent", "")
-            navmesh_interface.settings[value_camel] = get_ui_value(navmesh_settings_map, key)
+            navmesh_interface.settings[value_camel] = ui_window.get_ui_value(navmesh_settings_map, key)
     elif settings_type == "navmesh_config":
-        preset_name = get_ui_value(ui_config_map, "navmesh_preset")
+        preset_name = ui_window.get_ui_value(ui_config_map, "navmesh_preset")
         for key, (value, _) in navmesh_settings_map.items():
-            task_config['navmesh'][preset_name][value] = get_ui_value(navmesh_settings_map, key)
+            task_config['navmesh'][preset_name][value] = ui_window.get_ui_value(navmesh_settings_map, key)
         task_generator.save_config()
     elif settings_type == "scene":
         for key, (value, _) in ui_config_map.items():
-            scene_config[value] = get_ui_value(ui_config_map, key)
+            scene_config[value] = ui_window.get_ui_value(ui_config_map, key)
             task_generator.update_config(scene_config)
         task_generator.save_config()
     elif settings_type == "scene_runtime":
         for key, (value, _) in ui_config_map.items():
-            current_episode[value] = get_ui_value(ui_config_map, key)
+            current_episode[value] = ui_window.get_ui_value(ui_config_map, key)
 
 def load_scene():
     save_settings("scene_runtime")
@@ -354,17 +320,17 @@ sim_init = False
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
-    if not sim_init:
-        obs, _ = env.reset(current_episode)
-        sim_init = True
-        print(f"[INFO]: Resetting robot state..")
-
     with torch.inference_mode():
+        if not sim_init:
+            obs, _ = env.reset(current_episode)
+            sim_init = True
+            print(f"[INFO]: Resetting robot state..")
+
         # Policy forward pass
-        obs, reward, done, info = env.step(in_n_out_sim.commands)
+        obs, reward, done, info = env.step(vln_sim.commands)
         # print("measures: ", info["measurements"])
-        in_n_out_sim.update_obs(obs, manager_env)
+        vln_sim.update_obs(obs, manager_env, current_episode)
         # task_generator.step()
-        # print(f'[{in_n_out_sim.commands_source}] command: {in_n_out_sim.commands}')
+        # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
 
 simulation_app.close()

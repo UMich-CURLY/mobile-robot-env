@@ -43,6 +43,18 @@ class VLNEpisode(dict):
     def episode_label(self):
         """ episode label = scene_id + episode_id """
         return f"{self['scene_id']}_{self['episode_id']}"
+    
+    @property
+    def episode_info(self):
+        info = deepcopy(self)
+        return json.dumps(self, indent=4)
+
+    def __getitem__(self, key):
+        if key == "episode_label":
+            return self.episode_label
+        if key == "episode_info":
+            return self.episode_info
+        return super().__getitem__(key)
 
     @classmethod
     def from_json(self, json_path, format="default"):

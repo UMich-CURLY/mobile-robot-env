@@ -7,7 +7,7 @@
 # ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation_no_people.usd
 # ../IsaacLab/isaaclab.sh -p robot_env/isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
 # DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/pohsun/test_scene.usd
-# DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia_edit/park/park_morning_edit.usd
+# DISPLAY=:2 python isaac_lab_server_spot_path.py --enable_cameras --scene_path /home/junzhewu/data/isaac_scenes_v1/nvidia/park/park_morning_edit.usd
 # python isaac_lab_server_spot_path.py --enable_cameras --scene_path /data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
 import argparse
 import sys
@@ -33,9 +33,10 @@ parser.add_argument("--navmesh_path", type=str, default=None, help="Path to prel
 
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
 rsl_rl_cli_args.add_rsl_rl_args(parser)
+import utils.vln_args as vln_cli_args
 
 AppLauncher.add_app_launcher_args(parser)
-args_cli = parser.parse_args()
+args = vln_cli_args.parse_args(parser)
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args_cli)

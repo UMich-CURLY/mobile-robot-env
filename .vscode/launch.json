@@ -9,8 +9,6 @@
             "console": "integratedTerminal",
             "args": [
                 "--enable_cameras",
-                "--scene_folder",
-                "/home/junzhewu/data/isaac_scenes_v1",
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_id",
@@ -42,14 +40,15 @@
             "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
             "console": "integratedTerminal",
             "args": [
-                "--scene_folder",
-                "/data/isaac_scenes_v1",
                 "--episode_path",
-                "${workspaceFolder}/episodes/test.json",
+                "${workspaceFolder}/episodes/test_generator.json",
                 "--test_id",
-                "nv_park_0",
+                "0",
                 "--enable_cameras"
-            ]
+            ],
+            "env": {
+                "DISPLAY": ":2"
+            }
         },
         {
             "name": "Path Planning",
@@ -61,7 +60,7 @@
                 "--enable_cameras",
                 "--scene_path",
                 "/home/junzhewu/data/isaac_scenes_v1/nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd",
-                // "/data/isaac_scenes_v1/nvidia_edit/park_morning/park_morning_edit.usd",
+                // "/data/isaac_scenes_v1/nvidia/park_morning/park_morning_edit.usd",
                 "--navmesh_path",
                 "${workspaceFolder}/episodes/navmesh.bin"
             ]
@@ -74,8 +73,6 @@
             "console": "integratedTerminal",
             "args": [
                 "--enable_cameras",
-                "--scene_folder",
-                "/data/isaac_scenes_v1/",
                 "--navmesh_path",
                 "${workspaceFolder}/episodes/navmesh.bin",
                 "--episode_path",

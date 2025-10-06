@@ -9,6 +9,7 @@ from scipy.spatial.transform import Rotation
 # omni-isaaclab
 from isaaclab.app import AppLauncher
 
+import utils.vln_args as vln_cli_args
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="Server for reading data from Isaac Lab agent and issuing action commands")
@@ -30,7 +31,7 @@ parser.add_argument("--load_timeout", type=float, default=600.0, help="Max secon
 
 AppLauncher.add_app_launcher_args(parser)
 # parser.add_argument("--draw_pointcloud", action="store_true", default=False, help="DRaw pointlcoud.")
-args_cli = parser.parse_args()
+args = vln_cli_args.parse_args(parser)
 
 # launch omniverse app
 app_launcher = AppLauncher(args_cli)
