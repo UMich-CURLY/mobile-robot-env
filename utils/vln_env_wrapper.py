@@ -111,6 +111,7 @@ class VLNEnvWrapper:
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
+        self.set_stop_called(False)
 
         # reset robot position
         robot_root_state = self.scene["robot"].data.default_root_state.clone()

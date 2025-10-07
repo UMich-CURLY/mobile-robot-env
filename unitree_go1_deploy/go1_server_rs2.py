@@ -5,7 +5,7 @@ from typing import Optional, Dict, Any
 
 import numpy as np
 
-from utils.server import run_server, format_data, compress_payload
+from utils.socket_server import run_server, format_data, compress_payload
 from utils.pcd import get_distance
 import utils.planner as pl
 
@@ -226,7 +226,7 @@ def main() -> None:
             logger.error(f"Pose acquisition error: {exc}")
         print(f"time diff: {pose_ts - rgbd_ts}")
 
-    # Callbacks for socket server (re-use utils.server implementation)
+    # Callbacks for socket server (re-use utils.socket_server implementation)
     def data_callback():
         now = time.time()
         if not hasattr(data_callback, "_last_ts"):

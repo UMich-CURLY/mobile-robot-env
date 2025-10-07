@@ -1,10 +1,11 @@
-from utils.server import run_server, format_data
+from utils.socket_server import run_server, format_data
 import torch
 import numpy as np
 import carb
 from threading import Thread
 import omni
 from omni.kit.viewport.utility import get_viewport_from_window_name
+from utils.path_following_utils import visualize_path, follow_waypoints
 
 class VLNSim:
     def __init__(self, args, env):
@@ -19,10 +20,12 @@ class VLNSim:
             "depth": None,
             "position": None,
             "quat_wxyz": None,
-            "scenario": None,
+            "info": {}
         }
 
         # simulation
+        self.waypoints = []
+        self.waypoints_idx = 0
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
         self.usd_path = None
         self.commands_source = 'server'
@@ -42,17 +45,34 @@ class VLNSim:
     def action_callback(self, msg_type, message):
         # Expect messages of type 'VEL' with fields x, y, omega
         if msg_type == 'VEL':
-            self.commands[self.robot_index] = torch.tensor([float(message.x), float(message.y), float(message.omega)], device=self.device)
+            vx, vy, vw = message["vx"], message["vy"], message["vw"]
+            self.commands[self.robot_index] = torch.tensor([float(vx), float(vy), float(vw)], device=self.device)
             self.commands_source = 'server_vel'
-        elif msg_type == 'WAYPOINTS':
-            print("ERROR: Waypoints not supported yet")
+        elif msg_type == 'WAYPOINT':
+            x_list, y_list = message["x_list"], message["y_list"]
+            waypoints = []
+            for x, y in zip(x_list, y_list):
+                waypoints.append([float(x), float(y), 0.0])
+            self.set_waypoints(waypoints)
+            self.commands_source = 'server_waypoint'
+        elif msg_type == 'STOP':
+            self.clear_waypoints()
+            self.commands[self.robot_index] = torch.tensor([0.0, 0.0, 0.0], device=self.device)
+            self.commands_source = 'server_stop'
+            self.env.set_stop_called(True)
 
     def data_callback(self):
         for key in self._latest_data:
             if self._latest_data[key] is None:
                 print(f"[Warning] socket server data missing for key: {key}")
                 return None
-        return format_data(self._latest_data["rgb"], self._latest_data["depth"], self._latest_data["position"], self._latest_data["quat_wxyz"], self._latest_data["scenario"])
+        return format_data(
+            self._latest_data["rgb"],
+            self._latest_data["depth"],
+            self._latest_data["position"],
+            self._latest_data["quat_wxyz"],
+            self._latest_data["info"]
+        )
 
     def planner_callback(self):
         # No onboard planner state here
@@ -66,21 +86,31 @@ class VLNSim:
             camera_path = f"/World/envs/env_{self.robot_index}/Robot/body/Camera"
         self.viewport.set_active_camera(camera_path)
 
-    def start_server(self):
+    def start_server(self, host="localhost", port=12300, server_name="IsaacLabServer"):
         # Start socket server in background
         server_thread = Thread(target=run_server, kwargs={
             "data_cb": self.data_callback, 
             "action_cb": self.action_callback, 
-            "planner_cb": self.planner_callback
+            "planner_cb": self.planner_callback,
+            "host": host,
+            "port": port,
+            "server_name": server_name
         })
         server_thread.daemon = True
         server_thread.start()
         print("[INFO] Socket server started")
+    
+    def set_waypoints(self, waypoints, visualize=False):
+        self.waypoints = waypoints
+        self.waypoints_idx = 0
+        if visualize:
+            visualize_path(self.manager_env, waypoints, target_xyz=waypoints[-1])
 
-    _obs_index = 0
+    def clear_waypoints(self):
+        self.waypoints = None
+        self.commands[self.robot_index] = torch.tensor([0.0, 0.0, 0.0], device=self.device)
+
     def update_obs(self, obs, manager_env, current_episode):
-        # np.save(f"results/obs_{self._obs_index}.npy", obs.cpu().numpy())
-        # self._obs_index = self._obs_index%100+1
         # only publish the first robot's obs for now
         try:
             self._latest_data["rgb"] = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
@@ -90,7 +120,13 @@ class VLNSim:
             self._latest_data["depth"] = depth
             self._latest_data["position"] = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
             self._latest_data["quat_wxyz"] = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
-            self._latest_data["scenario"] = current_episode["instruction"]
+            self._latest_data["info"] = {
+                "scene_id": current_episode["scene_id"],
+                "episode_id": current_episode["episode_id"],
+                "instruction": current_episode["instruction"]
+            }
+            if self.waypoints is not None and len(self.waypoints) > 0:
+                self.commands[self.robot_index], self.waypoints_idx = follow_waypoints(self.manager_env, self.device, self.waypoints, self.waypoints_idx)
         except Exception as e:
             print(f"Error updating obs: {e}")
             import traceback
@@ -117,6 +153,7 @@ class VLNSim:
             # Arrow keys map to pre-defined command vectors to control navigation of robot
             if event.input.name in self._key_to_control:
                 print("keyboard event: ", event.input.name)
+                self.clear_waypoints()
                 self.commands[self.robot_index] = self._key_to_control[event.input.name]
                 self.commands_source = 'keyboard'
             if event.input.name in ['KEY_'+str(i) for i in range(min(self.env.unwrapped.num_envs, 10))]:

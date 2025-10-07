@@ -1,20 +1,10 @@
 import socket
 import pickle
-import jsonpickle
 import json
 import time
 import numpy as np
 import cv2
 import struct
-
-# --- Configuration ---
-# SERVER_HOST = '35.3.201.75' # IP address of the sensor machine (use 'localhost' if running on the same machine)'localhost'#
-SERVER_HOST = '127.0.0.1'
-SERVER_PORT = 12345
-REQUEST_MESSAGE = b"GET_SENSOR_DATA"
-REQUEST_INTERVAL_SEC = 1.0 # 1 Hz
-
-
 
 def recv_all(sock, n):
     """Helper function to receive n bytes from a socket."""
@@ -82,40 +72,43 @@ def decompress_payload(compressed_payload_dict):
         decompressed_dict.pop('depth_image_dtype', None)
 
     return decompressed_dict
-def send_action_message(msg,host = SERVER_HOST):
+
+def send_action_message(msg_type, msg, host, port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
     while True:
         try:
-            client_socket.connect((host, SERVER_PORT))
+            client_socket.connect((host, port))
         except Exception as e:
             print(f"Waiting for server to be ready: {e}")
             time.sleep(1)
         else:
             break
     # print("Connected to server.")
-    message = msg.type+" "+jsonpickle.encode(msg)
+    message = msg_type+" "+json.dumps(msg)
     client_socket.sendall(message.encode())
+    client_socket.close()
 
-def request_sensor_data(host = SERVER_HOST):
-    # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {SERVER_HOST}:{SERVER_PORT}...")
+def request_sensor_data(host, port, verbose=False):
+    # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {host}:{port}...")
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
-    client_socket.connect((host, SERVER_PORT))
+    client_socket.connect((host, port))
     # print("Connected to server.")
 
     # 1. Send request
     start_time = time.time()
-    client_socket.sendall(REQUEST_MESSAGE)
+    client_socket.sendall(b"GET_SENSOR_DATA")
     end_time = time.time()
-    print(f"[Request] Time: {end_time - start_time:.3f}s")
-    # print(f"Sent request: {REQUEST_MESSAGE.decode()}")
+    if verbose:
+        print(f"[Request] Time: {end_time - start_time:.3f}s")
 
     # 2. Receive the length of the pickled data (8 bytes, unsigned long long)
     start_time = time.time()
     header = recv_all(client_socket, 8)
     end_time = time.time()
-    print(f"[Recv Len] Time: {end_time - start_time:.3f}s")
+    if verbose:
+        print(f"[Recv Len] Time: {end_time - start_time:.3f}s")
     if not header:
         print("Connection closed by server before sending data length.")
         return None 
@@ -125,8 +118,10 @@ def request_sensor_data(host = SERVER_HOST):
     start_time = time.time()
     msglen = struct.unpack('>Q', header)[0]
     pickled_payload = recv_all(client_socket, msglen)
+    client_socket.close()
     end_time = time.time()
-    print(f"[Recv] Time: {end_time - start_time:.3f}s")
+    if verbose:
+        print(f"[Recv] Time: {end_time - start_time:.3f}s")
     if not pickled_payload:
         print("Connection closed by server before sending full payload.")
         return None
@@ -135,24 +130,27 @@ def request_sensor_data(host = SERVER_HOST):
     start_time = time.time()
     payload = pickle.loads(pickled_payload)
     end_time = time.time()
-    print(f"[Deserialize] Time: {end_time - start_time:.3f}s")
+    if verbose:
+        print(f"[Deserialize] Time: {end_time - start_time:.3f}s")
     start_time = time.time()
     payload = decompress_payload(payload)
     end_time = time.time()
-    print(f"[Decompress] Time: {end_time - start_time:.3f}s")
+    if verbose:
+        print(f"[Decompress] Time: {end_time - start_time:.3f}s")
 
     return payload
 
-def request_planner_state(host = SERVER_HOST):
-    # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {SERVER_HOST}:{SERVER_PORT}...")
+def request_planner_state(host, port, verbose=False):
+    # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {host}:{port}...")
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
-    client_socket.connect((host, SERVER_PORT))
+    client_socket.connect((host, port))
     # print("Connected to server.")
 
     # 1. Send request
     client_socket.sendall(b"GET_PLANNER_STATE")
-    # print(f"Sent request: {REQUEST_MESSAGE.decode()}")
+    if verbose:
+        print(f"Sent request: {b'GET_PLANNER_STATE'.decode()}")
 
     # 2. Receive the length of the pickled data (8 bytes, unsigned long long)
     header = recv_all(client_socket, 8)
@@ -163,6 +161,7 @@ def request_planner_state(host = SERVER_HOST):
     # 3. Receive the pickled data
     msglen = struct.unpack('>Q', header)[0]
     json_payload = recv_all(client_socket, msglen).decode()
+    client_socket.close()
     if not json_payload:
         print("Connection closed by server before sending full payload.")
         return None
@@ -173,6 +172,8 @@ def request_planner_state(host = SERVER_HOST):
 
 def main():
     print("Agent Socket Client Started")
+    host = "localhost"
+    port = 12340
     while True:
         start_cycle_time = time.time()
         payload = None # Initialize payload to None for this cycle
@@ -229,7 +230,7 @@ def main():
 
 
         except socket.timeout:
-            print(f"Socket timeout during operation with {SERVER_HOST}:{SERVER_PORT}")
+            print(f"Socket timeout during operation with {host}:{port}")
         except socket.error as e:
             print(f"Socket error: {e}")
         except pickle.UnpicklingError as e:
@@ -242,7 +243,7 @@ def main():
             
             # Maintain 1Hz cycle
             elapsed_cycle_time = time.time() - start_cycle_time
-            sleep_time = REQUEST_INTERVAL_SEC - elapsed_cycle_time
+            sleep_time = 1.0 - elapsed_cycle_time
             if sleep_time > 0:
                 # print(f"Sleeping for {sleep_time:.2f} seconds...")
                 time.sleep(sleep_time)

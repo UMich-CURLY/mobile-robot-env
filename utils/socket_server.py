@@ -4,16 +4,43 @@ import threading
 import struct
 import time
 import numpy as np
-import cv2 # For dummy image generation
+import cv2
 import traceback
-from utils.protocol import *
-import jsonpickle
 import json
 import multiprocessing as mp
-# --- Configuration ---
-SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
-SOCKET_PORT = 12357      # Same port as your client expects
-SERVER_NAME = "StandaloneSensorActionServer"
+
+"""
+# Socket Server
+
+Set `host` to:
+- on client side: "localhost" for local network, ip address of server for remote network
+- on server side: "localhost" for local network, "0.0.0.0" for public network
+
+Set `port` to 12300+thread_id, e.g. 12300 for the first thread, 12301 for the second thread, etc.
+
+# Protocol Message Types
+
+Client to Server messages are handled in `handle_client_connection()`.
+Formatted as: "{message_type} {payload}", where message_type is one of the following:
+- GET_SENSOR_DATA: call data_cb(), no payload
+- GET_PLANNER_STATE: call planner_cb(), no payload
+- DISCRETE_ACTION: {action_id}
+- VEL: {vx, vy, vw}
+- WAYPOINT: {x_list, y_list}
+- STOP: {}
+- [Other ACTIONS]: handled by specific server, payload is JSON
+
+Server to Client messages are handled in `format_data()`.
+Formatted as: "{payload_len}{payload}". Payload includes:
+- rgb_image: RGB image
+- depth_image: Depth image
+- pose: Pose
+- timestamp_server_ns: Server-side timestamp when data was packed
+- success: Whether the data was successfully generated
+- message: Message from the server
+- [Other INFO]: handled by specific server (e.g. instruction, episode_label, etc.)
+
+"""
 
 # --- Global frame counter for dummy data ---
 # Use a list to pass by reference to threads, or a Lock with a simple int
@@ -27,9 +54,6 @@ def get_and_increment_frame_count():
         _frame_count += 1
     return current_count
 
-import cv2
-import numpy as np
-import pickle # For testing the functions standalone
 
 def compress_payload(payload_dict):
     """
@@ -88,9 +112,7 @@ def compress_payload(payload_dict):
 
     return compressed_dict
 
-def validate(payload):
-    return payload["pose"] is not None and payload["rgb_image"] is not None and payload["depth_image"] is not None
-def generate_dummy_data():
+def generate_dummy_data(server_name = "DummyServer"):
     """Generates a set of dummy sensor data."""
     frame_id = get_and_increment_frame_count()
     timestamp_ns = time.time_ns()
@@ -129,11 +151,11 @@ def generate_dummy_data():
         "pose": pose_dict,
         "timestamp_server_ns": timestamp_ns, # Server-side timestamp when data was packed
         "success": True,
-        "message": f"Dummy data generated successfully by {SERVER_NAME}."
+        "message": f"Dummy data generated successfully by {server_name}."
     }
     )
 
-def format_data(rgb,depth,position,quat, scenario):
+def format_data(rgb, depth, position, quat, info, server_name = "DummyServer"):
     timestamp_ns = time.time_ns()
 
     pose_dict = {
@@ -148,21 +170,21 @@ def format_data(rgb,depth,position,quat, scenario):
         }
     }
 
-    return compress_payload(
-    {
+    payload = {
         "rgb_image": rgb,
         "depth_image": depth,
         "pose": pose_dict,
-        "timestamp_server_ns": timestamp_ns, # Server-side timestamp when data was packed
+        "timestamp_server_ns": timestamp_ns,
         "success": True,
-        "message": f"Dummy data generated successfully by {SERVER_NAME}.",
-        "scenario": scenario
+        "message": f"Dummy data generated successfully by {server_name}."
     }
-    )
+    payload.update(info)
 
-def handle_client_connection(client_socket, client_address, data_cb=None, action_cb = None, planner_cb = None):
+    return compress_payload(payload)
+
+def handle_client_connection(client_socket, client_address, data_cb=None, action_cb = None, planner_cb = None, server_name = "DummyServer"):
     """Handles a single client connection."""
-    # print(f"[{time.strftime('%H:%M:%S')}] Accepted connection from {client_address}")
+    print(f"[{time.strftime('%H:%M:%S')}] Accepted connection from {client_address}")
     try:
         # 1. Wait for a request from the client (e.g., "GET_SENSOR_DATA")
         request = client_socket.recv(8172) # Expecting a small request string
@@ -175,18 +197,14 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
 
         if request_str == "GET_SENSOR_DATA":
             sensor_data_payload = data_cb()
-            if(sensor_data_payload is None):
-                sensor_data_payload = generate_dummy_data()
-            
-            if(not validate(sensor_data_payload)):
-                sensor_data_payload = {"success":False}
+            if sensor_data_payload is None:
+                sensor_data_payload = generate_dummy_data(server_name)
             pickled_payload = pickle.dumps(sensor_data_payload)
             payload_len = len(pickled_payload)
 
             # Send the pickled data
             header = struct.pack('>Q', payload_len)
             client_socket.sendall(header+pickled_payload)
-            # print(f"[{time.strftime('%H:%M:%S')}] Sent {payload_len} bytes of sensor data to {client_address}.")
         elif request_str == "GET_PLANNER_STATE":
             planner_state = planner_cb()
             json_payload = json.dumps(planner_state)
@@ -197,26 +215,8 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
         else:
             header = request_str.split(' ')[0]
             payload_index = len(header)+1
-            for message_type in message_types:
-                # print(message_type.type)
-                # print(header.strip())
-                if(message_type.type == header.strip()):
-                    # print(request_str[payload_index:])
-                    data = jsonpickle.decode(request_str[payload_index:].strip())
-                    action_cb(header.strip(),data)
-                    return 
-
-            print(f"[{time.strftime('%H:%M:%S')}] Unknown request '{request_str}' from {client_address}. Sending error.")
-            error_payload = {
-                "success": False,
-                "message": f"Unknown request: '{request_str}' received by {SERVER_NAME}.",
-                "rgb_image": None, "depth_image": None, "pose": None,
-                "timestamp_server_ns": time.time_ns()
-            }
-            pickled_error = pickle.dumps(error_payload)
-            error_len = len(pickled_error)
-            header = struct.pack('>Q', error_len)
-            client_socket.sendall(header+pickled_error)
+            data = json.loads(request_str[payload_index:].strip())
+            action_cb(header.strip(), data)
 
     except ConnectionResetError:
         print(f"[{time.strftime('%H:%M:%S')}] Client {client_address} reset the connection.")
@@ -226,10 +226,9 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
         print(f"[{time.strftime('%H:%M:%S')}] Error handling client {client_address}: {e}")
         raise
     finally:
-        # print(f"[{time.strftime('%H:%M:%S')}] Closing connection with {client_address}")
         client_socket.close()
 
-def run_server(data_cb=lambda:None,action_cb=lambda:None, planner_cb = lambda:None,stop_flag = None):
+def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:None, stop_flag = None, host = "localhost", port = 12340, server_name = "StandaloneSensorActionServer"):
     """Main server loop to listen for and handle connections."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Allow address reuse immediately after server closes
@@ -239,26 +238,21 @@ def run_server(data_cb=lambda:None,action_cb=lambda:None, planner_cb = lambda:No
         stop_flag = mp.Value('b', False)
     
     try:
-        server_socket.bind((SOCKET_HOST, SOCKET_PORT))
+        server_socket.bind((host, port))
         server_socket.listen(5) # Allow up to 5 queued connections
-        print(f"{SERVER_NAME} listening on {SOCKET_HOST}:{SOCKET_PORT}...")
+        print(f"{server_name} listening on {host}:{port}...")
 
         while not stop_flag.value:
             try:
                 client_socket, client_address = server_socket.accept()
-                # For simplicity, handling client sequentially. 
-                # For concurrent clients, start a new thread:
-                # client_thread = threading.Thread(target=handle_client_connection, args=(client_socket, client_address))
-                # client_thread.daemon = True # So threads exit when main program exits
-                # client_thread.start()
-                if(data_cb is not None):
-                    handle_client_connection(client_socket, client_address,data_cb,action_cb,planner_cb) # Sequential handling
+                if data_cb is not None:
+                    handle_client_connection(client_socket, client_address, data_cb, action_cb, planner_cb, server_name) # Sequential handling
                 else:
                     handle_client_connection(client_socket, client_address)
             except socket.timeout: # server_socket.accept() can timeout if set
                 continue 
             except KeyboardInterrupt:
-                print(f"\n{SERVER_NAME} received KeyboardInterrupt. Shutting down.")
+                print(f"\n{server_name} received KeyboardInterrupt. Shutting down.")
                 break
             except Exception as e:
                 print(f"Error in server accept loop: {e}")
@@ -266,7 +260,7 @@ def run_server(data_cb=lambda:None,action_cb=lambda:None, planner_cb = lambda:No
                 continue # Or continue, depending on desired robustness
 
     finally:
-        print(f"{SERVER_NAME} is shutting down.")
+        print(f"{server_name} is shutting down.")
         server_socket.close()
 
 if __name__ == "__main__":

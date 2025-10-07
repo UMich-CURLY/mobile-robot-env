@@ -62,7 +62,7 @@ from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkp
 TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
 from utils.path_following import PathFollower, FollowerParams, visualize_path, get_base_xy_yaw
-from utils.server import run_server, format_data
+from utils.socket_server import run_server, format_data
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 
 def _infer_scene_id_from_usd(plan_data, scene_path):

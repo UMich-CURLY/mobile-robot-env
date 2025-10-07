@@ -19,11 +19,9 @@ parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot wi
 
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
 import utils.vln_args as vln_cli_args
-import utils.wpfollowing_args as wpfollowing_cli_args
 
 rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
-wpfollowing_cli_args.add_wpfollowing_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
@@ -61,7 +59,6 @@ from isaaclab.utils.math import quat_from_euler_xyz
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab.managers import SceneEntityCfg
-from utils.path_following_utils import visualize_path, follow_waypoints, load_plan
 
 
 
@@ -81,7 +78,7 @@ from utils.vln_env_wrapper import VLNEnvWrapper
 
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 
-from utils.server import run_server, format_data
+from utils.socket_server import run_server, format_data
 from utils.sim import VLNSim
 
 # Main simulation loop
@@ -112,7 +109,7 @@ env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
 vln_sim = VLNSim(args, env)
-
+vln_sim.start_server(host="localhost", port=12300, server_name="IsaacLabBenchmarkServer")
 
 # Setup UI
 import utils.ui as sim_ui
@@ -145,6 +142,7 @@ with ui_elements["main_stack"]:
         ui_utils.btn_builder("Update States", text="Update", on_clicked_fn=lambda: save_settings("episode_runtime"))
         ui_utils.btn_builder("Follow Reference Path", text="Start", on_clicked_fn=lambda: start_following_waypoints())
         ui_utils.btn_builder("Stop Following", text="Stop", on_clicked_fn=lambda: stop_following_waypoints())
+        ui_utils.btn_builder("Switch StopCalled State", text="Switch", on_clicked_fn=lambda: env.set_stop_called(not env.is_stop_called))
     with ui_window.create_frame("Episode Info"):
         ui_elements["episode_info"] = ui_utils.ui.Label(
             "Episode Info",
@@ -184,25 +182,16 @@ def save_settings(settings_type):
         update_ui("episode_info")
         reset_environment()
 
-current_wp_idx = 0
-waypoints_world = None
-
 def start_following_waypoints():
-    global current_wp_idx, waypoints_world
-    current_wp_idx = 0
     goal_positions = np.array([x["location"] for x in current_episode["goals"]])
     dist_to_goals = np.linalg.norm(goal_positions - current_episode["start_position"], axis=1)
     closest_goal = current_episode["goals"][np.argmin(dist_to_goals)]
     ref_path = closest_goal["reference_path"]
-    target = closest_goal["location"]
-    waypoints_world = ref_path[1:]
-    visualize_path(manager_env, ref_path, target_xyz=target)
+    vln_sim.set_waypoints(ref_path[1:], visualize=True)
 
 def stop_following_waypoints():
-    global waypoints_world
-    waypoints_world = None
+    vln_sim.clear_waypoints()
     remove_prim("/World/PathVis")
-    vln_sim.commands *= 0.0
 
 def remove_prim(rule):
     prim_list = prim_utils.find_matching_prim_paths(rule)
@@ -221,15 +210,10 @@ while simulation_app.is_running():
             sim_init = True
             print(f"[INFO]: Resetting env state..")
 
-        if waypoints_world is not None:
-            vln_sim.commands, current_wp_idx = follow_waypoints(
-                manager_env, policy, obs, args.device, waypoints_world, current_wp_idx, max_v=1.5
-            )
-
         # Policy forward pass
         obs, reward, done, info = env.step(vln_sim.commands)
         vln_sim.update_obs(obs, manager_env, current_episode)
-        # print("measures: ", info["measurements"])
+        print("measures: ", info["measurements"])
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1
     if frame_count == 1:
@@ -239,7 +223,5 @@ while simulation_app.is_running():
     if frame_count % 100 == 0:
         print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {100 / (time.time() - start_time):.2f}")
         start_time = time.time()
-
-
 
 simulation_app.close()

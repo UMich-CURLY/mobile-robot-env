@@ -13,7 +13,7 @@ import pickle
 import threading
 import struct
 import base64
-from utils.server import run_server,format_data,compress_payload
+from utils.socket_server import run_server,format_data,compress_payload
 from utils.pcd import get_distance
 from scipy.spatial.transform import Rotation
 import utils.planner as pl

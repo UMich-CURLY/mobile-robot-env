@@ -132,11 +132,11 @@ class DistanceToGoal(Measure):
         super().__init__(env, episode, **kwargs)
 
         self._previous_position: Optional[Tuple[float, float, float]] = None
-        self._ref_path: Optional[
-            List[Tuple[float, float, float]]
-        ] = episode["goals"][0]["reference_path"]
-        self._kdtree = KDTree(self._ref_path)
+
+        self._goals = episode["goals"]
+        
     
+
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
         return self.cls_uuid
 
@@ -145,6 +145,14 @@ class DistanceToGoal(Measure):
         self.update_metric(*args, **kwargs)  # type: ignore
 
     def distance_to_goal(self, current_position):
+
+        # find the closest goal
+        goal_positions = np.array([x["location"] for x in self._goals])
+        dist_to_goals = np.linalg.norm(goal_positions - current_position, axis=1)
+        closest_goal = self._goals[np.argmin(dist_to_goals)]
+        ref_path = closest_goal["reference_path"]
+        self._ref_path = ref_path
+        self._kdtree = KDTree(self._ref_path)
         
         # Find the closest waypoint to the current position
         closest_distance, closest_waypoint_idx = self._kdtree.query(current_position)

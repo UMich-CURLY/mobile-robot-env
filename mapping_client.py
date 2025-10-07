@@ -8,7 +8,11 @@ from collections import deque
 import math
 import pygame.colordict
 
-from utils.protocol import *
+from utils.socket_client import request_sensor_data,send_action_message,request_planner_state
+from scipy.spatial.transform import Rotation
+from copy import deepcopy
+import matplotlib.cm as cm
+
 from argparse import ArgumentParser
 from utils.planner import fit_smoothing_spline
 HFOV = 54.75
@@ -34,7 +38,6 @@ WAYPOINTS = np.array([
  [ 1.46089797 ,-0.2089194 ],
  [ 1.26725344 ,-0.35803746]])
 WAYPOINTS = np.array([
-
 [0.,0.],[0.1,0],[0.5,0],[1,0]
 ])
 
@@ -45,11 +48,12 @@ magnification_choice = 3
 parser = ArgumentParser()
 parser.description = "Welcome to the robot client for the SG VLN project"
 parser.add_argument("--host",type=str,default='localhost',help="the host name of the remote robot server")
+parser.add_argument("--port",type=int,default=12300,help="the port name of the remote robot server")
 args = parser.parse_args()
 pygame.init()
 BORDER = 30
 ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
-screen_width, screen_height = 640*2+BORDER*3, 720+20
+screen_width, screen_height = 640*2+BORDER*3, 720+20+BORDER*2
 window = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
 pygame.display.set_caption("SG-VLN WEBSOCKET CLIENT")
 view_rgb = True
@@ -121,8 +125,6 @@ def draw_compass_arrow(
     surface.blit(rotated_arrow, arrow_rect)
 clock = pygame.time.Clock()
 
-from utils.socket_client import request_sensor_data,send_action_message,request_planner_state
-
 run = True
 data = None
 
@@ -135,16 +137,12 @@ vx,vy,vw = 0,0,0
 init_T = None
 curr_T = None
 
-from scipy.spatial.transform import Rotation
-from copy import deepcopy
 
 
 
-waypointmsg = WaypointMessage()
 translations = None
 
 pcd_memory = deque(maxlen=100)
-import matplotlib.cm as cm   
 def depth_to_pil_rgb(depth_array, 
                      cmap_name='viridis', 
                      min_depth=None, 
@@ -248,7 +246,7 @@ def depth_to_pil_rgb(depth_array,
     return pil_image
 while run:
     if translations is None:
-        send_action_message(VelMessage(vx,vy,vw), host=args.host)
+        send_action_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, host=args.host, port=args.port)
 
     clock.tick(60)
     for event in pygame.event.get():
@@ -290,10 +288,12 @@ while run:
                     print(f"Waypoint number: {WAYPOINTS.shape}")
                     translations = np.hstack((WAYPOINTS,np.ones((len(WAYPOINTS),1))*0.2,np.ones((len(WAYPOINTS),1)))) @  curr_T.T# @ np.linalg.inv(init_T).T 
                     
-                    waypointmsg.x = translations[:,0].tolist()
-                    waypointmsg.y = translations[:,1].tolist() #invert it because z is positive right, but y is positive left.
+                    waypointmsg = {
+                        "x_list":translations[:,0].tolist(),
+                        "y_list":translations[:,1].tolist()
+                    }
 
-                    send_action_message(waypointmsg, host=args.host)
+                    send_action_message("WAYPOINT", waypointmsg, host=args.host, port=args.port)
                 else:
                     print("not enough points, skipping")
                 continue
@@ -325,7 +325,7 @@ while run:
             if event.key == pygame.K_SPACE:
                 vx,vy,vw = vx/2,vy/2,vw/2
             
-            send_action_message(VelMessage(vx,vy,vw),args.host)
+            send_action_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, args.host, port=args.port)
         
         if event.type ==  pygame.MOUSEBUTTONDOWN:
             mx,my = (np.array(pygame.mouse.get_pos())-ROBOT_VIS_CENTER*window.get_width()/screen_width-np.array([window.get_rect().x,window.get_rect().y]))*np.array([1,-1])/scale/window.get_width()*screen_width
@@ -340,15 +340,15 @@ while run:
             # waypoints = WaypointMessage()
             # waypoints.x = translations[:,0]
             # waypoints.z = translations[:,1]
-            # send_action_message(waypoints,args.host)
+            # send_action_message(waypoints,args.host, port=args.port)
 
 
     try:
         start_ts = time.time()
-        data = request_sensor_data(args.host)
+        data = request_sensor_data(args.host, port=args.port)
         end_ts = time.time()
         # print(f"[Request] Time: {end_ts - start_ts:.3f}s")
-        my_dict = request_planner_state(args.host)
+        my_dict = request_planner_state(args.host, port=args.port)
         formatted_dict = {key: f"{value:+.2f}" for key, value in my_dict.items()}
         if translations is not None:
             planner_message = "[PLANNER] "
@@ -366,16 +366,13 @@ while run:
         # print(rounded_dict)
 
     except socket.timeout:
-            print(f"Socket timeout during operation with {SERVER_HOST}:{SERVER_PORT}")
+            print(f"Socket timeout during operation with {args.host}:{args.port}")
     except socket.error as e:
         print(f"Socket error: {e}")
     except pickle.UnpicklingError as e:
         print(f"Pickle error: {e}. Received data might be corrupt or not a pickle.")
     except Exception as e:
         print(f"An unexpected error occurred: {e}", exc_info=True)
-    finally:
-        if 'client_socket' in locals():
-            client_socket.close()
 
     if data and data.get("success", False):
         screen = pygame.Surface((screen_width, screen_height))
@@ -403,7 +400,7 @@ while run:
 
         from utils.pcd import get_distance
         mean_distance = get_distance(data.get("depth_image").astype(float)/1000.0,HFOV)
-        print(f"mean distance: {mean_distance}")
+        # print(f"mean distance: {mean_distance}")
 
 
         pose = data.get("pose")
@@ -480,27 +477,36 @@ while run:
         screen.blit(pygameSurface, (BORDER,BORDER))
         font = pygame.font.SysFont('Courier', 25)#pygame.font.Font('freesansbold.ttf', 32)
         
-        mean_distance = np.clip(mean_distance,0,5)
+        mean_distance_clip = np.clip(mean_distance,0,5)
         # Create a Rect object 
-        r = mean_distance*scale
+        r = mean_distance_clip*scale
         rect = pygame.Rect(0, 0, r*2,r*2)
         rect.center = ROBOT_VIS_CENTER
-        pygame.draw.arc(screen,(255-mean_distance*50,mean_distance*50,0),rect,curr_yaw-0.7,curr_yaw+0.7,int(8-mean_distance**2))
+        pygame.draw.arc(screen,(255-mean_distance_clip*50,mean_distance_clip*50,0),rect,curr_yaw-0.7,curr_yaw+0.7,int(8-mean_distance**2))
 
 
         draw_compass_arrow(screen,ROBOT_VIS_CENTER[0],ROBOT_VIS_CENTER[1],curr_yaw)
 
-        scenario_text = font.render(f"[Scenario] {data.get('scenario', 'No scenario')}",True,(255,255,255))
-        screen.blit(scenario_text,(BORDER,480+BORDER*2))
+        row_offset = 480+BORDER*2
+        scene_id = data.get('scene_id', 'Scene')
+        episode_id = data.get('episode_id', 'Episode')
+        episode_label = f"{scene_id}_{episode_id}"
+        instruction = data.get('instruction', 'None')
+        scenario_text = font.render(f"[SIM] Scenario: {instruction} | Episode: {episode_label}",True,(255,255,255))
+        screen.blit(scenario_text,(BORDER,row_offset))
+        row_offset += 1.5*BORDER
 
-        distance_text = font.render(f"[INFO] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | fps: {clock.get_fps():.1f} | E2E latency: {latency_ms:04} ms",True,(255,255,255))
-        screen.blit(distance_text,(BORDER,480+BORDER*2))
+        distance_text = font.render(f"[MAP] mean distance: {mean_distance:.2f}m | map magnification: {magnification_scale}X | fps: {clock.get_fps():.1f} | E2E latency: {latency_ms:04} ms",True,(255,255,255))
+        screen.blit(distance_text,(BORDER, row_offset))
+        row_offset += 1.5*BORDER
+
         # create a text surface object,
         # on which text is drawn on it.
         green = (0, 255, 0)
         blue = (0, 0, 128)
         path_text = font.render(planner_message, True, green)
-        screen.blit(path_text,(BORDER,480+BORDER*3.5))
+        screen.blit(path_text,(BORDER, row_offset))
+        row_offset += 1.5*BORDER
 
         waypoint_text = "[WAYPOINTS] "
         if(WAYPOINTS.shape[0]==1):
@@ -511,10 +517,12 @@ while run:
             for coords in WAYPOINTS:
                 waypoint_text+=f"{coords[0]:.1f} {coords[1]:.1f} | "
             waypoint_text = font.render(waypoint_text,True,green)
-        screen.blit(waypoint_text,(BORDER,480+BORDER*5))
+        screen.blit(waypoint_text,(BORDER, row_offset))
+        row_offset += 1.5*BORDER
 
         instructions = font.render("[CONTROLS] move: wasd | sprint: space | run_waypoint: ENTER | zoom in: m | zoom out: n",True,(255,255,255),blue)
-        screen.blit(instructions,(BORDER,480+BORDER*6.5))
+        screen.blit(instructions,(BORDER, row_offset))
+        row_offset += 1.5*BORDER
 
         screen = pygame.transform.scale(screen, (window.get_width() , window.get_width()*screen_height/screen_width ))
         window.blit(screen, (0, 0))

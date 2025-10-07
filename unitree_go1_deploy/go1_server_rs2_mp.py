@@ -6,7 +6,7 @@ from typing import Optional, Dict, Any
 import numpy as np
 import threading
 
-from utils.server import run_server, compress_payload
+from utils.socket_server import run_server, compress_payload
 from utils.pcd import get_distance
 import utils.planner as pl
 

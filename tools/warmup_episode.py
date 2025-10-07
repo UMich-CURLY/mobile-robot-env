@@ -95,7 +95,7 @@ from utils.vln_env_wrapper import VLNEnvWrapper
 
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 
-from utils.server import run_server, format_data
+from utils.socket_server import run_server, format_data
 from utils.sim import VLNSim
 
 TASK = "Isaac-Velocity-Flat-Spot-v0"

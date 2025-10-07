@@ -86,7 +86,7 @@ TASK = "Isaac-Velocity-Flat-Spot-v0"
 RL_LIBRARY = "rsl_rl"
 
 # Local imports
-from utils.server import run_server, format_data
+from utils.socket_server import run_server, format_data
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 
 # Parse robot position

@@ -103,22 +103,28 @@ def world_to_body(dx, dy, yaw):
     return c*dx - s*dy, s*dx + c*dy
 
 
-def follow_waypoints(manager_env, policy, obs, device, waypoints_world, current_wp_idx,
-                     max_v=0.6, max_yaw_rate=1.0, k_p_ang=1.5, arrive_thresh=0.25):
+def follow_waypoints(
+    manager_env,
+    device,
+    waypoints_world,
+    current_wp_idx,
+    max_vx=1.0,
+    max_vy=0.5,
+    max_yaw_rate=1.0,
+    k_p_ang=1.5,
+    arrive_dist=0.15,
+    arrive_yaw=np.pi/180.0*60.0,
+    term_dist=0.05,
+    term_yaw=np.pi/180.0*30.0
+):
     """Pure pursuit style waypoint follower. Returns updated obs and wp_idx."""
     if waypoints_world is None or len(waypoints_world) == 0:
-        return obs, current_wp_idx
+        return torch.tensor([[0.0, 0.0, 0.0]], device=device, dtype=torch.float32), current_wp_idx
 
     if current_wp_idx >= len(waypoints_world):
         current_wp_idx = len(waypoints_world) - 1
         last_wp = waypoints_world[-1]
         waypoints_world.append([last_wp[0] + 1.0, last_wp[1], last_wp[2]])
-# if waypoints_world is None or len(waypoints_world) == 0:
-#     return obs, current_wp_idx
-
-# if current_wp_idx >= len(waypoints_world):
-#     current_wp_idx = len(waypoints_world) - 1  # stick to last waypoint
-
 
     base_xy, base_yaw = get_base_xy_yaw(manager_env)
     wp = waypoints_world[current_wp_idx]
@@ -129,23 +135,22 @@ def follow_waypoints(manager_env, policy, obs, device, waypoints_world, current_
     desired_yaw = math.atan2(dy, dx)
     ang_err = wrap_to_pi(desired_yaw - base_yaw)
 
-    arrive_dist = max(0.1, min(0.15, arrive_thresh))
-    arrive_yaw = 0.25
-
     if abs(ang_err) > arrive_yaw:
-        v, vy, w = 0.0, 0.0, max(-max_yaw_rate, min(max_yaw_rate, k_p_ang * ang_err))
+        vx, vy, vw = 0.0, 0.0, max(-max_yaw_rate, min(max_yaw_rate, k_p_ang * ang_err))
     else:
         ex_b, ey_b = world_to_body(dx, dy, base_yaw)
-        v = max(-max_v, min(max_v, 0.6 * ex_b))
-        vy = 0.0
-        w = max(-max_yaw_rate, min(max_yaw_rate, k_p_ang * ang_err))
-        if abs(v) < 0.05:
-            v = 0.05 * (1.0 if ex_b >= 0.0 else -1.0)
+        vx = np.clip(max_vx * ex_b, -max_vx, max_vx)
+        vy = np.clip(max_vy * ey_b, -max_vy, max_vy)
+        vw = np.clip(k_p_ang * ang_err, -max_yaw_rate, max_yaw_rate)
+
+    if current_wp_idx == len(waypoints_world) - 1:
+        arrive_dist = term_dist
+        arrive_yaw = term_yaw
 
     if (dist < arrive_dist) and (abs(ang_err) < arrive_yaw):
         current_wp_idx += 1
         print(f"[PLAN] Reached waypoint {current_wp_idx}/{len(waypoints_world)}")
 
-    command = torch.tensor([[v, vy, w]], device=device, dtype=torch.float32)
+    command = torch.tensor([[vx, vy, vw]], device=device, dtype=torch.float32)
 
     return command, current_wp_idx
