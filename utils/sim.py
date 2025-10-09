@@ -113,6 +113,9 @@ class VLNSim:
     def update_obs(self, obs, manager_env, current_episode):
         # only publish the first robot's obs for now
         try:
+            cam_focal_length = manager_env.scene["pov_camera"].cfg.spawn.focal_length
+            cam_horizontal_aperture = manager_env.scene["pov_camera"].cfg.spawn.horizontal_aperture
+            hfov_deg = 2 * np.arctan((cam_horizontal_aperture / 2) / cam_focal_length) * 180.0 / np.pi
             self._latest_data["rgb"] = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
             depth = obs[0, :, :, 3].cpu().numpy()
             depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
@@ -123,7 +126,12 @@ class VLNSim:
             self._latest_data["info"] = {
                 "scene_id": current_episode["scene_id"],
                 "episode_id": current_episode["episode_id"],
-                "instruction": current_episode["instruction"]
+                "instruction": current_episode["instruction"],
+                "intrinsic": None,
+                "robot_height": 0.61,
+                "cam_pos_robot": manager_env.scene["pov_camera"].cfg.offset.pos,
+                "cam_rot_robot": manager_env.scene["pov_camera"].cfg.offset.rot,
+                "hfov_deg": hfov_deg,
             }
             if self.waypoints is not None and len(self.waypoints) > 0:
                 self.commands[self.robot_index], self.waypoints_idx = follow_waypoints(self.manager_env, self.device, self.waypoints, self.waypoints_idx)
