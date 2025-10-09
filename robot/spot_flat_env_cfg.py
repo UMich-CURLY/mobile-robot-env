@@ -420,7 +420,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
                 clipping_range=(1, 1000.0),
             ),
             offset=CameraCfg.OffsetCfg(
-                pos=(-1.0, 0.0, 0.5),
+                pos=(-1.0, 0.0, 0.6),
                 rot=(1, 0, 0, 0),
                 convention="world",
             ),
