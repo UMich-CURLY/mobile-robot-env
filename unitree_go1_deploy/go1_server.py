@@ -13,6 +13,15 @@ import pickle
 import threading
 import struct
 import base64
+import sys
+import os
+
+# Get the current working directory
+current_directory = os.getcwd()
+
+# Add it to sys.path if it's not already there
+if current_directory not in sys.path:
+    sys.path.append(current_directory)
 from utils.socket_server import run_server,format_data,compress_payload
 from utils.pcd import get_distance
 from scipy.spatial.transform import Rotation
@@ -305,7 +314,7 @@ def main(args=None):
     # Start socket server in a separate thread
     # Pass the logger from the ROS node to the socket thread for consistent logging
 
-    server_thread = threading.Thread(target=run_server,kwargs={"data_cb":data_callback,"action_cb":action_callback,"planner_cb":planner_callback})
+    server_thread = threading.Thread(target=run_server,kwargs={"data_cb":data_callback,"action_cb":action_callback,"planner_cb":planner_callback,"port":SOCKET_PORT,"host":SOCKET_HOST})
     publishing_thread = threading.Thread(target=lcm_sender)
     
     server_thread.start()

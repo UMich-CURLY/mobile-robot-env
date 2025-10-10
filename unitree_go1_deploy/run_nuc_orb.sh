@@ -33,7 +33,7 @@ tmux has-session -t ws_server 2>/dev/null
 if [ $? -ne 0 ]; then
   echo "Starting WebSocket server"
   tmux new-session -d -s ws_server \
-    python3 $HOME/mobile-robot-server/go1_server.py
+    python3 $HOME/mobile-robot-env/unitree_go1_deploy/go1_server.py
 fi
 
 echo "Tmux sessions are now running (or have been restarted)."
