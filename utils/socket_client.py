@@ -80,7 +80,7 @@ def send_action_message(msg_type, msg, host, port):
         try:
             client_socket.connect((host, port))
         except Exception as e:
-            print(f"Waiting for server to be ready: {e}")
+            print(f"Waiting for server ({host}:{port}) to be ready: {e}")
             time.sleep(1)
         else:
             break
