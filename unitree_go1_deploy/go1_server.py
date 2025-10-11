@@ -110,7 +110,7 @@ class SensorDataManager:
             with self.lock:
                 self._latest_data["depth"] = depth
                 self.distance = get_distance(self._latest_data["depth"].astype(float)/1000)
-                if(self.distance<collision_threshold):
+                if self.distance<collision_threshold:
                     x = np.clip(x,-0.5,0)
         except Exception as e:
             self.logger.error(f'Depth callback error: {e}')
@@ -136,7 +136,7 @@ class SensorDataManager:
             o = self._latest_data["quat_wxyz"]
             yaw = Rotation.from_quat([o[1],o[2],o[3],o[0]]).as_euler('zyx')[0]
             x,y,w = self.planner.step(position[0],position[1],yaw)
-            if(self.distance<collision_threshold):
+            if self.distance<collision_threshold:
                 x = np.clip(x,-0.5,0)
             publish_lcm(x, -y, w)
         
@@ -260,7 +260,6 @@ def main(args=None):
             x,y,w = message['vx'],message['vy'],message['vw']
             if data_manager.distance<collision_threshold:
                 x = np.clip(x,-0.5,0)
-            print(message)
             data_manager.useplanner = False
             # print(f"position: {position} quat: {quat}")
         if msg_type == 'WAYPOINT':
