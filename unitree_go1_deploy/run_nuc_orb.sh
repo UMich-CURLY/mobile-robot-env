@@ -36,6 +36,14 @@ if [ $? -ne 0 ]; then
     python3 $HOME/mobile-robot-env/unitree_go1_deploy/go1_server.py
 fi
 
+# foxglove
+tmux has-session -t foxglove 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "Starting Foxglove"
+  tmux new-session -d -s foxglove \
+    ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765
+fi
+
 echo "Tmux sessions are now running (or have been restarted)."
 tmux ls
 echo "Use 'tmux ls' to list them and 'tmux attach -t <session_name>' to attach. Use 'tmux kill-server' to kill all sessions."
