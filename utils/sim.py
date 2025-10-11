@@ -39,7 +39,8 @@ class VLNSim:
 
         # initialize keyboard and server
         self.set_up_keyboard()
-        self.start_server()
+        if not args.disable_socket_server:
+            self.start_server(host=args.socket_server_host, port=args.socket_server_port, server_name="BenchmarkServer")
 
     # Socket server integration (control Spot via external commands)
     def action_callback(self, msg_type, message):

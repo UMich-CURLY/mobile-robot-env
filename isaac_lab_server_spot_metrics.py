@@ -1,102 +1,65 @@
 
 import argparse
-import os
-import sys
 import numpy as np
 import torch
-import omni
-import io
 import time
-import math
-from threading import Thread
 from pathlib import Path
 
 # start simulation
 from isaaclab.app import AppLauncher
-
-# Add command line arguments
-parser = argparse.ArgumentParser(description="Isaac Lab Server for Spot robot with USD scene")
-
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
 import utils.vln_args as vln_cli_args
 
+# Add command line arguments
+parser = argparse.ArgumentParser(description="Benchmark")
 rsl_rl_cli_args.add_rsl_rl_args(parser)
 vln_cli_args.add_vln_args(parser)
-
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
 
-sim_start_time = time.time()
 # Launch Isaac Lab app
+sim_start_time = time.time()
 app_launcher = AppLauncher(args)
 simulation_app = app_launcher.app
 
-
-# Enable Extension
-from isaacsim.core.utils.extensions import enable_extension
-enable_extension("omni.anim.navigation.bundle")
+# Enable Extension and setup settings
+import carb
+# from isaacsim.core.utils.extensions import enable_extension
+# enable_extension("omni.anim.navigation.bundle")
 simulation_app.update()
-
-
-import carb, os
 settings = carb.settings.get_settings()
 settings.set("/renderer/multiGPU/enabled", False)
 settings.set("/renderer/activeGpu", 0)
 settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
 
-# Isaac Lab imports
-from pxr import Usd, UsdGeom, UsdPhysics, PhysxSchema, Gf
-import isaaclab.sim as sim_utils
-from isaaclab.assets import ArticulationCfg, AssetBaseCfg
-from isaaclab.scene import InteractiveScene, InteractiveSceneCfg
-from isaaclab.terrains import TerrainImporterCfg
-from isaaclab.actuators import ImplicitActuatorCfg
-from isaaclab.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
-from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
-from isaaclab.utils import configclass
-from isaaclab.sim import SimulationContext, PhysicsMaterialCfg
-from isaaclab.utils.math import quat_from_euler_xyz
-from isaaclab.managers import TerminationTermCfg as DoneTerm
-import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab.managers import SceneEntityCfg
-
-
-
-# Isaac Lab pretrained spot policy 
+# Isaac Lab Import
 from isaaclab.envs import ManagerBasedRLEnv
 from rsl_rl.runners import OnPolicyRunner
 from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
 from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
-from omni.kit.viewport.utility import get_viewport_from_window_name
-
-TASK = "Isaac-Velocity-Flat-Spot-v0"
-RL_LIBRARY = "rsl_rl"
 
 # Local imports
 from utils.episode import VLNEpisode
 from utils.vln_env_wrapper import VLNEnvWrapper
-
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-
-from utils.socket_server import run_server, format_data
 from utils.sim import VLNSim
 
-# Main simulation loop
-
 # load episodes
-episode_list = VLNEpisode.from_json(args.episode_path, args.episode_type)
+episode_list = VLNEpisode.from_json_folder(args.episode_folder)
 episode_label_list = [x.episode_label for x in episode_list]
-current_episode = episode_list[int(args.test_id)]
+current_episode = episode_list[episode_label_list.index(args.episode_id)]
 
-# setup environment
+# isaac lab manager
 env_cfg = SpotFlatEnvCfg_PLAY()
 scene_folder = Path(args.scene_folder)
-
 env_cfg.scene.num_envs = args.num_envs
 env_cfg.sim.device = args.device
 env_cfg.curriculum = None
 manager_env = ManagerBasedRLEnv(cfg=env_cfg)
 
+# policy
+TASK = "Isaac-Velocity-Flat-Spot-v0"
+RL_LIBRARY = "rsl_rl"
 agent_cfg: RslRlOnPolicyRunnerCfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
 env = RslRlVecEnvWrapper(manager_env)
 ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
@@ -104,12 +67,13 @@ checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
 ppo_runner.load(checkpoint)
 policy = ppo_runner.get_inference_policy(device=args.device)
 
+# simulation
 all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 
+# socket server & keyboard
 vln_sim = VLNSim(args, env)
-vln_sim.start_server(host="localhost", port=12300, server_name="IsaacLabBenchmarkServer")
 
 # Setup UI
 import utils.ui as sim_ui
