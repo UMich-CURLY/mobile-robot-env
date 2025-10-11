@@ -1,7 +1,7 @@
 import json
 import yaml
 from copy import deepcopy
-
+import os
 
 class VLNEpisode(dict):
     def __init__(self, data=None, **kwargs):
@@ -57,13 +57,18 @@ class VLNEpisode(dict):
         return super().__getitem__(key)
 
     @classmethod
-    def from_json(self, json_path, format="default"):
+    def from_json(self, json_path):
         data = json.load(open(json_path))
-        if format == "default":
-            episodes = [VLNEpisode(x) for x in data]
-            return episodes
-        elif format == "grscenes":
-            raise NotImplementedError("GRScenes format is not implemented yet")
+        episodes = [VLNEpisode(x) for x in data]
+        return episodes
+
+    @classmethod
+    def from_json_folder(self, json_folder):
+        json_paths = [os.path.join(json_folder, x) for x in os.listdir(json_folder) if x.endswith(".json")]
+        episodes = []
+        for json_path in json_paths:
+            episodes.extend(self.from_json(json_path))
+        return episodes
     
 
 def save_episodes(episodes, json_path):

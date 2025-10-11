@@ -228,7 +228,7 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
     finally:
         client_socket.close()
 
-def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:None, stop_flag = None, host = "localhost", port = 12340, server_name = "StandaloneSensorActionServer"):
+def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:None, stop_flag = None, host = "localhost", port = 12300, server_name = "StandaloneSensorActionServer"):
     """Main server loop to listen for and handle connections."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Allow address reuse immediately after server closes
