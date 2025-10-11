@@ -14,29 +14,26 @@
                 "--test_id",
                 "nv_apartment"
             ],
-            "env": {
-                "DISPLAY": ":2"
-            }
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Warmup",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/warmup.py",
+            "program": "${workspaceFolder}/tools/warmup.py",
             "console": "integratedTerminal",
             "args": [
                 "--dirs",
                 "/data/isaac_scenes_v1",
                 "--enable_cameras"
             ],
-            "env": {
-                // "DISPLAY": ":2"
-            }
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Metrics",
             "type": "debugpy",
             "request": "launch",
+            "python": "${command:python.interpreterPath}",
             "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
             "console": "integratedTerminal",
             "args": [
@@ -46,9 +43,7 @@
                 "0",
                 "--enable_cameras"
             ],
-            "env": {
-                "DISPLAY": ":2"
-            }
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Path Planning",
@@ -63,23 +58,8 @@
                 // "/data/isaac_scenes_v1/nvidia/park_morning/park_morning_edit.usd",
                 "--navmesh_path",
                 "${workspaceFolder}/episodes/navmesh.bin"
-            ]
-        },
-        {
-            "name": "Test",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/isaac_lab_server_test.py",
-            "console": "integratedTerminal",
-            "args": [
-                "--enable_cameras",
-                "--navmesh_path",
-                "${workspaceFolder}/episodes/navmesh.bin",
-                "--episode_path",
-                "${workspaceFolder}/episodes/test.json",
-                "--test_id",
-                "nv_park_0",
-            ]
+            ],
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
