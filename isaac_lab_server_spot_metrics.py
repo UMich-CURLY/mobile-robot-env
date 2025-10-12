@@ -40,7 +40,7 @@ from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkp
 
 # Local imports
 from utils.episode import VLNEpisode
-from utils.vln_env_wrapper import VLNEnvWrapper
+from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 
@@ -51,7 +51,7 @@ current_episode = episode_list[episode_label_list.index(args.episode_id)]
 
 # isaac lab manager
 env_cfg = SpotFlatEnvCfg_PLAY()
-scene_folder = Path(args.scene_folder)
+init_env_cfg(env_cfg, args, current_episode)
 env_cfg.scene.num_envs = args.num_envs
 env_cfg.sim.device = args.device
 env_cfg.curriculum = None
@@ -176,7 +176,7 @@ while simulation_app.is_running():
 
         # Policy forward pass
         obs, reward, done, info = env.step(vln_sim.commands)
-        vln_sim.update_obs(obs, manager_env, current_episode)
+        vln_sim.update_obs(obs, current_episode)
         print("measures: ", info["measurements"])
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1

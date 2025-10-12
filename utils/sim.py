@@ -6,6 +6,7 @@ from threading import Thread
 import omni
 from omni.kit.viewport.utility import get_viewport_from_window_name
 from utils.path_following_utils import visualize_path, follow_waypoints
+from scipy.spatial.transform import Rotation as R
 
 class VLNSim:
     def __init__(self, args, env):
@@ -27,7 +28,6 @@ class VLNSim:
         self.waypoints = []
         self.waypoints_idx = 0
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
-        self.usd_path = None
         self.commands_source = 'server'
         self.robot_index = 0
         self.viewport = get_viewport_from_window_name("Viewport")
@@ -111,27 +111,43 @@ class VLNSim:
         self.waypoints = None
         self.commands[self.robot_index] = torch.tensor([0.0, 0.0, 0.0], device=self.device)
 
-    def update_obs(self, obs, manager_env, current_episode):
+    def get_cam_pose(self):
+        manager_env = self.manager_env
+        # robot pose
+        pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
+        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
+        quat_robot = R.from_quat(np.concatenate([quat_robot[1:],quat_robot[:1]]))
+        # transform from robot to camera
+        pos_cam_body = manager_env.scene["pov_camera"].cfg.offset.pos
+        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot
+        quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
+        # camera pose in world frame
+        pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
+        rot_cam_world = quat_robot * quat_cam_body
+        rot_cam_world = rot_cam_world.as_quat()
+        rot_cam_world = np.concatenate([rot_cam_world[-1:],rot_cam_world[:-1]])
+        return pos_cam_world, rot_cam_world
+
+
+    def update_obs(self, obs, current_episode):
         # only publish the first robot's obs for now
+        manager_env = self.manager_env
         try:
             cam_focal_length = manager_env.scene["pov_camera"].cfg.spawn.focal_length
             cam_horizontal_aperture = manager_env.scene["pov_camera"].cfg.spawn.horizontal_aperture
-            hfov_deg = 2 * np.arctan((cam_horizontal_aperture / 2) / cam_focal_length) * 180.0 / np.pi
+            hfov_deg = 2 * np.arctan(cam_horizontal_aperture / 2.0 / cam_focal_length) * 180.0 / np.pi
             self._latest_data["rgb"] = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
             depth = obs[0, :, :, 3].cpu().numpy()
             depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
             depth = np.clip(depth, 0, 65535).astype(np.uint16)
             self._latest_data["depth"] = depth
-            self._latest_data["position"] = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
-            self._latest_data["quat_wxyz"] = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
+            self._latest_data["position"], self._latest_data["quat_wxyz"] = self.get_cam_pose()
             self._latest_data["info"] = {
                 "scene_id": current_episode["scene_id"],
                 "episode_id": current_episode["episode_id"],
                 "instruction": current_episode["instruction"],
                 "intrinsic": None,
                 "robot_height": 0.61,
-                "cam_pos_robot": manager_env.scene["pov_camera"].cfg.offset.pos,
-                "cam_rot_robot": manager_env.scene["pov_camera"].cfg.offset.rot,
                 "hfov_deg": hfov_deg,
             }
             if self.waypoints is not None and len(self.waypoints) > 0:

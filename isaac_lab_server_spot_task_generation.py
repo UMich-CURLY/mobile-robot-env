@@ -54,7 +54,7 @@ RL_LIBRARY = "rsl_rl"
 
 # Local imports
 from utils.episode import VLNEpisode, save_episodes
-from utils.vln_env_wrapper import VLNEnvWrapper
+from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 from utils.task_generator import TaskGenerator
@@ -74,6 +74,7 @@ task_generator, task_config, scene_config, current_episode = load_task_config(ar
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
+init_env_cfg(env_cfg, args, current_episode)
 scene_folder = Path(args.scene_folder)
 
 env_cfg.scene.num_envs = args.num_envs
@@ -329,7 +330,7 @@ while simulation_app.is_running():
         # Policy forward pass
         obs, reward, done, info = env.step(vln_sim.commands)
         # print("measures: ", info["measurements"])
-        vln_sim.update_obs(obs, manager_env, current_episode)
+        vln_sim.update_obs(obs, current_episode)
         # task_generator.step()
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
 

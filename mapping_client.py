@@ -385,6 +385,7 @@ while run:
         depth_image = data.get("depth_image").astype(float)/1000.0
         # print(np.max(depth_image))
         # convert depth image to distance image
+        HFOV = data.get("hfov_deg", 54.75)
         cw = np.arctan(HFOV/2/180*np.pi)
         ch = cw/640*480
         yv, xv = np.meshgrid(np.linspace(-ch,ch,480),np.linspace(-cw,cw,640), indexing='ij')
