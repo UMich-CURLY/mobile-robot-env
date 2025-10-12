@@ -37,13 +37,13 @@
             "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
             "console": "integratedTerminal",
             "args": [
-                "--episode_path",
-                "${workspaceFolder}/episodes/test_generator.json",
-                "--test_id",
-                "0",
+                "--episode_folder",
+                "${workspaceFolder}/episodes/",
+                "--episode_id",
+                // "test_generator_0",
+                "nv_parkmorning_1",
                 "--enable_cameras"
             ],
-            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Path Planning",

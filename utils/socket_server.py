@@ -184,7 +184,7 @@ def format_data(rgb, depth, position, quat, info, server_name = "DummyServer"):
 
 def handle_client_connection(client_socket, client_address, data_cb=None, action_cb = None, planner_cb = None, server_name = "DummyServer"):
     """Handles a single client connection."""
-    print(f"[{time.strftime('%H:%M:%S')}] Accepted connection from {client_address}")
+    # print(f"[{time.strftime('%H:%M:%S')}] Accepted connection from {client_address}")
     try:
         # 1. Wait for a request from the client (e.g., "GET_SENSOR_DATA")
         request = client_socket.recv(8172) # Expecting a small request string
@@ -198,7 +198,10 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
         if request_str == "GET_SENSOR_DATA":
             sensor_data_payload = data_cb()
             if sensor_data_payload is None:
-                sensor_data_payload = generate_dummy_data(server_name)
+                sensor_data_payload = {
+                    "success": False,
+                    "message": "data not ready"
+                }
             pickled_payload = pickle.dumps(sensor_data_payload)
             payload_len = len(pickled_payload)
 

@@ -5,46 +5,25 @@
 
 from typing import Optional
 import isaaclab.sim as sim_utils
-import isaaclab.terrains as terrain_gen
 from isaaclab.envs import ViewerCfg
 from isaaclab.managers import EventTermCfg as EventTerm
 from isaaclab.managers import ObservationGroupCfg as ObsGroup
 from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.managers import RewardTermCfg, SceneEntityCfg
 from isaaclab.managers import TerminationTermCfg as DoneTerm
-from isaaclab.terrains import TerrainImporterCfg, TerrainImporter
 from isaaclab.sensors import CameraCfg, TiledCameraCfg
 from isaaclab.utils import configclass
-from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 
 import isaaclab_tasks.manager_based.locomotion.velocity.config.spot.mdp as spot_mdp
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg
 
 ##
 # Pre-defined configs
 ##
 from isaaclab_assets.robots.spot import SPOT_CFG  # isort: skip
+from robot.base_env_cfg import BaseEnvCfg
 
-
-COBBLESTONE_ROAD_CFG = terrain_gen.TerrainGeneratorCfg(
-    size=(8.0, 8.0),
-    border_width=20.0,
-    num_rows=9,
-    num_cols=21,
-    horizontal_scale=0.1,
-    vertical_scale=0.005,
-    slope_threshold=0.75,
-    difficulty_range=(0.0, 1.0),
-    use_cache=False,
-    sub_terrains={
-        "flat": terrain_gen.MeshPlaneTerrainCfg(proportion=0.2),
-        "random_rough": terrain_gen.HfRandomUniformTerrainCfg(
-            proportion=0.2, noise_range=(0.02, 0.05), noise_step=0.02, border_width=0.25
-        ),
-    },
-)
 
 
 @configclass
@@ -312,7 +291,7 @@ class SpotTerminationsCfg:
 
 
 @configclass
-class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
+class SpotFlatEnvCfg(BaseEnvCfg):
 
     # Basic settings
     observations: SpotObservationsCfg = SpotObservationsCfg()
@@ -362,37 +341,11 @@ class SpotFlatEnvCfg(LocomotionVelocityRoughEnvCfg):
             static_friction=1.0,
             dynamic_friction=1.0,
         )
+
         self.load_generator()
 
         # no height scan
         self.scene.height_scanner = None
-
-    def load_generator(self):
-        self.scene.terrain = TerrainImporterCfg(
-            prim_path="/World/ground",
-            terrain_type="generator",
-            terrain_generator=COBBLESTONE_ROAD_CFG,
-            max_init_terrain_level=COBBLESTONE_ROAD_CFG.num_rows - 1,
-            collision_group=-1,
-            physics_material=self._physics_material,
-            visual_material=sim_utils.MdlFileCfg(
-                mdl_path=f"{ISAACLAB_NUCLEUS_DIR}/Materials/TilesMarbleSpiderWhiteBrickBondHoned/TilesMarbleSpiderWhiteBrickBondHoned.mdl",
-                project_uvw=True,
-                texture_scale=(0.25, 0.25),
-            ),
-            debug_vis=True,
-        )
-
-    def load_usd(self, usd_path: str):
-        usd_path = str(usd_path)
-        self.usd_path = usd_path
-        self.scene.terrain = TerrainImporterCfg(
-            prim_path="/World/ground",
-            terrain_type="usd",
-            usd_path=usd_path,
-            physics_material=self._physics_material,
-            env_spacing=self.scene.env_spacing,
-        )
         
 class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
     def __post_init__(self) -> None:
