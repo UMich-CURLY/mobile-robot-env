@@ -17,18 +17,18 @@ import sys
 import os
 
 # Get the current working directory
-current_directory = os.getcwd()
+utils_directory = os.getcwd()+'/..'
 
 # Add it to sys.path if it's not already there
-if current_directory not in sys.path:
-    sys.path.append(current_directory)
+if utils_directory not in sys.path:
+    sys.path.append(utils_directory)
 from utils.socket_server import run_server,format_data,compress_payload
 from utils.pcd import get_distance
 from scipy.spatial.transform import Rotation
 import utils.planner as pl
 # --- Configuration ---
 SOCKET_HOST = '0.0.0.0'  # Listen on all available interfaces
-SOCKET_PORT = 12345
+SOCKET_PORT = 12300
 MAX_BUFFER_SIZE = 4096 # For receiving request from client, and sending pickled data length
 import lcm
 
@@ -37,7 +37,7 @@ from unitree_go1_deploy.websocket.rc_command_lcmt_relay import rc_command_lcmt_r
 LCM_URL     = "udpm://239.255.76.67:7667?ttl=255"
 LCM_CHANNEL = "rc_command_relay"
 
-collision_threshold = 0.4
+collision_threshold = 0.5
 
 lc = lcm.LCM(LCM_URL)
 x,y,w = 0,0,0
@@ -63,9 +63,19 @@ def publish_lcm(lin_x,lin_y,yaw):
 class SensorDataManager:
     """Holds the latest sensor data and provides thread-safe access."""
     def __init__(self, logger):
-        self.latest_rgb_cv_image = None
-        self.latest_depth_cv_image = None
-        self.latest_pose_dict = None
+        self._latest_data = {
+            "rgb": None,
+            "depth": None,
+            "position": None,
+            "quat_wxyz": None
+        }
+        self.info = {
+            "scene_id": "real_world",
+            "episode_id": time.strftime("%m%d_%H%M"),
+            "robot_height": 0.72,
+            "hfov_deg": 54.75,
+        }
+        
         self.cv_bridge = CvBridge()
         self.lock = threading.Lock()
         self.logger = logger
@@ -83,8 +93,7 @@ class SensorDataManager:
             cv_img = self.cv_bridge.compressed_imgmsg_to_cv2(
                 msg, desired_encoding='bgr8')
             with self.lock:
-                self.latest_rgb_cv_image = cv_img
-            self.check_data_ready()
+                self._latest_data["rgb"] = cv_img
         except Exception as e:
             self.logger.error(f'RGB callback error: {e}')
 
@@ -99,64 +108,22 @@ class SensorDataManager:
 
             # depth = self.cv_bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
             with self.lock:
-                self.latest_depth_cv_image = depth
-                self.distance = get_distance(self.latest_depth_cv_image.astype(float)/1000)
-                if(self.distance<collision_threshold):
+                self._latest_data["depth"] = depth
+                self.distance = get_distance(self._latest_data["depth"].astype(float)/1000)
+                if self.distance<collision_threshold:
                     x = np.clip(x,-0.5,0)
-            self.check_data_ready()
         except Exception as e:
             self.logger.error(f'Depth callback error: {e}')
-
-
-    # def pose_callback(self, msg: Odometry):
-    #     with self.lock:
-    #         print("pose ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
-    #         self.latest_pose_dict = {
-    #             "header": {
-    #                 "stamp_sec": msg.header.stamp.sec,
-    #                 "stamp_nanosec": msg.header.stamp.nanosec,
-    #                 "frame_id": msg.header.frame_id
-    #             },
-    #             "pose": {
-    #                 "position": {"x": msg.pose.pose.position.x, "y": msg.pose.pose.position.y, "z": msg.pose.pose.position.z},
-    #                 "orientation": {"x": msg.pose.pose.orientation.x, "y": msg.pose.pose.orientation.y,
-    #                                 "z": msg.pose.pose.orientation.z, "w": msg.pose.pose.orientation.w}
-    #             }
-    #         }
-    #     # self.logger.info('Received Pose', throttle_duration_sec=5)
-    #     self.check_data_ready()
-    #     self.publish_planner_action()
+            import traceback
+            traceback.print_exc()
 
     def pose_callback(self, msg: PoseStamped):
+        print("pose callback")
         with self.lock:
-            # print("pose ts: ", msg.header.stamp.sec, msg.header.stamp.nanosec) 
-            self.latest_pose_dict = {
-                "header": {
-                    "stamp_sec": msg.header.stamp.sec,
-                    "stamp_nanosec": msg.header.stamp.nanosec,
-                    "frame_id": msg.header.frame_id
-                },
-                "pose": {
-                    # The path is now simpler: msg.pose instead of msg.pose.pose
-                    "position": {"x": msg.pose.position.x, "y": msg.pose.position.y, "z": msg.pose.position.z},
-                    "orientation": {"x": msg.pose.orientation.x, "y": msg.pose.orientation.y,
-                                    "z": msg.pose.orientation.z, "w": msg.pose.orientation.w}
-                }
-            }
+            self._latest_data["position"] = [msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]
+            self._latest_data["quat_wxyz"] = [msg.pose.orientation.w, msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z]
         # self.logger.info('Received Pose', throttle_duration_sec=5)
-        self.check_data_ready()
         self.publish_planner_action()
-
-    def check_data_ready(self):
-        # print(self.distance)
-
-        if not self.data_ready:
-            with self.lock:
-                if self.latest_rgb_cv_image is not None and \
-                   self.latest_depth_cv_image is not None and \
-                   self.latest_pose_dict is not None:
-                    self.data_ready = True
-                    self.logger.info("Initial set of sensor data received. Server is ready for client requests.")
     
     def publish_planner_action(self):
         global x,y,w
@@ -164,28 +131,29 @@ class SensorDataManager:
         #     print("last publish time:", time.time() - self._last_publish_time)
         self._last_publish_time = time.time()
 
-        if self.data_ready and self.useplanner:
-            pose = self.latest_pose_dict['pose']
-            position = pose['position']
-            o = pose['orientation']
-            yaw = Rotation.from_quat([o['x'],o['y'],o['z'],o['w']]).as_euler('zyx')[0]
-            x,y,w = self.planner.step(position['x'],position['y'],yaw)
-            if(self.distance<collision_threshold):
+        if self.useplanner:
+            position = self._latest_data["position"]
+            o = self._latest_data["quat_wxyz"]
+            yaw = Rotation.from_quat([o[1],o[2],o[3],o[0]]).as_euler('zyx')[0]
+            x,y,w = self.planner.step(position[0],position[1],yaw)
+            if self.distance<collision_threshold:
                 x = np.clip(x,-0.5,0)
             publish_lcm(x, -y, w)
         
             
     def get_latest_data(self):
         with self.lock:
+            data_ready = True
+            for key in self._latest_data:
+                if self._latest_data[key] is None:
+                    print(f"data not ready for key: {key}")
+                    data_ready = False
+                    break
+            self.data_ready = data_ready
             if not self.data_ready:
-                return None
+                return {}
             # Return copies to avoid issues if data is updated while pickling
-            return {
-                "rgb_image": self.latest_rgb_cv_image.copy() if self.latest_rgb_cv_image is not None else None,
-                "depth_image": self.latest_depth_cv_image.copy() if self.latest_depth_cv_image is not None else None,
-                "pose": self.latest_pose_dict.copy() if self.latest_pose_dict is not None else None,
-                "timestamp_server_ns": time.time()*1e9
-            }
+            return self._latest_data
 
     def _compressed_depth_to_image(self, msg, frame_id='camera_depth_frame'):
         """
@@ -271,22 +239,31 @@ def main(args=None):
 
     def data_callback():
         sensor_data = data_manager.get_latest_data()
-        sensor_data['success'] = True
-        sensor_data['message'] = "data from go1 robot"
-        return compress_payload(sensor_data)
+        print("data callback")
+        if sensor_data == {}:
+            return {
+                "success": False,
+                "message": "data not ready"
+            }
+        return format_data(
+            sensor_data["rgb"],
+            sensor_data["depth"],
+            sensor_data["position"],
+            sensor_data["quat_wxyz"],
+            data_manager.info,
+            server_name="go1_server"
+        )
     
-    def action_callback(message):
+    def action_callback(msg_type, message):
         global x,y,w
-        if message.type == 'VEL':
-            if(data_manager.distance<collision_threshold):
-                message.x = np.clip(message.x,-0.5,0)
-
-            x,y,w = message.x,message.y,message.omega
-            print(message)
+        if msg_type == 'VEL':
+            x,y,w = message['vx'],message['vy'],message['vw']
+            if data_manager.distance<collision_threshold:
+                x = np.clip(x,-0.5,0)
             data_manager.useplanner = False
             # print(f"position: {position} quat: {quat}")
-        if message.type == 'WAYPOINT':
-            waypoints = np.vstack((message.x,message.y)).T
+        if msg_type == 'WAYPOINT':
+            waypoints = np.vstack((message["x_list"], message["y_list"])).T
             data_manager.useplanner = True
             # for visualizer in visualizers:
             #     visualizer.set_visibility(False)
@@ -294,7 +271,10 @@ def main(args=None):
             translations = np.hstack((waypoints,np.ones((len(waypoints),1))*0.2))
             print("first waypoint raw: %s" % str(translations[0]))
             data_manager.planner.update_waypoints(translations[:,:2])
-
+        if msg_type == 'STOP':
+            x,y,w = 0,0,0
+            print("STOP")
+            data_manager.useplanner = False
     def planner_callback():
         col = int(data_manager.distance<collision_threshold)
         try:
@@ -315,10 +295,10 @@ def main(args=None):
     # Pass the logger from the ROS node to the socket thread for consistent logging
 
     server_thread = threading.Thread(target=run_server,kwargs={"data_cb":data_callback,"action_cb":action_callback,"planner_cb":planner_callback,"port":SOCKET_PORT,"host":SOCKET_HOST})
-    publishing_thread = threading.Thread(target=lcm_sender)
-    
     server_thread.start()
+    publishing_thread = threading.Thread(target=lcm_sender)
     publishing_thread.start()
+    
 
     try:
         rclpy.spin(sensor_server_ros_node)

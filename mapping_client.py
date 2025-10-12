@@ -15,6 +15,21 @@ import matplotlib.cm as cm
 
 from argparse import ArgumentParser
 from utils.planner import fit_smoothing_spline
+
+parser = ArgumentParser()
+parser.description = "Welcome to the robot client for the SG VLN project"
+parser.add_argument("--host",type=str,default='localhost',help="the host name of the remote robot server")
+parser.add_argument("--port",type=int,default=12300,help="the port name of the remote robot server")
+args = parser.parse_args()
+pygame.init()
+BORDER = 30
+ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
+screen_width, screen_height = 640*2+BORDER*3, 720+20+BORDER*2
+window = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
+pygame.display.set_caption("SG-VLN WEBSOCKET CLIENT")
+view_rgb = True
+
+
 HFOV = 54.75
 #preprogrammed waypoints to execute by pressing enter.
 # WAYPOINTS = np.array([
@@ -44,19 +59,6 @@ WAYPOINTS = np.array([
 
 MAGNIFICATION_OPTIONS = [1,2,4,6,8]
 magnification_choice = 3
-
-parser = ArgumentParser()
-parser.description = "Welcome to the robot client for the SG VLN project"
-parser.add_argument("--host",type=str,default='localhost',help="the host name of the remote robot server")
-parser.add_argument("--port",type=int,default=12300,help="the port name of the remote robot server")
-args = parser.parse_args()
-pygame.init()
-BORDER = 30
-ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
-screen_width, screen_height = 640*2+BORDER*3, 720+20+BORDER*2
-window = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
-pygame.display.set_caption("SG-VLN WEBSOCKET CLIENT")
-view_rgb = True
 
 def pilImageToSurface(pilImage):
     return pygame.image.fromstring(
@@ -255,9 +257,9 @@ while run:
         if event.type == pygame.KEYDOWN:
             translations = None
 
-            vx_min = 1.0
-            vy_min = 1.0
-            vw_min = 1.0
+            vx_min = 0.5
+            vy_min = 0.5
+            vw_min = 0.5
 
             # print(Rotation.from_matrix(curr_T[:3,:3]).as_quat())
             if event.key == pygame.K_w:

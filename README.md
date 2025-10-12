@@ -27,12 +27,19 @@ cd $HOME/mobile-robot-server/unitree_go1_deploy/go1_deploy/go1_gym_deploy/script
 ```
 this script enables the custom RL policy. it talks to the earlier script, and accepts movement commands from lcm. when it starts up, you will be prompted to press the "R2" button on the joystick controller to make the dog calibrate and stand up. (the dog should be prone and aligned at this point, if not you should restart everything)
 
-
+once stood up, the R2 button acts as a safety toggle, switching the dog from movement allowed to joints locked respectively.
 
 ## Robot Server
 make sure you are in the ~/mobile-robot-env directory on the dog.
 
-Simply run ~/mobile-robot-env/run_nuc_orb.sh to start everything on the dog.
+Simply run ~/mobile-robot-env/run_nuc_orb.sh to start everything on the dog. this starts the needed tmux sessions
+
+tmux --kill-server to end all of them.
+
+beware that the orb slam is power hungry, so kill it when robot is idle.
+
+## ORB SLAM
+ORB SLAM folder is at /home/curlynuc/ORB-SLAM3-STEREO-FIXED. The pose will only be published when the robot is moving.
 
 <!-- ## Isaac Entry Point:
 python3 isaac_provider.py --task=go2_matterport_vision --history_length=9 --load_run=2024-09-25_23-22-02 --episode_index 15 --enable_camera
