@@ -88,7 +88,7 @@ RL_LIBRARY = "rsl_rl"
 # Local imports
 from utils.socket_server import run_server, format_data
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
-
+from utils.vis import visualize_points, visualize_curve
 # Parse robot position
 robot_pos = [float(x) for x in args_cli.robot_pos.split(',')]
 
@@ -190,10 +190,10 @@ while simulation_app.is_running():
 
         # Find path between two points
         points = navmeshInterface.sample_random_points(1000)
-        navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=80.)
+        visualize_points(points, prim_path="/World/RandomPoints", width=80.)
         for i in range(50):
             path = navmeshInterface.find_paths(points[2*i], points[2*i+1])
-            navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=40.)
+            visualize_curve(path, prim_path=f"/World/Path_{i}", width=40.)
         if navmesh_file is None:
             navmeshInterface.save_navmesh("episodes/navmesh.bin")
 

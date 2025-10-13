@@ -40,8 +40,11 @@
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
                 "--episode_id",
+                // "vc_austin_0",
                 // "test_generator_0",
-                "nv_parkmorning_1",
+                // "nv_parkmorning_3",
+                "nv_apartment_17",
+                // "grCommercial_hospital_0",
                 "--enable_cameras"
             ],
         },

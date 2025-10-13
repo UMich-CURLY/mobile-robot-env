@@ -11,13 +11,6 @@ def _infer_scene_id_from_usd(plan_data, scene_path):
     candidates = [k for k in plan_data.keys() if k in (usd_base, usd_base.replace(".usd", ""))]
     return candidates[0] if candidates else next(iter(plan_data.keys()))
 
-def _to_xyz(pt, default_z):
-    if pt is None:
-        return None
-    if len(pt) == 3:
-        return [float(pt[0]), float(pt[1]), float(pt[2])]
-    return [float(pt[0]), float(pt[1]), float(default_z)]
-
 
 def load_plan(episode_path, scene_folder, episode_id, base_height=0.6):
     with open(episode_path, "r") as f:
@@ -49,44 +42,7 @@ def load_plan(episode_path, scene_folder, episode_id, base_height=0.6):
         "scene_id": episode["scene_id"],
         "base_height": base_height,
         "scene_scale": scale,
-    }
-
-
-
-def visualize_path(manager_env, path_xyz, target_xyz=None, dot_size=0.05, line_width=0.03):
-    """Create USD prims to visualize waypoints and path line."""
-    stage = manager_env.scene.stage
-    root_path = Sdf.Path("/World/PathVis")
-    if stage.GetPrimAtPath(root_path):
-        stage.RemovePrim(root_path)
-    UsdGeom.Xform.Define(stage, root_path)
-
-    GREEN = Gf.Vec3f(0.0, 1.0, 0.0)
-    RED   = Gf.Vec3f(1.0, 0.0, 0.0)
-
-    if path_xyz and len(path_xyz) >= 1:
-        pts = [Gf.Vec3f(p[0], p[1], p[2]) for p in path_xyz]
-
-        pts_prim = UsdGeom.Points.Define(stage, root_path.AppendPath("Waypoints"))
-        pts_prim.CreatePointsAttr(pts)
-        pts_prim.CreateWidthsAttr([dot_size] * len(pts))
-        pts_prim.CreateDisplayColorAttr([GREEN] * len(pts))
-
-        curve = UsdGeom.BasisCurves.Define(stage, root_path.AppendPath("PathLine"))
-        curve.CreateTypeAttr(UsdGeom.Tokens.linear)
-        curve.CreateCurveVertexCountsAttr([len(pts)])
-        curve.CreatePointsAttr(pts)
-        curve.CreateWidthsAttr([line_width] * len(pts))
-        curve.CreateDisplayColorAttr([RED])
-
-    if target_xyz is not None:
-        tprim = UsdGeom.Points.Define(stage, root_path.AppendPath("Target"))
-        tprim.CreatePointsAttr([Gf.Vec3f(*target_xyz)])
-        tprim.CreateWidthsAttr([dot_size * 2.5])
-        tprim.CreateDisplayColorAttr([GREEN])
-        
-        
-
+    } 
 
 def wrap_to_pi(a):
     return math.atan2(math.sin(a), math.cos(a))
@@ -112,7 +68,7 @@ def follow_waypoints(
     max_vy=0.5,
     max_yaw_rate=1.0,
     k_p_ang=1.5,
-    arrive_dist=0.15,
+    arrive_dist=0.3,
     arrive_yaw=np.pi/180.0*60.0,
     term_dist=0.05,
     term_yaw=np.pi/180.0*30.0
@@ -135,19 +91,16 @@ def follow_waypoints(
     desired_yaw = math.atan2(dy, dx)
     ang_err = wrap_to_pi(desired_yaw - base_yaw)
 
-    if abs(ang_err) > arrive_yaw:
-        vx, vy, vw = 0.0, 0.0, max(-max_yaw_rate, min(max_yaw_rate, k_p_ang * ang_err))
-    else:
-        ex_b, ey_b = world_to_body(dx, dy, base_yaw)
-        vx = np.clip(max_vx * ex_b, -max_vx, max_vx)
-        vy = np.clip(max_vy * ey_b, -max_vy, max_vy)
-        vw = np.clip(k_p_ang * ang_err, -max_yaw_rate, max_yaw_rate)
+    ex_b, ey_b = world_to_body(dx, dy, base_yaw)
+    vx = np.clip(max_vx * ex_b, -max_vx, max_vx)
+    vy = np.clip(max_vy * ey_b, -max_vy, max_vy)
+    vw = np.clip(k_p_ang * ang_err, -max_yaw_rate, max_yaw_rate)
 
     if current_wp_idx == len(waypoints_world) - 1:
         arrive_dist = term_dist
         arrive_yaw = term_yaw
 
-    if (dist < arrive_dist) and (abs(ang_err) < arrive_yaw):
+    if (dist < arrive_dist): #  and (abs(ang_err) < arrive_yaw)
         current_wp_idx += 1
         print(f"[PLAN] Reached waypoint {current_wp_idx}/{len(waypoints_world)}")
 

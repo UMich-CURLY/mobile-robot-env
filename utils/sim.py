@@ -5,8 +5,9 @@ import carb
 from threading import Thread
 import omni
 from omni.kit.viewport.utility import get_viewport_from_window_name
-from utils.path_following_utils import visualize_path, follow_waypoints
+from utils.path_following_utils import follow_waypoints
 from scipy.spatial.transform import Rotation as R
+from utils.vis import visualize_curve, visualize_points
 
 class VLNSim:
     def __init__(self, args, env):
@@ -105,7 +106,8 @@ class VLNSim:
         self.waypoints = waypoints
         self.waypoints_idx = 0
         if visualize:
-            visualize_path(self.manager_env, waypoints, target_xyz=waypoints[-1])
+            visualize_curve(waypoints)
+            visualize_points(waypoints[-1], prim_path="/World/Target", color=(0.0, 1.0, 0.0))
 
     def clear_waypoints(self):
         self.waypoints = None
@@ -123,10 +125,10 @@ class VLNSim:
         quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
         # camera pose in world frame
         pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
-        rot_cam_world = quat_robot * quat_cam_body
-        rot_cam_world = rot_cam_world.as_quat()
-        rot_cam_world = np.concatenate([rot_cam_world[-1:],rot_cam_world[:-1]])
-        return pos_cam_world, rot_cam_world
+        quat_cam_world = quat_robot * quat_cam_body
+        quat_cam_world = quat_cam_world.as_quat()
+        quat_cam_world = np.concatenate([quat_cam_world[-1:],quat_cam_world[:-1]])
+        return pos_cam_world, quat_cam_world
 
 
     def update_obs(self, obs, current_episode):

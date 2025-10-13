@@ -59,6 +59,7 @@ from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 from utils.task_generator import TaskGenerator
 import utils.navmesh_utils as navmesh_utils
+from utils.vis import visualize_points, visualize_curve
 
 # Main simulation loop
 
@@ -256,10 +257,10 @@ def test_navmesh():
     navmesh_interface.visualize_navmesh()
     points = navmesh_interface.sample_random_points(1000)
     if points is not None:
-        navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
+        visualize_points(points, prim_path="/World/RandomPoints", width=0.8)
         for i in range(50):
             path = navmesh_interface.find_paths(points[2*i], points[2*i+1])
-            navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
+            visualize_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
 
 def save_navmesh():
     os.makedirs(scene_folder / "navmesh", exist_ok=True)

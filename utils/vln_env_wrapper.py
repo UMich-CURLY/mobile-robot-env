@@ -2,7 +2,6 @@ from pathlib import Path
 from isaaclab.envs import ManagerBasedRLEnv
 from isaaclab.terrains import TerrainImporter
 from utils.measures import add_measurement
-from utils.vis import visualize_path
 import isaaclab.sim as sim_utils
 import isaacsim.core.utils.bounds as bounds_utils
 from pxr import Gf

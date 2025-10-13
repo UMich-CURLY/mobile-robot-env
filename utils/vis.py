@@ -1,38 +1,85 @@
-from pxr import Sdf, UsdGeom, Gf
+import omni
+from pxr import Sdf, UsdGeom, Gf, UsdShade, Vt, Usd
+import numpy as np
 
-def visualize_path(manager_env, path_xyz, target_xyz=None, dot_size=0.05, line_width=0.03):
-    """Create USD prims to visualize waypoints (small dots) and a thin polyline."""
-    stage = manager_env.scene.stage
-    root_path = Sdf.Path("/World/PathVis")
-    if stage.GetPrimAtPath(root_path):
-        stage.RemovePrim(root_path)
-    UsdGeom.Xform.Define(stage, root_path)
+def visualize_points(nodes, prim_path="/World/Points", color=(0.0, 1.0, 1.0), width=2.0):
+    '''Create and draw a Points on the stage following the nodes'''
+    stage = omni.usd.get_context().get_stage()
+    prim = UsdGeom.Points.Define(stage, prim_path)
+    prim.CreatePointsAttr(nodes)
+    prim.CreateWidthsAttr(np.array([width], dtype=float))
+    prim.CreateDisplayColorAttr([color])
 
-    GREEN = Gf.Vec3f(0.0, 1.0, 0.0)
-    RED   = Gf.Vec3f(1.0, 0.0, 0.0)
+def visualize_curve(path, prim_path="/World/Path", color=(1, 0, 0), width=1.0 ):
+    '''Create and draw a BasisCurve on the stage following the nodes'''
 
-    if path_xyz and len(path_xyz) >= 1:
-        pts = [Gf.Vec3f(p[0], p[1], p[2]) for p in path_xyz]
+    if len(path) <= 1:
+        print('[WARNING]: No valid path to visualize')
+        return
 
-        # Waypoint dots (green)
-        pts_prim = UsdGeom.Points.Define(stage, root_path.AppendPath("Waypoints"))
-        pts_prim.CreatePointsAttr(pts)
-        pts_prim.CreateWidthsAttr([dot_size] * len(pts))
-        # set per-point displayColor so the renderer definitely uses green
-        pts_prim.CreateDisplayColorAttr([GREEN] * len(pts))
+    nodes = [Gf.Vec3f(float(pt[0]), float(pt[1]), float(pt[2])) for pt in path]
 
-        # Polyline (red)
-        curve = UsdGeom.BasisCurves.Define(stage, root_path.AppendPath("PathLine"))
-        curve.CreateTypeAttr(UsdGeom.Tokens.linear)
-        curve.CreateCurveVertexCountsAttr([len(pts)])
-        curve.CreatePointsAttr(pts)
-        curve.CreateWidthsAttr([line_width] * len(pts))
-        # constant red for the whole curve (single color entry is fine)
-        curve.CreateDisplayColorAttr([RED])
+    stage = omni.usd.get_context().get_stage()
+    prim = UsdGeom.BasisCurves.Define(stage, prim_path)
+    prim.CreatePointsAttr(nodes)
 
-    if target_xyz is not None:
-        # Target: bigger green dot
-        tprim = UsdGeom.Points.Define(stage, root_path.AppendPath("Target"))
-        tprim.CreatePointsAttr([Gf.Vec3f(*target_xyz)])
-        tprim.CreateWidthsAttr([dot_size * 2.5])
-        tprim.CreateDisplayColorAttr([GREEN])
+    # Set the number of curve verts to be the same as the number of points we have
+    curve_verts = prim.CreateCurveVertexCountsAttr()
+    curve_verts.Set([len(nodes)])
+
+    # Set the curve type to linear so that each node is connected to the next
+    type_attr = prim.CreateTypeAttr()
+    type_attr.Set('linear')
+    type_attr = prim.GetTypeAttr().Get()
+    # Set the width of the curve
+
+    width_attr = prim.CreateWidthsAttr(np.array([width], dtype=float))
+
+    width =  Vt.FloatArray.FromNumpy(np.asarray([width for x in range(len(nodes))]))
+
+    width_attr.Set(width)
+
+    # color_primvar = prim.CreateDisplayColorPrimvar(UsdGeom.Tokens.constant)
+    UsdGeom.Primvar(prim.GetDisplayColorAttr()).SetInterpolation("constant")
+    prim.GetDisplayColorAttr().Set([color])
+
+def visualize_mesh(prim_path, points, indices, colors=None, opacity=None, use_prevsrf=True):
+    '''
+    Create a mesh in USD
+    '''
+
+    time = Usd.TimeCode.Default()
+    stage = omni.usd.get_context().get_stage()
+
+    mesh = UsdGeom.Mesh.Define(stage, prim_path)
+    mesh.GetPointsAttr().Set(points, time)
+    mesh.GetFaceVertexIndicesAttr().Set(indices, time)
+    mesh.GetFaceVertexCountsAttr().Set([3] * len(indices), time)
+
+    if use_prevsrf:
+
+        mtl_path = Sdf.Path(f"/World/Looks/PreviewSurface_{prim_path.split('/')[-1]}")
+
+        mtl = UsdShade.Material.Define(stage, mtl_path)
+        shader = UsdShade.Shader.Define(stage, mtl_path.AppendPath("Shader"))
+        shader.CreateIdAttr("UsdPreviewSurface")
+        shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(colors) 
+        shader.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(opacity)
+        shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(0.0)
+        shader.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(0.0)
+        shader.CreateInput("ior", Sdf.ValueTypeNames.Float).Set(1.0)
+        mtl.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
+            
+        # Bind the mesh
+        UsdShade.MaterialBindingAPI(mesh).Bind(mtl)
+
+    # Opacity seems to be broken
+    else:
+        UsdGeom.Primvar(mesh.GetDisplayColorAttr()).SetInterpolation("constant")
+        UsdGeom.Primvar(mesh.GetDisplayOpacityAttr()).SetInterpolation("constant")
+        if colors:
+            mesh.GetDisplayColorAttr().Set(colors, time)
+        if opacity:
+            mesh.GetDisplayOpacityAttr().Set(opacity, time)
+
+    return prim_path

@@ -9,7 +9,6 @@ import sys
 import time
 import numpy as np
 from utils.episode import VLNEpisode
-import utils.navmesh_utils as navmesh_utils
 
 # UI
 from utils.ui import SimWindow
@@ -19,6 +18,7 @@ import omni.usd
 import isaacsim.core.utils.prims as prim_utils
 import isaacsim.core.utils.bounds as bounds_utils
 import isaaclab.sim as sim_utils
+from utils.vis import visualize_points, visualize_curve
 
 class TaskGenerator:
     """
@@ -170,8 +170,8 @@ class TaskGenerator:
                     start_position=start.tolist(),
                     start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
                 )
-                navmesh_utils.create_points(random_points, prim_path="/World/RandomPoints", width=0.8)
-                navmesh_utils.create_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
+                visualize_points(random_points, prim_path="/World/RandomPoints", width=0.8)
+                visualize_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
                 self.generated_episodes.append(episode)
 
         print(f'[INFO]: Generated {len(self.generated_episodes)} episodes')
