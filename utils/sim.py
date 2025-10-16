@@ -21,7 +21,7 @@ class VLNSim:
             "rgb": None,
             "depth": None,
             "position": None,
-            "quat_wxyz": None,
+            "quat_xyzw": None,
             "info": {}
         }
 
@@ -45,7 +45,7 @@ class VLNSim:
 
     # Socket server integration (control Spot via external commands)
     def action_callback(self, msg_type, message):
-        # Expect messages of type 'VEL' with fields x, y, omega
+        print(f"[INFO] Received command: {msg_type}")
         if msg_type == 'VEL':
             vx, vy, vw = message["vx"], message["vy"], message["vw"]
             self.commands[self.robot_index] = torch.tensor([float(vx), float(vy), float(vw)], device=self.device)
@@ -72,7 +72,7 @@ class VLNSim:
             self._latest_data["rgb"],
             self._latest_data["depth"],
             self._latest_data["position"],
-            self._latest_data["quat_wxyz"],
+            self._latest_data["quat_xyzw"],
             self._latest_data["info"]
         )
 
@@ -117,21 +117,20 @@ class VLNSim:
         manager_env = self.manager_env
         # robot pose
         pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
-        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32)
+        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32) # wxyz
         quat_robot = R.from_quat(np.concatenate([quat_robot[1:],quat_robot[:1]]))
         # transform from robot to camera
         pos_cam_body = manager_env.scene["pov_camera"].cfg.offset.pos
-        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot
+        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot # wxyz
         quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
         # camera pose in world frame
         pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
         quat_cam_world = quat_robot * quat_cam_body
-        quat_cam_world = quat_cam_world.as_quat()
-        quat_cam_world = np.concatenate([quat_cam_world[-1:],quat_cam_world[:-1]])
+        quat_cam_world = quat_cam_world.as_quat() # xyzw
         return pos_cam_world, quat_cam_world
 
 
-    def update_obs(self, obs, current_episode):
+    def update_obs(self, obs, current_episode=None, info=None):
         # only publish the first robot's obs for now
         manager_env = self.manager_env
         try:
@@ -143,7 +142,7 @@ class VLNSim:
             depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
             depth = np.clip(depth, 0, 65535).astype(np.uint16)
             self._latest_data["depth"] = depth
-            self._latest_data["position"], self._latest_data["quat_wxyz"] = self.get_cam_pose()
+            self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
             self._latest_data["info"] = {
                 "scene_id": current_episode["scene_id"],
                 "episode_id": current_episode["episode_id"],
@@ -151,6 +150,7 @@ class VLNSim:
                 "intrinsic": None,
                 "robot_height": 0.61,
                 "hfov_deg": hfov_deg,
+                "metrics": info["measurements"],
             }
             if self.waypoints is not None and len(self.waypoints) > 0:
                 self.commands[self.robot_index], self.waypoints_idx = follow_waypoints(self.manager_env, self.device, self.waypoints, self.waypoints_idx)

@@ -176,8 +176,8 @@ while simulation_app.is_running():
 
         # Policy forward pass
         obs, reward, done, info = env.step(vln_sim.commands)
-        vln_sim.update_obs(obs, current_episode)
-        print("measures: ", info["measurements"])
+        vln_sim.update_obs(obs, info=info, current_episode=current_episode)
+        # print("measures: ", info["measurements"])
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1
     if frame_count == 1:

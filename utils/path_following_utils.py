@@ -73,7 +73,6 @@ def follow_waypoints(
     term_dist=0.05,
     term_yaw=np.pi/180.0*30.0
 ):
-    """Pure pursuit style waypoint follower. Returns updated obs and wp_idx."""
     if waypoints_world is None or len(waypoints_world) == 0:
         return torch.tensor([[0.0, 0.0, 0.0]], device=device, dtype=torch.float32), current_wp_idx
 

@@ -155,7 +155,7 @@ def generate_dummy_data(server_name = "DummyServer"):
     }
     )
 
-def format_data(rgb, depth, position, quat, info, server_name = "DummyServer"):
+def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServer"):
     timestamp_ns = time.time_ns()
 
     pose_dict = {
@@ -166,7 +166,7 @@ def format_data(rgb, depth, position, quat, info, server_name = "DummyServer"):
         },
         "pose": {
             "position": {"x": position[0], "y": position[1], "z": position[2]},
-            "orientation": {"x": quat[1], "y": quat[2], "z": quat[3], "w": quat[0]}
+            "orientation": {"x": quat_xyzw[0], "y": quat_xyzw[1], "z": quat_xyzw[2], "w": quat_xyzw[3]}
         }
     }
 
