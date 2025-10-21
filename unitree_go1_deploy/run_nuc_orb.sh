@@ -5,7 +5,13 @@
 # This script creates (or restarts) five detached tmux sessions,
 # each running one of the specified commands. Adjust session names if you like.
 
-sudo ip route add 224.0.0.0/4 dev eno1 metric 80
+if ! ip route | grep -q "^224\.0\.0\.0/4\b"; then
+if [ "$(id -u)" -eq 0 ]; then
+  ip route add 224.0.0.0/4 dev eno1 metric 80 || true
+else
+  sudo -n ip route add 224.0.0.0/4 dev eno1 metric 80 2>/dev/null || true
+fi
+fi
 
 # realsense (High‐accuracy preset)
 tmux has-session -t realsense_high 2>/dev/null

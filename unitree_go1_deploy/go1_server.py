@@ -17,7 +17,8 @@ import sys
 import os
 
 # Get the current working directory
-utils_directory = os.getcwd()+'/..'
+utils_directory = '/'.join(__file__.split('/')[:-2])
+print(utils_directory)
 
 # Add it to sys.path if it's not already there
 if utils_directory not in sys.path:
