@@ -72,7 +72,7 @@ class SensorDataManager:
         }
         self.info = {
             "scene_id": "real_world",
-            "episode_id": time.strftime("%m%d_%H%M"),
+            "episode_id": "42",
             "robot_height": 0.72,
             "hfov_deg": 54.75,
         }
@@ -242,10 +242,7 @@ def main(args=None):
         sensor_data = data_manager.get_latest_data()
         print("data callback")
         if sensor_data == {}:
-            return {
-                "success": False,
-                "message": "data not ready"
-            }
+            return None
         return format_data(
             sensor_data["rgb"],
             sensor_data["depth"],

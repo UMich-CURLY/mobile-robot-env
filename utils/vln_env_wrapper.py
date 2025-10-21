@@ -2,11 +2,24 @@ from pathlib import Path
 from isaaclab.envs import ManagerBasedRLEnv
 from isaaclab.terrains import TerrainImporter
 from utils.measures import add_measurement
-from utils.vis import visualize_path
 import isaaclab.sim as sim_utils
 import isaacsim.core.utils.bounds as bounds_utils
 from pxr import Gf
 import torch
+
+
+def init_env_cfg(env_cfg, args, episode):
+    load_scene(env_cfg, args, episode)
+    env_cfg.scene.robot.init_state.pos = episode["start_position"]
+    env_cfg.scene.robot.init_state.rot = episode["start_rotation"]
+    
+def load_scene(env_cfg, args, episode):
+    scene_path = episode["path"]
+    print(f"[INFO] Loading scene {scene_path}...")
+    if scene_path == "generator":
+        env_cfg.load_generator()
+    else:
+        env_cfg.load_usd(str(Path(args.scene_folder) / scene_path))
 
 class VLNEnvWrapper:
     """Wrapper to configure an :class:`RslRlVecEnvWrapper` instance to VLN environment."""
@@ -77,7 +90,8 @@ class VLNEnvWrapper:
                 raise ValueError("Episode is not set")
 
         # load scene
-        if self.usd_path != self.episode["path"]:
+        if self.usd_path is not None and self.usd_path != self.episode["path"]:
+            # remove previous scene
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
                 while self.scene.stage.GetPrimAtPath(self.scene.terrain.terrain_prim_paths[0]).IsValid():
@@ -86,17 +100,15 @@ class VLNEnvWrapper:
                     actions = self.low_level_policy(self.low_level_obs)
                     low_level_obs, _, _, infos = self.env.step(actions)
                 self.scene.terrain.terrain_prim_paths.pop(0)
-            print(f"Waiting for scene {self.episode['path']} to be loaded...")
+            print(f"Waiting for previous scene to be removed...")
+            # load new scene
+            load_scene(self.manager_env.cfg, self.args, self.episode)
+            self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
             if self.episode["path"] == "generator":
-                self.manager_env.cfg.load_generator()
-                self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
                 self.scene.terrain.terrain_prim_paths.append("/World/ground/terrain")
-            else:
-                self.manager_env.cfg.load_usd(str(Path(self.args.scene_folder) / self.episode["path"]))
-                self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
+        self.usd_path = self.episode["path"]
 
         # check if skylight exists in scene
-        # traverse all prims in scene
         disable_default_light = False
         prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
         for prim in prim_list:

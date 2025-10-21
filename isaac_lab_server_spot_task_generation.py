@@ -54,11 +54,12 @@ RL_LIBRARY = "rsl_rl"
 
 # Local imports
 from utils.episode import VLNEpisode, save_episodes
-from utils.vln_env_wrapper import VLNEnvWrapper
+from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 from utils.task_generator import TaskGenerator
 import utils.navmesh_utils as navmesh_utils
+from utils.vis import visualize_points, visualize_curve
 
 # Main simulation loop
 
@@ -74,6 +75,7 @@ task_generator, task_config, scene_config, current_episode = load_task_config(ar
 
 # setup environment
 env_cfg = SpotFlatEnvCfg_PLAY()
+init_env_cfg(env_cfg, args, current_episode)
 scene_folder = Path(args.scene_folder)
 
 env_cfg.scene.num_envs = args.num_envs
@@ -255,10 +257,10 @@ def test_navmesh():
     navmesh_interface.visualize_navmesh()
     points = navmesh_interface.sample_random_points(1000)
     if points is not None:
-        navmesh_utils.create_points(points, prim_path="/World/RandomPoints", width=0.8)
+        visualize_points(points, prim_path="/World/RandomPoints", width=0.8)
         for i in range(50):
             path = navmesh_interface.find_paths(points[2*i], points[2*i+1])
-            navmesh_utils.create_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
+            visualize_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
 
 def save_navmesh():
     os.makedirs(scene_folder / "navmesh", exist_ok=True)
@@ -329,7 +331,7 @@ while simulation_app.is_running():
         # Policy forward pass
         obs, reward, done, info = env.step(vln_sim.commands)
         # print("measures: ", info["measurements"])
-        vln_sim.update_obs(obs, manager_env, current_episode)
+        vln_sim.update_obs(obs, current_episode)
         # task_generator.step()
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
 
