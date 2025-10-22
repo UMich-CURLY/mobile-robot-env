@@ -155,8 +155,11 @@ def generate_dummy_data(server_name = "DummyServer"):
     }
     )
 
-def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServer"):
-    timestamp_ns = time.time_ns()
+def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServer", timestamp = None):
+    if timestamp is None:
+        timestamp_ns = time.time_ns()
+    else:
+        timestamp_ns = timestamp*1e9
 
     pose_dict = {
         "header": {
@@ -174,7 +177,7 @@ def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServe
         "rgb_image": rgb,
         "depth_image": depth,
         "pose": pose_dict,
-        "timestamp_server_ns": timestamp_ns,
+        "timestamp_server_ns": int(timestamp_ns),
         "success": True,
         "message": f"Dummy data generated successfully by {server_name}."
     }
