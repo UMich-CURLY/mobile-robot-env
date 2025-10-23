@@ -1,0 +1,23 @@
+[Unit]
+Description=Go1 ORB and sensors startup (user instance: %i)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=%i
+Group=%i
+Environment=HOME=/home/%i
+WorkingDirectory=/home/%i
+PermissionsStartOnly=true
+ExecStartPre=-/usr/sbin/ip route add 224.0.0.0/4 dev eno1 metric 80
+ExecStart=/usr/bin/bash -lc 'bash /home/%i/mobile-robot-env/unitree_go1_deploy/run_nuc_orb.sh'
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+

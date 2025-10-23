@@ -17,7 +17,8 @@ import sys
 import os
 
 # Get the current working directory
-utils_directory = os.getcwd()+'/..'
+utils_directory = '/'.join(__file__.split('/')[:-2])
+print(utils_directory)
 
 # Add it to sys.path if it's not already there
 if utils_directory not in sys.path:
@@ -67,7 +68,8 @@ class SensorDataManager:
             "rgb": None,
             "depth": None,
             "position": None,
-            "quat_wxyz": None
+            "quat_xyzw": None,
+            "timestamp": None
         }
         self.info = {
             "scene_id": "real_world",
@@ -75,6 +77,8 @@ class SensorDataManager:
             "robot_height": 0.72,
             "hfov_deg": 54.75,
         }
+
+        self.last_pose_timestamp = 0
         
         self.cv_bridge = CvBridge()
         self.lock = threading.Lock()
@@ -88,12 +92,17 @@ class SensorDataManager:
         # self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.2, max_vw=0.4, cruise_vel=0.5, Kp_x=0.5, Kp_w=0.5)
         self.planner = pl.Planner(max_vx=0.4, min_vx=-0.3, max_vy=0.1, max_vw=0.5, cruise_vel=0.4, Kp_x=0.5, Kp_w=0.5)
         self.distance = 5
+    
+    def _get_timestamp(self, msg):
+        return msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
+
     def rgb_callback(self, msg: CompressedImage):
         try:
             cv_img = self.cv_bridge.compressed_imgmsg_to_cv2(
                 msg, desired_encoding='bgr8')
             with self.lock:
                 self._latest_data["rgb"] = cv_img
+                self._latest_data["timestamp"] = self._get_timestamp(msg)
         except Exception as e:
             self.logger.error(f'RGB callback error: {e}')
 
@@ -118,10 +127,17 @@ class SensorDataManager:
             traceback.print_exc()
 
     def pose_callback(self, msg: PoseStamped):
-        print("pose callback")
         with self.lock:
+            if self._latest_data["timestamp"] is not None:
+                last_time_diff = self.last_pose_timestamp - self._latest_data["timestamp"]
+                curr_time_diff = self._get_timestamp(msg) - self._latest_data["timestamp"]
+                if abs(curr_time_diff)>abs(last_time_diff):
+                    # print(f"pose not aligned with rgb image (t={curr_time_diff}), skipping")
+                    return
+                # print(f"pose aligned with rgb image (t={curr_time_diff})")
             self._latest_data["position"] = [msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]
-            self._latest_data["quat_wxyz"] = [msg.pose.orientation.w, msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z]
+            self._latest_data["quat_xyzw"] = [msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w]
+            self.last_pose_timestamp = self._get_timestamp(msg)
         # self.logger.info('Received Pose', throttle_duration_sec=5)
         self.publish_planner_action()
     
@@ -133,7 +149,7 @@ class SensorDataManager:
 
         if self.useplanner:
             position = self._latest_data["position"]
-            o = self._latest_data["quat_wxyz"]
+            o = self._latest_data["quat_xyzw"]
             yaw = Rotation.from_quat([o[1],o[2],o[3],o[0]]).as_euler('zyx')[0]
             x,y,w = self.planner.step(position[0],position[1],yaw)
             if self.distance<collision_threshold:
@@ -246,9 +262,10 @@ def main(args=None):
             sensor_data["rgb"],
             sensor_data["depth"],
             sensor_data["position"],
-            sensor_data["quat_wxyz"],
+            sensor_data["quat_xyzw"],
             data_manager.info,
-            server_name="go1_server"
+            server_name="go1_server",
+            timestamp=sensor_data["timestamp"]
         )
     
     def action_callback(msg_type, message):
