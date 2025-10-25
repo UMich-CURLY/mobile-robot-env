@@ -1,4 +1,3 @@
-# python isaac_lab_server_spot_task_generation.py --enable_cameras --scene_folder /data/isaac_scenes_v1/
 # python isaac_lab_server_spot_task_generation.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --tg_config_path episodes/task_config.yaml --test_id test_generator
 
 import argparse
@@ -94,6 +93,8 @@ all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "Or
 env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
 print("[INFO] Env setup complete")
 navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+args.disable_socket_server = True
+print(f"[INFO] Socket server disabled in task generation")
 vln_sim = VLNSim(args, env)
 
 

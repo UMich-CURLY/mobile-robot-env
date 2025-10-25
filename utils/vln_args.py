@@ -6,6 +6,7 @@ def add_vln_args(parser):
     arg_group = parser.add_argument_group("VLN benchmark", description="Arguments for VLN benchmark.")
     arg_group.add_argument("--episode_folder", type=str, default="episodes", help="Path to the episodes folder.")
     arg_group.add_argument("--episode_id", type=str, default="test_generator_0", help="Test specific episode id.")
+    arg_group.add_argument("--test_id", type=str, default="test_generator", help="Scene id used for task generation.")
     arg_group.add_argument("--scene_folder", type=str, default=None, help="Path to the scene USD file.")
     arg_group.add_argument("--navmesh_path", type=str, default=None, help="Path to the navmesh file.")
     arg_group.add_argument("--disable_camera", type=bool, default=False, help="Disable camera.")
