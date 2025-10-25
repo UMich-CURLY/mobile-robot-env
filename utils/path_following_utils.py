@@ -65,44 +65,93 @@ def follow_waypoints(
     waypoints_world,
     current_wp_idx,
     max_vx=1.0,
-    max_vy=0.5,
+    max_vy=0.3,
     max_yaw_rate=1.0,
-    k_p_ang=1.5,
+    k_p_ang=2.0,
     arrive_dist=0.3,
     arrive_yaw=np.pi/180.0*60.0,
     term_dist=0.05,
-    term_yaw=np.pi/180.0*30.0
+    term_yaw=np.pi/180.0*30.0,
+    lookahead_distance=0.8,
+    min_lookahead=0.3
 ):
+    # Empty or invalid path
     if waypoints_world is None or len(waypoints_world) == 0:
         return torch.tensor([[0.0, 0.0, 0.0]], device=device, dtype=torch.float32), current_wp_idx
 
-    if current_wp_idx >= len(waypoints_world):
-        current_wp_idx = len(waypoints_world) - 1
-        last_wp = waypoints_world[-1]
-        waypoints_world.append([last_wp[0] + 1.0, last_wp[1], last_wp[2]])
+    num_wps = len(waypoints_world)
+    # Clamp current index to valid range (do not append/alter original path)
+    if current_wp_idx >= num_wps:
+        current_wp_idx = num_wps - 1
 
     base_xy, base_yaw = get_base_xy_yaw(manager_env)
-    wp = waypoints_world[current_wp_idx]
-    dx = wp[0] - base_xy[0]
-    dy = wp[1] - base_xy[1]
-    dist = math.hypot(dx, dy)
 
+    # 1) Find nearest forward waypoint to avoid going backwards
+    #    Only consider waypoints from current_wp_idx forward
+    dists = [
+        (i, math.hypot(waypoints_world[i][0] - base_xy[0], waypoints_world[i][1] - base_xy[1]))
+        for i in range(current_wp_idx, num_wps)
+    ]
+    nearest_idx, nearest_dist = min(dists, key=lambda t: t[1])
+    current_wp_idx = max(current_wp_idx, nearest_idx)
+
+    # 2) Choose a lookahead target a few meters ahead along the path
+    #    Use a simple rule: first waypoint at distance >= lookahead_distance from robot
+    Ld = max(min_lookahead, float(lookahead_distance))
+    target_idx = num_wps - 1
+    for i in range(current_wp_idx, num_wps):
+        di = math.hypot(waypoints_world[i][0] - base_xy[0], waypoints_world[i][1] - base_xy[1])
+        if di >= Ld:
+            target_idx = i
+            break
+
+    # For smoother approach, if we're on the final segment, adapt lookahead to remaining distance
+    final_wp = waypoints_world[-1]
+    dist_to_goal = math.hypot(final_wp[0] - base_xy[0], final_wp[1] - base_xy[1])
+    if dist_to_goal < Ld:
+        Ld = max(min_lookahead, dist_to_goal)
+
+    # If no waypoint satisfies the Ld condition and we are not at the end,
+    # try to pick a point between target_idx-1 and target_idx for continuity
+    # Otherwise, simply target the last waypoint
+    target_wp = waypoints_world[target_idx]
+
+    # 3) Compute control to the lookahead target in body frame (pure-pursuit style)
+    dx = target_wp[0] - base_xy[0]
+    dy = target_wp[1] - base_xy[1]
     desired_yaw = math.atan2(dy, dx)
     ang_err = wrap_to_pi(desired_yaw - base_yaw)
 
     ex_b, ey_b = world_to_body(dx, dy, base_yaw)
-    vx = np.clip(max_vx * ex_b, -max_vx, max_vx)
-    vy = np.clip(max_vy * ey_b, -max_vy, max_vy)
-    vw = np.clip(k_p_ang * ang_err, -max_yaw_rate, max_yaw_rate)
 
-    if current_wp_idx == len(waypoints_world) - 1:
-        arrive_dist = term_dist
-        arrive_yaw = term_yaw
+    # Linear velocities: proportional to lookahead vector, clipped by given maxima
+    vx = float(np.clip(ex_b, -max_vx, max_vx))
+    vy = float(np.clip(ey_b, -max_vy, max_vy))
 
-    if (dist < arrive_dist): #  and (abs(ang_err) < arrive_yaw)
+    # Angular velocity: proportional to heading error, clipped by given maxima
+    vw = float(np.clip(k_p_ang * ang_err, -max_yaw_rate, max_yaw_rate))
+
+    # 4) Near-goal handling to avoid singularity and oscillation
+    is_final_segment = (current_wp_idx >= num_wps - 2)
+    if is_final_segment:
+        # Tighten arrival checks on the last segment
+        arrive_dist_eff = term_dist
+        arrive_yaw_eff = term_yaw
+    else:
+        arrive_dist_eff = arrive_dist
+        arrive_yaw_eff = arrive_yaw
+
+    # If we are very close to the final goal, command a gentle stop
+    if dist_to_goal < term_dist and abs(ang_err) < arrive_yaw_eff:
+        vx, vy, vw = 0.0, 0.0, 0.0
+        current_wp_idx = num_wps - 1
+
+    # 5) Waypoint progression: progress when near the current waypoint (not only at final)
+    wp_now = waypoints_world[current_wp_idx]
+    d_now = math.hypot(wp_now[0] - base_xy[0], wp_now[1] - base_xy[1])
+    if d_now < arrive_dist_eff and current_wp_idx < num_wps - 1:
         current_wp_idx += 1
-        print(f"[PLAN] Reached waypoint {current_wp_idx}/{len(waypoints_world)}")
+        print(f"[PLAN] Reached waypoint {current_wp_idx}/{num_wps}")
 
     command = torch.tensor([[vx, vy, vw]], device=device, dtype=torch.float32)
-
     return command, current_wp_idx
