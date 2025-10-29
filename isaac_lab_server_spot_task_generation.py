@@ -35,10 +35,10 @@ simulation_app = app_launcher.app
 
 import carb, os
 settings = carb.settings.get_settings()
-# settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
-# settings.set("/rtx/reflections/enabled", True)
-# settings.set("/rtx/translucency/enabled", True)
-# settings.set("/rtx-flags/ecoMode/enabled", True)
+settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
+settings.set("/rtx/reflections/enabled", True)
+settings.set("/rtx/translucency/enabled", True)
+settings.set("/rtx-flags/ecoMode/enabled", True)
 
 
 

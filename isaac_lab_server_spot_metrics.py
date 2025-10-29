@@ -31,6 +31,9 @@ settings = carb.settings.get_settings()
 settings.set("/renderer/multiGPU/enabled", False)
 settings.set("/renderer/activeGpu", 0)
 settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
+settings.set("/rtx/reflections/enabled", True)
+settings.set("/rtx/translucency/enabled", True)
+settings.set("/rtx-flags/ecoMode/enabled", True)
 
 # Isaac Lab Import
 from isaaclab.envs import ManagerBasedRLEnv
