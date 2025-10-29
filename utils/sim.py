@@ -8,6 +8,7 @@ from omni.kit.viewport.utility import get_viewport_from_window_name
 from utils.path_following_utils import follow_waypoints
 from scipy.spatial.transform import Rotation as R
 from utils.vis import visualize_curve, visualize_points
+import time
 
 class VLNSim:
     def __init__(self, args, env):
@@ -22,6 +23,7 @@ class VLNSim:
             "depth": None,
             "position": None,
             "quat_xyzw": None,
+            "timestamp": None,
             "info": {}
         }
 
@@ -73,7 +75,8 @@ class VLNSim:
             self._latest_data["depth"],
             self._latest_data["position"],
             self._latest_data["quat_xyzw"],
-            self._latest_data["info"]
+            self._latest_data["info"],
+            self._latest_data["timestamp"]
         )
 
     def planner_callback(self):
@@ -145,6 +148,7 @@ class VLNSim:
                 depth = np.clip(depth, 0, 65535).astype(np.uint16)
                 self._latest_data["depth"] = depth
                 self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
+                self._latest_data["timestamp"] = time.time_ns()
                 self._latest_data["info"] = {
                     "scene_id": current_episode["scene_id"],
                     "episode_id": current_episode["episode_id"],
