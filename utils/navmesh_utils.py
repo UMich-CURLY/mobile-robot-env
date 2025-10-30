@@ -96,6 +96,7 @@ def get_mesh(objs):
         f, p = meshconvert(obj)#usd_stage.GetPrimAtPath(obj))
         p = np.array(p)
         f = np.array(f)
+<<<<<<< HEAD
 
         if len(p) == 0:
             continue
@@ -106,10 +107,16 @@ def get_mesh(objs):
         if p.max()>1000 or p.min()<-1000:
             print(f"[WARNING]: Remote mesh found: {obj.GetPath()}, Max: {p.max()}, Min: {p.min()}")
 
+=======
+        if np.any(np.isnan(p)):
+            print("points: ", p)
+            print("faces: ", f)
+        else:
+>>>>>>> virtual_community
         # print("points shape: ", p.shape)  n x 3
         # print("faces shape: ", f.shape)   n x 3
-        points.extend(p)
-        faces.extend(f + f_offset)
+            points.extend(p)
+            faces.extend(f + f_offset)
   
     return points, faces
 
@@ -147,6 +154,13 @@ def meshconvert(prim):
 
     # Transform all vertices to world space using matrix multiplication
     world_points = np.dot(points_np, matrix_np)
+    if np.any(np.isnan(world_points)):
+        print("world_points: ", world_points)
+        print("world_points shape: ", world_points.shape)
+        print("points_np: ", points_np)
+        print("matrix_np: ", matrix_np)
+        print("prim path: ", prim.GetPath())
+        print("prim: ", prim)
 
     tri_list = convert_to_triangle_mesh(tris, tris_cnt)
     # tri_list = tri_list.flatten()
@@ -255,13 +269,13 @@ class NavmeshInterface:
         self.input_vert = self._convert_up_axis(self.input_vert)
 
         verts_flat = []
-        for vertex in self.input_vert:
+        for vertex in tqdm(self.input_vert,desc="Loading vertices"):
             verts_flat.extend(vertex)
         # Convert faces to the format expected by init_by_raw
         # The example shows faces as [3, v0, v1, v2, 3, v0, v1, v2, ...]
         # where 3 indicates triangle (3 vertices per face)
         faces_flat = []
-        for face in self.input_tri:
+        for face in tqdm(self.input_tri,desc="Loading faces"):
             # cur_faces_flat = np.hstack([np.full((len(face), 1), 3), face]).flatten().tolist()
             cur_faces_flat = np.concatenate([[3], face]).tolist()
             # print("`cur_faces_flat: ", cur_faces_flat)
@@ -276,6 +290,7 @@ class NavmeshInterface:
         self.nm.set_settings(self.settings)
         # Try watershed (0); if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)
+        print("[INFO]: Building navmesh, will take a while, please wait.")
         self.nm.build_navmesh()
         v, t, = self.get_navmesh_polygons()
         print(f'v shape: {v.shape}')
@@ -325,9 +340,29 @@ class NavmeshInterface:
         
         self.navmesh_v = np.array(trivert, dtype=np.float32)
         self.navmesh_t = np.array(t, dtype=np.int32)
-
+        print(f'navmesh_v shape: {self.navmesh_v.shape}')
+        print(f'navmesh_t shape: {self.navmesh_t.shape}')
+        print(f'navmesh_v: {self.navmesh_v[0]}')
+        print(f'navmesh_t: {self.navmesh_t[0]}')
         self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
+        print(f'navmesh_v: {self.navmesh_v[0]}')
+        # [Disabled] Previously removed vertices with z>10 and remapped triangles
+        # mask = self.navmesh_v[:, 2] <= 10
+        # if not np.all(mask):
+        #     old_to_new = -np.ones(self.navmesh_v.shape[0], dtype=np.int32)
+        #     old_to_new[mask] = np.arange(np.sum(mask), dtype=np.int32)
+        #     valid_tris_mask = np.all(mask[self.navmesh_t], axis=1)
+        #     self.navmesh_t = self.navmesh_t[valid_tris_mask]
+        #     self.navmesh_t = old_to_new[self.navmesh_t]
+        #     self.navmesh_v = self.navmesh_v[mask]
+        #     print(f"[INFO]: Filtered navmesh vertices by z<=10, v={self.navmesh_v.shape}, t={self.navmesh_t.shape}")
 
+        # Clamp z to 10 for any vertex with z >= 10
+        over_mask = self.navmesh_v[:, 2] >= 10
+        if np.any(over_mask):
+            self.navmesh_v[over_mask, 2] = 10
+            print(f"[INFO]: Clamped {np.sum(over_mask)} navmesh vertices' z to 10")
+        
         self.built = self.navmesh_v.shape[0] > 0
         return self.navmesh_v, self.navmesh_t
     
