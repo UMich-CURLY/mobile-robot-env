@@ -82,7 +82,7 @@ def get_all_stage_mesh(stage, prims, exclude_paths=[]):
                 continue
             if x.IsA(UsdGeom.Mesh):
                 found_meshes.append(x)
-    # print("Length of found meshes: ", len(found_meshes))
+    print("Length of found meshes: ", len(found_meshes))
     points, faces = get_mesh(found_meshes)
    
     return points, faces
