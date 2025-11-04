@@ -1,6 +1,11 @@
 import omni
 from pxr import Sdf, UsdGeom, Gf, UsdShade, Vt, Usd
 import numpy as np
+from isaaclab.markers import VisualizationMarkers, VisualizationMarkersCfg
+import isaaclab.sim as sim_utils
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
+from scipy.spatial.transform import Rotation as R
+import isaacsim.core.utils.prims as prim_utils
 
 def visualize_points(nodes, prim_path="/World/Points", color=(0.0, 1.0, 1.0), width=2.0):
     '''Create and draw a Points on the stage following the nodes'''
@@ -9,6 +14,32 @@ def visualize_points(nodes, prim_path="/World/Points", color=(0.0, 1.0, 1.0), wi
     prim.CreatePointsAttr(nodes)
     prim.CreateWidthsAttr(np.array([width], dtype=float))
     prim.CreateDisplayColorAttr([color])
+
+def visualize_arrow(nodes, robot_height, prim_path="/World/Arrow", color=(1, 0, 0), scale=(1.0, 0.5, 0.5)):
+    '''Create and draw an Arrow on the stage following the nodes'''
+    # create a xform, remove old xform if it exists
+    stage = omni.usd.get_context().get_stage()
+    xform = UsdGeom.Xform.Define(stage, prim_path)
+    prim_list = prim_utils.find_matching_prim_paths(prim_path+"/arrow*")
+    for prim_path in prim_list:
+        prim_utils.delete_prim(prim_path)
+    cfg = VisualizationMarkersCfg(
+        prim_path=prim_path+"/arrow1",
+        markers={
+            "arrow_2": sim_utils.UsdFileCfg(
+                usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/arrow_x.usd",
+                scale=scale,
+                visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=color),
+            )
+        }
+    )
+    markers = VisualizationMarkers(cfg)
+    print("nodes:", nodes)
+    nodes = np.array(nodes)
+    marker_locations = np.concatenate([nodes[:, :2], np.ones((len(nodes), 1))*robot_height], axis=1)
+    marker_orientations = R.from_euler('z', nodes[:, 2]).as_quat()
+    marker_orientations = np.concatenate([marker_orientations[:, 3:4], marker_orientations[:, :3]], axis=1)
+    markers.visualize(marker_locations, marker_orientations)
 
 def visualize_curve(path, prim_path="/World/Path", color=(1, 0, 0), width=1.0 ):
     '''Create and draw a BasisCurve on the stage following the nodes'''

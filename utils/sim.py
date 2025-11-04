@@ -7,7 +7,7 @@ import omni
 from omni.kit.viewport.utility import get_viewport_from_window_name
 from utils.path_following_utils import follow_waypoints
 from scipy.spatial.transform import Rotation as R
-from utils.vis import visualize_curve, visualize_points
+from utils.vis import visualize_curve, visualize_points, visualize_arrow
 import time
 
 class VLNSim:
@@ -53,10 +53,7 @@ class VLNSim:
             self.commands[self.robot_index] = torch.tensor([float(vx), float(vy), float(vw)], device=self.device)
             self.commands_source = 'server_vel'
         elif msg_type == 'WAYPOINT':
-            x_list, y_list = message["x_list"], message["y_list"]
-            waypoints = []
-            for x, y in zip(x_list, y_list):
-                waypoints.append([float(x), float(y), 0.0])
+            waypoints = message["waypoint"]
             self.set_waypoints(waypoints)
             self.commands_source = 'server_waypoint'
         elif msg_type == 'STOP':
@@ -105,12 +102,9 @@ class VLNSim:
         server_thread.start()
         print("[INFO] Socket server started")
     
-    def set_waypoints(self, waypoints, visualize=False):
+    def set_waypoints(self, waypoints):
         self.waypoints = waypoints
         self.waypoints_idx = 0
-        if visualize:
-            visualize_curve(waypoints)
-            visualize_points(waypoints[-1], prim_path="/World/Target", color=(0.0, 1.0, 0.0))
 
     def clear_waypoints(self):
         self.waypoints = None
@@ -164,7 +158,14 @@ class VLNSim:
                 traceback.print_exc()
         # update waypoints
         if self.waypoints is not None and len(self.waypoints) > 0:
-            self.commands[self.robot_index], self.waypoints_idx = follow_waypoints(self.manager_env, self.device, self.waypoints, self.waypoints_idx)
+            cam_pos, cam_quat = self.get_cam_pose()
+            self.commands[self.robot_index], self.waypoints_idx = follow_waypoints(cam_pos, cam_quat, self.device, self.waypoints, self.waypoints_idx)
+            visualize_waypoints = False
+            if visualize_waypoints:
+                cam_height = cam_pos[2]
+                points = [cam_pos]+[[wp[0], wp[1], cam_height] for wp in self.waypoints]
+                visualize_curve(points, prim_path="/World/WaypointPath", width=0.02)
+                visualize_arrow(self.waypoints, cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
 
     def set_up_keyboard(self):
         """Sets up interface for keyboard input and registers the desired keys for control."""

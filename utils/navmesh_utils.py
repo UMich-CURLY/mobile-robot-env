@@ -6,6 +6,7 @@ import PyRecastDetour as pyrecast
 
 from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt, UsdUtils
 from isaaclab.sim.utils import export_prim_to_file
+from utils.vis import visualize_mesh
 # Import usd_utils functionality
 
 def traverse_instanced_children(prim):
@@ -291,7 +292,7 @@ class NavmeshInterface:
             # create a usd color of blue with transparency
             color = Gf.Vec3f(0.051208995, 0.774935, 0.94585985)
             opacity = 0.89
-            create_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
+            visualize_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
             print("[INFO]: Visualized navmesh")
         else:
             print('[WARNING]: Navmesh not built') 
