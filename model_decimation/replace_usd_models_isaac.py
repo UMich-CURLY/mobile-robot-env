@@ -1,7 +1,6 @@
-# python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py --input_folder "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/"
-
 ## Author: Po-Hsun Chang
 ## Contact: pohsun@umich.edu
+## Usage: python /home/junzhewu/pohsun/SG-VLN/robot_env/model_decimation/replace_usd_models_isaac.py --input_folder "/home/junzhewu/pohsun/data_decimated/grscenes_commercial/models/"
 
 import os
 import sys
