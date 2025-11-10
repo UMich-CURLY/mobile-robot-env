@@ -10,8 +10,7 @@ import torch
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
-    env_cfg.scene.robot.init_state.pos = episode["start_position"]
-    env_cfg.scene.robot.init_state.rot = episode["start_rotation"]
+    set_robot_pose(env_cfg, episode)
     
 def load_scene(env_cfg, args, episode):
     scene_path = episode["path"]
@@ -20,6 +19,22 @@ def load_scene(env_cfg, args, episode):
         env_cfg.load_generator()
     else:
         env_cfg.load_usd(str(Path(args.scene_folder) / scene_path))
+
+def set_robot_pose(env_cfg, episode, robot=None):
+    pos = list(episode["start_position"])
+    pos[2] += 0.6
+    rot = list(episode["start_rotation"])
+    env_cfg.scene.robot.init_state.pos = pos
+    env_cfg.scene.robot.init_state.rot = rot
+    if robot is not None:
+        robot_root_state = robot.data.default_root_state.clone()
+        robot_root_state[:, 0:3] = torch.tensor(pos, device=robot.device)
+        robot_root_state[:, 3:7] = torch.tensor(rot, device=robot.device)
+        robot.data.default_root_state = robot_root_state
+        robot.write_root_state_to_sim(robot_root_state)
+        robot.reset()
+        robot.write_data_to_sim()
+
 
 class VLNEnvWrapper:
     """Wrapper to configure an :class:`RslRlVecEnvWrapper` instance to VLN environment."""
@@ -33,7 +48,10 @@ class VLNEnvWrapper:
         self.scene = self.manager_env.scene
         self.robot_name = robot_name
         self.measure_names = measure_names
+        self.first_init = True
         self.usd_path = None
+        self.scene_scale = None
+        self.scene_setting = None
         self.args = args
 
         self.env_step = 0
@@ -88,9 +106,22 @@ class VLNEnvWrapper:
         else:
             if self.episode is None:
                 raise ValueError("Episode is not set")
+        # access episode settings
+        collider = self.episode.get("collider", True)
+        scene_scale = self.episode.get("scene_scale", 1.0)
+        align_ground = self.episode.get("align_ground", True)
+        scene_settings = {
+            "scale": scene_scale,
+            "align_ground": align_ground,
+            "collider": collider,
+        }
 
         # load scene
-        if self.usd_path is not None and self.usd_path != self.episode["path"]:
+        scene_changed = self.usd_path != self.episode["path"]
+        settings_changed = (self.scene_setting is None) or (self.scene_setting != scene_settings)
+
+        # do not update scene if it is the first init
+        if not self.first_init and (scene_changed or settings_changed):
             # remove previous scene
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
@@ -106,47 +137,43 @@ class VLNEnvWrapper:
             self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
             if self.episode["path"] == "generator":
                 self.scene.terrain.terrain_prim_paths.append("/World/ground/terrain")
+            # check if skylight exists in scene
+            disable_default_light = False
+            prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
+            for prim in prim_list:
+                from_usd = str(prim.GetPath()).startswith("/World/ground/terrain")
+                is_domelight = prim.GetTypeName() == "DomeLight"
+                if from_usd and is_domelight:
+                    disable_default_light = True
+                    break
+            dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
+            dome_light.SetActive(not disable_default_light)
+
+        # apply scene settings
+        if scene_changed or settings_changed:
+            terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
+            if collider:
+                collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
+                sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
+            terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
+            if align_ground:
+                bb_cache = bounds_utils.create_bbox_cache()
+                min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[terrain_prim.GetPrimPath()])
+                print(f"Bounding box: min_x: {min_x}, min_y: {min_y}, min_z: {min_z}, max_x: {max_x}, max_y: {max_y}, max_z: {max_z}")
+                terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
+        self.scene_setting = scene_settings
         self.usd_path = self.episode["path"]
 
-        # check if skylight exists in scene
-        disable_default_light = False
-        prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
-        for prim in prim_list:
-            from_usd = str(prim.GetPath()).startswith("/World/ground/terrain")
-            is_domelight = prim.GetTypeName() == "DomeLight"
-            if from_usd and is_domelight:
-                disable_default_light = True
-                break
-        dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
-        dome_light.SetActive(not disable_default_light)
+        # reset robot position
+        robot = self.scene["robot"]
+        set_robot_pose(self.manager_env.cfg, episode, robot)
 
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
         self.set_stop_called(False)
 
-        # reset robot position
-        robot_root_state = self.scene["robot"].data.default_root_state.clone()
-        robot_root_state[:, 0:3] = torch.tensor(episode["start_position"], device=self.args.device)
-        robot_root_state[:, 3:7] = torch.tensor(episode["start_rotation"], device=self.args.device)
-        robot_root_state[:, 2] += 0.6
-        self.manager_env.scene["robot"].write_root_state_to_sim(robot_root_state)
-
-        # set collider and scene scale
-        terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
-        if self.episode.get("collider", True):
-            collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
-            sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
-        scene_scale = self.episode.get("scene_scale", 1.0)
-        # if scene_scale != 1.0:
-        terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
-        if self.episode.get("align_ground", True):
-            bb_cache = bounds_utils.create_bbox_cache()
-            min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[terrain_prim.GetPrimPath()])
-            print(f"Bounding box: min_x: {min_x}, min_y: {min_y}, min_z: {min_z}, max_x: {max_x}, max_y: {max_y}, max_z: {max_z}")
-            terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
         # warmup_steps = 50
-
         # for i in range(warmup_steps):
         #     if i % 10 == 0 or i == warmup_steps - 1:
         #         print(f"Warmup step {i}/{warmup_steps}...")
@@ -157,15 +184,16 @@ class VLNEnvWrapper:
         #     self.low_level_obs = low_level_obs
         #     self.low_level_action = actions
 
-        self.env_step, self.same_pos_count = 0, 0
+        self.env_step = 0
+        self.same_pos_count = 0
 
-        self.measure_manager = add_measurement(self.env, self.episode, self.measure_names)
-
+        self.measure_manager = add_measurement(self, self.episode, self.measure_names)
         self.measure_manager.reset_measures()
         measurements = self.measure_manager.get_measurements()
         infos["measurements"] = measurements
 
         self.prev_pos = self.scene["robot"].data.root_pos_w[0].detach()
+        self.first_init = False
 
         # log
         if not self.args.disable_camera:
@@ -229,16 +257,15 @@ class VLNEnvWrapper:
             self.same_pos_count = 0
         self.prev_pos = curr_pos
 
-        # Break out of the loop if the robot has stayed in the same location for 1000 steps
+        # if the robot has stayed in the same location for 1000 steps
         if self.same_pos_count >= 1000:
-            print("Robot has stayed in the same location for 1000 steps. Breaking out of the loop.")
-            return True
+            print("Robot has stayed in the same location for 1000 steps.")
         
         return False
 
     def set_stop_called(self, is_stop_called: bool) -> None:
         """Set the stop called flag."""
-        self.env.is_stop_called = is_stop_called
+        self.is_stop_called = is_stop_called
     
     def close(self) -> None:
         self.env.close()
