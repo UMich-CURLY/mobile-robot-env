@@ -126,7 +126,7 @@ class TaskGenerator:
         else:
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []))
+            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), scene_type=self.scene_config.get("scene_type"))
             navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")

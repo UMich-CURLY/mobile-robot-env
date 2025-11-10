@@ -32,8 +32,8 @@ navmesh:
     agent_max_climb: 0.1
     agent_max_slope: 30.0
     agent_radius: 0.3
-    cell_height: 1.5
-    cell_size: 2.0
+    cell_height: 1.0
+    cell_size: 1.5
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
     edge_max_error: 0.0
@@ -175,13 +175,13 @@ scene:
         rule_pattern: name
       austin:
         episode_number: 30
-        goal_rules: &id003
+        goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
           street_lamp: Street_.*
           traffic_light: .*traffic_light.*
           tree: .*Tree.*
-        navmesh_exclude: &id004 []
+        navmesh_exclude: []
         navmesh_preset: vc
         path: virtual_community/AUSTIN/AUSTIN_with_road_objects_modified.usd
         rule_pattern: name
@@ -218,8 +218,13 @@ scene:
         rule_pattern: name
       ny:
         episode_number: 30
-        goal_rules: *id003
-        navmesh_exclude: *id004
+        goal_rules:
+          city_bench: .*Bench.*
+          sign: .*sign.*
+          street_lamp: Street_.*
+          traffic_light: .*traffic_light.*
+          tree: .*Tree.*
+        navmesh_exclude: []
         navmesh_preset: vc
         path: virtual_community/NY/NY_with_road_objects_modified.usd
         rule_pattern: name
