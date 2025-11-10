@@ -84,7 +84,8 @@ def get_all_stage_mesh(stage, prims, exclude_paths=[]):
                 found_meshes.append(x)
     print("Length of found meshes: ", len(found_meshes))
     points, faces = get_mesh(found_meshes)
-   
+    # print("points",points)
+    # print("faces",faces)
     return points, faces
 
 def get_mesh(objs):
@@ -96,7 +97,6 @@ def get_mesh(objs):
         f, p = meshconvert(obj)#usd_stage.GetPrimAtPath(obj))
         p = np.array(p)
         f = np.array(f)
-<<<<<<< HEAD
 
         if len(p) == 0:
             continue
@@ -107,17 +107,12 @@ def get_mesh(objs):
         if p.max()>1000 or p.min()<-1000:
             print(f"[WARNING]: Remote mesh found: {obj.GetPath()}, Max: {p.max()}, Min: {p.min()}")
 
-=======
-        if np.any(np.isnan(p)):
-            print("points: ", p)
-            print("faces: ", f)
-        else:
->>>>>>> virtual_community
         # print("points shape: ", p.shape)  n x 3
         # print("faces shape: ", f.shape)   n x 3
-            points.extend(p)
-            faces.extend(f + f_offset)
-  
+        points.extend(p)
+        faces.extend(f + f_offset)
+    print("points",len(points))
+    print("faces",len(faces))
     return points, faces
 
 def meshconvert(prim):
@@ -256,7 +251,7 @@ class NavmeshInterface:
             return False
         return True
 
-    def setup_navmesh(self, selected_paths, exclude_paths):
+    def setup_navmesh(self, selected_paths, exclude_paths, scene_type=None):
         self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
         self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim, exclude_paths=exclude_paths)
         if len(self.input_vert) == 0:
@@ -267,6 +262,35 @@ class NavmeshInterface:
         if np.any(np.isnan(self.input_vert)):
             print("[WARNING]: NaNs found in input vertices")
         self.input_vert = self._convert_up_axis(self.input_vert)
+
+        # Constrain vertices with z > 10 to z = 10 (only for vc scenes)
+        # Note: after _convert_up_axis, z is the third component (index 2)
+        print(f"[INFO]: scene_type: {scene_type}")
+        if scene_type == 'vc':
+            z_mask = self.input_vert[:, 2] > 10
+            if np.any(z_mask):
+                num_constrained = np.sum(z_mask)
+                self.input_vert[z_mask, 2] = 10
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 10 to z = 10")
+            
+            # Filter out invalid faces (degenerate triangles with zero area or collapsed vertices)
+            # A triangle is invalid if all three vertices are the same or if the triangle has zero area
+            valid_faces = []
+            for face in tqdm(self.input_tri, desc="Filtering faces"):
+                v0, v1, v2 = self.input_vert[face[0]], self.input_vert[face[1]], self.input_vert[face[2]]
+                # Check if triangle is degenerate (zero area or all vertices same)
+                edge1 = v1 - v0
+                edge2 = v2 - v0
+                cross_product = np.cross(edge1, edge2)
+                triangle_area = 0.5 * np.linalg.norm(cross_product)
+                # Keep triangle if area is greater than a small threshold (1e-6)
+                if triangle_area > 1e-6:
+                    valid_faces.append(face)
+            
+            if len(valid_faces) < len(self.input_tri):
+                num_removed = len(self.input_tri) - len(valid_faces)
+                print(f"[INFO]: Removed {num_removed} degenerate faces after z constraint")
+                self.input_tri = valid_faces
 
         verts_flat = []
         for vertex in tqdm(self.input_vert,desc="Loading vertices"):

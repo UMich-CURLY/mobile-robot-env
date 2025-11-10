@@ -5,6 +5,7 @@ import json
 import torch
 from pathlib import Path
 import time
+import random
 
 # start simulation
 from isaaclab.app import AppLauncher
@@ -160,6 +161,7 @@ with ui_elements["main_stack"]:
         ui_utils.btn_builder("Teleport Robot", text="Teleport", on_clicked_fn=lambda: teleport_robot())
         ui_utils.btn_builder("Generate Cube", text="Generate", on_clicked_fn=lambda: generate_cube())
         ui_utils.btn_builder("Clear Visualization", text="Clear", on_clicked_fn=lambda: clear_visualization())
+        ui_utils.btn_builder("Get Information", text="Info", on_clicked_fn=lambda: get_information())
     with ui_window.create_frame("Episode Settings"):
         # ui_elements["scene_type"] = ui_utils.str_builder("Scene Type", default_val=current_episode["scene_type"])
         # episode number
@@ -243,7 +245,7 @@ def build_navmesh():
     save_settings("navmesh_runtime")
     selected_paths = ["/World/ground/terrain"]
     start_time = time.time()
-    navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []))
+    navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), scene_type=scene_config.get("scene_type"))
     navmesh_interface.build_navmesh()
     end_time = time.time()
     print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
@@ -316,6 +318,102 @@ def generate_episodes():
     print(task_generator.scene_config)
     save_episodes(episodes, f"episodes/{current_episode['scene_id']}.json")
 
+def get_information():
+    # Get current robot world pose
+    pos = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy()
+    x, y, z = float(pos[0]), float(pos[1]), float(pos[2])
+    print(f"[INFO] Scene type: {scene_config['scene_type']}")
+
+    # Build base directory by combining scene_folder and path (drop filename)
+    json_path = str(scene_folder / os.path.dirname(scene_config["path"])) if isinstance(scene_config.get("path"), str) else str(scene_folder)
+    print(f"[INFO] JSON path: {json_path}")
+    try:
+        from utils.vc_location_info_utils import CityDataReader
+        reader = CityDataReader(json_path)
+    except Exception as e:
+        print(f"[ERROR] Failed to init CityDataReader: {e}")
+        return
+
+    # Query nearest road and nearby interesting points
+    nearest_road = reader.get_nearest_road(x, y)
+    nearby_points = reader.get_points_in_radius(x, y, radius=200.0)
+
+    print("[INFO] Current Position:", {"x": x, "y": y, "z": z})
+    if nearest_road:
+        rn = nearest_road.get("name", "unknown")
+        rt = nearest_road.get("type", "unknown")
+        dist = nearest_road.get("distance_to_road", None)
+        cp = nearest_road.get("closest_point_on_road", None)
+        print(f"[INFO] Nearest road: name={rn}, type={rt}, distance={dist:.2f}m" if dist is not None else f"[INFO] Nearest road: name={rn}, type={rt}")
+        if cp is not None:
+            print(f"[INFO] Closest point on road: ({cp[0]:.2f}, {cp[1]:.2f})")
+    else:
+        print("[INFO] No nearby road found")
+
+    print(f"[INFO] Nearby points within 200m: {len(nearby_points)}")
+    for p in nearby_points[:5]:
+        name = p.get("name", "-")
+        ptype = p.get("type", "-")
+        cat = p.get("category", "-")
+        d = p.get("distance_from_center", None)
+        if d is not None:
+            print(f"  - {name} ({ptype}/{cat}), {d:.1f}m")
+        else:
+            print(f"  - {name} ({ptype}/{cat})")
+    
+    # --- Sample one episode and aggregate road/POI names along its trajectory ---
+    episodes_file = f"episodes/{current_episode['scene_id']}.json"
+    if not os.path.exists(episodes_file):
+        print(f"[INFO] Episodes file not found: {episodes_file}; skipping trajectory info aggregation")
+        return
+    
+    try:
+        with open(episodes_file, 'r') as f:
+            episodes = json.load(f)
+    except Exception as e:
+        print(f"[ERROR] Failed to load episodes from {episodes_file}: {e}")
+        return
+    
+    if not episodes:
+        print("[INFO] No episodes in file; skipping trajectory info aggregation")
+        return
+
+    # Pick a random episode
+    sampled_episode = random.choice(episodes)
+    # Collect all reference path points from all goals
+    trajectory_points = []
+    for g in sampled_episode.get("goals", []):
+        ref_path = g.get("reference_path", [])
+        if isinstance(ref_path, list):
+            trajectory_points.extend(ref_path)
+
+    if not trajectory_points:
+        print("[INFO] Sampled episode has no reference_path; skipping info aggregation")
+        return
+
+    road_names = set()
+    poi_names = set()
+
+    for p in trajectory_points:
+        if not (isinstance(p, (list, tuple)) and len(p) >= 2):
+            continue
+        px, py = float(p[0]), float(p[1])
+        # nearest road
+        nearest_road = reader.get_nearest_road(px, py)
+        if nearest_road:
+            rn = nearest_road.get("name")
+            if rn:
+                road_names.add(rn)
+        # nearby POIs within 200m
+        nearby_points = reader.get_points_in_radius(px, py, radius=200.0)
+        for poi in nearby_points or []:
+            name = poi.get("name")
+            if name:
+                poi_names.add(name)
+
+    print(f"[INFO] Sampled episode id: {sampled_episode.get('episode_id')}")
+    print(f"[INFO] Roads along trajectory ({len(road_names)}): {sorted(road_names)}")
+    print(f"[INFO] POIs along trajectory ({len(poi_names)}): {sorted(poi_names)}")
 update_ui("scene_id", current_episode["scene_id"])
 
 sim_init = False

@@ -32,8 +32,8 @@ navmesh:
     agent_max_climb: 0.1
     agent_max_slope: 30.0
     agent_radius: 0.3
-    cell_height: 1.5
-    cell_size: 2.0
+    cell_height: 1.0
+    cell_size: 1.5
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
     edge_max_error: 0.0
@@ -68,15 +68,70 @@ scene:
     align_ground: true
     collider: true
     episodes:
+      apartment:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          light_switch: Lighting_Devices.*
+          mailbox: MailboxType.*
+          stair: Stairs_411731_0411731_35336
+          stove: .*Stove.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/sky_CloudySky/AxisNorth/SkySphere/Sphere
+        navmesh_preset: default
+        path: nvidia/park/apartment_flatten_edit.usd
+        rule_pattern: name
+      city1:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude: []
+        navmesh_preset: outdoor
+        path: nvidia/city1/city1_flatten_edit.usd
+        rule_pattern: name
+      city2:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/Ground/HorizonRT
+        - /World/ground/terrain/Ground/HorizonRT_01
+        navmesh_preset: outdoor
+        path: nvidia/city2/city2_flatten_edit.usd
+        rule_pattern: name
       parkmorning:
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
           park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
         navmesh_exclude: []
         navmesh_preset: outdoor
-        path: nvidia/park/park_morning_edit.usd
+        path: nvidia/park/park_morning_flatten_edit.usd
+        rule_pattern: name
+      parknight:
+        episode_number: 30
+        goal_rules:
+          hydrant: Hydrant_.*
+          mailbox: MailboxType.*
+          park_bench: ParkBench.*
+          trash_bin: OutdoorTrash.*
+          trash_can: TrashCan.*
+        navmesh_exclude:
+        - /World/ground/terrain/sky_NightSky/AxisNorth/SkySphere/Sphere
+        navmesh_preset: outdoor
+        path: nvidia/park/park_night_flatten_edit.usd
         rule_pattern: name
       parktest:
         episode_number: 30
@@ -88,7 +143,7 @@ scene:
         navmesh_preset: outdoor
         path: nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
         rule_pattern: name
-    scene_scale: 0.009999999776482582
+    scene_scale: 0.01
   test:
     align_ground: true
     collider: true
@@ -120,13 +175,13 @@ scene:
         rule_pattern: name
       austin:
         episode_number: 30
-        goal_rules: &id003
+        goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
           street_lamp: Street_.*
           traffic_light: .*traffic_light.*
           tree: .*Tree.*
-        navmesh_exclude: &id004 []
+        navmesh_exclude: []
         navmesh_preset: vc
         path: virtual_community/AUSTIN/AUSTIN_with_road_objects_modified.usd
         rule_pattern: name
@@ -163,8 +218,13 @@ scene:
         rule_pattern: name
       ny:
         episode_number: 30
-        goal_rules: *id003
-        navmesh_exclude: *id004
+        goal_rules:
+          city_bench: .*Bench.*
+          sign: .*sign.*
+          street_lamp: Street_.*
+          traffic_light: .*traffic_light.*
+          tree: .*Tree.*
+        navmesh_exclude: []
         navmesh_preset: vc
         path: virtual_community/NY/NY_with_road_objects_modified.usd
         rule_pattern: name
