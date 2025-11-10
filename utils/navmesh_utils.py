@@ -364,28 +364,11 @@ class NavmeshInterface:
         
         self.navmesh_v = np.array(trivert, dtype=np.float32)
         self.navmesh_t = np.array(t, dtype=np.int32)
-        print(f'navmesh_v shape: {self.navmesh_v.shape}')
-        print(f'navmesh_t shape: {self.navmesh_t.shape}')
-        print(f'navmesh_v: {self.navmesh_v[0]}')
-        print(f'navmesh_t: {self.navmesh_t[0]}')
+        # print(f'navmesh_v shape: {self.navmesh_v.shape}')
+        # print(f'navmesh_t shape: {self.navmesh_t.shape}')
+        # print(f'navmesh_v: {self.navmesh_v[0]}')
+        # print(f'navmesh_t: {self.navmesh_t[0]}')
         self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
-        print(f'navmesh_v: {self.navmesh_v[0]}')
-        # [Disabled] Previously removed vertices with z>10 and remapped triangles
-        # mask = self.navmesh_v[:, 2] <= 10
-        # if not np.all(mask):
-        #     old_to_new = -np.ones(self.navmesh_v.shape[0], dtype=np.int32)
-        #     old_to_new[mask] = np.arange(np.sum(mask), dtype=np.int32)
-        #     valid_tris_mask = np.all(mask[self.navmesh_t], axis=1)
-        #     self.navmesh_t = self.navmesh_t[valid_tris_mask]
-        #     self.navmesh_t = old_to_new[self.navmesh_t]
-        #     self.navmesh_v = self.navmesh_v[mask]
-        #     print(f"[INFO]: Filtered navmesh vertices by z<=10, v={self.navmesh_v.shape}, t={self.navmesh_t.shape}")
-
-        # Clamp z to 10 for any vertex with z >= 10
-        over_mask = self.navmesh_v[:, 2] >= 10
-        if np.any(over_mask):
-            self.navmesh_v[over_mask, 2] = 10
-            print(f"[INFO]: Clamped {np.sum(over_mask)} navmesh vertices' z to 10")
         
         self.built = self.navmesh_v.shape[0] > 0
         return self.navmesh_v, self.navmesh_t
