@@ -7,23 +7,7 @@ import sys
 import argparse
 from pxr import Usd, UsdGeom, UsdShade, Sdf, Tf
 import time
-
-def count_total_faces_in_mesh_prim(prim):
-    total_faces = 0
-    mesh = UsdGeom.Mesh(prim)
-    face_counts = mesh.GetFaceVertexCountsAttr().Get()
-    if face_counts is not None:
-        total_faces += len(face_counts)
-    return total_faces
-
-def get_parent_prim_name(prim):
-    """Get the parent prim name."""
-    parent_path = prim.GetPath().GetParentPath()
-    if parent_path == Sdf.Path.absoluteRootPath:
-        return None  # No parent (root prim)
-    
-    parent_prim = prim.GetStage().GetPrimAtPath(parent_path)
-    return parent_prim.GetName() if parent_prim else None
+from utils.mesh_utils import count_total_faces_in_mesh_prim, get_parent_prim_name
 
 def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
 
