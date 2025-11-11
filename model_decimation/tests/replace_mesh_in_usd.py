@@ -5,7 +5,8 @@
 
 import os, sys
 from pxr import Usd, UsdGeom, UsdShade, Sdf, Tf
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+# Ensure the package root (model_decimation) is on sys.path so `utils` can be imported
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.mesh_utils import count_total_faces_in_mesh_prim, get_parent_prim_name
 
 def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):

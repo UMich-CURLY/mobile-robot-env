@@ -23,13 +23,13 @@ The pipeline consists of three main steps:
 | `replace_usd_models_isaac.py` | Replaces original meshes with decimated versions | Python USD API |
 | `decimate_usd_models_face_autorestart.sh` | Main pipeline orchestrator with auto-restart capability | Bash, systemd |
 
-### Utility Scripts
+### Testing/Debugging Scripts
 
 | File | Description | Purpose |
 |------|-------------|---------|
-| `decimate_usd_face_blender.py` | Single USD file decimation | Testing/debugging |
-| `replace_mesh_in_usd.py` | Single USD mesh replacement with debugging | Testing/debugging |
-
+| `tests/decimate_usd_face_blender.py` | Single USD file decimation | Testing/debugging |
+| `tests/replace_mesh_in_usd.py` | Single USD mesh replacement with debugging | Testing/debugging |
+| `tests/count_faces_in_usd.py` | Count total mesh faces in usd file | Testing/debugging |
 ## Prerequisites
 
 - **Python 3.8+** with USD Python bindings (`pxr`)
