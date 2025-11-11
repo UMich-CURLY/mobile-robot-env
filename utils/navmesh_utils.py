@@ -6,6 +6,7 @@ import PyRecastDetour as pyrecast
 
 from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt, UsdUtils
 from isaaclab.sim.utils import export_prim_to_file
+from utils.vis import visualize_mesh
 # Import usd_utils functionality
 
 def traverse_instanced_children(prim):
@@ -81,9 +82,10 @@ def get_all_stage_mesh(stage, prims, exclude_paths=[]):
                 continue
             if x.IsA(UsdGeom.Mesh):
                 found_meshes.append(x)
-    # print("Length of found meshes: ", len(found_meshes))
+    print("Length of found meshes: ", len(found_meshes))
     points, faces = get_mesh(found_meshes)
-   
+    # print("points",points)
+    # print("faces",faces)
     return points, faces
 
 def get_mesh(objs):
@@ -109,7 +111,8 @@ def get_mesh(objs):
         # print("faces shape: ", f.shape)   n x 3
         points.extend(p)
         faces.extend(f + f_offset)
-  
+    print("points",len(points))
+    print("faces",len(faces))
     return points, faces
 
 def meshconvert(prim):
@@ -146,6 +149,13 @@ def meshconvert(prim):
 
     # Transform all vertices to world space using matrix multiplication
     world_points = np.dot(points_np, matrix_np)
+    if np.any(np.isnan(world_points)):
+        print("world_points: ", world_points)
+        print("world_points shape: ", world_points.shape)
+        print("points_np: ", points_np)
+        print("matrix_np: ", matrix_np)
+        print("prim path: ", prim.GetPath())
+        print("prim: ", prim)
 
     tri_list = convert_to_triangle_mesh(tris, tris_cnt)
     # tri_list = tri_list.flatten()
@@ -241,7 +251,7 @@ class NavmeshInterface:
             return False
         return True
 
-    def setup_navmesh(self, selected_paths, exclude_paths):
+    def setup_navmesh(self, selected_paths, exclude_paths, scene_type=None):
         self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
         self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim, exclude_paths=exclude_paths)
         if len(self.input_vert) == 0:
@@ -253,14 +263,43 @@ class NavmeshInterface:
             print("[WARNING]: NaNs found in input vertices")
         self.input_vert = self._convert_up_axis(self.input_vert)
 
+        # Constrain vertices with z > 10 to z = 10 (only for vc scenes)
+        # Note: after _convert_up_axis, z is the third component (index 2)
+        print(f"[INFO]: scene_type: {scene_type}")
+        if scene_type == 'vc':
+            z_mask = self.input_vert[:, 2] > 10
+            if np.any(z_mask):
+                num_constrained = np.sum(z_mask)
+                self.input_vert[z_mask, 2] = 10
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 10 to z = 10")
+            
+            # Filter out invalid faces (degenerate triangles with zero area or collapsed vertices)
+            # A triangle is invalid if all three vertices are the same or if the triangle has zero area
+            valid_faces = []
+            for face in tqdm(self.input_tri, desc="Filtering faces"):
+                v0, v1, v2 = self.input_vert[face[0]], self.input_vert[face[1]], self.input_vert[face[2]]
+                # Check if triangle is degenerate (zero area or all vertices same)
+                edge1 = v1 - v0
+                edge2 = v2 - v0
+                cross_product = np.cross(edge1, edge2)
+                triangle_area = 0.5 * np.linalg.norm(cross_product)
+                # Keep triangle if area is greater than a small threshold (1e-6)
+                if triangle_area > 1e-6:
+                    valid_faces.append(face)
+            
+            if len(valid_faces) < len(self.input_tri):
+                num_removed = len(self.input_tri) - len(valid_faces)
+                print(f"[INFO]: Removed {num_removed} degenerate faces after z constraint")
+                self.input_tri = valid_faces
+
         verts_flat = []
-        for vertex in self.input_vert:
+        for vertex in tqdm(self.input_vert,desc="Loading vertices"):
             verts_flat.extend(vertex)
         # Convert faces to the format expected by init_by_raw
         # The example shows faces as [3, v0, v1, v2, 3, v0, v1, v2, ...]
         # where 3 indicates triangle (3 vertices per face)
         faces_flat = []
-        for face in self.input_tri:
+        for face in tqdm(self.input_tri,desc="Loading faces"):
             # cur_faces_flat = np.hstack([np.full((len(face), 1), 3), face]).flatten().tolist()
             cur_faces_flat = np.concatenate([[3], face]).tolist()
             # print("`cur_faces_flat: ", cur_faces_flat)
@@ -275,6 +314,7 @@ class NavmeshInterface:
         self.nm.set_settings(self.settings)
         # Try watershed (0); if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)
+        print("[INFO]: Building navmesh, will take a while, please wait.")
         self.nm.build_navmesh()
         v, t, = self.get_navmesh_polygons()
         print(f'v shape: {v.shape}')
@@ -291,7 +331,7 @@ class NavmeshInterface:
             # create a usd color of blue with transparency
             color = Gf.Vec3f(0.051208995, 0.774935, 0.94585985)
             opacity = 0.89
-            create_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
+            visualize_mesh('/World/ground/navmeshmesh', v, t, color, opacity)
             print("[INFO]: Visualized navmesh")
         else:
             print('[WARNING]: Navmesh not built') 
@@ -324,9 +364,12 @@ class NavmeshInterface:
         
         self.navmesh_v = np.array(trivert, dtype=np.float32)
         self.navmesh_t = np.array(t, dtype=np.int32)
-
+        # print(f'navmesh_v shape: {self.navmesh_v.shape}')
+        # print(f'navmesh_t shape: {self.navmesh_t.shape}')
+        # print(f'navmesh_v: {self.navmesh_v[0]}')
+        # print(f'navmesh_t: {self.navmesh_t[0]}')
         self.navmesh_v = self._convert_up_axis(self.navmesh_v, inverse=True)
-
+        
         self.built = self.navmesh_v.shape[0] > 0
         return self.navmesh_v, self.navmesh_t
     
