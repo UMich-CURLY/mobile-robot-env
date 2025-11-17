@@ -8,7 +8,7 @@ from collections import deque
 import math
 import pygame.colordict
 
-from utils.socket_client import request_sensor_data,send_action_message,request_planner_state
+from utils.socket_client import request_sensor_data,send_message,request_planner_state
 from scipy.spatial.transform import Rotation
 from copy import deepcopy
 import matplotlib.cm as cm
@@ -248,7 +248,7 @@ def depth_to_pil_rgb(depth_array,
     return pil_image
 while run:
     if translations is None:
-        send_action_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, host=args.host, port=args.port)
+        send_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, host=args.host, port=args.port)
 
     clock.tick(60)
     for event in pygame.event.get():
@@ -295,7 +295,7 @@ while run:
                         "y_list":translations[:,1].tolist()
                     }
 
-                    send_action_message("WAYPOINT", waypointmsg, host=args.host, port=args.port)
+                    send_message("WAYPOINT", waypointmsg, host=args.host, port=args.port)
                 else:
                     print("not enough points, skipping")
                 continue
@@ -327,7 +327,7 @@ while run:
             if event.key == pygame.K_SPACE:
                 vx,vy,vw = vx/2,vy/2,vw/2
             
-            send_action_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, args.host, port=args.port)
+            send_message("VEL", {"vx":vx, "vy":vy, "vw":vw}, args.host, port=args.port)
         
         if event.type ==  pygame.MOUSEBUTTONDOWN:
             mx,my = (np.array(pygame.mouse.get_pos())-ROBOT_VIS_CENTER*window.get_width()/screen_width-np.array([window.get_rect().x,window.get_rect().y]))*np.array([1,-1])/scale/window.get_width()*screen_width
@@ -342,7 +342,7 @@ while run:
             # waypoints = WaypointMessage()
             # waypoints.x = translations[:,0]
             # waypoints.z = translations[:,1]
-            # send_action_message(waypoints,args.host, port=args.port)
+            # send_message(waypoints,args.host, port=args.port)
 
 
     try:

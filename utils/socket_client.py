@@ -73,7 +73,7 @@ def decompress_payload(compressed_payload_dict):
 
     return decompressed_dict
 
-def send_action_message(msg_type, msg, host, port):
+def send_message(msg_type, msg, host, port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
     while True:

@@ -49,7 +49,7 @@ ROBOT_VIS_CENTER = np.array([BORDER*2+640+320,240+BORDER])
 screen_width, screen_height = 640*2+BORDER*3, 720+20
 
 
-from utils.socket_client import request_sensor_data,send_action_message,request_planner_state
+from utils.socket_client import request_sensor_data,send_message,request_planner_state
 
 run = True
 data = None
@@ -74,7 +74,7 @@ frame_cnt = 0
 
 while run:
     if translations is None:
-        send_action_message(VelMessage(vx,vy,omg), host=args.host)
+        send_message(VelMessage(vx,vy,omg), host=args.host)
 
     try:
         start_ts = time.time()

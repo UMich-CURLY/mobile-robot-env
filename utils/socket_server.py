@@ -23,7 +23,6 @@ Set `port` to 12300+thread_id, e.g. 12300 for the first thread, 12301 for the se
 Client to Server messages are handled in `handle_client_connection()`.
 Formatted as: "{message_type} {payload}", where message_type is one of the following:
 - GET_SENSOR_DATA: call data_cb(), no payload
-- GET_PLANNER_STATE: call planner_cb(), no payload
 - DISCRETE_ACTION: {action_id}
 - VEL: {vx, vy, vw}
 - WAYPOINT: {x_list, y_list}
@@ -182,6 +181,7 @@ def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServe
         "message": f"Dummy data generated successfully by {server_name}."
     }
     payload.update(info)
+    payload = {k: v for k, v in payload.items() if v is not None}
 
     return compress_payload(payload)
 
@@ -198,27 +198,25 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
         request_str = request.decode().strip()
         # print(f"[{time.strftime('%H:%M:%S')}] Received request: '{request_str}' from {client_address}")
 
-        if request_str == "GET_SENSOR_DATA":
-            sensor_data_payload = data_cb()
-            if sensor_data_payload is None:
-                sensor_data_payload = {
+        request_types = ["GET_SENSOR_DATA", "GET_EPISODE_LIST"]
+        if request_str in request_types:
+            # handle request
+            try:
+                data_payload = data_cb(request_str)
+                if data_payload is None:
+                    raise ValueError("data not ready")
+            except Exception as e:
+                data_payload = {
                     "success": False,
-                    "message": "data not ready"
+                    "message": str(e)
                 }
-            pickled_payload = pickle.dumps(sensor_data_payload)
+            pickled_payload = pickle.dumps(data_payload)
             payload_len = len(pickled_payload)
-
             # Send the pickled data
             header = struct.pack('>Q', payload_len)
             client_socket.sendall(header+pickled_payload)
-        elif request_str == "GET_PLANNER_STATE":
-            planner_state = planner_cb()
-            json_payload = json.dumps(planner_state)
-            payload_len = len(json_payload)
-            # Send the pickled data
-            header = struct.pack('>Q', payload_len)
-            client_socket.sendall(header+json_payload.encode())
         else:
+            # handle action
             header = request_str.split(' ')[0]
             payload_index = len(header)+1
             data = json.loads(request_str[payload_index:].strip())
@@ -234,7 +232,7 @@ def handle_client_connection(client_socket, client_address, data_cb=None, action
     finally:
         client_socket.close()
 
-def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:None, stop_flag = None, host = "localhost", port = 12300, server_name = "StandaloneSensorActionServer"):
+def run_server(data_cb=lambda:None, action_cb=lambda:None, stop_flag = None, host = "localhost", port = 12300, server_name = "StandaloneSensorActionServer"):
     """Main server loop to listen for and handle connections."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Allow address reuse immediately after server closes
@@ -244,15 +242,15 @@ def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:N
         stop_flag = mp.Value('b', False)
     
     try:
+        print(f"{server_name} listening on {host}:{port}...")
         server_socket.bind((host, port))
         server_socket.listen(5) # Allow up to 5 queued connections
-        print(f"{server_name} listening on {host}:{port}...")
 
         while not stop_flag.value:
             try:
                 client_socket, client_address = server_socket.accept()
                 if data_cb is not None:
-                    handle_client_connection(client_socket, client_address, data_cb, action_cb, planner_cb, server_name) # Sequential handling
+                    handle_client_connection(client_socket, client_address, data_cb, action_cb, server_name) # Sequential handling
                 else:
                     handle_client_connection(client_socket, client_address)
             except socket.timeout: # server_socket.accept() can timeout if set
@@ -272,4 +270,4 @@ def run_server(data_cb=lambda:None, action_cb=lambda:None, planner_cb = lambda:N
 if __name__ == "__main__":
     # You might need to install OpenCV and NumPy if you haven't:
     # pip install opencv-python numpy
-    run_server(data_cb=generate_dummy_data,planner_cb=lambda :{"test":"hi"})
+    run_server(data_cb=generate_dummy_data)
