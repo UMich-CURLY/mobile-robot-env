@@ -11,7 +11,7 @@
                 "--enable_cameras",
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
-                "--test_id",
+                "--test_scene_id",
                 "nv_apartment"
             ],
             "envFile": "${workspaceFolder}/.env"
@@ -39,7 +39,7 @@
             "args": [
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
-                "--episode_id",
+                "--episode_label",
                 // "vc_austin_0",
                 // "test_generator_0",
                 // "nv_parkmorning_3",

@@ -43,7 +43,15 @@ class VLNEpisode(dict):
     def episode_label(self):
         """ episode label = scene_id + episode_id """
         return f"{self['scene_id']}_{self['episode_id']}"
-    
+
+    @property
+    def scene_id(self):
+        return self['scene_id']
+
+    @property
+    def episode_id(self):
+        return self['episode_id']
+
     @property
     def episode_info(self):
         info = deepcopy(self)
@@ -68,8 +76,19 @@ class VLNEpisode(dict):
         episodes = []
         for json_path in json_paths:
             episodes.extend(self.from_json(json_path))
+        episodes.sort(key=lambda x: (x.scene_id, x.episode_id))
         return episodes
-    
+
+def load_episode_set(json_folder):
+    #detect every file that ends with _set.txt
+    set_files = [x for x in os.listdir(json_folder) if x.endswith("_set.txt")]
+    episode_set_list = {}
+    for set_file in set_files:
+        with open(os.path.join(json_folder, set_file), 'r') as f:
+            lines = [x.strip() for x in f.read().splitlines()]
+            lines = [x for x in lines if not x.startswith("#")]
+            episode_set_list[set_file.replace("_set.txt", "")] = lines
+    return episode_set_list
 
 def save_episodes(episodes, json_path):
     json.dump(episodes, open(json_path, 'w'), indent=4)

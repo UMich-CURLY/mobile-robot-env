@@ -70,8 +70,12 @@ class TaskGenerator:
                 scene_name_config[key] = scene_config[key]
         
     def save_config(self):
+
+        class NoAliasDumper(yaml.SafeDumper):
+            def ignore_aliases(self, data):
+                return True
         with open(self.args.tg_config_path, "w") as f:
-            yaml.dump(self.task_config, f)
+            yaml.dump(self.task_config, f, Dumper=NoAliasDumper)
 
     def generate_episodes(self, env, scene_id, navmesh_interface):
         # bind objects
