@@ -17,13 +17,12 @@ from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 
 import isaaclab_tasks.manager_based.locomotion.velocity.config.spot.mdp as spot_mdp
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-
+import numpy as np
 ##
 # Pre-defined configs
 ##
 from isaaclab_assets.robots.spot import SPOT_CFG  # isort: skip
 from robot.base_env_cfg import BaseEnvCfg
-
 
 
 @configclass
@@ -269,27 +268,6 @@ class SpotRewardsCfg:
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*_h[xy]")},
     )
 
-
-@configclass
-class SpotTerminationsCfg:
-    """Termination terms for the MDP."""
-
-    # time_out = DoneTerm(func=mdp.time_out, time_out=True)
-    # body_contact = DoneTerm(
-    #     func=mdp.illegal_contact,
-    #     params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=["body", ".*leg"]), "threshold": 5.0},
-    # )
-    bad_orientation = DoneTerm(
-        func=mdp.bad_orientation,
-        params={"limit_angle": 0.8},
-    )
-    # terrain_out_of_bounds = DoneTerm(
-    #     func=mdp.terrain_out_of_bounds,
-    #     params={"asset_cfg": SceneEntityCfg("robot"), "distance_buffer": 3.0},
-    #     time_out=True,
-    # )
-
-
 @configclass
 class SpotFlatEnvCfg(BaseEnvCfg):
 
@@ -301,7 +279,6 @@ class SpotFlatEnvCfg(BaseEnvCfg):
 
     # MDP setting
     rewards: SpotRewardsCfg = SpotRewardsCfg()
-    terminations: SpotTerminationsCfg = SpotTerminationsCfg()
     events: SpotEventCfg = SpotEventCfg()
 
     # Viewer

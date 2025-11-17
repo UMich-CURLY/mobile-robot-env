@@ -22,9 +22,14 @@ COBBLESTONE_ROAD_CFG = terrain_gen.TerrainGeneratorCfg(
         ),
     },
 )
+@configclass
+class BaseTerminationsCfg:
+    pass
 
 @configclass
 class BaseEnvCfg(LocomotionVelocityRoughEnvCfg):
+
+    terminations: BaseTerminationsCfg = BaseTerminationsCfg()
 
     def load_generator(self):
         self.scene.terrain = TerrainImporterCfg(

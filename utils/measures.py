@@ -288,7 +288,7 @@ class Success(Measure):
 
     def __init__(self, env, episode, measure_manager, *args: Any, **kwargs: Any):
         super().__init__(env, episode)
-        self._success_distance = episode["goals"][0]["radius"]
+        self._success_distance = 2.0 #episode["goals"][0]["radius"]
         self.measure_manager = measure_manager
 
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
@@ -296,7 +296,6 @@ class Success(Measure):
 
     def reset_metric(self, *args: Any, **kwargs: Any):
         self.update_metric(*args, **kwargs)  # type: ignore
-        setattr(self._env, "is_stop_called", False)
 
     def update_metric(self, *args: Any, **kwargs: Any):
         distance_to_target = self.measure_manager.measures[
@@ -305,7 +304,7 @@ class Success(Measure):
 
         if (
             hasattr(self._env, "is_stop_called")
-            and self._env.is_stop_called  # type: ignore
+            and self._env.is_stop_called[0]  # type: ignore
             and distance_to_target < self._success_distance
         ):
             self._metric = 1.0
@@ -350,7 +349,7 @@ class OracleSuccess(Measure):
     def __init__(self, env, episode, measure_manager: MeasureManager, *args: Any, **kwargs: Any):
         super().__init__(env, episode)
         self.measure_manager = measure_manager
-        self._success_distance = episode["goals"][0]["radius"]
+        self._success_distance = 2.0 #episode["goals"][0]["radius"]
 
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
         return self.cls_uuid
