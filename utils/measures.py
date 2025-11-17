@@ -52,7 +52,7 @@ class Measure:
         return self._metric
     
     def get_robot_position(self):
-        robot_pos_w = self._env.unwrapped.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
+        robot_pos_w = self._env.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
         return robot_pos_w
     
 

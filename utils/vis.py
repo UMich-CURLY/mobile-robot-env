@@ -34,7 +34,6 @@ def visualize_arrow(nodes, robot_height, prim_path="/World/Arrow", color=(1, 0, 
         }
     )
     markers = VisualizationMarkers(cfg)
-    print("nodes:", nodes)
     nodes = np.array(nodes)
     marker_locations = np.concatenate([nodes[:, :2], np.ones((len(nodes), 1))*robot_height], axis=1)
     marker_orientations = R.from_euler('z', nodes[:, 2]).as_quat()

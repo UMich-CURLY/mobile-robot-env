@@ -3,7 +3,6 @@ import argparse
 import numpy as np
 import torch
 import time
-from pathlib import Path
 
 # start simulation
 from isaaclab.app import AppLauncher
@@ -35,58 +34,23 @@ settings.set("/rtx/reflections/enabled", True)
 settings.set("/rtx/translucency/enabled", True)
 settings.set("/rtx-flags/ecoMode/enabled", True)
 
-# Isaac Lab Import
-from isaaclab.envs import ManagerBasedRLEnv
-from rsl_rl.runners import OnPolicyRunner
-from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
-from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
-
 # Local imports
-from utils.episode import VLNEpisode
-from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
-from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 
-# load episodes
-episode_list = VLNEpisode.from_json_folder(args.episode_folder)
-episode_label_list = [x.episode_label for x in episode_list]
-current_episode = episode_list[episode_label_list.index(args.episode_id)]
+# setup simulation
+vln_sim = VLNSim(args)
+vln_sim.load_episode(args.episode_label)
 
-# isaac lab manager
-env_cfg = SpotFlatEnvCfg_PLAY()
-init_env_cfg(env_cfg, args, current_episode)
-env_cfg.scene.num_envs = args.num_envs
-env_cfg.sim.device = args.device
-env_cfg.curriculum = None
-manager_env = ManagerBasedRLEnv(cfg=env_cfg)
-
-# policy
-TASK = "Isaac-Velocity-Flat-Spot-v0"
-RL_LIBRARY = "rsl_rl"
-agent_cfg: RslRlOnPolicyRunnerCfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
-env = RslRlVecEnvWrapper(manager_env)
-ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
-checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
-ppo_runner.load(checkpoint)
-policy = ppo_runner.get_inference_policy(device=args.device)
-
-# simulation
-all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
-print("[INFO] Env setup complete")
-
-# socket server & keyboard
-vln_sim = VLNSim(args, env)
+# sim variables
+episode_label_list = vln_sim.episode_label_list
+episode_list = vln_sim.episode_list
+manager_env = vln_sim.manager_env
+env = vln_sim.env
 
 # Setup UI
 import utils.ui as sim_ui
 import utils.ui_utils as ui_utils
-import omni.ui as ui
-import omni.usd
 import isaacsim.core.utils.prims as prim_utils
-import isaacsim.core.utils.bounds as bounds_utils
-import isaaclab.sim as sim_utils
-import json
 
 ui_window = sim_ui.SimWindow(manager_env)
 ui_elements = ui_window.ui_elements
@@ -106,10 +70,10 @@ with ui_elements["main_stack"]:
             "Start Position",
             default_val=[0.0, 0.0, 0.0]
         )
-        ui_utils.btn_builder("Update States", text="Update", on_clicked_fn=lambda: save_settings("episode_runtime"))
+        ui_utils.btn_builder("Apply Settings", text="Update", on_clicked_fn=lambda: save_settings("episode_runtime"))
         ui_utils.btn_builder("Follow Reference Path", text="Start", on_clicked_fn=lambda: start_following_waypoints())
         ui_utils.btn_builder("Stop Following", text="Stop", on_clicked_fn=lambda: stop_following_waypoints())
-        ui_utils.btn_builder("Switch StopCalled State", text="Switch", on_clicked_fn=lambda: env.set_stop_called(not env.is_stop_called))
+        ui_utils.btn_builder("Switch StopCalled State", text="Switch", on_clicked_fn=lambda: env.set_stop_called(vln_sim.robot_index, not env.is_stop_called[vln_sim.robot_index]))
     with ui_window.create_frame("Episode Info"):
         ui_elements["episode_info"] = ui_utils.ui.Label(
             "Episode Info",
@@ -125,40 +89,37 @@ ui_map = {
 }
 
 def update_ui(settings_type, selected_value=None):
-    global current_episode
     if settings_type == "episode_label":
         print(f"[INFO]: Updating episode id to {selected_value}")
-        current_episode = episode_list[episode_label_list.index(selected_value)]
+        current_episode = vln_sim.episode_list[vln_sim.episode_label_list.index(selected_value)]
         for key, (value, _) in ui_map.items():
             ui_window.set_ui_value(ui_map, key, current_episode[value])
     elif settings_type == "episode_info":
         ui_window.set_ui_value(ui_map, "episode_info", current_episode["episode_info"])
-update_ui("episode_label", current_episode["episode_label"])
-
-sim_init = False
-def reset_environment():
-    global sim_init
-    sim_init = False
+update_ui("episode_label", vln_sim.current_episode["episode_label"])
 
 def save_settings(settings_type):
+    current_episode = dict(vln_sim.current_episode)
     if settings_type == "episode_runtime":
         for key, (value, _) in ui_map.items():
             if key == "episode_info":
                 continue
             current_episode[value] = ui_window.get_ui_value(ui_map, key)
         update_ui("episode_info")
-        reset_environment()
+        vln_sim.reset(current_episode)
 
 def start_following_waypoints():
+    current_episode = vln_sim.current_episode
     goal_positions = np.array([x["location"] for x in current_episode["goals"]])
     dist_to_goals = np.linalg.norm(goal_positions - current_episode["start_position"], axis=1)
     closest_goal = current_episode["goals"][np.argmin(dist_to_goals)]
     ref_path = closest_goal["reference_path"]
-    vln_sim.set_waypoints(ref_path[1:], visualize=True)
+    vln_sim.set_waypoints(ref_path[1:], fix_yaw=True)
 
 def stop_following_waypoints():
     vln_sim.clear_waypoints()
-    remove_prim("/World/PathVis")
+    remove_prim("/World/WaypointPath")
+    remove_prim("/World/Arrow")
 
 def remove_prim(rule):
     prim_list = prim_utils.find_matching_prim_paths(rule)
@@ -168,27 +129,25 @@ def remove_prim(rule):
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 start_time = time.time()
+start_episode_step = int(manager_env.episode_length_buf)
 frame_count = 0
 end_time = 0
 while simulation_app.is_running():
     with torch.inference_mode():
-        if not sim_init:
-            obs, _ = env.reset(current_episode)
-            sim_init = True
-            print(f"[INFO]: Resetting env state..")
-
-        # Policy forward pass
-        obs, reward, done, info = env.step(vln_sim.commands)
-        vln_sim.update_obs(obs, info=info, current_episode=current_episode)
-        # print("measures: ", info["measurements"])
+        vln_sim.step()
+        # print("measures: ", vln_sim.info["measurements"])
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1
     if frame_count == 1:
         first_frame_time = time.time()
         print(f"[INFO]: First frame time: {first_frame_time - sim_start_time:.2f}s")
         pass
-    if frame_count % 100 == 0:
-        print(f"[INFO]: Frame count: {frame_count}, Time: {time.time() - start_time:.2f}s, FPS: {100 / (time.time() - start_time):.2f}")
+    log_fps_interval = 100
+    if frame_count % log_fps_interval == 0:
+        duration = time.time() - start_time
+        sim_time = int(manager_env.episode_length_buf - start_episode_step) * manager_env.step_dt
+        print(f"[INFO]: Frame count: {frame_count}, Time: {duration:.2f}s, FPS: {log_fps_interval / duration:.2f}, Sim Time: {sim_time:.2f}s ({sim_time/duration:.2f}x)")
         start_time = time.time()
+        start_episode_step = int(manager_env.episode_length_buf)
 
 simulation_app.close()

@@ -40,7 +40,7 @@ class SimWindow:
     def get_ui_value(self, map, key):
         try:
             getter_func, setter_func = map[key][1]
-            print(f"[INFO]: Get {key} value: {getter_func(self.ui_elements[key])}")
+            # print(f"[INFO]: Get {key} value: {getter_func(self.ui_elements[key])}")
             return getter_func(self.ui_elements[key])
         except:
             print(f"[ERROR]: Failed to get value for {key}")
@@ -51,7 +51,7 @@ class SimWindow:
         try:
             getter_func, setter_func = map[key][1]
             setter_func(self.ui_elements[key], value)
-            print(f"[INFO]: Set {key} value: {value}")
+            # print(f"[INFO]: Set {key} value: {value}")
         except:
             print(f"[ERROR]: Failed to set value for {key}")
             import traceback

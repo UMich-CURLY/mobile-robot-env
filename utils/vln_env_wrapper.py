@@ -6,6 +6,8 @@ import isaaclab.sim as sim_utils
 import isaacsim.core.utils.bounds as bounds_utils
 from pxr import Gf
 import torch
+from utils.termination_cfg import VLNTerminationsCfg
+from isaaclab.managers import TerminationManager
 
 
 def init_env_cfg(env_cfg, args, episode):
@@ -45,6 +47,8 @@ class VLNEnvWrapper:
         ):
         self.env = env
         self.manager_env = env.unwrapped
+        self.sim = self.manager_env.sim
+        self.device = self.manager_env.device
         self.scene = self.manager_env.scene
         self.robot_name = robot_name
         self.measure_names = measure_names
@@ -53,6 +57,7 @@ class VLNEnvWrapper:
         self.scene_scale = None
         self.scene_setting = None
         self.args = args
+        self.num_envs = self.manager_env.num_envs
 
         self.env_step = 0
         self.max_length = max_length
@@ -65,8 +70,17 @@ class VLNEnvWrapper:
         self.low_level_policy = low_level_policy
         self.low_level_action = None
 
-        self.curr_pos, self.prev_pos = None, None
-        self.is_stop_called = False
+        self.is_stop_called = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
+
+        self.measure_manager = None
+        self.termination_states = {
+            "stuck_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
+            "stuck_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
+            "back_n_forth_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
+            "back_n_forth_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
+        }
+        self.terminations_cfg = VLNTerminationsCfg()
+        self.termination_manager = TerminationManager(self.terminations_cfg, self)
 
     @property
     def unwrapped(self) -> ManagerBasedRLEnv:
@@ -115,6 +129,9 @@ class VLNEnvWrapper:
             "align_ground": align_ground,
             "collider": collider,
         }
+
+        # load measures
+        self.measure_manager = add_measurement(self, self.episode, self.measure_names)
 
         # load scene
         scene_changed = self.usd_path != self.episode["path"]
@@ -168,10 +185,15 @@ class VLNEnvWrapper:
         robot = self.scene["robot"]
         set_robot_pose(self.manager_env.cfg, episode, robot)
 
+        # reset termination states
+        self.reset_termination_states([*range(self.num_envs)])
+        self.termination_manager.reset()
+
         # reset low-level environment
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
-        self.set_stop_called(False)
+        for i in range(self.num_envs):
+            self.set_stop_called(i, False)
 
         # warmup_steps = 50
         # for i in range(warmup_steps):
@@ -187,12 +209,10 @@ class VLNEnvWrapper:
         self.env_step = 0
         self.same_pos_count = 0
 
-        self.measure_manager = add_measurement(self, self.episode, self.measure_names)
         self.measure_manager.reset_measures()
         measurements = self.measure_manager.get_measurements()
         infos["measurements"] = measurements
 
-        self.prev_pos = self.scene["robot"].data.root_pos_w[0].detach()
         self.first_init = False
 
         # log
@@ -202,6 +222,11 @@ class VLNEnvWrapper:
             obs = []
         return obs, infos
     
+    def reset_termination_states(self, reset_env_ids):
+        for env_id in reset_env_ids:
+            for key in self.termination_states.keys():
+                self.termination_states[key][env_id] = 0
+    
     def update_command(self, command) -> None:
         """Update the command for the low-level policy."""
 
@@ -210,6 +235,7 @@ class VLNEnvWrapper:
             command = torch.tensor(command, device=self.manager_env.device)
         self.low_level_obs = self.low_level_obs.clone()
         self.low_level_obs[:, 9:12] = command
+        self.scene["robot"].velocity_command = command
 
     def step(self, action) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:
         """Take a step in the environment.
@@ -238,36 +264,58 @@ class VLNEnvWrapper:
             obs = []
         self.env_step += 1
 
+        # update measures
         self.measure_manager.update_measures()
         measurements = self.measure_manager.get_measurements()
         info["measurements"] = measurements
+        # update terminations
+        if not self.args.disable_termination:
+            self.reset_buf = self.termination_manager.compute()
+            reset_env_ids = self.reset_buf.nonzero(as_tuple=False).squeeze(-1)
+            termination_terms = self.termination_manager.get_active_iterable_terms(0)
+            done = done.any() or self.reset_buf.any()
+            if self.reset_buf.any():
+                termination_reason = max(termination_terms, key=lambda x:x[1])[0]
+                info["terminations"] = {"termination_reason": termination_reason}
+                print(f"Episode terminated due to {termination_reason}")
+            else:
+                if "terminations" in info:
+                    del info["terminations"]
+        else:
+            # termination disabled, only respond to stop_called
+            done = done.any() or self.is_stop_called.any()
+            if self.is_stop_called.any():
+                info["terminations"] = {"termination_reason": "stop_called"}
+                print(f"Episode terminated due to stop_called")
+            else:
+                if "terminations" in info:
+                    del info["terminations"]
 
-        # Check if the robot has stayed in the same location for 1000 steps or env has reached max length
-        same_pos = self.check_same_pos()
-        done = done[0] or same_pos or self.env_step >= self.max_length
 
         return obs, reward, done, info
     
-    def check_same_pos(self) -> bool:
-        curr_pos = self.scene["robot"].data.root_pos_w[0].detach()
-        robot_vel = torch.norm(self.scene["robot"].data.root_vel_w[0].detach())
-        if torch.norm(curr_pos - self.prev_pos) < 0.01 and robot_vel < 0.1:
-            self.same_pos_count += 1
-        else:
-            self.same_pos_count = 0
-        self.prev_pos = curr_pos
+    def reset_idx(self, reset_env_ids):
+        reset_env_ids = torch.tensor(reset_env_ids, device=self.device, dtype=torch.int32)
+        self.reset_termination_states(reset_env_ids)
+        self.reset_buf = self.termination_manager.compute()
+        for env_id in reset_env_ids:
+            self.set_stop_called(env_id, False)
+        if len(reset_env_ids) > 0:
+            # trigger recorder terms for pre-reset calls
+            self.manager_env.recorder_manager.record_pre_reset(reset_env_ids)
+            self.manager_env._reset_idx(reset_env_ids)
 
-        # if the robot has stayed in the same location for 1000 steps
-        if self.same_pos_count >= 1000:
-            print("Robot has stayed in the same location for 1000 steps.")
-        
-        return False
+            # if sensors are added to the scene, make sure we render to reflect changes in reset
+            if self.manager_env.sim.has_rtx_sensors():
+                num_rerenders_on_reset = 1
+                for _ in range(num_rerenders_on_reset):
+                    self.manager_env.sim.render()
+            # trigger recorder terms for post-reset calls
+            self.manager_env.recorder_manager.record_post_reset(reset_env_ids)
 
-    def set_stop_called(self, is_stop_called: bool) -> None:
+    def set_stop_called(self, robot_index: int, is_stop_called: bool) -> None:
         """Set the stop called flag."""
-        self.is_stop_called = is_stop_called
+        self.is_stop_called[robot_index] = is_stop_called
     
     def close(self) -> None:
         self.env.close()
-
-    

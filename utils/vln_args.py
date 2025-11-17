@@ -11,6 +11,8 @@ def add_vln_args(parser):
     arg_group.add_argument("--navmesh_path", type=str, default=None, help="Path to the navmesh file.")
     arg_group.add_argument("--disable_camera", type=bool, default=False, help="Disable camera.")
     arg_group.add_argument("--num_envs", type=int, default=1, help="How many robots to simulate.")
+    arg_group = parser.add_argument_group("Debug Options")
+    arg_group.add_argument("--disable_termination", type=bool, default=False, help="Disable episodetermination.")
     arg_group = parser.add_argument_group("Task Generation")
     arg_group.add_argument("--tg_config_path", type=str, default="episodes/task_config.yaml", help="Path to the task config file.")
     arg_group = parser.add_argument_group("Socket Server", description="Arguments for socket server.")

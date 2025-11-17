@@ -20,7 +20,7 @@ vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
-
+args.disable_termination = True
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
@@ -53,8 +53,6 @@ RL_LIBRARY = "rsl_rl"
 
 # Local imports
 from utils.episode import VLNEpisode, save_episodes
-from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
-from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from utils.sim import VLNSim
 from utils.task_generator import TaskGenerator
 import utils.navmesh_utils as navmesh_utils
@@ -70,32 +68,23 @@ def load_task_config(args, scene_id):
     current_episode = VLNEpisode(scene_config)
     return task_generator, task_config, scene_config, current_episode
 
-task_generator, task_config, scene_config, current_episode = load_task_config(args, args.test_id)
+task_generator, task_config, scene_config, current_episode = load_task_config(args, args.test_scene_id)
 
 # setup environment
-env_cfg = SpotFlatEnvCfg_PLAY()
-init_env_cfg(env_cfg, args, current_episode)
+vln_sim = VLNSim(args)
+vln_sim.reset(current_episode)
+
+# sim variables
+manager_env = vln_sim.manager_env
+env = vln_sim.env
 scene_folder = Path(args.scene_folder)
 
-env_cfg.scene.num_envs = args.num_envs
-env_cfg.sim.device = args.device
-env_cfg.curriculum = None
-manager_env = ManagerBasedRLEnv(cfg=env_cfg)
-
-agent_cfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
-env = RslRlVecEnvWrapper(manager_env)
-ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
-checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
-ppo_runner.load(checkpoint)
-policy = ppo_runner.get_inference_policy(device=args.device)
-
-all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
-print("[INFO] Env setup complete")
+# setup navmesh tools
 navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z', stage=manager_env.scene.stage)
+
+# disable socket server
 args.disable_socket_server = True
 print(f"[INFO] Socket server disabled in task generation")
-vln_sim = VLNSim(args, env)
 
 
 # Setup UI
@@ -318,22 +307,10 @@ def generate_episodes():
 
 update_ui("scene_id", current_episode["scene_id"])
 
-sim_init = False
-
 """Main simulation loop"""
 print("[INFO]: Starting simulation")
 while simulation_app.is_running():
     with torch.inference_mode():
-        if not sim_init:
-            obs, _ = env.reset(current_episode)
-            sim_init = True
-            print(f"[INFO]: Resetting robot state..")
-
-        # Policy forward pass
-        obs, reward, done, info = env.step(vln_sim.commands)
-        # print("measures: ", info["measurements"])
-        vln_sim.update_obs(obs, current_episode)
-        # task_generator.step()
-        # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
+        vln_sim.step()
 
 simulation_app.close()
