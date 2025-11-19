@@ -38,6 +38,7 @@ class VLNSim:
         self.done = None
         self.load_env_lock = Lock()
         self.obs_index = 0
+        self.cam_frame = -1
 
         # episode
         self.reset_flag = True
@@ -246,8 +247,6 @@ class VLNSim:
         # return pos_cam_world, quat_cam_world
 
     def step(self):
-        manager_env = self.manager_env
-        current_episode = self.current_episode
         # reset if needed
         if self.reset_flag:
             print(f"[INFO]: Resetting env state..")
@@ -272,6 +271,16 @@ class VLNSim:
             else:
                 # send the last obs with termination info to the client and then stop
                 self.server_reset_flag = True
+        # update obs
+        self.update_obs(obs, info)
+    
+    def update_obs(self, obs, info):
+        manager_env = self.manager_env
+        current_episode = self.current_episode
+        # do not update obs if camera frame is not updated
+        if self.cam_frame == self.manager_env.scene.sensors['pov_camera'].frame:
+            return
+        self.cam_frame = self.manager_env.scene.sensors['pov_camera'].frame.clone()
         # update server data (only publish the first robot's obs for now)
         if not self.args.disable_socket_server:
             try:
