@@ -38,6 +38,8 @@ class VLNEpisode(dict):
         if kwargs:
             self.update(deepcopy(kwargs))
             # print(f'Overwriting episode data with kwargs: {kwargs}')
+    def copy(self):
+        return deepcopy(self)
     
     @property
     def episode_label(self):

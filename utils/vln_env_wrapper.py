@@ -25,14 +25,14 @@ def load_scene(env_cfg, args, episode):
 def set_robot_pose(env_cfg, episode, robot=None):
     pos = list(episode["start_position"])
     pos[2] += 0.6
-    rot = list(episode["start_rotation"])
+    rot = list(episode["start_rotation"]) # wxyz
     env_cfg.scene.robot.init_state.pos = pos
     env_cfg.scene.robot.init_state.rot = rot
     if robot is not None:
         robot_root_state = robot.data.default_root_state.clone()
         robot_root_state[:, 0:3] = torch.tensor(pos, device=robot.device)
         robot_root_state[:, 3:7] = torch.tensor(rot, device=robot.device)
-        robot.data.default_root_state = robot_root_state
+        robot_root_state[:, 7:] = 0.
         robot.write_root_state_to_sim(robot_root_state)
         robot.reset()
         robot.write_data_to_sim()

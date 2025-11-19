@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 from typing import Optional
+import numpy as np
+import torch
+
 import isaaclab.sim as sim_utils
 from isaaclab.envs import ViewerCfg
 from isaaclab.managers import EventTermCfg as EventTerm
@@ -14,16 +17,15 @@ from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.sensors import CameraCfg, TiledCameraCfg
 from isaaclab.utils import configclass
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+from isaaclab.utils.math import convert_camera_frame_orientation_convention
 
 import isaaclab_tasks.manager_based.locomotion.velocity.config.spot.mdp as spot_mdp
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-import numpy as np
 ##
 # Pre-defined configs
 ##
 from isaaclab_assets.robots.spot import SPOT_CFG  # isort: skip
 from robot.base_env_cfg import BaseEnvCfg
-
 
 @configclass
 class SpotActionsCfg:
@@ -48,6 +50,18 @@ class SpotCommandsCfg:
         ),
     )
 
+
+def camera_info(
+    env,
+    sensor_cfg = SceneEntityCfg("tiled_camera"),
+):
+    # extract the used quantities (to enable type-hinting)
+    sensor = env.scene.sensors[sensor_cfg.name]
+    pose = sensor._view.get_world_poses()
+    pos = pose[0][0].detach().cpu().numpy()
+    quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
+    quat = np.concatenate([quat[1:],quat[:1]])
+    return torch.tensor(np.concatenate([pos, quat]))
 
 @configclass
 class SpotObservationsCfg:
@@ -87,12 +101,13 @@ class SpotObservationsCfg:
     class CameraPolicyCfg(ObsGroup):
 
         pov_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "rgb", "normalize": False})
+        pov_pose = ObsTerm(func=camera_info, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
         pov_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "distance_to_image_plane"})
         # third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb"})
 
         def __post_init__(self):
             self.enable_corruption = False
-            self.concatenate_terms = True
+            self.concatenate_terms = False
 
     # observation groups
     policy: PolicyCfg = PolicyCfg()
@@ -295,10 +310,10 @@ class SpotFlatEnvCfg(BaseEnvCfg):
         # self.sim.dt = 0.002  # 500 Hz
 
         # general settings
-        self.decimation = 4  # 50 Hz
+        self.decimation = 5
         self.episode_length_s = 1000000.
         # simulation settings
-        self.sim.dt = 0.005  # 500 Hz
+        self.sim.dt = 0.005
         self.sim.render_interval = self.decimation
         self.sim.physics_material.static_friction = 1.0
         self.sim.physics_material.dynamic_friction = 1.0
@@ -323,8 +338,12 @@ class SpotFlatEnvCfg(BaseEnvCfg):
 
         # no height scan
         self.scene.height_scanner = None
-        
+
+@configclass
 class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
+
+    events: Optional[SpotEventCfg] = None
+
     def __post_init__(self) -> None:
         # post init of parent
         super().__post_init__()
@@ -333,8 +352,9 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
         self.scene.num_envs = 1
         self.scene.env_spacing = 2.5
         self.scene.terrain.max_init_terrain_level = None
-        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
-        self.commands.base_velocity.ranges.heading = (-1.0, 1.0)
+        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (0.0, 0.0)
 
         # set the camera
         self.scene.pov_camera = TiledCameraCfg(
