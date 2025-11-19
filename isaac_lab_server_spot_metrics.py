@@ -95,7 +95,7 @@ def update_ui(settings_type, selected_value=None):
         for key, (value, _) in ui_map.items():
             ui_window.set_ui_value(ui_map, key, current_episode[value])
     elif settings_type == "episode_info":
-        ui_window.set_ui_value(ui_map, "episode_info", current_episode["episode_info"])
+        ui_window.set_ui_value(ui_map, "episode_info", vln_sim.current_episode["episode_info"])
 update_ui("episode_label", vln_sim.current_episode["episode_label"])
 
 def save_settings(settings_type):
