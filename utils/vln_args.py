@@ -15,10 +15,11 @@ def add_vln_args(parser):
     arg_group.add_argument("--disable_termination", type=bool, default=False, help="Disable episodetermination.")
     arg_group = parser.add_argument_group("Task Generation")
     arg_group.add_argument("--tg_config_path", type=str, default="episodes/task_config.yaml", help="Path to the task config file.")
-    arg_group = parser.add_argument_group("Socket Server", description="Arguments for socket server.")
+    arg_group = parser.add_argument_group("Server", description="Arguments for socket server.")
     arg_group.add_argument("--disable_socket_server", type=bool, default=False, help="Disable socket server.")
     arg_group.add_argument("--host", type=str, default="localhost", help="Host for socket server.")
     arg_group.add_argument("--port", type=int, default=12300, help="Port for socket server.")
+    arg_group.add_argument("--foxglove_port", type=int, default=0, help="Port for foxglove server.")
 
 def parse_args(parser):
     arg_list = sys.argv[1:]

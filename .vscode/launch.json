@@ -2,6 +2,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Metrics",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${command:python.interpreterPath}",
+            "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--episode_folder",
+                "${workspaceFolder}/episodes/",
+                "--episode_label",
+                // "vc_austin_0",
+                // "test_generator_0",
+                // "nv_parkmorning_3",
+                "nv_apartment_17",
+                // "grCommercial_hospital_0",
+                "--enable_cameras",
+                "--foxglove_port",
+                "4924",
+            ],
+        },
+        {
             "name": "Task Generation",
             "type": "debugpy",
             "request": "launch",
@@ -28,25 +49,6 @@
                 "--enable_cameras"
             ],
             "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "name": "Metrics",
-            "type": "debugpy",
-            "request": "launch",
-            "python": "${command:python.interpreterPath}",
-            "program": "${workspaceFolder}/isaac_lab_server_spot_metrics.py",
-            "console": "integratedTerminal",
-            "args": [
-                "--episode_folder",
-                "${workspaceFolder}/episodes/",
-                "--episode_label",
-                // "vc_austin_0",
-                // "test_generator_0",
-                // "nv_parkmorning_3",
-                "nv_apartment_17",
-                // "grCommercial_hospital_0",
-                "--enable_cameras"
-            ],
         },
         {
             "name": "Path Planning",

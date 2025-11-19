@@ -3,7 +3,7 @@ import numpy as np
 import time
 from threading import Thread
 from scipy.spatial.transform import Rotation as R
-
+import open3d as o3d
 # Isaac Import
 import carb
 import omni
@@ -20,6 +20,7 @@ from utils.socket_server import run_server, format_data
 from utils.vis import visualize_curve, visualize_points, visualize_arrow
 from utils.episode import VLNEpisode, load_episode_set
 from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
+from utils.foxglove_utils import FoxgloveVisualizer
 from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from threading import Lock
 
@@ -36,6 +37,7 @@ class VLNSim:
         self.reward = None
         self.done = None
         self.load_env_lock = Lock()
+        self.obs_index = 0
 
         # episode
         self.reset_flag = True
@@ -64,7 +66,10 @@ class VLNSim:
         self.server_reset_flag = False
         if not args.disable_socket_server:
             self.start_server(host=args.host, port=args.port, server_name="BenchmarkServer")
-
+        if args.foxglove_port>0:
+            self.visualizer = FoxgloveVisualizer(host=args.host, port=args.foxglove_port)
+        else:
+            self.visualizer = None
     def init_env(self):
         if self.current_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
@@ -232,7 +237,13 @@ class VLNSim:
         pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
         quat_cam_world = quat_robot * quat_cam_body
         quat_cam_world = quat_cam_world.as_quat() # xyzw
-        return pos_cam_world, quat_cam_world
+        pose = manager_env.scene["pov_camera"]._view.get_world_poses()
+        from isaaclab.utils.math import convert_camera_frame_orientation_convention
+        pos = pose[0][0].detach().cpu().numpy()
+        quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
+        quat = np.concatenate([quat[1:],quat[:1]])
+        return pos, quat
+        # return pos_cam_world, quat_cam_world
 
     def step(self):
         manager_env = self.manager_env
@@ -267,12 +278,14 @@ class VLNSim:
                 cam_focal_length = manager_env.scene["pov_camera"].cfg.spawn.focal_length
                 cam_horizontal_aperture = manager_env.scene["pov_camera"].cfg.spawn.horizontal_aperture
                 hfov_deg = 2 * np.arctan(cam_horizontal_aperture / 2.0 / cam_focal_length) * 180.0 / np.pi
-                self._latest_data["rgb"] = obs[0, :, :, :3].cpu().numpy().astype(np.uint8)
-                depth = obs[0, :, :, 3].cpu().numpy()
+                self._latest_data["rgb"] = obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8)
+                depth = obs['pov_depth'][0, :, :, 0].cpu().numpy()
                 depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
                 depth = np.clip(depth, 0, 65535).astype(np.uint16)
                 self._latest_data["depth"] = depth
                 self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
+                # obs_pose = obs['pov_pose'].cpu().numpy()
+                # print(self._latest_data["position"]-obs_pose[:3], self._latest_data["quat_xyzw"]-obs_pose[3:])
                 self._latest_data["timestamp"] = time.time_ns()
                 self._latest_data["info"] = {
                     "scene_id": current_episode["scene_id"],
@@ -284,6 +297,7 @@ class VLNSim:
                     "metrics": info["measurements"],
                     "terminations": None
                 }
+                
                 if "terminations" in info:
                     # wait the socket client to reset vln sim
                     self._latest_data["info"]["terminations"] = info["terminations"]
@@ -291,6 +305,87 @@ class VLNSim:
                 print(f"Error updating obs: {e}")
                 import traceback
                 traceback.print_exc()
+
+        self.obs_index += 1
+        # save pcd
+        # self.save_debug_data(obs)
+        if self.visualizer is not None:
+            self.visualize_obs(obs)
+    
+    def save_debug_data(self, obs):
+        if self.obs_index%10==0:
+            data = {
+                "rgb": obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8),
+                "depth": obs['pov_depth'][0, :, :, 0].cpu().numpy(),
+                "pose": obs['pov_pose'].cpu().numpy(),
+            }
+            np.savez(f"data/obs_{self.obs_index//10}.npz", **data)
+    
+    def visualize_obs(self, obs):
+        if not self.visualizer.listener.has_subscribers() and self.obs_index>1:
+            return
+        time_start = time.time()
+        rgb = obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8)
+        depth = obs['pov_depth'][0, :, :, 0].cpu().numpy()
+        depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0)
+        pose = obs['pov_pose'].cpu().numpy()
+        pose_matrix = np.eye(4)
+        pose_matrix[:3, 3] = pose[:3]
+        pose_matrix[:3, :3] = R.from_quat(pose[3:]).as_matrix()
+        # convert pose: x (forward), y (left), z (up) -> x (right), y (down), z (forward)
+        S = np.eye(4)
+        S[:3, :3] = np.array(
+            [[0, -1, 0],
+            [0, 0, -1],
+            [1, 0, 0]]
+        )
+        pose_matrix = S @ pose_matrix @ S.T
+        # log tf, rgb, depth
+        self.visualizer.log({
+            'type': 'tf',
+            'channel_name': 'robot_tf',
+            'pose': pose_matrix,
+            'parent_frame_id': 'world',
+            'child_frame_id': 'robot',
+        })
+        self.visualizer.log({
+            'type': 'image',
+            'channel_name': 'obs_rgb',
+            'image': rgb,
+            'frame_id': 'robot',
+        })
+        self.visualizer.log({
+            'type': 'image',
+            'channel_name': 'obs_depth',
+            'image': depth,
+            'frame_id': 'robot',
+        })
+        # log point cloud
+        if self.obs_index%5==0:
+            rgb_image = o3d.geometry.Image(rgb)
+            depth_image = o3d.geometry.Image(depth)
+            rgbd = o3d.geometry.RGBDImage.create_from_color_and_depth(rgb_image, depth_image, convert_rgb_to_intensity=False, depth_scale=1., depth_trunc=10000.)
+            intrinsic = o3d.camera.PinholeCameraIntrinsic(
+                width=rgb.shape[1],
+                height=rgb.shape[0],
+                fx=733,
+                fy=733,
+                cx=rgb.shape[1]//2,
+                cy=rgb.shape[0]//2,
+            )
+            obs_pc = o3d.geometry.PointCloud.create_from_rgbd_image(rgbd, intrinsic)
+            obs_pc = o3d.geometry.PointCloud.voxel_down_sample(obs_pc, voxel_size=0.03)
+            points = np.asarray(obs_pc.points)
+            colors = np.asarray(obs_pc.colors)
+            self.visualizer.log({
+                'type': 'point_cloud',
+                'channel_name': 'obs_pc',
+                'points': points,
+                'color': colors,
+                'pose': pose_matrix,
+                'frame_id': 'world',
+            })
+            print(f"Visualize obs time: {time.time() - time_start}")
 
     def set_up_keyboard(self):
         """Sets up interface for keyboard input and registers the desired keys for control."""
