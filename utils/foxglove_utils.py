@@ -7,6 +7,7 @@ import multiprocessing as mp
 import cv2
 import numpy as np
 import torch
+import queue
 
 from scipy.spatial.transform import Rotation as R
 import foxglove
@@ -149,15 +150,15 @@ class FoxgloveVisualizer():
         if log_data is None:
             return
         if log_data['type'] == 'image':
-            self.log_image(log_data['channel_name'], log_data['image'], log_data.get('frame_id', None))
+            self.log_image(log_data['channel_name'], log_data['image'], log_data.get('frame_id', 'robot'))
         elif log_data['type'] == 'json':
             self.log_json(log_data['channel_name'], log_data['json'])
         elif log_data['type'] == 'point_cloud':
-            self.log_pc(log_data['channel_name'], log_data['points'], log_data['color'], log_data.get('pose', None), log_data.get('frame_id', None))
+            self.log_pc(log_data['channel_name'], log_data['points'], log_data['color'], log_data.get('pose', np.eye(4)), log_data.get('frame_id', 'robot'))
         elif log_data['type'] == 'tf':
             self.log_tf(log_data['channel_name'], log_data['pose'], log_data['parent_frame_id'], log_data['child_frame_id'])
 
-    def log_image(self, channel_name, image, frame_id=None):
+    def log_image(self, channel_name, image, frame_id):
         if not channel_name in self.channels:
             self.channels[channel_name] = CompressedImageChannel(topic=f"/{channel_name}")
         img_jpg = cv2.imencode('.jpeg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])[1].tobytes()
@@ -175,7 +176,7 @@ class FoxgloveVisualizer():
         json_data = self.convert_data(json_data)
         self.channels[channel_name].log(json_data)
     
-    def log_pc(self, channel_name, points, color, pose=None, frame_id=None):
+    def log_pc(self, channel_name, points, color, pose, frame_id):
         """
         Log a point cloud to Foxglove.
         
@@ -186,6 +187,10 @@ class FoxgloveVisualizer():
         """
         if not channel_name in self.channels:
             self.channels[channel_name] = PointCloudChannel(topic=f"/{channel_name}")
+
+        if points.shape[0]==0:
+            print("[FOXGLOVE] no points to visualize, skipping")
+            return
         
         # Ensure points and color are numpy arrays
         points = np.asarray(points, dtype=np.float32)
