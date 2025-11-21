@@ -99,10 +99,11 @@ def update_ui(settings_type, selected_value=None):
 update_ui("episode_label", vln_sim.current_episode["episode_label"])
 
 def save_settings(settings_type):
-    current_episode = vln_sim.current_episode.copy()
+    current_episode_label = ui_window.get_ui_value(ui_map, "episode_label")
+    current_episode = vln_sim.episode_list[vln_sim.episode_label_list.index(current_episode_label)].copy()
     if settings_type == "episode_runtime":
         for key, (value, _) in ui_map.items():
-            if key == "episode_info":
+            if key in ["episode_info", "episode_label"]:
                 continue
             current_episode[value] = ui_window.get_ui_value(ui_map, key)
         update_ui("episode_info")
@@ -146,7 +147,7 @@ while simulation_app.is_running():
     if frame_count % log_fps_interval == 0:
         duration = time.time() - start_time
         sim_time = int(manager_env.common_step_counter - start_episode_step) * manager_env.step_dt
-        print(f"[INFO]: Frame count: {frame_count}, Time: {duration:.2f}s, FPS: {log_fps_interval / duration:.2f}, Sim Time: {sim_time:.2f}s ({sim_time/duration:.2f}x)")
+        print(f"[INFO]: Frame count: {frame_count}, Time: {duration:.2f}s, FPS: {log_fps_interval / duration:.2f}, Sim Time: {sim_time:.2f}s ({sim_time/duration:.2f}x), step_dt={manager_env.step_dt}, count={manager_env.common_step_counter}")
         start_time = time.time()
         start_episode_step = int(manager_env.common_step_counter)
 
