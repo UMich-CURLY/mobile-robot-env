@@ -5,6 +5,7 @@ import time
 import numpy as np
 import cv2
 import struct
+import copy
 
 def recv_all(sock, n):
     """Helper function to receive n bytes from a socket."""
@@ -16,62 +17,141 @@ def recv_all(sock, n):
         data.extend(packet)
     return data
 
+# def decompress_payload(compressed_payload_dict):
+#     """
+#     Decompresses 'rgb_image' and 'depth_image' in the payload dictionary
+#     if they were PNG-compressed.
+
+#     Args:
+#         compressed_payload_dict (dict): The dictionary received from the server,
+#                                         potentially with compressed image data as bytes.
+
+#     Returns:
+#         dict: A new dictionary with image bytes replaced by NumPy arrays.
+#     """
+#     decompressed_dict = compressed_payload_dict.copy()
+
+#     # Decompress RGB Image
+#     if isinstance(decompressed_dict.get('rgb_image'), bytes):
+#         encoded_bytes = decompressed_dict['rgb_image']
+#         # Convert bytes back to NumPy array for imdecode
+#         np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
+#         rgb_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+#         if rgb_image_np is not None:
+#             decompressed_dict['rgb_image'] = rgb_image_np[:,:,::-1]
+#             # Optionally, verify against stored shape/dtype if they were sent
+#             # stored_shape = decompressed_dict.get('rgb_image_shape')
+#             # stored_dtype = decompressed_dict.get('rgb_image_dtype')
+#             # if stored_shape and rgb_image_np.shape != stored_shape:
+#             #     print(f"Warning: Decompressed RGB shape {rgb_image_np.shape} differs from original {stored_shape}")
+#             # if stored_dtype and str(rgb_image_np.dtype) != stored_dtype:
+#             #     print(f"Warning: Decompressed RGB dtype {rgb_image_np.dtype} differs from original {stored_dtype}")
+#         else:
+#             print("Warning: RGB image decoding failed.")
+#             decompressed_dict['rgb_image'] = None # Or handle error
+#         # Clean up compression-specific keys
+#         decompressed_dict.pop('rgb_image_compressed_format', None)
+#         decompressed_dict.pop('rgb_image_shape', None)
+#         decompressed_dict.pop('rgb_image_dtype', None)
+
+
+#     # Decompress Depth Image
+#     if decompressed_dict.get('depth_image_compressed_format') == 'png' and \
+#        isinstance(decompressed_dict.get('depth_image'), bytes):
+#         encoded_bytes = decompressed_dict['depth_image']
+#         np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
+#         # cv2.IMREAD_UNCHANGED is crucial for 16-bit depth images
+#         depth_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+#         if depth_image_np is not None:
+#             decompressed_dict['depth_image'] = depth_image_np
+#         else:
+#             print("Warning: Depth image PNG decoding failed.")
+#             decompressed_dict['depth_image'] = None
+#         # Clean up compression-specific keys
+#         decompressed_dict.pop('depth_image_compressed_format', None)
+#         decompressed_dict.pop('depth_image_shape', None)
+#         decompressed_dict.pop('depth_image_dtype', None)
+
+#     return decompressed_dict
+
 def decompress_payload(compressed_payload_dict):
     """
-    Decompresses 'rgb_image' and 'depth_image' in the payload dictionary
-    if they were PNG-compressed.
+    Decompresses all JPEG/PNG compressed images in the payload.
+    Handles:
+        - 'rgb_image', 'depth_image'
+        - ANY key containing 'rgb', 'RGB', or 'depth'
+        - Multi-camera keys such as 'left-RGB', 'front_rgb', etc.
 
-    Args:
-        compressed_payload_dict (dict): The dictionary received from the server,
-                                        potentially with compressed image data as bytes.
+    Restores NumPy arrays and removes compression metadata.
 
-    Returns:
-        dict: A new dictionary with image bytes replaced by NumPy arrays.
+    Returns a fresh decompressed dict.
     """
-    decompressed_dict = compressed_payload_dict.copy()
 
-    # Decompress RGB Image
-    if isinstance(decompressed_dict.get('rgb_image'), bytes):
-        encoded_bytes = decompressed_dict['rgb_image']
-        # Convert bytes back to NumPy array for imdecode
-        np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
-        rgb_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
-        if rgb_image_np is not None:
-            decompressed_dict['rgb_image'] = rgb_image_np[:,:,::-1]
-            # Optionally, verify against stored shape/dtype if they were sent
-            # stored_shape = decompressed_dict.get('rgb_image_shape')
-            # stored_dtype = decompressed_dict.get('rgb_image_dtype')
-            # if stored_shape and rgb_image_np.shape != stored_shape:
-            #     print(f"Warning: Decompressed RGB shape {rgb_image_np.shape} differs from original {stored_shape}")
-            # if stored_dtype and str(rgb_image_np.dtype) != stored_dtype:
-            #     print(f"Warning: Decompressed RGB dtype {rgb_image_np.dtype} differs from original {stored_dtype}")
-        else:
-            print("Warning: RGB image decoding failed.")
-            decompressed_dict['rgb_image'] = None # Or handle error
-        # Clean up compression-specific keys
-        decompressed_dict.pop('rgb_image_compressed_format', None)
-        decompressed_dict.pop('rgb_image_shape', None)
-        decompressed_dict.pop('rgb_image_dtype', None)
+    decompressed_dict = copy.deepcopy(compressed_payload_dict)
 
+    for key, value in list(decompressed_dict.items()):
+        # Only decompress if we actually have bytes
+        if not isinstance(value, bytes):
+            continue
 
-    # Decompress Depth Image
-    if decompressed_dict.get('depth_image_compressed_format') == 'png' and \
-       isinstance(decompressed_dict.get('depth_image'), bytes):
-        encoded_bytes = decompressed_dict['depth_image']
-        np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
-        # cv2.IMREAD_UNCHANGED is crucial for 16-bit depth images
-        depth_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
-        if depth_image_np is not None:
-            decompressed_dict['depth_image'] = depth_image_np
-        else:
-            print("Warning: Depth image PNG decoding failed.")
-            decompressed_dict['depth_image'] = None
-        # Clean up compression-specific keys
-        decompressed_dict.pop('depth_image_compressed_format', None)
-        decompressed_dict.pop('depth_image_shape', None)
-        decompressed_dict.pop('depth_image_dtype', None)
+        lower_key = key.lower()
+
+        # Identify metadata keys
+        shape_key = f"{key}_shape"
+        dtype_key = f"{key}_dtype"
+        fmt_key   = f"{key}_compressed_format"
+
+        comp_format = decompressed_dict.get(fmt_key, None)
+
+        # -------------------------------
+        # Decompress RGB (JPEG)
+        # -------------------------------
+        if comp_format == "jpg" or ("rgb" in lower_key and comp_format is None):
+            # The JPEG branch
+            np_arr = np.frombuffer(value, dtype=np.uint8)
+            img = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+
+            if img is None:
+                print(f"Warning: JPEG decoding failed for key '{key}'")
+                decompressed_dict[key] = None
+            else:
+                # Convert BGR → RGB for consistency with your original code
+                img = img[:, :, ::-1]
+                decompressed_dict[key] = img
+
+            # Remove metadata keys
+            decompressed_dict.pop(shape_key, None)
+            decompressed_dict.pop(dtype_key, None)
+            decompressed_dict.pop(fmt_key, None)
+
+            continue
+
+        # -------------------------------
+        # Decompress Depth (PNG)
+        # -------------------------------
+        if comp_format == "png" or ("depth" in lower_key and comp_format is None):
+            np_arr = np.frombuffer(value, dtype=np.uint8)
+            img = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+
+            if img is None:
+                print(f"Warning: PNG depth decoding failed for key '{key}'")
+                decompressed_dict[key] = None
+            else:
+                decompressed_dict[key] = img
+
+            # Remove metadata keys
+            decompressed_dict.pop(shape_key, None)
+            decompressed_dict.pop(dtype_key, None)
+            decompressed_dict.pop(fmt_key, None)
+
+            continue
+
+        # If bytes but no known format, print warning
+        if isinstance(value, bytes):
+            print(f"Warning: Unknown compressed format for key '{key}'")
 
     return decompressed_dict
+
 
 def send_message(msg_type, msg, host, port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

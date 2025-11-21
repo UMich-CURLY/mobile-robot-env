@@ -3,7 +3,6 @@ import json
 import math
 import torch
 import numpy as np
-from pxr import UsdGeom, Gf, Sdf
 from scipy.spatial.transform import Rotation as R
 
 def wrap_to_pi(a):
