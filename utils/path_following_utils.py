@@ -3,7 +3,6 @@ import json
 import math
 import torch
 import numpy as np
-from pxr import UsdGeom, Gf, Sdf
 from scipy.spatial.transform import Rotation as R
 
 def wrap_to_pi(a):
@@ -119,7 +118,6 @@ class WaypointFollower:
         # Linear velocities: proportional to lookahead vector, clipped by given maxima
         # TODO: I and D terms should consider dt
         vel = self.kp * error + self.ki * self.error_integral + self.kd * error_derivative
-        vel = np.clip(vel, -self.max_vel, self.max_vel)
 
         # enforce minimum velocities when far from goal
         lin_speed = np.linalg.norm(vel[:2])
@@ -128,6 +126,7 @@ class WaypointFollower:
         if abs(ang_err) > self.arrive_yaw and abs(vel[2]) < self.min_ang_speed:
             vel[2] = vel[2] / abs(vel[2]) * self.min_ang_speed
 
+        vel = np.clip(vel, -self.max_vel, self.max_vel)
         vx, vy, vw = vel
 
         if verbose:
