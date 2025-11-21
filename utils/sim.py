@@ -292,8 +292,10 @@ class VLNSim:
                 depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
                 depth = np.clip(depth, 0, 65535).astype(np.uint16)
                 self._latest_data["depth"] = depth
-                self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
-                # obs_pose = obs['pov_pose'].cpu().numpy()
+                # self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
+                obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
+                self._latest_data["position"] = obs_pose[:3]
+                self._latest_data["quat_xyzw"] = obs_pose[3:]
                 # print(self._latest_data["position"]-obs_pose[:3], self._latest_data["quat_xyzw"]-obs_pose[3:])
                 self._latest_data["timestamp"] = time.time_ns()
                 self._latest_data["info"] = {
@@ -337,7 +339,7 @@ class VLNSim:
         rgb = obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8)
         depth = obs['pov_depth'][0, :, :, 0].cpu().numpy()
         depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0)
-        pose = obs['pov_pose'].cpu().numpy()
+        pose = obs['pov_pose'][self.robot_index].cpu().numpy()
         pose_matrix = np.eye(4)
         pose_matrix[:3, 3] = pose[:3]
         pose_matrix[:3, :3] = R.from_quat(pose[3:]).as_matrix()

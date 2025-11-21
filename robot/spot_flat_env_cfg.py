@@ -58,10 +58,10 @@ def camera_info(
     # extract the used quantities (to enable type-hinting)
     sensor = env.scene.sensors[sensor_cfg.name]
     pose = sensor._view.get_world_poses()
-    pos = pose[0][0].detach().cpu().numpy()
-    quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
-    quat = np.concatenate([quat[1:],quat[:1]])
-    return torch.tensor(np.concatenate([pos, quat]))
+    pos = sensor.data.pos_w.detach().cpu()
+    quat = sensor.data.quat_w_world.detach().cpu()
+    quat = torch.concat([quat[:,1:],quat[:,:1]], dim=1)
+    return torch.concat([pos,quat], dim=1)
 
 @configclass
 class SpotObservationsCfg:
@@ -310,7 +310,7 @@ class SpotFlatEnvCfg(BaseEnvCfg):
         # self.sim.dt = 0.002  # 500 Hz
 
         # general settings
-        self.decimation = 5
+        self.decimation = 10
         self.episode_length_s = 1000000.
         # simulation settings
         self.sim.dt = 0.005
@@ -360,6 +360,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
         self.scene.pov_camera = TiledCameraCfg(
             prim_path="{ENV_REGEX_NS}/Robot/body/Camera",
             update_period=0.1,  # 10 Hz
+            update_latest_camera_pose=True,
             height=480,
             width=640,
             data_types=["rgb", "distance_to_image_plane"],
@@ -377,6 +378,7 @@ class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
         self.scene.third_person_camera = TiledCameraCfg(
             prim_path="{ENV_REGEX_NS}/Robot/body/ThirdPersonCamera",
             update_period=0.1,  # 10 Hz
+            update_latest_camera_pose=True,
             height=480,
             width=640,
             data_types=["rgb"],
