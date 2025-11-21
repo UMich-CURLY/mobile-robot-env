@@ -12,6 +12,7 @@ from isaaclab.envs import ManagerBasedRLEnv
 from rsl_rl.runners import OnPolicyRunner
 from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
 from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
+from isaaclab.utils.math import convert_camera_frame_orientation_convention
 
 # Local imports
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
@@ -239,7 +240,6 @@ class VLNSim:
         quat_cam_world = quat_robot * quat_cam_body
         quat_cam_world = quat_cam_world.as_quat() # xyzw
         pose = manager_env.scene["pov_camera"]._view.get_world_poses()
-        from isaaclab.utils.math import convert_camera_frame_orientation_convention
         pos = pose[0][0].detach().cpu().numpy()
         quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
         quat = np.concatenate([quat[1:],quat[:1]])

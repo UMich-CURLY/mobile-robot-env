@@ -2,7 +2,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from numpy import ndarray
 
 import numpy as np
-from scipy.spatial import KDTree
 
 
 def euclidean_distance(
@@ -52,7 +51,7 @@ class Measure:
         return self._metric
     
     def get_robot_position(self):
-        robot_pos_w = self._env.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
+        robot_pos_w = self._env.scene.sensors['pov_camera'].data.pos_w[0].detach().cpu().numpy()
         return robot_pos_w
     
 
@@ -135,6 +134,21 @@ class DistanceToGoal(Measure):
 
         self._goals = episode["goals"]
         
+        n_goals = len(self._goals)
+        self.waypoint_distances = [] # distance from waypoint to goal
+        self.ref_waypoints = [] # waypoint list
+        self.waypoint_to_goal = [] # map waypoint to goal index
+        for i in range(n_goals):
+            distance = 0.0
+            n_waypoints = len(self._goals[i]["reference_path"])
+            for _j in range(n_waypoints):
+                j = n_waypoints - _j - 1
+                if _j>0:
+                    distance += euclidean_distance(self._goals[i]["reference_path"][j], self._goals[i]["reference_path"][j+1])
+                self.waypoint_distances.append(distance)
+                self.ref_waypoints.append(self._goals[i]["reference_path"][j])
+                self.waypoint_to_goal.append(i)
+        
     
 
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
@@ -146,25 +160,19 @@ class DistanceToGoal(Measure):
 
     def distance_to_goal(self, current_position):
 
-        # find the closest goal
-        goal_positions = np.array([x["location"] for x in self._goals])
-        dist_to_goals = np.linalg.norm(goal_positions - current_position, axis=1)
-        closest_goal = self._goals[np.argmin(dist_to_goals)]
-        ref_path = closest_goal["reference_path"]
-        self._ref_path = ref_path
-        self._kdtree = KDTree(self._ref_path)
-        
-        # Find the closest waypoint to the current position
-        closest_distance, closest_waypoint_idx = self._kdtree.query(current_position)
-        
-        # Initialize the total distance with the distance from the robot to the closest waypoint
-        total_distance = closest_distance
-        
-        # Add the distance between waypoints from the closest waypoint to the goal
-        for i in range(closest_waypoint_idx, len(self._ref_path) - 1):
-            total_distance += euclidean_distance(self._ref_path[i], self._ref_path[i + 1])
+        # calculate distance to each waypoint
+        distance_to_waypoints = [euclidean_distance(current_position, wp) for wp in self.ref_waypoints]
+        # add distance from waypoint to goal
+        total_distances = [distance_to_waypoints[i]+self.waypoint_distances[i] for i in range(len(self.ref_waypoints))]
+        # find the shortest path
+        closest_distance = min(total_distances)
+        closest_waypoint_idx = total_distances.index(closest_distance)
+        # get the radius of the goal
+        obj_radius = self._goals[self.waypoint_to_goal[closest_waypoint_idx]]["radius"]
+        # calculate the distance to the goal
+        dtg = max(0, closest_distance-obj_radius)
     
-        return total_distance
+        return dtg
 
     def update_metric(self, *args: Any, **kwargs: Any):
         current_position = self.get_robot_position()
@@ -288,7 +296,7 @@ class Success(Measure):
 
     def __init__(self, env, episode, measure_manager, *args: Any, **kwargs: Any):
         super().__init__(env, episode)
-        self._success_distance = 2.0 #episode["goals"][0]["radius"]
+        self._success_distance = 1.0
         self.measure_manager = measure_manager
 
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
@@ -342,14 +350,14 @@ class OracleNavigationError(Measure):
 
 
 class OracleSuccess(Measure):
-    """Oracle Success Rate (OSR). OSR = I(ONE <= goal_radius)"""
+    """Oracle Success Rate (OSR)"""
 
     cls_uuid: str = "oracle_success"
 
     def __init__(self, env, episode, measure_manager: MeasureManager, *args: Any, **kwargs: Any):
         super().__init__(env, episode)
         self.measure_manager = measure_manager
-        self._success_distance = 2.0 #episode["goals"][0]["radius"]
+        self._success_distance = 1.0
 
     def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
         return self.cls_uuid

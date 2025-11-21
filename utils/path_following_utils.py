@@ -28,7 +28,7 @@ class WaypointFollower:
         max_vel=[1.5, 1.0, 1.0],
         min_lin_speed=0.3,
         min_ang_speed=0.3,
-        kp=[2.0, 1.5, 2.0],
+        kp=[2.0, 0.5, 2.0],
         ki=[0.0, 0.0, 0.0], # [0.1, 0.1, 0.1]
         kd=[0.0, 0.0, 0.0], # [3, 3, 1]
         max_integral=[5.0, 5.0, 3.0],
@@ -62,7 +62,7 @@ class WaypointFollower:
         self.error_integral = np.zeros(3)
         self.last_error = np.zeros(3)
     
-    def update(self, cam_pos, cam_quat, waypoints_world):
+    def update(self, cam_pos, cam_quat, waypoints_world, verbose=False):
         device = self.device
         current_wp_idx = self.current_wp_idx
 
@@ -130,13 +130,14 @@ class WaypointFollower:
 
         vx, vy, vw = vel
 
-        print("================================================")
-        print(f"cam_pos: {cam_pos}")
-        print(f"target_wp: [{target_idx}] {target_wp[:2]} {np.rad2deg(target_wp[2])}")
-        print(f"base_xy: {base_xy} base_yaw: {np.rad2deg(base_yaw)}")
-        print(f"dx: {dx}, dy: {dy}, ang_err: {np.rad2deg(ang_err)}")
-        print(f"ex_b: {ex_b}, ey_b: {ey_b}")
-        print(f"vx: {vx}, vy: {vy}, vw: {vw}")
+        if verbose:
+            print("================================================")
+            print(f"cam_pos: {cam_pos}")
+            print(f"target_wp: [{target_idx}] {target_wp[:2]} {np.rad2deg(target_wp[2])}")
+            print(f"base_xy: {base_xy} base_yaw: {np.rad2deg(base_yaw)}")
+            print(f"dx: {dx}, dy: {dy}, ang_err: {np.rad2deg(ang_err)}")
+            print(f"ex_b: {ex_b}, ey_b: {ey_b}")
+            print(f"vx: {vx}, vy: {vy}, vw: {vw}")
 
 
         is_final_segment = (current_wp_idx >= num_wps - 2)

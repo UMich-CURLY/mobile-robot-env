@@ -136,7 +136,7 @@ end_time = 0
 while simulation_app.is_running():
     with torch.inference_mode():
         vln_sim.step()
-        # print("measures: ", vln_sim.info["measurements"])
+        # print("measures: ", ", ".join([f"{k}={v:.2f}" for k, v in vln_sim.info["measurements"].items()]))
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1
     if frame_count == 1:
