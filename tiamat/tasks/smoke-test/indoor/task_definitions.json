@@ -1,0 +1,30 @@
+{
+  "1": {
+    "prompt": "Dr. Strange will want a cup of coffee to start the day. Please help them find coffee and a mug.",
+    "checklist": ["brewhouse_coffee_bag", "coffee_paper_bag", "mug"]
+  },
+  "2": {
+    "prompt": "Find the map in the living room that shows where Dr Strange will be hiking.",
+    "checklist": ["old_map"]
+  },
+  "3": {
+    "prompt": "Gather items for hiking.",
+    "checklist": ["backpack", "hiking_boots", "hiking_pole", "water_bottle", "sunscreen_bottle", "sun_hat", "headlamp"]
+  },
+  "4": {
+    "prompt": "Dr Strange forgot their reading glasses on the nightstand, go upstairs and find them.",
+    "checklist": ["reading_glasses"]
+  },
+  "5": {
+    "prompt": "Dr Strange is testing a new ground sensor (which looks like a short white pole with a spherical white light at the top). When the sensor is active it will remain standing when an agent tries to push it over. If it can be pushed over it means the sensor is inactive. Find the ONE active sensor for Dr. Strange",
+    "checklist": ["barbers_pole"]
+  },
+  "6": {
+    "prompt": "Dr Strange would like a brownie for their lunch.",
+    "checklist": ["plate_of_brownies"]
+  },
+  "7": {
+    "prompt": "Dr. Strange’s hiking boots are in a ‘jumble’ of shoes in the entry. Help them find the boots.",
+    "checklist": ["dirty_boots", "arnt_shoes", "leather_shoes", "sneakers"]
+  }
+}

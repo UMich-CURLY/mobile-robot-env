@@ -1,0 +1,1 @@
+Dr Strange is testing a new ground sensor (which looks like a short white pole with a spherical white light at the top). When the sensor is active it will remain standing when an agent tries to push it over. If it can be pushed over it means the sensor is inactive. Find the ONE active sensor for Dr. Strange
