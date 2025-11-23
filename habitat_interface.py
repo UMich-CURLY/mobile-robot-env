@@ -22,6 +22,9 @@ from utils.socket_server import run_server, format_data
 from utils.path_following_utils import WaypointFollower
 from tf2_ros import Buffer, TransformListener, TransformException
 
+from openai import OpenAI
+import time
+
 # Global shared state
 _latest_rgb = None
 _latest_depth = None
@@ -75,8 +78,13 @@ class HabitatROSBridge(Node):
         The output must be a single word or short descriptive noun phrase. Do not include location details or general adjectives unless essential. Your Task: Instruction: 
         """)
 
-        from openai import OpenAI
-        self.client = OpenAI(api_key=self.openai_api_key, base_url=self.openai_api_base)
+        while True:
+            try:
+                self.client = OpenAI(api_key=self.openai_api_key, base_url=self.openai_api_base)
+                break
+            except Exception as e:
+                print(f"[HabitatROSBridge] Error initializing OpenAI client: {e}")
+                time.sleep(1)
 
         # topic names
         self.robot_topic = "/spot"
@@ -248,7 +256,7 @@ class HabitatROSBridge(Node):
 
     def path_follower_callback(self):
         if _latest_position is None or _latest_quat_xyzw is None:
-            print("[PATH FOLLOWER] Waiting for position and orientation...")
+            # print("[PATH FOLLOWER] Waiting for position and orientation...")
             return
         
         if self.follower is not None and hasattr(self.follower, "waypoints"):# and not self.follower.arrived_at_goal:
