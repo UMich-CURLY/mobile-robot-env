@@ -252,10 +252,10 @@ class HabitatROSBridge(Node):
             return
         
         if self.follower is not None and hasattr(self.follower, "waypoints"):# and not self.follower.arrived_at_goal:
-            print("[PATH FOLLOWER] Updating follower...")
+            # print("[PATH FOLLOWER] Updating follower...")
             #print(f"[PATH FOLLOWER] Current waypoints (interface): {self.follower.waypoints}")
             # Pass the current waypoints explicitly
-            cmd = self.follower.update(_latest_position, _latest_quat_xyzw, self.follower.waypoints, verbose=True)
+            cmd = self.follower.update(_latest_position, _latest_quat_xyzw, self.follower.waypoints, verbose=False)
             vx, vy, omega = cmd[0].cpu().numpy()
 
             move_command = Twist()
@@ -287,31 +287,19 @@ class HabitatROSBridge(Node):
         y_max: int = 384,
         crop_description: str = "top-right crop",
     ):
+        # ros2 topic pub /task_submission std_msgs/msg/String "data: '/spot/camera/head_rgb_left/image/compressed, (576, 192, 384, 0, 768, 384), top-right crop'"
+        print("[TASK SUBMISSION] Submitting task")
         task_sub_msg = String()
         camera_source = "/spot/camera/head_rgb_right/image/compressed"
-        coord_tuple = (
-            "("
-            + String(dot_x)
-            + ", "
-            + String(dot_y)
-            + ", "
-            + String(x_min)
-            + ", "
-            + String(y_min)
-            + ", "
-            + String(x_max)
-            + ", "
-            + String(y_max)
-            + ")"
-        )
-        task_sub_msg.data = camera_source + ", " + coord_tuple + ", " + crop_description
+        task_sub_msg.data = f"{camera_source}, ({dot_x}, {dot_y}, {x_min}, {y_min}, {x_max}, {y_max}), {crop_description}"
 
-        self.task_submission_pub.publish(task_sub_msg)
+        self.sim_control_pub.publish(task_sub_msg)
 
     # Once the agent determines that it has completed the task, call the following function
     # to complete the task. The simulation will then move to the next task, publishing it
     # to /scenario and saving all images and descriptions to a JSON.
     def pub_task_complete(self):
+        print("[TASK COMPLETE] Task complete")
         task_complete_msg = String()
         task_complete_msg.data = "Task Complete"
         self.sim_control_pub.publish(task_complete_msg)
