@@ -66,10 +66,12 @@ def make_args():
 class HabitatROSBridge(Node):
     def __init__(self, args=None):
         super().__init__('habitat_ros_bridge')
+        print("[HabitatROSBridge] Initializing Habitat ROS Bridge")
         self.args_cli = args or make_args()
         self.bridge = CvBridge()
         self._ros_publishers = {}
         self.old_task = None
+
 
         self.openai_api_key = "EMPTY"
         self.openai_api_base = "http://localhost:8000/v1"
@@ -78,9 +80,16 @@ class HabitatROSBridge(Node):
         The output must be a single word or short descriptive noun phrase. Do not include location details or general adjectives unless essential. Your Task: Instruction: 
         """)
 
+        self.client = OpenAI(api_key=self.openai_api_key, base_url=self.openai_api_base)
+
+        # wait for the openai client to be initialized
         while True:
             try:
-                self.client = OpenAI(api_key=self.openai_api_key, base_url=self.openai_api_base)
+                self.client.chat.completions.create(
+                    model="Qwen/Qwen3-4B-Instruct-2507",
+                    messages=[{"role": "user", "content": "Hello, world!"}],
+                    max_tokens=10,
+                )
                 break
             except Exception as e:
                 print(f"[HabitatROSBridge] Error initializing OpenAI client: {e}")
