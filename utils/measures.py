@@ -170,7 +170,7 @@ class DistanceToGoal(Measure):
         # get the radius of the goal
         obj_radius = self._goals[self.waypoint_to_goal[closest_waypoint_idx]]["radius"]
         # calculate the distance to the goal
-        dtg = max(0, closest_distance-obj_radius)
+        dtg = max(1e-5, closest_distance-obj_radius)
     
         return dtg
 
