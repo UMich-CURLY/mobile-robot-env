@@ -340,9 +340,13 @@ class SpotFlatEnvCfg(BaseEnvCfg):
         self.scene.height_scanner = None
 
 @configclass
+class EmptyEventCfg:
+    pass
+
+@configclass
 class SpotFlatEnvCfg_PLAY(SpotFlatEnvCfg):
 
-    events: Optional[SpotEventCfg] = None
+    events: EmptyEventCfg = EmptyEventCfg()
 
     def __post_init__(self) -> None:
         # post init of parent
