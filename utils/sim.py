@@ -114,9 +114,9 @@ class VLNSim:
             self.reset_server_cache()
         self.next_episode = episode
         self.reset_flag = True
-        if self.env is None:
-            with self.load_env_lock:
-                    self.init_env()
+        with self.load_env_lock:
+            if self.env is None:
+                self.init_env()
         self.clear_waypoints()
 
     def load_episode(self, episode_label):
