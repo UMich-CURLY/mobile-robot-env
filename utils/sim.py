@@ -43,9 +43,11 @@ class VLNSim:
 
         # episode
         self.reset_flag = True
-        self.current_episode = None
-        self.episode_list = None
-        self.episode_label_list = None
+        self.sim_state = "init" # init, loading, running, terminated
+        self.next_episode = None # this is updated when starting a new episode
+        self.current_episode = None # this is updated after an episode is loaded
+        self.episode_list = VLNEpisode.from_json_folder(self.args.episode_folder)
+        self.episode_label_list = [x.episode_label for x in self.episode_list]
 
         # Shared buffers for server callbacks
         self._latest_data = None
@@ -64,8 +66,7 @@ class VLNSim:
         self.viewport_third_person = True
 
         # initialize server
-        self.server_disabled = True
-        self.server_reset_flag = False
+        self.server_data_lock = Lock()
         if not args.disable_socket_server:
             self.start_server(host=args.host, port=args.port, server_name="BenchmarkServer")
         if args.foxglove_port>0:
@@ -73,12 +74,12 @@ class VLNSim:
         else:
             self.visualizer = None
     def init_env(self):
-        if self.current_episode is None:
+        if self.next_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
         # isaac lab manager
         args = self.args
         env_cfg = SpotFlatEnvCfg_PLAY()
-        init_env_cfg(env_cfg, args, self.current_episode)
+        init_env_cfg(env_cfg, args, self.next_episode)
         env_cfg.scene.num_envs = args.num_envs
         env_cfg.sim.device = args.device
         env_cfg.curriculum = None
@@ -109,25 +110,18 @@ class VLNSim:
         self.manager_env = manager_env
 
     def reset(self, episode):
-        self.current_episode = episode
-        self.set_reset_flag(True)
-        with self.load_env_lock:
-            if self.env is None:
+        with self.server_data_lock:
+            self.reset_server_cache()
+        self.next_episode = episode
+        self.reset_flag = True
+        if self.env is None:
+            with self.load_env_lock:
                     self.init_env()
         self.clear_waypoints()
-        self.reset_server_cache()
 
     def load_episode(self, episode_label):
         print(f"[INFO] Loading episode: {episode_label}")
-        if self.episode_list is None:
-            self.episode_list = VLNEpisode.from_json_folder(self.args.episode_folder)
-            self.episode_label_list = [x.episode_label for x in self.episode_list]
         self.reset(self.episode_list[self.episode_label_list.index(episode_label)])
-    
-    def set_reset_flag(self, reset_flag):
-        self.reset_flag = reset_flag
-        self.server_disabled = reset_flag
-        self.server_reset_flag = False
 
     def reset_server_cache(self):
         self._latest_data = {
@@ -160,24 +154,37 @@ class VLNSim:
 
     def data_callback(self, request_type):
         if request_type == "GET_SENSOR_DATA":
-            if self.server_disabled:
-                return None
-            for key in self._latest_data:
-                if self._latest_data[key] is None:
-                    print(f"[Warning] socket server data missing for key: {key}")
-                    return None
-            if self.server_reset_flag:
-                # send this message and then hang server
-                self.server_disabled = True
-                self.server_reset_flag = False
-            return format_data(
-                self._latest_data["rgb"],
-                self._latest_data["depth"],
-                self._latest_data["position"],
-                self._latest_data["quat_xyzw"],
-                self._latest_data["info"],
-                self._latest_data["timestamp"]
-            )
+            error_message = {
+                "success": False,
+                "message": "Unknown error",
+                "episode_id": self.current_episode.get("episode_id", ""),
+                "scene_id": self.current_episode.get("scene_id", ""),
+            }
+            if self.sim_state == "init":
+                error_message["message"] = "Simulator is initializing"
+                return error_message
+            elif self.sim_state == "loading":
+                error_message["message"] = "Episode is loading"
+                return error_message
+            elif self.sim_state == "terminated":
+                error_message["message"] = "Episode has been terminated"
+                error_message.update(self._latest_data["info"])
+                return error_message
+            # return the observation data
+            with self.server_data_lock:
+                for key in self._latest_data:
+                    if self._latest_data[key] is None:
+                        print(f"[Warning] socket server data missing for key: {key}")
+                        error_message["message"] = "Episode is not ready yet"
+                        return error_message
+                return format_data(
+                    self._latest_data["rgb"],
+                    self._latest_data["depth"],
+                    self._latest_data["position"],
+                    self._latest_data["quat_xyzw"],
+                    self._latest_data["info"],
+                    self._latest_data["timestamp"]
+                )
         elif request_type == "GET_EPISODE_LIST":
             episode_set_list = load_episode_set(self.args.episode_folder)
             episode_set_list["all"] = self.episode_label_list
@@ -250,10 +257,13 @@ class VLNSim:
         # reset if needed
         if self.reset_flag:
             print(f"[INFO]: Resetting env state..")
+            self.sim_state = "loading"
             self.env.reset_idx([self.robot_index])
-            obs, _ = self.env.reset(self.current_episode)
+            obs, _ = self.env.reset(self.next_episode)
             self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
-            self.set_reset_flag(False)
+            self.reset_flag = False
+            self.current_episode = self.next_episode
+            self.next_episode = None
         # update waypoints
         if self.waypoints is not None and len(self.waypoints) > 0:
             self.follow_waypoints(visualize_waypoints=False)
@@ -263,16 +273,17 @@ class VLNSim:
         self.obs = obs
         self.reward = reward
         self.done = done
-        # check if episode is done
-        if done:
-            if info["terminations"]["termination_reason"] == "stop_called":
-                # stop the server immediately
-                self.server_disabled = True
-            else:
-                # send the last obs with termination info to the client and then stop
-                self.server_reset_flag = True
         # update obs
-        self.update_obs(obs, info)
+        with self.server_data_lock:
+            # check if episode is terminated
+            if "terminations" in info:
+                self.sim_state = "terminated"
+                self._latest_data["info"] = {
+                    "terminations": info["terminations"]
+                }
+            else:
+                self.sim_state = "running"
+                self.update_obs(obs, info)
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env
@@ -306,12 +317,7 @@ class VLNSim:
                     "robot_height": 0.61,
                     "hfov_deg": hfov_deg,
                     "metrics": info["measurements"],
-                    "terminations": None
                 }
-                
-                if "terminations" in info:
-                    # wait the socket client to reset vln sim
-                    self._latest_data["info"]["terminations"] = info["terminations"]
             except Exception as e:
                 print(f"Error updating obs: {e}")
                 import traceback

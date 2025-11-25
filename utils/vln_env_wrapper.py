@@ -277,7 +277,7 @@ class VLNEnvWrapper:
             if self.reset_buf.any():
                 termination_reason = max(termination_terms, key=lambda x:x[1])[0]
                 info["terminations"] = {"termination_reason": termination_reason}
-                print(f"Episode terminated due to {termination_reason}")
+                print(f"Episode {self.episode['episode_label']} terminated due to {termination_reason}")
             else:
                 if "terminations" in info:
                     del info["terminations"]
@@ -286,7 +286,7 @@ class VLNEnvWrapper:
             done = done.any() or self.is_stop_called.any()
             if self.is_stop_called.any():
                 info["terminations"] = {"termination_reason": "stop_called"}
-                print(f"Episode terminated due to stop_called")
+                print(f"Episode {self.episode['episode_label']} terminated due to stop_called")
             else:
                 if "terminations" in info:
                     del info["terminations"]

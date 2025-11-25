@@ -96,7 +96,7 @@ def update_ui(settings_type, selected_value=None):
             ui_window.set_ui_value(ui_map, key, current_episode[value])
     elif settings_type == "episode_info":
         ui_window.set_ui_value(ui_map, "episode_info", vln_sim.current_episode.episode_info)
-update_ui("episode_label", vln_sim.current_episode["episode_label"])
+
 
 def save_settings(settings_type):
     current_episode_label = ui_window.get_ui_value(ui_map, "episode_label")
@@ -136,6 +136,8 @@ end_time = 0
 while simulation_app.is_running():
     with torch.inference_mode():
         vln_sim.step()
+        if frame_count == 0:
+            update_ui("episode_label", vln_sim.current_episode["episode_label"])
         # print("measures: ", ", ".join([f"{k}={v:.2f}" for k, v in vln_sim.info["measurements"].items()]))
         # print(f'[{vln_sim.commands_source}] command: {vln_sim.commands}')
     frame_count += 1
