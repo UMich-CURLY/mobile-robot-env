@@ -161,7 +161,8 @@ class FoxgloveVisualizer():
     def log_image(self, channel_name, image, frame_id):
         if not channel_name in self.channels:
             self.channels[channel_name] = CompressedImageChannel(topic=f"/{channel_name}")
-        img_jpg = cv2.imencode('.jpeg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])[1].tobytes()
+        image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        img_jpg = cv2.imencode('.jpeg', image_bgr, [cv2.IMWRITE_JPEG_QUALITY, 90])[1].tobytes()
         self.channels[channel_name].log(
             CompressedImage(
                 data=img_jpg,
