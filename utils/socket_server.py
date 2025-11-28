@@ -74,7 +74,7 @@ def compress_payload(payload_dict):
 
     # Compress RGB Image
     if 'rgb_image' in compressed_dict and isinstance(compressed_dict['rgb_image'], np.ndarray):
-        rgb_image_np = compressed_dict['rgb_image']
+        rgb_image_np = compressed_dict['rgb_image'][:, :, ::-1]
         success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
         if success:
             compressed_dict['rgb_image'] = encoded_image.tobytes() # Store as bytes

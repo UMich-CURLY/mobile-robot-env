@@ -114,10 +114,10 @@ class VLNSim:
             self.reset_server_cache()
         self.next_episode = episode
         self.reset_flag = True
+        self.clear_waypoints()
         with self.load_env_lock:
             if self.env is None:
                 self.init_env()
-        self.clear_waypoints()
 
     def load_episode(self, episode_label):
         print(f"[INFO] Loading episode: {episode_label}")
@@ -247,11 +247,11 @@ class VLNSim:
         quat_cam_world = quat_robot * quat_cam_body
         quat_cam_world = quat_cam_world.as_quat() # xyzw
         pose = manager_env.scene["pov_camera"]._view.get_world_poses()
-        pos = pose[0][0].detach().cpu().numpy()
-        quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
-        quat = np.concatenate([quat[1:],quat[:1]])
-        return pos, quat
-        # return pos_cam_world, quat_cam_world
+        # pos = pose[0][0].detach().cpu().numpy()
+        # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
+        # quat = np.concatenate([quat[1:],quat[:1]])
+        # return pos, quat
+        return pos_cam_world, quat_cam_world
 
     def step(self):
         # reset if needed
@@ -303,10 +303,10 @@ class VLNSim:
                 depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
                 depth = np.clip(depth, 0, 65535).astype(np.uint16)
                 self._latest_data["depth"] = depth
-                # self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
-                obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
-                self._latest_data["position"] = obs_pose[:3]
-                self._latest_data["quat_xyzw"] = obs_pose[3:]
+                self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
+                # obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
+                # self._latest_data["position"] = obs_pose[:3]
+                # self._latest_data["quat_xyzw"] = obs_pose[3:]
                 # print(self._latest_data["position"]-obs_pose[:3], self._latest_data["quat_xyzw"]-obs_pose[3:])
                 self._latest_data["timestamp"] = time.time_ns()
                 self._latest_data["info"] = {
