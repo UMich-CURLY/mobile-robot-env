@@ -11,8 +11,8 @@ vc_ny_4
 grCommercial_hospital_2
 grCommercial_hospital_3
 grCommercial_hospital_4
-grHome_indoor_0
-grHome_indoor_1
-grHome_indoor_2
-grHome_indoor_3
-grHome_indoor_4
+grHome_indoor1_0
+grHome_indoor1_1
+grHome_indoor1_2
+grHome_indoor1_3
+grHome_indoor1_4
