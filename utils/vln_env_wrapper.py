@@ -138,7 +138,7 @@ class VLNEnvWrapper:
         settings_changed = (self.scene_setting is None) or (self.scene_setting != scene_settings)
 
         # do not update scene if it is the first init
-        if not self.first_init and (scene_changed or settings_changed):
+        if scene_changed or settings_changed:
             # remove previous scene
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
@@ -165,9 +165,7 @@ class VLNEnvWrapper:
                     break
             dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
             dome_light.SetActive(not disable_default_light)
-
-        # apply scene settings
-        if scene_changed or settings_changed:
+            # apply scale and translation
             terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
             if collider:
                 collider_cfg = sim_utils.CollisionPropertiesCfg(collision_enabled=True)
@@ -277,7 +275,12 @@ class VLNEnvWrapper:
             if self.reset_buf.any():
                 termination_reason = max(termination_terms, key=lambda x:x[1])[0]
                 info["terminations"] = {"termination_reason": termination_reason}
-                print(f"Episode {self.episode['episode_label']} terminated due to {termination_reason}")
+                # print termination reason if it is not the same as the last time
+                print_termination_reason = (self.episode['episode_label'], termination_reason)
+                if not hasattr(self, 'print_termination_reason') or self.print_termination_reason != print_termination_reason:
+                    self.print_termination_reason = print_termination_reason
+                    print(f"Episode {self.episode['episode_label']} terminated due to {termination_reason}")
+                    print("Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in info["measurements"].items()]))
             else:
                 if "terminations" in info:
                     del info["terminations"]

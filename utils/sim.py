@@ -26,11 +26,13 @@ from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from threading import Lock
 
 class VLNSim:
-    def __init__(self, args):
+    def __init__(self, args, simulation_app):
         self.args = args
         self.device = args.device
+        self.simulation_app = simulation_app
 
         # env
+        self.init = False
         self.env = None
         self.manager_env = None
         self.info = None
@@ -64,6 +66,7 @@ class VLNSim:
             print("[INFO] Headless mode, disabling viewport updates")
             self.viewport.updates_enabled = False
         self.viewport_third_person = True
+        self.callbacks = {}
 
         # initialize server
         self.server_data_lock = Lock()
@@ -73,6 +76,7 @@ class VLNSim:
             self.visualizer = FoxgloveVisualizer(host=args.host, port=args.foxglove_port)
         else:
             self.visualizer = None
+
     def init_env(self):
         if self.next_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
@@ -110,13 +114,14 @@ class VLNSim:
         self.manager_env = manager_env
 
     def reset(self, episode):
-        with self.server_data_lock:
-            self.reset_server_cache()
-        self.next_episode = episode
-        self.reset_flag = True
-        self.clear_waypoints()
         with self.load_env_lock:
-            if self.env is None:
+            with self.server_data_lock:
+                self.reset_server_cache()
+            self.next_episode = episode
+            self.reset_flag = True
+            self.clear_waypoints()
+            if not self.init:
+                self.init = True
                 self.init_env()
 
     def load_episode(self, episode_label):
@@ -150,7 +155,13 @@ class VLNSim:
             self.env.set_stop_called(self.robot_index, True)
         elif msg_type == 'EPISODE':
             # this will trigger a reset of the vln sim
+            for func in self.callbacks.get('on_client_episode_changed', []):
+                func(message["episode_label"])
             self.load_episode(message["episode_label"])
+    
+    def on_client_episode_changed(self, func):
+        """args: func(episode_label)"""
+        self.callbacks.setdefault('on_client_episode_changed', []).append(func)
 
     def data_callback(self, request_type):
         if request_type == "GET_SENSOR_DATA":
@@ -254,36 +265,39 @@ class VLNSim:
         return pos_cam_world, quat_cam_world
 
     def step(self):
-        # reset if needed
-        if self.reset_flag:
-            print(f"[INFO]: Resetting env state..")
-            self.sim_state = "loading"
-            self.env.reset_idx([self.robot_index])
-            obs, _ = self.env.reset(self.next_episode)
-            self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
-            self.reset_flag = False
-            self.current_episode = self.next_episode
-            self.next_episode = None
-        # update waypoints
-        if self.waypoints is not None and len(self.waypoints) > 0:
-            self.follow_waypoints(visualize_waypoints=False)
-        # Policy forward pass
-        obs, reward, done, info = self.env.step(self.commands)
-        self.info = info
-        self.obs = obs
-        self.reward = reward
-        self.done = done
-        # update obs
-        with self.server_data_lock:
-            # check if episode is terminated
-            if "terminations" in info:
-                self.sim_state = "terminated"
-                self._latest_data["info"] = {
-                    "terminations": info["terminations"]
-                }
-            else:
-                self.sim_state = "running"
-                self.update_obs(obs, info)
+        with torch.inference_mode(): 
+            # reset if needed
+            with self.load_env_lock:
+                if self.reset_flag:
+                    print(f"[INFO]: Resetting env state to {self.next_episode.episode_label}..")
+                    self.sim_state = "loading"
+                    self.env.reset_idx([self.robot_index])
+                    obs, _ = self.env.reset(self.next_episode)
+                    self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
+                    self.reset_flag = False
+                    self.current_episode = self.next_episode
+                    self.next_episode = None
+            # update waypoints
+            if self.waypoints is not None and len(self.waypoints) > 0:
+                self.follow_waypoints(visualize_waypoints=False)
+            # Policy forward pass
+            obs, reward, done, info = self.env.step(self.commands)
+            # print(f'[Sim] command: {self.commands}, source: {self.commands_source}')
+            self.info = info
+            self.obs = obs
+            self.reward = reward
+            self.done = done
+            # update obs
+            with self.server_data_lock:
+                # check if episode is terminated
+                if "terminations" in info:
+                    self.sim_state = "terminated"
+                    self._latest_data["info"] = {
+                        "terminations": info["terminations"]
+                    }
+                else:
+                    self.sim_state = "running"
+                    self.update_obs(obs, info)
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env
