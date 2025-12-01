@@ -8,7 +8,7 @@ from pxr import Gf
 import torch
 from utils.termination_cfg import VLNTerminationsCfg
 from isaaclab.managers import TerminationManager
-
+import isaacsim.core.utils.prims as prim_utils
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -96,6 +96,11 @@ class VLNEnvWrapper:
         bb_cache = bounds_utils.create_bbox_cache()
         return bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[prim_path])
 
+    def remove_prim(self, rule):
+        prim_list = prim_utils.find_matching_prim_paths(rule)
+        for prim_path in prim_list:
+            prim_utils.delete_prim(prim_path)
+
     def get_prim_position(self, prim_path):
         """Return position of the prim (center of the bounding box)."""
         min_x, min_y, min_z, max_x, max_y, max_z = self.get_prim_bounding_box(prim_path)
@@ -179,6 +184,9 @@ class VLNEnvWrapper:
         self.scene_setting = scene_settings
         self.usd_path = self.episode["path"]
 
+        # remove visualization
+        self.remove_prim("/Visuals")
+
         # reset robot position
         robot = self.scene["robot"]
         set_robot_pose(self.manager_env.cfg, episode, robot)
@@ -188,6 +196,7 @@ class VLNEnvWrapper:
         self.termination_manager.reset()
 
         # reset low-level environment
+        print(f"[INFO] Updating environment, this may take a while...")
         low_level_obs, infos = self.env.reset()
         self.low_level_obs = low_level_obs
         for i in range(self.num_envs):

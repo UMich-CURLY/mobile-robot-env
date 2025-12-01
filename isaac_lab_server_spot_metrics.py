@@ -29,24 +29,21 @@ settings = carb.settings.get_settings()
 settings.set("/renderer/multiGPU/enabled", False)
 settings.set("/renderer/activeGpu", 0)
 settings.set("/renderer/shadercache/driverDiskCache/enabled", True)
-settings.set("/rtx/post/dlss/execMode", 1) # 0: Performance, 1: Balanced, 2: Quality, 3: Auto
-settings.set("/rtx/reflections/enabled", True)
-settings.set("/rtx/translucency/enabled", True)
-settings.set("/rtx-flags/ecoMode/enabled", True)
-simulation_app.update()
+import isaaclab.sim as sim_utils
 
 # Local imports
 from utils.sim import VLNSim
 
 # setup simulation
 default_episode = "test_generator_0"
-vln_sim = VLNSim(args, simulation_app)
+vln_sim = VLNSim(args)
 vln_sim.load_episode(default_episode)
 
 # Setup UI
 from utils.ui import BenchmarkUI
-ui = BenchmarkUI(vln_sim, default_episode_label=default_episode)
-vln_sim.on_client_episode_changed(lambda episode_label: ui.update_ui("episode_label", episode_label))
+benchmark_ui = BenchmarkUI(vln_sim)
+benchmark_ui.update_ui("episode_label", default_episode)
+vln_sim.on_client_episode_changed(lambda episode_label: benchmark_ui.update_ui("episode_label", episode_label))
 
 """Main simulation loop"""
 print(f"[INFO] Starting simulation took {time.time()-sim_start_time:.2f}s")
@@ -57,8 +54,8 @@ frame_count = 0
 end_time = 0
 while simulation_app.is_running():
     vln_sim.step()
-    frame_count += 1
     # print infos
+    frame_count += 1
     if frame_count == 1:
         print(f"[INFO] Loading default scene took {time.time() - start_time:.2f}s")
         pass

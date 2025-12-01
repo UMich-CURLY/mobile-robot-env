@@ -319,6 +319,9 @@ class SpotFlatEnvCfg(BaseEnvCfg):
         self.sim.physics_material.dynamic_friction = 1.0
         self.sim.physics_material.friction_combine_mode = "multiply"
         self.sim.physics_material.restitution_combine_mode = "multiply"
+        self.sim.render.dlss_mode = 1
+        self.sim.render.enable_reflections = True
+        self.sim.render.enable_translucency = True
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         self.scene.contact_forces.update_period = self.sim.dt

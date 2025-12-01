@@ -26,10 +26,9 @@ from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
 from threading import Lock
 
 class VLNSim:
-    def __init__(self, args, simulation_app):
+    def __init__(self, args):
         self.args = args
         self.device = args.device
-        self.simulation_app = simulation_app
 
         # env
         self.init = False
@@ -185,7 +184,7 @@ class VLNSim:
             with self.server_data_lock:
                 for key in self._latest_data:
                     if self._latest_data[key] is None:
-                        print(f"[Warning] socket server data missing for key: {key}")
+                        # print(f"[Warning] socket server data missing for key: {key}")
                         error_message["message"] = "Episode is not ready yet"
                         return error_message
                 return format_data(

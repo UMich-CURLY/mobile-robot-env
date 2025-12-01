@@ -11,13 +11,7 @@ import numpy as np
 from utils.episode import VLNEpisode
 
 # UI
-from utils.ui import SimWindow
-import utils.ui_utils as ui_utils
-import omni.ui as ui
-import omni.usd
-import isaacsim.core.utils.prims as prim_utils
-import isaacsim.core.utils.bounds as bounds_utils
-import isaaclab.sim as sim_utils
+import utils.navmesh_utils as navmesh_utils
 from utils.vis import visualize_points, visualize_curve
 
 class TaskGenerator:
@@ -35,6 +29,8 @@ class TaskGenerator:
         self.args = args
         self.task_config = yaml.load(open(args.tg_config_path, 'r'), Loader=yaml.FullLoader)
         self.parse_config(self.task_config)
+        # setup navmesh tools
+        self.navmesh_interface = navmesh_utils.NavmeshInterface(up_axis='Z')
 
     def parse_config(self, task_config):
         self.scene_id_list = []
@@ -70,18 +66,16 @@ class TaskGenerator:
                 scene_name_config[key] = scene_config[key]
         
     def save_config(self):
-
         class NoAliasDumper(yaml.SafeDumper):
             def ignore_aliases(self, data):
                 return True
         with open(self.args.tg_config_path, "w") as f:
             yaml.dump(self.task_config, f, Dumper=NoAliasDumper)
 
-    def generate_episodes(self, env, scene_id, navmesh_interface):
+    def generate_episodes(self, env, scene_id):
         # bind objects
         self.env = env
         self.manager_env = env.manager_env
-        self.navmesh_interface = navmesh_interface
         # load scene config
         self.scene_config = self.get_scene_config(scene_id)
         self.num_episodes = self.scene_config['episode_number']
@@ -130,7 +124,7 @@ class TaskGenerator:
         else:
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), scene_type=self.scene_config.get("scene_type"))
+            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=self.scene_config.get("scene_type"))
             navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")

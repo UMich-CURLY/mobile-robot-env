@@ -2,62 +2,12 @@ from collections import defaultdict
 import os
 import numpy as np
 from tqdm import tqdm
-import PyRecastDetour as pyrecast
-
-from pxr import Usd, UsdGeom, Gf, Sdf, UsdShade, Vt, UsdUtils
-from isaaclab.sim.utils import export_prim_to_file
+from pxr import UsdGeom, Gf, Usd
 from utils.vis import visualize_mesh
-# Import usd_utils functionality
-
-def traverse_instanced_children(prim):
-    """Get every Prim child beneath `prim`, even if `prim` is instanced.
-
-    Important:
-        If `prim` is instanced, any child that this function yields will
-        be an instance proxy.
-
-    Args:
-        prim (`pxr.Usd.Prim`): Some Prim to check for children.
-
-    Yields:
-        `pxr.Usd.Prim`: The children of `prim`.
-
-    """
-    for child in prim.GetFilteredChildren(Usd.TraverseInstanceProxies()):
-        yield child
-
-        for subchild in traverse_instanced_children(child):
-            yield subchild
-
-def parent_and_children_as_mesh(parent_prim):
-    if UsdGeom.Imageable(parent_prim).ComputeVisibility() == UsdGeom.Tokens.invisible:
-        return [], []
-    if parent_prim.IsA(UsdGeom.Mesh):
-        points, faces = get_mesh(parent_prim)
-        return points, faces
-    
-    found_meshes = []
-    for x in traverse_instanced_children(parent_prim):
-        # Check if prim is visible in the scene or not
-        if UsdGeom.Imageable(x).ComputeVisibility() == UsdGeom.Tokens.invisible:
-            continue
-        if x.IsA(UsdGeom.Mesh):
-            found_meshes.append(x)
-
-    # children = parent_prim.GetAllChildren()
-    # children = [child.GetPrimPath() for child in children]
-    # points, faces = get_mesh(children)
-    points, faces = get_mesh(found_meshes)
-    
-    return points, faces
-
-def children_as_mesh(stage, parent_prim):
-    children = parent_prim.GetAllChildren()
-    children = [child.GetPrimPath() for child in children]
-    points, faces = get_mesh(stage, children)
-    
-    return points, faces
-
+try:
+    import PyRecastDetour as pyrecast
+except ImportError:
+    raise ImportError("PyRecastDetour not found, run tools/install_pyrecastdetour.sh to install")
 
 def get_all_stage_mesh(stage, prims, exclude_paths=[]):
 
@@ -198,7 +148,7 @@ def convert_to_triangle_mesh(FaceVertexIndices, FaceVertexCounts):
     return np.array(triangle_faces)
 
 class NavmeshInterface:
-    def __init__(self, up_axis='Y', stage=None): 
+    def __init__(self, up_axis='Y'): 
         self.built = False
         self.input_prim = None
         self.input_vert = None
@@ -206,7 +156,6 @@ class NavmeshInterface:
         self.random_points = None
         self.wall_outline = []
         self.path_points = None
-        self.stage = stage
         self.start_pos = None
         self.end_pos = None
         self.nm = pyrecast.Navmesh()
@@ -229,13 +178,6 @@ class NavmeshInterface:
         # recast, then, we will convert it back to y_up (all functions will need to do that)
         self.z_up = up_axis == 'Z'
     
-    def _snake_to_camel(self, s):
-        parts = s.split('_')
-        return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
-    
-    def _camel_to_snake(self, s):
-        return ''.join(['_' + char.lower() if char.isupper() else char for char in s]).lstrip('_')
-
     def update_settings(self, settings):
         for key, value in settings.items():
             self.settings[self._snake_to_camel(key)] = value
@@ -251,9 +193,9 @@ class NavmeshInterface:
             return False
         return True
 
-    def setup_navmesh(self, selected_paths, exclude_paths, scene_type=None):
-        self.input_prim = [self.stage.GetPrimAtPath(x) for x in selected_paths]
-        self.input_vert, self.input_tri = get_all_stage_mesh(self.stage, self.input_prim, exclude_paths=exclude_paths)
+    def setup_navmesh(self, selected_paths, exclude_paths, stage, scene_type=None):
+        self.input_prim = [stage.GetPrimAtPath(x) for x in selected_paths]
+        self.input_vert, self.input_tri = get_all_stage_mesh(stage, self.input_prim, exclude_paths=exclude_paths)
         if len(self.input_vert) == 0:
             print('[INFO]: No mesh found')
         self.input_vert = np.array(self.input_vert)
