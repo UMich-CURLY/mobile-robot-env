@@ -21,7 +21,7 @@ from scipy.spatial.transform import Rotation as R
 from utils.socket_server import run_server, format_data
 from utils.path_following_utils import WaypointFollower
 from tf2_ros import Buffer, TransformListener, TransformException
-
+from message_filters import Subscriber, ApproximateTimeSynchronizer
 from openai import OpenAI
 import time
 
@@ -107,10 +107,12 @@ class HabitatROSBridge(Node):
         self.sim_control_topic = f"/sim_control"
         self.sim_settings_topic = f"/sim_settings"
         # Subscribers
-        self.create_subscription(CompressedImage, self.camera_topic, self.rgb_callback, 10)
-        self.create_subscription(Image, self.depth_topic, self.depth_callback, 10)
-        self.create_subscription(Odometry, self.odom_topic, self.odom_callback, 10)
-        self.subscription = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
+        self.rgb_sub = Subscriber(self, CompressedImage, self.camera_topic)
+        self.depth_sub = Subscriber(self, Image, self.depth_topic)
+        self.odom_sub = Subscriber(self, Odometry, self.odom_topic)
+        self.sync = ApproximateTimeSynchronizer([self.rgb_sub, self.depth_sub, self.odom_sub], 100, 0.1, allow_headerless=False)
+        self.sync.registerCallback(self.sensor_callback)
+        self.scenario_sub = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
 
         # wait for sim control topic to be available
         qos = QoSProfile(depth=10)
@@ -186,6 +188,11 @@ class HabitatROSBridge(Node):
         self.publish(self.action_topic, Twist())
         
     # ---- Callbacks ----
+    def sensor_callback(self, rgb_msg, depth_msg, odom_msg):
+        self.rgb_callback(rgb_msg)
+        self.depth_callback(depth_msg)
+        self.odom_callback(odom_msg)
+
     def rgb_callback(self, msg):
         global _latest_rgb
         try:
