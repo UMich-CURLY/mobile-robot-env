@@ -94,6 +94,7 @@ class HabitatROSBridge(Node):
             except Exception as e:
                 print(f"[HabitatROSBridge] Error initializing OpenAI client: {e}")
                 time.sleep(1)
+        print("[HabitatROSBridge] OpenAI client initialized")
 
         # topic names
         self.robot_topic = "/spot"
@@ -226,6 +227,7 @@ class HabitatROSBridge(Node):
                 "metrics": {}
             }
             if _latest_rgb is None or _latest_depth is None or _latest_position is None or _latest_quat_xyzw is None:
+                print("[HabitatROSBridge] Waiting for sensor data...")
                 return None
             return format_data(_latest_rgb, _latest_depth, _latest_position, _latest_quat_xyzw, _info, "hab_interface")
         elif request_type == "GET_EPISODE_LIST":
