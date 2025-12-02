@@ -92,9 +92,10 @@ class HabitatROSBridge(Node):
                 )
                 break
             except Exception as e:
-                print(f"[HabitatROSBridge] Error initializing OpenAI client: {e}")
+                print(f"[HabitatROSBridge] Waiting for OpenAI client to be initialized...")
                 time.sleep(1)
-        print("[HabitatROSBridge] OpenAI client initialized")
+        print("[HabitatROSBridge] OpenAI client initialized.")
+
 
         # topic names
         self.robot_topic = "/spot"
@@ -104,14 +105,40 @@ class HabitatROSBridge(Node):
         self.odom_topic = f"{self.robot_topic}/platform/odom"
         self.scenario_topic = f"/scenario"
         self.sim_control_topic = f"/sim_control"
+        self.sim_settings_topic = f"/sim_settings"
         # Subscribers
         self.create_subscription(CompressedImage, self.camera_topic, self.rgb_callback, 10)
         self.create_subscription(Image, self.depth_topic, self.depth_callback, 10)
         self.create_subscription(Odometry, self.odom_topic, self.odom_callback, 10)
         self.subscription = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
 
+        # wait for sim control topic to be available
         qos = QoSProfile(depth=10)
         qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
+
+        # wait for sim control topic to be available
+        sim_control_data = None
+        def sim_control_callback(msg):
+            nonlocal sim_control_data
+            sim_control_data = msg.data
+        self.sim_control_sub = self.create_subscription(String, self.sim_control_topic, sim_control_callback, 10)
+        while True:
+            rclpy.spin_once(self, timeout_sec=0.01)
+            if sim_control_data is not None:
+                print(f"[HabitatROSBridge] Sim control topic available: {sim_control_data}")
+                break
+            else:
+                print("[HabitatROSBridge] Waiting for sim control topic to be available...")
+                time.sleep(1.0)
+        self.destroy_subscription(self.sim_control_sub)
+
+        # publish sim settings
+        self.sim_settings_pub = self.create_publisher(String, self.sim_settings_topic, qos)
+        settings_msg = String()
+        settings_msg.data = "name: spot, model: hab_spot, policy: false, confirm settings"
+        self.sim_settings_pub.publish(settings_msg)
+
+        # publish sim control
         self.sim_control_pub = self.create_publisher(String, self.sim_control_topic, qos)
         cam_msg = String()
         cam_msg.data = self.camera_topic
