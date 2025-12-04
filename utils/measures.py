@@ -400,7 +400,23 @@ class OracleSuccess(Measure):
         self._metric = float(self._metric or d < self._success_distance)
 
 
-def add_measurement(env, episode, measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]):
+class SimDuration(Measure):
+    cls_uuid: str = "sim_duration"
+
+    def __init__(self, env, episode, measure_manager, **kwargs: Any):
+        super().__init__(env, episode, **kwargs)
+        self.measure_manager = measure_manager
+
+    def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
+        return self.cls_uuid
+
+    def reset_metric(self, *args: Any, **kwargs: Any):
+        self._metric = 0
+
+    def update_metric(self, *args: Any, **kwargs: Any) -> str:
+        self._metric = self._env.env_step * self._env.step_dt
+
+def add_measurement(env, episode, measure_names):
     measure_manager = MeasureManager()
     for measure_name in measure_names:
         measure = eval(measure_name)(env, episode, measure_manager)

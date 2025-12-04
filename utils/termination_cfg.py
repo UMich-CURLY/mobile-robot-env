@@ -51,8 +51,10 @@ def terrain_out_of_bounds(
 
 def time_out(env, max_time: float = 600.0) -> torch.Tensor:
     """Terminate the episode when the episode length exceeds the maximum episode length."""
-    # TODO: add a start time to states
-    return env.manager_env.episode_length_buf*env.manager_env.step_dt >= max_time
+    if env.measure_manager:
+        return env.measure_manager.get_measure("sim_duration").get_metric() >= max_time
+    else:
+        return False
     
 def robot_stuck(env, asset_cfg = SceneEntityCfg("robot"), label: str = "stuck", max_time: float = 30.0, dist_threshold: float = 0.01, vel_threshold: float = 0.1):
     """Terminate the episode when the robot is not moving even though there is a command input for a certain time."""
@@ -100,7 +102,7 @@ class VLNTerminationsCfg:
             "asset_cfg": SceneEntityCfg("robot"),
             "max_time": 10.0,
             "label": "stuck",
-            "dist_threshold": 0.03,
+            "dist_threshold": 0.05,
             "vel_threshold": 0.01,
         },
     )

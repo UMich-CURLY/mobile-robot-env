@@ -43,17 +43,13 @@ def set_robot_pose(env_cfg, episode, robot=None):
 class VLNEnvWrapper:
     """Wrapper to configure an :class:`RslRlVecEnvWrapper` instance to VLN environment."""
 
-    def __init__(self, args, env, 
-                 low_level_policy, robot_name, max_length=10000,
-                 measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
-        ):
+    def __init__(self, args, env, low_level_policy, robot_name, measure_names=None):
         self.env = env
         self.manager_env = env.unwrapped
         self.sim = self.manager_env.sim
         self.device = self.manager_env.device
         self.scene = self.manager_env.scene
         self.robot_name = robot_name
-        self.measure_names = measure_names
         self.first_init = True
         self.usd_path = None
         self.scene_scale = None
@@ -61,8 +57,21 @@ class VLNEnvWrapper:
         self.args = args
         self.num_envs = self.manager_env.num_envs
 
+        if measure_names is None:
+            measure_names = [
+                "PathLength",
+                "DistanceToGoal",
+                "ClosestGoal",
+                "Success",
+                "SPL",
+                "OracleNavigationError",
+                "OracleSuccess",
+                "SimDuration",
+            ]
+        self.measure_names = measure_names
+
         self.env_step = 0
-        self.max_length = max_length
+        self.step_dt = self.manager_env.step_dt
 
         self.high_level_obs_key = "camera"
         if not self.args.disable_camera:
