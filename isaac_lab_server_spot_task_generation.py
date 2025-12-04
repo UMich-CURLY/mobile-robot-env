@@ -18,7 +18,6 @@ vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
-args.disable_termination = True
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
@@ -51,6 +50,7 @@ task_generator = TaskGenerator(args)
 current_episode = VLNEpisode(task_generator.get_scene_config(default_scene_id))
 vln_sim = VLNSim(args)
 vln_sim.reset(current_episode)
+task_generator.bind_vln_sim(vln_sim)
 
 
 # disable socket server
