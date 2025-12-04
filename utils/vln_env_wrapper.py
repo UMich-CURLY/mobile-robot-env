@@ -9,6 +9,8 @@ import torch
 from utils.termination_cfg import VLNTerminationsCfg
 from isaaclab.managers import TerminationManager
 import isaacsim.core.utils.prims as prim_utils
+import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -117,6 +119,28 @@ class VLNEnvWrapper:
         if prim is None:
             raise ValueError(f"Prim at path {prim_path} not found")
         return prim.GetAttribute('xformOp:orient').Get()
+    
+
+    def get_cam_pose(self):
+        manager_env = self.manager_env
+        # robot pose
+        pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
+        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32) # wxyz
+        quat_robot = R.from_quat(np.concatenate([quat_robot[1:],quat_robot[:1]]))
+        # transform from robot to camera
+        pos_cam_body = manager_env.scene["pov_camera"].cfg.offset.pos
+        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot # wxyz
+        quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
+        # camera pose in world frame
+        pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
+        quat_cam_world = quat_robot * quat_cam_body
+        quat_cam_world = quat_cam_world.as_quat() # xyzw
+        pose = manager_env.scene["pov_camera"]._view.get_world_poses()
+        # pos = pose[0][0].detach().cpu().numpy()
+        # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
+        # quat = np.concatenate([quat[1:],quat[:1]])
+        # return pos, quat
+        return pos_cam_world, quat_cam_world
 
     def reset(self, episode=None) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""

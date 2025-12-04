@@ -51,7 +51,7 @@ class Measure:
         return self._metric
     
     def get_robot_position(self):
-        robot_pos_w = self._env.scene.sensors['pov_camera'].data.pos_w[0].detach().cpu().numpy()
+        robot_pos_w = self._env.get_cam_pose()[0]
         return robot_pos_w
     
 
@@ -138,6 +138,7 @@ class DistanceToGoal(Measure):
         self.waypoint_distances = [] # distance from waypoint to goal
         self.ref_waypoints = [] # waypoint list
         self.waypoint_to_goal = [] # map waypoint to goal index
+        self.closest_goal_idx = None
         for i in range(n_goals):
             distance = 0.0
             n_waypoints = len(self._goals[i]["reference_path"])
@@ -168,7 +169,8 @@ class DistanceToGoal(Measure):
         closest_distance = min(total_distances)
         closest_waypoint_idx = total_distances.index(closest_distance)
         # get the radius of the goal
-        obj_radius = self._goals[self.waypoint_to_goal[closest_waypoint_idx]]["radius"]
+        self.closest_goal_idx = self.waypoint_to_goal[closest_waypoint_idx]
+        obj_radius = self._goals[self.closest_goal_idx]["radius"]
         # calculate the distance to the goal
         dtg = max(1e-5, closest_distance-obj_radius)
     
@@ -188,6 +190,30 @@ class DistanceToGoal(Measure):
                 current_position[2],
             )
             self._metric = distance_to_target
+
+class ClosestGoal(Measure):
+    """Find the index of the closest goal"""
+    cls_uuid: str = "closest_goal"
+
+    def __init__(self, env, episode, measure_manager, **kwargs: Any):
+        super().__init__(env, episode, **kwargs)
+        self.measure_manager = measure_manager
+
+    def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
+        return self.cls_uuid
+
+    def reset_metric(self, *args: Any, **kwargs: Any):
+        self.measure_manager.check_measure_dependencies(
+            self.cls_uuid, [DistanceToGoal.cls_uuid]
+        )
+        self._metric = 0
+
+    def update_metric(self, *args: Any, **kwargs: Any) -> str:
+        closest_goal_idx = self.measure_manager.measures[
+            DistanceToGoal.cls_uuid
+        ].closest_goal_idx
+        # closest_goal_pos = self._goals[closest_goal_idx]["location"]
+        self._metric = closest_goal_idx
 
 
 class SPL(Measure):
