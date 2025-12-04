@@ -16,7 +16,7 @@ from isaaclab.utils.math import convert_camera_frame_orientation_convention
 
 # Local imports
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
-from utils.path_following_utils import WaypointFollower, set_yaw_to_forward
+from utils.path_following_utils import WaypointFollower
 from utils.socket_server import run_server, format_data
 from utils.vis import visualize_curve, visualize_points, visualize_arrow
 from utils.episode import VLNEpisode, load_episode_set
@@ -57,13 +57,17 @@ class VLNSim:
 
         # simulation
         self.waypoints = []
-        self.waypoint_follower = WaypointFollower(device=self.device)
+        self.waypoint_follower = WaypointFollower(
+            device=self.device,
+            max_vel=[1.5, 0.3, 0.8],
+            kp=[2.0, 0.5, 2.0],
+        )
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
         self.commands_source = 'server'
         self.robot_index = 0
         self.viewport = get_viewport_from_window_name("Viewport")
         if self.args.headless:
-            print("[INFO] Headless mode, disabling viewport updates")
+            print("[SIM] Headless mode, disabling viewport updates")
             self.viewport.updates_enabled = False
         self.viewport_third_person = True
         self.callbacks = {}
@@ -102,9 +106,8 @@ class VLNSim:
         policy = ppo_runner.get_inference_policy(device=args.device)
 
         # vln env
-        all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-        env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
-        print("[INFO] Env setup complete")
+        env = VLNEnvWrapper(args, env, policy, "spot")
+        print("[SIM] Env setup complete")
 
         # viewpoint
         self.update_viewer()
@@ -127,7 +130,7 @@ class VLNSim:
                 self.init_env()
 
     def load_episode(self, episode_label):
-        print(f"[INFO] Loading episode: {episode_label}")
+        print(f"[SIM] Loading episode: {episode_label}")
         self.reset(self.episode_list[self.episode_label_list.index(episode_label)])
 
     def reset_server_cache(self):
@@ -141,7 +144,7 @@ class VLNSim:
         }
 
     def action_callback(self, msg_type, message):
-        print(f"[INFO] Received command: {msg_type}")
+        print(f"[SIM] Received command: {msg_type}")
         if msg_type == 'VEL':
             vx, vy, vw = message["vx"], message["vy"], message["vw"]
             self.commands[self.robot_index] = torch.tensor([float(vx), float(vy), float(vw)], device=self.device)
@@ -157,8 +160,8 @@ class VLNSim:
             self.env.set_stop_called(self.robot_index, True)
         elif msg_type == 'EPISODE':
             # this will trigger a reset of the vln sim
-            self.call_callbacks('on_client_episode_changed', message["episode_label"])
             self.load_episode(message["episode_label"])
+            self.call_callbacks('on_client_episode_changed', message["episode_label"])
     
     def add_callback(self, callback_name, func):
         available_callbacks = ['on_client_episode_changed', 'on_step_finished', 'on_reset_finished']
@@ -235,11 +238,10 @@ class VLNSim:
         })
         server_thread.daemon = True
         server_thread.start()
-        print("[INFO] Socket server started")
+        print("[SIM] Socket server started")
     
-    def set_waypoints(self, waypoints, fix_yaw=False):
-        if fix_yaw:
-            waypoints = set_yaw_to_forward(self.env.get_cam_pose()[0], waypoints)
+    def set_waypoints(self, waypoints):
+        """Waypoint should be in the format of [x, y, yaw], set yaw to inf if angle is ignored"""
         self.waypoints = waypoints
         self.waypoint_follower.reset()
 
@@ -249,7 +251,9 @@ class VLNSim:
         measurements = measure_manager.get_measurements()
         closest_goal_idx = measurements["closest_goal"]
         ref_path = episode["goals"][closest_goal_idx]["reference_path"]
-        self.set_waypoints(ref_path[1:], fix_yaw=True)
+        # notice that ref_path has [x, y, z], while waypoints has [x, y, yaw]
+        waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
+        self.set_waypoints(waypoints)
 
     def clear_waypoints(self):
         self.waypoints = None
@@ -267,8 +271,10 @@ class VLNSim:
             if self.visualize_waypoints:
                 cam_height = cam_pos[2]
                 points = [cam_pos]+[[wp[0], wp[1], cam_height] for wp in self.waypoints[self.waypoint_follower.current_wp_idx:]]
+                remaining_waypoints = np.array(self.waypoints[self.waypoint_follower.current_wp_idx:])
                 visualize_curve(points, prim_path="/World/WaypointPath", width=0.02)
-                # visualize_arrow(self.waypoints[self.waypoint_follower.current_wp_idx:], cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
+                if (remaining_waypoints[:,2]<10.0).all():
+                    visualize_arrow(remaining_waypoints, cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
 
 
     def step(self):
@@ -276,7 +282,7 @@ class VLNSim:
             # reset if needed
             with self.load_env_lock:
                 if self.reset_flag:
-                    print(f"[INFO]: Resetting env state to {self.next_episode.episode_label}..")
+                    print(f"[SIM] Resetting env state to {self.next_episode.episode_label}..")
                     self.sim_state = "loading"
                     self.env.reset_idx([self.robot_index])
                     obs, _ = self.env.reset(self.next_episode)
@@ -297,7 +303,7 @@ class VLNSim:
             pos_cam_world, quat_cam_world = self.env.get_cam_pose()
             obs['pov_pose'] = torch.tensor(np.concatenate([pos_cam_world, quat_cam_world]).reshape(1,-1), device=self.device)
             # print(f'[Sim] command: {self.commands}, source: {self.commands_source}')
-            print("[Sim] Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in info["measurements"].items()]))
+            # print("[Sim] Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in info["measurements"].items()]))
             self.info = info
             self.obs = obs
             self.reward = reward

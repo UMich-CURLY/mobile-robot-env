@@ -93,7 +93,7 @@ class TaskGenerator:
             print(f'[ERROR]: No goal found')
             return []
         print(f'[TG] Generating {self.num_episodes} episodes')
-        # self.vln_sim.visualize_waypoints = True
+        self.vln_sim.visualize_waypoints = True
         self.generated_episodes = []
         self._generate_episodes()
 
@@ -151,12 +151,9 @@ class TaskGenerator:
                 return
             check_done = False
             success = False
-            img_saving_interval = 10
+            img_saving_interval = 1
             timeout = 100.0
-            if self.episode_start_sim_time is None:
-                self.episode_start_sim_time = self.vln_sim.manager_env.episode_length_buf * self.vln_sim.manager_env.step_dt
-            current_sim_time = self.vln_sim.manager_env.episode_length_buf * self.vln_sim.manager_env.step_dt
-            # change this to call stop when reach and check metrics?
+            # save data for vln
             if self.vln_sim.obs_index%img_saving_interval == 0:
                 # save rgb image
                 img_index = self.vln_sim.obs_index//img_saving_interval
@@ -165,33 +162,47 @@ class TaskGenerator:
                 # append pose to txt
                 with open(pose_path, 'a') as f:
                     f.write(f"{[img_index]+self.vln_sim.obs['pov_pose'].cpu().numpy()[0].tolist()}\n")
-            if self.vln_sim.obs_index==0 and self.vln_sim.info["measurements"]["distance_to_goal"] < 5.0:
+            # check if episode is done
+            self.env.measure_manager.update_measures()
+            measurements = self.env.measure_manager.get_measurements()
+            if self.vln_sim.obs_index==0 and measurements["distance_to_goal"] < 5.0:
                 print(f'[TG] episode {self.current_episode.episode_id} starting position is too close to goal')
                 check_done = True
-                success = False
             elif self.vln_sim.waypoint_follower.arrived_at_goal:
                 print(f'[TG] episode {self.current_episode.episode_id} completed')
-                self.filtered_episodes.append(self.current_episode)
-                success = True
+                # check episode quality by metrics
+                if measurements["oracle_success"] != 1.0:
+                    print(f'[TG] episode {self.current_episode.episode_id} failed')
+                elif measurements["sim_duration"] < 5.0:
+                    print(f'[TG] episode {self.current_episode.episode_id} completed but duration is too short')
+                elif measurements["path_length"] < 5.0:
+                    print(f'[TG] episode {self.current_episode.episode_id} completed but path length is too short')
+                else:
+                    print(f'[TG] episode {self.current_episode.episode_id} completed')
+                    success = True
                 check_done = True
-            elif current_sim_time - self.episode_start_sim_time > timeout:
+            elif measurements["sim_duration"] > timeout:
                 print(f'[TG] episode {self.current_episode.episode_id} timed out')
                 check_done = True
             elif "terminations" in self.vln_sim.info:
                 print(f'[TG] episode {self.current_episode.episode_id} terminated due to {self.vln_sim.info["terminations"]["termination_reason"]}')
                 check_done = True
+            # episode is done, check if it is successful
             if check_done:
                 self.vln_sim.remove_callback('on_step_finished', self.check_status_callback)
                 self.check_status_callback = None
-                if not success:
+                if success:
+                    self.filtered_episodes.append(self.current_episode)
+                else:
                     # remove data folder
                     shutil.rmtree(data_folder, ignore_errors=True)
                 self._check_episode()
         
         # Reset and start the episode
+        print(f'[TG] Reset episode {self.current_episode.episode_id}')
         self.vln_sim.reset(self.current_episode)
+        print(f'[TG] Set reference waypoints')
         self.vln_sim.set_ref_waypoints(self.current_episode)
-        self.episode_start_sim_time = None
         self.check_status_callback = check_status
         self.vln_sim.add_callback('on_step_finished', check_status)
 

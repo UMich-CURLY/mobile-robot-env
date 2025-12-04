@@ -135,20 +135,21 @@ class DistanceToGoal(Measure):
         self._goals = episode["goals"]
         
         n_goals = len(self._goals)
-        self.waypoint_distances = [] # distance from waypoint to goal
-        self.ref_waypoints = [] # waypoint list
-        self.waypoint_to_goal = [] # map waypoint to goal index
+        self.ref_path = [] # path list
+        self.point_distance = [] # distance from path point to goal (both xyz)
+        self.ref_path = [] # path list
+        self.point_to_goal = [] # map path to goal index
         self.closest_goal_idx = None
         for i in range(n_goals):
             distance = 0.0
-            n_waypoints = len(self._goals[i]["reference_path"])
-            for _j in range(n_waypoints):
-                j = n_waypoints - _j - 1
+            n_path = len(self._goals[i]["reference_path"])
+            for _j in range(n_path):
+                j = n_path - _j - 1
                 if _j>0:
                     distance += euclidean_distance(self._goals[i]["reference_path"][j], self._goals[i]["reference_path"][j+1])
-                self.waypoint_distances.append(distance)
-                self.ref_waypoints.append(self._goals[i]["reference_path"][j])
-                self.waypoint_to_goal.append(i)
+                self.point_distance.append(distance)
+                self.ref_path.append(self._goals[i]["reference_path"][j])
+                self.point_to_goal.append(i)
         
     
 
@@ -161,15 +162,15 @@ class DistanceToGoal(Measure):
 
     def distance_to_goal(self, current_position):
 
-        # calculate distance to each waypoint
-        distance_to_waypoints = [euclidean_distance(current_position, wp) for wp in self.ref_waypoints]
-        # add distance from waypoint to goal
-        total_distances = [distance_to_waypoints[i]+self.waypoint_distances[i] for i in range(len(self.ref_waypoints))]
+        # calculate distance to each point
+        distance_to_points = [euclidean_distance(current_position, wp) for wp in self.ref_path]
+        # add distance from point to goal
+        total_distances = [distance_to_points[i]+self.point_distance[i] for i in range(len(self.ref_path))]
         # find the shortest path
         closest_distance = min(total_distances)
-        closest_waypoint_idx = total_distances.index(closest_distance)
+        closest_point_idx = total_distances.index(closest_distance)
         # get the radius of the goal
-        self.closest_goal_idx = self.waypoint_to_goal[closest_waypoint_idx]
+        self.closest_goal_idx = self.point_to_goal[closest_point_idx]
         obj_radius = self._goals[self.closest_goal_idx]["radius"]
         # calculate the distance to the goal
         dtg = max(1e-5, closest_distance-obj_radius)
@@ -256,9 +257,6 @@ class SPL(Measure):
             *args, **kwargs
         )
 
-    def _euclidean_distance(self, position_a, position_b):
-        return np.linalg.norm(position_b - position_a, ord=2)
-
     def update_metric(
         self, *args: Any, **kwargs: Any
     ):
@@ -299,7 +297,7 @@ class SoftSPL(SPL):
             0, (1 - distance_to_target / self._start_end_episode_distance)
         )
 
-        self._agent_episode_distance += self._euclidean_distance(
+        self._agent_episode_distance += euclidean_distance(
             current_position, self._previous_position
         )
 
