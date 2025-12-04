@@ -14,6 +14,8 @@
                 "--enable_cameras",
                 "--foxglove_port",
                 "4934",
+                "--episode_label",
+                "nv_apartment_1"
             ],
         },
         {
