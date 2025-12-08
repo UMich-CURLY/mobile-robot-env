@@ -33,7 +33,7 @@ class WaypointFollower:
         ki=[0.0, 0.0, 0.0], # [0.1, 0.1, 0.1]
         kd=[0.0, 0.0, 0.0], # [3, 3, 1]
         max_integral=[5.0, 5.0, 3.0],
-        arrive_dist=0.05,
+        arrive_dist=0.1,
         arrive_yaw=np.pi/180.0*15.0,
         term_dist=0.05,
         term_yaw=np.pi/180.0*5.0,
@@ -99,7 +99,7 @@ class WaypointFollower:
             self.error_integral = np.zeros(3)
             self.last_error = np.zeros(3)
         current_wp_idx = target_idx
-        is_final_segment = (current_wp_idx >= num_wps - 2)
+        is_final_segment = (current_wp_idx == num_wps - 1)
         target_wp = waypoints_world[target_idx]
 
         # set different arrive thresholds for final segment
@@ -113,7 +113,8 @@ class WaypointFollower:
         # calculate xy diff
         diff_to_goal = target_wp[:2] - base_xy
         dist_to_goal = np.linalg.norm(diff_to_goal)
-        # set yaw to next waypoint and ignore set yaw angle until reaching the position
+
+        # set yaw to next waypoint and ignore set yaw angle until reaching the waypoint position
         # or, if the set yaw is inf, set yaw to next waypoint too
         if dist_to_goal > arrive_dist or target_wp[2]>10.0:
             target_wp = np.array(target_wp)
@@ -123,6 +124,7 @@ class WaypointFollower:
         dx = target_wp[0] - base_xy[0]
         dy = target_wp[1] - base_xy[1]
         ang_err = wrap_to_pi(target_wp[2] - base_yaw)
+
 
         ex_b, ey_b = world_to_body(dx, dy, base_yaw)
 
@@ -138,23 +140,29 @@ class WaypointFollower:
         vel = self.kp * error + self.ki * self.error_integral + self.kd * error_derivative
 
         # enforce minimum velocities when far from goal
-        for i in [0, 1]:
-            if abs(diff_to_goal[i]) > arrive_dist and abs(vel[i]) < self.min_vel[i]:
+        for i, diff in enumerate([ex_b, ey_b]):
+            if abs(diff) > arrive_dist and abs(vel[i]) < self.min_vel[i]:
                 vel[i] = vel[i] / abs(vel[i]) * self.min_vel[i]
         if abs(ang_err) > arrive_yaw and abs(vel[2]) < self.min_vel[2]:
             vel[2] = vel[2] / abs(vel[2]) * self.min_vel[2]
+
+        # if the angle error is too large, set linear velocity to 0
+        if ang_err > np.deg2rad(30.0):
+            vel[0] = 0.0
+            vel[1] = 0.0
 
         vel = np.clip(vel, -self.max_vel, self.max_vel)
         vx, vy, vw = vel
 
         if verbose:
             print("================================================")
-            print(f"cam_pos: {cam_pos}")
-            print(f"target_wp: [{target_idx}] {target_wp[:2]} {np.rad2deg(target_wp[2])}")
-            print(f"base_xy: {base_xy} base_yaw: {np.rad2deg(base_yaw)}")
-            print(f"dx: {dx}, dy: {dy}, ang_err: {np.rad2deg(ang_err)}")
-            print(f"ex_b: {ex_b}, ey_b: {ey_b}")
-            print(f"vx: {vx}, vy: {vy}, vw: {vw}")
+            print(f"cam_pos: {cam_pos[0]:.2f}, {cam_pos[1]:.2f}, {cam_pos[2]:.2f}")
+            print(f"target_wp: [{target_idx}] {target_wp[0]:.2f}, {target_wp[1]:.2f}, {np.rad2deg(target_wp[2]):.2f}")
+            print(f"base_xy: {base_xy[0]:.2f}, {base_xy[1]:.2f} base_yaw: {np.rad2deg(base_yaw):.2f}")
+            print(f"dx: {dx:.2f}, dy: {dy:.2f}, ang_err: {np.rad2deg(ang_err):.2f}")
+            print(f"ex_b: {ex_b:.2f}, ey_b: {ey_b:.2f}")
+            print(f"vx: {vx:.2f}, vy: {vy:.2f}, vw: {vw:.2f}")
+            print(f"current_wp_idx: {current_wp_idx}, num_wps: {num_wps}")
 
 
         if dist_to_goal < arrive_dist and abs(ang_err) < arrive_yaw:
