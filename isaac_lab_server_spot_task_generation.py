@@ -47,17 +47,11 @@ from utils.episode import VLNEpisode
 # setup environment
 default_scene_id = "test_generator"
 task_generator = TaskGenerator(args)
-current_episode = VLNEpisode(task_generator.get_scene_config(default_scene_id))
+test_episode = VLNEpisode(task_generator.get_scene_config(default_scene_id))
 vln_sim = VLNSim(args)
-vln_sim.reset(current_episode)
+vln_sim.reset(test_episode)
 vln_sim.step()
 task_generator.bind_vln_sim(vln_sim)
-
-# Load scene if specified
-if args.test_scene_id != "none":
-    current_episode = VLNEpisode(task_generator.get_scene_config(args.test_scene_id))
-    vln_sim.reset(current_episode)
-    vln_sim.step()
 
 # disable socket server
 args.disable_socket_server = True
@@ -67,10 +61,19 @@ print(f"[INFO] Socket server disabled in task generation")
 # Setup UI
 from utils.ui import TaskGeneratorUI
 task_generator_ui = TaskGeneratorUI(vln_sim, task_generator)
-task_generator_ui.update_ui("scene_id", current_episode.scene_id)
+task_generator_ui.update_ui("scene_id", test_episode.scene_id)
+
+# Load scene if specified
+if args.test_scene_id != "none":
+    test_episode = VLNEpisode(task_generator.get_scene_config(args.test_scene_id))
+    task_generator_ui.update_ui("scene_id", test_episode.scene_id)
+    vln_sim.reset(test_episode)
+    vln_sim.step()
 
 # add test code here
-task_generator.generate_episodes(current_episode.scene_id)
+task_generator.generate_episodes(test_episode.scene_id)
+# task_generator_ui.setup_navmesh()
+# task_generator_ui.build_navmesh()
 
 """Main simulation loop"""
 print("[INFO]: Starting simulation")

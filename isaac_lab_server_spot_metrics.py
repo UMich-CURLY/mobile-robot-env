@@ -48,6 +48,7 @@ benchmark_ui.update_ui("episode_label", default_episode)
 # Load episode if specified
 if args.episode_label != "none":
     vln_sim.load_episode(args.episode_label)
+    benchmark_ui.update_ui("episode_label", args.episode_label)
     vln_sim.step()
 
 

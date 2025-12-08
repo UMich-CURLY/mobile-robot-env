@@ -108,7 +108,7 @@ class TaskGenerator:
     
     def stop_generation(self):
         if self.check_status_callback is not None:
-            self.vln_sim.remove_callback('on_step_finished', self.check_status_callback)
+            self.vln_sim.remove_callback('step_finished', self.check_status_callback)
             self.check_status_callback = None
             print(f'[TG] Generation stopped')
         self.vln_sim.clear_waypoints()
@@ -170,6 +170,7 @@ class TaskGenerator:
                 check_done = True
             elif self.vln_sim.waypoint_follower.arrived_at_goal:
                 print(f'[TG] episode {self.current_episode.episode_id} completed')
+                print("[TG] Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in measurements.items()]))
                 # check episode quality by metrics
                 if measurements["oracle_success"] != 1.0:
                     print(f'[TG] episode {self.current_episode.episode_id} failed')
@@ -189,7 +190,7 @@ class TaskGenerator:
                 check_done = True
             # episode is done, check if it is successful
             if check_done:
-                self.vln_sim.remove_callback('on_step_finished', self.check_status_callback)
+                self.vln_sim.remove_callback('step_finished', self.check_status_callback)
                 self.check_status_callback = None
                 if success:
                     self.filtered_episodes.append(self.current_episode)
@@ -204,7 +205,7 @@ class TaskGenerator:
         print(f'[TG] Set reference waypoints')
         self.vln_sim.set_ref_waypoints(self.current_episode)
         self.check_status_callback = check_status
-        self.vln_sim.add_callback('on_step_finished', check_status)
+        self.vln_sim.add_callback('step_finished', check_status)
 
     def parse_scene(self):
         # find target prims

@@ -16,13 +16,14 @@ from isaaclab.utils.math import convert_camera_frame_orientation_convention
 
 # Local imports
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
-from utils.path_following_utils import WaypointFollower
+from utils.path_following_utils import WaypointFollower, calc_yaw
 from utils.socket_server import run_server, format_data
 from utils.vis import visualize_curve, visualize_points, visualize_arrow
 from utils.episode import VLNEpisode, load_episode_set
 from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
 from utils.foxglove_utils import FoxgloveVisualizer
-from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
+import robot
+from robot.spot.spot_rough_env_cfg import SpotRoughEnvCfg_PLAY
 from threading import Lock
 from utils.measures import add_measurement
 
@@ -59,8 +60,8 @@ class VLNSim:
         self.waypoints = []
         self.waypoint_follower = WaypointFollower(
             device=self.device,
-            max_vel=[1.5, 0.3, 0.8],
-            kp=[2.0, 0.5, 2.0],
+            max_vel=[1.5, 0.3, 1.5],
+            kp=[2.0, 0.5, 1.5],
         )
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
         self.commands_source = 'server'
@@ -88,7 +89,7 @@ class VLNSim:
 
         # isaac lab manager
         args = self.args
-        env_cfg = SpotFlatEnvCfg_PLAY()
+        env_cfg = SpotRoughEnvCfg_PLAY()
         init_env_cfg(env_cfg, args, self.next_episode)
         env_cfg.scene.num_envs = args.num_envs
         env_cfg.sim.device = args.device
@@ -96,12 +97,14 @@ class VLNSim:
         manager_env = ManagerBasedRLEnv(cfg=env_cfg)
 
         # policy
-        TASK = "Isaac-Velocity-Flat-Spot-v0"
+        # TASK = "Isaac-Velocity-Flat-Spot-v0"
+        TASK = "Isaac-Velocity-Rough-Spot-v0"
         RL_LIBRARY = "rsl_rl"
         agent_cfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
         env = RslRlVecEnvWrapper(manager_env)
         ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
-        checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
+        # checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
+        checkpoint = "robot/spot/model_dec7.pt"
         ppo_runner.load(checkpoint)
         policy = ppo_runner.get_inference_policy(device=args.device)
 
@@ -161,10 +164,10 @@ class VLNSim:
         elif msg_type == 'EPISODE':
             # this will trigger a reset of the vln sim
             self.load_episode(message["episode_label"])
-            self.call_callbacks('on_client_episode_changed', message["episode_label"])
+            self.call_callbacks('client_episode_changed', message["episode_label"])
     
     def add_callback(self, callback_name, func):
-        available_callbacks = ['on_client_episode_changed', 'on_step_finished', 'on_reset_finished']
+        available_callbacks = ['client_episode_changed', 'step_finished', 'reset_finished']
         if callback_name not in available_callbacks:
             raise ValueError(f"Invalid callback name: {callback_name}")
         self.callbacks.setdefault(callback_name, []).append(func)
@@ -264,7 +267,7 @@ class VLNSim:
     
     def follow_waypoints(self):
         cam_pos, cam_quat = self.env.get_cam_pose()
-        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints)
+        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints, verbose=True)
         if self.waypoint_follower.arrived_at_goal:
             self.clear_waypoints()
         else:
@@ -292,7 +295,7 @@ class VLNSim:
                     self.reset_flag = False
                     self.current_episode = self.next_episode
                     self.next_episode = None
-                    self.call_callbacks('on_reset_finished')
+                    self.call_callbacks('reset_finished')
             # update waypoints
             if self.waypoints is not None and len(self.waypoints) > 0:
                 self.follow_waypoints()
@@ -319,7 +322,7 @@ class VLNSim:
                 else:
                     self.sim_state = "running"
                     self.update_obs(obs, info)
-            self.call_callbacks('on_step_finished')
+            self.call_callbacks('step_finished')
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env

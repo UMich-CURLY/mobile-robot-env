@@ -89,7 +89,7 @@ class VLNTerminationsCfg:
     time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 100.0})
     bad_orientation = DoneTerm(
         func=mdp.bad_orientation,
-        params={"limit_angle": np.deg2rad(45.0)},
+        params={"limit_angle": float(np.deg2rad(45.0))},
     )
     terrain_out_of_bounds = DoneTerm(
         func=terrain_out_of_bounds,
@@ -106,16 +106,16 @@ class VLNTerminationsCfg:
             "vel_threshold": 0.01,
         },
     )
-    back_n_forth = DoneTerm(
-        func=robot_stuck,
-        params={
-            "asset_cfg": SceneEntityCfg("robot"),
-            "max_time": 30.0,
-            "label": "back_n_forth",
-            "dist_threshold": 2.0,
-            "vel_threshold": 0,
-        },
-    )
+    # back_n_forth = DoneTerm(
+    #     func=robot_stuck,
+    #     params={
+    #         "asset_cfg": SceneEntityCfg("robot"),
+    #         "max_time": 30.0,
+    #         "label": "back_n_forth",
+    #         "dist_threshold": 2.0,
+    #         "vel_threshold": 0,
+    #     },
+    # )
     stop_called = DoneTerm(
         func=stop_called,
     )
