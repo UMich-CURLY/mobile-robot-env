@@ -144,15 +144,16 @@ class VLNEnvWrapper:
         pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
         quat_cam_world = quat_robot * quat_cam_body
         quat_cam_world = quat_cam_world.as_quat() # xyzw
-        pose = manager_env.scene["pov_camera"]._view.get_world_poses()
+        pose = manager_env.scene["pov_camera"]._view.get_world_poses(usd=False)
         # pos = pose[0][0].detach().cpu().numpy()
         # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
         # quat = np.concatenate([quat[1:],quat[:1]])
         # return pos, quat
         return pos_cam_world, quat_cam_world
 
-    def reset(self, episode=None) -> tuple[torch.Tensor, dict]:
+    def reset(self, episode=None, warmup_steps=50) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
+        zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
         if episode is not None:
             self.episode = episode
         else:
@@ -181,7 +182,6 @@ class VLNEnvWrapper:
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
                 while self.scene.stage.GetPrimAtPath(self.scene.terrain.terrain_prim_paths[0]).IsValid():
-                    zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
                     self.update_command(zero_cmd)
                     actions = self.low_level_policy(self.low_level_obs)
                     low_level_obs, _, _, infos = self.env.step(actions)
@@ -216,9 +216,6 @@ class VLNEnvWrapper:
                 terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
         self.scene_setting = scene_settings
         self.usd_path = self.episode["path"]
-
-        # remove visualization
-        self.remove_prim("/Visuals")
 
         # reset robot position
         robot = self.scene["robot"]

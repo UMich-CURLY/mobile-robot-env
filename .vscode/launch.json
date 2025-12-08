@@ -34,14 +34,16 @@
             "envFile": "${workspaceFolder}/.env"
         },
         {
-            "name": "Warmup",
+            "name": "Train Policy",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/tools/warmup.py",
+            "program": "${workspaceFolder}/policy/train.py",
             "console": "integratedTerminal",
             "args": [
-                "--dirs",
-                "/data/isaac_scenes_v1",
+                "--task",
+                "Isaac-Velocity-Rough-Spot-v0",
+                "--num_envs",
+                "10",
                 "--enable_cameras"
             ],
             "envFile": "${workspaceFolder}/.env"
@@ -61,6 +63,13 @@
                 "${workspaceFolder}/episodes/navmesh.bin"
             ],
             "envFile": "${workspaceFolder}/.env"
-        }
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
     ]
 }
