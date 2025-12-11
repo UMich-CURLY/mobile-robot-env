@@ -23,12 +23,31 @@ simulation_app = app_launcher.app
 
 # Enable Extension and setup settings
 import carb
+import omni.kit.app
 # from isaacsim.core.utils.extensions import enable_extension
 # enable_extension("omni.anim.navigation.bundle")
 settings = carb.settings.get_settings()
 settings.set("/renderer/multiGPU/enabled", False)
 settings.set("/renderer/activeGpu", 0)
 settings.set("/renderer/shadercache/driverDiskCache/enabled", True)
+# no RTX or rendering
+settings.set("/rtx/enabled", False)
+settings.set("/rtx/post/aa/enabled", False)
+settings.set("/rendering/enabled", False)
+# Disable texture streaming entirely
+settings.set("/rtx/texturestreaming/gpuBudgetPriority", 0.0)
+
+# physics cooking OFF
+settings.set("/physics/cooking/ujitsoCollisionCooking", False)
+
+# reduce USD updates
+settings.set("/physics/updateToUsd", False)
+settings.set("/physics/updateVelocitiesToUsd", False)
+settings.set("/physics/updateParticlesToUsd", False)
+settings.set("/physics/updateForceSensorsToUsd", False)
+settings.set("/physics/updateResidualsToUsd", False)
+
+omni.kit.app.get_app().update()
 import isaaclab.sim as sim_utils
 
 # Local imports

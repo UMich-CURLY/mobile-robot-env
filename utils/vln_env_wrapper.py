@@ -20,6 +20,7 @@ def load_scene(env_cfg, args, episode):
     if scene_path == "generator":
         env_cfg.load_generator()
     else:
+        print(f"[DEBUG] Loading USD from {str(Path(args.scene_folder) / scene_path)}")
         env_cfg.load_usd(str(Path(args.scene_folder) / scene_path))
 
 def set_robot_pose(env_cfg, episode, robot=None):
