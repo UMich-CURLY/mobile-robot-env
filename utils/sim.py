@@ -16,14 +16,16 @@ from isaaclab.utils.math import convert_camera_frame_orientation_convention
 
 # Local imports
 import utils.rsl_rl_cli_args as rsl_rl_cli_args
-from utils.path_following_utils import WaypointFollower, set_yaw_to_forward
+from utils.path_following_utils import WaypointFollower, calc_yaw
 from utils.socket_server import run_server, format_data
 from utils.vis import visualize_curve, visualize_points, visualize_arrow
 from utils.episode import VLNEpisode, load_episode_set
 from utils.vln_env_wrapper import VLNEnvWrapper, init_env_cfg
 from utils.foxglove_utils import FoxgloveVisualizer
-from robot.spot_flat_env_cfg import SpotFlatEnvCfg_PLAY
+import robot
+from robot.spot.spot_rough_env_cfg import SpotRoughEnvCfg_PLAY
 from threading import Lock
+from utils.measures import add_measurement
 
 class VLNSim:
     def __init__(self, args):
@@ -56,16 +58,21 @@ class VLNSim:
 
         # simulation
         self.waypoints = []
-        self.waypoint_follower = WaypointFollower(device=self.device)
+        self.waypoint_follower = WaypointFollower(
+            device=self.device,
+            max_vel=[1.5, 0.3, 1.5],
+            kp=[2.0, 0.5, 1.5],
+        )
         self.commands = torch.tensor([[0.0, 0.0, 0.0] for _ in range(args.num_envs)], device=self.device)
         self.commands_source = 'server'
         self.robot_index = 0
         self.viewport = get_viewport_from_window_name("Viewport")
         if self.args.headless:
-            print("[INFO] Headless mode, disabling viewport updates")
+            print("[SIM] Headless mode, disabling viewport updates")
             self.viewport.updates_enabled = False
         self.viewport_third_person = True
         self.callbacks = {}
+        self.visualize_waypoints = False
 
         # initialize server
         self.server_data_lock = Lock()
@@ -79,9 +86,10 @@ class VLNSim:
     def init_env(self):
         if self.next_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
+
         # isaac lab manager
         args = self.args
-        env_cfg = SpotFlatEnvCfg_PLAY()
+        env_cfg = SpotRoughEnvCfg_PLAY()
         init_env_cfg(env_cfg, args, self.next_episode)
         env_cfg.scene.num_envs = args.num_envs
         env_cfg.sim.device = args.device
@@ -89,19 +97,20 @@ class VLNSim:
         manager_env = ManagerBasedRLEnv(cfg=env_cfg)
 
         # policy
-        TASK = "Isaac-Velocity-Flat-Spot-v0"
+        # TASK = "Isaac-Velocity-Flat-Spot-v0"
+        TASK = "Isaac-Velocity-Rough-Spot-v0"
         RL_LIBRARY = "rsl_rl"
         agent_cfg = rsl_rl_cli_args.parse_rsl_rl_cfg(TASK, args)
         env = RslRlVecEnvWrapper(manager_env)
         ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=args.device)
-        checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
+        # checkpoint = get_published_pretrained_checkpoint(RL_LIBRARY, TASK)
+        checkpoint = "robot/spot/model_dec7.pt"
         ppo_runner.load(checkpoint)
         policy = ppo_runner.get_inference_policy(device=args.device)
 
         # vln env
-        all_measures = ["PathLength", "DistanceToGoal", "Success", "SPL", "SoftSPL", "OracleNavigationError", "OracleSuccess"]
-        env = VLNEnvWrapper(args, env, policy, "spot", measure_names=all_measures)
-        print("[INFO] Env setup complete")
+        env = VLNEnvWrapper(args, env, policy, "spot")
+        print("[SIM] Env setup complete")
 
         # viewpoint
         self.update_viewer()
@@ -124,7 +133,7 @@ class VLNSim:
                 self.init_env()
 
     def load_episode(self, episode_label):
-        print(f"[INFO] Loading episode: {episode_label}")
+        print(f"[SIM] Loading episode: {episode_label}")
         self.reset(self.episode_list[self.episode_label_list.index(episode_label)])
 
     def reset_server_cache(self):
@@ -138,7 +147,7 @@ class VLNSim:
         }
 
     def action_callback(self, msg_type, message):
-        print(f"[INFO] Received command: {msg_type}")
+        print(f"[SIM] Received command: {msg_type}")
         if msg_type == 'VEL':
             vx, vy, vw = message["vx"], message["vy"], message["vw"]
             self.commands[self.robot_index] = torch.tensor([float(vx), float(vy), float(vw)], device=self.device)
@@ -154,13 +163,26 @@ class VLNSim:
             self.env.set_stop_called(self.robot_index, True)
         elif msg_type == 'EPISODE':
             # this will trigger a reset of the vln sim
-            for func in self.callbacks.get('on_client_episode_changed', []):
-                func(message["episode_label"])
             self.load_episode(message["episode_label"])
+            self.call_callbacks('client_episode_changed', message["episode_label"])
     
-    def on_client_episode_changed(self, func):
-        """args: func(episode_label)"""
-        self.callbacks.setdefault('on_client_episode_changed', []).append(func)
+    def add_callback(self, callback_name, func):
+        available_callbacks = ['client_episode_changed', 'step_finished', 'reset_finished']
+        if callback_name not in available_callbacks:
+            raise ValueError(f"Invalid callback name: {callback_name}")
+        self.callbacks.setdefault(callback_name, []).append(func)
+        return len(self.callbacks[callback_name])-1
+
+    def remove_callback(self, callback_name, func):
+        if callback_name in self.callbacks:
+            if func in self.callbacks[callback_name]:
+                self.callbacks[callback_name].remove(func)
+            else:
+                raise ValueError(f"Function {func} not found in callback {callback_name}")
+    
+    def call_callbacks(self, callback_name, *args, **kwargs):
+        for func in self.callbacks.get(callback_name, []):
+            func(*args, **kwargs)
 
     def data_callback(self, request_type):
         if request_type == "GET_SENSOR_DATA":
@@ -219,69 +241,72 @@ class VLNSim:
         })
         server_thread.daemon = True
         server_thread.start()
-        print("[INFO] Socket server started")
+        print("[SIM] Socket server started")
     
-    def set_waypoints(self, waypoints, fix_yaw=False):
-        if fix_yaw:
-            waypoints = set_yaw_to_forward(self.get_cam_pose()[0], waypoints)
+    def set_waypoints(self, waypoints):
+        """Waypoint should be in the format of [x, y, yaw], set yaw to inf if angle is ignored"""
         self.waypoints = waypoints
         self.waypoint_follower.reset()
+
+    def set_ref_waypoints(self, episode):
+        measure_manager = add_measurement(self.env, episode, measure_names=["DistanceToGoal", "ClosestGoal"])
+        measure_manager.update_measures()
+        measurements = measure_manager.get_measurements()
+        closest_goal_idx = measurements["closest_goal"]
+        ref_path = episode["goals"][closest_goal_idx]["reference_path"]
+        # notice that ref_path has [x, y, z], while waypoints has [x, y, yaw]
+        waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
+        self.set_waypoints(waypoints)
 
     def clear_waypoints(self):
         self.waypoints = None
         self.commands[self.robot_index] = torch.tensor([0.0, 0.0, 0.0], device=self.device)
+        if self.visualize_waypoints:
+            self.env.remove_prim("/World/WaypointPath")
+            self.env.remove_prim("/World/Arrow")
     
-    def follow_waypoints(self, visualize_waypoints=False):
-        cam_pos, cam_quat = self.get_cam_pose()
-        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints)
+    def follow_waypoints(self):
+        cam_pos, cam_quat = self.env.get_cam_pose()
+        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints, verbose=True)
         if self.waypoint_follower.arrived_at_goal:
             self.clear_waypoints()
-        if visualize_waypoints:
-            cam_height = cam_pos[2]
-            points = [cam_pos]+[[wp[0], wp[1], cam_height] for wp in self.waypoints[self.waypoint_follower.current_wp_idx:]]
-            visualize_curve(points, prim_path="/World/WaypointPath", width=0.02)
-            visualize_arrow(self.waypoints[self.waypoint_follower.current_wp_idx:], cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
+        else:
+            if self.visualize_waypoints:
+                cam_height = cam_pos[2]
+                points = [cam_pos]+[[wp[0], wp[1], cam_height] for wp in self.waypoints[self.waypoint_follower.current_wp_idx:]]
+                remaining_waypoints = np.array(self.waypoints[self.waypoint_follower.current_wp_idx:])
+                visualize_curve(points, prim_path="/World/WaypointPath", width=0.02)
+                if (remaining_waypoints[:,2]<10.0).all():
+                    visualize_arrow(remaining_waypoints, cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
 
-    def get_cam_pose(self):
-        manager_env = self.manager_env
-        # robot pose
-        pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
-        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32) # wxyz
-        quat_robot = R.from_quat(np.concatenate([quat_robot[1:],quat_robot[:1]]))
-        # transform from robot to camera
-        pos_cam_body = manager_env.scene["pov_camera"].cfg.offset.pos
-        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot # wxyz
-        quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
-        # camera pose in world frame
-        pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
-        quat_cam_world = quat_robot * quat_cam_body
-        quat_cam_world = quat_cam_world.as_quat() # xyzw
-        pose = manager_env.scene["pov_camera"]._view.get_world_poses()
-        # pos = pose[0][0].detach().cpu().numpy()
-        # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
-        # quat = np.concatenate([quat[1:],quat[:1]])
-        # return pos, quat
-        return pos_cam_world, quat_cam_world
 
     def step(self):
         with torch.inference_mode(): 
             # reset if needed
             with self.load_env_lock:
                 if self.reset_flag:
-                    print(f"[INFO]: Resetting env state to {self.next_episode.episode_label}..")
+                    print(f"[SIM] Resetting env state to {self.next_episode.episode_label}..")
                     self.sim_state = "loading"
                     self.env.reset_idx([self.robot_index])
                     obs, _ = self.env.reset(self.next_episode)
-                    self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
+                    for i in range(50):
+                        self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
+                    self.obs_index = 0
                     self.reset_flag = False
                     self.current_episode = self.next_episode
                     self.next_episode = None
+                    self.call_callbacks('reset_finished')
             # update waypoints
             if self.waypoints is not None and len(self.waypoints) > 0:
-                self.follow_waypoints(visualize_waypoints=False)
+                self.follow_waypoints()
             # Policy forward pass
             obs, reward, done, info = self.env.step(self.commands)
+            # fix isaac sim 5.0.0 pose bug
+            # ref: https://github.com/isaac-sim/IsaacLab/issues/3177
+            pos_cam_world, quat_cam_world = self.env.get_cam_pose()
+            obs['pov_pose'] = torch.tensor(np.concatenate([pos_cam_world, quat_cam_world]).reshape(1,-1), device=self.device)
             # print(f'[Sim] command: {self.commands}, source: {self.commands_source}')
+            # print("[Sim] Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in info["measurements"].items()]))
             self.info = info
             self.obs = obs
             self.reward = reward
@@ -297,6 +322,7 @@ class VLNSim:
                 else:
                     self.sim_state = "running"
                     self.update_obs(obs, info)
+            self.call_callbacks('step_finished')
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env
@@ -316,11 +342,9 @@ class VLNSim:
                 depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
                 depth = np.clip(depth, 0, 65535).astype(np.uint16)
                 self._latest_data["depth"] = depth
-                self._latest_data["position"], self._latest_data["quat_xyzw"] = self.get_cam_pose()
-                # obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
-                # self._latest_data["position"] = obs_pose[:3]
-                # self._latest_data["quat_xyzw"] = obs_pose[3:]
-                # print(self._latest_data["position"]-obs_pose[:3], self._latest_data["quat_xyzw"]-obs_pose[3:])
+                obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
+                self._latest_data["position"] = obs_pose[:3]
+                self._latest_data["quat_xyzw"] = obs_pose[3:]
                 self._latest_data["timestamp"] = time.time_ns()
                 self._latest_data["info"] = {
                     "scene_id": current_episode["scene_id"],

@@ -57,12 +57,19 @@ from utils.sim import VLNSim
 default_episode = "test_generator_0"
 vln_sim = VLNSim(args)
 vln_sim.load_episode(default_episode)
+vln_sim.step()
 
 # Setup UI
 from utils.ui import BenchmarkUI
 benchmark_ui = BenchmarkUI(vln_sim)
 benchmark_ui.update_ui("episode_label", default_episode)
-vln_sim.on_client_episode_changed(lambda episode_label: benchmark_ui.update_ui("episode_label", episode_label))
+
+# Load episode if specified
+if args.episode_label != "none":
+    vln_sim.load_episode(args.episode_label)
+    benchmark_ui.update_ui("episode_label", args.episode_label)
+    vln_sim.step()
+
 
 """Main simulation loop"""
 print(f"[INFO] Starting simulation took {time.time()-sim_start_time:.2f}s")

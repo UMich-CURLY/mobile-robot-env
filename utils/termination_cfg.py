@@ -51,7 +51,10 @@ def terrain_out_of_bounds(
 
 def time_out(env, max_time: float = 600.0) -> torch.Tensor:
     """Terminate the episode when the episode length exceeds the maximum episode length."""
-    return env.manager_env.episode_length_buf*env.manager_env.step_dt >= max_time
+    if env.measure_manager:
+        return env.measure_manager.get_measure("sim_duration").get_metric() >= max_time
+    else:
+        return False
     
 def robot_stuck(env, asset_cfg = SceneEntityCfg("robot"), label: str = "stuck", max_time: float = 30.0, dist_threshold: float = 0.01, vel_threshold: float = 0.1):
     """Terminate the episode when the robot is not moving even though there is a command input for a certain time."""
@@ -86,7 +89,7 @@ class VLNTerminationsCfg:
     time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 100.0})
     bad_orientation = DoneTerm(
         func=mdp.bad_orientation,
-        params={"limit_angle": np.deg2rad(45.0)},
+        params={"limit_angle": float(np.deg2rad(45.0))},
     )
     terrain_out_of_bounds = DoneTerm(
         func=terrain_out_of_bounds,
@@ -99,20 +102,20 @@ class VLNTerminationsCfg:
             "asset_cfg": SceneEntityCfg("robot"),
             "max_time": 10.0,
             "label": "stuck",
-            "dist_threshold": 0.03,
+            "dist_threshold": 0.05,
             "vel_threshold": 0.01,
         },
     )
-    back_n_forth = DoneTerm(
-        func=robot_stuck,
-        params={
-            "asset_cfg": SceneEntityCfg("robot"),
-            "max_time": 30.0,
-            "label": "back_n_forth",
-            "dist_threshold": 2.0,
-            "vel_threshold": 0,
-        },
-    )
+    # back_n_forth = DoneTerm(
+    #     func=robot_stuck,
+    #     params={
+    #         "asset_cfg": SceneEntityCfg("robot"),
+    #         "max_time": 30.0,
+    #         "label": "back_n_forth",
+    #         "dist_threshold": 2.0,
+    #         "vel_threshold": 0,
+    #     },
+    # )
     stop_called = DoneTerm(
         func=stop_called,
     )

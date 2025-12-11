@@ -9,6 +9,8 @@ import torch
 from utils.termination_cfg import VLNTerminationsCfg
 from isaaclab.managers import TerminationManager
 import isaacsim.core.utils.prims as prim_utils
+import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -42,17 +44,13 @@ def set_robot_pose(env_cfg, episode, robot=None):
 class VLNEnvWrapper:
     """Wrapper to configure an :class:`RslRlVecEnvWrapper` instance to VLN environment."""
 
-    def __init__(self, args, env, 
-                 low_level_policy, robot_name, max_length=10000,
-                 measure_names=["PathLength", "DistanceToGoal", "Success", "SPL", "OracleNavigationError", "OracleSuccess"]
-        ):
+    def __init__(self, args, env, low_level_policy, robot_name, measure_names=None):
         self.env = env
         self.manager_env = env.unwrapped
         self.sim = self.manager_env.sim
         self.device = self.manager_env.device
         self.scene = self.manager_env.scene
         self.robot_name = robot_name
-        self.measure_names = measure_names
         self.first_init = True
         self.usd_path = None
         self.scene_scale = None
@@ -60,8 +58,21 @@ class VLNEnvWrapper:
         self.args = args
         self.num_envs = self.manager_env.num_envs
 
+        if measure_names is None:
+            measure_names = [
+                "PathLength",
+                "DistanceToGoal",
+                "ClosestGoal",
+                "Success",
+                "SPL",
+                "OracleNavigationError",
+                "OracleSuccess",
+                "SimDuration",
+            ]
+        self.measure_names = measure_names
+
         self.env_step = 0
-        self.max_length = max_length
+        self.step_dt = self.manager_env.step_dt
 
         self.high_level_obs_key = "camera"
         if not self.args.disable_camera:
@@ -118,9 +129,32 @@ class VLNEnvWrapper:
         if prim is None:
             raise ValueError(f"Prim at path {prim_path} not found")
         return prim.GetAttribute('xformOp:orient').Get()
+    
 
-    def reset(self, episode=None) -> tuple[torch.Tensor, dict]:
+    def get_cam_pose(self):
+        manager_env = self.manager_env
+        # robot pose
+        pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
+        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32) # wxyz
+        quat_robot = R.from_quat(np.concatenate([quat_robot[1:],quat_robot[:1]]))
+        # transform from robot to camera
+        pos_cam_body = manager_env.scene["pov_camera"].cfg.offset.pos
+        quat_cam_body = manager_env.scene["pov_camera"].cfg.offset.rot # wxyz
+        quat_cam_body = R.from_quat(np.concatenate([quat_cam_body[1:],quat_cam_body[:1]]))
+        # camera pose in world frame
+        pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
+        quat_cam_world = quat_robot * quat_cam_body
+        quat_cam_world = quat_cam_world.as_quat() # xyzw
+        pose = manager_env.scene["pov_camera"]._view.get_world_poses(usd=False)
+        # pos = pose[0][0].detach().cpu().numpy()
+        # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
+        # quat = np.concatenate([quat[1:],quat[:1]])
+        # return pos, quat
+        return pos_cam_world, quat_cam_world
+
+    def reset(self, episode=None, warmup_steps=50) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
+        zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
         if episode is not None:
             self.episode = episode
         else:
@@ -149,7 +183,6 @@ class VLNEnvWrapper:
             while len(self.scene.terrain.terrain_prim_paths) > 0:
                 self.scene.stage.RemovePrim(self.scene.terrain.terrain_prim_paths[0])
                 while self.scene.stage.GetPrimAtPath(self.scene.terrain.terrain_prim_paths[0]).IsValid():
-                    zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
                     self.update_command(zero_cmd)
                     actions = self.low_level_policy(self.low_level_obs)
                     low_level_obs, _, _, infos = self.env.step(actions)
@@ -184,9 +217,6 @@ class VLNEnvWrapper:
                 terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
         self.scene_setting = scene_settings
         self.usd_path = self.episode["path"]
-
-        # remove visualization
-        self.remove_prim("/Visuals")
 
         # reset robot position
         robot = self.scene["robot"]

@@ -200,3 +200,5 @@ results/
 *.bin
 *.etli
 data
+logs/
+outputs/

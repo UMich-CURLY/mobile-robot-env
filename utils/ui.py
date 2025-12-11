@@ -15,7 +15,7 @@ import isaacsim.core.utils.prims as prim_utils
 import omni.usd
 import isaacsim.core.utils.bounds as bounds_utils
 import isaaclab.sim as sim_utils
-from utils.episode import VLNEpisode, save_episodes
+from utils.episode import VLNEpisode
 from utils.vis import visualize_points, visualize_curve
 
 LABEL_WIDTH = 120
@@ -114,6 +114,8 @@ class BenchmarkUI(BaseUI):
         self.manager_env = vln_sim.manager_env
         self.env = vln_sim.env
         self.ui_episode = None
+        # initialize ui
+        self.build_ui()
         # map ui_episode fields to ui_elements
         # format: {ui_name: (config_name, [getter_func, setter_func])}
         self.ui_map = {
@@ -122,8 +124,8 @@ class BenchmarkUI(BaseUI):
             "episode_info": ("episode_info", label_func),
             "start_position": ("start_position", xyz_func),
         }
-        # initialize ui
-        self.build_ui()
+        # add callback to sim
+        self.vln_sim.add_callback('client_episode_changed', lambda episode_label: self.update_ui("episode_label", episode_label))
 
     def build_ui(self):
         with self.ui_elements["main_stack"]:
@@ -141,9 +143,9 @@ class BenchmarkUI(BaseUI):
                     "Start Position",
                     default_val=[0.0, 0.0, 0.0]
                 )
-                ui_utils.btn_builder("Apply Settings", text="Update", on_clicked_fn=lambda: self.save_settings("episode_runtime"))
-                ui_utils.btn_builder("Follow Reference Path", text="Start", on_clicked_fn=lambda: self.start_following_waypoints())
-                ui_utils.btn_builder("Stop Following", text="Stop", on_clicked_fn=lambda: self.stop_following_waypoints())
+                ui_utils.btn_builder("Load Scene", text="Load", on_clicked_fn=lambda: self.save_settings("episode_runtime"))
+                ui_utils.btn_builder("Follow Reference Path", text="Start", on_clicked_fn=lambda: self.vln_sim.set_ref_waypoints(self.ui_episode))
+                ui_utils.btn_builder("Stop Following", text="Stop", on_clicked_fn=lambda: self.vln_sim.clear_waypoints())
                 ui_utils.btn_builder("Switch StopCalled State", text="Switch", on_clicked_fn=lambda: self.env.set_stop_called(self.vln_sim.robot_index, not self.env.is_stop_called[self.vln_sim.robot_index]))
             with self.create_frame("Episode Info"):
                 self.ui_elements["episode_info"] = ui_utils.ui.Label(
@@ -175,23 +177,6 @@ class BenchmarkUI(BaseUI):
                 self.ui_episode[value] = self.get_ui_value(self.ui_map, key)
             self.vln_sim.reset(self.ui_episode)
 
-    def start_following_waypoints(self):
-        goal_positions = np.array([x["location"] for x in self.ui_episode["goals"]])
-        dist_to_goals = np.linalg.norm(goal_positions - self.ui_episode["start_position"], axis=1)
-        closest_goal = self.ui_episode["goals"][np.argmin(dist_to_goals)]
-        ref_path = closest_goal["reference_path"]
-        self.vln_sim.set_waypoints(ref_path[1:], fix_yaw=True)
-
-    def stop_following_waypoints(self):
-        self.vln_sim.clear_waypoints()
-        self.remove_prim("/World/WaypointPath")
-        self.remove_prim("/World/Arrow")
-
-    def remove_prim(self, rule):
-        prim_list = prim_utils.find_matching_prim_paths(rule)
-        for prim_path in prim_list:
-            prim_utils.delete_prim(prim_path)
-
 class TaskGeneratorUI(BaseUI):
     def __init__(self, vln_sim, task_generator):
         super().__init__(vln_sim)
@@ -205,6 +190,8 @@ class TaskGeneratorUI(BaseUI):
         self.ui_episode = None
         self.scene_config = None
         self.scene_folder = Path(self.args.scene_folder)
+        # initialize ui
+        self.build_ui()
         # map ui_episode fields to ui_elements
         # format: {ui_name: (config_name, [getter_func, setter_func])}
         self.ui_config_map = {
@@ -220,9 +207,13 @@ class TaskGeneratorUI(BaseUI):
             "episode_number": ("episode_number", int_func),
             "rule_pattern": ("rule_pattern", choice_func(task_generator.rule_pattern_list)),
         }
-        self.navmesh_settings_map = {x: (x.replace("navmesh_settings_", ""), float_func) for x in self.ui_elements.keys() if x.startswith("navmesh_settings_")}
-        # initialize ui
-        self.build_ui()
+        navmesh_settings_keys = [self._camel_to_snake(x) for x in self.task_generator.navmesh_interface.settings.keys()]
+        self.navmesh_settings_map = {f"navmesh_settings_{x}": (x, float_func) for x in navmesh_settings_keys}
+        # add callback to sim
+        def episode_changed_callback(x):
+            self.update_ui("scene_id", self.vln_sim.next_episode.scene_id)
+            self.update_ui("navmesh_preset", self.vln_sim.next_episode["navmesh"])
+        self.vln_sim.add_callback('client_episode_changed', episode_changed_callback)
 
     def build_ui(self):
         with self.ui_elements["main_stack"]:
@@ -232,6 +223,7 @@ class TaskGeneratorUI(BaseUI):
                     items=self.task_generator.scene_id_list,
                     on_clicked_fn=lambda x: self.update_ui("scene_id", x)
                 )
+                ui_utils.btn_builder("Load Scene", text="Load", on_clicked_fn=lambda: self.load_scene())
                 ui_utils.btn_builder("Save Scene Settings", text="Save", on_clicked_fn=lambda: self.save_settings("scene"))
                 ui_utils.btn_builder("ReLoad Task Config", text="ReLoad", on_clicked_fn=lambda: self.reload_config())
                 self.ui_elements["usd_path"] = ui_utils.str_builder(
@@ -251,7 +243,6 @@ class TaskGeneratorUI(BaseUI):
                 )[0]
                 self.ui_elements["collider"] = ui_utils.cb_builder("Collider", default_val=True)
                 self.ui_elements["align_ground"] = ui_utils.cb_builder("Align Ground", default_val=True)
-                ui_utils.btn_builder("Load Scene", text="Load", on_clicked_fn=lambda: self.load_scene())
             with self.create_frame("Navmesh Settings", collapsed=True):
                 self.ui_elements["navmesh_preset"] = ui_utils.dropdown_builder(
                     "Navmesh Preset",
@@ -269,6 +260,7 @@ class TaskGeneratorUI(BaseUI):
                     )[0]
                 ui_utils.btn_builder("Navmesh Config", text="Save", on_clicked_fn=lambda: self.save_settings("navmesh_config"))
             with self.create_frame("Navmesh Tools"):
+                ui_utils.btn_builder("Setup Geometry", text="Setup", on_clicked_fn=lambda: self.setup_navmesh())
                 ui_utils.btn_builder("Build Navmesh", text="Build", on_clicked_fn=lambda: self.build_navmesh())
                 ui_utils.btn_builder("Load Navmesh", text="Load", on_clicked_fn=lambda: self.load_navmesh())
                 ui_utils.btn_builder("Save Navmesh", text="Save", on_clicked_fn=lambda: self.save_navmesh())
@@ -286,6 +278,7 @@ class TaskGeneratorUI(BaseUI):
                     on_clicked_fn=lambda x: self.save_settings("scene_runtime")
                 )
                 ui_utils.btn_builder("Generate Episode", text="Generate", on_clicked_fn=lambda: self.generate_episodes())
+                ui_utils.btn_builder("Stop Generation", text="Stop", on_clicked_fn=lambda: self.stop_generation())
     def _snake_to_camel(self, s):
         parts = s.split('_')
         return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
@@ -294,9 +287,11 @@ class TaskGeneratorUI(BaseUI):
         return ''.join(['_' + char.lower() if char.isupper() else char for char in s]).lstrip('_')
 
     def reload_config(self):
-        previous_scene_id = self.ui_episode["scene_id"] 
-        self.update_ui("scene_id", previous_scene_id)
-        self.update_ui("navmesh_preset", self.scene_config["navmesh_preset"])
+        scene_id = self.ui_episode["scene_id"]
+        # TODO: fix this
+        self.episode_ui = self.vln_sim.episode_list[self.episode_label_list.index(scene_id)]
+        self.update_ui("scene_id", scene_id)
+        self.update_ui("navmesh_preset", self.ui_episode["navmesh"])
         print("[INFO] Task config reloaded")
 
     def update_ui(self, settings_type, selected_value):
@@ -310,6 +305,7 @@ class TaskGeneratorUI(BaseUI):
             self.ui_episode = VLNEpisode(self.scene_config)
             for key, (value, _) in self.ui_config_map.items():
                 self.set_ui_value(self.ui_config_map, key, self.scene_config[value])
+            self.update_ui("navmesh_preset", self.ui_episode["navmesh"])
             print("[INFO] Loaded goal rules:", self.scene_config["goal_rules"])
             print("[INFO] Loaded excluded paths:", self.scene_config["navmesh_exclude"])
 
@@ -336,21 +332,26 @@ class TaskGeneratorUI(BaseUI):
     def load_scene(self):
         self.save_settings("scene_runtime")
         self.env.reset(self.ui_episode)
+    
+    def setup_navmesh(self):
+        self.save_settings("scene_runtime")
+        selected_paths = ["/World/ground/terrain"]
+        start_time = time.time()
+        self.task_generator.navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=self.scene_config.get("scene_type"))
+        print(f"[INFO]: Navmesh geometry setup time: {time.time() - start_time:.2f} seconds")
 
     def build_navmesh(self):
         self.save_settings("navmesh_runtime")
-        selected_paths = ["/World/ground/terrain"]
         start_time = time.time()
-        self.task_generator.navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), self.vln_sim.manager_env.scene.stage, scene_type=self.scene_config.get("scene_type"))
         self.task_generator.navmesh_interface.build_navmesh()
-        end_time = time.time()
-        print(f"[INFO]: Navmesh build time: {end_time - start_time:.2f} seconds")
+        print(f"[INFO]: Navmesh build time: {time.time() - start_time:.2f} seconds")
         self.test_navmesh()
 
     def load_navmesh(self):
         navmesh_path = str(self.scene_folder / f"navmesh/{self.ui_episode['scene_id']}_navmesh.bin")
         self.task_generator.navmesh_interface.load_navmesh(navmesh_path)
         self.test_navmesh()
+        self.teleport_robot()
 
     def test_navmesh(self):
         self.task_generator.navmesh_interface.visualize_navmesh()
@@ -360,6 +361,7 @@ class TaskGeneratorUI(BaseUI):
             for i in range(50):
                 path = self.task_generator.navmesh_interface.find_paths(points[2*i], points[2*i+1])
                 visualize_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
+        self.teleport_robot()
 
     def save_navmesh(self):
         os.makedirs(self.scene_folder / "navmesh", exist_ok=True)
@@ -391,7 +393,7 @@ class TaskGeneratorUI(BaseUI):
             min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[prim_path])
             cfg_cube = sim_utils.CuboidCfg(size=[1.0, 1.0, 1.0])
             position = [(min_x+max_x)/2, (min_y+max_y)/2, (min_z+max_z)/2]
-            cfg_cube.func("/World/Cube", cfg_cube, translation=list(position))
+            cfg_cube.func(cube_path, cfg_cube, translation=list(position))
         else:
             print("[ERROR]: No prim selected")
 
@@ -405,8 +407,10 @@ class TaskGeneratorUI(BaseUI):
         self.save_settings("scene_runtime")
         self.save_settings("navmesh_config")
         self.save_settings("navmesh_runtime")
-        episodes = self.task_generator.generate_episodes(self.env, self.ui_episode["scene_id"])
-        save_episodes(episodes, f"episodes/{self.ui_episode['scene_id']}.json")
+        self.task_generator.generate_episodes(self.ui_episode["scene_id"])
+    
+    def stop_generation(self):
+        self.task_generator.stop_generation()
 
     def get_information(self):
         # Get current robot world pose

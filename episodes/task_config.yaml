@@ -3,7 +3,7 @@ navmesh:
     agent_height: 0.3
     agent_max_climb: 0.05
     agent_max_slope: 26.0
-    agent_radius: 0.3
+    agent_radius: 1.0
     cell_height: 0.1
     cell_size: 0.08
     detail_sample_dist: 1.0
@@ -13,8 +13,8 @@ navmesh:
     region_merge_size: 0.5
     region_min_size: 0.5
     verts_per_poly: 6.0
-  outdoor:
-    agent_height: 0.61
+  indoor:
+    agent_height: 0.3
     agent_max_climb: 0.1
     agent_max_slope: 30.0
     agent_radius: 0.3
@@ -46,6 +46,47 @@ scene:
     align_ground: false
     collider: true
     episodes:
+      cafe:
+        episode_number: 30
+        goal_rules:
+          blanket: blanket/model_[^/]*/Instance$
+          bowl: bowl/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          counter: counter/model_[^/]*/Instance$
+          cup: cup/model_[^/]*/Instance$
+          picture: picture/model_[^/]*/Instance$
+          plate: plate/model_[^/]*/Instance$
+          pot: pot/model_[^/]*/Instance$
+          stool: stool/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toy: toy/model_[^/]*/Instance$
+          tray: tray/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAI8_usd/start_result_navigation.usd
+        rule_pattern: path
+      cafe2:
+        episode_number: 30
+        goal_rules:
+          blanket: blanket/model_[^/]*/Instance$
+          bowl: bowl/model_[^/]*/Instance$
+          coffeemaker: coffeemaker/model_[^/]*/Instance$
+          counter: counter/model_[^/]*/Instance$
+          cup: cup/model_[^/]*/Instance$
+          laptop: laptop/model_[^/]*/Instance$
+          picture: picture/model_[^/]*/Instance$
+          plate: plate/model_[^/]*/Instance$
+          pot: pot/model_[^/]*/Instance$
+          sink: sink/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toy: toy/model_[^/]*/Instance$
+          tray: tray/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAQ8_usd/start_result_navigation.usd
+        rule_pattern: path
       hospital:
         episode_number: 30
         goal_rules:
@@ -62,6 +103,159 @@ scene:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd
+        rule_pattern: path
+      kindergarten:
+        episode_number: 30
+        goal_rules:
+          basket: basket/model_[^/]*/Instance$
+          book: book/model_[^/]*/Instance$
+          bookshelf: bookshelf/model_[^/]*/Instance$
+          chair: chair/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          cup: cup/model_[^/]*/Instance$
+          keyboard: keyboard/model_[^/]*/Instance$
+          light: light/model_[^/]*/Instance$
+          pen: pen/model_[^/]*/Instance$
+          plant: plant/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toy: toy/model_[^/]*/Instance$
+          tv: tv/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAEI8_usd/start_result_navigation.usd
+        rule_pattern: path
+      studyRoom:
+        episode_number: 30
+        goal_rules:
+          book: book/model_[^/]*/Instance$
+          bookshelf: bookshelf/model_[^/]*/Instance$
+          chair: chair/model_[^/]*/Instance$
+          desk: desk/model_[^/]*/Instance$
+          door: door/model_[^/]*/Instance$
+          lamp: lamp/model_[^/]*/Instance$
+          laptop: laptop/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          sofa_chair: sofa_chair/model_[^/]*/Instance$
+          stool: stool/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          teatable: teatable/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
+        rule_pattern: path
+      superMarket:
+        episode_number: 30
+        goal_rules:
+          basket: basket/model_[^/]*/Instance$
+          bookshelf: bookshelf/model_[^/]*/Instance$
+          bottle: bottle/model_[^/]*/Instance$
+          chair: chair/model_[^/]*/Instance$
+          clothes: clothes/model_[^/]*/Instance$
+          coffee_maker: coffee_maker/model_[^/]*/Instance$
+          counter: counter/model_[^/]*/Instance$
+          microwave: microwave/model_[^/]*/Instance$
+          plate: plate/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          shoe: shoe/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          trashcan: trashcan/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEI8_usd/start_result_navigation.usd
+        rule_pattern: path
+      superMarket2:
+        episode_number: 30
+        goal_rules:
+          basket: basket/model_[^/]*/Instance$
+          bookshelf: bookshelf/model_[^/]*/Instance$
+          bowl: bowl/model_[^/]*/Instance$
+          chair: chair/model_[^/]*/Instance$
+          clothes: clothes/model_[^/]*/Instance$
+          counter: counter/model_[^/]*/Instance$
+          microwave: microwave/model_[^/]*/Instance$
+          plate: plate/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          shoppingtrolley: shoppingtrolley/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          towel: towel/model_[^/]*/Instance$
+          trashcan: trashcan/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADY8_usd/start_result_navigation.usd
+        rule_pattern: path
+    scene_scale: 0.009999999776482582
+  grHome:
+    align_ground: false
+    collider: false
+    episodes:
+      indoor1:
+        episode_number: 30
+        goal_rules:
+          bed: bed/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toilet: toilet/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_home/scenes/MVUHLWYKTKJ5EAABAAAAAAY8_usd/start_result_navigation.usd
+        rule_pattern: path
+      indoor2:
+        episode_number: 30
+        goal_rules:
+          bed: bed/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toilet: toilet/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd
+        rule_pattern: path
+      indoor3:
+        episode_number: 30
+        goal_rules:
+          bed: bed/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toilet: toilet/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_home/scenes/MVUCSQAKTKJ5EAABAAAAABA8_usd/start_result_navigation.usd
+        rule_pattern: path
+      indoor4:
+        episode_number: 30
+        goal_rules:
+          bed: bed/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toilet: toilet/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
+        rule_pattern: path
+      indoor5:
+        episode_number: 30
+        goal_rules:
+          bed: bed/model_[^/]*/Instance$
+          couch: couch/model_[^/]*/Instance$
+          refrigerator: refrigerator/model_[^/]*/Instance$
+          table: table/model_[^/]*/Instance$
+          toilet: toilet/model_[^/]*/Instance$
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd
         rule_pattern: path
     scene_scale: 0.009999999776482582
   nv:
@@ -91,7 +285,7 @@ scene:
           trash_bin: OutdoorTrash.*
           trash_can: TrashCan.*
         navmesh_exclude: []
-        navmesh_preset: outdoor
+        navmesh_preset: vc
         path: nvidia/city1/city1_flatten_edit.usd
         rule_pattern: name
       city2:
@@ -105,7 +299,7 @@ scene:
         navmesh_exclude:
         - /World/ground/terrain/Ground/HorizonRT
         - /World/ground/terrain/Ground/HorizonRT_01
-        navmesh_preset: outdoor
+        navmesh_preset: vc
         path: nvidia/city2/city2_flatten_edit.usd
         rule_pattern: name
       parkmorning:
@@ -117,7 +311,7 @@ scene:
           trash_bin: OutdoorTrash.*
           trash_can: TrashCan.*
         navmesh_exclude: []
-        navmesh_preset: outdoor
+        navmesh_preset: default
         path: nvidia/park/park_morning_flatten_edit.usd
         rule_pattern: name
       parknight:
@@ -130,7 +324,7 @@ scene:
           trash_can: TrashCan.*
         navmesh_exclude:
         - /World/ground/terrain/sky_NightSky/AxisNorth/SkySphere/Sphere
-        navmesh_preset: outdoor
+        navmesh_preset: default
         path: nvidia/park/park_night_flatten_edit.usd
         rule_pattern: name
       parktest:
@@ -140,7 +334,7 @@ scene:
           mailbox: MailboxType.*
           park_bench: ParkBench.*
         navmesh_exclude: []
-        navmesh_preset: outdoor
+        navmesh_preset: default
         path: nvidia/AECDemo_NVD@10012/Demos/AEC/BrownstoneDemo/test.usd
         rule_pattern: name
     scene_scale: 0.01
@@ -234,75 +428,5 @@ scene:
         path: virtual_community/NY/NY_with_road_objects_modified.usd
         rule_pattern: name
     scene_scale: 1.0
-  grHome:
-    align_ground: false
-    collider: false
-    episodes:
-      indoor1:
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/MVUHLWYKTKJ5EAABAAAAAAY8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor2:
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor3:
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/MVUCSQAKTKJ5EAABAAAAABA8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor4:
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor5:
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd
-        rule_pattern: path
-    scene_scale: 0.009999999776482582
 task:
   type: object_nav

@@ -12,11 +12,14 @@ def world_to_body(dx, dy, yaw):
     c, s = math.cos(-yaw), math.sin(-yaw)
     return c*dx - s*dy, s*dx + c*dy
 
+def calc_yaw(current_pos, target_pos):
+    return np.arctan2((target_pos[1] - current_pos[1]), target_pos[0] - current_pos[0])
+
 def set_yaw_to_forward(cam_pos, waypoints):
     last_pos = cam_pos[:2]
     new_waypoints = []
     for wp in waypoints:
-        yaw_angle = np.arctan2((wp[1] - last_pos[1]), wp[0] - last_pos[0])
+        yaw_angle = calc_yaw(last_pos, wp[:2])
         new_waypoints.append([wp[0], wp[1], yaw_angle])
         last_pos = wp[:2]
     return new_waypoints
@@ -25,13 +28,12 @@ class WaypointFollower:
     def __init__(self,
         device,
         max_vel=[1.5, 1.0, 1.0],
-        min_lin_speed=0.3,
-        min_ang_speed=0.3,
+        min_vel=[0.3, 0.1, 0.3],
         kp=[2.0, 0.5, 2.0],
         ki=[0.0, 0.0, 0.0], # [0.1, 0.1, 0.1]
         kd=[0.0, 0.0, 0.0], # [3, 3, 1]
         max_integral=[5.0, 5.0, 3.0],
-        arrive_dist=0.05,
+        arrive_dist=0.1,
         arrive_yaw=np.pi/180.0*15.0,
         term_dist=0.05,
         term_yaw=np.pi/180.0*5.0,
@@ -39,8 +41,7 @@ class WaypointFollower:
     ):
         self.device = device
         self.max_vel = np.array(max_vel)
-        self.min_lin_speed = min_lin_speed
-        self.min_ang_speed = min_ang_speed
+        self.min_vel = np.array(min_vel)
         self.kp = np.array(kp)
         self.ki = np.array(ki)
         self.kd = np.array(kd)
@@ -98,13 +99,32 @@ class WaypointFollower:
             self.error_integral = np.zeros(3)
             self.last_error = np.zeros(3)
         current_wp_idx = target_idx
+        is_final_segment = (current_wp_idx == num_wps - 1)
         target_wp = waypoints_world[target_idx]
-        dist_to_goal = np.linalg.norm(target_wp[:2] - base_xy)
+
+        # set different arrive thresholds for final segment
+        if is_final_segment:
+            arrive_dist = self.term_dist
+            arrive_yaw = self.term_yaw
+        else:
+            arrive_dist = self.arrive_dist
+            arrive_yaw = self.arrive_yaw
+
+        # calculate xy diff
+        diff_to_goal = target_wp[:2] - base_xy
+        dist_to_goal = np.linalg.norm(diff_to_goal)
+
+        # set yaw to next waypoint and ignore set yaw angle until reaching the waypoint position
+        # or, if the set yaw is inf, set yaw to next waypoint too
+        if dist_to_goal > arrive_dist or target_wp[2]>10.0:
+            target_wp = np.array(target_wp)
+            target_wp[2] = calc_yaw(base_xy, target_wp[:2])
 
         # 3) Compute control to the lookahead target in body frame (pure-pursuit style)
         dx = target_wp[0] - base_xy[0]
         dy = target_wp[1] - base_xy[1]
         ang_err = wrap_to_pi(target_wp[2] - base_yaw)
+
 
         ex_b, ey_b = world_to_body(dx, dy, base_yaw)
 
@@ -120,36 +140,38 @@ class WaypointFollower:
         vel = self.kp * error + self.ki * self.error_integral + self.kd * error_derivative
 
         # enforce minimum velocities when far from goal
-        lin_speed = np.linalg.norm(vel[:2])
-        if dist_to_goal > self.arrive_dist and lin_speed < self.min_lin_speed:
-            vel[:2] = vel[:2] / lin_speed * self.min_lin_speed
-        if abs(ang_err) > self.arrive_yaw and abs(vel[2]) < self.min_ang_speed:
-            vel[2] = vel[2] / abs(vel[2]) * self.min_ang_speed
+        for i, diff in enumerate([ex_b, ey_b]):
+            if abs(diff) > arrive_dist and abs(vel[i]) < self.min_vel[i]:
+                vel[i] = vel[i] / abs(vel[i]) * self.min_vel[i]
+        if abs(ang_err) > arrive_yaw and abs(vel[2]) < self.min_vel[2]:
+            vel[2] = vel[2] / abs(vel[2]) * self.min_vel[2]
+
+        # if the angle error is too large, set linear velocity to 0
+        if ang_err > np.deg2rad(30.0):
+            vel[0] = 0.0
+            vel[1] = 0.0
 
         vel = np.clip(vel, -self.max_vel, self.max_vel)
         vx, vy, vw = vel
 
         if verbose:
             print("================================================")
-            print(f"cam_pos: {cam_pos}")
-            print(f"target_wp: [{target_idx}] {target_wp[:2]} {np.rad2deg(target_wp[2])}")
-            print(f"base_xy: {base_xy} base_yaw: {np.rad2deg(base_yaw)}")
-            print(f"dx: {dx}, dy: {dy}, ang_err: {np.rad2deg(ang_err)}")
-            print(f"ex_b: {ex_b}, ey_b: {ey_b}")
-            print(f"vx: {vx}, vy: {vy}, vw: {vw}")
+            print(f"cam_pos: {cam_pos[0]:.2f}, {cam_pos[1]:.2f}, {cam_pos[2]:.2f}")
+            print(f"target_wp: [{target_idx}] {target_wp[0]:.2f}, {target_wp[1]:.2f}, {np.rad2deg(target_wp[2]):.2f}")
+            print(f"base_xy: {base_xy[0]:.2f}, {base_xy[1]:.2f} base_yaw: {np.rad2deg(base_yaw):.2f}")
+            print(f"dx: {dx:.2f}, dy: {dy:.2f}, ang_err: {np.rad2deg(ang_err):.2f}")
+            print(f"ex_b: {ex_b:.2f}, ey_b: {ey_b:.2f}")
+            print(f"vx: {vx:.2f}, vy: {vy:.2f}, vw: {vw:.2f}")
+            print(f"current_wp_idx: {current_wp_idx}, num_wps: {num_wps}")
 
 
-        is_final_segment = (current_wp_idx >= num_wps - 2)
-        if is_final_segment:
-            # 4) Near-goal handling to avoid singularity and oscillation
-            if dist_to_goal < self.term_dist and abs(ang_err) < self.term_yaw:
+        if dist_to_goal < arrive_dist and abs(ang_err) < arrive_yaw:
+            if is_final_segment:
                 vx, vy, vw = 0.0, 0.0, 0.0
                 current_wp_idx = num_wps - 1
                 self.arrived_at_goal = True
                 print(f"[PLAN] Reached goal")
-        else:
-            # 5) Waypoint progression: progress when near the current waypoint
-            if dist_to_goal < self.arrive_dist and abs(ang_err) < self.arrive_yaw:
+            else:
                 current_wp_idx += 1
                 print(f"[PLAN] Reached waypoint {current_wp_idx}/{num_wps}")
 
