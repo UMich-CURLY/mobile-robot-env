@@ -35,7 +35,7 @@ class WaypointFollower:
         max_integral=[5.0, 5.0, 3.0],
         arrive_dist=0.1,
         arrive_yaw=np.pi/180.0*15.0,
-        term_dist=0.05,
+        term_dist=0.1,
         term_yaw=np.pi/180.0*5.0,
         lookahead_distance=0,
     ):
@@ -113,10 +113,12 @@ class WaypointFollower:
         # calculate xy diff
         diff_to_goal = target_wp[:2] - base_xy
         dist_to_goal = np.linalg.norm(diff_to_goal)
-
-        # set yaw to next waypoint and ignore set yaw angle until reaching the waypoint position
-        # or, if the set yaw is inf, set yaw to next waypoint too
-        if dist_to_goal > arrive_dist or target_wp[2]>10.0:
+        
+        if dist_to_goal < arrive_dist and target_wp[2]>10.0:
+            # if set yaw is inf and robot is close to wp, set target yaw to current yaw
+            target_wp[2] = base_yaw
+        elif dist_to_goal > arrive_dist or target_wp[2]>10.0:
+            # set yaw to next waypoint if far away from the waypoint position or set yaw is inf
             target_wp = np.array(target_wp)
             target_wp[2] = calc_yaw(base_xy, target_wp[:2])
 
@@ -124,7 +126,6 @@ class WaypointFollower:
         dx = target_wp[0] - base_xy[0]
         dy = target_wp[1] - base_xy[1]
         ang_err = wrap_to_pi(target_wp[2] - base_yaw)
-
 
         ex_b, ey_b = world_to_body(dx, dy, base_yaw)
 
@@ -147,7 +148,7 @@ class WaypointFollower:
             vel[2] = vel[2] / abs(vel[2]) * self.min_vel[2]
 
         # if the angle error is too large, set linear velocity to 0
-        if ang_err > np.deg2rad(30.0):
+        if abs(ang_err) > np.deg2rad(30.0):
             vel[0] = 0.0
             vel[1] = 0.0
 
