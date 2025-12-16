@@ -164,6 +164,7 @@ class TaskGenerator:
                 img_path = f"{data_folder}/rgb/{img_index}.png"
                 cv2.imwrite(img_path, self.vln_sim.obs["pov_rgb"].cpu().numpy()[0][...,::-1])
                 # append pose to txt
+                # TODO: change this to waypoints
                 with open(pose_path, 'a') as f:
                     f.write(f"{[img_index]+self.vln_sim.obs['pov_pose'].cpu().numpy()[0].tolist()}\n")
             # check if episode is done

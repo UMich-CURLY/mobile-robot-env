@@ -3,6 +3,9 @@ import glob
 import cv2
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from litellm import completion
+import json
+import base64
 from utils.path_following_utils import calc_yaw, wrap_to_pi, world_to_body
 from utils.episode import VLNEpisode
 
@@ -12,7 +15,7 @@ class InstructionGenerator:
         self.episode_data_folder = episode_data_folder
         self.episode_list = VLNEpisode.from_json_folder(episode_folder)
     
-    def _get_data_path(self, episode, *children):
+    def get_data_path(self, episode, *children):
         return os.path.join(self.episode_data_folder, episode.episode_label, *children)
 
     def generate_instruction(
@@ -28,13 +31,21 @@ class InstructionGenerator:
         if episode_id is not None:
             scene_episodes = [x for x in scene_episodes if x.episode_id == episode_id]
         # template based generation
+        result = []
         for episode in scene_episodes:
             print("="*30)
             print(f"Generating instruction for episode {episode.episode_id}")
             full_instruction, aligned_instructions = self.template_based_generation(episode)
             if video:
+                print(f"Generating video for episode {episode.episode_id}")
                 find_instruction = lambda x: min(aligned_instructions, key=lambda y: abs(y[0]-x) if y[0]>=x else float('inf'))[1]
                 self.generate_video(episode, lambda x: [f"Frame {x}: {find_instruction(x)}"])
+            result.append({
+                "episode": episode,
+                "full_instruction": full_instruction,
+                "aligned_instructions": aligned_instructions,
+            })
+        return result
 
     def template_based_generation(self, episode):
         robot_pos = episode["start_position"]
@@ -53,7 +64,7 @@ class InstructionGenerator:
         to_remove = [] # indices to remove if diff is too small
         for i, diff in enumerate(pose_diff):
             # print(f"pose_diff {i}: ex_b={diff[0]:.2f}, yaw_diff={np.rad2deg(diff[2]):.2f}")
-            if abs(diff[2])<np.deg2rad(10) or abs(diff[0])<0.1:
+            if abs(diff[2])<np.deg2rad(10) or abs(diff[0])<0.5:
                 if i==len(reference_path)-1:
                     to_remove.append(i-1)
                 else:
@@ -90,7 +101,7 @@ class InstructionGenerator:
         print(f"Full instruction: {full_instruction}")
 
         # read poses from recorded trajectory
-        pose_file = self._get_data_path(episode, "pose.txt")
+        pose_file = self.get_data_path(episode, "pose.txt")
         with open(pose_file, 'r') as f:
             lines = [line[1:-2].split(",") for line in f.readlines()]
         pose_list = [np.array([float(x) for x in line]) for line in lines]
@@ -108,7 +119,7 @@ class InstructionGenerator:
         aligned_instructions = []
         for i, point in enumerate(simplified_path):
             for j, pose in enumerate(pose_list):
-                if np.linalg.norm(pose[:2] - np.array(point[:2])) < 0.3:
+                if np.linalg.norm(pose[:2] - np.array(point[:2])) < 0.5:
                     aligned_instructions.append((j, instruction_list[i]))
                     break
         aligned_instructions.append((len(pose_list)-1, instruction_list[-1]))
@@ -148,7 +159,7 @@ class InstructionGenerator:
         points = [pose[:3, 3]] + points
         ax.plot([point[0] for point in points], [point[1] for point in points])
         ax.plot(pose[:3, 3][0], pose[:3, 3][1], 'ro')
-        image_path = self._get_data_path(episode, f"path_{path_name}.png")
+        image_path = self.get_data_path(episode, f"path_{path_name}.png")
         plt.savefig(image_path)
         plt.close()
         print(f"Path image generated and saved to {image_path}")
@@ -160,7 +171,7 @@ class InstructionGenerator:
         if info_func is None:
             info_func = lambda x: [f"Frame {x}"]
         # load image folder
-        image_folder = self._get_data_path(episode, "rgb")
+        image_folder = self.get_data_path(episode, "rgb")
         image_files = glob.glob(os.path.join(image_folder, "*.png"))
         image_files = sorted(image_files, key=lambda x: int(x.split("/")[-1].split(".")[0]))
         images = [cv2.imread(x) for x in image_files]
@@ -171,10 +182,87 @@ class InstructionGenerator:
                 cv2.putText(images[int(frame_id)], text, (10, text_height), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50, 50, 50), 2)
                 text_height += 30
         # generate video
-        video_path = self._get_data_path(episode, "video_instruction.mp4")
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        video_path = self.get_data_path(episode, "video_instruction.mp4")
+        
+        # Try avc1 (H.264) first
+        fourcc = cv2.VideoWriter_fourcc(*'avc1')
         video_writer = cv2.VideoWriter(video_path, fourcc, 10, (images[0].shape[1], images[0].shape[0]))
+        
+        if not video_writer.isOpened():
+             print("Failed to open video writer with avc1, trying H264")
+             fourcc = cv2.VideoWriter_fourcc(*'H264')
+             video_writer = cv2.VideoWriter(video_path, fourcc, 10, (images[0].shape[1], images[0].shape[0]))
+
+        if not video_writer.isOpened():
+             print("Failed to open video writer with H264, trying vp09 (VP9)")
+             fourcc = cv2.VideoWriter_fourcc(*'vp09')
+             video_writer = cv2.VideoWriter(video_path, fourcc, 10, (images[0].shape[1], images[0].shape[0]))
+
+        if not video_writer.isOpened():
+             print("Failed to open video writer with vp09, falling back to mp4v")
+             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+             video_writer = cv2.VideoWriter(video_path, fourcc, 10, (images[0].shape[1], images[0].shape[0]))
+
+        
         for image in images:
             video_writer.write(image)
         video_writer.release()
         print(f"Video generated and saved to {video_path}")
+    
+    def vlm_based_generation(self, episode, aligned_instructions):
+        message_content = []
+        add_text = lambda text: message_content.append({"type": "text","text": text})
+        add_image = lambda image_path: message_content.append({"type": "image_url","image_url": {"url": "data:image/png;base64,"+base64.b64encode(open(image_path, "rb").read()).decode()}})
+        add_video = lambda video_path: message_content.append({"type": "video_url","video_url": {"url": "data:video/mp4;base64,"+base64.b64encode(open(video_path, "rb").read()).decode()}})
+        # change the frame_id to when the instruction begins
+        shifted_instructions = [(1, "You start at this position. "+aligned_instructions[0][1])]
+        for i in range(1, len(aligned_instructions)):
+            shifted_instructions.append((aligned_instructions[i-1][0], aligned_instructions[i][1]))
+        image_list = list(range(1, shifted_instructions[-1][0]+1, 10))
+        # add image idx to the prompt
+        prompt_instruction = []
+        for i, (keyframe_id, instruction) in enumerate(shifted_instructions):
+            prompt_instruction.append(f"(img {keyframe_id//10+1}) {instruction}")
+            # format_time = lambda x: f"{x//60:02d}:{x%60:02d}"
+            # prompt_instruction.append(f"(video {format_time(keyframe_id//10)}) {instruction}")
+        prompt_instruction = " ".join(prompt_instruction)
+        print(prompt_instruction)
+        
+        used_images = []
+        for image_idx in image_list:
+            image_url = self.get_data_path(episode, "rgb", f"{image_idx}.png")
+            print(f"added image: {image_url}")
+            add_image(image_url)
+            used_images.append(image_url)
+            
+        # video_path = instruction_generator.get_data_path(episode, "video_instruction.mp4")
+        # add_video(video_path)
+        # print(f"added video: {video_path}")
+        text_prompt = f"""
+        Describe the trajectory of the robot in the images. Improve the given instruction to:
+        1) include unique landmarks you see in the images for guidence, describe color, shape, etc. briefly. Only mention landmarks that can be clearly observed.
+        2) make the expression more diverse.
+        3) replace the exact distance value with more general description.
+        4) do not mention (img x) in the output.
+        5) in some cases, if you don't directly see the target in the image, just say "you will arrive at [target name]".
+        6) do not mention the red lines in the images, those are pointing to the waypoints.
+        7) if the robot is following the road, mention it in the output.
+        8) reduce some redundent instructions.
+        9) return the output only, no other text.
+        Improve this instruction: {prompt_instruction}
+        Example output: Go forward until you see the red building, then turn right and go until you see the blue car. You should be able to see the target mailbox on your right.
+        """
+        add_text(text_prompt)
+        print(text_prompt)
+        resp = completion(
+            model="gemini/gemini-3-pro-preview",
+            messages=[{"role": "user", "content": message_content}],
+            reasoning_effort="low",
+        )
+        improved_instructions = resp.choices[0].message.content
+        print(f"Improved instructions: {improved_instructions}")
+        return {
+            "improved_instructions": improved_instructions,
+            "prompt": text_prompt,
+            "used_images": used_images
+        }

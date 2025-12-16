@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLN Instruction Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { max-width: 1200px; margin-top: 20px; }
+        .section { border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .result-box { background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 10px; }
+        img, video { max-width: 100%; margin-top: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">VLN Instruction Generator</h1>
+
+        <!-- Initialization -->
+        <div class="section" id="init-section">
+            <h3>Configuration</h3>
+            <div class="mb-3">
+                <label for="episodesPath" class="form-label">Episodes Path</label>
+                <input type="text" class="form-control" id="episodesPath" value="{{ default_episodes_path }}">
+            </div>
+            <div class="mb-3">
+                <label for="dataPath" class="form-label">Episode Data Path</label>
+                <input type="text" class="form-control" id="dataPath" value="{{ default_data_path }}">
+            </div>
+            <div class="mb-3">
+                <label for="apiToken" class="form-label">Gemini API Token</label>
+                <input type="password" class="form-control" id="apiToken" value="{{ token }}">
+            </div>
+            <button class="btn btn-primary" onclick="initialize()">Initialize</button>
+            <div id="init-message" class="mt-2"></div>
+        </div>
+
+        <!-- Selection -->
+        <div class="section hidden" id="selection-section">
+            <h3>Select Episode</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="sceneSelect" class="form-label">Scene</label>
+                    <select class="form-select" id="sceneSelect" onchange="loadEpisodes()"></select>
+                </div>
+                <div class="col-md-6">
+                    <label for="episodeSelect" class="form-label">Episode ID</label>
+                    <select class="form-select" id="episodeSelect"></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="section hidden" id="step1-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Step 1: Template Based Generation</h3>
+                <button class="btn btn-success" onclick="runStep1()">Run Step 1</button>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="videoCheck" checked>
+                        <label class="form-check-label" for="videoCheck">Generate Video</label>
+                    </div>
+                </div>
+            </div>
+            <div id="step1-results" class="result-box hidden">
+                <h5>Results</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Full Instruction</h6>
+                        <p id="fullInstruction"></p>
+                        <h6>Aligned Instructions</h6>
+                        <div id="aligned-ui" class="mb-2">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 100px;">Node ID</th>
+                                            <th>Instruction</th>
+                                            <th style="width: 60px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aligned-tbody"></tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="addAlignedRow()">+ Add Step</button>
+                        </div>
+                        <details>
+                            <summary class="text-muted small cursor-pointer">Show Raw JSON</summary>
+                            <textarea class="form-control mt-2" id="alignedInstructions" rows="5" oninput="renderAlignedFromJSON()"></textarea>
+                        </details>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Visualizations</h6>
+                        <div id="visualizations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="section hidden" id="step2-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Step 2: VLM Refinement</h3>
+                <button class="btn btn-warning" onclick="runStep2()">Run Step 2</button>
+            </div>
+            <div id="step2-results" class="result-box hidden">
+                <h5>Improved Instructions</h5>
+                <div class="p-3 bg-white border rounded" id="improvedInstructions"></div>
+            </div>
+        </div>
+
+        <!-- Save -->
+        <div class="section hidden" id="save-section">
+            <h3>Save Results</h3>
+            <button class="btn btn-dark" onclick="saveResults()">Save to JSON</button>
+            <button class="btn btn-outline-primary" onclick="runAll()">Run All Steps & Save</button>
+            <div id="save-message" class="mt-2"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentScene = "";
+        let currentEpisode = "";
+
+        async function initialize() {
+            const episodesPath = document.getElementById('episodesPath').value;
+            const dataPath = document.getElementById('dataPath').value;
+            const token = document.getElementById('apiToken').value;
+            
+            // Clear previous messages
+            const msgDiv = document.getElementById('init-message');
+            msgDiv.innerText = '';
+            msgDiv.className = 'mt-2';
+
+            try {
+                const response = await fetch('/initialize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ episodes_path: episodesPath, data_path: dataPath, token: token })
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const sceneSelect = document.getElementById('sceneSelect');
+                    sceneSelect.innerHTML = '<option value="">Select Scene</option>';
+                    data.scenes.forEach(scene => {
+                        const option = document.createElement('option');
+                        option.value = scene;
+                        option.text = scene;
+                        sceneSelect.appendChild(option);
+                    });
+                    
+                    document.getElementById('selection-section').classList.remove('hidden');
+                    msgDiv.className = 'mt-2 text-success';
+                    msgDiv.innerText = 'Initialized successfully!';
+                } else {
+                    msgDiv.className = 'mt-2 text-danger';
+                    msgDiv.innerText = 'Initialization failed: ' + data.detail;
+                }
+            } catch (error) {
+                msgDiv.className = 'mt-2 text-danger';
+                msgDiv.innerText = 'Error: ' + error;
+            }
+        }
+
+        async function loadEpisodes() {
+            const sceneId = document.getElementById('sceneSelect').value;
+            currentScene = sceneId;
+            if (!sceneId) return;
+
+            const response = await fetch(`/episodes/${sceneId}`);
+            const data = await response.json();
+            
+            const episodeSelect = document.getElementById('episodeSelect');
+            episodeSelect.innerHTML = '<option value="">Select Episode</option>';
+            data.episodes.forEach(ep => {
+                const option = document.createElement('option');
+                option.value = ep;
+                option.text = ep;
+                episodeSelect.appendChild(option);
+            });
+            
+            episodeSelect.onchange = () => {
+                currentEpisode = episodeSelect.value;
+                if(currentEpisode) {
+                    document.getElementById('step1-section').classList.remove('hidden');
+                }
+            };
+        }
+
+        async function runStep1() {
+            if (!currentScene || !currentEpisode) {
+                alert("Please select scene and episode");
+                return;
+            }
+
+            const video = document.getElementById('videoCheck').checked;
+            
+            try {
+                // Show loading state
+                const btn = document.querySelector('button[onclick="runStep1()"]');
+                const originalText = btn.innerText;
+                btn.innerText = "Running...";
+                btn.disabled = true;
+
+                const response = await fetch('/generate_instruction', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scene_id: currentScene,
+                        episode_id: parseInt(currentEpisode),
+                        video: video
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    document.getElementById('step1-results').classList.remove('hidden');
+                    document.getElementById('fullInstruction').innerText = data.full_instruction;
+                    document.getElementById('alignedInstructions').value = JSON.stringify(data.aligned_instructions, null, 2);
+                    renderAlignedTable(data.aligned_instructions);
+                    
+                    const vizDiv = document.getElementById('visualizations');
+                    vizDiv.innerHTML = '';
+                    
+                    if (data.path_image_url) {
+                        vizDiv.innerHTML += `<h6>Path Image</h6><img src="${data.path_image_url}" alt="Path">`;
+                    }
+                    if (data.video_url) {
+                        vizDiv.innerHTML += `<h6>Video</h6><video controls src="${data.video_url}"></video>`;
+                    }
+                    
+                    document.getElementById('step2-section').classList.remove('hidden');
+                } else {
+                    alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return true; // for chaining
+            } catch (error) {
+                alert('Error: ' + error);
+                return false;
+            }
+        }
+
+        async function runStep2() {
+            const alignedText = document.getElementById('alignedInstructions').value;
+            if (!alignedText) {
+                alert("Please run step 1 first");
+                return;
+            }
+            
+            try {
+                // Show loading state
+                const btn = document.querySelector('button[onclick="runStep2()"]');
+                const originalText = btn.innerText;
+                btn.innerText = "Running VLM...";
+                btn.disabled = true;
+
+                const alignedInstructions = JSON.parse(alignedText);
+                
+                const response = await fetch('/vlm_generation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode_id: parseInt(currentEpisode),
+                        aligned_instructions: alignedInstructions
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    document.getElementById('step2-results').classList.remove('hidden');
+                    document.getElementById('improvedInstructions').innerText = data.improved_instruction;
+                    
+                    // Show Prompt and Images
+                    const vizDiv = document.createElement('div');
+                    vizDiv.className = 'mt-3';
+                    
+                    let imagesHtml = '';
+                    if (data.used_images && data.used_images.length > 0) {
+                        imagesHtml = '<div class="d-flex flex-wrap gap-2 mb-3">';
+                        data.used_images.forEach((url, idx) => {
+                            imagesHtml += `<div class="card" style="width: 150px;">
+                                <img src="${url}" class="card-img-top" alt="Frame ${idx}">
+                                <div class="card-body p-1 text-center"><small>Img ${idx+1}</small></div>
+                            </div>`;
+                        });
+                        imagesHtml += '</div>';
+                    }
+                    
+                    vizDiv.innerHTML = `
+                        <h6>VLM Input (Prompt & Images)</h6>
+                        ${imagesHtml}
+                        <div class="card card-body bg-light mb-3">
+                            <pre style="white-space: pre-wrap; max-height: 200px; overflow-y: auto;">${data.prompt}</pre>
+                        </div>
+                    `;
+                    
+                    const existingViz = document.getElementById('step2-viz');
+                    if (existingViz) existingViz.remove();
+                    vizDiv.id = 'step2-viz';
+                    document.getElementById('step2-results').appendChild(vizDiv);
+
+                    document.getElementById('save-section').classList.remove('hidden');
+                } else {
+                    alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+                
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return true;
+            } catch (error) {
+                alert('Error: ' + error);
+                return false;
+            }
+        }
+
+        // --- Aligned Instructions UI Helpers ---
+
+        function renderAlignedTable(data) {
+            const tbody = document.getElementById('aligned-tbody');
+            tbody.innerHTML = '';
+            
+            if (!Array.isArray(data)) return;
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                // row is usually [id, instruction_text]
+                const idVal = row[0] !== undefined ? row[0] : '';
+                const textVal = row[1] !== undefined ? row[1] : '';
+
+                tr.innerHTML = `
+                    <td><input type="number" class="form-control form-control-sm" value="${idVal}" oninput="updateAlignedJSON()"></td>
+                    <td><input type="text" class="form-control form-control-sm" value="${textVal.replace(/"/g, '&quot;')}" oninput="updateAlignedJSON()"></td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-danger border-0" onclick="deleteAlignedRow(this)" title="Remove">
+                            &times;
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateAlignedJSON() {
+            const tbody = document.getElementById('aligned-tbody');
+            const rows = tbody.querySelectorAll('tr');
+            const data = [];
+
+            rows.forEach(tr => {
+                const inputs = tr.querySelectorAll('input');
+                const idVal = parseFloat(inputs[0].value);
+                const textVal = inputs[1].value;
+                // Only add if there's some content, or maybe keep empty ones?
+                // Original format: [number, string]
+                data.push([isNaN(idVal) ? inputs[0].value : idVal, textVal]); 
+            });
+
+            document.getElementById('alignedInstructions').value = JSON.stringify(data, null, 2);
+        }
+
+        function addAlignedRow() {
+            const tbody = document.getElementById('aligned-tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="number" class="form-control form-control-sm" value="" oninput="updateAlignedJSON()"></td>
+                <td><input type="text" class="form-control form-control-sm" value="" oninput="updateAlignedJSON()"></td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-outline-danger border-0" onclick="deleteAlignedRow(this)" title="Remove">
+                        &times;
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            updateAlignedJSON();
+        }
+
+        function deleteAlignedRow(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+            updateAlignedJSON();
+        }
+
+        function renderAlignedFromJSON() {
+            try {
+                const val = document.getElementById('alignedInstructions').value;
+                const data = JSON.parse(val);
+                renderAlignedTable(data);
+            } catch (e) {
+                // Invalid JSON, maybe don't re-render table yet or show error state
+                console.warn("Invalid JSON in textarea", e);
+            }
+        }
+
+        async function saveResults() {
+             try {
+                const response = await fetch('/save_results', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode_id: parseInt(currentEpisode)
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success') {
+                    document.getElementById('save-message').className = "mt-2 text-success";
+                    document.getElementById('save-message').innerText = "Saved to: " + data.path;
+                } else {
+                     alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Error: ' + error);
+            }
+        }
+        
+        async function runAll() {
+            const s1 = await runStep1();
+            if (s1) {
+                const s2 = await runStep2();
+                if (s2) {
+                    await saveResults();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
