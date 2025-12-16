@@ -130,7 +130,10 @@ class VLNSim:
             self.clear_waypoints()
             if not self.init:
                 self.init = True
+                self.warmup_steps = 0 # no warmup for first reset
                 self.init_env()
+            else:
+                self.warmup_steps = 30
 
     def load_episode(self, episode_label):
         print(f"[SIM] Loading episode: {episode_label}")
@@ -267,7 +270,7 @@ class VLNSim:
     
     def follow_waypoints(self):
         cam_pos, cam_quat = self.env.get_cam_pose()
-        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints, verbose=True)
+        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints, verbose=False)
         if self.waypoint_follower.arrived_at_goal:
             self.clear_waypoints()
         else:
@@ -288,9 +291,7 @@ class VLNSim:
                     print(f"[SIM] Resetting env state to {self.next_episode.episode_label}..")
                     self.sim_state = "loading"
                     self.env.reset_idx([self.robot_index])
-                    obs, _ = self.env.reset(self.next_episode)
-                    for i in range(50):
-                        self.env.step(torch.tensor([0.0, 0.0, 0.0], device=self.device))
+                    obs, _ = self.env.reset(self.next_episode, self.warmup_steps)
                     self.obs_index = 0
                     self.reset_flag = False
                     self.current_episode = self.next_episode
@@ -322,7 +323,7 @@ class VLNSim:
                 else:
                     self.sim_state = "running"
                     self.update_obs(obs, info)
-            self.call_callbacks('step_finished')
+                self.call_callbacks('step_finished')
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env

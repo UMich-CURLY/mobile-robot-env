@@ -13,6 +13,8 @@ import cv2
 from utils.episode import VLNEpisode, save_episodes
 import utils.navmesh_utils as navmesh_utils
 from utils.vis import visualize_points, visualize_curve
+from utils.path_following_utils import calc_yaw
+from scipy.spatial.transform import Rotation as R
 
 class TaskGenerator:
     """
@@ -87,6 +89,11 @@ class TaskGenerator:
         self.scene_config = self.get_scene_config(scene_id)
         self.num_episodes = self.scene_config['episode_number']
         self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
+        # requiirements
+        self.min_path_length = 5.0
+        self.max_path_length = 50.0
+        self.min_duration = 5.0
+        self.timeout = 100.0
         # generate task
         total_goal_found = self.parse_scene()
         if total_goal_found == 0:
@@ -103,8 +110,7 @@ class TaskGenerator:
             print(f'[TG] Sampled {len(new_episodes)} episodes')
             self.check_episodes(new_episodes)
         else:
-            print(f'[TG] All episodes generated!!!')
-            save_episodes(self.generated_episodes, f"episodes/{self.scene_config['scene_id']}.json")
+            print(f'[TG] All {self.num_episodes} episodes generated!!!')
     
     def stop_generation(self):
         if self.check_status_callback is not None:
@@ -119,22 +125,21 @@ class TaskGenerator:
         Uses a state machine pattern with episode queue.
         """
         self.episode_queue = deque(episodes)
-        self.filtered_episodes = []
         self._check_episode()
     
     def _check_episode(self):
         """Start checking the next episode in the queue."""
-        if len(self.episode_queue) == 0:
-            print(f'[TG] All episodes checked, saved {len(self.filtered_episodes)} episodes')
-            self.generated_episodes.extend(self.filtered_episodes)
+        if len(self.episode_queue) == 0 or len(self.generated_episodes)>=self.num_episodes:
+            print(f'[TG] checking finished')
             self._generate_episodes()
             return
         
         self.current_episode = self.episode_queue.popleft()
-        self.current_episode['episode_id'] = len(self.filtered_episodes)
+        self.current_episode['episode_id'] = len(self.generated_episodes)
         self.current_episode_start_time = time.time()
         print(f'======================')
         print(f'[TG] Checking episode {self.current_episode.episode_id}')
+        print(f'[TG] target: {self.current_episode["objnav"]}, path length: {self.current_episode["goals"][0]["path_length"]:.2f}m')
 
         data_folder = f"{self.args.scene_folder}/episode_data/{self.current_episode.episode_label}"
         pose_path = f"{data_folder}/pose.txt"
@@ -152,7 +157,6 @@ class TaskGenerator:
             check_done = False
             success = False
             img_saving_interval = 1
-            timeout = 100.0
             # save data for vln
             if self.vln_sim.obs_index%img_saving_interval == 0:
                 # save rgb image
@@ -165,7 +169,7 @@ class TaskGenerator:
             # check if episode is done
             self.env.measure_manager.update_measures()
             measurements = self.env.measure_manager.get_measurements()
-            if self.vln_sim.obs_index==0 and measurements["distance_to_goal"] < 5.0:
+            if self.vln_sim.obs_index==0 and measurements["distance_to_goal"] < self.min_path_length:
                 print(f'[TG] episode {self.current_episode.episode_id} starting position is too close to goal')
                 check_done = True
             elif self.vln_sim.waypoint_follower.arrived_at_goal:
@@ -174,15 +178,15 @@ class TaskGenerator:
                 # check episode quality by metrics
                 if measurements["oracle_success"] != 1.0:
                     print(f'[TG] episode {self.current_episode.episode_id} failed')
-                elif measurements["sim_duration"] < 5.0:
+                elif measurements["sim_duration"] < self.min_duration:
                     print(f'[TG] episode {self.current_episode.episode_id} completed but duration is too short')
-                elif measurements["path_length"] < 5.0:
+                elif measurements["path_length"] < self.min_path_length:
                     print(f'[TG] episode {self.current_episode.episode_id} completed but path length is too short')
                 else:
                     print(f'[TG] episode {self.current_episode.episode_id} completed')
                     success = True
                 check_done = True
-            elif measurements["sim_duration"] > timeout:
+            elif measurements["sim_duration"] > self.timeout:
                 print(f'[TG] episode {self.current_episode.episode_id} timed out')
                 check_done = True
             elif "terminations" in self.vln_sim.info:
@@ -193,7 +197,10 @@ class TaskGenerator:
                 self.vln_sim.remove_callback('step_finished', self.check_status_callback)
                 self.check_status_callback = None
                 if success:
-                    self.filtered_episodes.append(self.current_episode)
+                    self.generated_episodes.append(self.current_episode)
+                    episode_path = f"episodes/{self.scene_config['scene_id']}.json"
+                    save_episodes(self.generated_episodes, episode_path)
+                    print(f'[TG] {len(self.generated_episodes)} episodes saved to {episode_path}')
                 else:
                     # remove data folder
                     shutil.rmtree(data_folder, ignore_errors=True)
@@ -248,16 +255,27 @@ class TaskGenerator:
             print(f"[TG] Navmesh build time: {end_time - start_time:.2f} seconds")
             navmesh_interface.save_navmesh(navmesh_path)
 
-        # Visualize the navmesh
-        # navmesh_interface.visualize_navmesh()
-
+        # sample goals
+        unique_goals = []
+        sampled_goals = []
+        while len(sampled_goals) < num_episodes:
+            if len(unique_goals) == 0:
+                unique_goals = set(self.goal_dict.keys())
+            random_goal = np.random.choice(list(unique_goals))
+            sampled_goals.append(random_goal)
+            unique_goals.remove(random_goal)
+        sampled_goals = sorted(sampled_goals)
+        # sample goals uniformly
         generated_episodes = []
+        retry_count = 0
         while len(generated_episodes) < num_episodes:
+            episode_id = len(generated_episodes)
+            goal_name = sampled_goals[episode_id]
+            goal_item = self.goal_dict[goal_name]
             # sample random points
             random_points = navmesh_interface.sample_random_points(1)
             start = random_points[0]
-            random_goal = np.random.choice(list(self.goal_dict.keys()))
-            goal_prim_list = self.goal_dict[random_goal]['prim']
+            goal_prim_list = goal_item['prim']
             goals = []
             for goal_prim in goal_prim_list:
                 # we use the position calculated with bounding box instead
@@ -267,35 +285,52 @@ class TaskGenerator:
                 if len(path) > 0:
                     dist_to_start = np.linalg.norm(start - path[0])
                     dist_to_end = np.linalg.norm(goal_pos - path[-1])
-                    if dist_to_start > 1.0 or dist_to_end > 1.0:
+                    obj_radius = self.env.get_prim_radius(prim_path)
+                    # skip if the path does not connect to the start or end
+                    if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
                         continue
-                    print(f'[TG] dist_to_start: {dist_to_start}, dist_to_end: {dist_to_end}')
+                    # skip if the path is too short
+                    path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start + dist_to_end
+                    if path_length < self.min_path_length:
+                        continue
+                    if path_length > self.max_path_length:
+                        continue
                     goals.append({
                         'instance': str(prim_path),
                         'type': 'object',
                         'location': goal_pos,
-                        'radius': self.env.get_prim_radius(prim_path),
-                        'reference_path': path.tolist()
+                        'radius': obj_radius,
+                        'path_length': path_length,
+                        'reference_path': path.tolist(),
                     })
             if len(goals) > 0:
+                print(f'[TG] Found {len(goals)} paths for goal {goal_name}')
+                closest_goal_idx = int(np.argmin([x['path_length'] for x in goals]))
+                closest_goal = goals[closest_goal_idx]
+                # set initial yaw angle to the next waypoint and add some noise
+                yaw_angle = calc_yaw(start[:2], closest_goal['reference_path'][1][:2])
+                yaw_angle += np.random.uniform(-np.deg2rad(30.0), np.deg2rad(30.0))
+                quat_xyzw = R.from_euler('z', yaw_angle).as_quat().tolist()
+                quat_wxyz = [quat_xyzw[3], quat_xyzw[0], quat_xyzw[1], quat_xyzw[2]]
                 episode = VLNEpisode(
                     data=self.scene_config,
-                    instruction=random_goal,
-                    episode_id=len(generated_episodes),
+                    objnav=goal_name,
+                    instruction="",
+                    episode_id=episode_id,
                     goals=goals,
                     start_position=start.tolist(),
-                    start_rotation=[1.0, 0.0, 0.0, 0.0] # TODO: get random rotation
+                    start_rotation=quat_wxyz, # wxyz
+                    closest_goal_idx=closest_goal_idx,
                 )
                 # visualize_points(random_points, prim_path="/World/RandomPoints", width=0.8)
                 # visualize_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
                 generated_episodes.append(episode)
-
+                retry_count = 0
+            else:
+                retry_count += 1
+                if retry_count >= 100:
+                    print(f'[TG] Failed to find paths to {goal_name}, removed from list')
+                    del self.goal_dict[goal_name]
+                    generated_episodes.extend(self.sample_episodes(sampled_goals.count(goal_name)))
+                    retry_count = 0
         return generated_episodes
-# class TaskGeneratorUI:
-#     def __init__(self, manager_env):
-#         self.manager_env = manager_env
-    
-#     def setup_ui(self):
-#         manager_env = self.manager_env
-
-        

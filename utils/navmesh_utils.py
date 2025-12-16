@@ -253,6 +253,7 @@ class NavmeshInterface:
         print(f"[INFO]: Geometry loaded")
 
     def build_navmesh(self):
+        print(f"[INFO]: settings: {self.settings}")
         self.nm.set_settings(self.settings)
         # Try watershed (0); if it fails, switch to monotone (1)
         self.nm.set_partition_type(1)

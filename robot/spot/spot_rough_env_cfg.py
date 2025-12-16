@@ -341,7 +341,7 @@ class SpotRoughEnvCfg(BaseEnvCfg):
         self.episode_length_s = 40.
         # simulation settings
         self.sim.dt = 0.005
-        self.sim.render_interval = self.decimation
+        self.sim.render_interval = 5
         self.sim.physics_material.static_friction = 1.0
         self.sim.physics_material.dynamic_friction = 1.0
         self.sim.physics_material.friction_combine_mode = "multiply"

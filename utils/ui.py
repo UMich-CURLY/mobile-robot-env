@@ -313,7 +313,7 @@ class TaskGeneratorUI(BaseUI):
     def save_settings(self, settings_type):
         if settings_type == "navmesh_runtime":
             for key, (value, _) in self.navmesh_settings_map.items():
-                value_camel = self._snake_to_camel(value).replace("agent", "")
+                value_camel = self._snake_to_camel(value)
                 self.task_generator.navmesh_interface.settings[value_camel] = self.get_ui_value(self.navmesh_settings_map, key)
         elif settings_type == "navmesh_config":
             preset_name = self.get_ui_value(self.ui_config_map, "navmesh_preset")

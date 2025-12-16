@@ -29,7 +29,8 @@
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_scene_id",
-                "nv_apartment"
+                // "nv_apartment"
+                "nv_parkmorning"
             ],
             "envFile": "${workspaceFolder}/.env"
         },

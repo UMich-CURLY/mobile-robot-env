@@ -36,7 +36,7 @@ def set_robot_pose(env_cfg, episode, robot=None):
         robot_root_state[:, 3:7] = torch.tensor(rot, device=robot.device)
         robot_root_state[:, 7:] = 0.
         robot.write_root_state_to_sim(robot_root_state)
-        robot.reset()
+        # robot.reset()
         robot.write_data_to_sim()
 
 
@@ -144,14 +144,14 @@ class VLNEnvWrapper:
         pos_cam_world = pos_robot + quat_robot.as_matrix() @ pos_cam_body
         quat_cam_world = quat_robot * quat_cam_body
         quat_cam_world = quat_cam_world.as_quat() # xyzw
-        pose = manager_env.scene["pov_camera"]._view.get_world_poses(usd=False)
+        # pose = manager_env.scene["pov_camera"]._view.get_world_poses()
         # pos = pose[0][0].detach().cpu().numpy()
         # quat = convert_camera_frame_orientation_convention(pose[1][0], origin="opengl", target="world").detach().cpu().numpy()
         # quat = np.concatenate([quat[1:],quat[:1]])
         # return pos, quat
         return pos_cam_world, quat_cam_world
 
-    def reset(self, episode=None, warmup_steps=50) -> tuple[torch.Tensor, dict]:
+    def reset(self, episode=None, warmup_steps=0) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
         zero_cmd = torch.tensor([0., 0., 0.], device=self.args.device)
         if episode is not None:
@@ -232,16 +232,14 @@ class VLNEnvWrapper:
         for i in range(self.num_envs):
             self.set_stop_called(i, False)
 
-        # warmup_steps = 50
-        # for i in range(warmup_steps):
-        #     if i % 10 == 0 or i == warmup_steps - 1:
-        #         print(f"Warmup step {i}/{warmup_steps}...")
-
-        #     self.update_command(zero_cmd)
-        #     actions = self.low_level_policy(self.low_level_obs)
-        #     low_level_obs, _, _, infos = self.env.step(actions)
-        #     self.low_level_obs = low_level_obs
-        #     self.low_level_action = actions
+        for i in range(warmup_steps):
+            if i==0 or (i+1) % 10 == 0 or (i+1) == warmup_steps:
+                print(f"Warmup step {i+1}/{warmup_steps}...")
+            self.update_command(zero_cmd)
+            actions = self.low_level_policy(self.low_level_obs)
+            low_level_obs, _, _, infos = self.env.step(actions)
+            self.low_level_obs = low_level_obs
+            self.low_level_action = actions
 
         self.env_step = 0
         self.same_pos_count = 0

@@ -1,0 +1,1 @@
+python isaac_lab_server_spot_task_generation.py --enable_cameras --tg_config_path ./episodes/task_config.yaml --test_scene_id nv_apartment
