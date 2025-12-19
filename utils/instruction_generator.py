@@ -33,17 +33,122 @@ class InstructionGenerator:
         # template based generation
         result = []
         for episode in scene_episodes:
-            print("="*30)
-            print(f"Generating instruction for episode {episode.episode_id}")
-            full_instruction, aligned_instructions = self.template_based_generation(episode)
-            if video:
-                print(f"Generating video for episode {episode.episode_id}")
-                find_instruction = lambda x: min(aligned_instructions, key=lambda y: abs(y[0]-x) if y[0]>=x else float('inf'))[1]
-                self.generate_video(episode, lambda x: [f"Frame {x}: {find_instruction(x)}"])
+            # Check if result already exists
+            save_path = self.get_data_path(episode, "generated_instructions.json")
+            loaded_data = None
+            
+            if os.path.exists(save_path):
+                print(f"Loading existing result from {save_path}")
+                try:
+                    with open(save_path, "r") as f:
+                        loaded_data = json.load(f)
+                except Exception as e:
+                    print(f"Failed to load json: {e}")
+                    loaded_data = None
+
+            # Validate loaded data
+            has_template = False
+            has_vlm = False
+            
+            if loaded_data:
+                # Check template part
+                if ("template_instruction" in loaded_data or "full_instruction" in loaded_data) and "aligned_instructions" in loaded_data:
+                    has_template = True
+                
+                # Check VLM part if requested
+                if llm_based:
+                    if loaded_data.get("improved_instructions") and loaded_data.get("prompt") and loaded_data.get("used_images"):
+                        has_vlm = True
+                else:
+                    # If not requesting LLM, we don't care about VLM part
+                    has_vlm = True 
+
+            # Decide whether to regenerate
+            need_regen_template = not has_template
+            need_regen_vlm = llm_based and not has_vlm
+            
+            if not need_regen_template and not need_regen_vlm:
+                # Everything we need is loaded
+                full_instruction = loaded_data.get("full_instruction", "")
+                if "template_instruction" in loaded_data:
+                    full_instruction = loaded_data["template_instruction"]
+                aligned_instructions = loaded_data.get("aligned_instructions", [])
+                
+                # ... check video/image (omitted for brevity, keep existing checks) ...
+                # Check if video exists
+                video_path = self.get_data_path(episode, "video_instruction.mp4")
+                if video and not os.path.exists(video_path):
+                     print(f"Regenerating video for episode {episode.episode_id}")
+                     find_instruction = lambda x: min(aligned_instructions, key=lambda y: abs(y[0]-x) if y[0]>=x else float('inf'))[1]
+                     self.generate_video(episode, lambda x: [f"Frame {x}: {find_instruction(x)}"])
+                
+                path_image = self.get_data_path(episode, "path_simplified_path.png")
+                # ... check path image ...
+
+                result.append({
+                    "episode": episode,
+                    "template_instruction": full_instruction,
+                    "full_instruction": full_instruction, 
+                    "aligned_instructions": aligned_instructions,
+                    "improved_instructions": loaded_data.get("improved_instructions", ""),
+                    "prompt": loaded_data.get("prompt", ""),
+                    "used_images": loaded_data.get("used_images", []),
+                })
+                continue
+            
+            # If we are here, we need to regenerate something
+            print(f"Regenerating for episode {episode.episode_id}. Template: {need_regen_template}, VLM: {need_regen_vlm}")
+            
+            if need_regen_template:
+                full_instruction, aligned_instructions = self.template_based_generation(episode)
+                if video:
+                    print(f"Generating video for episode {episode.episode_id}")
+                    find_instruction = lambda x: min(aligned_instructions, key=lambda y: abs(y[0]-x) if y[0]>=x else float('inf'))[1]
+                    self.generate_video(episode, lambda x: [f"Frame {x}: {find_instruction(x)}"])
+            else:
+                # Use loaded template
+                full_instruction = loaded_data.get("template_instruction", loaded_data.get("full_instruction"))
+                aligned_instructions = loaded_data["aligned_instructions"]
+                # Still check video if we are reusing template
+                video_path = self.get_data_path(episode, "video_instruction.mp4")
+                if video and not os.path.exists(video_path):
+                     print(f"Regenerating video for episode {episode.episode_id}")
+                     find_instruction = lambda x: min(aligned_instructions, key=lambda y: abs(y[0]-x) if y[0]>=x else float('inf'))[1]
+                     self.generate_video(episode, lambda x: [f"Frame {x}: {find_instruction(x)}"])
+
+            # Initialize VLM vars
+            improved_instructions = loaded_data.get("improved_instructions", "") if loaded_data else ""
+            prompt = loaded_data.get("prompt", "") if loaded_data else ""
+            used_images = loaded_data.get("used_images", []) if loaded_data else []
+
+            if need_regen_vlm:
+                print(f"Running VLM generation for episode {episode.episode_id}")
+                vlm_res = self.vlm_based_generation(episode, aligned_instructions)
+                improved_instructions = vlm_res["improved_instructions"]
+                prompt = vlm_res["prompt"]
+                used_images = vlm_res["used_images"]
+
+            # Save results (if we changed anything)
+            data_to_save = {
+                "aligned_instructions": aligned_instructions,
+                "full_instruction": full_instruction,
+                "template_instruction": full_instruction,
+                "improved_instructions": improved_instructions,
+                "prompt": prompt,
+                "used_images": used_images
+            }
+            with open(save_path, "w") as f:
+                json.dump(data_to_save, f, indent=2)
+            print(f"Saved results to {save_path}")
+
             result.append({
                 "episode": episode,
-                "full_instruction": full_instruction,
+                "template_instruction": full_instruction,
+                "full_instruction": full_instruction, # legacy support
                 "aligned_instructions": aligned_instructions,
+                "improved_instructions": improved_instructions,
+                "prompt": prompt,
+                "used_images": used_images
             })
         return result
 
@@ -97,8 +202,8 @@ class InstructionGenerator:
                         break
             instruction_list.append(instruction)
         instruction_list.append(f"You will arrive at the {episode['objnav']}.")
-        full_instruction = " ".join(instruction_list)
-        print(f"Full instruction: {full_instruction}")
+        template_instruction = " ".join(instruction_list)
+        print(f"Template instruction: {template_instruction}")
 
         # read poses from recorded trajectory
         pose_file = self.get_data_path(episode, "pose.txt")
@@ -125,7 +230,7 @@ class InstructionGenerator:
         aligned_instructions.append((len(pose_list)-1, instruction_list[-1]))
         print(f"Aligned instructions: {aligned_instructions}")
 
-        return full_instruction, aligned_instructions
+        return template_instruction, aligned_instructions
     
     def _get_SE2_pose(self, xyz_quat):
         yaw = R.from_quat(xyz_quat[3:]).as_euler('ZYX')[0]
@@ -154,14 +259,16 @@ class InstructionGenerator:
         return pose_diff
     
     def generate_path_image(self, episode, points, pose, path_name="test"):
+        import matplotlib
+        matplotlib.use('Agg')
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
         points = [pose[:3, 3]] + points
         ax.plot([point[0] for point in points], [point[1] for point in points])
         ax.plot(pose[:3, 3][0], pose[:3, 3][1], 'ro')
         image_path = self.get_data_path(episode, f"path_{path_name}.png")
-        plt.savefig(image_path)
-        plt.close()
+        fig.savefig(image_path)
+        plt.close(fig)
         print(f"Path image generated and saved to {image_path}")
 
     def generate_video(self, episode, info_func=None):
@@ -226,12 +333,12 @@ class InstructionGenerator:
             # format_time = lambda x: f"{x//60:02d}:{x%60:02d}"
             # prompt_instruction.append(f"(video {format_time(keyframe_id//10)}) {instruction}")
         prompt_instruction = " ".join(prompt_instruction)
-        print(prompt_instruction)
+        # print(prompt_instruction)
         
         used_images = []
         for image_idx in image_list:
             image_url = self.get_data_path(episode, "rgb", f"{image_idx}.png")
-            print(f"added image: {image_url}")
+            # print(f"added image: {image_url}")
             add_image(image_url)
             used_images.append(image_url)
             
@@ -253,7 +360,7 @@ class InstructionGenerator:
         Example output: Go forward until you see the red building, then turn right and go until you see the blue car. You should be able to see the target mailbox on your right.
         """
         add_text(text_prompt)
-        print(text_prompt)
+        # print(text_prompt)
         resp = completion(
             model="gemini/gemini-3-pro-preview",
             messages=[{"role": "user", "content": message_content}],

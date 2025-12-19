@@ -15,7 +15,7 @@ class VLNEpisode(dict):
             "scene_scale": 1.0,
             "collider": True,
             "align_ground": True,
-            "navmesh": "default",
+            "navmesh_preset": "default",
             "objnav": "table",
             "instruction": "Find the table and stop.",
             "closest_goal_idx": 0,

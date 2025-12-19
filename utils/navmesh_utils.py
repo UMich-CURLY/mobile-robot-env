@@ -217,22 +217,22 @@ class NavmeshInterface:
             
             # Filter out invalid faces (degenerate triangles with zero area or collapsed vertices)
             # A triangle is invalid if all three vertices are the same or if the triangle has zero area
-            valid_faces = []
-            for face in tqdm(self.input_tri, desc="Filtering faces"):
-                v0, v1, v2 = self.input_vert[face[0]], self.input_vert[face[1]], self.input_vert[face[2]]
-                # Check if triangle is degenerate (zero area or all vertices same)
-                edge1 = v1 - v0
-                edge2 = v2 - v0
-                cross_product = np.cross(edge1, edge2)
-                triangle_area = 0.5 * np.linalg.norm(cross_product)
-                # Keep triangle if area is greater than a small threshold (1e-6)
-                if triangle_area > 1e-6:
-                    valid_faces.append(face)
+            # valid_faces = []
+            # for face in tqdm(self.input_tri, desc="Filtering faces"):
+            #     v0, v1, v2 = self.input_vert[face[0]], self.input_vert[face[1]], self.input_vert[face[2]]
+            #     # Check if triangle is degenerate (zero area or all vertices same)
+            #     edge1 = v1 - v0
+            #     edge2 = v2 - v0
+            #     cross_product = np.cross(edge1, edge2)
+            #     triangle_area = 0.5 * np.linalg.norm(cross_product)
+            #     # Keep triangle if area is greater than a small threshold (1e-6)
+            #     if triangle_area > 1e-6:
+            #         valid_faces.append(face)
             
-            if len(valid_faces) < len(self.input_tri):
-                num_removed = len(self.input_tri) - len(valid_faces)
-                print(f"[INFO]: Removed {num_removed} degenerate faces after z constraint")
-                self.input_tri = valid_faces
+            # if len(valid_faces) < len(self.input_tri):
+            #     num_removed = len(self.input_tri) - len(valid_faces)
+            #     print(f"[INFO]: Removed {num_removed} degenerate faces after z constraint")
+            #     self.input_tri = valid_faces
 
         verts_flat = []
         for vertex in tqdm(self.input_vert,desc="Loading vertices"):

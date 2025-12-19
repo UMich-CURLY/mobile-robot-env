@@ -92,9 +92,9 @@ async def get_episodes(scene_id: str):
     return {"episodes": episodes}
 
 @app.post("/generate_instruction")
-async def generate_instruction(
+def generate_instruction(
     scene_id: str = Body(...),
-    episode_id: int = Body(...),
+    episode_id: Optional[int] = Body(None),
     template_based: bool = Body(True),
     llm_based: bool = Body(False),
     video: bool = Body(True)
@@ -106,6 +106,7 @@ async def generate_instruction(
     try:
         # The generate_instruction method returns a list of results
         # We process one episode at a time based on user selection
+        # If episode_id is None, it generates for all episodes in the scene
         results = generator_instance.generate_instruction(
             scene_id=scene_id,
             episode_id=episode_id,
@@ -115,18 +116,8 @@ async def generate_instruction(
         )
         
         if not results:
-            raise HTTPException(status_code=404, detail="No episode found")
+            raise HTTPException(status_code=404, detail="No episodes found")
             
-        result = results[0]
-        episode = result["episode"]
-        
-        # Store for next step
-        current_results[str(episode_id)] = result
-        
-        # Prepare response data (paths to images/videos)
-        # We need to construct URLs for the frontend
-        # generator.get_data_path returns absolute path
-        
         # Helper to convert abs path to url
         def to_url(abs_path):
             if abs_path.startswith(episode_data_root):
@@ -134,24 +125,51 @@ async def generate_instruction(
                 return f"/data/{rel_path}"
             return ""
 
-        # Find generated files
-        video_path = generator_instance.get_data_path(episode, "video_instruction.mp4")
-        path_image = generator_instance.get_data_path(episode, "path_simplified_path.png")
-        
-        return {
+        processed_results = []
+        for result in results:
+            episode = result["episode"]
+            ep_id = episode.episode_id
+            
+            # Store for next step
+            current_results[str(ep_id)] = result
+            
+            # Find generated files
+            video_path = generator_instance.get_data_path(episode, "video_instruction.mp4")
+            path_image = generator_instance.get_data_path(episode, "path_simplified_path.png")
+            
+            processed_results.append({
+                "episode_id": ep_id,
+                "full_instruction": result["full_instruction"], # legacy
+                "template_instruction": result.get("template_instruction", result["full_instruction"]),
+                "aligned_instructions": result["aligned_instructions"],
+                "video_url": to_url(video_path) if os.path.exists(video_path) else None,
+                "path_image_url": to_url(path_image) if os.path.exists(path_image) else None
+            })
+            
+        response = {
             "status": "success",
-            "full_instruction": result["full_instruction"],
-            "aligned_instructions": result["aligned_instructions"],
-            "video_url": to_url(video_path) if os.path.exists(video_path) else None,
-            "path_image_url": to_url(path_image) if os.path.exists(path_image) else None
+            "results": processed_results
         }
+        
+        # Backward compatibility for single episode
+        if episode_id is not None and len(processed_results) == 1:
+            res = processed_results[0]
+            response.update({
+                "full_instruction": res["full_instruction"],
+                "template_instruction": res["template_instruction"],
+                "aligned_instructions": res["aligned_instructions"],
+                "video_url": res["video_url"],
+                "path_image_url": res["path_image_url"]
+            })
+            
+        return response
     except Exception as e:
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/vlm_generation")
-async def vlm_generation(
+def vlm_generation(
     episode_id: int = Body(...),
     aligned_instructions: List = Body(...) # Allow overriding instructions
 ):
@@ -229,7 +247,8 @@ async def save_results(
         data_to_save = {
             "aligned_instructions": result.get("aligned_instructions"),
             "improved_instructions": result.get("improved_instructions"),
-            "full_instruction": result.get("full_instruction")
+            "full_instruction": result.get("full_instruction"),
+            "template_instruction": result.get("template_instruction", result.get("full_instruction"))
         }
         
         with open(save_path, "w") as f:

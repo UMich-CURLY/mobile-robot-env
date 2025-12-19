@@ -168,7 +168,7 @@ class VLNSim:
             # this will trigger a reset of the vln sim
             self.load_episode(message["episode_label"])
             self.call_callbacks('client_episode_changed', message["episode_label"])
-    
+
     def add_callback(self, callback_name, func):
         available_callbacks = ['client_episode_changed', 'step_finished', 'reset_finished']
         if callback_name not in available_callbacks:
@@ -182,7 +182,7 @@ class VLNSim:
                 self.callbacks[callback_name].remove(func)
             else:
                 raise ValueError(f"Function {func} not found in callback {callback_name}")
-    
+
     def call_callbacks(self, callback_name, *args, **kwargs):
         for func in self.callbacks.get(callback_name, []):
             func(*args, **kwargs)
@@ -347,15 +347,19 @@ class VLNSim:
                 self._latest_data["position"] = obs_pose[:3]
                 self._latest_data["quat_xyzw"] = obs_pose[3:]
                 self._latest_data["timestamp"] = time.time_ns()
-                self._latest_data["info"] = {
+                info = {
                     "scene_id": current_episode["scene_id"],
                     "episode_id": current_episode["episode_id"],
-                    "instruction": current_episode["instruction"],
                     "intrinsic": None,
                     "robot_height": 0.61,
                     "hfov_deg": hfov_deg,
                     "metrics": info["measurements"],
                 }
+                if self.args.task_type=="objnav":
+                    info["instruction"] = current_episode["objnav"]
+                else:
+                    info["instruction"] = current_episode["instruction"]
+                self._latest_data["info"] = info
             except Exception as e:
                 print(f"Error updating obs: {e}")
                 import traceback

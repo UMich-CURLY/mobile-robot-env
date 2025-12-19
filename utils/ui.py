@@ -68,7 +68,7 @@ class BaseUI:
 
     def set_ui_value(self, map, key, value):
         try:
-            getter_func, setter_func = map[key][1]
+            getter_func,  setter_func = map[key][1]
             setter_func(self.ui_elements[key], value)
             # print(f"[INFO]: Set {key} value: {value}")
         except:
@@ -159,7 +159,7 @@ class BenchmarkUI(BaseUI):
         if settings_type == "episode_label":
             if self.ui_episode is not None and selected_value==self.ui_episode["episode_label"]:
                 return
-            print(f"[INFO] UI is updating to episode {selected_value}")
+            print(f"[UI] UI is updating to episode {selected_value}")
             self.ui_episode = self.vln_sim.episode_list[self.vln_sim.episode_label_list.index(selected_value)]
             for key, (value, _) in self.ui_map.items():
                 self.set_ui_value(self.ui_map, key, self.ui_episode[value])
@@ -212,7 +212,7 @@ class TaskGeneratorUI(BaseUI):
         # add callback to sim
         def episode_changed_callback(x):
             self.update_ui("scene_id", self.vln_sim.next_episode.scene_id)
-            self.update_ui("navmesh_preset", self.vln_sim.next_episode["navmesh"])
+            self.update_ui("navmesh_preset", self.vln_sim.next_episode["navmesh_preset"])
         self.vln_sim.add_callback('client_episode_changed', episode_changed_callback)
 
     def build_ui(self):
@@ -288,15 +288,15 @@ class TaskGeneratorUI(BaseUI):
 
     def reload_config(self):
         scene_id = self.ui_episode["scene_id"]
-        # TODO: fix this
         self.episode_ui = self.vln_sim.episode_list[self.episode_label_list.index(scene_id)]
         self.update_ui("scene_id", scene_id)
-        self.update_ui("navmesh_preset", self.ui_episode["navmesh"])
-        print("[INFO] Task config reloaded")
+        self.update_ui("navmesh_preset", self.ui_episode["navmesh_preset"])
+        print("[UI] Task config reloaded")
 
     def update_ui(self, settings_type, selected_value):
         if settings_type == "navmesh_preset":
             preset_name = selected_value
+            print(f"[UI] Update navmesh_preset to {preset_name}")
             for key, (value, _) in self.navmesh_settings_map.items():
                 self.set_ui_value(self.navmesh_settings_map, key, self.task_generator.task_config['navmesh'][preset_name][value])
         elif settings_type == "scene_id":
@@ -305,9 +305,8 @@ class TaskGeneratorUI(BaseUI):
             self.ui_episode = VLNEpisode(self.scene_config)
             for key, (value, _) in self.ui_config_map.items():
                 self.set_ui_value(self.ui_config_map, key, self.scene_config[value])
-            self.update_ui("navmesh_preset", self.ui_episode["navmesh"])
-            print("[INFO] Loaded goal rules:", self.scene_config["goal_rules"])
-            print("[INFO] Loaded excluded paths:", self.scene_config["navmesh_exclude"])
+            print("[UI] Loaded goal rules:", self.scene_config["goal_rules"])
+            print("[UI] Loaded excluded paths:", self.scene_config["navmesh_exclude"])
 
 
     def save_settings(self, settings_type):
@@ -345,7 +344,6 @@ class TaskGeneratorUI(BaseUI):
         start_time = time.time()
         self.task_generator.navmesh_interface.build_navmesh()
         print(f"[INFO]: Navmesh build time: {time.time() - start_time:.2f} seconds")
-        self.test_navmesh()
 
     def load_navmesh(self):
         navmesh_path = str(self.scene_folder / f"navmesh/{self.ui_episode['scene_id']}_navmesh.bin")
@@ -371,12 +369,13 @@ class TaskGeneratorUI(BaseUI):
     def teleport_robot(self):
         # self.ui_episode["start_position"] = navmesh_interface.sample_random_points(1)[0]
         # env.reset(self.ui_episode)
-        robot_root_state = self.manager_env.scene["robot"].data.default_root_state.clone()
-        random_pos = self.task_generator.navmesh_interface.sample_random_points(robot_root_state.shape[0])
-        random_pos[:, 2] += 0.6
-        robot_root_state[:, 0:3] = torch.tensor(random_pos, device=self.args.device)
-        self.manager_env.scene["robot"].write_root_state_to_sim(robot_root_state)
-        self.manager_env.scene.reset()
+        with torch.inference_mode(): 
+            robot_root_state = self.manager_env.scene["robot"].data.default_root_state.clone()
+            random_pos = self.task_generator.navmesh_interface.sample_random_points(robot_root_state.shape[0])
+            random_pos[:, 2] += 0.6
+            robot_root_state[:, 0:3] = torch.tensor(random_pos, device=self.args.device)
+            self.manager_env.scene["robot"].write_root_state_to_sim(robot_root_state)
+            self.manager_env.scene.reset()
 
     def generate_cube(self):
         prim_selection = omni.usd.get_context().get_selection()
@@ -416,11 +415,11 @@ class TaskGeneratorUI(BaseUI):
         # Get current robot world pose
         pos = self.manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy()
         x, y, z = float(pos[0]), float(pos[1]), float(pos[2])
-        print(f"[INFO] Scene type: {self.scene_config['scene_type']}")
+        print(f"[UI] Scene type: {self.scene_config['scene_type']}")
 
         # Build base directory by combining scene_folder and path (drop filename)
         json_path = str(self.scene_folder / os.path.dirname(self.scene_config["path"])) if isinstance(self.scene_config.get("path"), str) else str(self.scene_folder)
-        print(f"[INFO] JSON path: {json_path}")
+        print(f"[UI] JSON path: {json_path}")
         try:
             from utils.vc_location_info_utils import CityDataReader
             reader = CityDataReader(json_path)
@@ -432,19 +431,19 @@ class TaskGeneratorUI(BaseUI):
         nearest_road = reader.get_nearest_road(x, y)
         nearby_points = reader.get_points_in_radius(x, y, radius=200.0)
 
-        print("[INFO] Current Position:", {"x": x, "y": y, "z": z})
+        print("[UI] Current Position:", {"x": x, "y": y, "z": z})
         if nearest_road:
             rn = nearest_road.get("name", "unknown")
             rt = nearest_road.get("type", "unknown")
             dist = nearest_road.get("distance_to_road", None)
             cp = nearest_road.get("closest_point_on_road", None)
-            print(f"[INFO] Nearest road: name={rn}, type={rt}, distance={dist:.2f}m" if dist is not None else f"[INFO] Nearest road: name={rn}, type={rt}")
+            print(f"[UI] Nearest road: name={rn}, type={rt}, distance={dist:.2f}m" if dist is not None else f"[UI] Nearest road: name={rn}, type={rt}")
             if cp is not None:
-                print(f"[INFO] Closest point on road: ({cp[0]:.2f}, {cp[1]:.2f})")
+                print(f"[UI] Closest point on road: ({cp[0]:.2f}, {cp[1]:.2f})")
         else:
-            print("[INFO] No nearby road found")
+            print("[UI] No nearby road found")
 
-        print(f"[INFO] Nearby points within 200m: {len(nearby_points)}")
+        print(f"[UI] Nearby points within 200m: {len(nearby_points)}")
         for p in nearby_points[:5]:
             name = p.get("name", "-")
             ptype = p.get("type", "-")
@@ -458,7 +457,7 @@ class TaskGeneratorUI(BaseUI):
         # --- Sample one episode and aggregate road/POI names along its trajectory ---
         episodes_file = f"episodes/{self.ui_episode['scene_id']}.json"
         if not os.path.exists(episodes_file):
-            print(f"[INFO] Episodes file not found: {episodes_file}; skipping trajectory info aggregation")
+            print(f"[UI] Episodes file not found: {episodes_file}; skipping trajectory info aggregation")
             return
         
         try:
@@ -469,7 +468,7 @@ class TaskGeneratorUI(BaseUI):
             return
         
         if not episodes:
-            print("[INFO] No episodes in file; skipping trajectory info aggregation")
+            print("[UI] No episodes in file; skipping trajectory info aggregation")
             return
 
         # Pick a random episode
@@ -482,7 +481,7 @@ class TaskGeneratorUI(BaseUI):
                 trajectory_points.extend(ref_path)
 
         if not trajectory_points:
-            print("[INFO] Sampled episode has no reference_path; skipping info aggregation")
+            print("[UI] Sampled episode has no reference_path; skipping info aggregation")
             return
 
         road_names = set()
@@ -505,6 +504,6 @@ class TaskGeneratorUI(BaseUI):
                 if name:
                     poi_names.add(name)
 
-        print(f"[INFO] Sampled episode id: {sampled_episode.get('episode_id')}")
-        print(f"[INFO] Roads along trajectory ({len(road_names)}): {sorted(road_names)}")
-        print(f"[INFO] POIs along trajectory ({len(poi_names)}): {sorted(poi_names)}")
+        print(f"[UI] Sampled episode id: {sampled_episode.get('episode_id')}")
+        print(f"[UI] Roads along trajectory ({len(road_names)}): {sorted(road_names)}")
+        print(f"[UI] POIs along trajectory ({len(poi_names)}): {sorted(poi_names)}")

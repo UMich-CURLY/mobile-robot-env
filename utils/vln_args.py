@@ -20,6 +20,7 @@ def add_vln_args(parser):
     arg_group.add_argument("--host", type=str, default="localhost", help="Host for socket server.")
     arg_group.add_argument("--port", type=int, default=12300, help="Port for socket server.")
     arg_group.add_argument("--foxglove_port", type=int, default=0, help="Port for foxglove server.")
+    arg_group.add_argument("--task_type", type=str, default="objnav", help="")
 
 def parse_args(parser):
     arg_list = sys.argv[1:]
