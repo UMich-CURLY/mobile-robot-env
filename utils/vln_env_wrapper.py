@@ -11,6 +11,7 @@ from isaaclab.managers import TerminationManager
 import isaacsim.core.utils.prims as prim_utils
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from tqdm import tqdm
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -233,9 +234,12 @@ class VLNEnvWrapper:
         for i in range(self.num_envs):
             self.set_stop_called(i, False)
 
-        for i in range(warmup_steps):
-            if i==0 or (i+1) % 10 == 0 or (i+1) == warmup_steps:
-                print(f"Warmup step {i+1}/{warmup_steps}...")
+        pbar = tqdm(range(warmup_steps))
+        for i in pbar:
+            if i==0:
+                pbar.set_description("Resetting environment")
+            else:
+                pbar.set_description("Warmup")
             self.update_command(zero_cmd)
             actions = self.low_level_policy(self.low_level_obs)
             low_level_obs, _, _, infos = self.env.step(actions)

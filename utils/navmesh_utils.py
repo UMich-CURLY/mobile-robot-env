@@ -328,8 +328,8 @@ class NavmeshInterface:
         path_points = self._convert_up_axis(path_points, inverse=True)
         # print(f"Path points: {path_points.shape}")
         
-        if path_points.shape[0] <= 1:
-            print("[WARNING]: No valid path found")
+        # if path_points.shape[0] <= 1:
+        #     print("[WARNING]: No valid path found")
         return path_points
 
     def save_navmesh(self, save_path):

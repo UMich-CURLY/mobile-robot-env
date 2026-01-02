@@ -355,10 +355,10 @@ class TaskGeneratorUI(BaseUI):
         self.task_generator.navmesh_interface.visualize_navmesh()
         points = self.task_generator.navmesh_interface.sample_random_points(1000)
         if points is not None:
-            visualize_points(points, prim_path="/World/RandomPoints", width=0.8)
+            visualize_points(points, prim_path="/World/RandomPoints", width=0.2)
             for i in range(50):
                 path = self.task_generator.navmesh_interface.find_paths(points[2*i], points[2*i+1])
-                visualize_curve(path, prim_path=f"/World/Path_{i}", width=0.4)
+                visualize_curve(path, prim_path=f"/World/Path_{i}", width=0.1)
         self.teleport_robot()
 
     def save_navmesh(self):

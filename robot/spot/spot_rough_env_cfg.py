@@ -418,7 +418,7 @@ class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
             offset=CameraCfg.OffsetCfg(
                 pos=(0.5, 0.0, 0),
                 rot=(1, 0, 0, 0),
-                convention="world",
+                convention="opengl",
             ),
         )
         self.scene.third_person_camera = TiledCameraCfg(
@@ -429,14 +429,14 @@ class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
             width=640,
             data_types=["rgb"],
             spawn=sim_utils.PinholeCameraCfg(
-                focal_length=15.0,
+                focal_length=12.0,
                 horizontal_aperture=20.955,
-                clipping_range=(1.1, 1000.0),
+                clipping_range=(0.95, 1000.0),
             ),
             offset=CameraCfg.OffsetCfg(
-                pos=(-1.5, 0.0, 0.8),
-                rot=(0.9914449, 0, 0.1305262, 0),
-                convention="world",
+                pos=(-1.5, 0.0, 0.5),
+                rot=(0.5609855, 0.4304593, -0.4304593, -0.5609855),
+                convention="opengl",
             ),
         )
 

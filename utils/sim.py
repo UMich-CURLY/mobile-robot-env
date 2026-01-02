@@ -84,6 +84,7 @@ class VLNSim:
             self.visualizer = None
 
     def init_env(self):
+        print("[SIM] Initializing Isaac Lab environment...")
         if self.next_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
 
@@ -123,6 +124,7 @@ class VLNSim:
 
     def reset(self, episode):
         with self.load_env_lock:
+            print("[Sim] Reset the simulation...")
             with self.server_data_lock:
                 self.reset_server_cache()
             self.next_episode = episode
@@ -323,7 +325,7 @@ class VLNSim:
                 else:
                     self.sim_state = "running"
                     self.update_obs(obs, info)
-                self.call_callbacks('step_finished')
+            self.call_callbacks('step_finished')
     
     def update_obs(self, obs, info):
         manager_env = self.manager_env

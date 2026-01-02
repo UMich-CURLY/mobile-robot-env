@@ -15,6 +15,7 @@ import utils.navmesh_utils as navmesh_utils
 from utils.vis import visualize_points, visualize_curve
 from utils.path_following_utils import calc_yaw
 from scipy.spatial.transform import Rotation as R
+from tqdm import tqdm
 
 class TaskGenerator:
     """
@@ -174,7 +175,6 @@ class TaskGenerator:
                 print(f'[TG] episode {self.current_episode.episode_id} starting position is too close to goal')
                 check_done = True
             elif self.vln_sim.waypoint_follower.arrived_at_goal:
-                print(f'[TG] episode {self.current_episode.episode_id} completed')
                 print("[TG] Measures: ", ", ".join([f"{k}={v:.2f}" for k, v in measurements.items()]))
                 # check episode quality by metrics
                 if measurements["oracle_success"] != 1.0:
@@ -184,7 +184,7 @@ class TaskGenerator:
                 elif measurements["path_length"] < self.min_path_length:
                     print(f'[TG] episode {self.current_episode.episode_id} completed but path length is too short')
                 else:
-                    print(f'[TG] episode {self.current_episode.episode_id} completed')
+                    print(f'[TG] episode {self.current_episode.episode_id} completed successfully')
                     success = True
                 check_done = True
             elif measurements["sim_duration"] > self.timeout:
@@ -256,7 +256,7 @@ class TaskGenerator:
             print(f"[TG] Navmesh build time: {end_time - start_time:.2f} seconds")
             navmesh_interface.save_navmesh(navmesh_path)
 
-        # sample goals
+        # sample goals uniformly
         unique_goals = []
         sampled_goals = []
         while len(sampled_goals) < num_episodes:
@@ -266,50 +266,54 @@ class TaskGenerator:
             sampled_goals.append(random_goal)
             unique_goals.remove(random_goal)
         sampled_goals = sorted(sampled_goals)
-        # sample goals uniformly
+        # generate paths from random points to each goal
         generated_episodes = []
-        retry_count = 0
-        while len(generated_episodes) < num_episodes:
-            episode_id = len(generated_episodes)
-            goal_name = sampled_goals[episode_id]
-            goal_item = self.goal_dict[goal_name]
-            # sample random points
-            random_points = navmesh_interface.sample_random_points(1)
-            start = random_points[0]
-            goal_prim_list = goal_item['prim']
-            goals = []
-            for goal_prim in goal_prim_list:
-                # we use the position calculated with bounding box instead
-                prim_path = goal_prim.GetPrimPath()
-                goal_pos = self.env.get_prim_position(prim_path)
-                path = navmesh_interface.find_paths(start, goal_pos)
-                if len(path) > 0:
-                    dist_to_start = np.linalg.norm(start - path[0])
-                    dist_to_end = np.linalg.norm(goal_pos - path[-1])
-                    obj_radius = self.env.get_prim_radius(prim_path)
-                    # skip if the path does not connect to the start or end
-                    if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
-                        continue
-                    # skip if the path is too short
-                    path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start + dist_to_end
-                    if path_length < self.min_path_length:
-                        continue
-                    if path_length > self.max_path_length:
-                        continue
-                    goals.append({
-                        'instance': str(prim_path),
-                        'type': 'object',
-                        'location': goal_pos,
-                        'radius': obj_radius,
-                        'path_length': path_length,
-                        'reference_path': path.tolist(),
-                    })
-            if len(goals) > 0:
-                print(f'[TG] Found {len(goals)} paths for goal {goal_name}')
+        pbar = tqdm(sampled_goals, desc="Generating episodes")
+        for goal_name in pbar:
+            path_found = False
+            retry_count = 0
+            while not path_found and retry_count < 100:
+                goal_item = self.goal_dict[goal_name]
+                # sample random points
+                start_pos = navmesh_interface.sample_random_points(1)[0]
+                goal_prim_list = goal_item['prim']
+                goals = []
+                for goal_prim in goal_prim_list:
+                    # we use the position calculated with bounding box instead
+                    prim_path = goal_prim.GetPrimPath()
+                    goal_pos = self.env.get_prim_position(prim_path)
+                    path = navmesh_interface.find_paths(start_pos, goal_pos)
+                    if len(path) > 0:
+                        dist_to_start = np.linalg.norm(start_pos - path[0])
+                        dist_to_end = np.linalg.norm(goal_pos - path[-1])
+                        obj_radius = self.env.get_prim_radius(prim_path)
+                        # skip if the path does not connect to the start or end
+                        if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
+                            continue
+                        # skip if the path is too short or too long
+                        path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start + dist_to_end
+                        if path_length < self.min_path_length:
+                            continue
+                        if path_length > self.max_path_length:
+                            continue
+                        goals.append({
+                            'instance': str(prim_path),
+                            'type': 'object',
+                            'location': goal_pos,
+                            'radius': obj_radius,
+                            'path_length': path_length,
+                            'reference_path': path.tolist(),
+                        })
+                if len(goals) > 0:
+                    path_found = True
+                else:
+                    retry_count += 1
+            if path_found:
+                pbar.set_description(f'[TG] Found {len(goals)} paths for goal {goal_name}')
                 closest_goal_idx = int(np.argmin([x['path_length'] for x in goals]))
                 closest_goal = goals[closest_goal_idx]
                 # set initial yaw angle to the next waypoint and add some noise
-                yaw_angle = calc_yaw(start[:2], closest_goal['reference_path'][1][:2])
+                yaw_angle = calc_yaw(start_pos[:2], closest_goal['reference_path'][1][:2])
                 yaw_angle += np.random.uniform(-np.deg2rad(30.0), np.deg2rad(30.0))
                 quat_xyzw = R.from_euler('z', yaw_angle).as_quat().tolist()
                 quat_wxyz = [quat_xyzw[3], quat_xyzw[0], quat_xyzw[1], quat_xyzw[2]]
@@ -317,21 +321,15 @@ class TaskGenerator:
                     data=self.scene_config,
                     objnav=goal_name,
                     instruction="",
-                    episode_id=episode_id,
+                    episode_id=len(generated_episodes),
                     goals=goals,
-                    start_position=start.tolist(),
+                    start_position=start_pos.tolist(),
                     start_rotation=quat_wxyz, # wxyz
                     closest_goal_idx=closest_goal_idx,
                 )
                 # visualize_points(random_points, prim_path="/World/RandomPoints", width=0.8)
                 # visualize_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
                 generated_episodes.append(episode)
-                retry_count = 0
             else:
-                retry_count += 1
-                if retry_count >= 100:
-                    print(f'[TG] Failed to find paths to {goal_name}, removed from list')
-                    del self.goal_dict[goal_name]
-                    generated_episodes.extend(self.sample_episodes(sampled_goals.count(goal_name)))
-                    retry_count = 0
+                pbar.set_description(f'[TG] Failed to find paths for goal {goal_name}')
         return generated_episodes
