@@ -418,7 +418,7 @@ class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
             offset=CameraCfg.OffsetCfg(
                 pos=(0.5, 0.0, 0),
                 rot=(1, 0, 0, 0),
-                convention="opengl",
+                convention="world",
             ),
         )
         self.scene.third_person_camera = TiledCameraCfg(

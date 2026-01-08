@@ -47,6 +47,7 @@ scene:
     collider: true
     episodes:
       cafe:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           blanket: blanket/model_[^/]*/Instance$
@@ -67,6 +68,7 @@ scene:
         path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAI8_usd/start_result_navigation.usd
         rule_pattern: path
       cafe2:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           blanket: blanket/model_[^/]*/Instance$
@@ -88,6 +90,7 @@ scene:
         path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAQ8_usd/start_result_navigation.usd
         rule_pattern: path
       hospital:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -105,6 +108,7 @@ scene:
         path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/test_no_ground.usd
         rule_pattern: path
       kindergarten:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           basket: basket/model_[^/]*/Instance$
@@ -126,6 +130,7 @@ scene:
         path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAEI8_usd/start_result_navigation.usd
         rule_pattern: path
       studyRoom:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           book: book/model_[^/]*/Instance$
@@ -146,6 +151,7 @@ scene:
         path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
         rule_pattern: path
       superMarket:
+        ceiling_height: 18.100000269711018
         episode_number: 30
         goal_rules:
           basket: basket/model_[^/]*/Instance$
@@ -167,6 +173,7 @@ scene:
         path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEI8_usd/test_no_ground.usd
         rule_pattern: path
       superMarket2:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           basket: basket/model_[^/]*/Instance$
@@ -193,6 +200,7 @@ scene:
     collider: false
     episodes:
       indoor1:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -206,6 +214,7 @@ scene:
         path: grscenes_home/scenes/MVUHLWYKTKJ5EAABAAAAAAY8_usd/test_no_ground.usd
         rule_pattern: path
       indoor2:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -219,6 +228,7 @@ scene:
         path: grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd
         rule_pattern: path
       indoor3:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -232,6 +242,7 @@ scene:
         path: grscenes_home/scenes/MVUCSQAKTKJ5EAABAAAAABA8_usd/start_result_navigation.usd
         rule_pattern: path
       indoor4:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -245,6 +256,7 @@ scene:
         path: grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
         rule_pattern: path
       indoor5:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           bed: bed/model_[^/]*/Instance$
@@ -263,6 +275,7 @@ scene:
     collider: true
     episodes:
       apartment:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -277,6 +290,7 @@ scene:
         path: nvidia/park/apartment_flatten_edit.usd
         rule_pattern: name
       city1:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -289,6 +303,7 @@ scene:
         path: nvidia/city1/city1_flatten_edit.usd
         rule_pattern: name
       city2:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -303,6 +318,7 @@ scene:
         path: nvidia/city2/city2_flatten_edit.usd
         rule_pattern: name
       parkmorning:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -315,6 +331,7 @@ scene:
         path: nvidia/park/park_morning_flatten_edit.usd
         rule_pattern: name
       parknight:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -328,6 +345,7 @@ scene:
         path: nvidia/park/park_night_flatten_edit.usd
         rule_pattern: name
       parktest:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           hydrant: Hydrant_.*
@@ -343,6 +361,7 @@ scene:
     collider: true
     episodes:
       generator:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           mesh: mesh
@@ -356,6 +375,7 @@ scene:
     collider: true
     episodes:
       amsterdam:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*
@@ -368,6 +388,7 @@ scene:
         path: virtual_community/AMSTERDAM/AMSTERDAM_with_road_objects.usd
         rule_pattern: name
       austin:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*
@@ -380,6 +401,7 @@ scene:
         path: virtual_community/AUSTIN/AUSTIN_with_road_objects_modified.usd
         rule_pattern: name
       baltimore:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*
@@ -392,6 +414,7 @@ scene:
         path: virtual_community/BALTIMORE/BALTIMORE_with_road_objects_modified.usd
         rule_pattern: name
       barcelona:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*
@@ -404,6 +427,7 @@ scene:
         path: virtual_community/BARCELONA/BARCELONA_with_road_objects_modified.usd
         rule_pattern: name
       berlin:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*
@@ -416,6 +440,7 @@ scene:
         path: virtual_community/BERLIN/BERLIN_with_road_objects_modified.usd
         rule_pattern: name
       ny:
+        ceiling_height: 1.0
         episode_number: 30
         goal_rules:
           city_bench: .*Bench.*

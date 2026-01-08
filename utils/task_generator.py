@@ -11,11 +11,14 @@ import numpy as np
 from collections import deque
 import cv2
 from utils.episode import VLNEpisode, save_episodes
+import isaacsim.core.utils.prims as prim_utils
 import utils.navmesh_utils as navmesh_utils
 from utils.vis import visualize_points, visualize_curve
 from utils.path_following_utils import calc_yaw
 from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
+from threading import Lock
+from queue import Queue
 
 class TaskGenerator:
     """
@@ -46,6 +49,13 @@ class TaskGenerator:
         self.rule_pattern_list = ["path", "name"]
         for scene_type, scene in task_config['scene'].items():
             self.scene_id_list.extend([f'{scene_type}_{x}' for x in scene['episodes'].keys()])
+        # set default value
+        for scene_type in task_config['scene'].keys():
+            scene_type_config = task_config['scene'][scene_type]
+            for scene_name in scene_type_config['episodes'].keys():
+                scene_config = scene_type_config['episodes'][scene_name]
+                if not hasattr(scene_config, "ceiling_height"):
+                    scene_config["ceiling_height"] = 1.0
 
     def _parse_scene_id(self, scene_id):
         scene_type = scene_id.split('_')[0]
@@ -53,6 +63,7 @@ class TaskGenerator:
         return scene_type, scene_name
 
     def get_scene_config(self, scene_id):
+        # merge scene_type config (e.g., nv) with scene config (e.g., nv_apartment)
         scene_type, scene_name = self._parse_scene_id(scene_id)
         scene_config = deepcopy(self.task_config['scene'][scene_type])
         scene_config.update(scene_config['episodes'][scene_name])
@@ -317,8 +328,9 @@ class TaskGenerator:
                 yaw_angle += np.random.uniform(-np.deg2rad(30.0), np.deg2rad(30.0))
                 quat_xyzw = R.from_euler('z', yaw_angle).as_quat().tolist()
                 quat_wxyz = [quat_xyzw[3], quat_xyzw[0], quat_xyzw[1], quat_xyzw[2]]
+                remove_keys = ["episode_number", "goal_rules", "navmesh_exclude", "rule_pattern", "navmesh_preset"]
                 episode = VLNEpisode(
-                    data=self.scene_config,
+                    data={k: v for k, v in self.scene_config.items() if k not in remove_keys},
                     objnav=goal_name,
                     instruction="",
                     episode_id=len(generated_episodes),
@@ -333,3 +345,130 @@ class TaskGenerator:
             else:
                 pbar.set_description(f'[TG] Failed to find paths for goal {goal_name}')
         return generated_episodes
+    
+    def get_world_bb(self, scene_id):
+        scene_type, scene_name = self._parse_scene_id(scene_id)
+        navmesh_exclude = self.task_config["scene"][scene_type]["episodes"][scene_name]["navmesh_exclude"]
+        for prim_path in navmesh_exclude:
+            exclude_prim = self.manager_env.scene.stage.GetPrimAtPath(prim_path)
+            prim_utils.set_prim_visibility(exclude_prim, False)
+        world_bb = self.env.get_prim_bounding_box("/World/ground/terrain")
+        for prim_path in navmesh_exclude:
+            exclude_prim = self.manager_env.scene.stage.GetPrimAtPath(prim_path)
+            prim_utils.set_prim_visibility(exclude_prim, True)
+        return world_bb
+
+    def toggle_ceiling(self, scene_id):
+        if not hasattr(self, 'ceiling_data') or self.ceiling_data["scene_id"] != scene_id:
+            print(f"[TG] Detecting ceiling")
+            prim_list = []
+            world_bb = self.get_world_bb(scene_id)
+            for prim in self.manager_env.scene.stage.Traverse():
+                if str(prim.GetPath()).startswith("/World/ground/terrain"):
+                    prim_bb = self.env.get_prim_bounding_box(prim.GetPrimPath())
+                    if prim_bb[2] > world_bb[5]-1.0 and prim_bb[2] < 1e3:
+                        prim_list.append(prim)
+            self.ceiling_data = {
+                "prim_list": prim_list,
+                "prim_hidden": False,
+                "scene_id": scene_id,
+            }
+        self.ceiling_data["prim_hidden"] = not self.ceiling_data["prim_hidden"]
+        for prim in self.ceiling_data["prim_list"]:
+            prim_utils.set_prim_visibility(prim, not self.ceiling_data["prim_hidden"])
+        print(f"[TG] Ceiling is now {'visible' if self.ceiling_data['prim_hidden'] else 'hidden'}")
+    
+    def create_bev_camera(self, scene_id):
+        # create bev camera
+        world_bb = np.array(self.get_world_bb(scene_id))
+        world_center = (world_bb[:3] + world_bb[3:]) / 2
+        world_size = world_bb[3:] - world_bb[:3]
+        camera_pos = world_center + np.array([0, 0, 10.0])
+        padding = 1.0
+        image_width = min(int((world_size[0]+padding*2) * 100), 3840)
+        image_height = int(image_width * world_size[1] / world_size[0])
+        self.bev_camera = self.env.create_camera(
+            prim_path="/World/bev_camera",
+            perspective=False,
+            pos=camera_pos,
+            quat_opengl=[1, 0, 0, 0],
+            horizontal_aperture=(world_size[0]+padding*2)*10,
+            clipping_range_min=0.1,
+            clipping_range_max=200.0,
+            width=image_width,
+            height=image_height
+        )
+        print(f"[TG] Created BEV map camera")
+
+    def create_bev_map(self, scene_id, file_name="bev_map", clip_range="ceiling", ceiling_height=None):
+        """ When clip_range is "ceiling", the bev image sees everything under the ceiling.
+            When clip_range is "robot", the bev image only see things under robot height + 0.5m,
+            which can be used for occupancy.
+        """
+        # init task queue and lock if not initialized
+        if not hasattr(self, 'check_bev_map_queue'):
+            self.create_bev_camera(scene_id)
+            self.bev_camera_queue = Queue()
+            self.bev_camera_lock = Lock()
+            def check_bev_map_queue():
+                if self.bev_camera_queue.empty() or self.bev_camera_lock.locked():
+                    return
+                scene_id, file_name, clip_range, ceiling_height = self.bev_camera_queue.get()
+                self._create_bev_map(scene_id, file_name, clip_range, ceiling_height)
+            self.vln_sim.add_callback('step_finished', check_bev_map_queue)
+            self.check_bev_map_queue = check_bev_map_queue
+        # add task to queue
+        self.bev_camera_queue.put((scene_id, file_name, clip_range, ceiling_height))
+
+    def update_bev_camera_clip(self, scene_id, clip_range, ceiling_height):
+        print(f"[TG] Clip bev camera to {clip_range} with ceiling height {ceiling_height}")
+        world_bb = np.array(self.get_world_bb(scene_id))
+        world_center = (world_bb[:3] + world_bb[3:]) / 2
+        camera_pos = world_center + np.array([0, 0, 10.0])
+        if clip_range=="ceiling":
+            clipping_range_min = camera_pos[2] - (world_bb[5]-ceiling_height)
+        elif clip_range=="robot":
+            clipping_range_min = camera_pos[2] - (self.env.get_cam_pose()[0][2]+0.3)
+        clipping_range_min = max(0, clipping_range_min)
+        clipping_range_max = clipping_range_min+1000
+        camera_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/bev_camera")
+        clipping_range = camera_prim.GetAttribute('clippingRange').Get()
+        clipping_range[0] = clipping_range_min
+        clipping_range[1] = clipping_range_max
+        camera_prim.GetAttribute('clippingRange').Set(clipping_range)
+        # update task config
+        scene_type, scene_name = self._parse_scene_id(scene_id)
+        self.task_config["scene"][scene_type]["episodes"][scene_name]["ceiling_height"] = ceiling_height
+
+    def _create_bev_map(self, scene_id, file_name, clip_range, ceiling_height):
+        self.bev_camera_lock.acquire()
+        # hide ceiling
+        # if not hasattr(self, 'ceiling_data') or self.ceiling_data["scene_id"] != scene_id or not self.ceiling_data["prim_hidden"]:
+        #     self.toggle_ceiling(scene_id)
+        # update camera
+        if ceiling_height is None:
+            scene_config = self.get_scene_config(scene_id)
+            ceiling_height = scene_config.get("ceiling_height", 1.0)
+        self.update_bev_camera_clip(scene_id, clip_range, ceiling_height)
+        # hide robot
+        robot_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/envs/env_0/Robot")
+        prim_utils.set_prim_visibility(robot_prim, False)
+        def save_bev_map():
+            try:
+                if self.bev_camera.frame>-1 and self.env.env_step>5:
+                    rgb = self.bev_camera.data.output['rgba'].cpu().numpy()[0]
+                    depth = self.bev_camera.data.output['distance_to_image_plane'].cpu().numpy()[0]
+                    data_folder = f"{self.args.scene_folder}/episode_data/{scene_id}"
+                    os.makedirs(data_folder, exist_ok=True)
+                    np.savez(f"{data_folder}/{file_name}.npz", rgb=rgb, depth=depth)
+                    cv2.imwrite(f"{data_folder}/rgb.png", rgb[...,[2,1,0,3]])
+                    cv2.imwrite(f"{data_folder}/depth.png", depth)
+                    print(f"[TG] Saved BEV map to {data_folder}/{file_name}.npz")
+                    prim_utils.set_prim_visibility(robot_prim, True)
+                    self.vln_sim.remove_callback('step_finished', save_bev_map)
+                    self.bev_camera_lock.release()
+                else:
+                    print(f"[TG] BEV camera is not initialized yet, frame: {self.bev_camera.frame}, env_step: {self.env.env_step}")
+            except Exception as e:
+                print(f"[TG] Error saving BEV map: {e}")
+        self.vln_sim.add_callback('step_finished', save_bev_map)

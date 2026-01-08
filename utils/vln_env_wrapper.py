@@ -12,6 +12,7 @@ import isaacsim.core.utils.prims as prim_utils
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
+from isaaclab.sensors import TiledCamera, TiledCameraCfg
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -152,6 +153,29 @@ class VLNEnvWrapper:
         # quat = np.concatenate([quat[1:],quat[:1]])
         # return pos, quat
         return pos_cam_world, quat_cam_world
+    
+    def create_camera(self, prim_path="/World/camera", perspective=True, pos=None, quat_opengl=None, focal_length=24.0, horizontal_aperture=20.955, clipping_range_min=0.1, clipping_range_max=20.0, width=640, height=480):
+        if prim_utils.get_prim_at_path(prim_path):
+            prim_utils.delete_prim(prim_path)
+        camera_cfg = TiledCameraCfg(
+            prim_path=prim_path,
+            update_period=0.1,
+            update_latest_camera_pose=True,
+            offset=TiledCameraCfg.OffsetCfg(pos=pos, rot=quat_opengl, convention="opengl"),
+            width=width,
+            height=height,
+            data_types=["rgb", "distance_to_image_plane"],
+            spawn=sim_utils.PinholeCameraCfg(
+                focal_length=focal_length, horizontal_aperture=horizontal_aperture,
+                clipping_range=(clipping_range_min, clipping_range_max)
+            ),
+        )
+        tiled_camera = TiledCamera(camera_cfg)
+        if not perspective:
+            camera_prim = self.manager_env.scene.stage.GetPrimAtPath(prim_path)
+            camera_prim.GetAttribute('projection').Set("orthographic")
+        tiled_camera._initialize_callback(None)
+        return tiled_camera
 
     def reset(self, episode=None, warmup_steps=0) -> tuple[torch.Tensor, dict]:
         """Reset the environment."""
@@ -212,8 +236,7 @@ class VLNEnvWrapper:
                 sim_utils.define_collision_properties(terrain_prim.GetPrimPath(), collider_cfg)
             terrain_prim.GetAttribute('xformOp:scale').Set(Gf.Vec3f(scene_scale, scene_scale, scene_scale))
             if align_ground:
-                bb_cache = bounds_utils.create_bbox_cache()
-                min_x, min_y, min_z, max_x, max_y, max_z = bounds_utils.compute_combined_aabb(bb_cache, prim_paths=[terrain_prim.GetPrimPath()])
+                min_x, min_y, min_z, max_x, max_y, max_z = self.get_prim_bounding_box(terrain_prim.GetPrimPath())
                 print(f"Bounding box: min_x: {min_x}, min_y: {min_y}, min_z: {min_z}, max_x: {max_x}, max_y: {max_y}, max_z: {max_z}")
                 terrain_prim.GetAttribute('xformOp:translate').Set(Gf.Vec3f(0, 0, -min_z-20))
         self.scene_setting = scene_settings

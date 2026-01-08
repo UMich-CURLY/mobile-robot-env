@@ -202,6 +202,7 @@ class TaskGeneratorUI(BaseUI):
             ]),
             "navmesh_preset": ("navmesh_preset", choice_func(task_generator.navmesh_preset_list)),
             "scene_scale": ("scene_scale", float_func),
+            "ceiling_height": ("ceiling_height", float_func),
             "collider": ("collider", bool_func),
             "align_ground": ("align_ground", bool_func),
             "episode_number": ("episode_number", int_func),
@@ -241,6 +242,14 @@ class TaskGeneratorUI(BaseUI):
                     max=100,
                     step=0.01,
                 )[0]
+                self.ui_elements["ceiling_height"] = ui_utils.combo_floatfield_slider_builder(
+                    "Ceiling Clip Range",
+                    default_val=1.0,
+                    min=0,
+                    max=100,
+                    step=0.1,
+                )[0]
+                self.ui_elements["ceiling_height"].add_value_changed_fn(lambda x: self.task_generator.update_bev_camera_clip(self.ui_episode["scene_id"], "ceiling", x.as_float))
                 self.ui_elements["collider"] = ui_utils.cb_builder("Collider", default_val=True)
                 self.ui_elements["align_ground"] = ui_utils.cb_builder("Align Ground", default_val=True)
             with self.create_frame("Navmesh Settings", collapsed=True):
@@ -268,7 +277,6 @@ class TaskGeneratorUI(BaseUI):
                 ui_utils.btn_builder("Teleport Robot", text="Teleport", on_clicked_fn=lambda: self.teleport_robot())
                 ui_utils.btn_builder("Generate Cube", text="Generate", on_clicked_fn=lambda: self.generate_cube())
                 ui_utils.btn_builder("Clear Visualization", text="Clear", on_clicked_fn=lambda: self.clear_visualization())
-                ui_utils.btn_builder("Get Information", text="Info", on_clicked_fn=lambda: self.get_information())
             with self.create_frame("Episode Settings"):
                 # episode number
                 self.ui_elements["episode_number"] = ui_utils.int_builder("Episode Number", default_val=30)
@@ -279,6 +287,17 @@ class TaskGeneratorUI(BaseUI):
                 )
                 ui_utils.btn_builder("Generate Episode", text="Generate", on_clicked_fn=lambda: self.generate_episodes())
                 ui_utils.btn_builder("Stop Generation", text="Stop", on_clicked_fn=lambda: self.stop_generation())
+                ui_utils.btn_builder("Get Information", text="Get", on_clicked_fn=lambda: self.get_information())
+                ui_utils.btn_builder("Toggle Ceiling", text="Toggle", on_clicked_fn=lambda: self.task_generator.toggle_ceiling(self.ui_episode["scene_id"]))
+                ui_utils.btn_builder("Create BEV Map", text="Create", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="ceiling"))
+                ui_utils.btn_builder("Save Occupancy Map", text="Save", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="robot", file_name="height_map"))
+            with self.create_frame("Info"):
+                self.ui_elements["task_config"] = ui_utils.ui.Label(
+                    "Task Config",
+                    style_type_name_override="Label::label",
+                    word_wrap=True,
+                    alignment=ui_utils.ui.Alignment.LEFT_TOP,
+                )
     def _snake_to_camel(self, s):
         parts = s.split('_')
         return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
