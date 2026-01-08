@@ -46,6 +46,7 @@ from utils.episode import VLNEpisode
 
 # setup environment
 default_scene_id = "test_generator"
+# default_scene_id = "grCommercial_hostipal"
 task_generator = TaskGenerator(args)
 test_episode = VLNEpisode(task_generator.get_scene_config(default_scene_id))
 vln_sim = VLNSim(args)
@@ -71,7 +72,8 @@ if args.test_scene_id != "none":
     vln_sim.step()
 
 # add test code here
-task_generator.generate_episodes(test_episode.scene_id)
+# task_generator.generate_episodes(test_episode.scene_id)
+task_generator.generate_episodes_auto_goal(test_episode.scene_id)
 # task_generator_ui.setup_navmesh()
 # task_generator_ui.build_navmesh()
 
