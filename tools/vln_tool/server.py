@@ -17,7 +17,7 @@ robot_env_path = current_file.parent.parent.parent
 sys.path.append(str(robot_env_path))
 
 try:
-    from utils.instruction_generator import InstructionGenerator
+    from instruction_generator import InstructionGenerator
     from utils.episode import VLNEpisode
 except ImportError as e:
     print(f"Error importing modules: {e}")
@@ -69,7 +69,6 @@ async def initialize(
     
     if token:
         os.environ["GEMINI_API_KEY"] = token
-        os.environ["OPENAI_API_KEY"] = token # litellm might use this too depending on config
     
     try:
         episode_data_root = data_path
