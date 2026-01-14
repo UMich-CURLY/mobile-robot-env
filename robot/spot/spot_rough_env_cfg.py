@@ -1,0 +1,451 @@
+# Copyright (c) 2022-2025, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+from typing import Optional
+import numpy as np
+import torch
+
+import isaaclab.sim as sim_utils
+from isaaclab.envs import ViewerCfg
+from isaaclab.managers import EventTermCfg as EventTerm
+from isaaclab.managers import ObservationGroupCfg as ObsGroup
+from isaaclab.managers import ObservationTermCfg as ObsTerm
+from isaaclab.managers import RewardTermCfg, SceneEntityCfg
+from isaaclab.managers import TerminationTermCfg as DoneTerm
+from isaaclab.sensors import CameraCfg, TiledCameraCfg, RayCasterCfg, patterns
+from isaaclab.utils import configclass
+from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+from isaaclab.utils.math import convert_camera_frame_orientation_convention
+
+import isaaclab_tasks.manager_based.locomotion.velocity.config.spot.mdp as spot_mdp
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+##
+# Pre-defined configs
+##
+from isaaclab_assets.robots.spot import SPOT_CFG  # isort: skip
+from robot.base_env_cfg import BaseEnvCfg
+
+@configclass
+class SpotActionsCfg:
+    """Action specifications for the MDP."""
+
+    joint_pos = mdp.JointPositionActionCfg(asset_name="robot", joint_names=[".*"], scale=0.25, use_default_offset=True)
+
+
+@configclass
+class SpotCommandsCfg:
+    """Command specifications for the MDP."""
+
+    base_velocity = mdp.UniformVelocityCommandCfg(
+        asset_name="robot",
+        resampling_time_range=(4.0, 4.0),
+        rel_standing_envs=0.2,
+        rel_heading_envs=0.0,
+        heading_command=False,
+        debug_vis=False,
+        ranges=mdp.UniformVelocityCommandCfg.Ranges(
+            lin_vel_x=(-2.0, 3.0), lin_vel_y=(-1.5, 1.5), ang_vel_z=(-2.0, 2.0)
+        ),
+    )
+
+
+def camera_info(
+    env,
+    sensor_cfg = SceneEntityCfg("tiled_camera"),
+):
+    # extract the used quantities (to enable type-hinting)
+    sensor = env.scene.sensors[sensor_cfg.name]
+    pose = sensor._view.get_world_poses()
+    pos = sensor.data.pos_w.detach().cpu()
+    quat = sensor.data.quat_w_world.detach().cpu()
+    quat = torch.concat([quat[:,1:],quat[:,:1]], dim=1)
+    return torch.concat([pos,quat], dim=1)
+
+
+
+@configclass
+class PolicyCfg(ObsGroup):
+    """Observations for policy group."""
+
+    # `` observation terms (order preserved)
+    base_lin_vel = ObsTerm(
+        func=mdp.base_lin_vel, params={"asset_cfg": SceneEntityCfg("robot")}, noise=Unoise(n_min=-0.1, n_max=0.1)
+    )
+    base_ang_vel = ObsTerm(
+        func=mdp.base_ang_vel, params={"asset_cfg": SceneEntityCfg("robot")}, noise=Unoise(n_min=-0.1, n_max=0.1)
+    )
+    projected_gravity = ObsTerm(
+        func=mdp.projected_gravity,
+        params={"asset_cfg": SceneEntityCfg("robot")},
+        noise=Unoise(n_min=-0.05, n_max=0.05),
+    )
+    velocity_commands = ObsTerm(func=mdp.generated_commands, params={"command_name": "base_velocity"})
+    joint_pos = ObsTerm(
+        func=mdp.joint_pos_rel, params={"asset_cfg": SceneEntityCfg("robot")}, noise=Unoise(n_min=-0.05, n_max=0.05)
+    )
+    joint_vel = ObsTerm(
+        func=mdp.joint_vel_rel, params={"asset_cfg": SceneEntityCfg("robot")}, noise=Unoise(n_min=-0.5, n_max=0.5)
+    )
+    actions = ObsTerm(func=mdp.last_action)
+
+    def __post_init__(self):
+        self.enable_corruption = False
+        self.concatenate_terms = True
+
+
+@configclass
+class CameraPolicyCfg(ObsGroup):
+
+    pov_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "rgb", "normalize": False})
+    pov_pose = ObsTerm(func=camera_info, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
+    pov_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "distance_to_image_plane"})
+    # height_scanner = ObsTerm(func=mdp.height_scan, params={"sensor_cfg": SceneEntityCfg("height_scanner")})
+    # third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb"})
+
+    def __post_init__(self):
+        self.enable_corruption = False
+        self.concatenate_terms = False
+
+@configclass
+class SpotObservationsCfg:
+    """Observation specifications for the MDP."""
+    # observation groups
+    policy: PolicyCfg = PolicyCfg()
+
+@configclass
+class SpotObservationsCameraCfg:
+    """Observation specifications for the MDP."""
+    # observation groups
+    policy: PolicyCfg = PolicyCfg()
+    camera: CameraPolicyCfg = CameraPolicyCfg()
+
+@configclass
+class SpotEventCfg:
+    """Configuration for randomization."""
+
+    # startup
+    physics_material = EventTerm(
+        func=mdp.randomize_rigid_body_material,
+        mode="startup",
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names=".*"),
+            "static_friction_range": (0.3, 1.0),
+            "dynamic_friction_range": (0.3, 0.8),
+            "restitution_range": (0.0, 0.0),
+            "num_buckets": 64,
+        },
+    )
+
+    add_base_mass = EventTerm(
+        func=mdp.randomize_rigid_body_mass,
+        mode="startup",
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names="body"),
+            "mass_distribution_params": (-2.5, 2.5),
+            "operation": "add",
+        },
+    )
+
+    # reset
+    base_external_force_torque = EventTerm(
+        func=mdp.apply_external_force_torque,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names="body"),
+            "force_range": (0.0, 0.0),
+            "torque_range": (-0.0, 0.0),
+        },
+    )
+
+    reset_base = EventTerm(
+        func=mdp.reset_root_state_uniform,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("robot"),
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "velocity_range": {
+                "x": (-1.5, 1.5),
+                "y": (-1.0, 1.0),
+                "z": (-0.5, 0.5),
+                "roll": (-0.7, 0.7),
+                "pitch": (-0.7, 0.7),
+                "yaw": (-1.0, 1.0),
+            },
+        },
+    )
+
+    reset_robot_joints = EventTerm(
+        func=spot_mdp.reset_joints_around_default,
+        mode="reset",
+        params={
+            "position_range": (-0.2, 0.2),
+            "velocity_range": (-2.5, 2.5),
+            "asset_cfg": SceneEntityCfg("robot"),
+        },
+    )
+
+    # interval
+    push_robot = EventTerm(
+        func=mdp.push_by_setting_velocity,
+        mode="interval",
+        interval_range_s=(10.0, 15.0),
+        params={
+            "asset_cfg": SceneEntityCfg("robot"),
+            "velocity_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5)},
+        },
+    )
+
+
+@configclass
+class SpotRewardsCfg:
+    # -- task
+    air_time = RewardTermCfg(
+        func=spot_mdp.air_time_reward,
+        weight=5.5,
+        params={
+            "mode_time": 0.3,
+            "velocity_threshold": 0.5,
+            "asset_cfg": SceneEntityCfg("robot"),
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_foot"),
+        },
+    )
+    base_angular_velocity = RewardTermCfg(
+        func=spot_mdp.base_angular_velocity_reward,
+        weight=17.0,
+        params={"std": 2.0, "asset_cfg": SceneEntityCfg("robot")},
+    )
+    base_linear_velocity = RewardTermCfg(
+        func=spot_mdp.base_linear_velocity_reward,
+        weight=25.0,
+        params={"std": 1.0, "ramp_rate": 0.5, "ramp_at_vel": 1.0, "asset_cfg": SceneEntityCfg("robot")},
+    )
+    foot_clearance = RewardTermCfg(
+        func=spot_mdp.foot_clearance_reward,
+        weight=2.0,
+        params={
+            "std": 0.05,
+            "tanh_mult": 2.0,
+            "target_height": 0.25,
+            "asset_cfg": SceneEntityCfg("robot", body_names=".*_foot"),
+        },
+    )
+    gait = RewardTermCfg(
+        func=spot_mdp.GaitReward,
+        weight=17.0,
+        params={
+            "std": 0.1,
+            "max_err": 0.2,
+            "velocity_threshold": 0.5,
+            "synced_feet_pair_names": (("fl_foot", "hr_foot"), ("fr_foot", "hl_foot")),
+            "asset_cfg": SceneEntityCfg("robot"),
+            "sensor_cfg": SceneEntityCfg("contact_forces"),
+        },
+    )
+
+    # -- penalties
+    action_smoothness = RewardTermCfg(func=spot_mdp.action_smoothness_penalty, weight=-0.3)
+    air_time_variance = RewardTermCfg(
+        func=spot_mdp.air_time_variance_penalty,
+        weight=-0.5,
+        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_foot")},
+    )
+    base_motion = RewardTermCfg(
+        func=spot_mdp.base_motion_penalty, weight=-3.0, params={"asset_cfg": SceneEntityCfg("robot")}
+    )
+    base_orientation = RewardTermCfg(
+        func=spot_mdp.base_orientation_penalty, weight=-0.5, params={"asset_cfg": SceneEntityCfg("robot")}
+    )
+    foot_slip = RewardTermCfg(
+        func=spot_mdp.foot_slip_penalty,
+        weight=-0.5,
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names=".*_foot"),
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_foot"),
+            "threshold": 1.0,
+        },
+    )
+    joint_acc = RewardTermCfg(
+        func=spot_mdp.joint_acceleration_penalty,
+        weight=-1.0e-4,
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*_h[xy]")},
+    )
+    joint_pos = RewardTermCfg(
+        func=spot_mdp.joint_position_penalty,
+        weight=-0.7,
+        params={
+            "asset_cfg": SceneEntityCfg("robot", joint_names=".*"),
+            "stand_still_scale": 5.0,
+            "velocity_threshold": 0.5,
+        },
+    )
+    joint_torques = RewardTermCfg(
+        func=spot_mdp.joint_torques_penalty,
+        weight=-1.0e-4,
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*")},
+    )
+    joint_vel = RewardTermCfg(
+        func=spot_mdp.joint_velocity_penalty,
+        weight=-1.0e-3,
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=".*_h[xy]")},
+    )
+
+@configclass
+class SpotTerminationsCfg:
+    """Termination terms for the MDP."""
+
+    time_out = DoneTerm(func=mdp.time_out, time_out=True)
+    body_contact = DoneTerm(
+        func=mdp.illegal_contact,
+        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=["body"]), "threshold": 1.0},
+    )
+    terrain_out_of_bounds = DoneTerm(
+        func=mdp.terrain_out_of_bounds,
+        params={"asset_cfg": SceneEntityCfg("robot"), "distance_buffer": 3.0},
+        time_out=True,
+    )
+    bad_orientation = DoneTerm(
+        func=mdp.bad_orientation,
+        params={"limit_angle": float(np.deg2rad(45.0))},
+    )
+@configclass
+class SpotRoughEnvCfg(BaseEnvCfg):
+
+    # Basic settings
+    observations: SpotObservationsCfg = SpotObservationsCfg()
+    actions: SpotActionsCfg = SpotActionsCfg()
+    commands: SpotCommandsCfg = SpotCommandsCfg()
+    usd_path: Optional[str] = None
+
+    # MDP setting
+    rewards: SpotRewardsCfg = SpotRewardsCfg()
+    terminations: SpotTerminationsCfg = SpotTerminationsCfg()
+    events: SpotEventCfg = SpotEventCfg()
+
+    # Viewer
+    viewer = ViewerCfg(eye=(10.5, 10.5, 0.3), origin_type="world", env_index=0, asset_name="robot")
+
+    def __post_init__(self):
+        # post init of parent
+        super().__post_init__()
+
+        # general settings
+        # self.decimation = 10  # 50 Hz
+        # self.episode_length_s = 1000000.
+        # # simulation settings
+        # self.sim.dt = 0.002  # 500 Hz
+
+        # general settings
+        self.decimation = 10
+        self.episode_length_s = 40.
+        # simulation settings
+        self.sim.dt = 0.005
+        self.sim.render_interval = 5
+        self.sim.physics_material.static_friction = 1.0
+        self.sim.physics_material.dynamic_friction = 1.0
+        self.sim.physics_material.friction_combine_mode = "multiply"
+        self.sim.physics_material.restitution_combine_mode = "multiply"
+        self.sim.render.dlss_mode = 1
+        self.sim.render.enable_reflections = True
+        self.sim.render.enable_translucency = True
+        # update sensor update periods
+        # we tick all the sensors based on the smallest update period (physics update period)
+        self.scene.contact_forces.update_period = self.sim.dt
+
+        # switch robot to Spot-d
+        self.scene.robot = SPOT_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
+
+        # default terrain
+        self._physics_material = sim_utils.RigidBodyMaterialCfg(
+            friction_combine_mode="multiply",
+            restitution_combine_mode="multiply",
+            static_friction=1.0,
+            dynamic_friction=1.0,
+        )
+
+        self.load_generator()
+
+        # set height scanner
+        self.scene.height_scanner = None
+        # self.scene.height_scanner = RayCasterCfg(
+        #     prim_path="{ENV_REGEX_NS}/Robot/body",
+        #     update_period=0.02,
+        #     offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.5)),
+        #     ray_alignment="yaw",
+        #     pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 0.8]),
+        #     debug_vis=True,
+        #     mesh_prim_paths=["/World/ground/terrain"],
+        # )
+
+@configclass
+class EmptyCfg:
+    pass
+
+@configclass
+class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
+
+    events: EmptyCfg = EmptyCfg()
+    terminations: EmptyCfg = EmptyCfg()
+    observations: SpotObservationsCameraCfg = SpotObservationsCameraCfg()
+
+    def __post_init__(self) -> None:
+        # post init of parent
+        super().__post_init__()
+
+        # make a smaller scene for play
+        self.scene.num_envs = 1
+        self.episode_length_s = 1000000.
+        self.scene.env_spacing = 2.5
+        self.scene.terrain.max_init_terrain_level = None
+        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (0.0, 0.0)
+
+        # set the camera
+        self.scene.pov_camera = TiledCameraCfg(
+            prim_path="{ENV_REGEX_NS}/Robot/body/Camera",
+            update_period=0.1,  # 10 Hz
+            update_latest_camera_pose=True,
+            height=480,
+            width=640,
+            data_types=["rgb", "distance_to_image_plane"],
+            spawn=sim_utils.PinholeCameraCfg(
+                focal_length=24.0,
+                horizontal_aperture=20.955,
+                clipping_range=(0.1, 1000.0),
+            ),
+            offset=CameraCfg.OffsetCfg(
+                pos=(0.5, 0.0, 0),
+                rot=(1, 0, 0, 0),
+                convention="world",
+            ),
+        )
+        self.scene.third_person_camera = TiledCameraCfg(
+            prim_path="{ENV_REGEX_NS}/Robot/body/ThirdPersonCamera",
+            update_period=0.1,  # 10 Hz
+            update_latest_camera_pose=True,
+            height=480,
+            width=640,
+            data_types=["rgb"],
+            spawn=sim_utils.PinholeCameraCfg(
+                focal_length=12.0,
+                horizontal_aperture=20.955,
+                clipping_range=(0.95, 1000.0),
+            ),
+            offset=CameraCfg.OffsetCfg(
+                pos=(-1.5, 0.0, 0.5),
+                rot=(0.5609855, 0.4304593, -0.4304593, -0.5609855),
+                convention="opengl",
+            ),
+        )
+
+        # reduce the number of terrains to save memory
+        if self.scene.terrain.terrain_generator is not None:
+            self.scene.terrain.terrain_generator.num_rows = 5
+            self.scene.terrain.terrain_generator.num_cols = 5
+            self.scene.terrain.terrain_generator.curriculum = False
+
+        # disable randomization for play
+        self.observations.policy.enable_corruption = False
+        # remove random pushing event
