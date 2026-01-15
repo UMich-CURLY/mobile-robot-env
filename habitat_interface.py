@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from functools import partial
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, DurabilityPolicy
@@ -6,6 +7,7 @@ from rclpy.qos import QoSProfile, DurabilityPolicy
 from sensor_msgs.msg import CompressedImage, Image
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
+from tf2_msgs.msg import TFMessage
 from cv_bridge import CvBridge
 
 import numpy as np
@@ -28,8 +30,11 @@ import time
 # Global shared state
 _latest_rgb = None
 _latest_depth = None
+_latest_rgb_by_source = {}
+_latest_depth_by_source = {}
 _latest_position = None
 _latest_quat_xyzw = None
+_latest_tfs = {}
 _scenario = None
 _info = None
 _host = "localhost"
@@ -97,6 +102,39 @@ class HabitatROSBridge(Node):
         print("[HabitatROSBridge] OpenAI client initialized.")
 
 
+        ## Cam Subscribers
+        rgb_topics = {
+            "rgb_image": "/habitatsim/image/head_rgb_right/compressed", ## Assigned main camera
+            "rgb_head_left": "/habitatsim/image/head_rgb_left/compressed",
+            "rgb_right": "/habitatsim/image/right_rgb/compressed",
+            "rgb_left": "/habitatsim/image/left_rgb/compressed",
+        }
+
+        depth_topics = {
+            "depth_image": "/habitatsim/depth/head_stereo_right_depth/image_raw", ## Assigned main camera
+            "depth_head_left":  "/habitatsim/depth/head_stereo_left_depth/image_raw",
+            "depth_right":      "/habitatsim/depth/right_depth/image_raw",
+            "depth_left":       "/habitatsim/depth/left_depth/image_raw",
+        }
+        
+        # RGB subscriptions
+        for name, topic in rgb_topics.items():
+            self.create_subscription(
+                CompressedImage,
+                topic,
+                partial(self.rgb_callback, source=name),
+                10
+            )
+
+        # Depth subscriptions
+        for name, topic in depth_topics.items():
+            self.create_subscription(
+                Image,
+                topic,
+                partial(self.depth_callback, source=name),
+                10
+        )
+                  
         # topic names
         self.robot_topic = "/spot"
         self.action_topic = f"{self.robot_topic}/cmd_vel"
@@ -113,6 +151,10 @@ class HabitatROSBridge(Node):
         self.sync = ApproximateTimeSynchronizer([self.rgb_sub, self.depth_sub, self.odom_sub], 100, 0.1, allow_headerless=False)
         self.sync.registerCallback(self.sensor_callback)
         self.scenario_sub = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
+        
+        # TF subscriptions for camera transforms (static + dynamic)
+        self.tf_sub = self.create_subscription(TFMessage, "/tf", self.tf_ros_callback, 10)
+        self.tf_static_sub = self.create_subscription(TFMessage, "/tf_static", self.tf_ros_callback, 10)
 
         # wait for sim control topic to be available
         qos = QoSProfile(depth=10)
@@ -189,25 +231,59 @@ class HabitatROSBridge(Node):
         
     # ---- Callbacks ----
     def sensor_callback(self, rgb_msg, depth_msg, odom_msg):
-        self.rgb_callback(rgb_msg)
-        self.depth_callback(depth_msg)
+        self.rgb_callback(rgb_msg, source="rgb_image")
+        self.depth_callback(depth_msg, source="depth_image")
         self.odom_callback(odom_msg)
 
-    def rgb_callback(self, msg):
-        global _latest_rgb
+    def rgb_callback(self, msg, source="rgb_image"):
+        global _latest_rgb, _latest_rgb_by_source
         try:
             cv_image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="bgr8")
-            _latest_rgb = cv_image[..., ::-1].astype(np.uint8)
+            rgb_image = cv_image[..., ::-1].astype(np.uint8)
+            _latest_rgb_by_source[source] = rgb_image
+            if source == "rgb_image":
+                _latest_rgb = rgb_image
         except Exception as e:
             self.get_logger().error(f"RGB callback error: {e}")
 
-    def depth_callback(self, msg):
-        global _latest_depth
+    def depth_callback(self, msg, source="depth_image"):
+        global _latest_depth, _latest_depth_by_source
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
-            _latest_depth = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
+            depth_image = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
+            _latest_depth_by_source[source] = depth_image
+            if source == "depth_image":
+                _latest_depth = depth_image
         except Exception as e:
             self.get_logger().error(f"Depth callback error: {e}")
+    
+    def tf_ros_callback(self, msg):
+        global _latest_tfs
+        for t in msg.transforms:
+            parent_frame = t.header.frame_id
+            child_frame = t.child_frame_id
+            
+            # Extract Translation (x, y, z)
+            translation = {
+                'x': float(t.transform.translation.x),
+                'y': float(t.transform.translation.y),
+                'z': float(t.transform.translation.z)
+            }
+
+            # Extract Rotation (x, y, z, w)
+            rotation = {
+                'x': float(t.transform.rotation.x),
+                'y': float(t.transform.rotation.y),
+                'z': float(t.transform.rotation.z),
+                'w': float(t.transform.rotation.w)
+            }
+            
+            # Store keyed by child_frame (e.g. "head_right_rgbd_optical")
+            _latest_tfs[child_frame] = {
+                'parent_frame': parent_frame,
+                'translation': translation,
+                'rotation': rotation
+            }
 
     def odom_callback(self, msg):
         global _latest_position, _latest_quat_xyzw
@@ -260,10 +336,29 @@ class HabitatROSBridge(Node):
                 "hfov_deg": self.args_cli.hfov_deg,
                 "metrics": {}
             }
-            if _latest_rgb is None or _latest_depth is None or _latest_position is None or _latest_quat_xyzw is None:
+            if (not _latest_rgb_by_source or not _latest_depth_by_source or
+                    _latest_position is None or _latest_quat_xyzw is None):
                 print("[HabitatROSBridge] Waiting for sensor data...")
                 return None
-            return format_data(_latest_rgb, _latest_depth, _latest_position, _latest_quat_xyzw, _info, "hab_interface")
+            rgb_images = [
+                {"source": name, "image": img}
+                for name, img in sorted(_latest_rgb_by_source.items())
+            ]
+            depth_images = [
+                {"source": name, "image": img}
+                for name, img in sorted(_latest_depth_by_source.items())
+            ]
+            return format_data(
+                _latest_rgb,
+                _latest_depth,
+                _latest_position,
+                _latest_quat_xyzw,
+                _info,
+                "hab_interface",
+                rgb_images=rgb_images,
+                depth_images=depth_images,
+                tfs=_latest_tfs.copy() if _latest_tfs else None,
+            )
         elif request_type == "GET_EPISODE_LIST":
             episode_set_list = {
                 "all": ["test_ep_0"]*100,

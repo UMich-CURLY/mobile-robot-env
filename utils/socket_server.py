@@ -31,8 +31,11 @@ Formatted as: "{message_type} {payload}", where message_type is one of the follo
 
 Server to Client messages are handled in `format_data()`.
 Formatted as: "{payload_len}{payload}". Payload includes:
-- rgb_image: RGB image
-- depth_image: Depth image
+- rgb_image: RGB image (primary)
+- depth_image: Depth image (primary)
+- rgb_images: Array of RGB images with sources
+- depth_images: Array of depth images with sources
+- tfs: Dict of transforms keyed by child_frame (e.g. camera transforms)
 - pose: Pose
 - timestamp_server_ns: Server-side timestamp when data was packed
 - success: Whether the data was successfully generated
@@ -54,10 +57,39 @@ def get_and_increment_frame_count():
     return current_count
 
 
+def _compress_rgb_image(rgb_image_np):
+    rgb_image_np = rgb_image_np[:, :, ::-1]
+    success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
+    if not success:
+        print("Warning: RGB image JPG encoding failed.")
+        return None, None
+    return encoded_image.tobytes(), {
+        "shape": rgb_image_np.shape,
+        "dtype": str(rgb_image_np.dtype),
+        "compressed_format": "jpg",
+    }
+
+
+def _compress_depth_image(depth_image_np):
+    if depth_image_np.dtype not in [np.uint8, np.uint16]:
+        print(f"Warning: Depth image dtype {depth_image_np.dtype} might not be perfectly preserved by PNG. "
+              "Consider converting to uint16 if precision loss is acceptable, or use a different compression.")
+    success, encoded_image = cv2.imencode('.png', depth_image_np)
+    if not success:
+        print("Warning: Depth image PNG encoding failed.")
+        return None, None
+    return encoded_image.tobytes(), {
+        "shape": depth_image_np.shape,
+        "dtype": str(depth_image_np.dtype),
+        "compressed_format": "png",
+    }
+
+
 def compress_payload(payload_dict):
     """
-    Compresses 'rgb_image' and 'depth_image' in the payload dictionary
-    using lossless PNG encoding. Other items are left as is.
+    Compresses image fields in the payload dictionary.
+    Supports single images ('rgb_image', 'depth_image') and image arrays
+    ('rgb_images', 'depth_images') as lists of {source, image} entries.
 
     Args:
         payload_dict (dict): The dictionary containing sensor data.
@@ -74,40 +106,51 @@ def compress_payload(payload_dict):
 
     # Compress RGB Image
     if 'rgb_image' in compressed_dict and isinstance(compressed_dict['rgb_image'], np.ndarray):
-        rgb_image_np = compressed_dict['rgb_image'][:, :, ::-1]
-        success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
-        if success:
-            compressed_dict['rgb_image'] = encoded_image.tobytes() # Store as bytes
-            # Store metadata for potential precise reconstruction if imdecode isn't enough
-            # (though for PNG and typical image types, it usually is)
-            compressed_dict['rgb_image_shape'] = rgb_image_np.shape
-            compressed_dict['rgb_image_dtype'] = str(rgb_image_np.dtype)
-            compressed_dict['rgb_image_compressed_format'] = 'jpg'
+        encoded_bytes, meta = _compress_rgb_image(compressed_dict['rgb_image'])
+        if encoded_bytes is not None:
+            compressed_dict['rgb_image'] = encoded_bytes
+            compressed_dict['rgb_image_shape'] = meta["shape"]
+            compressed_dict['rgb_image_dtype'] = meta["dtype"]
+            compressed_dict['rgb_image_compressed_format'] = meta["compressed_format"]
         else:
-            print("Warning: RGB image PNG encoding failed.")
-            # Optionally, remove the key or send uncompressed with a flag
-            compressed_dict['rgb_image'] = None # Or handle error appropriately
+            compressed_dict['rgb_image'] = None
 
     # Compress Depth Image
     if 'depth_image' in compressed_dict and isinstance(compressed_dict['depth_image'], np.ndarray):
-        depth_image_np = compressed_dict['depth_image']
-        # PNG supports 8-bit and 16-bit grayscale.
-        # If depth_image_np is float32, PNG won't directly store it losslessly as float.
-        # It would typically be converted to uint16 or uint8.
-        # For this example, we assume depth_image_np is uint8 or uint16.
-        if depth_image_np.dtype not in [np.uint8, np.uint16]:
-            print(f"Warning: Depth image dtype {depth_image_np.dtype} might not be perfectly preserved by PNG. "
-                  "Consider converting to uint16 if precision loss is acceptable, or use a different compression.")
-
-        success, encoded_image = cv2.imencode('.png', depth_image_np)
-        if success:
-            compressed_dict['depth_image'] = encoded_image.tobytes() # Store as bytes
-            compressed_dict['depth_image_shape'] = depth_image_np.shape
-            compressed_dict['depth_image_dtype'] = str(depth_image_np.dtype)
-            compressed_dict['depth_image_compressed_format'] = 'png'
+        encoded_bytes, meta = _compress_depth_image(compressed_dict['depth_image'])
+        if encoded_bytes is not None:
+            compressed_dict['depth_image'] = encoded_bytes
+            compressed_dict['depth_image_shape'] = meta["shape"]
+            compressed_dict['depth_image_dtype'] = meta["dtype"]
+            compressed_dict['depth_image_compressed_format'] = meta["compressed_format"]
         else:
-            print("Warning: Depth image PNG encoding failed.")
             compressed_dict['depth_image'] = None
+
+    # Compress RGB Image Array
+    if isinstance(compressed_dict.get('rgb_images'), list):
+        for entry in compressed_dict['rgb_images']:
+            if isinstance(entry.get("image"), np.ndarray):
+                encoded_bytes, meta = _compress_rgb_image(entry["image"])
+                entry["image"] = encoded_bytes
+                if meta is not None:
+                    entry["image_shape"] = meta["shape"]
+                    entry["image_dtype"] = meta["dtype"]
+                    entry["image_compressed_format"] = meta["compressed_format"]
+            elif entry.get("image") is not None:
+                entry["image"] = None
+
+    # Compress Depth Image Array
+    if isinstance(compressed_dict.get('depth_images'), list):
+        for entry in compressed_dict['depth_images']:
+            if isinstance(entry.get("image"), np.ndarray):
+                encoded_bytes, meta = _compress_depth_image(entry["image"])
+                entry["image"] = encoded_bytes
+                if meta is not None:
+                    entry["image_shape"] = meta["shape"]
+                    entry["image_dtype"] = meta["dtype"]
+                    entry["image_compressed_format"] = meta["compressed_format"]
+            elif entry.get("image") is not None:
+                entry["image"] = None
 
     return compressed_dict
 
@@ -154,7 +197,18 @@ def generate_dummy_data(server_name = "DummyServer"):
     }
     )
 
-def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServer", timestamp = None):
+def format_data(
+    rgb,
+    depth,
+    position,
+    quat_xyzw,
+    info,
+    server_name="DummyServer",
+    timestamp=None,
+    rgb_images=None,
+    depth_images=None,
+    tfs=None,
+):
     if timestamp is None:
         timestamp_ns = time.time_ns()
     else:
@@ -167,14 +221,17 @@ def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServe
             "frame_id": "dummy_odom"
         },
         "pose": {
-            "position": {"x": position[0], "y": position[1], "z": position[2]},
-            "orientation": {"x": quat_xyzw[0], "y": quat_xyzw[1], "z": quat_xyzw[2], "w": quat_xyzw[3]}
+            "position": {"x": float(position[0]), "y": float(position[1]), "z": float(position[2])},
+            "orientation": {"x": float(quat_xyzw[0]), "y": float(quat_xyzw[1]), "z": float(quat_xyzw[2]), "w": float(quat_xyzw[3])}
         }
     }
 
     payload = {
         "rgb_image": rgb,
         "depth_image": depth,
+        "rgb_images": rgb_images,
+        "depth_images": depth_images,
+        "tfs": tfs,
         "pose": pose_dict,
         "timestamp_server_ns": int(timestamp_ns),
         "success": True,

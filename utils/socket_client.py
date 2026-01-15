@@ -16,6 +16,25 @@ def recv_all(sock, n):
         data.extend(packet)
     return data
 
+def _decode_rgb_image(encoded_bytes):
+    np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
+    rgb_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+    if rgb_image_np is None:
+        return None
+    return rgb_image_np[:, :, ::-1]
+
+
+def _decode_depth_image(encoded_bytes):
+    np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
+    return cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+
+
+def _cleanup_image_entry(entry):
+    entry.pop('image_compressed_format', None)
+    entry.pop('image_shape', None)
+    entry.pop('image_dtype', None)
+
+
 def decompress_payload(compressed_payload_dict):
     """
     Decompresses 'rgb_image' and 'depth_image' in the payload dictionary
@@ -33,11 +52,9 @@ def decompress_payload(compressed_payload_dict):
     # Decompress RGB Image
     if isinstance(decompressed_dict.get('rgb_image'), bytes):
         encoded_bytes = decompressed_dict['rgb_image']
-        # Convert bytes back to NumPy array for imdecode
-        np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
-        rgb_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+        rgb_image_np = _decode_rgb_image(encoded_bytes)
         if rgb_image_np is not None:
-            decompressed_dict['rgb_image'] = rgb_image_np[:,:,::-1]
+            decompressed_dict['rgb_image'] = rgb_image_np
             # Optionally, verify against stored shape/dtype if they were sent
             # stored_shape = decompressed_dict.get('rgb_image_shape')
             # stored_dtype = decompressed_dict.get('rgb_image_dtype')
@@ -58,9 +75,8 @@ def decompress_payload(compressed_payload_dict):
     if decompressed_dict.get('depth_image_compressed_format') == 'png' and \
        isinstance(decompressed_dict.get('depth_image'), bytes):
         encoded_bytes = decompressed_dict['depth_image']
-        np_arr = np.frombuffer(encoded_bytes, dtype=np.uint8)
         # cv2.IMREAD_UNCHANGED is crucial for 16-bit depth images
-        depth_image_np = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+        depth_image_np = _decode_depth_image(encoded_bytes)
         if depth_image_np is not None:
             decompressed_dict['depth_image'] = depth_image_np
         else:
@@ -70,6 +86,30 @@ def decompress_payload(compressed_payload_dict):
         decompressed_dict.pop('depth_image_compressed_format', None)
         decompressed_dict.pop('depth_image_shape', None)
         decompressed_dict.pop('depth_image_dtype', None)
+
+    # Decompress RGB Image Array
+    if isinstance(decompressed_dict.get('rgb_images'), list):
+        for entry in decompressed_dict['rgb_images']:
+            if isinstance(entry.get("image"), bytes):
+                rgb_image_np = _decode_rgb_image(entry["image"])
+                if rgb_image_np is not None:
+                    entry["image"] = rgb_image_np
+                else:
+                    print("Warning: RGB image array decoding failed.")
+                    entry["image"] = None
+            _cleanup_image_entry(entry)
+
+    # Decompress Depth Image Array
+    if isinstance(decompressed_dict.get('depth_images'), list):
+        for entry in decompressed_dict['depth_images']:
+            if isinstance(entry.get("image"), bytes):
+                depth_image_np = _decode_depth_image(entry["image"])
+                if depth_image_np is not None:
+                    entry["image"] = depth_image_np
+                else:
+                    print("Warning: Depth image array decoding failed.")
+                    entry["image"] = None
+            _cleanup_image_entry(entry)
 
     return decompressed_dict
 
@@ -188,6 +228,7 @@ def main():
                 rgb_image = payload.get("rgb_image")
                 depth_image = payload.get("depth_image")
                 pose = payload.get("pose")
+                tfs = payload.get("tfs")
                 server_timestamp_ns = payload.get("timestamp_server_ns")
                 
                 latency_ms = (time.time_ns() - server_timestamp_ns) / 1_000_000 if server_timestamp_ns else -1
