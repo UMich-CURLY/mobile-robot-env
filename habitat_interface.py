@@ -160,8 +160,7 @@ class HabitatROSBridge(Node):
             lookahead_distance=0.5,
             kp=[2.5, 1.0, 2.0],
             max_vel=[2.0, 1.5, 1.5],
-            min_lin_speed=0.5,
-            min_ang_speed=0.5,
+            min_vel=[0.5, 0.5, 0.3],
             arrive_dist=0.1,
             arrive_yaw=np.pi/180.0*30.0,
         )
@@ -207,7 +206,7 @@ class HabitatROSBridge(Node):
         global _latest_rgb
         try:
             cv_image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="bgr8")
-            _latest_rgb = cv_image[..., ::-1].astype(np.uint8)
+            _latest_rgb = cv_image.astype(np.uint8)
         except Exception as e:
             self.get_logger().error(f"RGB callback error: {e}")
 
@@ -343,6 +342,8 @@ class HabitatROSBridge(Node):
             #TODO: implement episode loading
             pass
             #self.load_episode(message["episode_label"])
+        elif msg_type == 'RESET':
+            self.pub_robot_reset()
 
     def path_follower_callback(self):
         if _latest_position is None or _latest_quat_xyzw is None:
@@ -400,6 +401,12 @@ class HabitatROSBridge(Node):
         task_complete_msg = String()
         task_complete_msg.data = "task complete"
         self.sim_control_pub.publish(task_complete_msg)
+    
+    def pub_robot_reset(self):
+        print("[ROBOT RESET] Resetting robot")
+        robot_reset_msg = String()
+        robot_reset_msg.data = "reset"
+        self.sim_control_pub.publish(robot_reset_msg)
 
 
 # Entrypoint
