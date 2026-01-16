@@ -15,8 +15,10 @@ class VLNEpisode(dict):
             "scene_scale": 1.0,
             "collider": True,
             "align_ground": True,
-            "navmesh": "default",
-            "instruction": "table",
+            "navmesh_preset": "default",
+            "objnav": "table",
+            "instruction": "Find the table and stop.",
+            "closest_goal_idx": 0,
             "goals": [
                 {
                     "instance": "table",
@@ -77,7 +79,11 @@ class VLNEpisode(dict):
         json_paths = [os.path.join(json_folder, x) for x in os.listdir(json_folder) if x.endswith(".json")]
         episodes = []
         for json_path in json_paths:
-            episodes.extend(self.from_json(json_path))
+            try:
+                episodes.extend(self.from_json(json_path))
+            except Exception as e:
+                print(f"Error loading episode from {json_path}: {e}")
+                continue
         episodes.sort(key=lambda x: (x.scene_id, x.episode_id))
         return episodes
 

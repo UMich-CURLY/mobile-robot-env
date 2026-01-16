@@ -65,6 +65,7 @@ def make_args():
     parser.add_argument("--robot_height", type=float, default=0.44)
     parser.add_argument("--hfov_deg", type=float, default=90.0)
     parser.add_argument("--metrics", type=str, default="{}")
+    parser.add_argument("--dummy_llm", action="store_true")
     return parser.parse_args()
 
 
@@ -88,18 +89,19 @@ class HabitatROSBridge(Node):
         self.client = OpenAI(api_key=self.openai_api_key, base_url=self.openai_api_base)
 
         # wait for the openai client to be initialized
-        while True:
-            try:
-                self.client.chat.completions.create(
-                    model="Qwen/Qwen3-4B-Instruct-2507",
-                    messages=[{"role": "user", "content": "Hello, world!"}],
-                    max_tokens=10,
-                )
-                break
-            except Exception as e:
-                print(f"[HabitatROSBridge] Waiting for OpenAI client to be initialized...")
-                time.sleep(1)
-        print("[HabitatROSBridge] OpenAI client initialized.")
+        if not self.args_cli.dummy_llm:
+            while True:
+                try:
+                    self.client.chat.completions.create(
+                        model="Qwen/Qwen3-4B-Instruct-2507",
+                        messages=[{"role": "user", "content": "Hello, world!"}],
+                        max_tokens=10,
+                    )
+                    break
+                except Exception as e:
+                    print(f"[HabitatROSBridge] Waiting for OpenAI client to be initialized...")
+                    time.sleep(1)
+            print("[HabitatROSBridge] OpenAI client initialized.")
 
 
         ## Cam Subscribers
@@ -142,8 +144,10 @@ class HabitatROSBridge(Node):
         self.depth_topic = f"{self.robot_topic}/depth/frontright/image"
         self.odom_topic = f"{self.robot_topic}/platform/odom"
         self.scenario_topic = f"/scenario"
+        self.sim_status_topic = f"/sim_status"
         self.sim_control_topic = f"/sim_control"
         self.sim_settings_topic = f"/sim_settings"
+        self.task_submission_topic = f"/task_submission"
         # Subscribers
         self.rgb_sub = Subscriber(self, CompressedImage, self.camera_topic)
         self.depth_sub = Subscriber(self, Image, self.depth_topic)
@@ -161,25 +165,25 @@ class HabitatROSBridge(Node):
         qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
 
         # wait for sim control topic to be available
-        sim_control_data = None
-        def sim_control_callback(msg):
-            nonlocal sim_control_data
-            sim_control_data = msg.data
-        self.sim_control_sub = self.create_subscription(String, self.sim_control_topic, sim_control_callback, 10)
+        sim_status_data = None
+        def sim_status_callback(msg):
+            nonlocal sim_status_data
+            sim_status_data = msg.data
+        self.sim_status_sub = self.create_subscription(String, self.sim_status_topic, sim_status_callback, 10)
         while True:
             rclpy.spin_once(self, timeout_sec=0.01)
-            if sim_control_data is not None:
-                print(f"[HabitatROSBridge] Sim control topic available: {sim_control_data}")
+            if sim_status_data is not None:
+                print(f"[HabitatROSBridge] Sim status topic available: {sim_status_data}")
                 break
             else:
-                print("[HabitatROSBridge] Waiting for sim control topic to be available...")
+                print("[HabitatROSBridge] Waiting for sim status topic to be available...")
                 time.sleep(1.0)
-        self.destroy_subscription(self.sim_control_sub)
+        self.destroy_subscription(self.sim_status_sub)
 
         # publish sim settings
         self.sim_settings_pub = self.create_publisher(String, self.sim_settings_topic, qos)
         settings_msg = String()
-        settings_msg.data = "name: spot, model: hab_spot, policy: false, confirm settings"
+        settings_msg.data = "sensors: head_rgb_left head_rgb_right head_stereo_left head_stereo_right rear_rgb rear_depth, name: spot, model: hab_spot, policy: false, confirm settings"
         self.sim_settings_pub.publish(settings_msg)
 
         # publish sim control
@@ -188,14 +192,19 @@ class HabitatROSBridge(Node):
         cam_msg.data = self.camera_topic
         self.sim_control_pub.publish(cam_msg)
 
+        # publish task submission
+        self.task_submission_pub = self.create_publisher(String, self.task_submission_topic, qos)
+
         # Timer for path follower
         self.path_follower_timer = self.create_timer(0.05, self.path_follower_callback)
         self.follower = WaypointFollower(
             device="cpu",
             lookahead_distance=0.5,
-            max_vel=[0.1, 0.05, 0.2],
-            min_lin_speed=0.05,
-            min_ang_speed=0.03
+            kp=[2.5, 1.0, 2.0],
+            max_vel=[2.0, 1.5, 1.5],
+            min_vel=[0.5, 0.5, 0.3],
+            arrive_dist=0.1,
+            arrive_yaw=np.pi/180.0*30.0,
         )
 
     def init_360(self):
@@ -308,15 +317,34 @@ class HabitatROSBridge(Node):
             print(f"New scenario received: {msg.data}")
             self.old_task = msg.data
             self.instruction = msg.data
-            llm_processed_task = self.client.chat.completions.create(
-                model="Qwen/Qwen3-4B-Instruct-2507",
-                messages=[{"role": "user", "content": self.prompt + msg.data}],
-                max_tokens=300,
-                temperature=0.6,
-                top_p=0.95
-            )
-            print(f"[TaskListener] Processed task: {llm_processed_task.choices[0].message.content}")
-            _scenario = llm_processed_task.choices[0].message.content
+            if self.args_cli.dummy_llm:
+                keyword_map = {
+                    "umbrella": "umbrella",
+                    "soda, bread, cheese, and a bowl of fruit": "soda,bread,cheese,a bowl of fruit",
+                    "hammer and something to measure length": "hammer,rule",
+                    "step on the green then red floor panels": "green floor panel;red floor panel;watch",
+                    "phone": "phone",
+                    "wallet": "wallet",
+                    "toothbrush": "toothbrush",
+                    "chair": "chair",
+                    "lunchbox": "lunchbox",
+                    "one important item for sleeping": "sleeping bag"
+                }
+                for keyword, object_list in keyword_map.items():
+                    if keyword in msg.data.lower():
+                        _scenario = object_list
+                        break
+            else:
+                llm_processed_task = self.client.chat.completions.create(
+                    model="Qwen/Qwen3-4B-Instruct-2507",
+                    messages=[{"role": "user", "content": self.prompt + msg.data}],
+                    max_tokens=300,
+                    temperature=0.6,
+                    top_p=0.95
+                )
+                print(f"[TaskListener] Processed task: {llm_processed_task.choices[0].message.content}")
+                _scenario = llm_processed_task.choices[0].message.content
+            print(f"[HabitatROSBridge] Parsed scenario: {_scenario}")
 
     def publish(self, topic_name, msg):
         if topic_name not in self._ros_publishers:
@@ -374,7 +402,7 @@ class HabitatROSBridge(Node):
             move_command.angular.z = float(message['vw'])
             self.publish(self.action_topic, move_command)
         elif msg_type == 'WAYPOINT':
-            print("Received waypoint message")
+            print("Received waypoint message, length: ", len(message["waypoint"]))
             if _latest_position is None or _latest_quat_xyzw is None:
                 return
 
@@ -386,13 +414,31 @@ class HabitatROSBridge(Node):
             self.follower.arrived_at_goal = False
             self.follower.reset()
         elif msg_type == 'STOP':
-            self.pub_task_submission()
+            print(f"Received stop message: {message}")
+            if not "goal_xyxy" in message:
+                print(f"Warning: stop message does not contain goal_xyxy")
+                return
+            goal_xyxy = message["goal_xyxy"]
+            x_min, y_min, x_max, y_max = [int(x) for x in goal_xyxy]
+            dot_x = (x_min + x_max) // 2
+            dot_y = (y_min + y_max) // 2
+            self.pub_task_submission(
+                dot_x=dot_x,
+                dot_y=dot_y,
+                x_min=x_min,
+                y_min=y_min,
+                x_max=x_max,
+                y_max=y_max,
+                description="goal"
+            )
             self.pub_task_complete()
         elif msg_type == 'EPISODE':
             # this will trigger a reset of the vln sim
             #TODO: implement episode loading
             pass
             #self.load_episode(message["episode_label"])
+        elif msg_type == 'RESET':
+            self.pub_robot_reset()
 
     def path_follower_callback(self):
         if _latest_position is None or _latest_quat_xyzw is None:
@@ -433,15 +479,14 @@ class HabitatROSBridge(Node):
         y_min: int = 0,
         x_max: int = 768,
         y_max: int = 384,
-        crop_description: str = "top-right crop",
+        description: str = "goal",
     ):
         # ros2 topic pub /task_submission std_msgs/msg/String "data: '/spot/camera/head_rgb_left/image/compressed, (576, 192, 384, 0, 768, 384), top-right crop'"
         print("[TASK SUBMISSION] Submitting task")
         task_sub_msg = String()
-        camera_source = "/spot/camera/head_rgb_right/image/compressed"
-        task_sub_msg.data = f"{camera_source}, ({dot_x}, {dot_y}, {x_min}, {y_min}, {x_max}, {y_max}), {crop_description}"
+        task_sub_msg.data = f"{self.camera_topic}, ({dot_x}, {dot_y}, {x_min}, {y_min}, {x_max}, {y_max}), {description}"
 
-        self.sim_control_pub.publish(task_sub_msg)
+        self.task_submission_pub.publish(task_sub_msg)
 
     # Once the agent determines that it has completed the task, call the following function
     # to complete the task. The simulation will then move to the next task, publishing it
@@ -449,8 +494,14 @@ class HabitatROSBridge(Node):
     def pub_task_complete(self):
         print("[TASK COMPLETE] Task complete")
         task_complete_msg = String()
-        task_complete_msg.data = "Task Complete"
+        task_complete_msg.data = "task complete"
         self.sim_control_pub.publish(task_complete_msg)
+    
+    def pub_robot_reset(self):
+        print("[ROBOT RESET] Resetting robot")
+        robot_reset_msg = String()
+        robot_reset_msg.data = "reset"
+        self.sim_control_pub.publish(robot_reset_msg)
 
 
 # Entrypoint

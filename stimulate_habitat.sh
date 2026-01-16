@@ -1,6 +1,6 @@
 #!/bin/bash
 # Publish sim sensor settings
-# ros2 topic pub /sim_settings std_msgs/msg/String "data: 'sensors: head_rgb_left head_rgb_right head_stereo_left head_stereo_right rear_rgb rear_depth'" --once
+ros2 topic pub /sim_settings std_msgs/msg/String "data: 'sensors: head_rgb_left head_rgb_right head_stereo_left head_stereo_right rear_rgb rear_depth'" --once
 # sleep 0.3
 # # Publish model selection
 # ros2 topic pub /sim_settings std_msgs/msg/String "data: 'model: hab_spot'" --once

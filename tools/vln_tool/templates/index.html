@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLN Instruction Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { max-width: 1200px; margin-top: 20px; }
+        .section { border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .result-box { background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 10px; }
+        img, video { max-width: 100%; margin-top: 10px; }
+        .hidden { display: none; }
+
+        /* Lightbox styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .lightbox-overlay.active .lightbox-content {
+            transform: scale(1);
+        }
+        .cursor-pointer-zoom {
+            cursor: zoom-in;
+        }
+    </style>
+</head>
+<body>
+    <!-- Lightbox Container -->
+    <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <!-- Content injected here via JS -->
+    </div>
+
+    <div class="container">
+        <h1 class="mb-4">VLN Instruction Generator</h1>
+
+        <!-- Initialization -->
+        <div class="section" id="init-section">
+            <h3>Configuration</h3>
+            <div class="mb-3">
+                <label for="episodesPath" class="form-label">Episodes Path</label>
+                <input type="text" class="form-control" id="episodesPath" value="{{ default_episodes_path }}">
+            </div>
+            <div class="mb-3">
+                <label for="dataPath" class="form-label">Episode Data Path</label>
+                <input type="text" class="form-control" id="dataPath" value="{{ default_data_path }}">
+            </div>
+            <div class="mb-3">
+                <label for="apiToken" class="form-label">Gemini API Token</label>
+                <input type="password" class="form-control" id="apiToken" value="{{ token }}">
+            </div>
+            <button class="btn btn-primary" onclick="initialize()">Initialize</button>
+            <div id="init-message" class="mt-2"></div>
+        </div>
+
+        <!-- Selection -->
+        <div class="section hidden" id="selection-section">
+            <h3>Select Episode</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="sceneSelect" class="form-label">Scene</label>
+                    <select class="form-select" id="sceneSelect" onchange="loadEpisodes()"></select>
+                </div>
+                <div class="col-md-6">
+                    <label for="episodeSelect" class="form-label">Episode ID</label>
+                    <select class="form-select" id="episodeSelect"></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="section hidden" id="step1-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Step 1: Template Based Generation</h3>
+                <button class="btn btn-success" onclick="runStep1()">Run Step 1</button>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="videoCheck" checked>
+                        <label class="form-check-label" for="videoCheck">Generate Video</label>
+                    </div>
+                </div>
+            </div>
+            <div id="step1-results" class="result-box hidden">
+                <h5>Results</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Template Instruction</h6>
+                        <p id="fullInstruction"></p>
+                        <h6>Aligned Instructions</h6>
+                        <div id="aligned-ui" class="mb-2">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 100px;">Node ID</th>
+                                            <th>Instruction</th>
+                                            <th style="width: 60px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aligned-tbody"></tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="addAlignedRow()">+ Add Step</button>
+                        </div>
+                        <details>
+                            <summary class="text-muted small cursor-pointer">Show Raw JSON</summary>
+                            <textarea class="form-control mt-2" id="alignedInstructions" rows="5" oninput="renderAlignedFromJSON()"></textarea>
+                        </details>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Visualizations</h6>
+                        <div id="visualizations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="section hidden" id="step2-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Step 2: VLM Refinement</h3>
+                <button class="btn btn-warning" onclick="runStep2()">Run Step 2</button>
+            </div>
+            <div id="step2-results" class="result-box hidden">
+                <h5>Improved Instructions</h5>
+                <div class="p-3 bg-white border rounded" id="improvedInstructions"></div>
+            </div>
+        </div>
+
+        <!-- Batch Processing Section -->
+        <div class="section hidden" id="batch-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h3>Batch Processing</h3>
+                 <div class="d-flex align-items-center gap-2">
+                    <label class="form-label mb-0">Threads:</label>
+                    <input type="number" id="batchConcurrency" class="form-control" style="width: 80px;" value="10" min="1" max="30">
+                    <button class="btn btn-primary" id="startBatchBtn" onclick="startBatch()">Start Batch Processing</button>
+                 </div>
+            </div>
+            
+            <div id="batch-progress-container" class="hidden">
+                <div class="progress mb-3">
+                    <div id="batch-progress-bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+                <div class="card card-body bg-light mb-3" style="height: 150px; overflow-y: auto;">
+                    <pre id="batch-log" class="m-0 small"></pre>
+                </div>
+            </div>
+
+            <div id="batch-review-container" class="hidden">
+                <div class="d-flex justify-content-between align-items-center bg-light p-2 rounded mb-3">
+                    <button class="btn btn-secondary" onclick="prevBatchItem()">&larr; Previous</button>
+                    <span class="fw-bold">Episode: <span id="batch-current-ep"></span> (<span id="batch-current-idx"></span>/<span id="batch-total"></span>)</span>
+                    <button class="btn btn-secondary" onclick="nextBatchItem()">Next &rarr;</button>
+                </div>
+                
+                <div class="mb-3 text-end">
+                     <button class="btn btn-warning btn-sm" onclick="rerunBatchItem()">Rerun VLM (Current)</button>
+                     <button class="btn btn-success btn-sm" onclick="saveAllBatch()">Save All</button>
+                     <span id="batch-save-msg" class="ms-2"></span>
+                </div>
+
+                <div id="batch-item-content" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Save -->
+        <div class="section hidden" id="save-section">
+            <h3>Save Results</h3>
+            <button class="btn btn-dark" onclick="saveResults()">Save to JSON</button>
+            <button class="btn btn-outline-primary" onclick="runAll()">Run All Steps & Save</button>
+            <div id="save-message" class="mt-2"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentScene = "";
+        let currentEpisode = "";
+        let batchResults = [];
+        let currentBatchIndex = 0;
+
+        async function initialize() {
+            const episodesPath = document.getElementById('episodesPath').value;
+            const dataPath = document.getElementById('dataPath').value;
+            const token = document.getElementById('apiToken').value;
+            
+            // Clear previous messages
+            const msgDiv = document.getElementById('init-message');
+            msgDiv.innerText = '';
+            msgDiv.className = 'mt-2';
+
+            try {
+                const response = await fetch('/initialize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ episodes_path: episodesPath, data_path: dataPath, token: token })
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const sceneSelect = document.getElementById('sceneSelect');
+                    sceneSelect.innerHTML = '<option value="">Select Scene</option>';
+                    data.scenes.forEach(scene => {
+                        const option = document.createElement('option');
+                        option.value = scene;
+                        option.text = scene;
+                        sceneSelect.appendChild(option);
+                    });
+                    
+                    document.getElementById('selection-section').classList.remove('hidden');
+                    msgDiv.className = 'mt-2 text-success';
+                    msgDiv.innerText = 'Initialized successfully!';
+                } else {
+                    msgDiv.className = 'mt-2 text-danger';
+                    msgDiv.innerText = 'Initialization failed: ' + data.detail;
+                }
+            } catch (error) {
+                msgDiv.className = 'mt-2 text-danger';
+                msgDiv.innerText = 'Error: ' + error;
+            }
+        }
+
+        async function loadEpisodes() {
+            const sceneId = document.getElementById('sceneSelect').value;
+            currentScene = sceneId;
+            if (!sceneId) return;
+
+            const response = await fetch(`/episodes/${sceneId}`);
+            const data = await response.json();
+            
+            const episodeSelect = document.getElementById('episodeSelect');
+            episodeSelect.innerHTML = '<option value="">Select Episode</option><option value="all">All Episodes</option>';
+            data.episodes.forEach(ep => {
+                const option = document.createElement('option');
+                option.value = ep;
+                option.text = ep;
+                episodeSelect.appendChild(option);
+            });
+            
+            episodeSelect.onchange = () => {
+                currentEpisode = episodeSelect.value;
+                if(currentEpisode === "all") {
+                    document.getElementById('step1-section').classList.add('hidden');
+                    document.getElementById('step2-section').classList.add('hidden');
+                    document.getElementById('save-section').classList.add('hidden');
+                    document.getElementById('batch-section').classList.remove('hidden');
+                } else if(currentEpisode) {
+                    document.getElementById('step1-section').classList.remove('hidden');
+                    document.getElementById('batch-section').classList.add('hidden');
+                }
+            };
+        }
+
+        // --- Single Episode Functions ---
+
+        async function runStep1() {
+            if (!currentScene || !currentEpisode || currentEpisode === "all") {
+                alert("Please select scene and a specific episode");
+                return;
+            }
+
+            const video = document.getElementById('videoCheck').checked;
+            
+            try {
+                // Show loading state
+                const btn = document.querySelector('button[onclick="runStep1()"]');
+                const originalText = btn.innerText;
+                btn.innerText = "Running...";
+                btn.disabled = true;
+
+                const response = await fetch('/generate_instruction', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scene_id: currentScene,
+                        episode_id: parseInt(currentEpisode),
+                        video: video
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    // Handle new list response format
+                    let resultData = data;
+                    if (data.results && data.results.length > 0) {
+                         resultData = data.results[0];
+                    }
+
+                    document.getElementById('step1-results').classList.remove('hidden');
+                    document.getElementById('fullInstruction').innerText = resultData.template_instruction || resultData.full_instruction;
+                    document.getElementById('alignedInstructions').value = JSON.stringify(resultData.aligned_instructions, null, 2);
+                    renderAlignedTable(resultData.aligned_instructions);
+                    
+                    const vizDiv = document.getElementById('visualizations');
+                    vizDiv.innerHTML = '';
+                    
+                    if (resultData.path_image_url) {
+                        vizDiv.innerHTML += `<h6>Path Image</h6><img src="${resultData.path_image_url}" alt="Path" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'image')">`;
+                    }
+                    if (resultData.video_url) {
+                        vizDiv.innerHTML += `<h6>Video</h6><video controls src="${resultData.video_url}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+                    }
+                    
+                    document.getElementById('step2-section').classList.remove('hidden');
+                } else {
+                    alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return true; // for chaining
+            } catch (error) {
+                alert('Error: ' + error);
+                return false;
+            }
+        }
+
+        async function runStep2() {
+            const alignedText = document.getElementById('alignedInstructions').value;
+            if (!alignedText) {
+                alert("Please run step 1 first");
+                return;
+            }
+            
+            try {
+                // Show loading state
+                const btn = document.querySelector('button[onclick="runStep2()"]');
+                const originalText = btn.innerText;
+                btn.innerText = "Running VLM...";
+                btn.disabled = true;
+
+                const alignedInstructions = JSON.parse(alignedText);
+                
+                const response = await fetch('/vlm_generation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode_id: parseInt(currentEpisode),
+                        aligned_instructions: alignedInstructions
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    document.getElementById('step2-results').classList.remove('hidden');
+                    document.getElementById('improvedInstructions').innerText = data.improved_instruction;
+                    
+                    // Show Prompt and Images
+                    const vizDiv = document.createElement('div');
+                    vizDiv.className = 'mt-3';
+                    
+                    let imagesHtml = '';
+                    if (data.used_images && data.used_images.length > 0) {
+                        imagesHtml = '<div class="d-flex flex-wrap gap-2 mb-3">';
+                        data.used_images.forEach((url, idx) => {
+                            imagesHtml += `<div class="card" style="width: 150px;">
+                                <img src="${url}" class="card-img-top cursor-pointer-zoom" alt="Frame ${idx}" onclick="openLightbox(this.src, 'image')">
+                                <div class="card-body p-1 text-center"><small>Img ${idx+1}</small></div>
+                            </div>`;
+                        });
+                        imagesHtml += '</div>';
+                    }
+                    
+                    vizDiv.innerHTML = `
+                        <h6>VLM Input (Prompt & Images)</h6>
+                        ${imagesHtml}
+                        <div class="card card-body bg-light mb-3">
+                            <pre style="white-space: pre-wrap; max-height: 200px; overflow-y: auto;">${data.prompt}</pre>
+                        </div>
+                    `;
+                    
+                    const existingViz = document.getElementById('step2-viz');
+                    if (existingViz) existingViz.remove();
+                    vizDiv.id = 'step2-viz';
+                    document.getElementById('step2-results').appendChild(vizDiv);
+
+                    document.getElementById('save-section').classList.remove('hidden');
+                } else {
+                    alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+                
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return true;
+            } catch (error) {
+                alert('Error: ' + error);
+                return false;
+            }
+        }
+
+        // --- Lightbox Functions ---
+        function openLightbox(src, type) {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.innerHTML = ''; // Clear previous content
+
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'lightbox-content';
+                // Stop propagation so clicking the image doesn't close the lightbox
+                img.onclick = (e) => e.stopPropagation();
+                lightbox.appendChild(img);
+            } else if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.autoplay = true;
+                video.className = 'lightbox-content';
+                video.onclick = (e) => e.stopPropagation();
+                lightbox.appendChild(video);
+            }
+
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            // Stop video if playing
+            setTimeout(() => {
+                lightbox.innerHTML = '';
+            }, 300); // Wait for transition
+        }
+
+        async function saveResults() {
+             try {
+                const response = await fetch('/save_results', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode_id: parseInt(currentEpisode)
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success') {
+                    document.getElementById('save-message').className = "mt-2 text-success";
+                    document.getElementById('save-message').innerText = "Saved to: " + data.path;
+                } else {
+                     alert('Error: ' + (data.detail || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Error: ' + error);
+            }
+        }
+        
+        async function runAll() {
+            const s1 = await runStep1();
+            if (s1) {
+                const s2 = await runStep2();
+                if (s2) {
+                    await saveResults();
+                }
+            }
+        }
+
+        // --- Batch Processing Functions ---
+
+        async function startBatch() {
+            if (!currentScene) {
+                alert("Please select a scene first.");
+                return;
+            }
+
+            const video = document.getElementById('videoCheck').checked;
+            
+            // Get all episodes list first
+            // We use the dropdown options instead of re-fetching, assuming they are loaded
+            const episodeSelect = document.getElementById('episodeSelect');
+            let episodes = [];
+            for (let i = 0; i < episodeSelect.options.length; i++) {
+                const val = episodeSelect.options[i].value;
+                if (val && val !== 'all' && val !== 'Select Episode') {
+                    episodes.push(parseInt(val));
+                }
+            }
+            
+            if (episodes.length === 0) {
+                alert("No episodes found.");
+                return;
+            }
+
+            document.getElementById('startBatchBtn').disabled = true;
+            document.getElementById('batch-progress-container').classList.remove('hidden');
+            document.getElementById('batch-review-container').classList.add('hidden');
+            
+            const logArea = document.getElementById('batch-log');
+            const progressBar = document.getElementById('batch-progress-bar');
+            
+            logArea.innerText = `Starting batch processing for ${episodes.length} episodes.\n`;
+            progressBar.style.width = "0%";
+            
+            // Initialize results with pending state
+            batchResults = episodes.map(id => ({ episode_id: id, status: 'pending' }));
+            
+            // Show review container immediately
+            document.getElementById('batch-review-container').classList.remove('hidden');
+            currentBatchIndex = 0;
+            renderBatchItem(0);
+            
+            let processedCount = 0;
+            
+            // Concurrency Control
+            const concurrencyInput = document.getElementById('batchConcurrency');
+            const CONCURRENCY = parseInt(concurrencyInput.value) || 4;
+            const queue = [...episodes];
+            
+            const processEpisode = async (epId) => {
+                const index = episodes.indexOf(epId);
+                
+                // Update status to processing
+                if (batchResults[index]) {
+                    batchResults[index].status = 'processing';
+                    if (index === currentBatchIndex) renderBatchItem(index);
+                }
+
+                try {
+                    // Step 1: Call generate_instruction with llm_based=true
+                    // This handles everything (loading, generating template, generating VLM if needed/missing)
+                    const resp1 = await fetch('/generate_instruction', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            scene_id: currentScene,
+                            episode_id: epId,
+                            video: video,
+                            llm_based: true
+                        })
+                    });
+                    const data1 = await resp1.json();
+                    
+                    if (data1.status !== 'success' || !data1.results || data1.results.length === 0) {
+                         throw new Error(data1.detail || "Step 1 failed");
+                    }
+                    const result1 = data1.results[0];
+                    
+                    // We don't need to call vlm_generation explicitly anymore, as generate_instruction handles it.
+                    // Combine results (result1 has everything)
+                    
+                    const finalResult = { ...result1, status: 'completed' };
+                    batchResults[index] = finalResult;
+                    
+                    logArea.innerText += `Completed Ep ${epId}\n`;
+                    
+                } catch (e) {
+                    logArea.innerText += `Error Ep ${epId}: ${e.message}\n`;
+                    batchResults[index] = { episode_id: epId, status: 'error', error: e.message };
+                } finally {
+                    processedCount++;
+                    const pct = Math.round((processedCount / episodes.length) * 100);
+                    progressBar.style.width = `${pct}%`;
+                    logArea.scrollTop = logArea.scrollHeight;
+                    
+                    // Update UI if we are looking at this item
+                    if (index === currentBatchIndex) renderBatchItem(index);
+                }
+            };
+            
+            const workers = [];
+            for (let i = 0; i < CONCURRENCY; i++) {
+                workers.push(async () => {
+                    while (queue.length > 0) {
+                        const epId = queue.shift();
+                        await processEpisode(epId);
+                    }
+                });
+            }
+            
+            await Promise.all(workers.map(w => w()));
+            
+            logArea.innerText += "Batch processing complete.\n";
+            document.getElementById('startBatchBtn').disabled = false;
+        }
+
+        function renderBatchItem(index) {
+            if (!batchResults || batchResults.length === 0) return;
+            if (index < 0) index = 0;
+            if (index >= batchResults.length) index = batchResults.length - 1;
+            
+            currentBatchIndex = index;
+            const item = batchResults[index];
+            
+            document.getElementById('batch-current-ep').innerText = item.episode_id;
+            document.getElementById('batch-current-idx').innerText = index + 1;
+            document.getElementById('batch-total').innerText = batchResults.length;
+            
+            const container = document.getElementById('batch-item-content');
+            container.innerHTML = ''; // Clear
+
+            if (item.status === 'pending') {
+                 container.innerHTML = `<div class="alert alert-secondary">Waiting in queue...</div>`;
+                 return;
+            }
+            if (item.status === 'processing') {
+                 container.innerHTML = `<div class="alert alert-info">Processing...</div>`;
+                 return;
+            }
+            if (item.status === 'error') {
+                 container.innerHTML = `<div class="alert alert-danger">Error: ${item.error}</div>`;
+                 return;
+            }
+
+            // ... normal render ...
+            
+            const row = document.createElement('div');
+            row.className = "row";
+            
+            // Left col: Instructions
+            const colLeft = document.createElement('div');
+            colLeft.className = "col-md-6";
+            
+            // Aligned Instructions (Editable)
+            // We need unique IDs for the table to work with helper functions? 
+            // Or we can just adapt the helper functions. 
+            // For simplicity, let's just use text area for now, or use the global functions but we need to set the global ID `alignedInstructions`?
+            // Wait, if we use the global ID `alignedInstructions`, it conflicts with the Single view.
+            // Let's create a scoped aligned instructions UI.
+            
+            colLeft.innerHTML = `
+                <h6>Template Instruction</h6>
+                <p>${item.template_instruction || item.full_instruction}</p>
+                <h6>Aligned Instructions (Editable)</h6>
+                <textarea class="form-control mb-2" id="batch-aligned-${index}" rows="8">${JSON.stringify(item.aligned_instructions, null, 2)}</textarea>
+                <h6>Improved Instructions (VLM Result)</h6>
+                <div class="p-2 bg-white border rounded mb-2" style="white-space: pre-wrap;">${item.improved_instruction || 'N/A'}</div>
+            `;
+            
+            // Right col: Viz
+            const colRight = document.createElement('div');
+            colRight.className = "col-md-6";
+            
+            let vizHtml = "";
+             if (item.path_image_url) {
+                vizHtml += `<h6>Path Image</h6><img src="${item.path_image_url}" alt="Path" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'image')">`;
+            }
+            if (item.video_url) {
+                vizHtml += `<h6>Video</h6><video controls src="${item.video_url}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+            }
+            
+            // VLM details
+            if (item.prompt) {
+                vizHtml += `<h6 class="mt-3">VLM Prompt</h6><div class="card card-body bg-light mb-2"><pre style="max-height: 150px; overflow: auto;">${item.prompt}</pre></div>`;
+            }
+             if (item.used_images && item.used_images.length > 0) {
+                 vizHtml += `<h6 class="mt-2">VLM Images</h6><div class="d-flex flex-wrap gap-2">`;
+                item.used_images.forEach((url, i) => {
+                    vizHtml += `<img src="${url}" style="width: 100px; height: auto; border: 1px solid #ddd;" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'image')">`;
+                });
+                vizHtml += `</div>`;
+            }
+
+            colRight.innerHTML = vizHtml;
+            
+            row.appendChild(colLeft);
+            row.appendChild(colRight);
+            container.appendChild(row);
+        }
+
+        function prevBatchItem() {
+            if (currentBatchIndex > 0) renderBatchItem(currentBatchIndex - 1);
+        }
+
+        function nextBatchItem() {
+            if (currentBatchIndex < batchResults.length - 1) renderBatchItem(currentBatchIndex + 1);
+        }
+
+        async function rerunBatchItem() {
+            const index = currentBatchIndex;
+            const item = batchResults[index];
+            const alignedText = document.getElementById(`batch-aligned-${index}`).value;
+            
+            try {
+                const btn = document.querySelector('button[onclick="rerunBatchItem()"]');
+                const oldText = btn.innerText;
+                btn.innerText = "Running...";
+                btn.disabled = true;
+
+                const alignedInstructions = JSON.parse(alignedText);
+                 const vlmResp = await fetch('/vlm_generation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        episode_id: item.episode_id,
+                        aligned_instructions: alignedInstructions
+                    })
+                });
+                const vlmData = await vlmResp.json();
+                
+                if (vlmData.status === 'success') {
+                    // Update result
+                    batchResults[index] = { ...item, ...vlmData, aligned_instructions: alignedInstructions };
+                    renderBatchItem(index); // Re-render
+                } else {
+                    alert("Error: " + vlmData.detail);
+                }
+                
+                btn.innerText = oldText;
+                btn.disabled = false;
+            } catch(e) {
+                alert("Error: " + e);
+            }
+        }
+
+        async function saveAllBatch() {
+             const msgSpan = document.getElementById('batch-save-msg');
+             msgSpan.innerText = "Saving...";
+             msgSpan.className = "";
+             
+             let errors = 0;
+             for (const item of batchResults) {
+                 // We need to make sure the server has the latest "current_results" for this episode, 
+                 // because save_results endpoint uses current_results[episode_id].
+                 // Our rerunBatchItem updates batchResults locally but also calls vlm_generation which updates server state.
+                 // However, if we didn't rerun, the server state might still have the result from the initial batch run.
+                 // YES, the initial batch run also called vlm_generation which updates current_results.
+                 // SO it should be fine.
+                 try {
+                     // But wait, if we edited the aligned instructions locally in the batch view text area but didn't click "Rerun",
+                     // the server doesn't know about the edit.
+                     // The user should probably Rerun if they edit.
+                     // We'll assume what's on server is what we want to save unless we want to send the full object to save.
+                     // The save_results endpoint takes episode_id and looks up server state.
+                     
+                     // If we want to support saving locally edited text without rerunning, we'd need to update the server state first.
+                     // But typically save implies saving the generated result.
+                     
+                     await fetch('/save_results', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            episode_id: item.episode_id
+                        })
+                    });
+                 } catch(e) {
+                     errors++;
+                     console.error(e);
+                 }
+             }
+             
+             if (errors === 0) {
+                 msgSpan.innerText = "All saved successfully!";
+                 msgSpan.className = "text-success";
+             } else {
+                 msgSpan.innerText = `Saved with ${errors} errors. Check console.`;
+                 msgSpan.className = "text-danger";
+             }
+        }
+
+        // --- Aligned Instructions UI Helpers (For Single View) ---
+
+        function renderAlignedTable(data) {
+            const tbody = document.getElementById('aligned-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            
+            if (!Array.isArray(data)) return;
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                const idVal = row[0] !== undefined ? row[0] : '';
+                const textVal = row[1] !== undefined ? row[1] : '';
+
+                tr.innerHTML = `
+                    <td><input type="number" class="form-control form-control-sm" value="${idVal}" oninput="updateAlignedJSON()"></td>
+                    <td><input type="text" class="form-control form-control-sm" value="${textVal.replace(/"/g, '&quot;')}" oninput="updateAlignedJSON()"></td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-danger border-0" onclick="deleteAlignedRow(this)" title="Remove">
+                            &times;
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateAlignedJSON() {
+            const tbody = document.getElementById('aligned-tbody');
+            if(!tbody) return;
+            const rows = tbody.querySelectorAll('tr');
+            const data = [];
+
+            rows.forEach(tr => {
+                const inputs = tr.querySelectorAll('input');
+                const idVal = parseFloat(inputs[0].value);
+                const textVal = inputs[1].value;
+                data.push([isNaN(idVal) ? inputs[0].value : idVal, textVal]); 
+            });
+
+            const ta = document.getElementById('alignedInstructions');
+            if(ta) ta.value = JSON.stringify(data, null, 2);
+        }
+
+        function addAlignedRow() {
+            const tbody = document.getElementById('aligned-tbody');
+            if(!tbody) return;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="number" class="form-control form-control-sm" value="" oninput="updateAlignedJSON()"></td>
+                <td><input type="text" class="form-control form-control-sm" value="" oninput="updateAlignedJSON()"></td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-outline-danger border-0" onclick="deleteAlignedRow(this)" title="Remove">
+                        &times;
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            updateAlignedJSON();
+        }
+
+        function deleteAlignedRow(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+            updateAlignedJSON();
+        }
+
+        function renderAlignedFromJSON() {
+            try {
+                const val = document.getElementById('alignedInstructions').value;
+                const data = JSON.parse(val);
+                renderAlignedTable(data);
+            } catch (e) {
+                console.warn("Invalid JSON in textarea", e);
+            }
+        }
+    </script>
+</body>
+</html>
+

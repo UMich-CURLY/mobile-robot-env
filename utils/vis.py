@@ -24,9 +24,9 @@ def visualize_arrow(nodes, robot_height, prim_path="/World/Arrow", color=(1, 0, 
     for prim_path in prim_list:
         prim_utils.delete_prim(prim_path)
     cfg = VisualizationMarkersCfg(
-        prim_path=prim_path+"/arrow1",
+        prim_path=prim_path+"/arrow",
         markers={
-            "arrow_2": sim_utils.UsdFileCfg(
+            "arrow": sim_utils.UsdFileCfg(
                 usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/arrow_x.usd",
                 scale=scale,
                 visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=color),
