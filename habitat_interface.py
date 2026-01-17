@@ -35,6 +35,8 @@ _latest_depth_by_source = {}
 _latest_position = None
 _latest_quat_xyzw = None
 _latest_tfs = {}
+_latest_base_frame = None
+_latest_odom_frame = None
 _scenario = None
 _info = None
 _host = "localhost"
@@ -79,6 +81,95 @@ def _topic_to_key(topic_name: str) -> str:
         key = key.replace("/image_raw", "")
         return key.strip("/")
     return topic_name.strip("/").split("/")[-1]
+
+
+def _tf_transform_to_matrix(transform: dict) -> np.ndarray:
+    matrix = np.eye(4)
+    if not isinstance(transform, dict):
+        return matrix
+    trans = transform.get("translation", {})
+    rot = transform.get("rotation", {})
+    matrix[:3, 3] = [
+        float(trans.get("x", 0.0)),
+        float(trans.get("y", 0.0)),
+        float(trans.get("z", 0.0)),
+    ]
+    quat = [
+        float(rot.get("x", 0.0)),
+        float(rot.get("y", 0.0)),
+        float(rot.get("z", 0.0)),
+        float(rot.get("w", 1.0)),
+    ]
+    matrix[:3, :3] = R.from_quat(quat).as_matrix()
+    return matrix
+
+
+def _matrix_to_tf_transform(matrix: np.ndarray) -> dict:
+    quat = R.from_matrix(matrix[:3, :3]).as_quat()
+    return {
+        "translation": {
+            "x": float(matrix[0, 3]),
+            "y": float(matrix[1, 3]),
+            "z": float(matrix[2, 3]),
+        },
+        "rotation": {
+            "x": float(quat[0]),
+            "y": float(quat[1]),
+            "z": float(quat[2]),
+            "w": float(quat[3]),
+        },
+    }
+
+
+def _resolve_child_frame_name(child_frame: str, tf_dict: dict, base_frame: str | None) -> str | None:
+    if child_frame in tf_dict:
+        return child_frame
+    if base_frame and "/" in base_frame:
+        prefix = base_frame.split("/")[0]
+        candidate = f"{prefix}/{child_frame}"
+        if candidate in tf_dict:
+            return candidate
+    for key in tf_dict.keys():
+        if key.endswith(f"/{child_frame}") or key.endswith(child_frame):
+            return key
+    return None
+
+
+def _resolve_base_frame(tf_dict: dict, base_frame_hint: str | None) -> str | None:
+    if base_frame_hint:
+        return base_frame_hint
+    parents = {
+        tf.get("parent_frame")
+        for tf in tf_dict.values()
+        if isinstance(tf, dict) and tf.get("parent_frame")
+    }
+    for suffix in ("body", "base", "base_link"):
+        for parent in parents:
+            if parent == suffix or parent.endswith(f"/{suffix}"):
+                return parent
+    return None
+
+
+def _lookup_transform_to_base(target_frame: str, base_frame: str, tf_dict: dict, max_depth: int = 10) -> np.ndarray | None:
+    chain = []
+    current = target_frame
+    visited = set()
+    while current != base_frame:
+        if current in visited or len(chain) >= max_depth:
+            return None
+        visited.add(current)
+        tf_entry = tf_dict.get(current)
+        if not isinstance(tf_entry, dict):
+            return None
+        parent = tf_entry.get("parent_frame")
+        if not parent:
+            return None
+        chain.append(tf_entry)
+        current = parent
+    transform = np.eye(4)
+    for tf_entry in reversed(chain):
+        transform = transform @ _tf_transform_to_matrix(tf_entry.get("transform", {}))
+    return transform
 
 
 class HabitatROSBridge(Node):
@@ -294,31 +385,28 @@ class HabitatROSBridge(Node):
         for t in msg.transforms:
             parent_frame = t.header.frame_id
             child_frame = t.child_frame_id
-            
-            # Extract Translation (x, y, z)
-            translation = {
-                'x': float(t.transform.translation.x),
-                'y': float(t.transform.translation.y),
-                'z': float(t.transform.translation.z)
-            }
 
-            # Extract Rotation (x, y, z, w)
-            rotation = {
-                'x': float(t.transform.rotation.x),
-                'y': float(t.transform.rotation.y),
-                'z': float(t.transform.rotation.z),
-                'w': float(t.transform.rotation.w)
-            }
-            
             # Store keyed by child_frame (e.g. "head_right_rgbd_optical")
             _latest_tfs[child_frame] = {
-                'parent_frame': parent_frame,
-                'translation': translation,
-                'rotation': rotation
+                "parent_frame": parent_frame,
+                "child_frame_id": child_frame,
+                "transform": {
+                    "translation": {
+                        "x": float(t.transform.translation.x),
+                        "y": float(t.transform.translation.y),
+                        "z": float(t.transform.translation.z),
+                    },
+                    "rotation": {
+                        "x": float(t.transform.rotation.x),
+                        "y": float(t.transform.rotation.y),
+                        "z": float(t.transform.rotation.z),
+                        "w": float(t.transform.rotation.w),
+                    },
+                },
             }
 
     def odom_callback(self, msg):
-        global _latest_position, _latest_quat_xyzw
+        global _latest_position, _latest_quat_xyzw, _latest_base_frame, _latest_odom_frame
         try:
             _latest_position = np.array([
                 msg.pose.pose.position.x,
@@ -331,6 +419,10 @@ class HabitatROSBridge(Node):
                 msg.pose.pose.orientation.z,
                 msg.pose.pose.orientation.w,
             ], dtype=np.float32)
+            if msg.header.frame_id:
+                _latest_odom_frame = msg.header.frame_id
+            if msg.child_frame_id:
+                _latest_base_frame = msg.child_frame_id
         except Exception as e:
             self.get_logger().error(f"Odom callback error: {e}")
 
@@ -394,11 +486,21 @@ class HabitatROSBridge(Node):
             rgb_images = dict(_latest_rgb_by_source)
             depth_images = dict(_latest_depth_by_source)
             if _latest_tfs:
+                base_frame = _resolve_base_frame(_latest_tfs, _latest_base_frame)
                 tfs_by_camera = {}
-                for cam_name, child_frame in self.tf_child_frame_by_camera.items():
-                    tf_data = _latest_tfs.get(child_frame)
-                    if tf_data is not None:
-                        tfs_by_camera[cam_name] = tf_data
+                if base_frame:
+                    for cam_name, child_frame in self.tf_child_frame_by_camera.items():
+                        resolved_child = _resolve_child_frame_name(child_frame, _latest_tfs, base_frame)
+                        if resolved_child is None:
+                            continue
+                        transform = _lookup_transform_to_base(resolved_child, base_frame, _latest_tfs)
+                        if transform is None:
+                            continue
+                        tfs_by_camera[cam_name] = {
+                            "parent_frame": base_frame,
+                            "child_frame_id": resolved_child,
+                            "transform": _matrix_to_tf_transform(transform),
+                        }
                 if tfs_by_camera:
                     _info["tfs"] = tfs_by_camera
             return format_data(
