@@ -29,12 +29,6 @@ def _decode_depth_image(encoded_bytes):
     return cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
 
 
-def _cleanup_image_entry(entry):
-    entry.pop('image_compressed_format', None)
-    entry.pop('image_shape', None)
-    entry.pop('image_dtype', None)
-
-
 def decompress_payload(compressed_payload_dict):
     """
     Decompresses 'rgb_image' and 'depth_image' in the payload dictionary
@@ -87,29 +81,31 @@ def decompress_payload(compressed_payload_dict):
         decompressed_dict.pop('depth_image_shape', None)
         decompressed_dict.pop('depth_image_dtype', None)
 
-    # Decompress RGB Image Array
-    if isinstance(decompressed_dict.get('rgb_images'), list):
-        for entry in decompressed_dict['rgb_images']:
-            if isinstance(entry.get("image"), bytes):
-                rgb_image_np = _decode_rgb_image(entry["image"])
-                if rgb_image_np is not None:
-                    entry["image"] = rgb_image_np
-                else:
-                    print("Warning: RGB image array decoding failed.")
-                    entry["image"] = None
-            _cleanup_image_entry(entry)
+    # Decompress RGB Images (dict)
+    if isinstance(decompressed_dict.get('rgb_images'), dict):
+        rgb_images = {}
+        for cam_name, value in decompressed_dict['rgb_images'].items():
+            if isinstance(value, bytes):
+                rgb_image_np = _decode_rgb_image(value)
+                if rgb_image_np is None:
+                    print(f"Warning: RGB image decoding failed for {cam_name}.")
+                rgb_images[cam_name] = rgb_image_np
+            else:
+                rgb_images[cam_name] = value
+        decompressed_dict['rgb_images'] = rgb_images
 
-    # Decompress Depth Image Array
-    if isinstance(decompressed_dict.get('depth_images'), list):
-        for entry in decompressed_dict['depth_images']:
-            if isinstance(entry.get("image"), bytes):
-                depth_image_np = _decode_depth_image(entry["image"])
-                if depth_image_np is not None:
-                    entry["image"] = depth_image_np
-                else:
-                    print("Warning: Depth image array decoding failed.")
-                    entry["image"] = None
-            _cleanup_image_entry(entry)
+    # Decompress Depth Images (dict)
+    if isinstance(decompressed_dict.get('depth_images'), dict):
+        depth_images = {}
+        for cam_name, value in decompressed_dict['depth_images'].items():
+            if isinstance(value, bytes):
+                depth_image_np = _decode_depth_image(value)
+                if depth_image_np is None:
+                    print(f"Warning: Depth image decoding failed for {cam_name}.")
+                depth_images[cam_name] = depth_image_np
+            else:
+                depth_images[cam_name] = value
+        decompressed_dict['depth_images'] = depth_images
 
     return decompressed_dict
 

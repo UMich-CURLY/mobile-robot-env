@@ -31,10 +31,8 @@ Formatted as: "{message_type} {payload}", where message_type is one of the follo
 
 Server to Client messages are handled in `format_data()`.
 Formatted as: "{payload_len}{payload}". Payload includes:
-- rgb_image: RGB image (primary)
-- depth_image: Depth image (primary)
-- rgb_images: Array of RGB images with sources
-- depth_images: Array of depth images with sources
+- rgb_images: Dict of RGB images keyed by camera topic
+- depth_images: Dict of depth images keyed by camera topic
 - tfs: Dict of transforms keyed by child_frame (e.g. camera transforms)
 - pose: Pose
 - timestamp_server_ns: Server-side timestamp when data was packed
@@ -88,8 +86,8 @@ def _compress_depth_image(depth_image_np):
 def compress_payload(payload_dict):
     """
     Compresses image fields in the payload dictionary.
-    Supports single images ('rgb_image', 'depth_image') and image arrays
-    ('rgb_images', 'depth_images') as lists of {source, image} entries.
+    Supports single images ('rgb_image', 'depth_image') and dicts of images
+    ('rgb_images', 'depth_images') keyed by camera topic.
 
     Args:
         payload_dict (dict): The dictionary containing sensor data.
@@ -126,31 +124,27 @@ def compress_payload(payload_dict):
         else:
             compressed_dict['depth_image'] = None
 
-    # Compress RGB Image Array
-    if isinstance(compressed_dict.get('rgb_images'), list):
-        for entry in compressed_dict['rgb_images']:
-            if isinstance(entry.get("image"), np.ndarray):
-                encoded_bytes, meta = _compress_rgb_image(entry["image"])
-                entry["image"] = encoded_bytes
-                if meta is not None:
-                    entry["image_shape"] = meta["shape"]
-                    entry["image_dtype"] = meta["dtype"]
-                    entry["image_compressed_format"] = meta["compressed_format"]
-            elif entry.get("image") is not None:
-                entry["image"] = None
+    # Compress RGB Images (dict)
+    if isinstance(compressed_dict.get('rgb_images'), dict):
+        rgb_images = {}
+        for cam_name, image in compressed_dict['rgb_images'].items():
+            if isinstance(image, np.ndarray):
+                encoded_bytes, _ = _compress_rgb_image(image)
+                rgb_images[cam_name] = encoded_bytes
+            else:
+                rgb_images[cam_name] = image
+        compressed_dict['rgb_images'] = rgb_images
 
-    # Compress Depth Image Array
-    if isinstance(compressed_dict.get('depth_images'), list):
-        for entry in compressed_dict['depth_images']:
-            if isinstance(entry.get("image"), np.ndarray):
-                encoded_bytes, meta = _compress_depth_image(entry["image"])
-                entry["image"] = encoded_bytes
-                if meta is not None:
-                    entry["image_shape"] = meta["shape"]
-                    entry["image_dtype"] = meta["dtype"]
-                    entry["image_compressed_format"] = meta["compressed_format"]
-            elif entry.get("image") is not None:
-                entry["image"] = None
+    # Compress Depth Images (dict)
+    if isinstance(compressed_dict.get('depth_images'), dict):
+        depth_images = {}
+        for cam_name, image in compressed_dict['depth_images'].items():
+            if isinstance(image, np.ndarray):
+                encoded_bytes, _ = _compress_depth_image(image)
+                depth_images[cam_name] = encoded_bytes
+            else:
+                depth_images[cam_name] = image
+        compressed_dict['depth_images'] = depth_images
 
     return compressed_dict
 
@@ -205,9 +199,6 @@ def format_data(
     info,
     server_name="DummyServer",
     timestamp=None,
-    rgb_images=None,
-    depth_images=None,
-    tfs=None,
 ):
     if timestamp is None:
         timestamp_ns = time.time_ns()
@@ -227,16 +218,19 @@ def format_data(
     }
 
     payload = {
-        "rgb_image": rgb,
-        "depth_image": depth,
-        "rgb_images": rgb_images,
-        "depth_images": depth_images,
-        "tfs": tfs,
         "pose": pose_dict,
         "timestamp_server_ns": int(timestamp_ns),
         "success": True,
         "message": f"Dummy data generated successfully by {server_name}."
     }
+    if isinstance(rgb, dict):
+        payload["rgb_images"] = rgb
+    else:
+        payload["rgb_image"] = rgb
+    if isinstance(depth, dict):
+        payload["depth_images"] = depth
+    else:
+        payload["depth_image"] = depth
     payload.update(info)
     payload = {k: v for k, v in payload.items() if v is not None}
 

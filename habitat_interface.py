@@ -69,6 +69,18 @@ def make_args():
     return parser.parse_args()
 
 
+def _topic_to_key(topic_name: str) -> str:
+    if "/image/" in topic_name:
+        key = topic_name.split("/image/")[-1]
+        key = key.replace("/compressed", "").replace("/image_raw", "")
+        return key.strip("/")
+    if "/depth/" in topic_name:
+        key = topic_name.split("/depth/")[-1]
+        key = key.replace("/image_raw", "")
+        return key.strip("/")
+    return topic_name.strip("/").split("/")[-1]
+
+
 class HabitatROSBridge(Node):
     def __init__(self, args=None):
         super().__init__('habitat_ros_bridge')
@@ -106,17 +118,19 @@ class HabitatROSBridge(Node):
 
         ## Cam Subscribers
         rgb_topics = {
-            "rgb_image": "/habitatsim/image/head_rgb_right/compressed", ## Assigned main camera
-            "rgb_head_left": "/habitatsim/image/head_rgb_left/compressed",
-            "rgb_right": "/habitatsim/image/right_rgb/compressed",
-            "rgb_left": "/habitatsim/image/left_rgb/compressed",
+            "frontright": "/spot/camera/frontright/image/compressed",
+            "frontleft": "/spot/camera/frontleft/image/compressed",
+            "left": "/spot/camera/left/image/compressed",
+            "right": "/spot/camera/right/image/compressed",
+            "back": "/spot/camera/back/image/compressed",
         }
 
         depth_topics = {
-            "depth_image": "/habitatsim/depth/head_stereo_right_depth/image_raw", ## Assigned main camera
-            "depth_head_left":  "/habitatsim/depth/head_stereo_left_depth/image_raw",
-            "depth_right":      "/habitatsim/depth/right_depth/image_raw",
-            "depth_left":       "/habitatsim/depth/left_depth/image_raw",
+            "frontright": "/spot/depth/frontright/image",
+            "frontleft": "/spot/depth/frontleft/image",
+            "left": "/spot/depth/left/image",
+            "right": "/spot/depth/right/image",
+            "back": "/spot/depth/back/image",
         }
         
         # RGB subscriptions
@@ -155,6 +169,15 @@ class HabitatROSBridge(Node):
         self.sync = ApproximateTimeSynchronizer([self.rgb_sub, self.depth_sub, self.odom_sub], 100, 0.1, allow_headerless=False)
         self.sync.registerCallback(self.sensor_callback)
         self.scenario_sub = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
+
+        # Map camera keys to TF child frames for consistent payloads
+        self.tf_child_frame_by_camera = {
+            "frontright": "head_right_rgbd_optical",
+            "frontleft": "head_left_rgbd_optical",
+            "left": "left_rgbd_optical",
+            "right": "right_rgbd_optical",
+            "back": "rear_rgbd_optical",
+        }
         
         # TF subscriptions for camera transforms (static + dynamic)
         self.tf_sub = self.create_subscription(TFMessage, "/tf", self.tf_ros_callback, 10)
@@ -240,8 +263,8 @@ class HabitatROSBridge(Node):
         
     # ---- Callbacks ----
     def sensor_callback(self, rgb_msg, depth_msg, odom_msg):
-        self.rgb_callback(rgb_msg, source="rgb_image")
-        self.depth_callback(depth_msg, source="depth_image")
+        self.rgb_callback(rgb_msg, source="frontright")
+        self.depth_callback(depth_msg, source="frontright")
         self.odom_callback(odom_msg)
 
     def rgb_callback(self, msg, source="rgb_image"):
@@ -250,7 +273,7 @@ class HabitatROSBridge(Node):
             cv_image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="bgr8")
             rgb_image = cv_image[..., ::-1].astype(np.uint8)
             _latest_rgb_by_source[source] = rgb_image
-            if source == "rgb_image":
+            if source == "frontright":
                 _latest_rgb = rgb_image
         except Exception as e:
             self.get_logger().error(f"RGB callback error: {e}")
@@ -261,7 +284,7 @@ class HabitatROSBridge(Node):
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
             depth_image = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
             _latest_depth_by_source[source] = depth_image
-            if source == "depth_image":
+            if source == "frontright":
                 _latest_depth = depth_image
         except Exception as e:
             self.get_logger().error(f"Depth callback error: {e}")
@@ -362,30 +385,29 @@ class HabitatROSBridge(Node):
                 "instruction": _scenario,
                 "robot_height": self.args_cli.robot_height,
                 "hfov_deg": self.args_cli.hfov_deg,
-                "metrics": {}
+                "metrics": {},
             }
             if (not _latest_rgb_by_source or not _latest_depth_by_source or
                     _latest_position is None or _latest_quat_xyzw is None):
                 print("[HabitatROSBridge] Waiting for sensor data...")
                 return None
-            rgb_images = [
-                {"source": name, "image": img}
-                for name, img in sorted(_latest_rgb_by_source.items())
-            ]
-            depth_images = [
-                {"source": name, "image": img}
-                for name, img in sorted(_latest_depth_by_source.items())
-            ]
+            rgb_images = dict(_latest_rgb_by_source)
+            depth_images = dict(_latest_depth_by_source)
+            if _latest_tfs:
+                tfs_by_camera = {}
+                for cam_name, child_frame in self.tf_child_frame_by_camera.items():
+                    tf_data = _latest_tfs.get(child_frame)
+                    if tf_data is not None:
+                        tfs_by_camera[cam_name] = tf_data
+                if tfs_by_camera:
+                    _info["tfs"] = tfs_by_camera
             return format_data(
-                _latest_rgb,
-                _latest_depth,
+                rgb_images,
+                depth_images,
                 _latest_position,
                 _latest_quat_xyzw,
                 _info,
                 "hab_interface",
-                rgb_images=rgb_images,
-                depth_images=depth_images,
-                tfs=_latest_tfs.copy() if _latest_tfs else None,
             )
         elif request_type == "GET_EPISODE_LIST":
             episode_set_list = {
