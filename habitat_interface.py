@@ -3,6 +3,8 @@ from functools import partial
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, DurabilityPolicy
+from rclpy.time import Time
+from rclpy.duration import Duration
 
 from sensor_msgs.msg import CompressedImage, Image
 from nav_msgs.msg import Odometry
@@ -32,6 +34,8 @@ _latest_rgb = None
 _latest_depth = None
 _latest_rgb_by_source = {}
 _latest_depth_by_source = {}
+_latest_rgb_stamp_by_source = {}
+_latest_depth_stamp_by_source = {}
 _latest_position = None
 _latest_quat_xyzw = None
 _latest_tfs = {}
@@ -41,6 +45,7 @@ _scenario = None
 _info = None
 _host = "localhost"
 _port = 12357
+_time_sync_tolerance_sec = 0.05
 
 
 def _wrap_to_pi(a: float) -> float:
@@ -180,6 +185,8 @@ class HabitatROSBridge(Node):
         self.bridge = CvBridge()
         self._ros_publishers = {}
         self.old_task = None
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
 
 
         self.openai_api_key = "EMPTY"
@@ -359,22 +366,24 @@ class HabitatROSBridge(Node):
         self.odom_callback(odom_msg)
 
     def rgb_callback(self, msg, source="rgb_image"):
-        global _latest_rgb, _latest_rgb_by_source
+        global _latest_rgb, _latest_rgb_by_source, _latest_rgb_stamp_by_source
         try:
             cv_image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="bgr8")
             rgb_image = cv_image[..., ::-1].astype(np.uint8)
             _latest_rgb_by_source[source] = rgb_image
+            _latest_rgb_stamp_by_source[source] = msg.header.stamp
             if source == "frontright":
                 _latest_rgb = rgb_image
         except Exception as e:
             self.get_logger().error(f"RGB callback error: {e}")
 
     def depth_callback(self, msg, source="depth_image"):
-        global _latest_depth, _latest_depth_by_source
+        global _latest_depth, _latest_depth_by_source, _latest_depth_stamp_by_source
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
             depth_image = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
             _latest_depth_by_source[source] = depth_image
+            _latest_depth_stamp_by_source[source] = msg.header.stamp
             if source == "frontright":
                 _latest_depth = depth_image
         except Exception as e:
@@ -485,15 +494,82 @@ class HabitatROSBridge(Node):
                 return None
             rgb_images = dict(_latest_rgb_by_source)
             depth_images = dict(_latest_depth_by_source)
+            base_frame = _resolve_base_frame(_latest_tfs, _latest_base_frame)
+            ref_stamp = None
+            if "frontright" in _latest_depth_stamp_by_source:
+                ref_stamp = _latest_depth_stamp_by_source.get("frontright")
+            elif _latest_depth_stamp_by_source:
+                ref_stamp = next(iter(_latest_depth_stamp_by_source.values()))
+            elif _latest_rgb_stamp_by_source:
+                ref_stamp = next(iter(_latest_rgb_stamp_by_source.values()))
+            ref_time = Time.from_msg(ref_stamp) if ref_stamp is not None else None
+            if ref_time is not None:
+                valid_cameras = set()
+                max_delta_ns = int(_time_sync_tolerance_sec * 1e9)
+                for cam_name in depth_images.keys():
+                    stamp = _latest_depth_stamp_by_source.get(cam_name)
+                    if stamp is None:
+                        continue
+                    delta_ns = abs(Time.from_msg(stamp).nanoseconds - ref_time.nanoseconds)
+                    if delta_ns <= max_delta_ns:
+                        valid_cameras.add(cam_name)
+                if valid_cameras:
+                    rgb_images = {k: v for k, v in rgb_images.items() if k in valid_cameras}
+                    depth_images = {k: v for k, v in depth_images.items() if k in valid_cameras}
+            position = _latest_position
+            quat_xyzw = _latest_quat_xyzw
+            if base_frame and _latest_odom_frame and ref_time is not None:
+                try:
+                    pose_tf = self.tf_buffer.lookup_transform(
+                        _latest_odom_frame,
+                        base_frame,
+                        ref_time,
+                        timeout=Duration(seconds=0.1),
+                    )
+                    trans = pose_tf.transform.translation
+                    rot = pose_tf.transform.rotation
+                    position = np.array([trans.x, trans.y, trans.z], dtype=np.float32)
+                    quat_xyzw = np.array([rot.x, rot.y, rot.z, rot.w], dtype=np.float32)
+                except TransformException:
+                    pass
             if _latest_tfs:
-                base_frame = _resolve_base_frame(_latest_tfs, _latest_base_frame)
                 tfs_by_camera = {}
                 if base_frame:
                     for cam_name, child_frame in self.tf_child_frame_by_camera.items():
                         resolved_child = _resolve_child_frame_name(child_frame, _latest_tfs, base_frame)
+                        if resolved_child is None and base_frame and "/" in base_frame:
+                            prefix = base_frame.split("/")[0]
+                            resolved_child = f"{prefix}/{child_frame}"
+                        if resolved_child is None:
+                            resolved_child = child_frame
                         if resolved_child is None:
                             continue
-                        transform = _lookup_transform_to_base(resolved_child, base_frame, _latest_tfs)
+                        transform = None
+                        if ref_time is not None:
+                            try:
+                                cam_tf = self.tf_buffer.lookup_transform(
+                                    base_frame,
+                                    resolved_child,
+                                    ref_time,
+                                    timeout=Duration(seconds=0.1),
+                                )
+                                transform = _tf_transform_to_matrix({
+                                    "translation": {
+                                        "x": cam_tf.transform.translation.x,
+                                        "y": cam_tf.transform.translation.y,
+                                        "z": cam_tf.transform.translation.z,
+                                    },
+                                    "rotation": {
+                                        "x": cam_tf.transform.rotation.x,
+                                        "y": cam_tf.transform.rotation.y,
+                                        "z": cam_tf.transform.rotation.z,
+                                        "w": cam_tf.transform.rotation.w,
+                                    },
+                                })
+                            except TransformException:
+                                transform = None
+                        if transform is None:
+                            transform = _lookup_transform_to_base(resolved_child, base_frame, _latest_tfs)
                         if transform is None:
                             continue
                         tfs_by_camera[cam_name] = {
@@ -506,8 +582,8 @@ class HabitatROSBridge(Node):
             return format_data(
                 rgb_images,
                 depth_images,
-                _latest_position,
-                _latest_quat_xyzw,
+                position,
+                quat_xyzw,
                 _info,
                 "hab_interface",
             )
