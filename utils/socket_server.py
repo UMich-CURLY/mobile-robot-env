@@ -31,8 +31,9 @@ Formatted as: "{message_type} {payload}", where message_type is one of the follo
 
 Server to Client messages are handled in `format_data()`.
 Formatted as: "{payload_len}{payload}". Payload includes:
-- rgb_image: RGB image
-- depth_image: Depth image
+- rgb_images: Dict of RGB images keyed by camera topic
+- depth_images: Dict of depth images keyed by camera topic
+- tfs: Dict of transforms keyed by child_frame (e.g. camera transforms)
 - pose: Pose
 - timestamp_server_ns: Server-side timestamp when data was packed
 - success: Whether the data was successfully generated
@@ -54,10 +55,39 @@ def get_and_increment_frame_count():
     return current_count
 
 
+def _compress_rgb_image(rgb_image_np):
+    rgb_image_np = rgb_image_np[:, :, ::-1]
+    success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
+    if not success:
+        print("Warning: RGB image JPG encoding failed.")
+        return None, None
+    return encoded_image.tobytes(), {
+        "shape": rgb_image_np.shape,
+        "dtype": str(rgb_image_np.dtype),
+        "compressed_format": "jpg",
+    }
+
+
+def _compress_depth_image(depth_image_np):
+    if depth_image_np.dtype not in [np.uint8, np.uint16]:
+        print(f"Warning: Depth image dtype {depth_image_np.dtype} might not be perfectly preserved by PNG. "
+              "Consider converting to uint16 if precision loss is acceptable, or use a different compression.")
+    success, encoded_image = cv2.imencode('.png', depth_image_np)
+    if not success:
+        print("Warning: Depth image PNG encoding failed.")
+        return None, None
+    return encoded_image.tobytes(), {
+        "shape": depth_image_np.shape,
+        "dtype": str(depth_image_np.dtype),
+        "compressed_format": "png",
+    }
+
+
 def compress_payload(payload_dict):
     """
-    Compresses 'rgb_image' and 'depth_image' in the payload dictionary
-    using lossless PNG encoding. Other items are left as is.
+    Compresses image fields in the payload dictionary.
+    Supports single images ('rgb_image', 'depth_image') and dicts of images
+    ('rgb_images', 'depth_images') keyed by camera topic.
 
     Args:
         payload_dict (dict): The dictionary containing sensor data.
@@ -74,40 +104,47 @@ def compress_payload(payload_dict):
 
     # Compress RGB Image
     if 'rgb_image' in compressed_dict and isinstance(compressed_dict['rgb_image'], np.ndarray):
-        rgb_image_np = compressed_dict['rgb_image'][:, :, ::-1]
-        success, encoded_image = cv2.imencode('.jpg', rgb_image_np, [cv2.IMWRITE_JPEG_QUALITY, 80])
-        if success:
-            compressed_dict['rgb_image'] = encoded_image.tobytes() # Store as bytes
-            # Store metadata for potential precise reconstruction if imdecode isn't enough
-            # (though for PNG and typical image types, it usually is)
-            compressed_dict['rgb_image_shape'] = rgb_image_np.shape
-            compressed_dict['rgb_image_dtype'] = str(rgb_image_np.dtype)
-            compressed_dict['rgb_image_compressed_format'] = 'jpg'
+        encoded_bytes, meta = _compress_rgb_image(compressed_dict['rgb_image'])
+        if encoded_bytes is not None:
+            compressed_dict['rgb_image'] = encoded_bytes
+            compressed_dict['rgb_image_shape'] = meta["shape"]
+            compressed_dict['rgb_image_dtype'] = meta["dtype"]
+            compressed_dict['rgb_image_compressed_format'] = meta["compressed_format"]
         else:
-            print("Warning: RGB image PNG encoding failed.")
-            # Optionally, remove the key or send uncompressed with a flag
-            compressed_dict['rgb_image'] = None # Or handle error appropriately
+            compressed_dict['rgb_image'] = None
 
     # Compress Depth Image
     if 'depth_image' in compressed_dict and isinstance(compressed_dict['depth_image'], np.ndarray):
-        depth_image_np = compressed_dict['depth_image']
-        # PNG supports 8-bit and 16-bit grayscale.
-        # If depth_image_np is float32, PNG won't directly store it losslessly as float.
-        # It would typically be converted to uint16 or uint8.
-        # For this example, we assume depth_image_np is uint8 or uint16.
-        if depth_image_np.dtype not in [np.uint8, np.uint16]:
-            print(f"Warning: Depth image dtype {depth_image_np.dtype} might not be perfectly preserved by PNG. "
-                  "Consider converting to uint16 if precision loss is acceptable, or use a different compression.")
-
-        success, encoded_image = cv2.imencode('.png', depth_image_np)
-        if success:
-            compressed_dict['depth_image'] = encoded_image.tobytes() # Store as bytes
-            compressed_dict['depth_image_shape'] = depth_image_np.shape
-            compressed_dict['depth_image_dtype'] = str(depth_image_np.dtype)
-            compressed_dict['depth_image_compressed_format'] = 'png'
+        encoded_bytes, meta = _compress_depth_image(compressed_dict['depth_image'])
+        if encoded_bytes is not None:
+            compressed_dict['depth_image'] = encoded_bytes
+            compressed_dict['depth_image_shape'] = meta["shape"]
+            compressed_dict['depth_image_dtype'] = meta["dtype"]
+            compressed_dict['depth_image_compressed_format'] = meta["compressed_format"]
         else:
-            print("Warning: Depth image PNG encoding failed.")
             compressed_dict['depth_image'] = None
+
+    # Compress RGB Images (dict)
+    if isinstance(compressed_dict.get('rgb_images'), dict):
+        rgb_images = {}
+        for cam_name, image in compressed_dict['rgb_images'].items():
+            if isinstance(image, np.ndarray):
+                encoded_bytes, _ = _compress_rgb_image(image)
+                rgb_images[cam_name] = encoded_bytes
+            else:
+                rgb_images[cam_name] = image
+        compressed_dict['rgb_images'] = rgb_images
+
+    # Compress Depth Images (dict)
+    if isinstance(compressed_dict.get('depth_images'), dict):
+        depth_images = {}
+        for cam_name, image in compressed_dict['depth_images'].items():
+            if isinstance(image, np.ndarray):
+                encoded_bytes, _ = _compress_depth_image(image)
+                depth_images[cam_name] = encoded_bytes
+            else:
+                depth_images[cam_name] = image
+        compressed_dict['depth_images'] = depth_images
 
     return compressed_dict
 
@@ -154,7 +191,15 @@ def generate_dummy_data(server_name = "DummyServer"):
     }
     )
 
-def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServer", timestamp = None):
+def format_data(
+    rgb,
+    depth,
+    position,
+    quat_xyzw,
+    info,
+    server_name="DummyServer",
+    timestamp=None,
+):
     if timestamp is None:
         timestamp_ns = time.time_ns()
     else:
@@ -167,19 +212,25 @@ def format_data(rgb, depth, position, quat_xyzw, info, server_name = "DummyServe
             "frame_id": "dummy_odom"
         },
         "pose": {
-            "position": {"x": position[0], "y": position[1], "z": position[2]},
-            "orientation": {"x": quat_xyzw[0], "y": quat_xyzw[1], "z": quat_xyzw[2], "w": quat_xyzw[3]}
+            "position": {"x": float(position[0]), "y": float(position[1]), "z": float(position[2])},
+            "orientation": {"x": float(quat_xyzw[0]), "y": float(quat_xyzw[1]), "z": float(quat_xyzw[2]), "w": float(quat_xyzw[3])}
         }
     }
 
     payload = {
-        "rgb_image": rgb,
-        "depth_image": depth,
         "pose": pose_dict,
         "timestamp_server_ns": int(timestamp_ns),
         "success": True,
         "message": f"Dummy data generated successfully by {server_name}."
     }
+    if isinstance(rgb, dict):
+        payload["rgb_images"] = rgb
+    else:
+        payload["rgb_image"] = rgb
+    if isinstance(depth, dict):
+        payload["depth_images"] = depth
+    else:
+        payload["depth_image"] = depth
     payload.update(info)
     payload = {k: v for k, v in payload.items() if v is not None}
 

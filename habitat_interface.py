@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
+from functools import partial
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, DurabilityPolicy
+from rclpy.time import Time
+from rclpy.duration import Duration
 
 from sensor_msgs.msg import CompressedImage, Image
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
+from tf2_msgs.msg import TFMessage
 from cv_bridge import CvBridge
 
 import numpy as np
@@ -28,12 +32,20 @@ import time
 # Global shared state
 _latest_rgb = None
 _latest_depth = None
+_latest_rgb_by_source = {}
+_latest_depth_by_source = {}
+_latest_rgb_stamp_by_source = {}
+_latest_depth_stamp_by_source = {}
 _latest_position = None
 _latest_quat_xyzw = None
+_latest_tfs = {}
+_latest_base_frame = None
+_latest_odom_frame = None
 _scenario = None
 _info = None
 _host = "localhost"
 _port = 12357
+_time_sync_tolerance_sec = 0.05
 
 
 def _wrap_to_pi(a: float) -> float:
@@ -64,6 +76,107 @@ def make_args():
     return parser.parse_args()
 
 
+def _topic_to_key(topic_name: str) -> str:
+    if "/image/" in topic_name:
+        key = topic_name.split("/image/")[-1]
+        key = key.replace("/compressed", "").replace("/image_raw", "")
+        return key.strip("/")
+    if "/depth/" in topic_name:
+        key = topic_name.split("/depth/")[-1]
+        key = key.replace("/image_raw", "")
+        return key.strip("/")
+    return topic_name.strip("/").split("/")[-1]
+
+
+def _tf_transform_to_matrix(transform: dict) -> np.ndarray:
+    matrix = np.eye(4)
+    if not isinstance(transform, dict):
+        return matrix
+    trans = transform.get("translation", {})
+    rot = transform.get("rotation", {})
+    matrix[:3, 3] = [
+        float(trans.get("x", 0.0)),
+        float(trans.get("y", 0.0)),
+        float(trans.get("z", 0.0)),
+    ]
+    quat = [
+        float(rot.get("x", 0.0)),
+        float(rot.get("y", 0.0)),
+        float(rot.get("z", 0.0)),
+        float(rot.get("w", 1.0)),
+    ]
+    matrix[:3, :3] = R.from_quat(quat).as_matrix()
+    return matrix
+
+
+def _matrix_to_tf_transform(matrix: np.ndarray) -> dict:
+    quat = R.from_matrix(matrix[:3, :3]).as_quat()
+    return {
+        "translation": {
+            "x": float(matrix[0, 3]),
+            "y": float(matrix[1, 3]),
+            "z": float(matrix[2, 3]),
+        },
+        "rotation": {
+            "x": float(quat[0]),
+            "y": float(quat[1]),
+            "z": float(quat[2]),
+            "w": float(quat[3]),
+        },
+    }
+
+
+def _resolve_child_frame_name(child_frame: str, tf_dict: dict, base_frame: str | None) -> str | None:
+    if child_frame in tf_dict:
+        return child_frame
+    if base_frame and "/" in base_frame:
+        prefix = base_frame.split("/")[0]
+        candidate = f"{prefix}/{child_frame}"
+        if candidate in tf_dict:
+            return candidate
+    for key in tf_dict.keys():
+        if key.endswith(f"/{child_frame}") or key.endswith(child_frame):
+            return key
+    return None
+
+
+def _resolve_base_frame(tf_dict: dict, base_frame_hint: str | None) -> str | None:
+    if base_frame_hint:
+        return base_frame_hint
+    parents = {
+        tf.get("parent_frame")
+        for tf in tf_dict.values()
+        if isinstance(tf, dict) and tf.get("parent_frame")
+    }
+    for suffix in ("body", "base", "base_link"):
+        for parent in parents:
+            if parent == suffix or parent.endswith(f"/{suffix}"):
+                return parent
+    return None
+
+
+def _lookup_transform_to_base(target_frame: str, base_frame: str, tf_dict: dict, max_depth: int = 10) -> np.ndarray | None:
+    chain = []
+    current = target_frame
+    visited = set()
+    while current != base_frame:
+        if current in visited or len(chain) >= max_depth:
+            return None
+        visited.add(current)
+        tf_entry = tf_dict.get(current)
+        if not isinstance(tf_entry, dict):
+            return None
+        parent = tf_entry.get("parent_frame")
+        if not parent:
+            return None
+        chain.append(tf_entry)
+        current = parent
+    transform = np.eye(4)
+    for tf_entry in reversed(chain):
+        transform = transform @ _tf_transform_to_matrix(tf_entry.get("transform", {}))
+    return transform
+
+
 class HabitatROSBridge(Node):
     def __init__(self, args=None):
         super().__init__('habitat_ros_bridge')
@@ -72,6 +185,8 @@ class HabitatROSBridge(Node):
         self.bridge = CvBridge()
         self._ros_publishers = {}
         self.old_task = None
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
 
 
         self.openai_api_key = "EMPTY"
@@ -99,6 +214,41 @@ class HabitatROSBridge(Node):
             print("[HabitatROSBridge] OpenAI client initialized.")
 
 
+        ## Cam Subscribers
+        rgb_topics = {
+            "frontright": "/spot/camera/frontright/image/compressed",
+            "frontleft": "/spot/camera/frontleft/image/compressed",
+            "left": "/spot/camera/left/image/compressed",
+            "right": "/spot/camera/right/image/compressed",
+            "back": "/spot/camera/back/image/compressed",
+        }
+
+        depth_topics = {
+            "frontright": "/spot/depth/frontright/image",
+            "frontleft": "/spot/depth/frontleft/image",
+            "left": "/spot/depth/left/image",
+            "right": "/spot/depth/right/image",
+            "back": "/spot/depth/back/image",
+        }
+        
+        # RGB subscriptions
+        for name, topic in rgb_topics.items():
+            self.create_subscription(
+                CompressedImage,
+                topic,
+                partial(self.rgb_callback, source=name),
+                10
+            )
+
+        # Depth subscriptions
+        for name, topic in depth_topics.items():
+            self.create_subscription(
+                Image,
+                topic,
+                partial(self.depth_callback, source=name),
+                10
+        )
+                  
         # topic names
         self.robot_topic = "/spot"
         self.action_topic = f"{self.robot_topic}/cmd_vel"
@@ -117,6 +267,19 @@ class HabitatROSBridge(Node):
         self.sync = ApproximateTimeSynchronizer([self.rgb_sub, self.depth_sub, self.odom_sub], 100, 0.1, allow_headerless=False)
         self.sync.registerCallback(self.sensor_callback)
         self.scenario_sub = self.create_subscription(String, self.scenario_topic, self.scenario_ros_callback, 10)
+
+        # Map camera keys to TF child frames for consistent payloads
+        self.tf_child_frame_by_camera = {
+            "frontright": "head_right_rgbd_optical",
+            "frontleft": "head_left_rgbd_optical",
+            "left": "left_rgbd_optical",
+            "right": "right_rgbd_optical",
+            "back": "rear_rgbd_optical",
+        }
+        
+        # TF subscriptions for camera transforms (static + dynamic)
+        self.tf_sub = self.create_subscription(TFMessage, "/tf", self.tf_ros_callback, 10)
+        self.tf_static_sub = self.create_subscription(TFMessage, "/tf_static", self.tf_ros_callback, 10)
 
         # wait for sim control topic to be available
         qos = QoSProfile(depth=10)
@@ -198,28 +361,61 @@ class HabitatROSBridge(Node):
         
     # ---- Callbacks ----
     def sensor_callback(self, rgb_msg, depth_msg, odom_msg):
-        self.rgb_callback(rgb_msg)
-        self.depth_callback(depth_msg)
+        self.rgb_callback(rgb_msg, source="frontright")
+        self.depth_callback(depth_msg, source="frontright")
         self.odom_callback(odom_msg)
 
-    def rgb_callback(self, msg):
-        global _latest_rgb
+    def rgb_callback(self, msg, source="rgb_image"):
+        global _latest_rgb, _latest_rgb_by_source, _latest_rgb_stamp_by_source
         try:
             cv_image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="bgr8")
-            _latest_rgb = cv_image.astype(np.uint8)
+            rgb_image = cv_image[..., ::-1].astype(np.uint8)
+            _latest_rgb_by_source[source] = rgb_image
+            _latest_rgb_stamp_by_source[source] = msg.header.stamp
+            if source == "frontright":
+                _latest_rgb = rgb_image
         except Exception as e:
             self.get_logger().error(f"RGB callback error: {e}")
 
-    def depth_callback(self, msg):
-        global _latest_depth
+    def depth_callback(self, msg, source="depth_image"):
+        global _latest_depth, _latest_depth_by_source, _latest_depth_stamp_by_source
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
-            _latest_depth = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
+            depth_image = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
+            _latest_depth_by_source[source] = depth_image
+            _latest_depth_stamp_by_source[source] = msg.header.stamp
+            if source == "frontright":
+                _latest_depth = depth_image
         except Exception as e:
             self.get_logger().error(f"Depth callback error: {e}")
+    
+    def tf_ros_callback(self, msg):
+        global _latest_tfs
+        for t in msg.transforms:
+            parent_frame = t.header.frame_id
+            child_frame = t.child_frame_id
+
+            # Store keyed by child_frame (e.g. "head_right_rgbd_optical")
+            _latest_tfs[child_frame] = {
+                "parent_frame": parent_frame,
+                "child_frame_id": child_frame,
+                "transform": {
+                    "translation": {
+                        "x": float(t.transform.translation.x),
+                        "y": float(t.transform.translation.y),
+                        "z": float(t.transform.translation.z),
+                    },
+                    "rotation": {
+                        "x": float(t.transform.rotation.x),
+                        "y": float(t.transform.rotation.y),
+                        "z": float(t.transform.rotation.z),
+                        "w": float(t.transform.rotation.w),
+                    },
+                },
+            }
 
     def odom_callback(self, msg):
-        global _latest_position, _latest_quat_xyzw
+        global _latest_position, _latest_quat_xyzw, _latest_base_frame, _latest_odom_frame
         try:
             _latest_position = np.array([
                 msg.pose.pose.position.x,
@@ -232,6 +428,10 @@ class HabitatROSBridge(Node):
                 msg.pose.pose.orientation.z,
                 msg.pose.pose.orientation.w,
             ], dtype=np.float32)
+            if msg.header.frame_id:
+                _latest_odom_frame = msg.header.frame_id
+            if msg.child_frame_id:
+                _latest_base_frame = msg.child_frame_id
         except Exception as e:
             self.get_logger().error(f"Odom callback error: {e}")
 
@@ -286,12 +486,107 @@ class HabitatROSBridge(Node):
                 "instruction": _scenario,
                 "robot_height": self.args_cli.robot_height,
                 "hfov_deg": self.args_cli.hfov_deg,
-                "metrics": {}
+                "metrics": {},
             }
-            if _latest_rgb is None or _latest_depth is None or _latest_position is None or _latest_quat_xyzw is None:
+            if (not _latest_rgb_by_source or not _latest_depth_by_source or
+                    _latest_position is None or _latest_quat_xyzw is None):
                 print("[HabitatROSBridge] Waiting for sensor data...")
                 return None
-            return format_data(_latest_rgb, _latest_depth, _latest_position, _latest_quat_xyzw, _info, "hab_interface")
+            rgb_images = dict(_latest_rgb_by_source)
+            depth_images = dict(_latest_depth_by_source)
+            base_frame = _resolve_base_frame(_latest_tfs, _latest_base_frame)
+            ref_stamp = None
+            if "frontright" in _latest_depth_stamp_by_source:
+                ref_stamp = _latest_depth_stamp_by_source.get("frontright")
+            elif _latest_depth_stamp_by_source:
+                ref_stamp = next(iter(_latest_depth_stamp_by_source.values()))
+            elif _latest_rgb_stamp_by_source:
+                ref_stamp = next(iter(_latest_rgb_stamp_by_source.values()))
+            ref_time = Time.from_msg(ref_stamp) if ref_stamp is not None else None
+            if ref_time is not None:
+                valid_cameras = set()
+                max_delta_ns = int(_time_sync_tolerance_sec * 1e9)
+                for cam_name in depth_images.keys():
+                    stamp = _latest_depth_stamp_by_source.get(cam_name)
+                    if stamp is None:
+                        continue
+                    delta_ns = abs(Time.from_msg(stamp).nanoseconds - ref_time.nanoseconds)
+                    if delta_ns <= max_delta_ns:
+                        valid_cameras.add(cam_name)
+                if valid_cameras:
+                    rgb_images = {k: v for k, v in rgb_images.items() if k in valid_cameras}
+                    depth_images = {k: v for k, v in depth_images.items() if k in valid_cameras}
+            position = _latest_position
+            quat_xyzw = _latest_quat_xyzw
+            if base_frame and _latest_odom_frame and ref_time is not None:
+                try:
+                    pose_tf = self.tf_buffer.lookup_transform(
+                        _latest_odom_frame,
+                        base_frame,
+                        ref_time,
+                        timeout=Duration(seconds=0.1),
+                    )
+                    trans = pose_tf.transform.translation
+                    rot = pose_tf.transform.rotation
+                    position = np.array([trans.x, trans.y, trans.z], dtype=np.float32)
+                    quat_xyzw = np.array([rot.x, rot.y, rot.z, rot.w], dtype=np.float32)
+                except TransformException:
+                    pass
+            if _latest_tfs:
+                tfs_by_camera = {}
+                if base_frame:
+                    for cam_name, child_frame in self.tf_child_frame_by_camera.items():
+                        resolved_child = _resolve_child_frame_name(child_frame, _latest_tfs, base_frame)
+                        if resolved_child is None and base_frame and "/" in base_frame:
+                            prefix = base_frame.split("/")[0]
+                            resolved_child = f"{prefix}/{child_frame}"
+                        if resolved_child is None:
+                            resolved_child = child_frame
+                        if resolved_child is None:
+                            continue
+                        transform = None
+                        if ref_time is not None:
+                            try:
+                                cam_tf = self.tf_buffer.lookup_transform(
+                                    base_frame,
+                                    resolved_child,
+                                    ref_time,
+                                    timeout=Duration(seconds=0.1),
+                                )
+                                transform = _tf_transform_to_matrix({
+                                    "translation": {
+                                        "x": cam_tf.transform.translation.x,
+                                        "y": cam_tf.transform.translation.y,
+                                        "z": cam_tf.transform.translation.z,
+                                    },
+                                    "rotation": {
+                                        "x": cam_tf.transform.rotation.x,
+                                        "y": cam_tf.transform.rotation.y,
+                                        "z": cam_tf.transform.rotation.z,
+                                        "w": cam_tf.transform.rotation.w,
+                                    },
+                                })
+                            except TransformException:
+                                transform = None
+                        if transform is None:
+                            transform = _lookup_transform_to_base(resolved_child, base_frame, _latest_tfs)
+                        if transform is None:
+                            continue
+                        tfs_by_camera[cam_name] = {
+                            "parent_frame": base_frame,
+                            "child_frame_id": resolved_child,
+                            "transform": _matrix_to_tf_transform(transform),
+                        }
+                if tfs_by_camera:
+                    _info["tfs"] = tfs_by_camera
+            return format_data(
+                rgb_images,
+                depth_images,
+                position,
+                quat_xyzw,
+                _info,
+                "hab_interface",
+            )
         elif request_type == "GET_EPISODE_LIST":
             episode_set_list = {
                 "all": ["test_ep_0"]*100,
