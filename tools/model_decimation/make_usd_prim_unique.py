@@ -4,11 +4,14 @@
 ## Contact: pohsun@umich.edu
 
 import os
+import random
+import string
 import sys
 import argparse
 from pxr import Usd, Sdf
 # import omni.kit.commands
 # import omni.kit
+import tqdm
 
 def make_unique_name(name, existing):
     """
@@ -20,7 +23,9 @@ def make_unique_name(name, existing):
     i = 1
     while f"{name}_{i}" in existing:
         i += 1
-    unique_name = f"{name}_{i}"
+    # 5 random letters
+    random_suffix = ''.join(random.choices(string.ascii_letters, k=5))
+    unique_name = f"{name}_{i}_{random_suffix}"
     existing.add(unique_name)
     return unique_name
 
@@ -83,22 +88,23 @@ def process_usd_file(usd_path, output_usd_path):
 
     # Save to a new USD file
     stage.GetRootLayer().Export(output_usd_path)
-    print(f"Saved renamed USD: {output_usd_path}")
+    # print(f"Saved renamed USD: {output_usd_path}")
 
 def make_name_unique_all_usds(input_folder):
     """
     Iterate through all subfolders in input_folder,
     find 'instance.usd' files, rename prims uniquely, and save as 'instance_renamed.usd'.
     """
+    all_usd_paths = []
     for root_dir, dirs, files in os.walk(input_folder):
         if "instance_renamed.usd" in files:
-            print(f"[SKIP] Already renamed: {root_dir}")
             continue
         if "instance.usd" in files:
-            usd_path = os.path.join(root_dir, "instance.usd")
-            renamed_usd_path = os.path.join(root_dir, "instance_renamed.usd")
-            print(f"Processing USD: {usd_path}")
-            process_usd_file(usd_path, renamed_usd_path)
+            all_usd_paths.append(os.path.join(root_dir, "instance.usd"))
+    all_usd_paths.sort()
+    pbar = tqdm.tqdm(all_usd_paths)
+    for usd_path in pbar:
+        process_usd_file(usd_path, usd_path.replace("instance.usd", "instance_renamed.usd"))
 
 if __name__ == "__main__":
     # Parse command line arguments

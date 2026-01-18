@@ -202,3 +202,4 @@ results/
 data
 logs/
 outputs/
+tools/model_decimation/*.csv

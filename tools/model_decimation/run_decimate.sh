@@ -1,0 +1,1 @@
+blender --background --python decimate_usd_models_face_blender.py -- --input_folder /home/junzhewu/data/isaac_scenes_v1/grscenes_commercial/models/

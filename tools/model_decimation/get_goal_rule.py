@@ -155,7 +155,7 @@ def render_usd_image(usd_file, output_image):
 #  MAIN ENTRY POINT
 # ----------------------------------------------------------
 if __name__ == "__main__":
-    dataset_path = "/home/junzhewu/pohsun/data_decimated/grscenes_commercial"
+    dataset_path = os.path.expanduser("~") + "/data/isaac_scenes_v1/grscenes_commercial"
     usd_file = os.path.join(dataset_path, "scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/start_result_navigation.usd")
     # usd_file = os.path.join(dataset_path, "scenes/modified_scene.usd")
 
