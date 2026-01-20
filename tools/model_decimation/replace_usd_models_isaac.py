@@ -75,13 +75,12 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
                 print("possible mesh:")
                 for name, path in zip(found_mesh_name, found_mesh_path):
                     print(f"  {name}: {path}")
-                if os.path.exists(original_usd_path):
-                    print(f"Remove renamed usd file: {original_usd_path}")
-                    os.remove(original_usd_path)
+                # if os.path.exists(original_usd_path):
+                #     print(f"Remove renamed usd file: {original_usd_path}")
+                #     os.remove(original_usd_path)
                 continue
             elif len(found_mesh_name) == 1:
                 dec_prim = dec_mesh_map[found_mesh_name[0]]
-                continue
             else:
                 print("--------------------------------")
                 print("usd path:", original_usd_path)
@@ -90,9 +89,9 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
                 for key in dec_mesh_map.keys():
                     if mesh_name+"_" in key:
                         print(f"path not matched:{dec_mesh_map[key].GetPath()}")
-                if os.path.exists(original_usd_path):
-                    print(f"Remove renamed usd file: {original_usd_path}")
-                    os.remove(original_usd_path)
+                # if os.path.exists(original_usd_path):
+                #     print(f"Remove renamed usd file: {original_usd_path}")
+                #     os.remove(original_usd_path)
                 continue
         for attr_name in [
             "points", "normals", "faceVertexIndices", "faceVertexCounts",

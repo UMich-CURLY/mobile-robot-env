@@ -1,15 +1,24 @@
 
 import sys
-print(sys.executable)
-print(sys.version)
+# print(sys.executable)
+# print(sys.version)
 import site
 sys.path.append(site.getusersitepackages())
 
 import os
 import argparse
-import bpy
 import re
+import glob
+import subprocess
+import shutil
+import time
 from tqdm import tqdm
+
+try:
+    import bpy
+    IS_IN_BLENDER = True
+except ImportError:
+    IS_IN_BLENDER = False
 
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
@@ -88,6 +97,10 @@ def analyze_scene(usd_path, dataset_root):
     Aggregates face counts for objects where a parent starts with "model_".
     Returns: (total_faces, list_of_heavy_objects)
     """
+    if not IS_IN_BLENDER:
+        print("Error: analyze_scene must be run inside Blender")
+        return 0, []
+
     print(f"Analyzing scene: {usd_path}")
     # Clear the scene of existing objects before import
     bpy.ops.scene.new()
@@ -146,33 +159,42 @@ def analyze_scene(usd_path, dataset_root):
 
     return total_faces, heavy_objects
 
-def process_folder(input_folder, scene_log_path, objects_log_path, dataset_root):
-    """Recursively find and process start_result_navigation.usd files."""
+def process_folder_worker(input_folder, scene_log_path, objects_log_path, dataset_root, worker_id, total_workers):
+    """
+    Recursively find and process start_result_navigation.usd files.
+    This runs inside Blender as a worker.
+    """
     
-    # Load processed scenes to skip
+    # Load processed scenes to skip from the MAIN log file (if exists, optional)
     processed_scenes = set()
-    if os.path.exists(scene_log_path):
-        with open(scene_log_path, "r") as f:
+    # We might want to check the main log file to skip already processed scenes from previous runs
+    main_scene_log = scene_log_path.replace(f"_{worker_id}.csv", ".csv")
+    if os.path.exists(main_scene_log):
+         with open(main_scene_log, "r") as f:
             lines = f.readlines()
             for line in lines[1:]:
                 if "," in line:
                     processed_scenes.add(line.split(",")[0].strip())
-    
+
+    # Scan for files
     target_files = []
-    print(f"Scanning {input_folder} for start_result_navigation.usd files...")
+    print(f"Scanning {input_folder} for usd files...")
     for root, dirs, files in os.walk(input_folder):
-        if "start_result_navigation.usd" in files:
-            full_path = os.path.join(root, "start_result_navigation.usd")
-            if full_path not in processed_scenes:
-                target_files.append(full_path)
-            else:
-                # print(f"Skipping already processed: {full_path}")
-                pass
+        for file in files:
+            if file.endswith(".usd") and not "_renamed.usd" in file and not "_decimated.usd" in file:
+                target_files.append(os.path.join(root, file))
     
     target_files.sort()
-    print(f"Found {len(target_files)} new scenes to process (skipped {len(processed_scenes)}).")
+    
+    # Filter files for this worker
+    my_files = [f for i, f in enumerate(target_files) if i % total_workers == worker_id]
+    
+    # Further filter already processed
+    my_files_filtered = [f for f in my_files if f not in processed_scenes]
+    
+    print(f"Worker {worker_id}/{total_workers}: Processing {len(my_files_filtered)} scenes (Total found: {len(target_files)}, Assigned: {len(my_files)}, Skipped: {len(my_files) - len(my_files_filtered)})")
 
-    # Initialize logs with headers if they don't exist
+    # Initialize partial logs with headers if they don't exist
     if not os.path.exists(scene_log_path):
         with open(scene_log_path, "w") as f:
             f.write("scene_path,total_faces\n")
@@ -181,7 +203,7 @@ def process_folder(input_folder, scene_log_path, objects_log_path, dataset_root)
         with open(objects_log_path, "w") as f:
             f.write("scene_path,prim_path,prim_name,face_count,source_usd_path\n")
     
-    for usd_path in tqdm(target_files, desc="Processing Scenes"):
+    for usd_path in tqdm(my_files_filtered, desc=f"Worker {worker_id} Processing"):
         total_faces, heavy_objs = analyze_scene(usd_path, dataset_root)
         
         # Log scene info
@@ -194,15 +216,101 @@ def process_folder(input_folder, scene_log_path, objects_log_path, dataset_root)
                 for obj in heavy_objs:
                     f.write(f"{usd_path},{obj['path']},{obj['name']},{obj['faces']},{obj['source_path']}\n")
 
+def launch_workers(input_folder, scene_log, object_log, dataset_root, num_workers):
+    """
+    Launch multiple Blender processes to process the folder in parallel.
+    """
+    print(f"Launching {num_workers} workers...")
+    processes = []
+    
+    # Determine blender executable
+    blender_exe = "blender" # Assume in path or use specific path
+    # If shutil.which("blender") is None, you might need a fallback or error
+    if shutil.which("blender") is None:
+        print("Warning: 'blender' not found in PATH. Trying default locations...")
+        # Add common locations if needed, but assuming env is set up like other scripts
+    
+    script_path = os.path.abspath(__file__)
+    
+    for i in range(num_workers):
+        # Define partial log paths
+        base_scene, ext_scene = os.path.splitext(scene_log)
+        base_obj, ext_obj = os.path.splitext(object_log)
+        
+        partial_scene_log = f"{base_scene}_{i}{ext_scene}"
+        partial_object_log = f"{base_obj}_{i}{ext_obj}"
+        
+        cmd = [
+            blender_exe,
+            "--background",
+            "--python", script_path,
+            "--",
+            "--input_folder", input_folder,
+            "--scene_log", partial_scene_log,
+            "--object_log", partial_object_log,
+            "--dataset_root", dataset_root,
+            "--worker_id", str(i),
+            "--total_workers", str(num_workers),
+        ]
+        
+        log_file = open(f"check_scenes_worker_{i}.log", "w")
+        p = subprocess.Popen(cmd, stdout=log_file, stderr=subprocess.STDOUT)
+        processes.append((p, log_file))
+        print(f"Started worker {i} (PID {p.pid})")
+        
+    # Wait for completion
+    for p, f in processes:
+        p.wait()
+        f.close()
+        if p.returncode != 0:
+            print(f"Worker process failed with return code {p.returncode}")
+            
+    print("All workers finished. Merging logs...")
+    
+    # Merge logs
+    # Scene Log
+    with open(scene_log, "a") as outfile: # Append to existing or create new
+        if os.path.getsize(scene_log) == 0:
+             outfile.write("scene_path,total_faces\n")
+             
+        for i in range(num_workers):
+            base_scene, ext_scene = os.path.splitext(scene_log)
+            partial_log = f"{base_scene}_{i}{ext_scene}"
+            if os.path.exists(partial_log):
+                with open(partial_log, "r") as infile:
+                    # Skip header
+                    lines = infile.readlines()
+                    if lines:
+                        outfile.writelines(lines[1:])
+                # Clean up
+                os.remove(partial_log)
+
+    # Object Log
+    with open(object_log, "a") as outfile:
+        if os.path.getsize(object_log) == 0:
+             outfile.write("scene_path,prim_path,prim_name,face_count,source_usd_path\n")
+             
+        for i in range(num_workers):
+            base_obj, ext_obj = os.path.splitext(object_log)
+            partial_log = f"{base_obj}_{i}{ext_obj}"
+            if os.path.exists(partial_log):
+                with open(partial_log, "r") as infile:
+                     # Skip header
+                    lines = infile.readlines()
+                    if lines:
+                        outfile.writelines(lines[1:])
+                # Clean up
+                os.remove(partial_log)
+                
+    print("Logs merged successfully.")
+
+
 if __name__ == "__main__":
     # Parse command line arguments
     # Note: When running with Blender, arguments after '--' are passed to the script
-    argv = sys.argv
+    argv = sys.argv[1:]
     if "--" in argv:
         argv = argv[argv.index("--") + 1:]  # Get arguments after '--'
-    else:
-        argv = []
-
     parser = argparse.ArgumentParser(description="Analyze face counts in USD scenes using Blender")
     parser.add_argument("--input_folder", 
                         type=str, 
@@ -220,12 +328,32 @@ if __name__ == "__main__":
                         type=str,
                         default="/home/junzhewu/data/isaac_scenes_v1/grscenes_commercial",
                         help="Root path of the dataset for resolving model paths")
+    
+    # Worker arguments
+    parser.add_argument("--worker_id", type=int, default=0, help="Worker ID")
+    parser.add_argument("--total_workers", type=int, default=1, help="Total workers")
+    parser.add_argument("--num_workers", type=int, default=8, help="Number of workers to launch (Manager mode only)")
 
     args = parser.parse_args(argv)
     
     print(f"[INFO] Input folder: {args.input_folder}")
-    print(f"[INFO] Scene Log: {args.scene_log}")
-    print(f"[INFO] Object Log: {args.object_log}")
-    print(f"[INFO] Dataset Root: {args.dataset_root}")
     
-    process_folder(args.input_folder, args.scene_log, args.object_log, args.dataset_root)
+    if IS_IN_BLENDER:
+        # Worker mode running inside Blender
+        process_folder_worker(
+            args.input_folder, 
+            args.scene_log, 
+            args.object_log, 
+            args.dataset_root,
+            args.worker_id,
+            args.total_workers
+        )
+    elif not IS_IN_BLENDER:
+        # Manager mode running in Python
+        launch_workers(
+            args.input_folder,
+            args.scene_log,
+            args.object_log,
+            args.dataset_root,
+            args.num_workers
+        )

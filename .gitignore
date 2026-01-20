@@ -203,3 +203,4 @@ data
 logs/
 outputs/
 tools/model_decimation/*.csv
+*.parquet

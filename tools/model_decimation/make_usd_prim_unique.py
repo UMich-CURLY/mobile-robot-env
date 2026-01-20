@@ -79,7 +79,12 @@ def process_usd_file(usd_path, output_usd_path):
     """
     Open a USD file in Isaac Lab, rename all prims uniquely, and save to a new USD file.
     """
-    stage = Usd.Stage.Open(usd_path)
+    try:
+        stage = Usd.Stage.Open(usd_path)
+    except Exception as e:
+        print(f"Failed to open USD stage: {usd_path}: {e}")
+        return
+
     if not stage:
         print(f"Failed to open USD stage: {usd_path}")
         return
@@ -90,21 +95,36 @@ def process_usd_file(usd_path, output_usd_path):
     stage.GetRootLayer().Export(output_usd_path)
     # print(f"Saved renamed USD: {output_usd_path}")
 
-def make_name_unique_all_usds(input_folder):
+def make_name_unique_all_usds(input_folder, source="gr"):
     """
     Iterate through all subfolders in input_folder,
     find 'instance.usd' files, rename prims uniquely, and save as 'instance_renamed.usd'.
     """
     all_usd_paths = []
+    
+    print(f"Scanning folder: {input_folder} with source={source}")
+    
     for root_dir, dirs, files in os.walk(input_folder):
-        if "instance_renamed.usd" in files:
-            continue
-        if "instance.usd" in files:
-            all_usd_paths.append(os.path.join(root_dir, "instance.usd"))
+        if source == "gr":
+            if "instance_renamed.usd" in files:
+                continue
+            if "instance.usd" in files:
+                all_usd_paths.append((os.path.join(root_dir, "instance.usd"), os.path.join(root_dir, "instance_renamed.usd")))
+        elif source == "all":
+            for f in files:
+                if f.endswith(".usd") and not f.endswith("_renamed.usd") and not f.endswith("_decimated.usd"):
+                    base_name = os.path.splitext(f)[0]
+                    renamed_name = f"{base_name}_renamed.usd"
+                    if renamed_name in files:
+                        continue
+                    all_usd_paths.append((os.path.join(root_dir, f), os.path.join(root_dir, renamed_name)))
+
     all_usd_paths.sort()
+    print(f"Found {len(all_usd_paths)} files to process.")
+    
     pbar = tqdm.tqdm(all_usd_paths)
-    for usd_path in pbar:
-        process_usd_file(usd_path, usd_path.replace("instance.usd", "instance_renamed.usd"))
+    for usd_path, output_path in pbar:
+        process_usd_file(usd_path, output_path)
 
 if __name__ == "__main__":
     # Parse command line arguments
@@ -113,11 +133,17 @@ if __name__ == "__main__":
                         type=str, 
                         required=True,
                         help="Path to the input folder containing USD files to process")
+    parser.add_argument("--source",
+                        type=str,
+                        default="gr",
+                        choices=["gr", "all"],
+                        help="Source type: 'gr' for instance.usd, 'all' for all .usd files")
     
     args = parser.parse_args()
     
     # Use parsed arguments
     input_folder = args.input_folder
+    source = args.source
     
     print(f"Processing USD files in folder: {input_folder}")
     
@@ -127,4 +153,4 @@ if __name__ == "__main__":
         sys.exit(1)
     
     # Main function call
-    make_name_unique_all_usds(input_folder)
+    make_name_unique_all_usds(input_folder, source)

@@ -59,10 +59,10 @@ SCRIPT="decimate_usd_models_face_blender.py"
 # RATIO=0.1  # default decimation ratio
 # NUM_WORKERS=20
 
-MAX_IDLE=180   # seconds of no output before killing
-MEM_LIMIT="3G"  # memory limit for Blender process
-RATIO=0.1  # default decimation ratio
-NUM_WORKERS=20
+MAX_IDLE=300   # seconds of no output before killing
+MEM_LIMIT="10G"  # memory limit for Blender process
+RATIO=0.5  # default decimation ratio
+NUM_WORKERS=10
 
 echo -e "\n=== Step 2: Running Blender face decimation with $NUM_WORKERS workers ===\n"
 

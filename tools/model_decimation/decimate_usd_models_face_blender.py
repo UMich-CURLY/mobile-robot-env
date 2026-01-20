@@ -64,6 +64,8 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
                     dec_mesh_map[parent_prim_name] = prim
                 else:
                     dec_mesh_map[prim.GetName()] = prim
+            else:
+                 dec_mesh_map[prim.GetName()] = prim
 
     # For each mesh in the original, if a decimated mesh with the same name exists, swap geometry
     total_faces_original = 0
@@ -72,9 +74,65 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
     for prim in stage_orig.Traverse():
         total_faces_original += count_total_faces_in_mesh_prim(prim)
 
+        # check prim type and mesh face count
+        faces = UsdGeom.Mesh(prim).GetFaceVertexCountsAttr().Get()
+        if not prim.IsA(UsdGeom.Mesh) or faces is not None and len(faces)<10:
+            continue
+
         mesh_name = prim.GetName()
+
+        dec_prim = None
         if mesh_name in dec_mesh_map:
             dec_prim = dec_mesh_map[mesh_name]
+        else:
+            found_mesh_name = []
+            found_mesh_path = []
+            mesh_path = []
+            for key in dec_mesh_map.keys():
+                if mesh_name+"_" in key:
+                    found = True
+                    mesh_path = str(prim.GetPath()).replace("/Root/Instance/", "").split("/")
+                    # there are some random SM_XXXXXXX or Group_XXXXXXX path in last but second position
+                    if len(mesh_path) >= 2:
+                        if "Group_" in mesh_path[-2] or "SM_" in mesh_path[-2] and len(mesh_path[-2])<=5:
+                            mesh_path = mesh_path[:-1]
+                        else:
+                            mesh_path = mesh_path[:-2]
+                    for path_part in mesh_path:
+                        if not path_part in str(dec_mesh_map[key].GetPath()):
+                            found = False
+                            break
+                    if found:
+                        found_mesh_name.append(key)
+                        found_mesh_path.append(dec_mesh_map[key].GetPath())
+            if len(found_mesh_name) > 1:
+                print("--------------------------------")
+                print("usd path:", original_usd_path)
+                print(f"Multiple possible meshes found in decimated meshes: {mesh_name}, path: {prim.GetPath()}")
+                print(f"matching path: {mesh_path}")
+                print("possible mesh:")
+                for name, path in zip(found_mesh_name, found_mesh_path):
+                    print(f"  {name}: {path}")
+                # if os.path.exists(original_usd_path):
+                #     print(f"Remove renamed usd file: {original_usd_path}")
+                #     os.remove(original_usd_path)
+                continue
+            elif len(found_mesh_name) == 1:
+                dec_prim = dec_mesh_map[found_mesh_name[0]]
+            else:
+                print("--------------------------------")
+                print("usd path:", original_usd_path)
+                print(f"Prim not found in decimated meshes: {mesh_name}, path: {prim.GetPath()}")
+                # print(f"matching path: {mesh_path}")
+                # for key in dec_mesh_map.keys():
+                #     if mesh_name+"_" in key:
+                #         print(f"path not matched:{dec_mesh_map[key].GetPath()}")
+                # if os.path.exists(original_usd_path):
+                #     print(f"Remove renamed usd file: {original_usd_path}")
+                #     os.remove(original_usd_path)
+                continue
+        
+        if dec_prim:
             for attr_name in [
                 "points", "normals", "faceVertexIndices", "faceVertexCounts",
                 "primvars:normals", "primvars:st", "primvars:uv"
@@ -84,9 +142,6 @@ def swap_mesh_geometry(original_usd_path, decimated_usd_path, output_usd_path):
                 if orig_attr and dec_attr and dec_attr.HasAuthoredValue():
                     orig_attr.Set(dec_attr.Get())
             total_faces_swapped += count_total_faces_in_mesh_prim(prim)
-        elif prim.IsA(UsdGeom.Mesh):
-            # remove the prim
-            to_remove_prims.append(prim.GetPath())
     
     for path in to_remove_prims:
         stage_orig.RemovePrim(path)
@@ -115,13 +170,15 @@ def export_usd(output_usd_path):
     except Exception as e:
         print(f"[ERROR] Export USD failed: {e}")
 
-def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
+def decimate_usd_meshes(input_usd_path, output_usd_path, original_usd_path, info_path, ratio=0.1):
     """
     Imports a USD file, decimates all meshes, and exports to a new USD file.
     
     Args:
         input_usd_path (str): The full path to the USD file to import.
         output_usd_path (str): The full path for the decimated USD file.
+        original_usd_path (str): The full path for the original USD file to swap geometry into.
+        info_path (str): The full path for the info json file.
         ratio (float): The decimation ratio. A value of 0.1 means 10% of the original faces.
     """
     print(f"================================================")
@@ -182,7 +239,11 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
     
     if original_face_count < 100:
         print(f"Original face count is too low: {original_face_count}, skipping...")
-        shutil.copy(input_usd_path, os.path.join(os.path.dirname(output_usd_path), "instance.usd"))
+        # For "all", original_usd_path is `foo.usd`. input is `foo_renamed.usd`.
+        # If we copy input to original, we get unique names in original.
+        # Maybe that's acceptable if face count is low.
+        shutil.copy(input_usd_path, original_usd_path) 
+        
         with open(f"{os.path.dirname(output_usd_path)}/skipped.txt", "w") as f:
             f.write(f"Face count is too low: {original_face_count}, skipping...")
         return
@@ -225,19 +286,28 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
 
             if len(obj.data.polygons)>threshold3:
                 # try remesh
-                voxel_size = 3.0
-                adaptivity = 3.0
-                if len(obj.data.polygons)> 5*threshold3:
-                    voxel_size = 5.0
-                    adaptivity = 5.0
+                voxel_size = 5.0
+                adaptivity = 5.0
                 print(f"  > Applying remesh, original face count: {len(obj.data.polygons)}, voxel_size: {voxel_size}")
-                bpy.ops.ed.undo_push()
+                
+                # Create a backup of the mesh data instead of relying on undo
+                mesh_backup = obj.data.copy()
+                
                 apply_remesh_modifiers(obj, voxel_size, adaptivity, modifier_name="Remesh_Faces3")
                 if len(obj.data.polygons)==0:
                     print(f"  > Remesh failed, original face count: {len(obj.data.polygons)}, skipping...")
-                    bpy.ops.ed.undo()
+                    # Restore from backup
+                    failed_mesh = obj.data
+                    obj.data = mesh_backup
+                    # Remove the failed mesh data
+                    bpy.data.meshes.remove(failed_mesh)
+                    
                     success = False
                     continue
+                else:
+                    # Success, remove the backup
+                    bpy.data.meshes.remove(mesh_backup)
+
                 ratio3 = min(threshold3/len(obj.data.polygons), 0.5)
                 print(f"  > Applying third decimation, original face count: {len(obj.data.polygons)}, ratio: {ratio3}")
                 apply_decimate_modifiers(obj, ratio3, modifier_name="Decimate_Faces3")
@@ -271,7 +341,6 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
 
     # Export decimated geometry
     export_usd(output_usd_path)
-    original_usd_path = output_usd_path.replace("instance_renamed_decimated.usd", "instance.usd")
     
     # merge decimated geometry into original hierarchy
     print(f"Merging decimated geometry into original hierarchy...")
@@ -283,7 +352,8 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
     if faces == 0:
         success = False
         print(f"Error: Resulting USD has 0 triangles")
-        os.remove(output_usd_path)
+        if os.path.exists(output_usd_path):
+            os.remove(output_usd_path)
     else:
         print(f"Resulting USD has {faces} triangles.")
         # save a "optimized.txt" file in that folder
@@ -297,7 +367,7 @@ def decimate_usd_meshes(input_usd_path, output_usd_path, ratio=0.1):
         }
 
         # save to info.json
-        with open(os.path.join(os.path.dirname(output_usd_path), "info.json"), "w") as f:
+        with open(info_path, "w") as f:
             json.dump(info, f)
 
 def count_total_faces_in_usd(usd_path):
@@ -313,53 +383,97 @@ def count_total_faces_in_usd(usd_path):
             total_faces += len(obj.data.polygons)
     return total_faces
 
-def decimate_all_usd_in_folder(input_folder, ratio=0.1, worker_id=0, total_workers=1):
-    """Recursively decimate all 'instance_renamed.usd' files in a folder."""
+def decimate_all_usd_in_folder(input_folder, ratio=0.1, worker_id=0, total_workers=1, source="gr"):
+    """Recursively decimate all USD files in a folder."""
     all_files = []
-    for root, dirs, files in os.walk(input_folder):
-        if "instance_renamed.usd" in files:
-            all_files.append((root, files))
+    
+    if source == "gr":
+        for root, dirs, files in os.walk(input_folder):
+            if "instance_renamed.usd" in files:
+                all_files.append((root, files))
+    elif source == "all":
+        for root, dirs, files in os.walk(input_folder):
+            renamed_files = [f for f in files if f.endswith("_renamed.usd")]
+            if renamed_files:
+                all_files.append((root, files))
+
     usd_files = []
     random.shuffle(all_files)
-    pbar = tqdm(all_files, desc="Processing info.json files", maxinterval=0.5)
+    pbar = tqdm(all_files, desc="Checking status", maxinterval=0.5)
+    
     for root, files in pbar:
-        decimation_success = None
-        if "info.json" in files:
-            try:
-                with open(os.path.join(root, "info.json"), "r") as f:
-                    info = json.load(f)
-                    decimation_success = info["decimated_face_count"]>0 and ("instance_renamed_decimated.usd" in files) or ("skipped.txt" in files)
-                    # decimation_success = info["decimation_success"] and info["decimated_face_count"]>0 and ("instance_renamed_decimated.usd" in files) or ("skipped.txt" in files)
-            except Exception as e:
-                print(f"Error loading {os.path.join(root, 'info.json')}: {e}")
-        if decimation_success is None:
-            decimated_face_count = count_total_faces_in_usd(os.path.join(root, "instance_renamed_decimated.usd"))
-            decimation_success = (decimated_face_count is not None) and (decimated_face_count < 30000) or ("skipped.txt" in files)
-            decimated_face_count = 0 if decimated_face_count is None else decimated_face_count
-            info = {
-                "decimated_face_count": decimated_face_count,
-                "decimation_success": decimation_success,
-            }
-        with open(os.path.join(root, "info.json"), "w") as f:
-            json.dump(info, f)
-        if not decimation_success:
-            usd_files.append(os.path.join(root, "instance_renamed.usd"))
+        # Determine targets in this folder
+        targets = []
+        if source == "gr":
+            if "instance_renamed.usd" in files:
+                targets.append("instance_renamed.usd")
+        elif source == "all":
+            targets = [f for f in files if f.endswith("_renamed.usd")]
+            
+        for target_file in targets:
+            base_name = target_file.replace("_renamed.usd", "")
+            # info_file logic
+            if source == "gr":
+                info_filename = "info.json"
+                output_filename = "instance_renamed_decimated.usd"
+            else:
+                info_filename = f"{base_name}_info.json"
+                output_filename = f"{base_name}_decimated.usd"
+                
+            decimation_success = None
+            if info_filename in files:
+                try:
+                    with open(os.path.join(root, info_filename), "r") as f:
+                        info = json.load(f)
+                        decimation_success = info.get("decimated_face_count", 0) > 0 and (output_filename in files) or ("skipped.txt" in files)
+                except Exception as e:
+                    print(f"Error loading {os.path.join(root, info_filename)}: {e}")
+            
+            if decimation_success is None:
+                decimated_face_count = count_total_faces_in_usd(os.path.join(root, output_filename))
+                decimation_success = (decimated_face_count is not None) and (decimated_face_count < 30000) or ("skipped.txt" in files)
+                decimated_face_count = 0 if decimated_face_count is None else decimated_face_count
+                info = {
+                    "decimated_face_count": decimated_face_count,
+                    "decimation_success": decimation_success,
+                }
+                # Update info file just in case
+                with open(os.path.join(root, info_filename), "w") as f:
+                    json.dump(info, f)
+            
+            if not decimation_success:
+                usd_files.append(os.path.join(root, target_file))
+                
     usd_files.sort()
     # Partition files among workers
-    if len(usd_files) < 500:
-        my_files = usd_files
-    else:
-        my_files = [f for i, f in enumerate(usd_files) if i % total_workers == worker_id]
+    # if len(usd_files) < 500:
+    #     my_files = usd_files
+    # else:
+    my_files = [f for i, f in enumerate(usd_files) if i % total_workers == worker_id]
     # shuffle the files
     random.shuffle(my_files)
 
     print(f"TERMINAL: Worker {worker_id}/{total_workers-1} processing {len(my_files)}/{len(usd_files)} USD files in folder: {input_folder}")
 
     for idx, usd_path in tqdm(enumerate(my_files)):
-        output_path = os.path.splitext(usd_path)[0] + "_decimated.usd"
+        # usd_path is like ".../foo_renamed.usd"
+        base_name_ext = os.path.basename(usd_path) # foo_renamed.usd
+        base_name = base_name_ext.replace("_renamed.usd", "") # foo
+        
+        dir_name = os.path.dirname(usd_path)
+        
+        output_path = os.path.join(dir_name, f"{base_name}_decimated.usd")
+        if source == "gr":
+             # Original logic for GR: instance_renamed.usd -> instance.usd
+             original_usd_path = os.path.join(dir_name, "instance.usd")
+             info_path = os.path.join(dir_name, "info.json")
+        else:
+             original_usd_path = os.path.join(dir_name, f"{base_name}.usd")
+             info_path = os.path.join(dir_name, f"{base_name}_info.json")
+
         print(f"[INFO] Worker {worker_id} ({idx}/{len(my_files)}) Decimating: {usd_path} → {output_path}")
         try:
-            decimate_usd_meshes(usd_path, output_path, ratio)
+            decimate_usd_meshes(usd_path, output_path, original_usd_path, info_path, ratio)
         except Exception as e:
             print(f"[ERROR] Worker {worker_id} Failed to process {usd_path}: {e}")
             import traceback
@@ -393,6 +507,11 @@ if __name__ == "__main__":
                         type=int,
                         default=1,
                         help="Total number of workers")
+    parser.add_argument("--source",
+                        type=str,
+                        default="gr",
+                        choices=["gr", "all"],
+                        help="Source type: 'gr' or 'all'")
 
     args = parser.parse_args(argv)
     
@@ -401,10 +520,12 @@ if __name__ == "__main__":
     decimation_ratio = args.ratio
     worker_id = args.worker_id
     total_workers = args.total_workers
+    source = args.source
     
     print(f"[INFO] Input folder: {input_folder}")
     print(f"[INFO] Decimation ratio: {decimation_ratio}")
     print(f"[INFO] Worker ID: {worker_id}, Total Workers: {total_workers}")
+    print(f"[INFO] Source: {source}")
     
     # Main function call
-    decimate_all_usd_in_folder(input_folder, decimation_ratio, worker_id, total_workers)
+    decimate_all_usd_in_folder(input_folder, decimation_ratio, worker_id, total_workers, source)
