@@ -3,9 +3,9 @@ navmesh:
     agent_height: 0.61
     agent_max_climb: 0.2
     agent_max_slope: 45.0
-    agent_radius: 1.1
-    cell_height: 0.1
-    cell_size: 0.1
+    agent_radius: 0.3
+    cell_height: 0.05
+    cell_size: 0.05
     detail_sample_dist: 1.0
     detail_sample_max_error: 1.0
     edge_max_error: 1.3
@@ -18,8 +18,8 @@ navmesh:
     agent_max_climb: 0.2
     agent_max_slope: 45.0
     agent_radius: 0.3
-    cell_height: 0.1
-    cell_size: 0.1
+    cell_height: 0.05
+    cell_size: 0.05
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
     edge_max_error: 0.0
@@ -47,121 +47,121 @@ scene:
     collider: true
     episodes:
       scene0:
-        label: supermarket
         ceiling_height: 1.0
         episode_number: 20
+        label: supermarket
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene0/start_result_navigation.usd
         rule_pattern: gr
       scene1:
-        label: kindergarten
         ceiling_height: 1.0
         episode_number: 20
+        label: kindergarten
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene1/start_result_navigation.usd
         rule_pattern: gr
-      scene2:
-        label: hospital
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene2/start_result_navigation.usd
-        rule_pattern: gr
-      scene3:
-        label: studyroom
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene3/start_result_navigation.usd
-        rule_pattern: gr
-      scene6:
-        label: cafe
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene6/start_result_navigation.usd
-        rule_pattern: gr
-      scene7:
-        label: supermarket
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene7/start_result_navigation.usd
-        rule_pattern: gr
-      scene8:
-        label: kindergarden
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene8/start_result_navigation.usd
-        rule_pattern: gr
-      scene9:
-        label: hospital
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/scene9/start_result_navigation.usd
-        rule_pattern: gr
       scene11:
-        label: hospital
         ceiling_height: 1.0
         episode_number: 20
+        label: hospital
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene11/start_result_navigation.usd
         rule_pattern: gr
       scene13:
-        label: supermarket
         ceiling_height: 1.0
         episode_number: 20
+        label: supermarket
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene13/start_result_navigation.usd
         rule_pattern: gr
-      scene26:
-        label: cafe
+      scene2:
         ceiling_height: 1.0
         episode_number: 20
+        label: hospital
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene2/start_result_navigation.usd
+        rule_pattern: gr
+      scene26:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: cafe
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene26/start_result_navigation.usd
         rule_pattern: gr
       scene27:
-        label: supermarket
         ceiling_height: 1.0
         episode_number: 20
+        label: supermarket
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene27/start_result_navigation.usd
         rule_pattern: gr
       scene29:
-        label: breakroom
         ceiling_height: 1.0
         episode_number: 20
+        label: breakroom
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
+        navmesh_preset: indoor
         path: grscenes_commercial/scenes/scene29/start_result_navigation.usd
+        rule_pattern: gr
+      scene3:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: studyroom
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene3/start_result_navigation.usd
+        rule_pattern: gr
+      scene6:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: cafe
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene6/start_result_navigation.usd
+        rule_pattern: gr
+      scene7:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: supermarket
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene7/start_result_navigation.usd
+        rule_pattern: gr
+      scene8:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: kindergarden
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene8/start_result_navigation.usd
+        rule_pattern: gr
+      scene9:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: hospital
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: indoor
+        path: grscenes_commercial/scenes/scene9/start_result_navigation.usd
         rule_pattern: gr
     scene_scale: 0.009999999776482582
   grHome:
