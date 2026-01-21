@@ -1,6 +1,7 @@
 # python isaac_lab_server_spot_task_generation.py --enable_cameras --scene_folder /home/junzhewu/data/isaac_scenes_v1 --tg_config_path episodes/task_config.yaml --test_id test_generator
 
 import argparse
+from sympy.logic import true
 import torch
 from pathlib import Path
 
@@ -18,6 +19,7 @@ vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
+args.enable_cameras = True
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
@@ -64,22 +66,57 @@ from utils.ui import TaskGeneratorUI
 task_generator_ui = TaskGeneratorUI(vln_sim, task_generator)
 task_generator_ui.update_ui("scene_id", test_episode.scene_id)
 
-# Load scene if specified
-if args.test_scene_id != "none":
-    test_episode = VLNEpisode(task_generator.get_scene_config(args.test_scene_id))
-    task_generator_ui.update_ui("scene_id", test_episode.scene_id)
-    vln_sim.reset(test_episode)
-    vln_sim.step()
+# Generate task
+import os
+import sys
+import signal
+
+try:
+    if args.test_scene_id != "none":
+        scene_id = args.test_scene_id
+        scene_type, scene_name = task_generator.parse_scene_id(scene_id)
+        scene_config = task_generator.task_config['scene'][scene_type]['episodes'][scene_name]
+        test_episode = VLNEpisode(scene_config)
+        task_generator_ui.update_ui("scene_id", scene_id)
+        task_generator.save_status(scene_id, "start")
+
+        # check if task is already generated
+        task_done = task_generator.load_status(scene_id)=="success"
+        if os.path.exists(os.path.join(task_generator.data_folder, scene_id, f"bev_map_{scene_id}.npz")):
+            print(f"[TG] BEV map already exists for {scene_id}")
+            task_done = true
+
+        if task_done:
+            print(f"[TG] Task already generated for {scene_id}, quitting...")
+            task_generator.save_status(scene_id, "success")
+            os.kill(os.getpid(), signal.SIGKILL)
+
+        # otherwise, load scene and generate task
+        task_generator.save_status(scene_id, "load_scene")
+        vln_sim.reset(test_episode)
+        vln_sim.step()
+        # generate BEV map
+        task_generator.save_status(scene_id, "create_bev")
+        task_generator.create_bev_map(scene_id, file_name=f"bev_map_{scene_id}", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
+        for i in range(10000):
+            vln_sim.step()
+            if not task_generator.bev_camera_lock.locked():
+                print(f"[TG] BEV camera job completed")
+                break
+        task_generator.save_status(scene_id, "success")
+except Exception as e:
+    print(f"[TG] Error: {e}")
+    task_generator.save_status(scene_id, "error")
 
 # add test code here
-# task_generator.generate_episodes(test_episode.scene_id)
-task_generator.generate_episodes_auto_goal(test_episode.scene_id)
 # task_generator_ui.setup_navmesh()
 # task_generator_ui.build_navmesh()
+# task_generator.generate_episodes(test_episode.scene_id)
+# task_generator.generate_episodes(test_episode.scene_id)
 
 """Main simulation loop"""
-print("[INFO]: Starting simulation")
-while simulation_app.is_running():
-    vln_sim.step()
+# print("[INFO]: Starting simulation")
+# while simulation_app.is_running():
+#     vln_sim.step()
 
-simulation_app.close()
+os.kill(os.getpid(), signal.SIGKILL)

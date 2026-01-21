@@ -180,10 +180,12 @@ def process_folder_worker(input_folder, scene_log_path, objects_log_path, datase
     target_files = []
     print(f"Scanning {input_folder} for usd files...")
     for root, dirs, files in os.walk(input_folder):
+        if "start_result_navigation.usd" in files:
+            target_files.append(os.path.join(root, "start_result_navigation.usd"))
+            continue
         for file in files:
             if file.endswith(".usd") and not "_renamed.usd" in file and not "_decimated.usd" in file:
                 target_files.append(os.path.join(root, file))
-    
     target_files.sort()
     
     # Filter files for this worker

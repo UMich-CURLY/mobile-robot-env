@@ -30,7 +30,7 @@ def parse_args(parser):
         if key.lower() in args.__dict__ and "--"+key.lower() not in arg_list:
             arg_list += [f"--{key.lower()}", value]
             print(f"Using {key} from .env: {dot_args[key]}")
-    arg_list += ["--kit_args", "--/log/level=error --/log/fileLogLevel=error --/log/outputStreamLevel=error"]
+    arg_list += ["--kit_args", "--/log/level=error --/log/fileLogLevel=error --/log/outputStreamLevel=fatal"]
     print(f"Using kit args: {arg_list}")
     args = parser.parse_args(arg_list)
     return args

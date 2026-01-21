@@ -324,7 +324,7 @@ class TaskGeneratorUI(BaseUI):
             self.ui_episode = VLNEpisode(self.scene_config)
             for key, (value, _) in self.ui_config_map.items():
                 self.set_ui_value(self.ui_config_map, key, self.scene_config[value])
-            print("[UI] Loaded goal rules:", self.scene_config["goal_rules"])
+            print("[UI] Loaded goal rules:", self.scene_config.get("goal_rules", {}))
             print("[UI] Loaded excluded paths:", self.scene_config["navmesh_exclude"])
 
 

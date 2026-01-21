@@ -426,6 +426,7 @@ def decimate_all_usd_in_folder(input_folder, ratio=0.1, worker_id=0, total_worke
                     with open(os.path.join(root, info_filename), "r") as f:
                         info = json.load(f)
                         decimation_success = info.get("decimated_face_count", 0) > 0 and (output_filename in files) or ("skipped.txt" in files)
+                        # decimation_success = info.get("decimated_face_count", 0) > 0 and (output_filename in files) or ("skipped.txt" in files)
                 except Exception as e:
                     print(f"Error loading {os.path.join(root, info_filename)}: {e}")
             
@@ -462,7 +463,13 @@ def decimate_all_usd_in_folder(input_folder, ratio=0.1, worker_id=0, total_worke
         
         dir_name = os.path.dirname(usd_path)
         
-        output_path = os.path.join(dir_name, f"{base_name}_decimated.usd")
+        if source == "gr":
+            info_filename = "info.json"
+            output_filename = "instance_renamed_decimated.usd"
+        else:
+            info_filename = f"{base_name}_info.json"
+            output_filename = f"{base_name}_decimated.usd"
+        output_path = os.path.join(dir_name, output_filename)
         if source == "gr":
              # Original logic for GR: instance_renamed.usd -> instance.usd
              original_usd_path = os.path.join(dir_name, "instance.usd")

@@ -46,154 +46,123 @@ scene:
     align_ground: false
     collider: true
     episodes:
-      cafe:
+      scene0:
+        label: supermarket
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          blanket: blanket/model_[^/]*/Instance$
-          bowl: bowl/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          counter: counter/model_[^/]*/Instance$
-          cup: cup/model_[^/]*/Instance$
-          picture: picture/model_[^/]*/Instance$
-          plate: plate/model_[^/]*/Instance$
-          pot: pot/model_[^/]*/Instance$
-          stool: stool/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toy: toy/model_[^/]*/Instance$
-          tray: tray/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAI8_usd/start_result_navigation.usd
-        rule_pattern: path
-      cafe2:
+        path: grscenes_commercial/scenes/scene0/start_result_navigation.usd
+        rule_pattern: gr
+      scene1:
+        label: kindergarten
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          blanket: blanket/model_[^/]*/Instance$
-          bowl: bowl/model_[^/]*/Instance$
-          coffeemaker: coffeemaker/model_[^/]*/Instance$
-          counter: counter/model_[^/]*/Instance$
-          cup: cup/model_[^/]*/Instance$
-          laptop: laptop/model_[^/]*/Instance$
-          picture: picture/model_[^/]*/Instance$
-          plate: plate/model_[^/]*/Instance$
-          pot: pot/model_[^/]*/Instance$
-          sink: sink/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toy: toy/model_[^/]*/Instance$
-          tray: tray/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAAQ8_usd/start_result_navigation.usd
-        rule_pattern: path
-      hospital:
+        path: grscenes_commercial/scenes/scene1/start_result_navigation.usd
+        rule_pattern: gr
+      scene2:
+        label: hospital
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          cabinet: cabinet/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          counter: counter/model_[^/]*/Instance$
-          cup: cup/model_[^/]*/Instance$
-          faucet: faucet/model_[^/]*/Instance$
-          shelf: shelf/model_[^/]*/Instance$
-          sink: sink/model_[^/]*/Instance$
-          trash_can: trash_can/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADQ8_usd/test_no_ground.usd
-        rule_pattern: path
-      kindergarten:
+        path: grscenes_commercial/scenes/scene2/start_result_navigation.usd
+        rule_pattern: gr
+      scene3:
+        label: studyroom
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          basket: basket/model_[^/]*/Instance$
-          book: book/model_[^/]*/Instance$
-          bookshelf: bookshelf/model_[^/]*/Instance$
-          chair: chair/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          cup: cup/model_[^/]*/Instance$
-          keyboard: keyboard/model_[^/]*/Instance$
-          light: light/model_[^/]*/Instance$
-          pen: pen/model_[^/]*/Instance$
-          plant: plant/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toy: toy/model_[^/]*/Instance$
-          tv: tv/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV5M25QKTKJZ2AABAAAAAEI8_usd/start_result_navigation.usd
-        rule_pattern: path
-      studyRoom:
+        path: grscenes_commercial/scenes/scene3/start_result_navigation.usd
+        rule_pattern: gr
+      scene6:
+        label: cafe
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          book: book/model_[^/]*/Instance$
-          bookshelf: bookshelf/model_[^/]*/Instance$
-          chair: chair/model_[^/]*/Instance$
-          desk: desk/model_[^/]*/Instance$
-          door: door/model_[^/]*/Instance$
-          lamp: lamp/model_[^/]*/Instance$
-          laptop: laptop/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          sofa_chair: sofa_chair/model_[^/]*/Instance$
-          stool: stool/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          teatable: teatable/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
-        rule_pattern: path
-      superMarket:
-        ceiling_height: 18.100000269711018
-        episode_number: 30
-        goal_rules:
-          basket: basket/model_[^/]*/Instance$
-          bookshelf: bookshelf/model_[^/]*/Instance$
-          bottle: bottle/model_[^/]*/Instance$
-          chair: chair/model_[^/]*/Instance$
-          clothes: clothes/model_[^/]*/Instance$
-          coffee_maker: coffee_maker/model_[^/]*/Instance$
-          counter: counter/model_[^/]*/Instance$
-          microwave: microwave/model_[^/]*/Instance$
-          plate: plate/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          shoe: shoe/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          trashcan: trashcan/model_[^/]*/Instance$
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAAEI8_usd/test_no_ground.usd
-        rule_pattern: path
-      superMarket2:
+        path: grscenes_commercial/scenes/scene6/start_result_navigation.usd
+        rule_pattern: gr
+      scene7:
+        label: supermarket
         ceiling_height: 1.0
-        episode_number: 30
-        goal_rules:
-          basket: basket/model_[^/]*/Instance$
-          bookshelf: bookshelf/model_[^/]*/Instance$
-          bowl: bowl/model_[^/]*/Instance$
-          chair: chair/model_[^/]*/Instance$
-          clothes: clothes/model_[^/]*/Instance$
-          counter: counter/model_[^/]*/Instance$
-          microwave: microwave/model_[^/]*/Instance$
-          plate: plate/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          shoppingtrolley: shoppingtrolley/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          towel: towel/model_[^/]*/Instance$
-          trashcan: trashcan/model_[^/]*/Instance$
+        episode_number: 20
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
-        path: grscenes_commercial/scenes/MV4AFHQKTKJZ2AABAAAAADY8_usd/start_result_navigation.usd
-        rule_pattern: path
+        path: grscenes_commercial/scenes/scene7/start_result_navigation.usd
+        rule_pattern: gr
+      scene8:
+        label: kindergarden
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene8/start_result_navigation.usd
+        rule_pattern: gr
+      scene9:
+        label: hospital
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene9/start_result_navigation.usd
+        rule_pattern: gr
+      scene11:
+        label: hospital
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene11/start_result_navigation.usd
+        rule_pattern: gr
+      scene13:
+        label: supermarket
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene13/start_result_navigation.usd
+        rule_pattern: gr
+      scene26:
+        label: cafe
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene26/start_result_navigation.usd
+        rule_pattern: gr
+      scene27:
+        label: supermarket
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene27/start_result_navigation.usd
+        rule_pattern: gr
+      scene29:
+        label: breakroom
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_commercial/scenes/scene29/start_result_navigation.usd
+        rule_pattern: gr
     scene_scale: 0.009999999776482582
   grHome:
     align_ground: false
@@ -201,7 +170,7 @@ scene:
     episodes:
       indoor1:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           bed: bed/model_[^/]*/Instance$
           couch: couch/model_[^/]*/Instance$
@@ -215,7 +184,7 @@ scene:
         rule_pattern: path
       indoor2:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           bed: bed/model_[^/]*/Instance$
           couch: couch/model_[^/]*/Instance$
@@ -229,7 +198,7 @@ scene:
         rule_pattern: path
       indoor3:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           bed: bed/model_[^/]*/Instance$
           couch: couch/model_[^/]*/Instance$
@@ -243,7 +212,7 @@ scene:
         rule_pattern: path
       indoor4:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           bed: bed/model_[^/]*/Instance$
           couch: couch/model_[^/]*/Instance$
@@ -257,7 +226,7 @@ scene:
         rule_pattern: path
       indoor5:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           bed: bed/model_[^/]*/Instance$
           couch: couch/model_[^/]*/Instance$
@@ -276,7 +245,7 @@ scene:
     episodes:
       apartment:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           light_switch: Lighting_Devices.*
@@ -291,7 +260,7 @@ scene:
         rule_pattern: name
       city1:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
@@ -304,7 +273,7 @@ scene:
         rule_pattern: name
       city2:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
@@ -319,7 +288,7 @@ scene:
         rule_pattern: name
       parkmorning:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
@@ -332,7 +301,7 @@ scene:
         rule_pattern: name
       parknight:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
@@ -346,7 +315,7 @@ scene:
         rule_pattern: name
       parktest:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           hydrant: Hydrant_.*
           mailbox: MailboxType.*
@@ -362,7 +331,7 @@ scene:
     episodes:
       generator:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           mesh: mesh
         navmesh_exclude: []
@@ -376,7 +345,7 @@ scene:
     episodes:
       amsterdam:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
@@ -389,7 +358,7 @@ scene:
         rule_pattern: name
       austin:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
@@ -402,7 +371,7 @@ scene:
         rule_pattern: name
       baltimore:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
@@ -415,7 +384,7 @@ scene:
         rule_pattern: name
       barcelona:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
@@ -428,7 +397,7 @@ scene:
         rule_pattern: name
       berlin:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*
@@ -441,7 +410,7 @@ scene:
         rule_pattern: name
       ny:
         ceiling_height: 1.0
-        episode_number: 30
+        episode_number: 20
         goal_rules:
           city_bench: .*Bench.*
           sign: .*sign.*

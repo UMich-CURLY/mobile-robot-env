@@ -42,11 +42,14 @@ class TaskGenerator:
         self.current_episode = None
         self.current_episode_start_time = None
         self.check_status_callback = None
+        self.data_folder = os.path.join(args.scene_folder, "episode_data")
+        os.makedirs(self.data_folder, exist_ok=True)
+        os.makedirs(os.path.join(self.data_folder, "status"), exist_ok=True)
 
     def parse_config(self, task_config):
         self.scene_id_list = []
         self.navmesh_preset_list = [*task_config['navmesh'].keys()]
-        self.rule_pattern_list = ["path", "name"]
+        self.rule_pattern_list = ["path", "name", "gr", "vc"]
         for scene_type, scene in task_config['scene'].items():
             self.scene_id_list.extend([f'{scene_type}_{x}' for x in scene['episodes'].keys()])
         # set default value
@@ -57,14 +60,14 @@ class TaskGenerator:
                 if not hasattr(scene_config, "ceiling_height"):
                     scene_config["ceiling_height"] = 1.0
 
-    def _parse_scene_id(self, scene_id):
+    def parse_scene_id(self, scene_id):
         scene_type = scene_id.split('_')[0]
         scene_name = scene_id[len(scene_type)+1:]
         return scene_type, scene_name
 
     def get_scene_config(self, scene_id):
         # merge scene_type config (e.g., nv) with scene config (e.g., nv_apartment)
-        scene_type, scene_name = self._parse_scene_id(scene_id)
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         scene_config = deepcopy(self.task_config['scene'][scene_type])
         scene_config.update(scene_config['episodes'][scene_name])
         del scene_config['episodes']
@@ -74,7 +77,7 @@ class TaskGenerator:
     
     def update_config(self, scene_config):
         scene_id = scene_config['scene_id']
-        scene_type, scene_name = self._parse_scene_id(scene_id)
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         scene_type_config = self.task_config['scene'][scene_type]
         scene_name_config = scene_type_config['episodes'][scene_name]
         # update by key
@@ -233,7 +236,7 @@ class TaskGenerator:
         print(f'Loaded {len(self.prim_list)} prims')
         self.goal_dict = {}
         total_goal_found = 0
-        for goal, goal_rule in self.scene_config['goal_rules'].items():
+        for goal, goal_rule in self.scene_config.get("goal_rules", {}).items():
             if self.rule_pattern == "path":
                 # Convert prim path to string and normalize path separators
                 goal_prim = []
@@ -242,13 +245,15 @@ class TaskGenerator:
                     if re.search(goal_rule, prim_path_str):
                         goal_prim.append(x)
                         print(f"  Matched: {prim_path_str}")
-            else:
+            elif self.rule_pattern == "name":
                 goal_prim = [x for x in self.prim_list if re.search(goal_rule, x.GetName())]
             self.goal_dict[goal] = {
                 'prim': goal_prim,
             }
             print(f'[TG] Found {len(goal_prim)} {goal}')
             total_goal_found += len(goal_prim)
+        if self.rule_pattern == "gr":
+            pass
         print(f'[TG] Total goal found: {total_goal_found}')
         return total_goal_found
     
@@ -347,7 +352,7 @@ class TaskGenerator:
         return generated_episodes
     
     def get_world_bb(self, scene_id):
-        scene_type, scene_name = self._parse_scene_id(scene_id)
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         navmesh_exclude = self.task_config["scene"][scene_type]["episodes"][scene_name]["navmesh_exclude"]
         for prim_path in navmesh_exclude:
             exclude_prim = self.manager_env.scene.stage.GetPrimAtPath(prim_path)
@@ -407,7 +412,6 @@ class TaskGenerator:
         """
         # init task queue and lock if not initialized
         if not hasattr(self, 'check_bev_map_queue'):
-            self.create_bev_camera(scene_id)
             self.bev_camera_queue = Queue()
             self.bev_camera_lock = Lock()
             def check_bev_map_queue():
@@ -419,6 +423,38 @@ class TaskGenerator:
             self.check_bev_map_queue = check_bev_map_queue
         # add task to queue
         self.bev_camera_queue.put((scene_id, file_name, clip_range, ceiling_height))
+
+    def _create_bev_map(self, scene_id, file_name, clip_range, ceiling_height):
+        self.bev_camera_lock.acquire()
+        self.create_bev_camera(scene_id)
+        # update camera
+        if ceiling_height is None:
+            scene_config = self.get_scene_config(scene_id)
+            ceiling_height = scene_config.get("ceiling_height", 1.0)
+        self.update_bev_camera_clip(scene_id, clip_range, ceiling_height)
+        # hide robot
+        robot_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/envs/env_0/Robot")
+        prim_utils.set_prim_visibility(robot_prim, False)
+        def save_bev_map():
+            try:
+                if self.bev_camera.frame>-1 and self.env.env_step>3:
+                    rgb = self.bev_camera.data.output['rgba'].cpu().numpy()[0]
+                    depth = self.bev_camera.data.output['distance_to_image_plane'].cpu().numpy()[0]
+                    data_folder = f"{self.data_folder}/{scene_id}"
+                    os.makedirs(data_folder, exist_ok=True)
+                    np.savez(f"{data_folder}/{file_name}.npz", rgb=rgb, depth=depth)
+                    cv2.imwrite(f"{data_folder}/{file_name}_rgb.png", rgb[...,[2,1,0,3]])
+                    cv2.imwrite(f"{data_folder}/{file_name}_depth.png", depth)
+                    print(f"[TG] Saved BEV map to {data_folder}/{file_name}")
+                    prim_utils.set_prim_visibility(robot_prim, True)
+                    self.vln_sim.remove_callback('step_finished', save_bev_map)
+                    self.bev_camera_lock.release()
+                    prim_utils.delete_prim(self.bev_camera.cfg.prim_path)
+                else:
+                    print(f"[TG] BEV camera is not initialized yet, frame: {self.bev_camera.frame}, env_step: {self.env.env_step}")
+            except Exception as e:
+                print(f"[TG] Error saving BEV map: {e}")
+        self.vln_sim.add_callback('step_finished', save_bev_map)
 
     def update_bev_camera_clip(self, scene_id, clip_range, ceiling_height):
         print(f"[TG] Clip bev camera to {clip_range} with ceiling height {ceiling_height}")
@@ -437,38 +473,27 @@ class TaskGenerator:
         clipping_range[1] = clipping_range_max
         camera_prim.GetAttribute('clippingRange').Set(clipping_range)
         # update task config
-        scene_type, scene_name = self._parse_scene_id(scene_id)
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         self.task_config["scene"][scene_type]["episodes"][scene_name]["ceiling_height"] = ceiling_height
+    def save_status(self, scene_id, status):
+        status_file = os.path.join(self.data_folder, "status", f"{scene_id}.json")
+        print(f"[TG] Saving status to {status_file}")
+        status_data = {}
+        if os.path.exists(status_file):
+            with open(status_file, 'r') as f:
+                try:
+                    status_data = json.load(f)
+                except json.JSONDecodeError:
+                    pass
 
-    def _create_bev_map(self, scene_id, file_name, clip_range, ceiling_height):
-        self.bev_camera_lock.acquire()
-        # hide ceiling
-        # if not hasattr(self, 'ceiling_data') or self.ceiling_data["scene_id"] != scene_id or not self.ceiling_data["prim_hidden"]:
-        #     self.toggle_ceiling(scene_id)
-        # update camera
-        if ceiling_height is None:
-            scene_config = self.get_scene_config(scene_id)
-            ceiling_height = scene_config.get("ceiling_height", 1.0)
-        self.update_bev_camera_clip(scene_id, clip_range, ceiling_height)
-        # hide robot
-        robot_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/envs/env_0/Robot")
-        prim_utils.set_prim_visibility(robot_prim, False)
-        def save_bev_map():
-            try:
-                if self.bev_camera.frame>-1 and self.env.env_step>5:
-                    rgb = self.bev_camera.data.output['rgba'].cpu().numpy()[0]
-                    depth = self.bev_camera.data.output['distance_to_image_plane'].cpu().numpy()[0]
-                    data_folder = f"{self.args.scene_folder}/episode_data/{scene_id}"
-                    os.makedirs(data_folder, exist_ok=True)
-                    np.savez(f"{data_folder}/{file_name}.npz", rgb=rgb, depth=depth)
-                    cv2.imwrite(f"{data_folder}/rgb.png", rgb[...,[2,1,0,3]])
-                    cv2.imwrite(f"{data_folder}/depth.png", depth)
-                    print(f"[TG] Saved BEV map to {data_folder}/{file_name}.npz")
-                    prim_utils.set_prim_visibility(robot_prim, True)
-                    self.vln_sim.remove_callback('step_finished', save_bev_map)
-                    self.bev_camera_lock.release()
-                else:
-                    print(f"[TG] BEV camera is not initialized yet, frame: {self.bev_camera.frame}, env_step: {self.env.env_step}")
-            except Exception as e:
-                print(f"[TG] Error saving BEV map: {e}")
-        self.vln_sim.add_callback('step_finished', save_bev_map)
+        status_data[scene_id] = status
+        
+        with open(status_file, 'w') as f:
+            json.dump(status_data, f)
+    def load_status(self, scene_id):
+        status_file = os.path.join(self.data_folder, "status", f"{scene_id}.json")
+        if not os.path.exists(status_file):
+            return None
+        with open(status_file, 'r') as f:
+            status_data = json.load(f)
+            return status_data.get(scene_id, None)

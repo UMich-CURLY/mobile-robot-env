@@ -212,7 +212,7 @@ class VLNEnvWrapper:
                     actions = self.low_level_policy(self.low_level_obs)
                     low_level_obs, _, _, infos = self.env.step(actions)
                 self.scene.terrain.terrain_prim_paths.pop(0)
-            print(f"Waiting for previous scene to be removed...")
+            print(f"[ENV] Waiting for previous scene to be removed...")
             # load new scene
             load_scene(self.manager_env.cfg, self.args, self.episode)
             self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)

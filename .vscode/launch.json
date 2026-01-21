@@ -11,7 +11,6 @@
             "args": [
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
-                "--enable_cameras",
                 "--foxglove_port",
                 "4934",
                 "--episode_label",
@@ -25,12 +24,11 @@
             "program": "${workspaceFolder}/isaac_lab_server_spot_task_generation.py",
             "console": "integratedTerminal",
             "args": [
-                "--enable_cameras",
                 "--tg_config_path",
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_scene_id",
                 // "nv_apartment"
-                "nv_parkmorning"
+                "grCommercial_scene0"
             ],
             "envFile": "${workspaceFolder}/.env"
         },

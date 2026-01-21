@@ -82,12 +82,11 @@ class VLNSim:
             self.visualizer = FoxgloveVisualizer(host=args.host, port=args.foxglove_port)
         else:
             self.visualizer = None
-
+    
     def init_env(self):
         print("[SIM] Initializing Isaac Lab environment...")
         if self.next_episode is None:
             raise ValueError("Current episode must be set before initializing the environment")
-
         # isaac lab manager
         args = self.args
         env_cfg = SpotRoughEnvCfg_PLAY()
