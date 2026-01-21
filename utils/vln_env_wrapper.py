@@ -263,12 +263,11 @@ class VLNEnvWrapper:
         for i in range(self.num_envs):
             self.set_stop_called(i, False)
 
-        pbar = tqdm(range(warmup_steps))
-        for i in pbar:
+        for i in range(warmup_steps):
             if i==0:
-                pbar.set_description("Resetting environment")
-            else:
-                pbar.set_description("Warmup")
+                print("Resetting environment...")
+            elif i%10==0:
+                print(f"Warmup {i} / {warmup_steps}...")
             self.update_command(zero_cmd)
             actions = self.low_level_policy(self.low_level_obs)
             low_level_obs, _, _, infos = self.env.step(actions)

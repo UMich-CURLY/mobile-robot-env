@@ -54,10 +54,10 @@ echo -e "\n=== Step 1: IsaacLab preprocessing finished successfully ===\n"
 
 # Step 2: Run face decimation in Blender with auto-restart on crash or hang
 SCRIPT="decimate_usd_models_face_blender.py"
-MAX_IDLE=180   # seconds of no output before killing
+MAX_IDLE=300   # seconds of no output before killing
 MEM_LIMIT="3G"  # memory limit for Blender process
 RATIO=0.1  # default decimation ratio
-NUM_WORKERS=10
+NUM_WORKERS=5
 
 echo -e "\n=== Step 2: Running Blender face decimation with $NUM_WORKERS workers ===\n"
 

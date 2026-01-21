@@ -168,76 +168,141 @@ scene:
     align_ground: false
     collider: false
     episodes:
-      indoor1:
+      scene2:
+        label: none
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: indoor
-        path: grscenes_home/scenes/MVUHLWYKTKJ5EAABAAAAAAY8_usd/test_no_ground.usd
-        rule_pattern: path
-      indoor2:
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene2/start_result_navigation.usd
+        rule_pattern: gr
+      scene4:
+        label: none
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: indoor
-        path: grscenes_home/scenes/MWAX5JYKTKJZ2AABAAAAABI8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor3:
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene4/start_result_navigation.usd
+        rule_pattern: gr
+      scene5:
+        label: none
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: indoor
-        path: grscenes_home/scenes/MVUCSQAKTKJ5EAABAAAAABA8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor4:
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene5/start_result_navigation.usd
+        rule_pattern: gr
+      scene12:
+        label: none
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: indoor
-        path: grscenes_home/scenes/MV7J6NIKTKJZ2AABAAAAAEA8_usd/start_result_navigation.usd
-        rule_pattern: path
-      indoor5:
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene12/start_result_navigation.usd
+        rule_pattern: gr
+      scene13:
+        label: none
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          bed: bed/model_[^/]*/Instance$
-          couch: couch/model_[^/]*/Instance$
-          refrigerator: refrigerator/model_[^/]*/Instance$
-          table: table/model_[^/]*/Instance$
-          toilet: toilet/model_[^/]*/Instance$
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: indoor
-        path: grscenes_home/scenes/MVUHL5YKTKJ5EAABAAAAAAA8_usd/start_result_navigation.usd
-        rule_pattern: path
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene13/start_result_navigation.usd
+        rule_pattern: gr
+      scene21:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene21/start_result_navigation.usd
+        rule_pattern: gr
+      scene22:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene22/start_result_navigation.usd
+        rule_pattern: gr
+      scene33:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene33/start_result_navigation.usd
+        rule_pattern: gr
+      scene40:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene40/start_result_navigation.usd
+        rule_pattern: gr
+      scene41:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene41/start_result_navigation.usd
+        rule_pattern: gr
+      scene48:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene48/start_result_navigation.usd
+        rule_pattern: gr
+      scene58:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene58/start_result_navigation.usd
+        rule_pattern: gr
+      scene59:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene59/start_result_navigation.usd
+        rule_pattern: gr
+      scene66:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene66/start_result_navigation.usd
+        rule_pattern: gr
+      scene67:
+        label: none
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene67/start_result_navigation.usd
+        rule_pattern: gr
     scene_scale: 0.009999999776482582
   nv:
     align_ground: true

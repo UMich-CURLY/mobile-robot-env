@@ -100,7 +100,7 @@ class VLNTerminationsCfg:
         func=robot_stuck,
         params={
             "asset_cfg": SceneEntityCfg("robot"),
-            "max_time": 15.0,
+            "max_time": 10.0,
             "label": "stuck",
             "dist_threshold": 0.05,
             "vel_threshold": 0.01,

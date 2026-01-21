@@ -104,8 +104,18 @@ class TaskGenerator:
         # load scene config
         self.env.env.cfg.sim.render_interval = 50
         self.scene_config = self.get_scene_config(scene_id)
-        self.num_episodes = self.scene_config['episode_number']
         self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
+        self.num_episodes = self.scene_config['episode_number']
+
+        # check how many episodes to generate
+        # read episode file
+        episode_path = f"episodes/{self.scene_config['scene_id']}.json"
+        if os.path.exists(episode_path):
+            with open(episode_path, 'r') as f:
+                episodes = json.load(f)
+        else:
+            episodes = []
+
         # requirements
         self.min_path_length = 5.0
         self.max_path_length = 50.0
@@ -119,7 +129,7 @@ class TaskGenerator:
             return []
         print(f'[TG] Generating {self.num_episodes} episodes')
         self.vln_sim.visualize_waypoints = True
-        self.generated_episodes = []
+        self.generated_episodes = episodes
         self.generate_finished = False
         self._generate_episodes()
 
@@ -164,7 +174,7 @@ class TaskGenerator:
         print(f'[TG] Checking episode {self.current_episode.episode_id}')
         print(f'[TG] target: {self.current_episode["objnav"]}, path length: {self.current_episode["goals"][0]["path_length"]:.2f}m')
 
-        data_folder = f"{self.args.scene_folder}/episode_data/{self.current_episode.episode_label}"
+        data_folder = f"{self.args.scene_folder}/episode_data/{self.current_episode.scene_id}/episode_{self.current_episode.episode_id}"
         pose_path = f"{data_folder}/pose.txt"
         # remove data folder if exists
         if os.path.exists(data_folder):
@@ -266,14 +276,22 @@ class TaskGenerator:
         if self.rule_pattern == "gr":
             for x in self.prim_list:
                 prim_path_str = str(x.GetPrimPath())
-                match_result = re.search(r"/([^/]*?)/(model_[^/]*)/Instance$", prim_path_str)
+                match_result = re.search(r"/(Furnitures|Animation)/([^/]*?)/(model_[^/]*)/Instance$", prim_path_str)
                 if match_result:
-                    goal = match_result.group(1)
-                    object_name = match_result.group(2)
+                    goal = match_result.group(2)
+                    object_name = match_result.group(3)
+                    if goal in ["other", "box", "bottle", "person"]:
+                        continue
                     self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
-                    print(f"  Matched: {goal} {object_name}")
                     total_goal_found += 1
+            new_goal_dict = {}
+            for goal, goal_item in self.goal_dict.items():
+                if len(goal_item['prim'])<=8:
+                    new_goal_dict[goal] = goal_item
+            self.goal_dict = new_goal_dict
         print(f'[TG] Total goal found: {total_goal_found}')
+        for goal, goal_item in self.goal_dict.items():
+            print(f"  Found {len(goal_item['prim'])} {goal}")
         return total_goal_found
     
     def check_navmesh(self, scene_id):
@@ -309,7 +327,7 @@ class TaskGenerator:
             random_goal = np.random.choice(list(unique_goals))
             sampled_goals.append(random_goal)
             unique_goals.remove(random_goal)
-        sampled_goals = sorted(sampled_goals)
+        # sampled_goals = sorted(sampled_goals)
         # generate paths from random points to each goal
         generated_episodes = []
         pbar = tqdm(sampled_goals, desc="Generating episodes")
@@ -335,7 +353,7 @@ class TaskGenerator:
                         if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
                             continue
                         # skip if the path is too short or too long
-                        path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start + dist_to_end
+                        path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start
                         if path_length < self.min_path_length:
                             continue
                         if path_length > self.max_path_length:
@@ -420,6 +438,8 @@ class TaskGenerator:
         padding = 1.0
         image_width = min(int((world_size[0]+padding*2) * 100), 3840)
         image_height = int(image_width * world_size[1] / world_size[0])
+        self.px_per_meter = image_width / (world_size[0]+padding*2)
+        self.world_center = world_center
         self.bev_camera = self.env.create_camera(
             prim_path="/World/bev_camera",
             perspective=False,
@@ -473,6 +493,12 @@ class TaskGenerator:
                     np.savez(f"{data_folder}/{file_name}.npz", rgb=rgb, depth=depth)
                     cv2.imwrite(f"{data_folder}/{file_name}_rgb.png", rgb[...,[2,1,0,3]])
                     cv2.imwrite(f"{data_folder}/{file_name}_depth.png", depth)
+                    with open(f"{data_folder}/{file_name}_info.txt", 'w') as f:
+                        info = {
+                            "px_per_meter": self.px_per_meter,
+                            "world_center": self.world_center.tolist()
+                        }
+                        json.dump(info, f)
                     print(f"[TG] Saved BEV map to {data_folder}/{file_name}")
                     prim_utils.set_prim_visibility(robot_prim, True)
                     self.vln_sim.remove_callback('step_finished', save_bev_map)

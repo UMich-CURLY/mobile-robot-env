@@ -251,6 +251,11 @@ class VLNSim:
         """Waypoint should be in the format of [x, y, yaw], set yaw to inf if angle is ignored"""
         self.waypoints = waypoints
         self.waypoint_follower.reset()
+    
+    def generate_astar_path(self, scene_id, ref_path):
+        # load bev image
+        bev_data = np.load(f"{self.args.scene_folder}/episode_data/{scene_id}/bev_map.npz")
+        rgb, depth = bev_data['rgb'], bev_data['depth'][:,:,0]
 
     def set_ref_waypoints(self, episode):
         measure_manager = add_measurement(self.env, episode, measure_names=["DistanceToGoal", "ClosestGoal"])

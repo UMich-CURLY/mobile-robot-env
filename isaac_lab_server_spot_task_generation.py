@@ -91,7 +91,7 @@ try:
             vln_sim.step()
         # generate BEV map
         with task_generator.timing_status(scene_id, "create_bev"):
-            task_generator.create_bev_map(scene_id, file_name=f"bev_map_{scene_id}", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
+            task_generator.create_bev_map(scene_id, file_name=f"bev_map", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
             for i in range(10000):
                 vln_sim.step()
                 if not task_generator.bev_camera_lock.locked():
@@ -101,10 +101,11 @@ try:
         #     task_generator.check_navmesh(scene_id)
         with task_generator.timing_status(scene_id, "generate_episodes"):
             task_generator.generate_episodes(scene_id)
-        while True:
-            vln_sim.step()
-            if task_generator.generate_finished:
-                break
+            while True:
+                vln_sim.step()
+                if task_generator.generate_finished:
+                    break
+        task_generator.save_status(scene_id, status="success")
 except Exception as e:
     print(f"[TG] Error: {e}")
     task_generator.save_status(scene_id, status="error", error=str(e))
