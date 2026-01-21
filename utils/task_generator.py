@@ -111,6 +111,7 @@ class TaskGenerator:
         self.max_path_length = 50.0
         self.min_duration = 5.0
         self.timeout = 100.0
+        self.total_samples = 0
         # generate task
         total_goal_found = self.parse_scene()
         if total_goal_found == 0:
@@ -123,9 +124,10 @@ class TaskGenerator:
         self._generate_episodes()
 
     def _generate_episodes(self):
-        if len(self.generated_episodes) < self.num_episodes:
+        if len(self.generated_episodes) < self.num_episodes or self.total_samples >= 5*self.num_episodes:
             new_episodes = self.sample_episodes(self.num_episodes)
             print(f'[TG] Sampled {len(new_episodes)} episodes')
+            self.total_samples += len(new_episodes)
             self.check_episodes(new_episodes)
         else:
             self.generate_finished = True
