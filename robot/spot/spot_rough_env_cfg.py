@@ -102,7 +102,7 @@ class CameraPolicyCfg(ObsGroup):
     pov_pose = ObsTerm(func=camera_info, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
     pov_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "distance_to_image_plane"})
     # height_scanner = ObsTerm(func=mdp.height_scan, params={"sensor_cfg": SceneEntityCfg("height_scanner")})
-    # third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb"})
+    third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb", "normalize": False})
 
     def __post_init__(self):
         self.enable_corruption = False
@@ -411,7 +411,7 @@ class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
             width=640,
             data_types=["rgb", "distance_to_image_plane"],
             spawn=sim_utils.PinholeCameraCfg(
-                focal_length=24.0,
+                focal_length=12.0,
                 horizontal_aperture=20.955,
                 clipping_range=(0.1, 1000.0),
             ),

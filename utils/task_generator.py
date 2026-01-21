@@ -170,7 +170,8 @@ class TaskGenerator:
         if os.path.exists(data_folder):
             shutil.rmtree(data_folder, ignore_errors=True)
         os.makedirs(data_folder, exist_ok=True)
-        os.makedirs(f"{data_folder}/rgb", exist_ok=True)
+        os.makedirs(f"{data_folder}/pov_rgb", exist_ok=True)
+        os.makedirs(f"{data_folder}/third_person_rgb", exist_ok=True)
         print(f'[TG] Saving data to {data_folder}')
 
         # Create new callback for this episode
@@ -184,8 +185,10 @@ class TaskGenerator:
             if self.vln_sim.obs_index%img_saving_interval == 0:
                 # save rgb image
                 img_index = self.vln_sim.obs_index//img_saving_interval
-                img_path = f"{data_folder}/rgb/{img_index}.png"
+                img_path = f"{data_folder}/pov_rgb/{img_index}.png"
                 cv2.imwrite(img_path, self.vln_sim.obs["pov_rgb"].cpu().numpy()[0][...,::-1])
+                img_path = f"{data_folder}/third_person_rgb/{img_index}.png"
+                cv2.imwrite(img_path, self.vln_sim.obs["third_person_rgb"].cpu().numpy()[0][...,::-1])
                 # append pose to txt
                 # TODO: change this to waypoints
                 with open(pose_path, 'a') as f:
