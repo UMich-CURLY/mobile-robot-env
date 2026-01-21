@@ -119,6 +119,7 @@ class TaskGenerator:
         print(f'[TG] Generating {self.num_episodes} episodes')
         self.vln_sim.visualize_waypoints = True
         self.generated_episodes = []
+        self.generate_finished = False
         self._generate_episodes()
 
     def _generate_episodes(self):
@@ -127,6 +128,7 @@ class TaskGenerator:
             print(f'[TG] Sampled {len(new_episodes)} episodes')
             self.check_episodes(new_episodes)
         else:
+            self.generate_finished = True
             self.stop_generation()
             print(f'[TG] All {self.num_episodes} episodes generated!!!')
     

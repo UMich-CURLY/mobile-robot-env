@@ -70,45 +70,49 @@ import os
 import sys
 import signal
 
-# try:
-#     if args.test_scene_id != "none":
-#         scene_id = args.test_scene_id
-#         scene_config = task_generator.get_scene_config(scene_id)
-#         test_episode = VLNEpisode(scene_config)
-#         task_generator_ui.update_ui("scene_id", scene_id)
-#         task_generator.save_status(scene_id, status="start")
+try:
+    if args.test_scene_id != "none":
+        scene_id = args.test_scene_id
+        scene_config = task_generator.get_scene_config(scene_id)
+        test_episode = VLNEpisode(scene_config)
+        task_generator_ui.update_ui("scene_id", scene_id)
+        task_generator.save_status(scene_id, status="start")
 
-#         # check if task is already generated
-#         task_done = task_generator.load_status(scene_id)=="success"
-#         if task_done:
-#             print(f"[TG] Task already generated for {scene_id}, quitting...")
-#             task_generator.save_status(scene_id, status="success")
-#             os.kill(os.getpid(), signal.SIGKILL)
+        # check if task is already generated
+        task_done = task_generator.load_status(scene_id)=="success"
+        if task_done:
+            print(f"[TG] Task already generated for {scene_id}, quitting...")
+            task_generator.save_status(scene_id, status="success")
+            os.kill(os.getpid(), signal.SIGKILL)
 
-#         # otherwise, load scene and generate task
-#         with task_generator.timing_status(scene_id, "load_scene"):
-#             vln_sim.reset(test_episode)
-#             vln_sim.step()
-#         # generate BEV map
-#         with task_generator.timing_status(scene_id, "create_bev"):
-#             task_generator.create_bev_map(scene_id, file_name=f"bev_map_{scene_id}", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
-#             for i in range(10000):
-#                 vln_sim.step()
-#                 if not task_generator.bev_camera_lock.locked():
-#                     print(f"[TG] BEV camera job completed")
-#                     break
-#         # with task_generator.timing_status(scene_id, "check_navmesh"):
-#         #     task_generator.check_navmesh(scene_id)
-#         with task_generator.timing_status(scene_id, "generate_episodes"):
-#             task_generator.generate_episodes(scene_id)
-# except Exception as e:
-#     print(f"[TG] Error: {e}")
-#     task_generator.save_status(scene_id, status="error", error=str(e))
-#     raise e
+        # otherwise, load scene and generate task
+        with task_generator.timing_status(scene_id, "load_scene"):
+            vln_sim.reset(test_episode)
+            vln_sim.step()
+        # generate BEV map
+        with task_generator.timing_status(scene_id, "create_bev"):
+            task_generator.create_bev_map(scene_id, file_name=f"bev_map_{scene_id}", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
+            for i in range(10000):
+                vln_sim.step()
+                if not task_generator.bev_camera_lock.locked():
+                    print(f"[TG] BEV camera job completed")
+                    break
+        # with task_generator.timing_status(scene_id, "check_navmesh"):
+        #     task_generator.check_navmesh(scene_id)
+        with task_generator.timing_status(scene_id, "generate_episodes"):
+            task_generator.generate_episodes(scene_id)
+        while True:
+            vln_sim.step()
+            if task_generator.generate_finished:
+                break
+except Exception as e:
+    print(f"[TG] Error: {e}")
+    task_generator.save_status(scene_id, status="error", error=str(e))
+    raise e
 
 """Main simulation loop"""
-print("[INFO]: Starting simulation")
-while simulation_app.is_running():
-    vln_sim.step()
+# print("[INFO]: Starting simulation")
+# while simulation_app.is_running():
+#     vln_sim.step()
 
 os.kill(os.getpid(), signal.SIGKILL)
