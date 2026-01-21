@@ -106,6 +106,14 @@ def worker(worker_id, port_number):
             env = os.environ.copy()
             env["PYTHONUNBUFFERED"] = "1"
 
+            # Set CUDA_VISIBLE_DEVICES
+            num_gpus = torch.cuda.device_count()
+            if num_gpus > 0:
+                gpu_id = worker_id % num_gpus
+                env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+                print(f"[worker {worker_id}] Using GPU: {gpu_id}")
+                log_file.write(f"[worker {worker_id}] Using GPU: {gpu_id}\n")
+
             process = None
             try:
                 process = subprocess.Popen(

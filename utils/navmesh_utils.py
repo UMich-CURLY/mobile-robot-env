@@ -178,6 +178,13 @@ class NavmeshInterface:
         # recast, then, we will convert it back to y_up (all functions will need to do that)
         self.z_up = up_axis == 'Z'
     
+    def _snake_to_camel(self, s):
+        parts = s.split('_')
+        return parts[0].lower() + ''.join(word.capitalize() for word in parts[1:])
+    
+    def _camel_to_snake(self, s):
+        return ''.join(['_' + char.lower() if char.isupper() else char for char in s]).lstrip('_')
+
     def update_settings(self, settings):
         for key, value in settings.items():
             self.settings[self._snake_to_camel(key)] = value

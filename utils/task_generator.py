@@ -7,6 +7,7 @@ import re
 import sys
 import shutil
 import time
+import contextlib
 import numpy as np
 from collections import deque
 import cv2
@@ -101,10 +102,11 @@ class TaskGenerator:
 
     def generate_episodes(self, scene_id):
         # load scene config
+        self.env.env.cfg.sim.render_interval = 50
         self.scene_config = self.get_scene_config(scene_id)
         self.num_episodes = self.scene_config['episode_number']
         self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
-        # requiirements
+        # requirements
         self.min_path_length = 5.0
         self.max_path_length = 50.0
         self.min_duration = 5.0
@@ -125,6 +127,7 @@ class TaskGenerator:
             print(f'[TG] Sampled {len(new_episodes)} episodes')
             self.check_episodes(new_episodes)
         else:
+            self.stop_generation()
             print(f'[TG] All {self.num_episodes} episodes generated!!!')
     
     def stop_generation(self):
@@ -133,6 +136,7 @@ class TaskGenerator:
             self.check_status_callback = None
             print(f'[TG] Generation stopped')
         self.vln_sim.clear_waypoints()
+        self.env.env.cfg.sim.render_interval = 5
 
     def check_episodes(self, episodes):
         """
@@ -241,7 +245,7 @@ class TaskGenerator:
                 # Convert prim path to string and normalize path separators
                 goal_prim = []
                 for x in self.prim_list:
-                    prim_path_str = str(x.GetPrimPath()).replace('\\', '/')
+                    prim_path_str = str(x.GetPrimPath())
                     if re.search(goal_rule, prim_path_str):
                         goal_prim.append(x)
                         print(f"  Matched: {prim_path_str}")
@@ -253,24 +257,41 @@ class TaskGenerator:
             print(f'[TG] Found {len(goal_prim)} {goal}')
             total_goal_found += len(goal_prim)
         if self.rule_pattern == "gr":
-            pass
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/([^/]*?)/(model_[^/]*)/Instance$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    object_name = match_result.group(2)
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+                    print(f"  Matched: {goal} {object_name}")
+                    total_goal_found += 1
         print(f'[TG] Total goal found: {total_goal_found}')
         return total_goal_found
     
-    def sample_episodes(self, num_episodes):
+    def check_navmesh(self, scene_id):
+        scene_config = self.get_scene_config(scene_id)
         navmesh_interface = self.navmesh_interface
+        navmesh_interface.update_settings(self.task_config['navmesh'][scene_config['navmesh_preset']])
         scene_folder = Path(self.args.scene_folder)
-        navmesh_path = str(scene_folder / f"navmesh/{self.scene_config['scene_id']}_navmesh.bin")
+        os.makedirs(scene_folder / "navmesh", exist_ok=True)
+        navmesh_path = str(scene_folder / f"navmesh/{scene_config['scene_id']}_navmesh.bin")
         if os.path.exists(navmesh_path):
+            print(f"[TG] Navmesh found, loading...")
             navmesh_interface.load_navmesh(navmesh_path)
         else:
+            print(f"[TG] Navmesh not found, building...")
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths, self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=self.scene_config.get("scene_type"))
+            navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=scene_config.get("scene_type"))
             navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[TG] Navmesh build time: {end_time - start_time:.2f} seconds")
             navmesh_interface.save_navmesh(navmesh_path)
+    
+    def sample_episodes(self, num_episodes):
+        self.check_navmesh(self.scene_config['scene_id'])
+        navmesh_interface = self.navmesh_interface
 
         # sample goals uniformly
         unique_goals = []
@@ -475,9 +496,9 @@ class TaskGenerator:
         # update task config
         scene_type, scene_name = self.parse_scene_id(scene_id)
         self.task_config["scene"][scene_type]["episodes"][scene_name]["ceiling_height"] = ceiling_height
-    def save_status(self, scene_id, status):
+
+    def save_status(self, scene_id, **kwargs):
         status_file = os.path.join(self.data_folder, "status", f"{scene_id}.json")
-        print(f"[TG] Saving status to {status_file}")
         status_data = {}
         if os.path.exists(status_file):
             with open(status_file, 'r') as f:
@@ -486,14 +507,35 @@ class TaskGenerator:
                 except json.JSONDecodeError:
                     pass
 
-        status_data[scene_id] = status
+        status_data.update(kwargs)
         
         with open(status_file, 'w') as f:
             json.dump(status_data, f)
+
+    def timing_status(self, scene_id, status_name, **kwargs):
+        @contextlib.contextmanager
+        def context():
+            self.save_status(scene_id, status=status_name)
+            start_time = time.time()
+            try:
+                yield
+                duration = time.time() - start_time
+                kwargs[f"{status_name}"] = "success"
+                kwargs[f"{status_name}_time"] = duration
+                self.save_status(scene_id, **kwargs)
+            except Exception as e:
+                duration = time.time() - start_time
+                kwargs[f"{status_name}"] = "error"
+                kwargs[f"{status_name}_time"] = duration
+                kwargs[f"{status_name}_error"] = str(e)
+                self.save_status(scene_id, **kwargs)
+                raise e
+        return context()
+
     def load_status(self, scene_id):
         status_file = os.path.join(self.data_folder, "status", f"{scene_id}.json")
         if not os.path.exists(status_file):
             return None
         with open(status_file, 'r') as f:
             status_data = json.load(f)
-            return status_data.get(scene_id, None)
+            return status_data.get("status", None)
