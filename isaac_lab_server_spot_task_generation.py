@@ -92,7 +92,7 @@ try:
         # generate BEV map
         with task_generator.timing_status(scene_id, "create_bev"):
             task_generator.create_bev_map(scene_id, file_name=f"bev_map", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
-            for i in range(10000):
+            for i in range(200):
                 vln_sim.step()
                 if not task_generator.bev_camera_lock.locked():
                     print(f"[TG] BEV camera job completed")
