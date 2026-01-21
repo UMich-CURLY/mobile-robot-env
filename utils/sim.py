@@ -270,18 +270,17 @@ class VLNSim:
             self.env.remove_prim("/World/Arrow")
     
     def follow_waypoints(self):
-        cam_pos, cam_quat = self.env.get_cam_pose()
-        self.commands[self.robot_index] = self.waypoint_follower.update(cam_pos, cam_quat, self.waypoints, verbose=False)
+        body_pos, body_quat = self.env.get_body_pose()
+        self.commands[self.robot_index] = self.waypoint_follower.update(body_pos, body_quat, self.waypoints, verbose=False)
         if self.waypoint_follower.arrived_at_goal:
             self.clear_waypoints()
         else:
             if self.visualize_waypoints:
-                cam_height = cam_pos[2]
-                points = [cam_pos]+[[wp[0], wp[1], cam_height] for wp in self.waypoints[self.waypoint_follower.current_wp_idx:]]
+                points = [body_pos]+[[wp[0], wp[1], body_pos[2]] for wp in self.waypoints[self.waypoint_follower.current_wp_idx:]]
                 remaining_waypoints = np.array(self.waypoints[self.waypoint_follower.current_wp_idx:])
                 visualize_curve(points, prim_path="/World/WaypointPath", width=0.02)
                 if (remaining_waypoints[:,2]<10.0).all():
-                    visualize_arrow(remaining_waypoints, cam_height, prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
+                    visualize_arrow(remaining_waypoints, body_pos[2], prim_path="/World/Arrow", color=(0.0, 1.0, 0.0), scale=(0.2, 0.2, 0.2))
 
 
     def step(self):

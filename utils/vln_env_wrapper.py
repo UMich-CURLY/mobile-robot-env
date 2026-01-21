@@ -132,6 +132,12 @@ class VLNEnvWrapper:
             raise ValueError(f"Prim at path {prim_path} not found")
         return prim.GetAttribute('xformOp:orient').Get()
     
+    def get_body_pose(self):
+        manager_env = self.manager_env
+        pos_robot = manager_env.scene["robot"].data.root_state_w[0, 0:3].cpu().numpy().astype(np.float32)
+        quat_robot = manager_env.scene["robot"].data.root_state_w[0, 3:7].cpu().numpy().astype(np.float32) # wxyz
+        quat_robot = np.concatenate([quat_robot[1:],quat_robot[:1]])
+        return pos_robot, quat_robot
 
     def get_cam_pose(self):
         manager_env = self.manager_env
