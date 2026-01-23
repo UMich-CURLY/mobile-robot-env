@@ -619,6 +619,9 @@ class HabitatROSBridge(Node):
                 print(f"Warning: stop message does not contain goal_xyxy")
                 return
             goal_xyxy = message["goal_xyxy"]
+            goal_camera = message.get("goal_camera")
+            if goal_camera:
+                self.camera_topic = f"{self.robot_topic}/camera/{goal_camera}/image/compressed"
             x_min, y_min, x_max, y_max = [int(x) for x in goal_xyxy]
             dot_x = (x_min + x_max) // 2
             dot_y = (y_min + y_max) // 2
