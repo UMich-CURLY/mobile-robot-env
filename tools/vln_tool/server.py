@@ -104,7 +104,8 @@ def generate_instruction(
     episode_id: Optional[int] = Body(None),
     template_based: bool = Body(True),
     llm_based: bool = Body(False),
-    video: bool = Body(True)
+    video: bool = Body(True),
+    force: bool = Body(False)
 ):
     global current_results
     if not generator_instance:
@@ -119,7 +120,8 @@ def generate_instruction(
             episode_id=episode_id,
             template_based=template_based,
             llm_based=llm_based,
-            video=video
+            video=video,
+            force=force
         )
         
         if not results:
@@ -255,6 +257,7 @@ async def save_results(
     episode_id: int = Body(..., embed=True),
     improved_instructions: Optional[str] = Body(None),
     aligned_instructions: Optional[List] = Body(None),
+    prompt: Optional[str] = Body(None),
     is_bad: Optional[bool] = Body(None),
     checked: Optional[bool] = Body(None)
 ):
@@ -269,6 +272,19 @@ async def save_results(
             raise HTTPException(status_code=404, detail="No results to save for this episode")
         episode = scene_episodes[0]
         result = {"episode": episode}
+        
+        # Load existing data if available to avoid overwriting with None
+        save_path = generator_instance.get_data_path(episode, "generated_instructions.json")
+        if os.path.exists(save_path):
+            try:
+                with open(save_path, "r") as f:
+                    existing_data = json.load(f)
+                    result.update(existing_data)
+            except:
+                pass
+        
+        # Store back to cache
+        current_results[str(episode_id)] = result
     else:
         episode = result["episode"]
         
@@ -280,6 +296,8 @@ async def save_results(
             result["improved_instructions"] = improved_instructions
         if aligned_instructions is not None:
             result["aligned_instructions"] = aligned_instructions
+        if prompt is not None:
+            result["prompt"] = prompt
         if is_bad is not None:
             result["is_bad"] = is_bad
         if checked is not None:

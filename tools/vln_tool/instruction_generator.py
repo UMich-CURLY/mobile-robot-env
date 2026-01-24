@@ -29,17 +29,20 @@ class InstructionGenerator:
             save_path = self.get_data_path(episode, "generated_instructions.json")
             has_result = os.path.exists(save_path)
             is_checked = False
+            is_bad = False
             if has_result:
                 try:
                     with open(save_path, "r") as f:
                         data = json.load(f)
                         is_checked = data.get("checked", False)
+                        is_bad = data.get("is_bad", False)
                 except:
                     pass
             status.append({
                 "episode_id": episode.episode_id,
                 "has_result": has_result,
-                "is_checked": is_checked
+                "is_checked": is_checked,
+                "is_bad": is_bad
             })
         return status
 
@@ -49,7 +52,8 @@ class InstructionGenerator:
         episode_id=None,
         template_based=True,
         llm_based=False,
-        video=True
+        video=True,
+        force=False
     ):
         # load episodes
         scene_episodes = [x for x in self.episode_list if x.scene_id == scene_id]
@@ -62,14 +66,15 @@ class InstructionGenerator:
             save_path = self.get_data_path(episode, "generated_instructions.json")
             loaded_data = None
             
-            if os.path.exists(save_path):
+            if os.path.exists(save_path) and not force:
                 print(f"Loading existing result from {save_path}")
                 try:
                     with open(save_path, "r") as f:
                         loaded_data = json.load(f)
                 except Exception as e:
                     print(f"Failed to load json: {e}")
-                    loaded_data = None
+                    loaded_data = {}
+                print("Found keys:", [*loaded_data.keys()])
 
 
             # Validate loaded data
@@ -79,7 +84,14 @@ class InstructionGenerator:
             if loaded_data:
                 # Check template part
                 if loaded_data.get("aligned_instructions") and loaded_data.get("template_instruction") and loaded_data.get("full_instruction"):
-                    has_template = True
+                    full_instruction = loaded_data.get("full_instruction")
+                    aligned_instructions = loaded_data.get("aligned_instructions")
+                    aligned_instruction_str = " ".join([instruction for _, instruction in aligned_instructions])
+                    if aligned_instruction_str != full_instruction:
+                        print(f"Instruction mismatch: {aligned_instruction_str} not in {full_instruction}, regenerating template")
+                        has_template = False
+                    else:
+                        has_template = True
                 
                 # Check VLM part if requested
                 if llm_based:
@@ -135,10 +147,10 @@ class InstructionGenerator:
             
             # If we are here, we need to regenerate something
             print(f"Regenerating for episode {episode.episode_id}. Template: {need_regen_template}, VLM: {need_regen_vlm}")
-            
+            is_bad = False
             if need_regen_template:
-                full_instruction, aligned_instructions = self.template_based_generation(episode)
-                if video:
+                full_instruction, aligned_instructions, is_bad = self.template_based_generation(episode)
+                if video and not is_bad:
                     generate_video(episode, aligned_instructions, view_type="pov")
                     generate_video(episode, aligned_instructions, view_type="third_person")
             else:
@@ -157,10 +169,11 @@ class InstructionGenerator:
             improved_instructions = loaded_data.get("improved_instructions", "") if loaded_data else ""
             prompt = loaded_data.get("prompt", "") if loaded_data else ""
             used_images = loaded_data.get("used_images", []) if loaded_data else []
-            is_bad = loaded_data.get("is_bad", False) if loaded_data else False
+            if not is_bad:
+                is_bad = loaded_data.get("is_bad", False) if loaded_data else False
             is_checked = loaded_data.get("checked", False) if loaded_data else False
 
-            if need_regen_vlm:
+            if need_regen_vlm and not is_bad:
                 print(f"Running VLM generation for episode {episode.episode_id}")
                 vlm_res = self.vlm_based_generation(episode, aligned_instructions)
                 improved_instructions = vlm_res["improved_instructions"]
@@ -267,15 +280,20 @@ class InstructionGenerator:
         aligned_instructions = []
         start_idx = 0
         for i, point in enumerate(simplified_path):
-            for j, pose in enumerate(pose_list[start_idx:]):
-                if np.linalg.norm(pose[:2] - np.array(point[:2])) < 0.5:
+            for j in range(start_idx, len(pose_list)):
+                pose = pose_list[j]
+                if np.linalg.norm(pose[:2] - np.array(point[:2])) < 1.5:
                     aligned_instructions.append((j, instruction_list[i]))
-                    start_idx = j
+                    start_idx = j+1
                     break
         aligned_instructions.append((len(pose_list)-1, instruction_list[-1]))
-        print(f"Aligned instructions: {aligned_instructions}")
+        print(f"Aligned instructions: {len(aligned_instructions)}/{len(instruction_list)}")
+        
+        is_bad = len(aligned_instructions) != len(instruction_list)
+        if is_bad:
+            print(f"Alignment failed, episode is labeled as bad: {len(aligned_instructions)}/{len(instruction_list)}")
 
-        return template_instruction, aligned_instructions
+        return template_instruction, aligned_instructions, is_bad
     
     def _get_SE2_pose(self, xyz_quat):
         yaw = R.from_quat(xyz_quat[3:]).as_euler('ZYX')[0]
@@ -369,11 +387,14 @@ class InstructionGenerator:
         shifted_instructions = [(1, "You start at this position. "+aligned_instructions[0][1])]
         for i in range(1, len(aligned_instructions)):
             shifted_instructions.append((aligned_instructions[i-1][0], aligned_instructions[i][1]))
-        image_list = list(range(1, shifted_instructions[-1][0]+1, 10))
+        image_interval = max(10, aligned_instructions[-1][0]//15)
+        image_list = list(range(1, aligned_instructions[-1][0]+1, image_interval))
+        print(f"Using {len(image_list)} images (interval={image_interval})")
         # add image idx to the prompt
         prompt_instruction = []
         for i, (keyframe_id, instruction) in enumerate(shifted_instructions):
-            prompt_instruction.append(f"(img {keyframe_id//10+1}) {instruction}")
+            print(f"Add keyframe {keyframe_id//image_interval+1} at frame {keyframe_id}: {instruction}")
+            prompt_instruction.append(f"(img {keyframe_id//image_interval+1}) {instruction}")
             # format_time = lambda x: f"{x//60:02d}:{x%60:02d}"
             # prompt_instruction.append(f"(video {format_time(keyframe_id//10)}) {instruction}")
         prompt_instruction = " ".join(prompt_instruction)
@@ -405,9 +426,11 @@ class InstructionGenerator:
             Example output: Go forward until you see the red building, then turn right and go until you see the blue car. You should be able to see the target mailbox on your right.
             """
         else:
-            # If user provided a prompt, we assume it contains {prompt_instruction} placeholder or we just append it
+            # If user provided a prompt, we assume it contains prompt_instruction or we just append it
             if "{prompt_instruction}" in prompt:
                 text_prompt = prompt.format(prompt_instruction=prompt_instruction)
+            elif "Improve this instruction" in prompt:
+                text_prompt = prompt
             else:
                 text_prompt = prompt + f"\nImprove this instruction: {prompt_instruction}"
         
