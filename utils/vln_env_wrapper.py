@@ -13,6 +13,8 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
 from isaaclab.sensors import TiledCamera, TiledCameraCfg
+from isaacsim.core.utils.stage import add_reference_to_stage
+import os
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -224,17 +226,15 @@ class VLNEnvWrapper:
             self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
             if self.episode["path"] == "generator":
                 self.scene.terrain.terrain_prim_paths.append("/World/ground/terrain")
-            # check if skylight exists in scene
-            disable_default_light = False
+            # disable all lights in scene
             prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
             for prim in prim_list:
                 from_usd = str(prim.GetPath()).startswith("/World/ground/terrain")
                 is_domelight = prim.GetTypeName() == "DomeLight"
                 if from_usd and is_domelight:
-                    disable_default_light = True
-                    break
-            dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
-            dome_light.SetActive(not disable_default_light)
+                    prim.SetActive(False)
+            # add ref to usd file
+            add_reference_to_stage(prim_path="/World/sky", usd_path=os.path.join(self.args.scene_folder, "nvidia", "sky", "CloudySky.usd"))
             # apply scale and translation
             terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
             if collider:

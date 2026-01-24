@@ -106,6 +106,7 @@ class TaskGenerator:
         self.scene_config = self.get_scene_config(scene_id)
         self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
         self.num_episodes = self.scene_config['episode_number']
+        self.generate_finished = False
 
         # check how many episodes to generate
         # read episode file
@@ -117,8 +118,13 @@ class TaskGenerator:
             episodes = []
 
         # requirements
+        scene_type, scene_name = self.parse_scene_id(scene_id)
+        if scene_type == "vc":
+            self.min_path_length = 15.0
+        else:
+            self.min_path_length = 5.0
         self.min_path_length = 5.0
-        self.max_path_length = 50.0
+        self.max_path_length = 100.0
         self.min_duration = 5.0
         self.timeout = 100.0
         self.total_samples = 0
@@ -130,7 +136,6 @@ class TaskGenerator:
         print(f'[TG] Generating {self.num_episodes} episodes')
         self.vln_sim.visualize_waypoints = True
         self.generated_episodes = episodes
-        self.generate_finished = False
         self._generate_episodes()
 
     def _generate_episodes(self):
@@ -168,7 +173,12 @@ class TaskGenerator:
             return
         
         self.current_episode = self.episode_queue.popleft()
-        self.current_episode['episode_id'] = len(self.generated_episodes)
+        # find first missing episode id
+        all_episode_ids = set([x["episode_id"] for x in self.generated_episodes])
+        for episode_id in range(len(self.generated_episodes)+1):
+            if episode_id not in all_episode_ids:
+                self.current_episode['episode_id'] = episode_id
+                break
         self.current_episode_start_time = time.time()
         print(f'======================')
         print(f'[TG] Checking episode {self.current_episode.episode_id}')
@@ -256,7 +266,6 @@ class TaskGenerator:
         # [x for x in self.prim_list if str(x.GetPath()).startswith("/World/ground/terrain/Brownstone03/Geometry/Specialty_Equipment/")]
         print(f'Loaded {len(self.prim_list)} prims')
         self.goal_dict = {}
-        total_goal_found = 0
         for goal, goal_rule in self.scene_config.get("goal_rules", {}).items():
             if self.rule_pattern == "path":
                 # Convert prim path to string and normalize path separators
@@ -272,7 +281,6 @@ class TaskGenerator:
                 'prim': goal_prim,
             }
             print(f'[TG] Found {len(goal_prim)} {goal}')
-            total_goal_found += len(goal_prim)
         if self.rule_pattern == "gr":
             for x in self.prim_list:
                 prim_path_str = str(x.GetPrimPath())
@@ -283,15 +291,24 @@ class TaskGenerator:
                     if goal in ["other", "box", "bottle", "person"]:
                         continue
                     self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
-                    total_goal_found += 1
             new_goal_dict = {}
             for goal, goal_item in self.goal_dict.items():
                 if len(goal_item['prim'])<=8:
                     new_goal_dict[goal] = goal_item
             self.goal_dict = new_goal_dict
-        print(f'[TG] Total goal found: {total_goal_found}')
+        elif self.rule_pattern == "vc":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/Objaverse/([^/]*?)$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    goal = "_".join(goal.split("_")[:-1])
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        total_goal_found = 0
         for goal, goal_item in self.goal_dict.items():
             print(f"  Found {len(goal_item['prim'])} {goal}")
+            total_goal_found += len(goal_item['prim'])
+        print(f'[TG] Total goal found: {total_goal_found}')
         return total_goal_found
     
     def check_navmesh(self, scene_id):
@@ -337,7 +354,10 @@ class TaskGenerator:
             while not path_found and retry_count < 100:
                 goal_item = self.goal_dict[goal_name]
                 # sample random points
-                start_pos = navmesh_interface.sample_random_points(1)[0]
+                random_point = navmesh_interface.sample_random_points(1)
+                if random_point is None:
+                    raise RuntimeError(f"Failed to sample random point")
+                start_pos = random_point[0]
                 goal_prim_list = goal_item['prim']
                 goals = []
                 for goal_prim in goal_prim_list:
@@ -432,16 +452,40 @@ class TaskGenerator:
     def create_bev_camera(self, scene_id):
         # create bev camera
         world_bb = np.array(self.get_world_bb(scene_id))
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         world_center = (world_bb[:3] + world_bb[3:]) / 2
         world_size = world_bb[3:] - world_bb[:3]
+        if world_size[0] > 100.0 or world_size[1] > 100.0:
+            print(f"[TG] World size is too large, checking large prim now")
+            for prim in self.manager_env.scene.stage.Traverse():
+                prim_bb = self.env.get_prim_bounding_box(prim.GetPrimPath())
+                if prim_bb[3] - prim_bb[0] > 100.0 or prim_bb[4] - prim_bb[1] > 100.0:
+                    print(f"[TG] Found large prim: {prim.GetPrimPath()}")
+                    if "model_" in str(prim.GetPrimPath()):
+                        with open(f"large_prim.txt", 'a') as f:
+                            f.write(f"{prim.GetPrimPath()}\n")
+                        if scene_type != "vc":
+                            prim_utils.set_prim_visibility(prim, False)
+            world_bb = np.array(self.get_world_bb(scene_id))
+            world_center = (world_bb[:3] + world_bb[3:]) / 2
+            world_size = world_bb[3:] - world_bb[:3]
         camera_pos = world_center + np.array([0, 0, 10.0])
         padding = 1.0
         image_width = min(int((world_size[0]+padding*2) * 100), 3840)
         image_height = int(image_width * world_size[1] / world_size[0])
-        self.px_per_meter = image_width / (world_size[0]+padding*2)
-        self.world_center = world_center
+        self.bev_data = {
+            "px_per_meter": image_width / (world_size[0]+padding*2),
+            "world_center": world_center.tolist(),
+            "world_size": world_size.tolist(),
+            "world_bb": world_bb.tolist(),
+            "image_width": image_width,
+            "image_height": image_height,
+        }
+        if not hasattr(self, 'bev_camera_count'):
+            self.bev_camera_count = 0
+        self.bev_camera_count += 1
         self.bev_camera = self.env.create_camera(
-            prim_path="/World/bev_camera",
+            prim_path=f"/World/bev_camera_{self.bev_camera_count}",
             perspective=False,
             pos=camera_pos,
             quat_opengl=[1, 0, 0, 0],
@@ -469,17 +513,18 @@ class TaskGenerator:
                 self._create_bev_map(scene_id, file_name, clip_range, ceiling_height)
             self.vln_sim.add_callback('step_finished', check_bev_map_queue)
             self.check_bev_map_queue = check_bev_map_queue
+            self.create_bev_camera(scene_id)
         # add task to queue
         self.bev_camera_queue.put((scene_id, file_name, clip_range, ceiling_height))
 
     def _create_bev_map(self, scene_id, file_name, clip_range, ceiling_height):
         self.bev_camera_lock.acquire()
-        self.create_bev_camera(scene_id)
         # update camera
         if ceiling_height is None:
             scene_config = self.get_scene_config(scene_id)
             ceiling_height = scene_config.get("ceiling_height", 1.0)
         self.update_bev_camera_clip(scene_id, clip_range, ceiling_height)
+        self.bev_camera.reset()
         # hide robot
         robot_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/envs/env_0/Robot")
         prim_utils.set_prim_visibility(robot_prim, False)
@@ -494,20 +539,17 @@ class TaskGenerator:
                     cv2.imwrite(f"{data_folder}/{file_name}_rgb.png", rgb[...,[2,1,0,3]])
                     cv2.imwrite(f"{data_folder}/{file_name}_depth.png", depth)
                     with open(f"{data_folder}/{file_name}_info.txt", 'w') as f:
-                        info = {
-                            "px_per_meter": self.px_per_meter,
-                            "world_center": self.world_center.tolist()
-                        }
-                        json.dump(info, f)
+                        json.dump(self.bev_data, f)
                     print(f"[TG] Saved BEV map to {data_folder}/{file_name}")
                     prim_utils.set_prim_visibility(robot_prim, True)
                     self.vln_sim.remove_callback('step_finished', save_bev_map)
                     self.bev_camera_lock.release()
-                    prim_utils.delete_prim(self.bev_camera.cfg.prim_path)
+                    # prim_utils.delete_prim(self.bev_camera.cfg.prim_path)
                 else:
                     print(f"[TG] BEV camera is not initialized yet, frame: {self.bev_camera.frame}, env_step: {self.env.env_step}")
             except Exception as e:
                 print(f"[TG] Error saving BEV map: {e}")
+                raise e
         self.vln_sim.add_callback('step_finished', save_bev_map)
 
     def update_bev_camera_clip(self, scene_id, clip_range, ceiling_height):
@@ -521,7 +563,7 @@ class TaskGenerator:
             clipping_range_min = camera_pos[2] - (self.env.get_cam_pose()[0][2]+0.3)
         clipping_range_min = max(0, clipping_range_min)
         clipping_range_max = clipping_range_min+1000
-        camera_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/bev_camera")
+        camera_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/bev_camera_{self.bev_camera_count}")
         clipping_range = camera_prim.GetAttribute('clippingRange').Get()
         clipping_range[0] = clipping_range_min
         clipping_range[1] = clipping_range_max

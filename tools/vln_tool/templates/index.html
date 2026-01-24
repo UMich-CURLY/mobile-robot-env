@@ -104,6 +104,12 @@
                         <label class="form-check-label" for="videoCheck">Generate Video</label>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="badEpisodeCheck">
+                        <label class="form-check-label" for="badEpisodeCheck">Bad Episode</label>
+                    </div>
+                </div>
             </div>
             <div id="step1-results" class="result-box hidden">
                 <h5>Results</h5>
@@ -147,8 +153,10 @@
                 <button class="btn btn-warning" onclick="runStep2()">Run Step 2</button>
             </div>
             <div id="step2-results" class="result-box hidden">
-                <h5>Improved Instructions</h5>
-                <div class="p-3 bg-white border rounded" id="improvedInstructions"></div>
+                <h5>VLM Prompt (Editable)</h5>
+                <textarea class="form-control mb-3" id="vlmPrompt" rows="8"></textarea>
+                <h5>Improved Instructions (Editable)</h5>
+                <textarea class="form-control mb-3" id="improvedInstructions" rows="5"></textarea>
             </div>
         </div>
 
@@ -160,6 +168,7 @@
                     <label class="form-label mb-0">Threads:</label>
                     <input type="number" id="batchConcurrency" class="form-control" style="width: 80px;" value="10" min="1" max="30">
                     <button class="btn btn-primary" id="startBatchBtn" onclick="startBatch()">Start Batch Processing</button>
+                    <button class="btn btn-danger" onclick="batchDelete()">Batch Delete</button>
                  </div>
             </div>
             
@@ -192,6 +201,10 @@
         <!-- Save -->
         <div class="section hidden" id="save-section">
             <h3>Save Results</h3>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="checkedStatus">
+                <label class="form-check-label" for="checkedStatus">Checked</label>
+            </div>
             <button class="btn btn-dark" onclick="saveResults()">Save to JSON</button>
             <button class="btn btn-outline-primary" onclick="runAll()">Run All Steps & Save</button>
             <div id="save-message" class="mt-2"></div>
@@ -204,6 +217,28 @@
         let currentEpisode = "";
         let batchResults = [];
         let currentBatchIndex = 0;
+        let isTaskRunning = false;
+
+        window.onbeforeunload = function() {
+            if (isTaskRunning) {
+                return "A task is still running. Are you sure you want to leave?";
+            }
+        };
+
+        function freezeUI() {
+            isTaskRunning = true;
+            document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+            // Re-enable some buttons that shouldn't be frozen if any
+        }
+
+        function unfreezeUI() {
+            isTaskRunning = false;
+            document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            // Special handling for buttons that depend on state
+            if (currentEpisode === "all") {
+                document.getElementById('startBatchBtn').disabled = false;
+            }
+        }
 
         async function initialize() {
             const episodesPath = document.getElementById('episodesPath').value;
@@ -246,40 +281,119 @@
             }
         }
 
+        let currentSceneStatus = [];
+
         async function loadEpisodes() {
             const sceneId = document.getElementById('sceneSelect').value;
             currentScene = sceneId;
             if (!sceneId) return;
 
+            // Fetch episodes
             const response = await fetch(`/episodes/${sceneId}`);
             const data = await response.json();
             
+            // Fetch status
+            const statusResp = await fetch(`/episodes_status/${sceneId}`);
+            const statusData = await statusResp.json();
+            currentSceneStatus = statusData.status;
+
             const episodeSelect = document.getElementById('episodeSelect');
-            episodeSelect.innerHTML = '<option value="">Select Episode</option><option value="all">All Episodes</option>';
+            episodeSelect.innerHTML = '<option value="all" selected>All Episodes (Batch)</option><option value="">Select Episode</option>';
             data.episodes.forEach(ep => {
+                const epStatus = currentSceneStatus.find(s => s.episode_id === ep);
+                let suffix = "";
+                if (epStatus && epStatus.has_result) {
+                    suffix = " (Saved)";
+                    if (epStatus.is_checked) suffix = " (Checked)";
+                }
                 const option = document.createElement('option');
                 option.value = ep;
-                option.text = ep;
+                option.text = ep + suffix;
                 episodeSelect.appendChild(option);
             });
             
+            // Trigger onchange to show batch section by default
             episodeSelect.onchange = () => {
                 currentEpisode = episodeSelect.value;
+                // Clear previous results
+                document.getElementById('step1-results').classList.add('hidden');
+                document.getElementById('step2-results').classList.add('hidden');
+                document.getElementById('save-section').classList.add('hidden');
+
                 if(currentEpisode === "all") {
                     document.getElementById('step1-section').classList.add('hidden');
                     document.getElementById('step2-section').classList.add('hidden');
                     document.getElementById('save-section').classList.add('hidden');
                     document.getElementById('batch-section').classList.remove('hidden');
+                    renderBatchStatus();
                 } else if(currentEpisode) {
                     document.getElementById('step1-section').classList.remove('hidden');
                     document.getElementById('batch-section').classList.add('hidden');
+                    
+                    // Auto-load if saved
+                    const epStatus = currentSceneStatus.find(s => s.episode_id === parseInt(currentEpisode));
+                    if (epStatus && epStatus.has_result) {
+                        console.log("Auto-loading saved data for episode", currentEpisode);
+                        runStep1(true); // true means use existing
+                    }
                 }
             };
+            episodeSelect.onchange();
+        }
+
+        function renderBatchStatus() {
+            const container = document.getElementById('batch-progress-container');
+            container.classList.remove('hidden');
+            
+            const logArea = document.getElementById('batch-log');
+            const total = currentSceneStatus.length;
+            const savedEpisodes = currentSceneStatus.filter(s => s.has_result);
+            const savedCount = savedEpisodes.length;
+            const missingEpisodes = currentSceneStatus.filter(s => !s.has_result).map(s => s.episode_id);
+            const missingCount = missingEpisodes.length;
+            
+            let logText = `Scene: ${currentScene}\nTotal episodes: ${total}\nSaved: ${savedCount}\nMissing: ${missingCount}\n`;
+            if (missingCount > 0) {
+                logText += `Missing IDs: ${missingEpisodes.join(', ')}\n`;
+            }
+            logArea.innerText = logText;
+            
+            // Initialize batchResults with all episodes from currentSceneStatus
+            batchResults = currentSceneStatus.map(s => ({
+                episode_id: s.episode_id,
+                status: s.has_result ? 'saved' : 'pending'
+            }));
+            
+            // Show review container
+            document.getElementById('batch-review-container').classList.remove('hidden');
+            currentBatchIndex = 0;
+            renderBatchItem(0);
+
+            if (total - saved > 0) {
+                document.getElementById('startBatchBtn').innerText = `Run Batch on Missing (${total - saved})`;
+                document.getElementById('startBatchBtn').onclick = () => startBatch(true);
+            } else {
+                document.getElementById('startBatchBtn').innerText = `Run Batch on All (${total})`;
+                document.getElementById('startBatchBtn').onclick = () => startBatch(false);
+            }
+            
+            // Also add a button to run on all even if some are saved
+            const existingRunAll = document.getElementById('runAllBatchBtn');
+            if (existingRunAll) existingRunAll.remove();
+            
+            if (total - saved > 0 && saved > 0) {
+                const runAllBtn = document.createElement('button');
+                runAllBtn.id = 'runAllBatchBtn';
+                runAllBtn.className = 'btn btn-outline-secondary ms-2';
+                runAllBtn.innerText = `Run Batch on All (${total})`;
+                runAllBtn.onclick = () => startBatch(false);
+                document.getElementById('startBatchBtn').parentNode.appendChild(runAllBtn);
+            }
         }
 
         // --- Single Episode Functions ---
 
-        async function runStep1() {
+        async function runStep1(loadAll = false) {
             if (!currentScene || !currentEpisode || currentEpisode === "all") {
                 alert("Please select scene and a specific episode");
                 return;
@@ -291,8 +405,8 @@
                 // Show loading state
                 const btn = document.querySelector('button[onclick="runStep1()"]');
                 const originalText = btn.innerText;
-                btn.innerText = "Running...";
-                btn.disabled = true;
+                btn.innerText = loadAll ? "Loading..." : "Running...";
+                freezeUI();
 
                 const response = await fetch('/generate_instruction', {
                     method: 'POST',
@@ -300,7 +414,8 @@
                     body: JSON.stringify({
                         scene_id: currentScene,
                         episode_id: parseInt(currentEpisode),
-                        video: video
+                        video: video,
+                        llm_based: loadAll
                     })
                 });
                 
@@ -316,6 +431,7 @@
                     document.getElementById('step1-results').classList.remove('hidden');
                     document.getElementById('fullInstruction').innerText = resultData.template_instruction || resultData.full_instruction;
                     document.getElementById('alignedInstructions').value = JSON.stringify(resultData.aligned_instructions, null, 2);
+                    document.getElementById('badEpisodeCheck').checked = !!resultData.is_bad;
                     renderAlignedTable(resultData.aligned_instructions);
                     
                     const vizDiv = document.getElementById('visualizations');
@@ -324,22 +440,71 @@
                     if (resultData.path_image_url) {
                         vizDiv.innerHTML += `<h6>Path Image</h6><img src="${resultData.path_image_url}" alt="Path" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'image')">`;
                     }
-                    if (resultData.video_url) {
-                        vizDiv.innerHTML += `<h6>Video</h6><video controls src="${resultData.video_url}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+                    if (resultData.video_url_pov) {
+                        vizDiv.innerHTML += `<h6>POV Video</h6><video controls src="${resultData.video_url_pov}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+                    }
+                    if (resultData.video_url_third_person) {
+                        vizDiv.innerHTML += `<h6>Third Person Video</h6><video controls src="${resultData.video_url_third_person}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
                     }
                     
-                    document.getElementById('step2-section').classList.remove('hidden');
+                    // Display VLM if loaded
+                    if (resultData.improved_instruction) {
+                        document.getElementById('step2-section').classList.remove('hidden');
+                        document.getElementById('step2-results').classList.remove('hidden');
+                        document.getElementById('improvedInstructions').value = resultData.improved_instruction;
+                        document.getElementById('vlmPrompt').value = resultData.prompt || '';
+                        document.getElementById('checkedStatus').checked = !!resultData.checked;
+                        
+                        // Render Step 2 viz
+                        renderStep2Viz(resultData);
+                        document.getElementById('save-section').classList.remove('hidden');
+                    } else {
+                        document.getElementById('step2-section').classList.remove('hidden');
+                        document.getElementById('step2-results').classList.add('hidden');
+                        document.getElementById('save-section').classList.add('hidden');
+                    }
                 } else {
                     alert('Error: ' + (data.detail || 'Unknown error'));
                 }
 
                 btn.innerText = originalText;
-                btn.disabled = false;
+                unfreezeUI();
                 return true; // for chaining
             } catch (error) {
                 alert('Error: ' + error);
+                unfreezeUI();
                 return false;
             }
+        }
+
+        function renderStep2Viz(data) {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'mt-3';
+            
+            let imagesHtml = '';
+            if (data.used_images && data.used_images.length > 0) {
+                imagesHtml = '<div class="d-flex flex-wrap gap-2 mb-3">';
+                data.used_images.forEach((url, idx) => {
+                    imagesHtml += `<div class="card" style="width: 150px;">
+                        <img src="${url}" class="card-img-top cursor-pointer-zoom" alt="Frame ${idx}" onclick="openLightbox(this.src, 'image')">
+                        <div class="card-body p-1 text-center"><small>Img ${idx+1}</small></div>
+                    </div>`;
+                });
+                imagesHtml += '</div>';
+            }
+            
+            vizDiv.innerHTML = `
+                <h6>VLM Input (Prompt & Images)</h6>
+                ${imagesHtml}
+                <div class="card card-body bg-light mb-3">
+                    <pre style="white-space: pre-wrap; max-height: 200px; overflow-y: auto;">${data.prompt || 'N/A'}</pre>
+                </div>
+            `;
+            
+            const existingViz = document.getElementById('step2-viz');
+            if (existingViz) existingViz.remove();
+            vizDiv.id = 'step2-viz';
+            document.getElementById('step2-results').appendChild(vizDiv);
         }
 
         async function runStep2() {
@@ -354,16 +519,18 @@
                 const btn = document.querySelector('button[onclick="runStep2()"]');
                 const originalText = btn.innerText;
                 btn.innerText = "Running VLM...";
-                btn.disabled = true;
+                freezeUI();
 
                 const alignedInstructions = JSON.parse(alignedText);
+                const customPrompt = document.getElementById('vlmPrompt').value;
                 
                 const response = await fetch('/vlm_generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         episode_id: parseInt(currentEpisode),
-                        aligned_instructions: alignedInstructions
+                        aligned_instructions: alignedInstructions,
+                        prompt: customPrompt || null
                     })
                 });
                 
@@ -371,36 +538,11 @@
                 
                 if (data.status === 'success') {
                     document.getElementById('step2-results').classList.remove('hidden');
-                    document.getElementById('improvedInstructions').innerText = data.improved_instruction;
+                    document.getElementById('improvedInstructions').value = data.improved_instruction;
+                    document.getElementById('vlmPrompt').value = data.prompt;
                     
-                    // Show Prompt and Images
-                    const vizDiv = document.createElement('div');
-                    vizDiv.className = 'mt-3';
-                    
-                    let imagesHtml = '';
-                    if (data.used_images && data.used_images.length > 0) {
-                        imagesHtml = '<div class="d-flex flex-wrap gap-2 mb-3">';
-                        data.used_images.forEach((url, idx) => {
-                            imagesHtml += `<div class="card" style="width: 150px;">
-                                <img src="${url}" class="card-img-top cursor-pointer-zoom" alt="Frame ${idx}" onclick="openLightbox(this.src, 'image')">
-                                <div class="card-body p-1 text-center"><small>Img ${idx+1}</small></div>
-                            </div>`;
-                        });
-                        imagesHtml += '</div>';
-                    }
-                    
-                    vizDiv.innerHTML = `
-                        <h6>VLM Input (Prompt & Images)</h6>
-                        ${imagesHtml}
-                        <div class="card card-body bg-light mb-3">
-                            <pre style="white-space: pre-wrap; max-height: 200px; overflow-y: auto;">${data.prompt}</pre>
-                        </div>
-                    `;
-                    
-                    const existingViz = document.getElementById('step2-viz');
-                    if (existingViz) existingViz.remove();
-                    vizDiv.id = 'step2-viz';
-                    document.getElementById('step2-results').appendChild(vizDiv);
+                    // Use helper
+                    renderStep2Viz(data);
 
                     document.getElementById('save-section').classList.remove('hidden');
                 } else {
@@ -408,10 +550,11 @@
                 }
                 
                 btn.innerText = originalText;
-                btn.disabled = false;
+                unfreezeUI();
                 return true;
             } catch (error) {
                 alert('Error: ' + error);
+                unfreezeUI();
                 return false;
             }
         }
@@ -452,11 +595,21 @@
 
         async function saveResults() {
              try {
+                const improvedText = document.getElementById('improvedInstructions').value;
+                const alignedText = document.getElementById('alignedInstructions').value;
+                const badEpisode = document.getElementById('badEpisodeCheck').checked;
+                const isChecked = document.getElementById('checkedStatus').checked || true; // Force true on save as per requirement
+                const alignedData = alignedText ? JSON.parse(alignedText) : null;
+
                 const response = await fetch('/save_results', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        episode_id: parseInt(currentEpisode)
+                        episode_id: parseInt(currentEpisode),
+                        improved_instructions: improvedText,
+                        aligned_instructions: alignedData,
+                        is_bad: badEpisode,
+                        checked: isChecked
                     })
                 });
                 
@@ -464,6 +617,13 @@
                 if (data.status === 'success') {
                     document.getElementById('save-message').className = "mt-2 text-success";
                     document.getElementById('save-message').innerText = "Saved to: " + data.path;
+                    document.getElementById('checkedStatus').checked = true;
+                    // Update currentSceneStatus for UI consistency
+                    const epStatus = currentSceneStatus.find(s => s.episode_id === parseInt(currentEpisode));
+                    if (epStatus) {
+                        epStatus.has_result = true;
+                        epStatus.is_checked = true;
+                    }
                 } else {
                      alert('Error: ' + (data.detail || 'Unknown error'));
                 }
@@ -484,7 +644,7 @@
 
         // --- Batch Processing Functions ---
 
-        async function startBatch() {
+        async function startBatch(runOnlyMissing = false) {
             if (!currentScene) {
                 alert("Please select a scene first.");
                 return;
@@ -492,59 +652,55 @@
 
             const video = document.getElementById('videoCheck').checked;
             
-            // Get all episodes list first
-            // We use the dropdown options instead of re-fetching, assuming they are loaded
-            const episodeSelect = document.getElementById('episodeSelect');
-            let episodes = [];
-            for (let i = 0; i < episodeSelect.options.length; i++) {
-                const val = episodeSelect.options[i].value;
-                if (val && val !== 'all' && val !== 'Select Episode') {
-                    episodes.push(parseInt(val));
+            // Determine which episodes to process
+            let episodesToProcess = [];
+            batchResults.forEach(item => {
+                if (runOnlyMissing) {
+                    if (item.status === 'pending' || item.status === 'error') {
+                        item.status = 'queued';
+                        episodesToProcess.push(item.episode_id);
+                    }
+                } else {
+                    item.status = 'queued';
+                    episodesToProcess.push(item.episode_id);
                 }
-            }
+            });
             
-            if (episodes.length === 0) {
-                alert("No episodes found.");
+            if (episodesToProcess.length === 0) {
+                alert("No episodes to process.");
                 return;
             }
 
-            document.getElementById('startBatchBtn').disabled = true;
+            freezeUI();
+
             document.getElementById('batch-progress-container').classList.remove('hidden');
-            document.getElementById('batch-review-container').classList.add('hidden');
             
             const logArea = document.getElementById('batch-log');
             const progressBar = document.getElementById('batch-progress-bar');
             
-            logArea.innerText = `Starting batch processing for ${episodes.length} episodes.\n`;
+            logArea.innerText += `Starting batch processing for ${episodesToProcess.length} episodes.\n`;
             progressBar.style.width = "0%";
             
-            // Initialize results with pending state
-            batchResults = episodes.map(id => ({ episode_id: id, status: 'pending' }));
-            
-            // Show review container immediately
-            document.getElementById('batch-review-container').classList.remove('hidden');
-            currentBatchIndex = 0;
-            renderBatchItem(0);
+            // Re-render current item if it's now queued
+            renderBatchItem(currentBatchIndex);
             
             let processedCount = 0;
             
             // Concurrency Control
             const concurrencyInput = document.getElementById('batchConcurrency');
             const CONCURRENCY = parseInt(concurrencyInput.value) || 4;
-            const queue = [...episodes];
+            const queue = [...episodesToProcess];
             
             const processEpisode = async (epId) => {
-                const index = episodes.indexOf(epId);
+                const index = batchResults.findIndex(r => r.episode_id === epId);
+                if (index === -1) return;
                 
                 // Update status to processing
-                if (batchResults[index]) {
-                    batchResults[index].status = 'processing';
-                    if (index === currentBatchIndex) renderBatchItem(index);
-                }
+                batchResults[index].status = 'processing';
+                if (index === currentBatchIndex) renderBatchItem(index);
 
                 try {
                     // Step 1: Call generate_instruction with llm_based=true
-                    // This handles everything (loading, generating template, generating VLM if needed/missing)
                     const resp1 = await fetch('/generate_instruction', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -562,9 +718,6 @@
                     }
                     const result1 = data1.results[0];
                     
-                    // We don't need to call vlm_generation explicitly anymore, as generate_instruction handles it.
-                    // Combine results (result1 has everything)
-                    
                     const finalResult = { ...result1, status: 'completed' };
                     batchResults[index] = finalResult;
                     
@@ -575,7 +728,7 @@
                     batchResults[index] = { episode_id: epId, status: 'error', error: e.message };
                 } finally {
                     processedCount++;
-                    const pct = Math.round((processedCount / episodes.length) * 100);
+                    const pct = Math.round((processedCount / episodesToProcess.length) * 100);
                     progressBar.style.width = `${pct}%`;
                     logArea.scrollTop = logArea.scrollHeight;
                     
@@ -597,10 +750,13 @@
             await Promise.all(workers.map(w => w()));
             
             logArea.innerText += "Batch processing complete.\n";
-            document.getElementById('startBatchBtn').disabled = false;
+            unfreezeUI();
+            
+            // Refresh status
+            await loadEpisodes();
         }
 
-        function renderBatchItem(index) {
+        async function renderBatchItem(index) {
             if (!batchResults || batchResults.length === 0) return;
             if (index < 0) index = 0;
             if (index >= batchResults.length) index = batchResults.length - 1;
@@ -616,7 +772,41 @@
             container.innerHTML = ''; // Clear
 
             if (item.status === 'pending') {
+                 container.innerHTML = `<div class="alert alert-secondary">Not generated yet. Run batch processing to generate.</div>`;
+                 return;
+            }
+            if (item.status === 'queued') {
                  container.innerHTML = `<div class="alert alert-secondary">Waiting in queue...</div>`;
+                 return;
+            }
+            if (item.status === 'saved') {
+                 container.innerHTML = `<div class="alert alert-info">Loading saved data...</div>`;
+                 // Auto-load saved data
+                 try {
+                     const response = await fetch('/generate_instruction', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            scene_id: currentScene,
+                            episode_id: item.episode_id,
+                            llm_based: true // This loads existing
+                        })
+                    });
+                    const data = await response.json();
+                    if (data.status === 'success' && data.results && data.results.length > 0) {
+                        batchResults[index] = { ...data.results[0], status: 'completed' };
+                        // Only re-render if we are still on the same index
+                        if (currentBatchIndex === index) renderBatchItem(index);
+                    } else {
+                        batchResults[index].status = 'error';
+                        batchResults[index].error = data.detail || "Failed to load saved data";
+                        if (currentBatchIndex === index) renderBatchItem(index);
+                    }
+                 } catch (e) {
+                    batchResults[index].status = 'error';
+                    batchResults[index].error = e.message;
+                    if (currentBatchIndex === index) renderBatchItem(index);
+                 }
                  return;
             }
             if (item.status === 'processing') {
@@ -645,12 +835,24 @@
             // Let's create a scoped aligned instructions UI.
             
             colLeft.innerHTML = `
+                <div class="d-flex gap-3 align-items-center mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="batch-bad-${index}" ${item.is_bad ? 'checked' : ''} onchange="updateBatchResult(${index}, 'bad')">
+                        <label class="form-check-label fw-bold text-danger" for="batch-bad-${index}">Bad Episode</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="batch-checked-${index}" ${item.checked ? 'checked' : ''} onchange="updateBatchResult(${index}, 'checked')">
+                        <label class="form-check-label fw-bold text-success" for="batch-checked-${index}">Checked</label>
+                    </div>
+                </div>
                 <h6>Template Instruction</h6>
                 <p>${item.template_instruction || item.full_instruction}</p>
                 <h6>Aligned Instructions (Editable)</h6>
-                <textarea class="form-control mb-2" id="batch-aligned-${index}" rows="8">${JSON.stringify(item.aligned_instructions, null, 2)}</textarea>
-                <h6>Improved Instructions (VLM Result)</h6>
-                <div class="p-2 bg-white border rounded mb-2" style="white-space: pre-wrap;">${item.improved_instruction || 'N/A'}</div>
+                <textarea class="form-control mb-2" id="batch-aligned-${index}" rows="8" oninput="updateBatchResult(${index}, 'aligned')">${JSON.stringify(item.aligned_instructions, null, 2)}</textarea>
+                <h6>VLM Prompt (Editable)</h6>
+                <textarea class="form-control mb-2" id="batch-prompt-${index}" rows="8" oninput="updateBatchResult(${index}, 'prompt')">${item.prompt || ''}</textarea>
+                <h6>Improved Instructions (Editable)</h6>
+                <textarea class="form-control mb-2" id="batch-improved-${index}" rows="8" oninput="updateBatchResult(${index}, 'improved')">${item.improved_instruction || item.improved_instructions || ''}</textarea>
             `;
             
             // Right col: Viz
@@ -661,8 +863,11 @@
              if (item.path_image_url) {
                 vizHtml += `<h6>Path Image</h6><img src="${item.path_image_url}" alt="Path" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'image')">`;
             }
-            if (item.video_url) {
-                vizHtml += `<h6>Video</h6><video controls src="${item.video_url}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+            if (item.video_url_pov) {
+                vizHtml += `<h6>POV Video</h6><video controls src="${item.video_url_pov}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
+            }
+            if (item.video_url_third_person) {
+                vizHtml += `<h6>Third Person Video</h6><video controls src="${item.video_url_third_person}" class="cursor-pointer-zoom" onclick="openLightbox(this.src, 'video')"></video>`;
             }
             
             // VLM details
@@ -696,12 +901,13 @@
             const index = currentBatchIndex;
             const item = batchResults[index];
             const alignedText = document.getElementById(`batch-aligned-${index}`).value;
+            const promptText = document.getElementById(`batch-prompt-${index}`).value;
             
             try {
                 const btn = document.querySelector('button[onclick="rerunBatchItem()"]');
                 const oldText = btn.innerText;
                 btn.innerText = "Running...";
-                btn.disabled = true;
+                freezeUI();
 
                 const alignedInstructions = JSON.parse(alignedText);
                  const vlmResp = await fetch('/vlm_generation', {
@@ -709,7 +915,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         episode_id: item.episode_id,
-                        aligned_instructions: alignedInstructions
+                        aligned_instructions: alignedInstructions,
+                        prompt: promptText || null
                     })
                 });
                 const vlmData = await vlmResp.json();
@@ -723,9 +930,36 @@
                 }
                 
                 btn.innerText = oldText;
-                btn.disabled = false;
+                unfreezeUI();
             } catch(e) {
                 alert("Error: " + e);
+                unfreezeUI();
+            }
+        }
+
+        function updateBatchResult(index, type) {
+            const item = batchResults[index];
+            if (!item) return;
+
+            if (type === 'aligned') {
+                const val = document.getElementById(`batch-aligned-${index}`).value;
+                try {
+                    item.aligned_instructions = JSON.parse(val);
+                } catch (e) {
+                    // Ignore invalid JSON while typing
+                }
+            } else if (type === 'improved') {
+                const val = document.getElementById(`batch-improved-${index}`).value;
+                item.improved_instruction = val;
+            } else if (type === 'prompt') {
+                const val = document.getElementById(`batch-prompt-${index}`).value;
+                item.prompt = val;
+            } else if (type === 'bad') {
+                const val = document.getElementById(`batch-bad-${index}`).checked;
+                item.is_bad = val;
+            } else if (type === 'checked') {
+                const val = document.getElementById(`batch-checked-${index}`).checked;
+                item.checked = val;
             }
         }
 
@@ -736,27 +970,18 @@
              
              let errors = 0;
              for (const item of batchResults) {
-                 // We need to make sure the server has the latest "current_results" for this episode, 
-                 // because save_results endpoint uses current_results[episode_id].
-                 // Our rerunBatchItem updates batchResults locally but also calls vlm_generation which updates server state.
-                 // However, if we didn't rerun, the server state might still have the result from the initial batch run.
-                 // YES, the initial batch run also called vlm_generation which updates current_results.
-                 // SO it should be fine.
+                 if (item.status !== 'completed' && item.status !== 'saved') continue;
+                 
                  try {
-                     // But wait, if we edited the aligned instructions locally in the batch view text area but didn't click "Rerun",
-                     // the server doesn't know about the edit.
-                     // The user should probably Rerun if they edit.
-                     // We'll assume what's on server is what we want to save unless we want to send the full object to save.
-                     // The save_results endpoint takes episode_id and looks up server state.
-                     
-                     // If we want to support saving locally edited text without rerunning, we'd need to update the server state first.
-                     // But typically save implies saving the generated result.
-                     
                      await fetch('/save_results', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            episode_id: item.episode_id
+                            episode_id: item.episode_id,
+                            improved_instructions: item.improved_instruction || item.improved_instructions,
+                            aligned_instructions: item.aligned_instructions,
+                            is_bad: !!item.is_bad,
+                            checked: item.checked !== undefined ? item.checked : true // Default to true on batch save
                         })
                     });
                  } catch(e) {
@@ -768,10 +993,49 @@
              if (errors === 0) {
                  msgSpan.innerText = "All saved successfully!";
                  msgSpan.className = "text-success";
+                 await loadEpisodes(); // Refresh list to show Checked status
              } else {
                  msgSpan.innerText = `Saved with ${errors} errors. Check console.`;
                  msgSpan.className = "text-danger";
              }
+        }
+
+        async function batchDelete() {
+            if (!currentScene) return;
+            
+            const episodesToDelete = batchResults
+                .filter(item => item.status === 'completed' || item.status === 'saved')
+                .map(item => item.episode_id);
+            
+            if (episodesToDelete.length === 0) {
+                alert("No saved/completed episodes to delete in this batch.");
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to delete results for ${episodesToDelete.length} episodes? This cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                freezeUI();
+                const response = await fetch('/delete_results', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ episode_ids: episodesToDelete })
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    alert(`Deleted ${data.deleted.length} results. Errors: ${data.errors.length}`);
+                    await loadEpisodes();
+                } else {
+                    alert("Delete failed: " + data.detail);
+                }
+                unfreezeUI();
+            } catch (e) {
+                alert("Error: " + e);
+                unfreezeUI();
+            }
         }
 
         // --- Aligned Instructions UI Helpers (For Single View) ---

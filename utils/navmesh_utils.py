@@ -211,15 +211,15 @@ class NavmeshInterface:
             print("[WARNING]: NaNs found in input vertices")
         self.input_vert = self._convert_up_axis(self.input_vert)
 
-        # Constrain vertices with z > 10 to z = 10 (only for vc scenes)
+        # Constrain vertices with z > 5 to z = 5 (only for vc scenes)
         # Note: after _convert_up_axis, z is the third component (index 2)
         print(f"[INFO]: scene_type: {scene_type}")
         if scene_type == 'vc':
-            z_mask = self.input_vert[:, 2] > 10
+            z_mask = self.input_vert[:, 2] > 5
             if np.any(z_mask):
                 num_constrained = np.sum(z_mask)
-                self.input_vert[z_mask, 2] = 10
-                print(f"[INFO]: Constrained {num_constrained} vertices with z > 10 to z = 10")
+                self.input_vert[z_mask, 2] = 5
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 5 to z = 5")
             
             # Filter out invalid faces (degenerate triangles with zero area or collapsed vertices)
             # A triangle is invalid if all three vertices are the same or if the triangle has zero area

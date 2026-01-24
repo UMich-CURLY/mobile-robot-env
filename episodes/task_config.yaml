@@ -1,11 +1,11 @@
 navmesh:
   default:
-    agent_height: 0.61
-    agent_max_climb: 0.2
-    agent_max_slope: 45.0
-    agent_radius: 0.3
-    cell_height: 0.05
-    cell_size: 0.05
+    agent_height: 0.6
+    agent_max_climb: 0.05
+    agent_max_slope: 26.0
+    agent_radius: 0.5
+    cell_height: 0.1
+    cell_size: 0.08
     detail_sample_dist: 1.0
     detail_sample_max_error: 1.0
     edge_max_error: 1.3
@@ -14,7 +14,7 @@ navmesh:
     region_min_size: 0.5
     verts_per_poly: 6.0
   indoor:
-    agent_height: 0.61
+    agent_height: 0.6
     agent_max_climb: 0.2
     agent_max_slope: 45.0
     agent_radius: 0.3
@@ -28,11 +28,11 @@ navmesh:
     region_min_size: 0.0
     verts_per_poly: 6.0
   vc:
-    agent_height: 0.61
-    agent_max_climb: 0.25
+    agent_height: 0.6000000238418579
+    agent_max_climb: 0.2
     agent_max_slope: 45.0
-    agent_radius: 1.1
-    cell_height: 0.05
+    agent_radius: 0.5
+    cell_height: 0.1
     cell_size: 1.5
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
@@ -166,138 +166,138 @@ scene:
     scene_scale: 0.009999999776482582
   grHome:
     align_ground: false
-    collider: false
+    collider: true
     episodes:
-      scene2:
-        label: none
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/scene2/start_result_navigation.usd
-        rule_pattern: gr
-      scene4:
-        label: none
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/scene4/start_result_navigation.usd
-        rule_pattern: gr
-      scene5:
-        label: none
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude:
-        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
-        navmesh_preset: default
-        path: grscenes_home/scenes/scene5/start_result_navigation.usd
-        rule_pattern: gr
       scene12:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene12/start_result_navigation.usd
         rule_pattern: gr
       scene13:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene13/start_result_navigation.usd
         rule_pattern: gr
-      scene21:
-        label: none
+      scene2:
         ceiling_height: 1.0
         episode_number: 20
+        label: none
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene2/start_result_navigation.usd
+        rule_pattern: gr
+      scene21:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene21/start_result_navigation.usd
         rule_pattern: gr
       scene22:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene22/start_result_navigation.usd
         rule_pattern: gr
       scene33:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene33/start_result_navigation.usd
         rule_pattern: gr
-      scene40:
-        label: none
+      scene4:
         ceiling_height: 1.0
         episode_number: 20
+        label: none
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene4/start_result_navigation.usd
+        rule_pattern: gr
+      scene40:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene40/start_result_navigation.usd
         rule_pattern: gr
       scene41:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene41/start_result_navigation.usd
         rule_pattern: gr
       scene48:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene48/start_result_navigation.usd
         rule_pattern: gr
-      scene58:
-        label: none
+      scene5:
         ceiling_height: 1.0
         episode_number: 20
+        label: none
+        navmesh_exclude:
+        - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
+        navmesh_preset: default
+        path: grscenes_home/scenes/scene5/start_result_navigation.usd
+        rule_pattern: gr
+      scene58:
+        ceiling_height: 1.0
+        episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene58/start_result_navigation.usd
         rule_pattern: gr
       scene59:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene59/start_result_navigation.usd
         rule_pattern: gr
       scene66:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
         path: grscenes_home/scenes/scene66/start_result_navigation.usd
         rule_pattern: gr
       scene67:
-        label: none
         ceiling_height: 1.0
         episode_number: 20
+        label: none
         navmesh_exclude:
         - /World/ground/terrain/__default_setting/HDR_Sphere/SM_Sphere
         navmesh_preset: default
@@ -411,81 +411,73 @@ scene:
       amsterdam:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/AMSTERDAM/AMSTERDAM_with_road_objects.usd
-        rule_pattern: name
+        path: vc_plus/AMSTERDAM/AMSTERDAM_store_merged.usd
+        rule_pattern: vc
       austin:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/AUSTIN/AUSTIN_with_road_objects_modified.usd
-        rule_pattern: name
+        path: vc_plus/AUSTIN/AUSTIN_store_merged.usd
+        rule_pattern: vc
       baltimore:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/BALTIMORE/BALTIMORE_with_road_objects_modified.usd
-        rule_pattern: name
+        path: vc_plus/BALTIMORE/BALTIMORE_store_merged.usd
+        rule_pattern: vc
       barcelona:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/BARCELONA/BARCELONA_with_road_objects_modified.usd
-        rule_pattern: name
-      berlin:
+        path: vc_plus/BARCELONA/BARCELONA_store_merged.usd
+        rule_pattern: vc
+      belgrade:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/BERLIN/BERLIN_with_road_objects_modified.usd
-        rule_pattern: name
+        path: vc_plus/BELGRADE/BELGRADE_store_merged.usd
+        rule_pattern: vc
+      boise:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BOISE/BOISE_store_merged.usd
+        rule_pattern: vc
+      boston:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BOSTON/BOSTON_store_merged.usd
+        rule_pattern: vc
+      bratislava:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BRATISLAVA/BRATISLAVA_store_merged.usd
+        rule_pattern: vc
+      brussels:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BRUSSELS/BRUSSELS_store_merged.usd
+        rule_pattern: vc
       ny:
         ceiling_height: 1.0
         episode_number: 20
-        goal_rules:
-          city_bench: .*Bench.*
-          sign: .*sign.*
-          street_lamp: Street_.*
-          traffic_light: .*traffic_light.*
-          tree: .*Tree.*
         navmesh_exclude: []
         navmesh_preset: vc
-        path: virtual_community/NY/NY_with_road_objects_modified.usd
-        rule_pattern: name
+        path: vc_plus/NY/NY_store_merged.usd
+        rule_pattern: vc
     scene_scale: 1.0
 task:
   type: object_nav

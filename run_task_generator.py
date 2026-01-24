@@ -33,7 +33,7 @@ task_config = yaml.load(open(args.tg_config_path, 'r'), Loader=yaml.FullLoader)
 scene_configs = task_config['scene']
 tasks = []
 port_start = args.port
-for scene_type in ["grCommercial"]:
+for scene_type in ["vc"]: # "grCommercial", "nv", "vc", "grHome"
 # for scene_type in scene_configs.keys():
     for scene_name in scene_configs[scene_type]['episodes'].keys():
         tasks.append(f"{scene_type}_{scene_name}")

@@ -256,8 +256,7 @@ class VLNSim:
     
     def generate_astar_path(self, scene_id, ref_path):
         # load bev image
-        scene_name = "_".join(scene_id.split("_")[:-1])
-        bev_depth, info = load_bev_map(f"{self.args.scene_folder}/episode_data/{scene_name}/bev_map.npz")
+        bev_depth, info = load_bev_map(f"{self.args.scene_folder}/episode_data/{scene_id}/bev_map.npz")
         image_height, image_width = bev_depth.shape
         obstacle_map = generate_obstacle_map(bev_depth)
         px_per_meter = np.array(info["px_per_meter"])
@@ -296,8 +295,12 @@ class VLNSim:
         for i in range(len(ref_waypoints_px)-1):
             goal = ref_waypoints_px[i+1]
             path = self.astar_planner.plan(obstacle_map, start, goal, time_budget=1.0)
-            total_path.extend(path)
-            start = path[-1]
+            if path is None:
+                total_path.append(goal)
+                start = goal
+            else:
+                total_path.extend(path)
+                start = path[-1]
         return total_path
 
     def set_ref_waypoints(self, episode):
@@ -307,8 +310,8 @@ class VLNSim:
         closest_goal_idx = measurements["closest_goal"]
         ref_path = episode["goals"][closest_goal_idx]["reference_path"]
         # notice that ref_path has [x, y, z], while waypoints has [x, y, yaw]
-        # waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
-        waypoints = self.generate_astar_path(episode["scene_id"], ref_path)
+        waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
+        # waypoints = self.generate_astar_path(episode["scene_id"], ref_path)
         self.set_waypoints(waypoints)
 
     def clear_waypoints(self):

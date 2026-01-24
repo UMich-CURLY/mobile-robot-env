@@ -289,6 +289,7 @@ class TaskGeneratorUI(BaseUI):
                 ui_utils.btn_builder("Stop Generation", text="Stop", on_clicked_fn=lambda: self.stop_generation())
                 ui_utils.btn_builder("Get Information", text="Get", on_clicked_fn=lambda: self.get_information())
                 ui_utils.btn_builder("Toggle Ceiling", text="Toggle", on_clicked_fn=lambda: self.task_generator.toggle_ceiling(self.ui_episode["scene_id"]))
+                ui_utils.btn_builder("Get World Size", text="Get", on_clicked_fn=lambda: self.task_generator.get_world_bb(self.ui_episode["scene_id"]))
                 ui_utils.btn_builder("Create BEV Map", text="Create", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="ceiling"))
                 ui_utils.btn_builder("Save Occupancy Map", text="Save", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="robot", file_name="height_map"))
             with self.create_frame("Info"):

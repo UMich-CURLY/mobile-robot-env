@@ -50,7 +50,7 @@ async def read_root(request: Request):
     # Default paths
     default_episodes = str(robot_env_path / "episodes")
     # Try to guess episode_data_folder or use a default
-    default_data = "/home/junzhe_lighthouse/lighthouse/scratch/isaac_scenes_v1/episode_data"
+    default_data = str(robot_env_path / "data" / "episode_data")
     
     return templates.TemplateResponse("index.html", {
         "request": request, 
@@ -89,6 +89,14 @@ async def get_episodes(scene_id: str):
     
     episodes = [e.episode_id for e in generator_instance.episode_list if e.scene_id == scene_id]
     return {"episodes": episodes}
+
+@app.get("/episodes_status/{scene_id}")
+async def get_episodes_status(scene_id: str):
+    if not generator_instance:
+        raise HTTPException(status_code=400, detail="Generator not initialized")
+    
+    status = generator_instance.get_episode_status(scene_id)
+    return {"status": status}
 
 @app.post("/generate_instruction")
 def generate_instruction(
@@ -133,7 +141,8 @@ def generate_instruction(
             current_results[str(ep_id)] = result
             
             # Find generated files
-            video_path = generator_instance.get_data_path(episode, "video_instruction.mp4")
+            video_path_pov = generator_instance.get_data_path(episode, "video_instruction_pov.mp4")
+            video_path_third_person = generator_instance.get_data_path(episode, "video_instruction_third_person.mp4")
             path_image = generator_instance.get_data_path(episode, "path_simplified_path.png")
             
             processed_results.append({
@@ -141,8 +150,14 @@ def generate_instruction(
                 "full_instruction": result["full_instruction"], # legacy
                 "template_instruction": result.get("template_instruction", result["full_instruction"]),
                 "aligned_instructions": result["aligned_instructions"],
-                "video_url": to_url(video_path) if os.path.exists(video_path) else None,
-                "path_image_url": to_url(path_image) if os.path.exists(path_image) else None
+                "improved_instruction": result.get("improved_instructions"),
+                "prompt": result.get("prompt"),
+                "used_images": [to_url(p) for p in result.get("used_images", [])],
+                "video_url_pov": to_url(video_path_pov) if os.path.exists(video_path_pov) else None,
+                "video_url_third_person": to_url(video_path_third_person) if os.path.exists(video_path_third_person) else None,
+                "path_image_url": to_url(path_image) if os.path.exists(path_image) else None,
+                "is_bad": result.get("is_bad", False),
+                "checked": result.get("checked", False)
             })
             
         response = {
@@ -157,8 +172,13 @@ def generate_instruction(
                 "full_instruction": res["full_instruction"],
                 "template_instruction": res["template_instruction"],
                 "aligned_instructions": res["aligned_instructions"],
-                "video_url": res["video_url"],
-                "path_image_url": res["path_image_url"]
+                "improved_instruction": res.get("improved_instruction"),
+                "prompt": res.get("prompt"),
+                "used_images": res.get("used_images"),
+                "video_url_pov": res["video_url_pov"],
+                "video_url_third_person": res["video_url_third_person"],
+                "path_image_url": res["path_image_url"],
+                "checked": res.get("checked", False)
             })
             
         return response
@@ -170,7 +190,8 @@ def generate_instruction(
 @app.post("/vlm_generation")
 def vlm_generation(
     episode_id: int = Body(...),
-    aligned_instructions: List = Body(...) # Allow overriding instructions
+    aligned_instructions: List = Body(...), # Allow overriding instructions
+    prompt: Optional[str] = Body(None)
 ):
     if not generator_instance:
         raise HTTPException(status_code=400, detail="Generator not initialized")
@@ -189,17 +210,17 @@ def vlm_generation(
             episode = episode_res["episode"]
 
         # Call VLM generation
-        vlm_result = generator_instance.vlm_based_generation(episode, aligned_instructions)
+        vlm_result = generator_instance.vlm_based_generation(episode, aligned_instructions, prompt=prompt)
         
         # Handle new dictionary return type
         if isinstance(vlm_result, dict):
             improved_instruction = vlm_result["improved_instructions"]
-            prompt = vlm_result["prompt"]
+            actual_prompt = vlm_result["prompt"]
             used_images = vlm_result["used_images"]
         else:
              # Fallback if old code
              improved_instruction = vlm_result
-             prompt = ""
+             actual_prompt = ""
              used_images = []
         
         # Update current results
@@ -207,6 +228,7 @@ def vlm_generation(
             current_results[str(episode_id)] = {"episode": episode}
         current_results[str(episode_id)]["improved_instructions"] = improved_instruction
         current_results[str(episode_id)]["aligned_instructions"] = aligned_instructions
+        current_results[str(episode_id)]["prompt"] = actual_prompt
         
         # Convert image paths to URLs
         def to_url(abs_path):
@@ -220,7 +242,7 @@ def vlm_generation(
         return {
             "status": "success",
             "improved_instruction": improved_instruction,
-            "prompt": prompt,
+            "prompt": actual_prompt,
             "used_images": used_images_urls
         }
     except Exception as e:
@@ -230,24 +252,48 @@ def vlm_generation(
 
 @app.post("/save_results")
 async def save_results(
-    episode_id: int = Body(..., embed=True)
+    episode_id: int = Body(..., embed=True),
+    improved_instructions: Optional[str] = Body(None),
+    aligned_instructions: Optional[List] = Body(None),
+    is_bad: Optional[bool] = Body(None),
+    checked: Optional[bool] = Body(None)
 ):
     if not generator_instance:
         raise HTTPException(status_code=400, detail="Generator not initialized")
         
     result = current_results.get(str(episode_id))
     if not result:
-        raise HTTPException(status_code=404, detail="No results to save for this episode")
+        # Try to find it in the list if not in current_results
+        scene_episodes = [x for x in generator_instance.episode_list if x.episode_id == episode_id]
+        if not scene_episodes:
+            raise HTTPException(status_code=404, detail="No results to save for this episode")
+        episode = scene_episodes[0]
+        result = {"episode": episode}
+    else:
+        episode = result["episode"]
         
     try:
-        episode = result["episode"]
         save_path = generator_instance.get_data_path(episode, "generated_instructions.json")
         
+        # Update server state if new data provided
+        if improved_instructions is not None:
+            result["improved_instructions"] = improved_instructions
+        if aligned_instructions is not None:
+            result["aligned_instructions"] = aligned_instructions
+        if is_bad is not None:
+            result["is_bad"] = is_bad
+        if checked is not None:
+            result["checked"] = checked
+
         data_to_save = {
             "aligned_instructions": result.get("aligned_instructions"),
             "improved_instructions": result.get("improved_instructions"),
             "full_instruction": result.get("full_instruction"),
-            "template_instruction": result.get("template_instruction", result.get("full_instruction"))
+            "template_instruction": result.get("template_instruction", result.get("full_instruction")),
+            "prompt": result.get("prompt"),
+            "used_images": result.get("used_images"),
+            "is_bad": result.get("is_bad", False),
+            "checked": result.get("checked", False)
         }
         
         with open(save_path, "w") as f:
@@ -255,7 +301,37 @@ async def save_results(
             
         return {"status": "success", "path": save_path}
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/delete_results")
+async def delete_results(
+    episode_ids: List[int] = Body(..., embed=True)
+):
+    if not generator_instance:
+        raise HTTPException(status_code=400, detail="Generator not initialized")
+    
+    deleted = []
+    errors = []
+    
+    for ep_id in episode_ids:
+        try:
+            scene_episodes = [x for x in generator_instance.episode_list if x.episode_id == ep_id]
+            if not scene_episodes:
+                errors.append(f"Episode {ep_id} not found")
+                continue
+            episode = scene_episodes[0]
+            save_path = generator_instance.get_data_path(episode, "generated_instructions.json")
+            if os.path.exists(save_path):
+                os.remove(save_path)
+                deleted.append(ep_id)
+            else:
+                errors.append(f"Episode {ep_id} has no results to delete")
+        except Exception as e:
+            errors.append(f"Error deleting episode {ep_id}: {str(e)}")
+            
+    return {"status": "success", "deleted": deleted, "errors": errors}
 
 if __name__ == "__main__":
     uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
