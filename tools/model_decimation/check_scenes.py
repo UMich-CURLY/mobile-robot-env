@@ -16,6 +16,7 @@ from tqdm import tqdm
 
 try:
     import bpy
+    import mathutils
     IS_IN_BLENDER = True
 except ImportError:
     IS_IN_BLENDER = False
@@ -95,32 +96,86 @@ def analyze_scene(usd_path, dataset_root):
     """
     Imports a USD file, counts total faces, and identifies objects with >10k faces.
     Aggregates face counts for objects where a parent starts with "model_".
-    Returns: (total_faces, list_of_heavy_objects)
+    Returns: (total_faces, list_of_heavy_objects, scene_size)
     """
     if not IS_IN_BLENDER:
         print("Error: analyze_scene must be run inside Blender")
-        return 0, []
+        return 0, [], (0, 0, 0)
 
     print(f"Analyzing scene: {usd_path}")
-    # Clear the scene of existing objects before import
     bpy.ops.scene.new()
 
     # Import the USD file
     try:
         with SuppressBlenderOutput():
             bpy.ops.wm.usd_import(filepath=usd_path)
+        # Ensure all transforms are calculated
+        bpy.context.view_layer.update()
     except Exception as e:
         print(f"Error importing USD file: {e}")
-        return 0, []
+        return 0, [], (0, 0, 0)
+
+    # Debug: print scene units
+    unit_settings = bpy.context.scene.unit_settings
+    print(f"Scene Units: system={unit_settings.system}, scale={unit_settings.scale_length}")
+
+    # Remove specific mesh if it's the navigation scene
+    if os.path.basename(usd_path) == "start_result_navigation.usd":
+        # More robust matching for the HDR sphere
+        target_parts = "HDR_Sphere"
+        to_delete = []
+        for obj in bpy.context.scene.objects:
+            obj_path = get_obj_path(obj)
+            if target_parts in obj_path:
+                to_delete.append(obj)
+        
+        if to_delete:
+            print(f"Removing {len(to_delete)} mesh(es) matching {target_parts}")
+            # Use a context-safe way to delete
+            bpy.ops.object.select_all(action='DESELECT')
+            for obj in to_delete:
+                obj.select_set(True)
+            bpy.ops.object.delete()
+            bpy.context.view_layer.update()
 
     total_faces = 0
     # Store aggregated counts: key = (path, name), value = face_count
     aggregated_counts = {}
 
+    # Calculate scene size and count faces
+    min_x, min_y, min_z = float('inf'), float('inf'), float('inf')
+    max_x, max_y, max_z = float('-inf'), float('-inf'), float('-inf')
+    found_mesh = False
+
     # Iterate through all objects in the scene
     print(f"Number of objects in the scene: {len(bpy.context.scene.objects)}")
+    
+    # Debug: check first few objects
+    mesh_count = 0
+    for obj in bpy.context.scene.objects:
+        if not obj.parent:
+            s = obj.matrix_world.to_scale()
+            print(f"Root Object: {obj.name}, type={obj.type}, scale=({s.x:.6f}, {s.y:.6f}, {s.z:.6f})")
+        
+        if obj.type == 'MESH':
+            mesh_count += 1
+            if mesh_count <= 5:
+                s = obj.matrix_world.to_scale()
+                print(f"Mesh {mesh_count}: {obj.name}, world_scale=({s.x:.6f}, {s.y:.6f}, {s.z:.6f})")
+
     for obj in tqdm(bpy.context.scene.objects, desc="Analyzing objects"):
         if obj.type == 'MESH':
+            found_mesh = True
+            # Update scene size using world coordinates of bounding box corners
+            for corner in obj.bound_box:
+                world_corner = obj.matrix_world @ mathutils.Vector(corner)
+                min_x = min(min_x, world_corner.x)
+                min_y = min(min_y, world_corner.y)
+                min_z = min(min_z, world_corner.z)
+                max_x = max(max_x, world_corner.x)
+                max_y = max(max_y, world_corner.y)
+                max_z = max(max_z, world_corner.z)
+
             # Count number of faces
             face_count = len(obj.data.polygons)
             total_faces += face_count
@@ -142,6 +197,13 @@ def analyze_scene(usd_path, dataset_root):
                 aggregated_counts[key] = 0
             aggregated_counts[key] += face_count
 
+    if found_mesh:
+        scene_size = (max_x - min_x, max_y - min_y, max_z - min_z)
+    else:
+        scene_size = (0, 0, 0)
+
+    print(f"Calculated scene size: {scene_size}")
+
     print("Analyzing heavy objects...")
     heavy_objects = []
     for (path, name), count in aggregated_counts.items():
@@ -157,7 +219,7 @@ def analyze_scene(usd_path, dataset_root):
     # Sort heavy objects by faces descending
     heavy_objects.sort(key=lambda x: x["faces"], reverse=True)
 
-    return total_faces, heavy_objects
+    return total_faces, heavy_objects, scene_size
 
 def process_folder_worker(input_folder, scene_log_path, objects_log_path, dataset_root, worker_id, total_workers):
     """
@@ -199,18 +261,18 @@ def process_folder_worker(input_folder, scene_log_path, objects_log_path, datase
     # Initialize partial logs with headers if they don't exist
     if not os.path.exists(scene_log_path):
         with open(scene_log_path, "w") as f:
-            f.write("scene_path,total_faces\n")
+            f.write("scene_path,total_faces,size_x,size_y,size_z\n")
         
     if not os.path.exists(objects_log_path):
         with open(objects_log_path, "w") as f:
             f.write("scene_path,prim_path,prim_name,face_count,source_usd_path\n")
     
     for usd_path in tqdm(my_files_filtered, desc=f"Worker {worker_id} Processing"):
-        total_faces, heavy_objs = analyze_scene(usd_path, dataset_root)
+        total_faces, heavy_objs, scene_size = analyze_scene(usd_path, dataset_root)
         
         # Log scene info
         with open(scene_log_path, "a") as f:
-            f.write(f"{usd_path},{total_faces}\n")
+            f.write(f"{usd_path},{total_faces},{scene_size[0]},{scene_size[1]},{scene_size[2]}\n")
             
         # Log heavy objects
         if heavy_objs:
@@ -273,7 +335,7 @@ def launch_workers(input_folder, scene_log, object_log, dataset_root, num_worker
     # Scene Log
     with open(scene_log, "a") as outfile: # Append to existing or create new
         if os.path.getsize(scene_log) == 0:
-             outfile.write("scene_path,total_faces\n")
+             outfile.write("scene_path,total_faces,size_x,size_y,size_z\n")
              
         for i in range(num_workers):
             base_scene, ext_scene = os.path.splitext(scene_log)

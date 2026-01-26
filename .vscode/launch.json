@@ -28,7 +28,8 @@
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_scene_id",
                 // "nv_apartment"
-                "grCommercial_scene0"
+                // "grHome_scene12"
+                "vc_austin"
             ],
             "envFile": "${workspaceFolder}/.env"
         },

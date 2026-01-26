@@ -870,6 +870,6 @@ def serve_image(keyword, obj_name, filename):
     return send_from_directory(os.path.join(RENDER_DIR, keyword, obj_name), filename)
 
 if __name__ == '__main__':
-    print(f"Starting server at http://localhost:5000")
+    print(f"Starting server at http://localhost:5001")
     print(f"Scanning directory: {RENDER_DIR}")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

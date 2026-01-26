@@ -18,7 +18,6 @@ vln_cli_args.add_vln_args(parser)
 
 AppLauncher.add_app_launcher_args(parser)
 args = vln_cli_args.parse_args(parser)
-args.enable_cameras = True
 
 # Launch Isaac Lab app
 app_launcher = AppLauncher(args)
@@ -89,16 +88,24 @@ try:
         with task_generator.timing_status(scene_id, "load_scene"):
             vln_sim.reset(test_episode)
             vln_sim.step()
+        with task_generator.timing_status(scene_id, "check_navmesh"):
+            task_generator.check_navmesh(scene_id)
+            task_generator_ui.teleport_robot()
+
         # generate BEV map
         with task_generator.timing_status(scene_id, "create_bev"):
             task_generator.create_bev_map(scene_id, file_name=f"bev_map", clip_range="ceiling", ceiling_height=scene_config["ceiling_height"])
+            for i in range(200):
+                vln_sim.step()
+                if not task_generator.bev_camera_lock.locked():
+                    print(f"[TG] BEV camera job completed")
+                    break
+            task_generator.create_bev_map(scene_id, file_name=f"nav_bev_map", clip_range="robot")
             for i in range(10000):
                 vln_sim.step()
                 if not task_generator.bev_camera_lock.locked():
                     print(f"[TG] BEV camera job completed")
                     break
-        # with task_generator.timing_status(scene_id, "check_navmesh"):
-        #     task_generator.check_navmesh(scene_id)
         with task_generator.timing_status(scene_id, "generate_episodes"):
             task_generator.generate_episodes(scene_id)
             while True:
@@ -109,7 +116,6 @@ try:
 except Exception as e:
     print(f"[TG] Error: {e}")
     task_generator.save_status(scene_id, status="error", error=str(e))
-    raise e
 
 """Main simulation loop"""
 # print("[INFO]: Starting simulation")
