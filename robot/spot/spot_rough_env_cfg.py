@@ -348,7 +348,11 @@ class SpotRoughEnvCfg(BaseEnvCfg):
         self.sim.physics_material.restitution_combine_mode = "multiply"
         self.sim.render.dlss_mode = 1
         self.sim.render.enable_reflections = True
+        self.sim.render.enable_direct_lighting = True
         self.sim.render.enable_translucency = True
+        self.sim.render.enable_shadows = True
+        self.sim.render.enable_ambient_occlusion = True
+        self.sim.render.enable_dl_denoiser = True
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         self.scene.contact_forces.update_period = self.sim.dt

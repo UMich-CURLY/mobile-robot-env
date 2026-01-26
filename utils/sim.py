@@ -4,6 +4,8 @@ import time
 from threading import Thread
 from scipy.spatial.transform import Rotation as R
 import open3d as o3d
+import json
+from utils.astar import load_bev_map, generate_obstacle_map, AStarPlanner
 # Isaac Import
 import carb
 import omni
@@ -254,8 +256,52 @@ class VLNSim:
     
     def generate_astar_path(self, scene_id, ref_path):
         # load bev image
-        bev_data = np.load(f"{self.args.scene_folder}/episode_data/{scene_id}/bev_map.npz")
-        rgb, depth = bev_data['rgb'], bev_data['depth'][:,:,0]
+        bev_depth, info = load_bev_map(f"{self.args.scene_folder}/episode_data/{scene_id}/bev_map.npz")
+        image_height, image_width = bev_depth.shape
+        obstacle_map = generate_obstacle_map(bev_depth)
+        px_per_meter = np.array(info["px_per_meter"])
+        world_center = np.array(info["world_center"])
+        # process ref path to waypoints
+        ref_waypoints = [[x[0], x[1], 0] for x in ref_path]
+        ref_waypoints_px = []
+        last_point = None
+        # convert to grid coordinates
+        for i, point in enumerate(ref_path):
+            point = np.array(point)
+            if last_point is not None:
+                if np.linalg.norm(point - last_point) < 0.5:
+                    continue
+            last_point = point
+            wp = (point[:2] - world_center[:2]) * px_per_meter
+            ref_waypoints_px.append((wp[0]+image_width//2, image_height//2-wp[1], 0))
+        # set yaw angle to the direction of the next waypoint
+        for i, point in enumerate(ref_waypoints_px):
+            if i == len(ref_waypoints_px) - 1:
+                yaw_angle = ref_waypoints_px[-2][2]
+            else:
+                yaw_angle = np.arctan2(ref_waypoints_px[i+1][1] - point[1], ref_waypoints_px[i+1][0] - point[0])
+            ref_waypoints_px[i] = (ref_waypoints_px[i][0], ref_waypoints_px[i][1], yaw_angle)
+        # plan path
+        self.astar_planner = AStarPlanner(
+            meters_per_cell=1.0/px_per_meter,
+            robot_width=0.5, # 0.44
+            robot_height=0.9, # 0.88
+            step_size=0.2,
+            step_size_yaw=45,
+            reach_threshold=0.5,
+        )
+        total_path = []
+        start = ref_waypoints_px[0]
+        for i in range(len(ref_waypoints_px)-1):
+            goal = ref_waypoints_px[i+1]
+            path = self.astar_planner.plan(obstacle_map, start, goal, time_budget=1.0)
+            if path is None:
+                total_path.append(goal)
+                start = goal
+            else:
+                total_path.extend(path)
+                start = path[-1]
+        return total_path
 
     def set_ref_waypoints(self, episode):
         measure_manager = add_measurement(self.env, episode, measure_names=["DistanceToGoal", "ClosestGoal"])
@@ -265,6 +311,7 @@ class VLNSim:
         ref_path = episode["goals"][closest_goal_idx]["reference_path"]
         # notice that ref_path has [x, y, z], while waypoints has [x, y, yaw]
         waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
+        # waypoints = self.generate_astar_path(episode["scene_id"], ref_path)
         self.set_waypoints(waypoints)
 
     def clear_waypoints(self):
@@ -362,7 +409,7 @@ class VLNSim:
                 }
                 if self.args.task_type=="objnav":
                     info["instruction"] = current_episode["objnav"]
-                else:
+                elif self.args.task_type=="vln":
                     info["instruction"] = current_episode["instruction"]
                 self._latest_data["info"] = info
             except Exception as e:
