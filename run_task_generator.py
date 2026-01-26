@@ -36,7 +36,10 @@ port_start = args.port
 for scene_type in ["vc"]: # "grCommercial", "nv", "vc", "grHome"
 # for scene_type in scene_configs.keys():
     for scene_name in scene_configs[scene_type]['episodes'].keys():
+        # if not scene_name.endswith("_store"):
+        #     continue
         tasks.append(f"{scene_type}_{scene_name}")
+print(f"Running {len(tasks)} tasks: {tasks}")
 
 # Filter arguments to remove num_workers
 cmd_args = []

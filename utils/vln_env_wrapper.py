@@ -233,6 +233,8 @@ class VLNEnvWrapper:
                 is_domelight = prim.GetTypeName() == "DomeLight"
                 if from_usd and is_domelight:
                     prim.SetActive(False)
+            default_dome_light = self.scene.stage.GetPrimAtPath('/World/skyLight')
+            default_dome_light.SetActive(False)
             # add ref to usd file
             add_reference_to_stage(prim_path="/World/sky", usd_path=os.path.join(self.args.scene_folder, "nvidia", "sky", "CloudySky.usd"))
             # apply scale and translation

@@ -73,7 +73,7 @@ def convert_models():
 
 # Configuration
 def main(CITY):
-    VC_SCENE_DIR = os.path.join(SCENE_DATA_DIR, f"vc_plus/{CITY}")
+    VC_SCENE_DIR = os.path.join(SCENE_DATA_DIR, f"vc_plus_store/{CITY}")
     LANE_POINTS = os.path.join(VC_SCENE_DIR, "lane_points.json")
     SIDEWALK_POINTS = os.path.join(VC_SCENE_DIR, "sidewalk_points.json")
     ROAD_OBJECTS = os.path.join(VC_SCENE_DIR, "road_objects_info.json")
@@ -445,7 +445,7 @@ def main(CITY):
                 asset_path = obj.get('asset_path')
                 if "ViCo" in asset_path or ":" in asset_path:
                     filename = os.path.basename(asset_path.replace("\\", "/"))
-                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus/road_objects", filename)
+                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus_store/road_objects", filename)
                     asset_path = os.path.relpath(asset_path, VC_SCENE_DIR)
                 
                 filename = os.path.basename(asset_path).split(".")[0]
@@ -504,7 +504,7 @@ def main(CITY):
                 asset_path = obj.get('asset_path')
                 if "ViCo" in asset_path or ":" in asset_path:
                     filename = os.path.basename(asset_path.replace("\\", "/"))
-                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus/road_objects", filename)
+                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus_store/road_objects", filename)
                     asset_path = os.path.relpath(asset_path, VC_SCENE_DIR)
                 
                 filename = os.path.basename(asset_path).split(".")[0]
@@ -580,15 +580,19 @@ def main(CITY):
         merged_layer.Save()
         print(f"Saved merged USD to {OUTPUT_MERGED_USD}")
 
+    if os.path.exists(OUTPUT_MERGED_USD):
+        return
+    print(f"Processing {CITY}")
+
     generate_objaverse_json()
     merge_usds()
 
 if __name__ == "__main__":
     cities = []
     if args.city == "all":
-        # iterate over all cities in the vc_plus folder
-        for city in os.listdir(os.path.join(args.scene_folder, "vc_plus")):
-            if os.path.isdir(os.path.join(args.scene_folder, "vc_plus", city)):
+        # iterate over all cities in the vc_plus_store folder
+        for city in os.listdir(os.path.join(args.scene_folder, "vc_plus_store")):
+            if os.path.isdir(os.path.join(args.scene_folder, "vc_plus_store", city)) and city != "road_objects":
                 cities.append(city)
     else:
         cities.append(args.city)

@@ -409,7 +409,7 @@ class VLNSim:
                 }
                 if self.args.task_type=="objnav":
                     info["instruction"] = current_episode["objnav"]
-                else:
+                elif self.args.task_type=="vln":
                     info["instruction"] = current_episode["instruction"]
                 self._latest_data["info"] = info
             except Exception as e:

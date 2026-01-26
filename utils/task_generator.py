@@ -304,6 +304,13 @@ class TaskGenerator:
                     goal = match_result.group(1)
                     goal = "_".join(goal.split("_")[:-1])
                     self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        elif self.rule_pattern == "vc_store":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/store/([^/]*?)_.$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
         total_goal_found = 0
         for goal, goal_item in self.goal_dict.items():
             print(f"  Found {len(goal_item['prim'])} {goal}")

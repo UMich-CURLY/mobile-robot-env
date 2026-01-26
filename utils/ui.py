@@ -118,9 +118,10 @@ class BenchmarkUI(BaseUI):
         self.build_ui()
         # map ui_episode fields to ui_elements
         # format: {ui_name: (config_name, [getter_func, setter_func])}
+        instruction_name = "objnav" if self.vln_sim.args.task_type=="objnav" else "instruction"
         self.ui_map = {
             "episode_label": ("episode_label", choice_func(self.episode_label_list)),
-            "instruction": ("instruction", str_func),
+            "instruction": (instruction_name, str_func),
             "episode_info": ("episode_info", label_func),
             "start_position": ("start_position", xyz_func),
         }

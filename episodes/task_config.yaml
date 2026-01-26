@@ -443,33 +443,12 @@ scene:
         navmesh_preset: vc
         path: vc_plus/BELGRADE/BELGRADE_store_merged.usd
         rule_pattern: vc
-      boise:
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude: []
-        navmesh_preset: vc
-        path: vc_plus/BOISE/BOISE_store_merged.usd
-        rule_pattern: vc
       boston:
         ceiling_height: 1.0
         episode_number: 20
         navmesh_exclude: []
         navmesh_preset: vc
         path: vc_plus/BOSTON/BOSTON_store_merged.usd
-        rule_pattern: vc
-      bratislava:
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude: []
-        navmesh_preset: vc
-        path: vc_plus/BRATISLAVA/BRATISLAVA_store_merged.usd
-        rule_pattern: vc
-      brussels:
-        ceiling_height: 1.0
-        episode_number: 20
-        navmesh_exclude: []
-        navmesh_preset: vc
-        path: vc_plus/BRUSSELS/BRUSSELS_store_merged.usd
         rule_pattern: vc
       ny:
         ceiling_height: 1.0
@@ -478,6 +457,111 @@ scene:
         navmesh_preset: vc
         path: vc_plus/NY/NY_store_merged.usd
         rule_pattern: vc
+      paris:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/PARIS/PARIS_store_merged.usd
+        rule_pattern: vc
+      berlin:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BERLIN/BERLIN_store_merged.usd
+        rule_pattern: vc
+      madrid:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/MADRID/MADRID_store_merged.usd
+        rule_pattern: vc
+      london:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/LONDON/LONDON_store_merged.usd
+        rule_pattern: vc
+      austin_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/AUSTIN/AUSTIN_store_merged.usd
+        rule_pattern: vc_store
+      belgrade_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BELGRADE/BELGRADE_store_merged.usd
+        rule_pattern: vc_store
+      ny_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/NY/NY_store_merged.usd
+        rule_pattern: vc_store
+      barcelona_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BARCELONA/BARCELONA_store_merged.usd
+        rule_pattern: vc_store
+      boston_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BOSTON/BOSTON_store_merged.usd
+        rule_pattern: vc_store
+      baltimore_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BALTIMORE/BALTIMORE_store_merged.usd
+        rule_pattern: vc_store
+      amsterdam_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/AMSTERDAM/AMSTERDAM_store_merged.usd
+        rule_pattern: vc_store
+      paris_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/PARIS/PARIS_store_merged.usd
+        rule_pattern: vc_store
+      berlin_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BERLIN/BERLIN_store_merged.usd
+        rule_pattern: vc_store
+      madrid_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/MADRID/MADRID_store_merged.usd
+        rule_pattern: vc_store
+      london_store:
+        ceiling_height: 1.0
+        episode_number: 20
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/LONDON/LONDON_store_merged.usd
+        rule_pattern: vc_store
     scene_scale: 1.0
 task:
   type: object_nav
