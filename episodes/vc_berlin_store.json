@@ -1,0 +1,1372 @@
+[
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_9",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_9_4",
+                "type": "object",
+                "location": [
+                    -84.2984868521846,
+                    234.39322643258882,
+                    5.2295610886332735
+                ],
+                "radius": 3.649609689156037,
+                "path_length": 87.01607205957924,
+                "reference_path": [
+                    [
+                        -144.5699005126953,
+                        186.07598876953125,
+                        3.0260157585144043
+                    ],
+                    [
+                        -133.107666015625,
+                        195.86398315429688,
+                        3.200000762939453
+                    ],
+                    [
+                        -131.607666015625,
+                        197.36398315429688,
+                        3.200000762939453
+                    ],
+                    [
+                        -124.107666015625,
+                        221.36398315429688,
+                        4.100000381469727
+                    ],
+                    [
+                        -122.607666015625,
+                        222.86398315429688,
+                        4.100000381469727
+                    ],
+                    [
+                        -110.607666015625,
+                        233.36398315429688,
+                        4.100000381469727
+                    ],
+                    [
+                        -103.107666015625,
+                        234.86398315429688,
+                        3.8999996185302734
+                    ],
+                    [
+                        -94.107666015625,
+                        236.36398315429688,
+                        3.700000762939453
+                    ],
+                    [
+                        -84.2984848022461,
+                        236.36398315429688,
+                        3.3263180255889893
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -144.56989743089673,
+            186.07599119392336,
+            3.0260156609200495
+        ],
+        "start_rotation": [
+            0.9535741919692651,
+            0.0,
+            0.0,
+            0.3011581983113911
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    294.69547673881516,
+                    58.735166539664576,
+                    5.169076090215441
+                ],
+                "radius": 3.6161665941350805,
+                "path_length": 59.749150253374474,
+                "reference_path": [
+                    [
+                        352.570556640625,
+                        42.792171478271484,
+                        3.290426254272461
+                    ],
+                    [
+                        342.392333984375,
+                        42.863983154296875,
+                        3.3000011444091797
+                    ],
+                    [
+                        294.6954650878906,
+                        56.363983154296875,
+                        3.2022461891174316
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            352.5705610762443,
+            42.79217197142218,
+            3.2904262835008304
+        ],
+        "start_rotation": [
+            -0.035763256888367054,
+            0.0,
+            0.0,
+            0.9993602901139992
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "library_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/library_0_1",
+                "type": "object",
+                "location": [
+                    287.4187656691404,
+                    172.1815324803194,
+                    4.471562287714306
+                ],
+                "radius": 3.6005836289279927,
+                "path_length": 44.22331094060108,
+                "reference_path": [
+                    [
+                        276.184326171875,
+                        132.25392150878906,
+                        2.700000762939453
+                    ],
+                    [
+                        276.392333984375,
+                        132.86398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        291.392333984375,
+                        158.36398315429688,
+                        2.6000003814697266
+                    ],
+                    [
+                        291.392333984375,
+                        165.86398315429688,
+                        2.6000003814697266
+                    ],
+                    [
+                        289.892333984375,
+                        172.18153381347656,
+                        2.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            276.18434074760756,
+            132.25392327166836,
+            2.700000762939453
+        ],
+        "start_rotation": [
+            0.8787850333510042,
+            0.0,
+            0.0,
+            0.47721783826495257
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_1",
+                "type": "object",
+                "location": [
+                    282.19814298529116,
+                    158.26382790215644,
+                    4.585690486510714
+                ],
+                "radius": 3.5970788519311725,
+                "path_length": 32.60311098290578,
+                "reference_path": [
+                    [
+                        260.57763671875,
+                        131.04954528808594,
+                        3.1543142795562744
+                    ],
+                    [
+                        262.892333984375,
+                        132.86398315429688,
+                        3.0
+                    ],
+                    [
+                        264.392333984375,
+                        134.36398315429688,
+                        2.8999996185302734
+                    ],
+                    [
+                        282.1981506347656,
+                        155.36398315429688,
+                        2.6000003814697266
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            260.57762950454764,
+            131.04953821102302,
+            3.154314220648279
+        ],
+        "start_rotation": [
+            0.884226131524397,
+            0.0,
+            0.0,
+            0.4670590415883197
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_3",
+                "type": "object",
+                "location": [
+                    123.93429717736478,
+                    177.18852737942785,
+                    4.352119530085537
+                ],
+                "radius": 3.578784892116488,
+                "path_length": 80.72372274037934,
+                "reference_path": [
+                    [
+                        160.32650756835938,
+                        131.9794921875,
+                        2.8999996185302734
+                    ],
+                    [
+                        154.892333984375,
+                        146.36398315429688,
+                        2.8999996185302734
+                    ],
+                    [
+                        154.892333984375,
+                        149.36398315429688,
+                        2.8999996185302734
+                    ],
+                    [
+                        156.392333984375,
+                        168.86398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        156.392333984375,
+                        170.36398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        147.392333984375,
+                        183.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        145.892333984375,
+                        185.36398315429688,
+                        2.5
+                    ],
+                    [
+                        144.392333984375,
+                        185.36398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        126.392333984375,
+                        180.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        123.93429565429688,
+                        179.36398315429688,
+                        2.383612871170044
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            160.32650328371167,
+            131.97949677682675,
+            2.8999996185302734
+        ],
+        "start_rotation": [
+            0.5034456304545185,
+            0.0,
+            0.0,
+            0.8640269076691145
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_4",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_4_1",
+                "type": "object",
+                "location": [
+                    283.93072324140815,
+                    179.39055301147476,
+                    4.43170871852638
+                ],
+                "radius": 3.5661214813564186,
+                "path_length": 86.94872973324524,
+                "reference_path": [
+                    [
+                        207.29664611816406,
+                        177.3699951171875,
+                        2.4021260738372803
+                    ],
+                    [
+                        205.892333984375,
+                        179.36398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        205.892333984375,
+                        180.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        207.392333984375,
+                        182.36398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        213.392333984375,
+                        186.86398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        222.392333984375,
+                        191.36398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        235.892333984375,
+                        192.86398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        252.392333984375,
+                        192.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        283.93072509765625,
+                        182.36398315429688,
+                        2.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            207.29664258764495,
+            177.3699875483805,
+            2.4021261021250235
+        ],
+        "start_rotation": [
+            0.4279885800884172,
+            0.0,
+            0.0,
+            0.9037841419907192
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_6",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_6_1",
+                "type": "object",
+                "location": [
+                    -290.0062769831135,
+                    14.081491164453348,
+                    5.133976566047991
+                ],
+                "radius": 3.64209742015211,
+                "path_length": 39.72603979413274,
+                "reference_path": [
+                    [
+                        -298.2019958496094,
+                        55.118892669677734,
+                        3.6621415615081787
+                    ],
+                    [
+                        -292.107666015625,
+                        15.863983154296875,
+                        3.3999996185302734
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -298.20200515563016,
+            55.11889186528716,
+            3.662141546131689
+        ],
+        "start_rotation": [
+            0.7764201554773499,
+            0.0,
+            0.0,
+            -0.6302156314853892
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_1_2",
+                "type": "object",
+                "location": [
+                    249.93094478249327,
+                    39.599522691916874,
+                    5.086551897419669
+                ],
+                "radius": 3.6296117985410348,
+                "path_length": 59.956487506519146,
+                "reference_path": [
+                    [
+                        301.9316711425781,
+                        30.349271774291992,
+                        3.0
+                    ],
+                    [
+                        301.892333984375,
+                        32.363983154296875,
+                        3.200000762939453
+                    ],
+                    [
+                        292.892333984375,
+                        41.363983154296875,
+                        3.3999996185302734
+                    ],
+                    [
+                        291.392333984375,
+                        41.363983154296875,
+                        3.3999996185302734
+                    ],
+                    [
+                        262.892333984375,
+                        32.363983154296875,
+                        3.1000003814697266
+                    ],
+                    [
+                        261.392333984375,
+                        32.363983154296875,
+                        3.1000003814697266
+                    ],
+                    [
+                        249.93093872070312,
+                        36.863983154296875,
+                        3.1337015628814697
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            301.9316598425063,
+            30.349272261359314,
+            3.0
+        ],
+        "start_rotation": [
+            0.5544207356515036,
+            0.0,
+            0.0,
+            0.8322365336126777
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_8",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_8_1",
+                "type": "object",
+                "location": [
+                    -314.6486710133718,
+                    56.880493024933834,
+                    5.315615162663371
+                ],
+                "radius": 3.613553327348029,
+                "path_length": 12.742726111286874,
+                "reference_path": [
+                    [
+                        -322.9537048339844,
+                        47.93735122680664,
+                        3.576343297958374
+                    ],
+                    [
+                        -313.107666015625,
+                        53.363983154296875,
+                        3.5
+                    ],
+                    [
+                        -313.107666015625,
+                        54.863983154296875,
+                        3.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -322.95371570014464,
+            47.937349437330674,
+            3.576343358433132
+        ],
+        "start_rotation": [
+            0.9995050929514999,
+            0.0,
+            0.0,
+            0.031457418266818034
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_2",
+                "type": "object",
+                "location": [
+                    107.83713652293822,
+                    52.291066645281774,
+                    4.808176466803501
+                ],
+                "radius": 3.534594185694843,
+                "path_length": 40.87768308956174,
+                "reference_path": [
+                    [
+                        105.67562103271484,
+                        92.63306427001953,
+                        2.529484748840332
+                    ],
+                    [
+                        106.892333984375,
+                        90.86398315429688,
+                        2.5
+                    ],
+                    [
+                        109.892333984375,
+                        62.363983154296875,
+                        2.5
+                    ],
+                    [
+                        109.892333984375,
+                        52.29106521606445,
+                        2.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            105.67562218169962,
+            92.63306698937363,
+            2.529484843059934
+        ],
+        "start_rotation": [
+            0.8006322360723155,
+            0.0,
+            0.0,
+            -0.5991560919842542
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    294.69547673881516,
+                    58.735166539664576,
+                    5.169076090215441
+                ],
+                "radius": 3.6161665941350805,
+                "path_length": 42.64592535980328,
+                "reference_path": [
+                    [
+                        262.8328552246094,
+                        31.223819732666016,
+                        3.1000003814697266
+                    ],
+                    [
+                        283.892333984375,
+                        39.863983154296875,
+                        3.5
+                    ],
+                    [
+                        285.392333984375,
+                        41.363983154296875,
+                        3.5
+                    ],
+                    [
+                        294.392333984375,
+                        54.863983154296875,
+                        3.200000762939453
+                    ],
+                    [
+                        294.6954650878906,
+                        56.363983154296875,
+                        3.2022461891174316
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            262.83286959428796,
+            31.22381996353696,
+            3.100000381469726
+        ],
+        "start_rotation": [
+            0.9472991758455834,
+            0.0,
+            0.0,
+            0.32035023246796374
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_4",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_4_1",
+                "type": "object",
+                "location": [
+                    283.93072324140815,
+                    179.39055301147476,
+                    4.43170871852638
+                ],
+                "radius": 3.5661214813564186,
+                "path_length": 89.52749263727485,
+                "reference_path": [
+                    [
+                        196.67196655273438,
+                        200.24368286132812,
+                        2.3999996185302734
+                    ],
+                    [
+                        229.892333984375,
+                        194.36398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        252.392333984375,
+                        192.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        283.93072509765625,
+                        182.36398315429688,
+                        2.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            196.6719740871095,
+            200.24368284455807,
+            2.3999996185302734
+        ],
+        "start_rotation": [
+            0.9886773780469158,
+            0.0,
+            0.0,
+            0.150056796374826
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_2",
+                "type": "object",
+                "location": [
+                    301.9531661540815,
+                    59.51805621895009,
+                    5.150216029565299
+                ],
+                "radius": 3.6169048363740615,
+                "path_length": 90.89464666304593,
+                "reference_path": [
+                    [
+                        233.75741577148438,
+                        9.060293197631836,
+                        2.7617645263671875
+                    ],
+                    [
+                        234.392333984375,
+                        6.863983154296875,
+                        2.700000762939453
+                    ],
+                    [
+                        235.892333984375,
+                        5.363983154296875,
+                        2.8999996185302734
+                    ],
+                    [
+                        237.392333984375,
+                        5.363983154296875,
+                        2.8999996185302734
+                    ],
+                    [
+                        238.892333984375,
+                        6.863983154296875,
+                        3.0
+                    ],
+                    [
+                        247.892333984375,
+                        21.863983154296875,
+                        3.0
+                    ],
+                    [
+                        249.392333984375,
+                        23.363983154296875,
+                        2.8000011444091797
+                    ],
+                    [
+                        258.392333984375,
+                        30.863983154296875,
+                        3.1000003814697266
+                    ],
+                    [
+                        262.892333984375,
+                        32.363983154296875,
+                        3.1000003814697266
+                    ],
+                    [
+                        283.892333984375,
+                        39.863983154296875,
+                        3.5
+                    ],
+                    [
+                        301.9531555175781,
+                        56.363983154296875,
+                        3.2622299194335938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            233.75740879941887,
+            9.06029364798066,
+            2.761764417774397
+        ],
+        "start_rotation": [
+            0.66577335825381,
+            0.0,
+            0.0,
+            -0.7461540292992084
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_1",
+                "type": "object",
+                "location": [
+                    164.42012099537664,
+                    290.91440676871247,
+                    5.305425342131649
+                ],
+                "radius": 3.6243610442586487,
+                "path_length": 51.44460017162672,
+                "reference_path": [
+                    [
+                        156.9903106689453,
+                        341.3096923828125,
+                        2.644660711288452
+                    ],
+                    [
+                        166.892333984375,
+                        294.8639831542969,
+                        3.3000011444091797
+                    ],
+                    [
+                        166.892333984375,
+                        290.9143981933594,
+                        3.387768268585205
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            156.99030978014997,
+            341.30968818327597,
+            2.6446606165334217
+        ],
+        "start_rotation": [
+            0.9098179478328475,
+            0.0,
+            0.0,
+            -0.4150075924621452
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_3",
+                "type": "object",
+                "location": [
+                    123.93429717736478,
+                    177.18852737942785,
+                    4.352119530085537
+                ],
+                "radius": 3.578784892116488,
+                "path_length": 92.05293252877514,
+                "reference_path": [
+                    [
+                        32.4571533203125,
+                        170.6039581298828,
+                        2.200000762939453
+                    ],
+                    [
+                        36.392333984375,
+                        171.86398315429688,
+                        2.200000762939453
+                    ],
+                    [
+                        63.392333984375,
+                        174.86398315429688,
+                        2.5
+                    ],
+                    [
+                        111.392333984375,
+                        179.36398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        123.93429565429688,
+                        179.36398315429688,
+                        2.383612871170044
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            32.457151592738505,
+            170.60396088936696,
+            2.200000762939453
+        ],
+        "start_rotation": [
+            0.9998209820408529,
+            0.0,
+            0.0,
+            0.01892099021892347
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_1",
+                "type": "object",
+                "location": [
+                    -293.7321072300745,
+                    59.998123703482435,
+                    5.250009962897251
+                ],
+                "radius": 3.5321223670101745,
+                "path_length": 60.11267247492164,
+                "reference_path": [
+                    [
+                        -260.2055969238281,
+                        28.79897117614746,
+                        2.700000762939453
+                    ],
+                    [
+                        -259.107666015625,
+                        29.363983154296875,
+                        2.700000762939453
+                    ],
+                    [
+                        -254.607666015625,
+                        33.863983154296875,
+                        2.5
+                    ],
+                    [
+                        -254.607666015625,
+                        45.863983154296875,
+                        2.6000003814697266
+                    ],
+                    [
+                        -256.107666015625,
+                        48.863983154296875,
+                        2.6000003814697266
+                    ],
+                    [
+                        -262.107666015625,
+                        54.863983154296875,
+                        2.8000011444091797
+                    ],
+                    [
+                        -290.607666015625,
+                        57.863983154296875,
+                        3.6000003814697266
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -260.2056019835621,
+            28.798972010551935,
+            2.700000762939453
+        ],
+        "start_rotation": [
+            0.8780526706918318,
+            0.0,
+            0.0,
+            0.4785640056365935
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_1",
+                "type": "object",
+                "location": [
+                    252.55839168596117,
+                    180.4780887881864,
+                    4.353888130601752
+                ],
+                "radius": 3.6115280283827076,
+                "path_length": 58.177887182950194,
+                "reference_path": [
+                    [
+                        210.08009338378906,
+                        183.9647216796875,
+                        2.2141003608703613
+                    ],
+                    [
+                        213.392333984375,
+                        186.86398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        222.392333984375,
+                        191.36398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        235.892333984375,
+                        192.86398315429688,
+                        2.3000011444091797
+                    ],
+                    [
+                        252.392333984375,
+                        192.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        255.392333984375,
+                        189.86398315429688,
+                        2.3999996185302734
+                    ],
+                    [
+                        255.392333984375,
+                        182.36398315429688,
+                        2.5
+                    ],
+                    [
+                        255.392333984375,
+                        180.47808837890625,
+                        2.5314316749572754
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.08009877560468,
+            183.9647248795763,
+            2.2141003822910865
+        ],
+        "start_rotation": [
+            0.9177948357777709,
+            0.0,
+            0.0,
+            0.3970549576817479
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "library_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/library_0_1",
+                "type": "object",
+                "location": [
+                    287.4187656691404,
+                    172.1815324803194,
+                    4.471562287714306
+                ],
+                "radius": 3.6005836289279927,
+                "path_length": 50.79038379455745,
+                "reference_path": [
+                    [
+                        313.3451232910156,
+                        128.03076171875,
+                        2.544428825378418
+                    ],
+                    [
+                        312.392333984375,
+                        128.36398315429688,
+                        2.5
+                    ],
+                    [
+                        303.392333984375,
+                        138.86398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        289.892333984375,
+                        172.18153381347656,
+                        2.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            313.34512214044867,
+            128.03076882027636,
+            2.544428747350975
+        ],
+        "start_rotation": [
+            0.13088468792153332,
+            0.0,
+            0.0,
+            0.9913975985787351
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    294.69547673881516,
+                    58.735166539664576,
+                    5.169076090215441
+                ],
+                "radius": 3.6161665941350805,
+                "path_length": 86.19598932107044,
+                "reference_path": [
+                    [
+                        265.642578125,
+                        126.0959243774414,
+                        2.7166519165039062
+                    ],
+                    [
+                        268.892333984375,
+                        123.86398315429688,
+                        2.5
+                    ],
+                    [
+                        273.392333984375,
+                        122.36398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        276.392333984375,
+                        120.86398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        277.892333984375,
+                        119.36398315429688,
+                        2.700000762939453
+                    ],
+                    [
+                        288.392333984375,
+                        56.363983154296875,
+                        3.3000011444091797
+                    ],
+                    [
+                        289.892333984375,
+                        54.863983154296875,
+                        3.3000011444091797
+                    ],
+                    [
+                        294.392333984375,
+                        54.863983154296875,
+                        3.200000762939453
+                    ],
+                    [
+                        294.6954650878906,
+                        56.363983154296875,
+                        3.2022461891174316
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            265.64256626099353,
+            126.09592154385155,
+            2.7166520080174354
+        ],
+        "start_rotation": [
+            0.9956511255656969,
+            0.0,
+            0.0,
+            -0.0931602713594201
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BERLIN/BERLIN_store_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_1",
+                "type": "object",
+                "location": [
+                    282.19814298529116,
+                    158.26382790215644,
+                    4.585690486510714
+                ],
+                "radius": 3.5970788519311725,
+                "path_length": 30.374076280048072,
+                "reference_path": [
+                    [
+                        304.5855712890625,
+                        134.8365020751953,
+                        2.700000762939453
+                    ],
+                    [
+                        282.1981506347656,
+                        155.36398315429688,
+                        2.6000003814697266
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            304.5855679610614,
+            134.83650826241654,
+            2.700000762939453
+        ],
+        "start_rotation": [
+            0.3296503280480792,
+            0.0,
+            0.0,
+            0.9441030988286151
+        ],
+        "ceiling_height": 1.0
+    }
+]
