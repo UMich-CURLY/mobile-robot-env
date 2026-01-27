@@ -57,6 +57,7 @@ def _world_to_body(dx: float, dy: float, yaw: float):
     return c*dx - s*dy, s*dx + c*dy
 
 def _f32c1_depth_to_u16c1_mm(depth_f32_m):
+    # this conversion assumes that the depth images coming from Isaac sim follow the ROS standard which has F32C1 as meters and UC16C1 as mm
     x = depth_f32_m.astype(np.float32)
     x = np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
     x_mm = np.rint(x * 1000.0)
