@@ -56,6 +56,11 @@ def _world_to_body(dx: float, dy: float, yaw: float):
     c, s = math.cos(-yaw), math.sin(-yaw)
     return c*dx - s*dy, s*dx + c*dy
 
+def _f32c1_depth_to_u16c1_mm(depth_f32_m):
+    x = depth_f32_m.astype(np.float32)
+    x = np.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
+    x_mm = np.rint(x * 1000.0)
+    return np.clip(x_mm, 0, 65535).astype(np.uint16)
 
 def make_args():
     parser = argparse.ArgumentParser(description="Waypoint follower parser...")
@@ -73,6 +78,7 @@ def make_args():
     parser.add_argument("--hfov_deg", type=float, default=90.0)
     parser.add_argument("--metrics", type=str, default="{}")
     parser.add_argument("--dummy_llm", action="store_true")
+    parser.add_argument("--ignore_sim_status", action="store_true")
     return parser.parse_args()
 
 
@@ -290,16 +296,18 @@ class HabitatROSBridge(Node):
         def sim_status_callback(msg):
             nonlocal sim_status_data
             sim_status_data = msg.data
-        self.sim_status_sub = self.create_subscription(String, self.sim_status_topic, sim_status_callback, 10)
-        while True:
-            rclpy.spin_once(self, timeout_sec=0.01)
-            if sim_status_data is not None:
-                print(f"[HabitatROSBridge] Sim status topic available: {sim_status_data}")
-                break
-            else:
-                print("[HabitatROSBridge] Waiting for sim status topic to be available...")
-                time.sleep(1.0)
-        self.destroy_subscription(self.sim_status_sub)
+        ### Set arg "--ignore_sim_status" when using Isaac Sim
+        if not self.args_cli.ignore_sim_status:
+          self.sim_status_sub = self.create_subscription(String, self.sim_status_topic, sim_status_callback, 10)
+          while True:
+              rclpy.spin_once(self, timeout_sec=0.01)
+              if sim_status_data is not None:
+                  print(f"[HabitatROSBridge] Sim status topic available: {sim_status_data}")
+                  break
+              else:
+                  print("[HabitatROSBridge] Waiting for sim status topic to be available...")
+                  time.sleep(1.0)
+          self.destroy_subscription(self.sim_status_sub)
 
         # publish sim settings
         self.sim_settings_pub = self.create_publisher(String, self.sim_settings_topic, qos)
@@ -381,6 +389,8 @@ class HabitatROSBridge(Node):
         global _latest_depth, _latest_depth_by_source, _latest_depth_stamp_by_source
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
+            if msg.encoding == '32FC1': #ISAAC SIM USE DIFF ENCODING FOR DEPTH
+                cv_image = _f32c1_depth_to_u16c1_mm(cv_image)
             depth_image = np.nan_to_num(cv_image, nan=0, posinf=0, neginf=0).astype(np.uint16)
             _latest_depth_by_source[source] = depth_image
             _latest_depth_stamp_by_source[source] = msg.header.stamp
