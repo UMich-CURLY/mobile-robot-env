@@ -11,10 +11,8 @@
             "args": [
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
-                "--foxglove_port",
-                "4934",
-                "--episode_label",
-                "nv_apartment_17"
+                "--port",
+                "12800"
             ],
         },
         {

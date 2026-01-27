@@ -35,8 +35,8 @@ class WaypointFollower:
         max_integral=[5.0, 5.0, 3.0],
         arrive_dist=0.1,
         arrive_yaw=np.pi/180.0*15.0,
-        term_dist=0.1,
-        term_yaw=np.pi/180.0*5.0,
+        term_dist=0.03,
+        term_yaw=np.pi/180.0*3.0,
         lookahead_distance=0,
     ):
         self.device = device
@@ -100,7 +100,7 @@ class WaypointFollower:
             self.last_error = np.zeros(3)
         current_wp_idx = target_idx
         is_final_segment = (current_wp_idx == num_wps - 1)
-        target_wp = waypoints_world[target_idx]
+        target_wp = waypoints_world[target_idx].copy()
 
         # set different arrive thresholds for final segment
         if is_final_segment:
@@ -114,10 +114,10 @@ class WaypointFollower:
         diff_to_goal = target_wp[:2] - base_xy
         dist_to_goal = np.linalg.norm(diff_to_goal)
         
-        if dist_to_goal < arrive_dist and target_wp[2]>10.0:
+        if dist_to_goal < 0.5 and target_wp[2]>10.0:
             # if set yaw is inf and robot is close to wp, set target yaw to current yaw
             target_wp[2] = base_yaw
-        elif dist_to_goal > arrive_dist or target_wp[2]>10.0:
+        elif dist_to_goal > 0.5 or target_wp[2]>10.0:
             # set yaw to next waypoint if far away from the waypoint position or set yaw is inf
             target_wp = np.array(target_wp)
             target_wp[2] = calc_yaw(base_xy, target_wp[:2])
@@ -168,7 +168,7 @@ class WaypointFollower:
 
         if dist_to_goal < arrive_dist and abs(ang_err) < arrive_yaw:
             if is_final_segment:
-                vx, vy, vw = 0.0, 0.0, 0.0
+                # vx, vy, vw = 0.0, 0.0, 0.0
                 current_wp_idx = num_wps - 1
                 self.arrived_at_goal = True
                 print(f"[PLAN] Reached goal")
