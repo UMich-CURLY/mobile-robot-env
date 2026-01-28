@@ -73,12 +73,12 @@ def convert_models():
 
 # Configuration
 def main(CITY):
-    VC_SCENE_DIR = os.path.join(SCENE_DATA_DIR, f"vc_plus_store/{CITY}")
+    VC_SCENE_DIR = os.path.join(SCENE_DATA_DIR, f"vc_plus/{CITY}")
     LANE_POINTS = os.path.join(VC_SCENE_DIR, "lane_points.json")
     SIDEWALK_POINTS = os.path.join(VC_SCENE_DIR, "sidewalk_points.json")
     ROAD_OBJECTS = os.path.join(VC_SCENE_DIR, "road_objects_info.json")
-    SCENE_USD = os.path.join(VC_SCENE_DIR, f"{CITY}_store.usd")
-    OUTPUT_MERGED_USD = os.path.join(VC_SCENE_DIR, f"{CITY}_store_merged.usd")
+    SCENE_USD = os.path.join(VC_SCENE_DIR, f"{CITY}.usd")
+    OUTPUT_MERGED_USD = os.path.join(VC_SCENE_DIR, f"{CITY}_merged.usd")
 
     # Store types from store_front.ipynb
     STORE_TYPES = [
@@ -310,8 +310,12 @@ def main(CITY):
         # Define store and city parents
         store_parent_path = world_path.AppendChild("store")
         city_parent_path = world_path.AppendChild("city")
-        stage.DefinePrim(store_parent_path, "Xform")
-        stage.DefinePrim(city_parent_path, "Xform")
+        prim = stage.DefinePrim(store_parent_path, "Xform")
+        xform = UsdGeom.XformCommonAPI(prim)
+        xform.SetScale(Gf.Vec3f(0.01, 0.01, 0.01))
+        prim = stage.DefinePrim(city_parent_path, "Xform")
+        xform = UsdGeom.XformCommonAPI(prim)
+        xform.SetScale(Gf.Vec3f(0.01, 0.01, 0.01))
 
         # Collect prims to move
         to_move = []
@@ -445,7 +449,7 @@ def main(CITY):
                 asset_path = obj.get('asset_path')
                 if "ViCo" in asset_path or ":" in asset_path:
                     filename = os.path.basename(asset_path.replace("\\", "/"))
-                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus_store/road_objects", filename)
+                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus/road_objects", filename)
                     asset_path = os.path.relpath(asset_path, VC_SCENE_DIR)
                 
                 filename = os.path.basename(asset_path).split(".")[0]
@@ -504,7 +508,7 @@ def main(CITY):
                 asset_path = obj.get('asset_path')
                 if "ViCo" in asset_path or ":" in asset_path:
                     filename = os.path.basename(asset_path.replace("\\", "/"))
-                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus_store/road_objects", filename)
+                    asset_path = os.path.join(SCENE_DATA_DIR, "vc_plus/road_objects", filename)
                     asset_path = os.path.relpath(asset_path, VC_SCENE_DIR)
                 
                 filename = os.path.basename(asset_path).split(".")[0]
@@ -580,7 +584,9 @@ def main(CITY):
         merged_layer.Save()
         print(f"Saved merged USD to {OUTPUT_MERGED_USD}")
 
-    if os.path.exists(OUTPUT_MERGED_USD):
+    # if os.path.exists(OUTPUT_MERGED_USD):
+    #     return
+    if CITY != "AMSTERDAM":
         return
     print(f"Processing {CITY}")
 
@@ -590,9 +596,9 @@ def main(CITY):
 if __name__ == "__main__":
     cities = []
     if args.city == "all":
-        # iterate over all cities in the vc_plus_store folder
-        for city in os.listdir(os.path.join(args.scene_folder, "vc_plus_store")):
-            if os.path.isdir(os.path.join(args.scene_folder, "vc_plus_store", city)) and city != "road_objects":
+        # iterate over all cities in the vc_plus folder
+        for city in os.listdir(os.path.join(args.scene_folder, "vc_plus")):
+            if os.path.isdir(os.path.join(args.scene_folder, "vc_plus", city)) and city != "road_objects":
                 cities.append(city)
     else:
         cities.append(args.city)

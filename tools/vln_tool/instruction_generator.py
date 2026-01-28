@@ -51,7 +51,7 @@ class InstructionGenerator:
         scene_id,
         episode_id=None,
         template_based=True,
-        llm_based=False,
+        llm_based=True,
         video=True,
         force=False
     ):
@@ -402,7 +402,7 @@ class InstructionGenerator:
         
         used_images = []
         for image_idx in image_list:
-            image_url = self.get_data_path(episode, "third_person_rgb", f"{image_idx}.png")
+            image_url = self.get_data_path(episode, "pov_rgb", f"{image_idx}.png")
             # print(f"added image: {image_url}")
             add_image(image_url)
             used_images.append(image_url)
@@ -412,18 +412,19 @@ class InstructionGenerator:
         # print(f"added video: {video_path}")
         if prompt is None:
             text_prompt = f"""
-            Describe the trajectory of the robot in the images. Improve the given instruction to:
-            1) include unique landmarks you see in the images for guidence, describe color, shape, etc. briefly. Only mention landmarks that can be clearly observed.
-            2) make the expression more diverse.
-            3) replace the exact distance value with more general description.
-            4) do not mention (img x) in the output.
-            5) in some cases, if you don't directly see the target in the image, just say "you will arrive at [target name]".
-            6) do not mention the red lines in the images, those are pointing to the waypoints.
-            7) if the robot is following the road, mention it in the output.
-            8) reduce some redundent instructions.
-            9) return the output only, no other text.
-            Improve this instruction: {prompt_instruction}
-            Example output: Go forward until you see the red building, then turn right and go until you see the blue car. You should be able to see the target mailbox on your right.
+Describe the trajectory of the robot in the images. Improve the given instruction to:
+1) include unique landmarks you see in the images for guidance, describe color, shape, etc. briefly. Only mention landmarks that can be clearly observed.
+2) make the expression more diverse.
+3) replace the exact distance value with more general description.
+4) do not mention (img x) in the output.
+5) in some cases, if you don’t directly see the target in the image, just say “you will arrive at [target name]“.
+6) do not mention the red lines in the images, those are pointing to the waypoints.
+7) if the robot is following the road, mention it in the output.
+8) make the instruction compact, only include the key landmarks.
+9) return the output only, no other text.
+10) make it within 100 words.
+Improve this instruction: {prompt_instruction}
+Example output: Go forward until you see the red building, then turn right and go until you see the blue car. You should be able to see the target mailbox on your right.
             """
         else:
             # If user provided a prompt, we assume it contains prompt_instruction or we just append it
