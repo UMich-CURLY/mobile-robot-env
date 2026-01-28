@@ -92,6 +92,7 @@ class VLNEnvWrapper:
         self.termination_states = {
             "stuck_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "stuck_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
+            "stuck_dist_history": [],
             "back_n_forth_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "back_n_forth_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
         }

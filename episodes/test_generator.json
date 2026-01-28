@@ -66,5 +66,345 @@
         "navmesh_exclude": [],
         "navmesh_preset": "default",
         "rule_pattern": "name"
+    },
+    {
+        "scene_id": "test_generator",
+        "scene_type": "test",
+        "episode_id": 5,
+        "path": "generator",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mesh",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/mesh",
+                "type": "object",
+                "location": [
+                    0.0,
+                    0.0,
+                    -19.470000000670552
+                ],
+                "radius": 104.0,
+                "reference_path": [
+                    [
+                        13.473653793334961,
+                        2.5037403106689453,
+                        -18.899999618530273
+                    ],
+                    [
+                        11.680000305175781,
+                        2.0,
+                        -18.899999618530273
+                    ],
+                    [
+                        8.879997253417969,
+                        1.44000244140625,
+                        -18.899999618530273
+                    ],
+                    [
+                        5.439998626708984,
+                        1.2000045776367188,
+                        -18.899999618530273
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        -19.469999313354492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            13.473653812430545,
+            2.5037403957608113,
+            -18.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "mesh": "mesh"
+        },
+        "navmesh_exclude": [],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "test_generator",
+        "scene_type": "test",
+        "episode_id": 1,
+        "path": "generator",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mesh",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/mesh",
+                "type": "object",
+                "location": [
+                    0.0,
+                    0.0,
+                    -19.470000000670552
+                ],
+                "radius": 104.0,
+                "reference_path": [
+                    [
+                        13.473653793334961,
+                        2.5037403106689453,
+                        -18.899999618530273
+                    ],
+                    [
+                        11.680000305175781,
+                        2.0,
+                        -18.899999618530273
+                    ],
+                    [
+                        8.879997253417969,
+                        1.44000244140625,
+                        -18.899999618530273
+                    ],
+                    [
+                        5.439998626708984,
+                        1.2000045776367188,
+                        -18.899999618530273
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        -19.469999313354492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            13.473653812430545,
+            2.5037403957608113,
+            -18.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "mesh": "mesh"
+        },
+        "navmesh_exclude": [],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "test_generator",
+        "scene_type": "test",
+        "episode_id": 2,
+        "path": "generator",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mesh",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/mesh",
+                "type": "object",
+                "location": [
+                    0.0,
+                    0.0,
+                    -19.470000000670552
+                ],
+                "radius": 104.0,
+                "reference_path": [
+                    [
+                        13.473653793334961,
+                        2.5037403106689453,
+                        -18.899999618530273
+                    ],
+                    [
+                        11.680000305175781,
+                        2.0,
+                        -18.899999618530273
+                    ],
+                    [
+                        8.879997253417969,
+                        1.44000244140625,
+                        -18.899999618530273
+                    ],
+                    [
+                        5.439998626708984,
+                        1.2000045776367188,
+                        -18.899999618530273
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        -19.469999313354492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            13.473653812430545,
+            2.5037403957608113,
+            -18.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "mesh": "mesh"
+        },
+        "navmesh_exclude": [],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "test_generator",
+        "scene_type": "test",
+        "episode_id": 3,
+        "path": "generator",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mesh",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/mesh",
+                "type": "object",
+                "location": [
+                    0.0,
+                    0.0,
+                    -19.470000000670552
+                ],
+                "radius": 104.0,
+                "reference_path": [
+                    [
+                        13.473653793334961,
+                        2.5037403106689453,
+                        -18.899999618530273
+                    ],
+                    [
+                        11.680000305175781,
+                        2.0,
+                        -18.899999618530273
+                    ],
+                    [
+                        8.879997253417969,
+                        1.44000244140625,
+                        -18.899999618530273
+                    ],
+                    [
+                        5.439998626708984,
+                        1.2000045776367188,
+                        -18.899999618530273
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        -19.469999313354492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            13.473653812430545,
+            2.5037403957608113,
+            -18.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "mesh": "mesh"
+        },
+        "navmesh_exclude": [],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
+    },
+    {
+        "scene_id": "test_generator",
+        "scene_type": "test",
+        "episode_id": 4,
+        "path": "generator",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh": "default",
+        "instruction": "mesh",
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/mesh",
+                "type": "object",
+                "location": [
+                    0.0,
+                    0.0,
+                    -19.470000000670552
+                ],
+                "radius": 104.0,
+                "reference_path": [
+                    [
+                        13.473653793334961,
+                        2.5037403106689453,
+                        -18.899999618530273
+                    ],
+                    [
+                        11.680000305175781,
+                        2.0,
+                        -18.899999618530273
+                    ],
+                    [
+                        8.879997253417969,
+                        1.44000244140625,
+                        -18.899999618530273
+                    ],
+                    [
+                        5.439998626708984,
+                        1.2000045776367188,
+                        -18.899999618530273
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        -19.469999313354492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            13.473653812430545,
+            2.5037403957608113,
+            -18.899999618530273
+        ],
+        "start_rotation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "episode_number": 30,
+        "goal_rules": {
+            "mesh": "mesh"
+        },
+        "navmesh_exclude": [],
+        "navmesh_preset": "default",
+        "rule_pattern": "name"
     }
 ]

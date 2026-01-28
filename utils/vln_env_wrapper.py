@@ -92,6 +92,7 @@ class VLNEnvWrapper:
         self.termination_states = {
             "stuck_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "stuck_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
+            "stuck_dist_history": [[] for _ in range(self.num_envs)],
             "back_n_forth_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "back_n_forth_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
         }
@@ -295,7 +296,10 @@ class VLNEnvWrapper:
     def reset_termination_states(self, reset_env_ids):
         for env_id in reset_env_ids:
             for key in self.termination_states.keys():
-                self.termination_states[key][env_id] = 0
+                if "dist_history" in key:
+                    self.termination_states[key][env_id] = []
+                else:
+                    self.termination_states[key][env_id] = 0
     
     def update_command(self, command) -> None:
         """Update the command for the low-level policy."""
