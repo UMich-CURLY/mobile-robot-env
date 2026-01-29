@@ -11,8 +11,10 @@
             "args": [
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
+                "--host",
+                "0.0.0.0",
                 "--port",
-                "12800"
+                "11100"
             ],
         },
         {
@@ -27,7 +29,9 @@
                 "--test_scene_id",
                 // "nv_apartment"
                 // "grHome_scene12"
-                "vc_austin"
+                "innout_amsterdam",
+                "--tg_mode",
+                "manual"
             ],
             "envFile": "${workspaceFolder}/.env"
         },

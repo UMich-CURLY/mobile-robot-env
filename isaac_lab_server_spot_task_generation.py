@@ -69,10 +69,7 @@ import os
 import sys
 import signal
 
-mode = "auto"
-# mode = "manual"
-
-if mode == "auto":
+if args.tg_mode == "auto":
     try:
         if args.test_scene_id != "none":
             scene_id = args.test_scene_id
@@ -123,6 +120,12 @@ if mode == "auto":
 else:
     """Main simulation loop"""
     print("[INFO]: Starting simulation")
+    scene_id = args.test_scene_id
+    if scene_id != "none":
+        scene_config = task_generator.get_scene_config(scene_id)
+        test_episode = VLNEpisode(scene_config)
+        task_generator_ui.update_ui("scene_id", scene_id)
+        vln_sim.reset(test_episode)
     while simulation_app.is_running():
         vln_sim.step()
 

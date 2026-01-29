@@ -3,7 +3,6 @@ import os
 import numpy as np
 from tqdm import tqdm
 from pxr import UsdGeom, Gf, Usd
-from utils.vis import visualize_mesh
 try:
     import PyRecastDetour as pyrecast
 except ImportError:
@@ -258,6 +257,48 @@ class NavmeshInterface:
         self.nm.init_by_raw(verts_flat, faces_flat)
         print(f"[INFO]: Geometry loaded")
 
+    def save_geometry(self, selected_paths, exclude_paths, stage, output_dir, scene_id=None):
+        self.input_prim = [stage.GetPrimAtPath(x) for x in selected_paths]
+        self.input_vert, self.input_tri = get_all_stage_mesh(stage, self.input_prim, exclude_paths=exclude_paths)
+        if len(self.input_vert) == 0:
+            print('[INFO]: No mesh found')
+        self.input_vert = np.array(self.input_vert)
+        print(f"[INFO]: Loaded {len(self.input_vert)} vertices and {len(self.input_tri)} triangles")
+        print(f'[INFO]: bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
+        if np.any(np.isnan(self.input_vert)):
+            print("[WARNING]: NaNs found in input vertices")
+        self.input_vert = self._convert_up_axis(self.input_vert)
+
+        # Constrain vertices with z > 5 to z = 5 (only for vc scenes)
+        # Note: after _convert_up_axis, z is the third component (index 2)
+        print(f"[INFO]: scene_type: {scene_id}")
+        if "vc" in scene_id or "innout" in scene_id:
+            z_mask = self.input_vert[:, 2] > 5
+            if np.any(z_mask):
+                num_constrained = np.sum(z_mask)
+                self.input_vert[z_mask, 2] = 5
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 5 to z = 5")
+        
+        # Save to bin files
+        output_dir = str(output_dir)
+        os.makedirs(output_dir, exist_ok=True)
+        verts_path = os.path.join(output_dir, f"{scene_id}_vertices.bin")
+        faces_path = os.path.join(output_dir, f"{scene_id}_faces.bin")
+        
+        print(f"[INFO]: Saving geometry to {output_dir}")
+        self.input_vert.astype(np.float32).tofile(verts_path)
+        
+        if len(self.input_tri) > 0:
+            # Flatten faces
+            faces_arr = np.array(self.input_tri, dtype=np.int32)
+            faces_arr.tofile(faces_path)
+        else:
+            with open(faces_path, 'wb') as f:
+                pass
+                
+        print(f"[INFO]: Geometry saved")
+
+
     def build_navmesh(self):
         print(f"[INFO]: settings: {self.settings}")
         self.nm.set_settings(self.settings)
@@ -274,6 +315,7 @@ class NavmeshInterface:
             print('[WARNING]: Failed to build navmesh')
 
     def visualize_navmesh(self):
+        from utils.vis import visualize_mesh
         if self.built:
             v, t, = self.navmesh_v, self.navmesh_t
             v = v.flatten()

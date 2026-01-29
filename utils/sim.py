@@ -412,7 +412,7 @@ class VLNSim:
                     "third_person": third_person_depth,
                 }
                 body_pose = obs['body_pose'][self.robot_index].cpu().numpy()
-                pov_tf = obs['third_person_tf'][self.robot_index].cpu().numpy().tolist()
+                pov_tf = obs['pov_tf'][self.robot_index].cpu().numpy().tolist()
                 third_person_tf = obs['third_person_tf'][self.robot_index].cpu().numpy().tolist()
                 extract_xyz = lambda pose: {key: pose[i] for i, key in enumerate(["x", "y", "z"])}
                 extract_quat = lambda pose: {key: pose[i+3] for i, key in enumerate(["x", "y", "z", "w"])}
@@ -448,8 +448,8 @@ class VLNSim:
                 }
                 if self.args.task_type=="objnav":
                     if "store" in current_episode["scene_id"]:
-                        info["instruction"] = current_episode["objnav"].split("_")[0]
-                        print(f"[Sim] instruction: {info['instruction']}")
+                        # remove the last number from store name
+                        info["instruction"] = "_".join(current_episode["objnav"].split("_")[:-1])
                     else:
                         info["instruction"] = current_episode["objnav"]
                 elif self.args.task_type=="vln":
