@@ -16,6 +16,7 @@ def add_vln_args(parser):
     arg_group.add_argument("--disable_termination", type=bool, default=False, help="Disable episodetermination.")
     arg_group = parser.add_argument_group("Task Generation")
     arg_group.add_argument("--tg_config_path", type=str, default="episodes/task_config.yaml", help="Path to the task config file.")
+    arg_group.add_argument("--tg_mode", type=str, default="manual", help="Mode for task generation.", choices=["manual", "auto"])
     arg_group = parser.add_argument_group("Server", description="Arguments for socket server.")
     arg_group.add_argument("--disable_socket_server", type=bool, default=False, help="Disable socket server.")
     arg_group.add_argument("--host", type=str, default="localhost", help="Host for socket server.")

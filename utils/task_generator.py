@@ -50,7 +50,7 @@ class TaskGenerator:
     def parse_config(self, task_config):
         self.scene_id_list = []
         self.navmesh_preset_list = [*task_config['navmesh'].keys()]
-        self.rule_pattern_list = ["path", "name", "gr", "vc"]
+        self.rule_pattern_list = ["path", "name", "gr", "vc", "vc_store", "innout"]
         for scene_type, scene in task_config['scene'].items():
             self.scene_id_list.extend([f'{scene_type}_{x}' for x in scene['episodes'].keys()])
         # set default value
@@ -310,6 +310,19 @@ class TaskGenerator:
                 if match_result:
                     goal = match_result.group(1)
                     self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        elif self.rule_pattern == "innout":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/store/([^/]*?)_.$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/Objaverse/([^/]*?)$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    goal = "_".join(goal.split("_")[:-1])
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
         total_goal_found = 0
         for goal, goal_item in self.goal_dict.items():
             print(f"  Found {len(goal_item['prim'])} {goal}")
@@ -361,6 +374,111 @@ class TaskGenerator:
                 goal_item = self.goal_dict[goal_name]
                 # sample random points
                 random_point = navmesh_interface.sample_random_points(1)
+                if random_point is None:
+                    raise RuntimeError(f"Failed to sample random point")
+                start_pos = random_point[0]
+                goal_prim_list = goal_item['prim']
+                goals = []
+                for goal_prim in goal_prim_list:
+                    # we use the position calculated with bounding box instead
+                    prim_path = goal_prim.GetPrimPath()
+                    goal_pos = self.env.get_prim_position(prim_path)
+                    path = navmesh_interface.find_paths(start_pos, goal_pos)
+                    if len(path) > 0:
+                        dist_to_start = np.linalg.norm(start_pos - path[0])
+                        dist_to_end = np.linalg.norm(goal_pos - path[-1])
+                        obj_radius = self.env.get_prim_radius(prim_path)
+                        # skip if the path does not connect to the start or end
+                        if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
+                            continue
+                        # skip if the path is too short or too long
+                        path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start
+                        if path_length < self.min_path_length:
+                            continue
+                        if path_length > self.max_path_length:
+                            continue
+                        goals.append({
+                            'instance': str(prim_path),
+                            'type': 'object',
+                            'location': goal_pos,
+                            'radius': obj_radius,
+                            'path_length': path_length,
+                            'reference_path': path.tolist(),
+                        })
+                if len(goals) > 0:
+                    path_found = True
+                else:
+                    retry_count += 1
+            if path_found:
+                pbar.set_description(f'[TG] Found {len(goals)} paths for goal {goal_name}')
+                closest_goal_idx = int(np.argmin([x['path_length'] for x in goals]))
+                closest_goal = goals[closest_goal_idx]
+                # set initial yaw angle to the next waypoint and add some noise
+                yaw_angle = calc_yaw(start_pos[:2], closest_goal['reference_path'][1][:2])
+                yaw_angle += np.random.uniform(-np.deg2rad(30.0), np.deg2rad(30.0))
+                quat_xyzw = R.from_euler('z', yaw_angle).as_quat().tolist()
+                quat_wxyz = [quat_xyzw[3], quat_xyzw[0], quat_xyzw[1], quat_xyzw[2]]
+                remove_keys = ["episode_number", "goal_rules", "navmesh_exclude", "rule_pattern", "navmesh_preset"]
+                episode = VLNEpisode(
+                    data={k: v for k, v in self.scene_config.items() if k not in remove_keys},
+                    objnav=goal_name,
+                    instruction="",
+                    episode_id=len(generated_episodes),
+                    goals=goals,
+                    start_position=start_pos.tolist(),
+                    start_rotation=quat_wxyz, # wxyz
+                    closest_goal_idx=closest_goal_idx,
+                )
+                # visualize_points(random_points, prim_path="/World/RandomPoints", width=0.8)
+                # visualize_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
+                generated_episodes.append(episode)
+            else:
+                pbar.set_description(f'[TG] Failed to find paths for goal {goal_name}')
+        return generated_episodes
+    
+    def sample_episodes_innout(self, num_episodes):
+        # load navmesh for interior and exterior
+        navmesh_interface_in = navmesh_utils.NavmeshInterface(up_axis='Z')
+        navmesh_interface_out = navmesh_utils.NavmeshInterface(up_axis='Z')
+        scene_folder = Path(self.args.scene_folder)
+        scene_config = self.scene_config
+        scene_id = scene_config['scene_id']
+        navmesh_path = str(scene_folder / f"navmesh/{scene_config['scene_id']}_navmesh.bin")
+        if os.path.exists(navmesh_path):
+            print(f"[TG] Outdoor navmesh found, loading...")
+            navmesh_interface_out.load_navmesh(navmesh_path)
+        interior_scene = scene_config['interior_scene']
+        navmesh_path = str(scene_folder / f"navmesh/grCommercial_{interior_scene}_navmesh.bin")
+        if os.path.exists(navmesh_path):
+            print(f"[TG] Indoor navmesh found, loading...")
+            navmesh_interface_in.load_navmesh(navmesh_path)
+        
+        # get indoor scene prim
+        indoor_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/ground/terrain/start_result_navigation/")
+        indoor_pos = indoor_prim
+        door_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/Door")
+
+
+        # sample goals uniformly
+        unique_goals = []
+        sampled_goals = []
+        while len(sampled_goals) < num_episodes:
+            if len(unique_goals) == 0:
+                unique_goals = set(self.goal_dict.keys())
+            random_goal = np.random.choice(list(unique_goals))
+            sampled_goals.append(random_goal)
+            unique_goals.remove(random_goal)
+        # sampled_goals = sorted(sampled_goals)
+        # generate paths from random points to each goal
+        generated_episodes = []
+        pbar = tqdm(sampled_goals, desc="Generating episodes")
+        for goal_name in pbar:
+            path_found = False
+            retry_count = 0
+            while not path_found and retry_count < 100:
+                goal_item = self.goal_dict[goal_name]
+                # sample random points
+                random_point = navmesh_interface_in.sample_random_points(1)
                 if random_point is None:
                     raise RuntimeError(f"Failed to sample random point")
                 start_pos = random_point[0]
