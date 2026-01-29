@@ -411,7 +411,7 @@ class VLNSim:
                     "pov": pov_depth,
                     "third_person": third_person_depth,
                 }
-                body_pose = obs['body_pose'][self.robot_index].cpu().numpy()
+                pos_robot, quat_robot = self.env.get_body_pose()
                 pov_tf = obs['pov_tf'][self.robot_index].cpu().numpy().tolist()
                 third_person_tf = obs['third_person_tf'][self.robot_index].cpu().numpy().tolist()
                 extract_xyz = lambda pose: {key: pose[i] for i, key in enumerate(["x", "y", "z"])}
@@ -434,8 +434,8 @@ class VLNSim:
                         },
                     },
                 }
-                self._latest_data["position"] = body_pose[:3]
-                self._latest_data["quat_xyzw"] = body_pose[3:]
+                self._latest_data["position"] = pos_robot
+                self._latest_data["quat_xyzw"] = quat_robot
                 self._latest_data["timestamp"] = time.time_ns()
                 info = {
                     "scene_id": current_episode["scene_id"],

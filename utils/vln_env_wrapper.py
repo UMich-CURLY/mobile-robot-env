@@ -31,7 +31,7 @@ def load_scene(env_cfg, args, episode):
 
 def set_robot_pose(env_cfg, episode, robot=None):
     pos = list(episode["start_position"])
-    pos[2] += 0.6
+    pos[2] += 0.8
     rot = list(episode["start_rotation"]) # wxyz
     env_cfg.scene.robot.init_state.pos = pos
     env_cfg.scene.robot.init_state.rot = rot
