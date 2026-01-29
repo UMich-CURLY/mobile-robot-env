@@ -447,7 +447,11 @@ class VLNSim:
                     "tfs": tf_dict,
                 }
                 if self.args.task_type=="objnav":
-                    info["instruction"] = current_episode["objnav"]
+                    if "store" in current_episode["scene_id"]:
+                        info["instruction"] = current_episode["objnav"].split("_")[0]
+                        print(f"[Sim] instruction: {info['instruction']}")
+                    else:
+                        info["instruction"] = current_episode["objnav"]
                 elif self.args.task_type=="vln":
                     info["instruction"] = current_episode["instruction"]
                 self._latest_data["info"] = info
