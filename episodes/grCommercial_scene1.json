@@ -695,7 +695,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start from the hallway with wooden flooring and shelves on the left containing framed animal pictures. Head towards the open doorway leading into the carpeted living room. As you pass through the doorway, notice a child playing on the floor near a low table. Slightly veer right towards the large grey sofa where a girl holding a stuffed animal is sitting. You will arrive at the couch.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2219,7 +2219,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Start facing the large wooden cloud-shaped shelving unit. Move forward, passing the blue toy animal on your left and heading towards the center of the shelving structure. As you get closer to the shelves, specifically near the blue circular tunnel seat, turn slightly right to align with the lower shelf section. Continue forward along the length of the wooden unit. You will arrive at the purple basket sitting on the floor shelf.",
         "closest_goal_idx": 3,
         "goals": [
             {
@@ -2943,7 +2943,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Start by facing the light-colored wooden flooring and a large wooden shelving unit shaped like clouds, filled with various objects like brown teddy bears and blue circular seats. Move forward across the floor, keeping the white desk and black office chair to your right. Continue straight ahead, passing a metal rack with colorful toys, including a rainbow stacker, on your left. Proceed forward towards the dark window until you arrive at the wooden shelf directly in front of you.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3049,7 +3049,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Head towards the white cabinet located between the doorway and the wooden shelving unit filled with stuffed animals. As you pass the wooden shelves on your right, proceed towards the center of the room where a girl is sitting on the rug playing with a toy. Continue moving forward, keeping the girl to your left. You will arrive near the grey couch.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3477,7 +3477,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "blanket",
-        "instruction": "",
+        "instruction": "Turn slightly left and head towards the large wooden shelf with circular cutouts filled with toys and books. After passing a small blue cylindrical stool, turn left. Move straight across the room, keeping the wooden shelf on your left and heading towards the large window wall. As you approach the area with a large gray rug, you will arrive at the blanket spread on the floor.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3717,7 +3717,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Start facing the wooden shelf on your right, filled with decorative items and bunny figures. Turn slightly left, facing the open room. Walk straight ahead across the wooden floor, passing a seating area with green and white chairs on your left. Continue forward towards the back wall where a large white screen or window is located. As you approach the back area, you will arrive at the bookshelf on your right, near the child sitting on the floor.",
         "closest_goal_idx": 1,
         "goals": [
             {

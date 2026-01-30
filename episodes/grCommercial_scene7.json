@@ -2689,7 +2689,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "towel",
-        "instruction": "",
+        "instruction": "Start near the produce section with its wooden base and black upper display. Turn slightly right, facing down the aisle between the metal-framed shelving units stocked with colorful boxes and cans. Proceed straight ahead, passing the produce island on your left and the shelves on your right. Continue down the aisle towards the back of the store where a tiered wooden display stands in the center. As you approach this display, you will arrive at the stack of folded grey and maroon towels placed on its shelves.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -3110,7 +3110,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Pass the white counter on your right, where a woman in a black skirt is standing, and head toward the aisle with wooden shelves stocked with colorful chip bags. Continue straight down the aisle, keeping the snack shelves on your left and the large glass windows on your right. As you move forward, you will pass a white table and chair set near a trash can by the window. Keep going until you reach the end of the aisle near the glass wall. You will arrive at the bookshelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3211,7 +3211,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start between the wooden shelves filled with colorful snacks, facing the aisle with the hexagonal ceiling lights. Move forward down the aisle, passing the shelves on your left and right. As you reach the end of the aisle where it opens up into a wider white space with large windows, turn right. Continue moving towards the white table and chairs near the windows. You will arrive at the white trash can located next to the table leg.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3952,7 +3952,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "chair",
-        "instruction": "",
+        "instruction": "Turn right towards the aisle lined with wooden shelves stocked with colorful products and juice cartons. Walk straight down this aisle, passing the shelves on your right. As you reach the end of the aisle where a woman in a black skirt is standing near a white counter, turn left towards the open area. Continue moving forward past the counter. You will arrive at the silver chair with a red seat cushion.",
         "closest_goal_idx": 0,
         "goals": [
             {
