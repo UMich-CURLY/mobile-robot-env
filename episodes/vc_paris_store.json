@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Head straight towards the row of concrete buildings on the left, passing a large wall mural depicting dense green foliage on your left. Continue along the road, keeping the wall with the nature scene to your left side. As you move forward, the path curves slightly right, bringing you closer to the gray, blocky structures. Proceed past the section of the wall featuring posters or advertisements. Eventually, the path leads you directly to the entrance of a building labeled as toilets_2, distinguishable by its gray block construction and glass doors.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -89,7 +89,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_5",
-        "instruction": "",
+        "instruction": "Head down the road with the large, textured buildings on either side, keeping the fountain visible in the distance on your left. As you pass the intersection where the fountain sits, angle slightly right to follow the street. Continue forward past the tall, narrow buildings. You will see a storefront labeled \"Sakura Bites Sushi & Bar\" appearing on your left. Follow the road as it curves gently left toward the shop. You will arrive at restaurant_5.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -164,7 +164,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_1",
-        "instruction": "",
+        "instruction": "Go straight along the road, passing a large, textured stone pillar on your left and a series of dilapidated white buildings in the distance. As you approach a small structure labeled \"PUBLIC TOILETS\" directly ahead, veer slightly right. Continue a short distance towards the stone building with arched windows and a wooden door. You will arrive at the bar.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -234,7 +234,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Start slightly right and head towards the public toilets, passing the worn building with the blue 'Public Toilets' sign. Continue forward, keeping the white building with the smashed glass storefront on your left. As you approach the building, angle slightly left to align with the entrance. You will arrive at the toilets, right in front of the broken glass door.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -299,7 +299,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_5",
-        "instruction": "",
+        "instruction": "Head towards the grey building with horizontal slats in the distance, keeping the tall, textured wall on your left. Continue along the road for a while. Then, make a sharp left turn into an alleyway, facing a white storefront labeled \"SAKURA BITES SUSHI & BAR\". Move towards the storefront, passing tall buildings on either side. You will arrive at the Sakura Bites sushi restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -384,7 +384,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_0",
-        "instruction": "",
+        "instruction": "Start facing the massive, dark, abstract structure with gold accents that looks like a distorted building. Move forward across the gray paved surface, keeping this large structure on your left.\n\nContinue straight ahead as the path runs parallel to the building's facade. You will pass a small, rectangular stone structure or entrance near the base of the dark wall.\n\nKeep moving forward along the pavement. As you approach the end of the dark structure, you will see a white, boxy building with gray louvered doors and a modern chair outside. You will arrive at the toilets just past this furniture.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -454,7 +454,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_1",
-        "instruction": "",
+        "instruction": "Head straight, keeping the large, dark textured wall on your left. Continue along the road towards the grey stone building with arched windows ahead. As you approach, you will pass a white structure labeled \"PUBLIC TOILETS\" on your right. Keep moving forward until you arrive directly in front of the stone building, which is the bar.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -639,7 +639,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_1",
-        "instruction": "",
+        "instruction": "Head towards the graffiti-covered building on the right, keeping the open sky to your left. As you approach the structure, veer slightly right to follow the paved path. Continue straight, passing a tall, dark, textured wall on your right. Keep following the path alongside this dark wall until you see a small, light-colored building labelled \"PUBLIC TOILETS\" appearing on your left. Move past the dark wall structure and the public toilets. You will arrive at the stone building with arched windows, which is the bar.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -749,7 +749,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Proceed straight along the paved path, keeping the large, vegetation-covered wall and the curved modern building on your left. Continue forward past the large grey building complex. As you approach the end of the wall structure on your left, turn sharply to the left towards the building's entrance. You will arrive at the toilets, marked by a sign with figures on the glass door.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -879,7 +879,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_5",
-        "instruction": "",
+        "instruction": "Head down the straight road, keeping the dilapidated white buildings on your right. As you continue, the streetscape will become more urban with taller, aged structures flanking the road. A distinctive blue building will appear ahead, sandwiched between the white ones. Follow the road as it curves slightly right towards this blue building. Just past the blue building, on the right side of the street, you will arrive at Sakura Bites Sushi & Bar, easily identifiable by its white storefront and large glass windows displaying sushi.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -969,7 +969,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Start on the open paved area, moving towards the distant building line. Turn right to follow the path bordered by a long, textured wall with green foliage imagery on your left. Continue straight along this wall, passing various grey structures and kiosks. As the wall extends, follow the gentle curve slightly right. Keep moving forward on the paved ground, with the wall remaining on your left. Eventually, slightly angle left towards the end of the wall structure. You will arrive at the toilets, marked by a small, standalone grey building near the end of the path.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1059,7 +1059,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_0",
-        "instruction": "",
+        "instruction": "Go straight along the road, passing the dark, curved wall structure on your left. As you approach a white, angular building ahead, turn slightly left towards the gap between the dark wall and the white building. You will arrive at the toilets, located near a chair and a small stone object.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1119,7 +1119,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Start your journey on the open road with a clear blue sky above. Proceed forward along the asphalt, keeping the distant buildings in view as you gently curve to the left. As you continue, you will notice a small, light green round object on the ground to your left. Keep moving forward, following the path as it leads you towards a white, blocky building marked with a \"PUBLIC TOILETS\" sign featuring blue gender symbols. You will arrive directly in front of the damaged entrance of this public toilet facility.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1199,7 +1199,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_5",
-        "instruction": "",
+        "instruction": "Head slightly left along the road, moving past the tall, dilapidated grey building on your left. As you proceed, the view of the street narrows between large buildings. Continue forward, keeping the grey structures on your left. Eventually, a white storefront labeled \"SAKURA BITES\" with large glass windows and images of sushi will appear on your left. You will arrive at this restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1274,7 +1274,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Move forward across the wide concrete expanse towards the large, ruined, grey concrete bunker structures in the distance. The building on the right has a partially intact glass facade with a blue \"S\" symbol visible. Continue straight, aiming for the gap between the buildings ahead. As you approach the structures, you will see a large, dark opening or entrance near the white building with the \"S\". Turn slightly right towards the entrance of the building on the right side. You will arrive at the toilets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1339,7 +1339,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_1",
-        "instruction": "",
+        "instruction": "Start by heading towards the flat, open space, keeping the tall building with the mural of trees and a tower-like structure on your right. As you move forward, the building reveals a small structure labeled \"PUBLIC TOILETS\" with blue symbols attached to its side. Follow the road as it curves slightly towards this structure. Continue straight, aiming directly for the entrance of the public toilets, which features a glass door and window. You will arrive at the public toilets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1404,7 +1404,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_1",
-        "instruction": "",
+        "instruction": "Go straight on the road, passing a large grey rock face on your left and a series of dilapidated apartment blocks on your right. As you approach a white public restroom building ahead, veer slightly left to pass its front entrance. Then, turn right immediately after passing the structure. You will arrive at the bar, which has a distinctive blue arched window.",
         "closest_goal_idx": 0,
         "goals": [
             {

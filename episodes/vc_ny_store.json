@@ -64,7 +64,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bureau_de_change_0",
-        "instruction": "",
+        "instruction": "Start facing the Rocket Burger diner with its red and white facade. Move forward along the road, keeping the diner on your left. Continue straight, passing a white food truck parked near the diner.\n\nAs you proceed down the street, you will pass a red mailbox on your right side. Keep heading straight towards the Global Currency Exchange building, recognizable by its white exterior and large blue sign. You will arrive at the bureau de change, which is located inside that building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -279,7 +279,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_4",
-        "instruction": "",
+        "instruction": "Move forward along the road, heading toward the right side of the street where the buildings are shadowed. As you approach the sidewalk, focus on the corner building with the retro red and silver storefront. This is a diner-style establishment called \"Rocket Burgers,\" featuring large glass windows, checkered floors inside, and neon-style signage above. Continue moving toward this red storefront until you are directly in front of the entrance. You will arrive at Rocket Burgers.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -394,7 +394,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "atm_1",
-        "instruction": "",
+        "instruction": "Head down the dark city street, keeping the tall buildings on your left and right. You will pass a white armored truck parked on the right side of the road. Continue straight ahead along the asphalt, moving past a white trash can on the sidewalk to your left. As you proceed, look for a building with a blue neon sign labeled \"METRO CASH POINT\" on the left side of the street. Approach this building and enter through the glass doors; you will arrive at the ATM inside.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -539,7 +539,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_0",
-        "instruction": "",
+        "instruction": "Start driving straight down the urban road, keeping the large building with the \"Terrace\" sign on your left. Continue forward past the intersection. As you proceed, you will see a white shop sign labeled \"Apex Community Bank\" on the right. Keep moving straight ahead along the street. Ahead on your right, look for a modern storefront with a red \"Chick'n'Burger Co.\" sign. Turn right towards the glass windows and you will arrive at the fast food restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -699,7 +699,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_4",
-        "instruction": "",
+        "instruction": "Move forward along the road, heading straight between the tall city buildings towards the distant gap of blue sky. As you proceed, you'll pass a white fire hydrant on your right. Continue straight down the street, keeping the dark shadowed buildings on your left and the sunlit beige skyscrapers on your right. Eventually, on your left-hand side, you will see a red and white storefront with large glass windows. This is the fast_food_4.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1179,7 +1179,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_4",
-        "instruction": "",
+        "instruction": "Head down the straight road, passing tall buildings on your left and a series of storefronts on your right. Keep moving forward along the street, staying parallel to the sidewalk. Continue past the intersection where a grey trash can sits on the corner. Further ahead, you will pass a red mailbox on the right sidewalk. Keep going straight until you reach the red-and-white retro-style diner labeled \"Rocket Burgers\" on the right side of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1354,7 +1354,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bureau_de_change_0",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, keeping the tall, dark city buildings on your left and right. Ahead, you will spot a bright white, modern building labeled \"GLOBAL CURRENCY EXCHANGE\" next to a smaller, rustic shopfront called \"Nonna's Trattoria\" on the left. Continue moving towards this white building. As you get closer, you'll see a white food truck with a yellow banana on top parked nearby. Proceed directly towards the glass doors of the \"GLOBAL CURRENCY EXCHANGE,\" and you will arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {

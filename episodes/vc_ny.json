@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "seagull",
-        "instruction": "",
+        "instruction": "Head straight down the dark city street, keeping the towering, shadowed buildings on your right. Follow the road as it stretches toward the distant patch of blue sky. As you proceed, you will see a white shop front with red trim directly ahead at the end of the block. Continue forward, staying on the main road. Just before reaching the intersection near the shop, veer slightly right. You will arrive at the seagull.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -84,7 +84,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "boxing_gloves",
-        "instruction": "",
+        "instruction": "Follow the dark, deserted city street, keeping the towering, shadowed buildings on your right and the lighter, textured buildings on your left. Move forward along the road, heading towards the gap between the skyscrapers in the distance where the sky is visible. As you continue down the center of the street, maintain your course. Eventually, you will arrive at the boxing gloves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -154,7 +154,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "notebook",
-        "instruction": "",
+        "instruction": "Head down the city street, keeping the tall brown building on your left and the dark structure with red signage on your right. As you proceed, you'll approach an intersection with a white building featuring a \"Capital One\" logo on the corner. Turn left at this intersection, following the road past the storefronts with green trim. Continue straight along this street, passing a parked white van and an ambulance on your left. Keep moving forward down the road, and you will arrive at the notebook lying on a metal grate.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -239,7 +239,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Proceed straight down the dark street, following the road ahead. Continue past the tall, dark buildings flanking both sides. As you move forward, you will see a white storefront with blue text on your right. Keep going straight, passing another red and white storefront labeled \"Rocket Burger\" on your right. Maintain your course down the road. You will eventually arrive at the vans_shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -304,7 +304,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "trash_bag",
-        "instruction": "",
+        "instruction": "Head forward along the dark road, flanked by a massive, multi-story building on your left and a partially destroyed, gridded building on your right. In the distance, between the structures, you will see a pile of debris and wreckage. Continue straight, keeping the debris pile slightly to your right. As you proceed, you will see a white trash bag and a white container ahead on the ground. Maintain your course until you arrive directly at the trash bag.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -354,7 +354,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "baby_stroller",
-        "instruction": "",
+        "instruction": "Move forward along the road, keeping the dark, shadowed building on your left and the sunlit building with arched windows on your right. Continue straight down the street, passing the intersection where the crosswalk markings are visible. As you proceed, the lighting will dim as you enter the shadows cast by the tall skyscrapers. Keep moving forward down the center of the road. Eventually, you will spot a purple baby stroller sitting alone near the sidewalk on the left side of the street. You will arrive at the baby stroller.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -439,7 +439,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "tissues",
-        "instruction": "",
+        "instruction": "Head straight down the city street, flanked by tall, dark grey skyscrapers on the left and a lighter beige building with rows of rectangular windows on the right. Continue forward, passing the white ambulance with red stripes parked on the right side of the road. Keep going straight towards the horizon between the buildings. As you proceed, you will arrive at a small box of tissues sitting on the road surface.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -494,7 +494,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "stack_of_towels",
-        "instruction": "",
+        "instruction": "Start on the street flanked by tall, darkened city buildings and move forward down the road. Continue straight, passing the light-colored, detailed facades on your left. As the street opens up towards the brighter sky ahead, turn right. Follow the road, staying centered as you advance between the towering structures toward the distant red light. Slightly adjust your path to the right, continuing down the long avenue. You will arrive at the stack_of_towels.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -559,7 +559,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "beach_ball",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing a white storefront with red lettering on your left. Continue forward down the dark street flanked by tall skyscrapers. Keep moving straight as the street widens slightly. Eventually, you will pass a \"Capital Trust Bank\" with large glass windows on your right. Just past the bank, you will arrive at the beach ball sitting on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -629,7 +629,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dragon_ball",
-        "instruction": "",
+        "instruction": "Start your journey on a dark city street flanked by tall skyscrapers, moving forward along the road. As you proceed, keep an eye out for a white and red ambulance parked on the left side of the street. Continue straight down the urban canyon, maintaining your course on the asphalt. The path will lead you directly toward the end of the block. You will arrive at the dragon_ball.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -704,7 +704,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "offroad_truck",
-        "instruction": "",
+        "instruction": "Start on the city street, proceeding towards the red and white ambulance parked near the intersection. As you approach the ambulance, maintain your course along the road, slightly veering left to pass it. Continue forward down the avenue, keeping the tall skyscrapers on your left and right. Eventually, you will see a dark-colored offroad truck with large tires parked on the left side of the street; this is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -779,7 +779,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench_with_back",
-        "instruction": "",
+        "instruction": "Start at the city street corner, with a brown-fronted shop on your left and a hot dog truck parked further down on the right. Proceed forward down the center of the road, heading towards the tall buildings in the distance. Continue straight past the initial shops. As you move further down the block, you will approach a park bench situated on the left sidewalk. You will arrive at the park_bench_with_back.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -844,7 +844,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "nursing_bottle",
-        "instruction": "",
+        "instruction": "Start from the shadowed street, moving forward past the ambulance parked on the left. Continue down the dark road, keeping the towering buildings on either side. As you proceed, the path curves gently left. You will pass a lit storefront labeled \"The Rusty Crumb\" on your right. Keep following the road as it bends left past the storefronts with red awnings. Continue moving forward along this street, and you will eventually arrive at the nursing bottle.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -944,7 +944,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "white_glue_bottle",
-        "instruction": "",
+        "instruction": "Head straight along the road, keeping the dark buildings on your left. Continue forward until you see a white ambulance with red stripes parked on the left side of the street. Pass the ambulance, staying on the main road. As you move past the dark building next to the ambulance, slightly veer left towards the curb. You will arrive at the white glue bottle near the base of the building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1024,7 +1024,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance",
-        "instruction": "",
+        "instruction": "Head straight down the city street, keeping the tall beige buildings on your left and the modern glass skyscrapers on your right. Follow the road as it curves slightly, passing a large building with green-tinted windows on the right side. Continue moving forward through the urban canyon. You will eventually see a white and red ambulance parked on the right side of the road; that is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1104,7 +1104,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "van",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the dark buildings on your left and the \"PIZZA\" shop on your right. Continue forward, passing the storefront with the red \"Laundromat\" sign on your right. As you approach the intersection where a large blue van is parked on the left side of the street, begin to angle slightly left. You will arrive at the rear of the blue van.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1174,7 +1174,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "water_fountain",
-        "instruction": "",
+        "instruction": "Go straight along the crosswalk, keeping the large beige building with numerous windows on your left. Continue down the road past the \"Capital One\" storefront. At the intersection, turn left onto the street flanked by tall skyscrapers on both sides. Proceed forward down this avenue, passing a red ambulance parked on the right and a dark, modern building structure on your left. Continue straight ahead until you arrive at the small, tiered water fountain in the middle of the plaza.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1259,7 +1259,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "books",
-        "instruction": "",
+        "instruction": "Proceed straight down the street flanked by tall, darkened buildings, keeping the road in sight. Continue forward as the cityscape opens up slightly, revealing a clearer view of the sky ahead. Maintain your course along the road, observing the towering architecture on either side. As you move further, the perspective shifts slightly to the right. Finally, you will arrive at a stack of books placed on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1329,7 +1329,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance_1",
-        "instruction": "",
+        "instruction": "Starting near the white ambulance on your left, proceed forward down the street. Follow the road straight, passing the crosswalk and moving between the tall city buildings on either side. Continue ahead down the open road until you approach another white ambulance with red and blue stripes parked on the right side. You will arrive at the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1404,7 +1404,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "seagull",
-        "instruction": "",
+        "instruction": "Start facing the tall, dark buildings on your left and the lighter-colored structures on your right. Follow the road, veering slightly right past the red barrier. Continue straight down the street, keeping the storefront labeled \"Santander\" with its red awning on your right. Proceed forward, passing a white concrete block lying on the road. As you approach the storefront with the sign \"APEX,\" turn right towards the entrance. You will arrive at the destination near the shop window.",
         "closest_goal_idx": 0,
         "goals": [
             {

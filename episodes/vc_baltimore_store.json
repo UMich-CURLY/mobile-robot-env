@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start at the center of the road, facing down the street with multi-story buildings on both sides. Move forward, keeping to the road's center, passing a series of blurred storefronts on your left. As you proceed, angle slightly left towards the sidewalk where a distinct \"Quick Stop Mart\" with a white sign and blue/red text is located. Approach the curb in front of this store. You will arrive at the convenience store entrance, near a small potted plant and a metal shopping cart on the sidewalk.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -84,7 +84,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "Navigate towards the narrow passage between the tall, dark grey buildings. Continue straight through the corridor, passing a large wall with a mural on the right. As you emerge from the alleyway onto a street, look for a building on the far right with a sign that includes red and white colors. Head towards this structure, which is the convenience store, located near a small white figure or object on the sidewalk.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -149,7 +149,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "Start by slightly turning right and moving down the street, keeping the yellow ice cream truck to your distant left. Proceed forward past the dilapidated grey buildings. As you approach a large, textured grey wall on your right, slightly turn left to follow the road. Continue forward through the shadowed street. As you near the end of the block, turn left towards the brick-faced storefront with large glass windows. You will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -234,7 +234,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Begin facing the ambulance with red and white stripes. Turn right and proceed down the street, keeping the tall grey buildings on your right and the construction-style barriers on your left. Follow the road forward as it curves slightly. Continue past the row of brown brick buildings on your left. As you approach the end of the block, veer slightly left towards the storefronts. You will arrive at the Quick Stop convenience store with the beige tiled facade.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -339,7 +339,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start near the ambulance and office chair, heading away from them down the street. Follow the road straight for a long distance, passing the buildings on your left. Continue straight, keeping the buildings on your left, until you spot a convenience store with a 'QUICK STOP MART' sign on the left side of the street. Approach the sidewalk in front of this store to arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -434,7 +434,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start by moving forward down the street, keeping the tall grey buildings on your right. As you continue, you'll pass a series of storefronts on the left, including one with a white facade. Keep heading straight along the road.\n\nAs you approach a Quick Stop Mart with a large glass window display on your right, slightly veer left toward the sidewalk. You will arrive at the convenience store entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -514,7 +514,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "Move forward across the paved road, keeping the dilapidated building with blue-tinted windows to your right. Continue straight ahead towards the brick building labeled \"ACADEMY OF LEARNING\" with large glass doors, which you will arrive at shortly.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -569,7 +569,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_2",
-        "instruction": "",
+        "instruction": "Follow the road and proceed straight ahead, keeping the dark buildings on your left and the lighter, tan-colored buildings on your right. Continue moving forward along the street. As you advance, you will notice a colorful object on the ground to your right. Keep going straight until you arrive at the bar.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -629,7 +629,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start by slightly turning right and moving forward down the road. As you advance, you'll pass a row of buildings on your left, including a green-facaded structure and a beige building with windows. Continue straight along the street, keeping the tall dark buildings on your right and the row of storefronts on your left.\n\nEventually, you will approach an intersection with a white fountain in the distance. Turn left towards the sidewalk before reaching the intersection, aiming for the storefronts. Proceed slightly left and move forward toward the beige brick building with large glass windows. You will arrive at the Quick Stop Mart with a white sign and red lettering above the entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -704,7 +704,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Start on the road, facing a street with buildings on both sides. Move forward, slightly veering right and then adjusting left to stay centered on the path. Continue straight down the street for a significant distance, passing a row of beige and grey buildings on your left. As you proceed, keep an eye out for a white storefront on your right labeled \"URBAN PROVISIONS\" with large glass windows and stocked shelves visible inside. As you approach this store, slightly turn right towards its entrance. You will arrive at the Urban Provisions convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -769,7 +769,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start facing the street with a building featuring green glass windows on your left. Move forward along the road, keeping the urban buildings on your left side. Continue straight down the street for a significant distance. As you proceed, you will pass a large white sign with a triangle cutout on your left. Eventually, the road will curve slightly; follow it towards the curb on the left. You will arrive at the Quick Stop Mart, which has a white facade and large glass windows.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -854,7 +854,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "With the yellow robot dog as your avatar, start from the grassy area next to the gray concrete wall. Move forward, transitioning onto the dark, paved road, keeping the wall on your right.\n\nContinue straight down the road, passing a series of dilapidated, blocky buildings on your left. As you proceed, keep the tall, gray concrete structure on your right side.\n\nEventually, you will approach a brick building with large, dark-framed windows on your right. Make a slight right turn towards this structure, and you will arrive at the school.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -934,7 +934,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Start by slightly turning right and moving forward down the center of the empty street, flanked by multi-story urban buildings on both sides. Continue straight for a long distance, following the road as it stretches toward the horizon. As you proceed, you will pass various storefronts and buildings with muted brown and grey facades. Eventually, you will approach a white storefront on your right labeled \"URBAN PROVISIONS,\" which features large glass windows displaying stocked shelves inside. You will arrive directly in front of this convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -999,7 +999,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Navigate down the road with the tall, dark buildings on your left and the lighter-colored buildings on your right. As you proceed, the path curves slightly to the right, taking you past a row of brown brick buildings with dark windows. Continue forward along the street. You will eventually pass a large, beige building on your left with a wide glass front, which appears to be a shop, and a green truck further down the road. Keep following the road, curving slightly to the left, until you arrive directly in front of the convenience store with its brightly lit interior and large glass windows.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1084,7 +1084,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_0",
-        "instruction": "",
+        "instruction": "You start on a paved road with buildings on either side, including a distinct red and white ambulance parked on the right. Move forward, passing the ambulance and proceeding down the street. As you continue, you will pass a large green recycling truck parked on the left side of the road. Keep following the road forward. As you approach the end of the block, turn slightly right towards the sidewalk. You will arrive at the cafe with a \"The Daily Crumb\" sign above the window, where people can be seen sitting inside.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1159,7 +1159,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start by facing a dark alleyway between buildings, then turn slightly right and proceed down the road. As you move forward, the environment opens up, revealing a long street flanked by buildings. Continue straight along the dark road, passing a row of tall, muted-colored buildings on your right. Keep heading down the street towards a bright green truck parked further ahead on the left side of the road. Eventually, you will arrive at the convenience store, which is the white building on your right with large glass windows and signs reading \"QUICK STOP MART.\"",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1224,7 +1224,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_1",
-        "instruction": "",
+        "instruction": "Start by facing the red and white retro diner painting on the wall. Slightly turn left and proceed forward along the dark path. As you move, keep the diner mural on your right. Continue straight ahead, passing parallel to the wall with the diner artwork. Eventually, you will arrive at the fast_food_1 location near the end of the diner mural.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1284,7 +1284,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Start your journey on the road, facing down a street lined with buildings. Slightly turn right and move forward down the street, keeping the white building labeled \"URBAN PROVISIONS\" on your right. As you approach the building, slightly veer right towards its entrance. You will arrive at the \"URBAN PROVISIONS\" convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1339,7 +1339,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start slightly angled right and move forward down the road. As you continue straight ahead, you will pass a large green truck parked on the left side of the street. Slightly turn left and keep moving forward past the truck. You will then arrive at the Quick Stop Mart, a white storefront with a glass display window on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1414,7 +1414,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "Start by moving straight along the dark path. Continue forward past the long, grey industrial-looking buildings on your right and the scattered ruins on your left. Keep heading straight until you see a building with a large glass window and a brick facade on your right. As you approach this brick building, turn slightly right towards it. You will arrive at the school.",
         "closest_goal_idx": 0,
         "goals": [
             {

@@ -9,7 +9,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start at the wooden floor edge near the window overlooking the city, facing slightly left towards a large play area. Move forward across the room, passing between a sitting area with pastel stools and a large wooden toy display wall on your left. As you approach the center of the room, veer slightly right past a row of blue stools. Continue forward towards the back wall, keeping the dark window and desk area on your right, until you arrive directly in front of the large wooden shelf filled with toys and blue archways. 123",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -562,7 +562,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Starting from the grey patterned carpet area, move forward, keeping the long conference table and its chairs on your left. As you proceed, angle slightly to the right, moving away from the yellow wall on the far left. Continue straight ahead, passing the silver decorative object on the low black table to your right. Finally, turn right towards the large grey double doors, and you will arrive at the tall green potted plant situated near the wall.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -734,7 +734,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "refrigerator",
-        "instruction": "",
+        "instruction": "Start with your back to the sofa and coffee table area where a person is seated. Turn right, passing the modern, angular tan chairs, and head straight towards the kitchen area. Continue moving forward across the grey patterned carpet until you arrive at the large, gold-colored double-door refrigerator.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1167,7 +1167,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start your journey facing away from a window, positioned between a tall silver counter on your left and a white wall on your right. A woman in a floral dress is standing near the counter. Move forward along the patterned grey carpet with orange stripes.\n\nContinue straight down this corridor, keeping the reflective silver counter surface to your left and the white wall to your right.\n\nAs you proceed, the view of the woman will disappear behind the counter structure. Follow the path alongside the counter.\n\nEventually, you will reach the end of the counter. Turn right slightly to align with the corridor extending ahead.\n\nProceed forward down the hallway, keeping the large windows on your right. You will then arrive at the tan couch located in the living area ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1293,7 +1293,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "laptop",
-        "instruction": "",
+        "instruction": "Start near the silver counter and the person standing nearby, then move forward slightly. Turn left and proceed down the hallway past the person in the floral dress. Upon reaching the end of the hallway near the orange leather sofa, turn left again. Continue forward a short distance, keeping the large window on your right. Slightly turn right and move towards the living area where people are seated on the sofa. You will arrive at the laptop near the coffee table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1419,7 +1419,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start with your back to the long conference table and the person sitting on the beige couch, facing towards the kitchen area. Turn slightly left and head towards the silver kitchen island and the blue trash can next to it. As you move forward across the patterned grey carpet, veer slightly left again to bypass the beige office chair. Continue forward past the chair until you reach the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1530,7 +1530,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start from a position facing a long white countertop on your left. Move straight ahead, following the gray carpet with orange stripes. Pass the yellow robot dog in front of you. As you approach the silver, reflective kitchen island on your right, make a sharp right turn. Continue forward briefly until you reach the trashcan located near the island.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1669,7 +1669,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "refrigerator",
-        "instruction": "",
+        "instruction": "Start with the dark grey couch on your left and the white kitchen counter in the distance; turn slightly right and proceed forward across the grey carpet with orange stripes. Continue straight, passing a desk with a brown and grey office chair on your right, towards the yellow wall at the far end of the room. You will arrive at the tall, metallic refrigerator located near the blue water dispenser.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1785,7 +1785,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Turn slightly right from the window view and walk straight ahead across the grey carpet, passing the yellow robot dog on your left and aiming towards the kitchen island. Continue forward until you reach the table near the person standing on the right.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1881,7 +1881,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start near the white cabinets with a microwave on the counter. Move forward along the grey carpet with orange stripes, passing the silver counter on your right. As you continue, you will pass a woman in a floral dress standing near the counter. Keep moving forward down the hallway, keeping the long white tables and chairs to your right. Eventually, you will arrive at the trashcan.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2040,7 +2040,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Starting near a yellow wall on the left and a silver table leg on the right, proceed forward across the grey patterned carpet. As you move, keep the large metallic table structure to your right.\n\nContinue past the blue trash bin located next to the silver table leg. You are moving through a workspace with desks and chairs visible in the background.\n\nNavigate around the silver table leg, making a slight turn to follow the open path. On your left, you will see a white office chair and a person standing in a suit near the yellow wall.\n\nHead towards the lounge area where a long beige couch is situated. There are two people seated on the couch; one on the far left and another standing nearby holding a cup. You will arrive at the couch area.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2171,7 +2171,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Turn right slightly from your starting point and head towards the office chair and table area ahead. Proceed forward, passing a silver metallic object on your left and heading towards the group of office chairs arranged around tables. Upon reaching the area with the low black coffee table and white paper on it, turn right. Continue forward across the grey carpet with orange stripes towards the corner where a potted plant sits on a desk, near a large window. You will arrive at the plant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2282,7 +2282,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "laptop",
-        "instruction": "",
+        "instruction": "From the starting position near the white round table, slightly turn right and move forward past the metal table leg. Continue straight, passing under the large, reflective, abstract metal structure.\n\nTurn right around the base of the metal structure, heading towards the open office area. Proceed forward, keeping the row of desks and orange chairs on your left. You will see a man standing and holding a cup on the left side of the aisle.\n\nContinue moving forward down the aisle. You will pass office chairs on your left and the reflective metal structure will remain on your right. As you advance, you will arrive at the laptop sitting on a desk near the end of the path.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2408,7 +2408,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "refrigerator",
-        "instruction": "",
+        "instruction": "Move forward through the office space, passing the large conference table and orange chairs on your left and right. Continue straight ahead, moving past the lounge area where people are seated on a long beige sofa. Keep going towards the kitchen area, navigating between the white counter stools and the modern office chairs. Proceed directly towards the large stainless steel refrigerator in the corner of the kitchen, arriving right in front of it.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2554,7 +2554,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Starting from a position near office chairs and a white trash bin, slightly turn left and move forward past the legs of a black-suited person. Continue straight, passing a grey office chair on your left, until you reach an open area with orange carpet stripes. Turn left, heading towards a low coffee table surrounded by a beige sofa where people are seated, and you will arrive at the table.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2783,7 +2783,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start by facing the open office area with the conference tables to your left and a lounge area ahead. Move forward past the black coffee table and the person standing near the yellow wall on your left. As you approach the grey office chairs, execute a turn to the left towards the lounge area. Continue forward a short distance, positioning yourself directly in front of the brown leather couch to arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {

@@ -9,7 +9,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bed",
-        "instruction": "",
+        "instruction": "Starting near the white shelf filled with green and brown boxes, turn slightly right and proceed towards the white reception desk where a person in a pink top is standing. Turn right around the corner of the reception desk, passing a person seated on a chair to your left. Move straight down the hallway past the row of white chairs and the IV stands. Continue forward past the white partition wall on your left. You will arrive at the white examination bed situated next to a blue curtain.",
         "closest_goal_idx": 0,
         "goals": [
             {

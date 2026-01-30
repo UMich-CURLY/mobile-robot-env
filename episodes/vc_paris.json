@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "coffee_cup",
-        "instruction": "",
+        "instruction": "Starting near a white scooter parked against a building, turn slightly right and proceed down the wide road. Continue straight, keeping the tall, greyish buildings on your left. As you move forward, the environment opens up with low concrete walls visible in the distance. Keep following the road towards these walls. Eventually, you will reach an area near a red table where you will arrive at the coffee cup.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -124,7 +124,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bike_rack",
-        "instruction": "",
+        "instruction": "Start near the weathered beige walls on the left. Move forward across the open concrete area. As you proceed, keep the large, dark, reflective structure with intricate golden patterns on your right. Follow the edge of this structure, curving slightly right as the path bends around it. Continue straight ahead, keeping the dark patterned wall close to your right. You will eventually arrive at the black metal bike rack located on the pavement.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -214,7 +214,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "house_mailbox",
-        "instruction": "",
+        "instruction": "Move forward along the dark road, keeping the massive building covered in a detailed, classical mural on your left. As you proceed, a bright red mailbox standing alone on a post will come into view near the base of the building. Continue straight towards it. You will arrive at the house_mailbox.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -269,7 +269,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "strereo_camera_sensor",
-        "instruction": "",
+        "instruction": "Start with the ambulance and the dark, towering ruin on your right. Move forward across the open ground, keeping the ruin to your right. Continue straight ahead, passing a small white pedestal or fountain on your left. As you proceed, you will see a small vertical rectangular structure in the distance. Maintain your heading towards the gap between the distant structure and the large ruin. Slightly veer right as you approach the end of the path. You will arrive near the base of the towering structure.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -364,7 +364,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pack_of_paper_towels",
-        "instruction": "",
+        "instruction": "Move forward along the open dirt path, keeping the row of large, textured building blocks on your right. As you advance, you will see a white block with a blue \"S\" logo on the right side. Continue straight past this landmark. Eventually, you will see a small white object on the ground in the distance to your right. Turn slightly right towards it, and you will arrive at the pack of paper towels near the white and blue block.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -434,7 +434,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_phone_1",
-        "instruction": "",
+        "instruction": "Head towards the tall, gold-framed tower resembling the Eiffel Tower, staying on the open road. As you approach the intersection where the white shop sign reads \"Sakura Bites,\" angle slightly left, moving past the shop. Continue straight down the narrow street flanked by tall, textured buildings towards the tower's base. The road will lead you directly underneath the archway of the tower structure, where you will arrive at the office phone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -504,7 +504,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bottle_with_red_liquid",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, keeping the large, dark, curved building with visible windows on your left. Continue forward as the road stretches out under a clear blue sky. Pass the green dumpster and white structures visible in the distance on your right. As you proceed, you will arrive at the bottle with red liquid.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -574,7 +574,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "coffee_cup",
-        "instruction": "",
+        "instruction": "Start at an open area with a tall beige building featuring a palm tree mural on your right. Follow the road straight ahead, passing between the buildings. Continue moving forward across the wide, paved ground as the view opens up to a distant horizon with low, indistinct structures. Keep going straight, maintaining your course on the dark pavement. As you approach a red bench on your left, turn left slightly towards it. You will arrive at the coffee cup near the bench.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -664,7 +664,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "water_fountain",
-        "instruction": "",
+        "instruction": "Proceed straight on the road, keeping the large, weathered stone building with dark windows on your left. As you move forward, the road curves slightly. You will see a low concrete structure in the distance ahead. Continue along the road, then turn right off the path towards a stack of balanced rocks. You will arrive at the water fountain near these rocks.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -729,7 +729,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "beach_ball_1",
-        "instruction": "",
+        "instruction": "Start near the dark cave-like structure supported by pillars. Turn left to face the open road. Proceed forward, keeping the white 'QUICK STOP' building on your right. As you continue down the road, you will pass a large grey building facade on your left. Further ahead, the path curves slightly left. Keep moving forward until you spot a red and white beach ball on the ground; this is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -804,7 +804,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "soccer_ball_1",
-        "instruction": "",
+        "instruction": "Head straight along the open sandy ground, following the slight curve of the path. In the distance, aim towards the group of dilapidated, grey concrete buildings and structures. As you approach these ruins, you will arrive at the soccer ball.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -934,7 +934,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dinner_jacket",
-        "instruction": "",
+        "instruction": "Head towards the large, tan concrete structure on your right that resembles the base of the Eiffel Tower. As you approach this massive structure with intricate latticework textures, continue moving forward across the open ground. Maintain a straight path towards the tower's base. The destination is near the entrance of this distinct landmark.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1117,7 +1117,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "gardening_hose",
-        "instruction": "",
+        "instruction": "Face right towards the ivy-covered beige building, then proceed forward along the dark paved road. Continue straight, keeping the tall building with blue-tinted windows and dense green ivy on your left. As you move forward, the road leads towards an opening between buildings in the distance. Maintain your course on the pavement until you reach the area near the base of the ivy-covered wall. You will arrive at the gardening_hose.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1177,7 +1177,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "police_hat",
-        "instruction": "",
+        "instruction": "Start facing the stone wall and turn left onto the dark asphalt road. Follow the road straight ahead, keeping the large, textured stone building resembling the base of the Eiffel Tower on your left. Continue forward, passing the white rectangular buildings in the distance on your right. As you proceed down the road, you will arrive at the police_hat, which appears as a white object lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1232,7 +1232,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Begin by moving forward across the pavement, keeping the large, blocky concrete buildings on your left and the white fountain with green trim on your right. As you proceed, veer slightly right, away from the buildings and towards the open area. Continue straight until you approach a wooden bench with metal legs. Just past the bench, make a sharp right turn towards a simple wooden table with a red top surface. You will arrive directly in front of the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1307,7 +1307,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_phone",
-        "instruction": "",
+        "instruction": "Move straight down the road, keeping the large, abstract gold structure resembling a deconstructed Eiffel Tower on your left and the white building with arched windows on your right. Continue forward as the terrain becomes a rougher, dark grey mound. Follow the road as it curves slightly left around the base of the gold structure. Continue past the mound until you reach the red cone on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1377,7 +1377,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fleece_blankets",
-        "instruction": "",
+        "instruction": "Start by looking slightly right towards the Eiffel Tower replica, then follow the road straight ahead. Keep moving forward, passing the red and white ambulance on your right. As you pass the ambulance, slightly veer right and continue down the dark street lined with tall, pale buildings. Stay on the road, heading towards the shadowy area under the overhang. You will arrive at the fleece_blankets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1472,7 +1472,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "white_bench",
-        "instruction": "",
+        "instruction": "From the base of the massive black, reflective tower structure, move forward across the open concrete area. As you proceed, the path curves slightly to the left, heading away from the large tower. Continue straight across the vast, flat terrain towards the distant buildings on the horizon. Keep moving forward, and you will eventually arrive at a white bench standing in the open field.",
         "closest_goal_idx": 0,
         "goals": [
             {

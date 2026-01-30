@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Purse",
-        "instruction": "",
+        "instruction": "Follow the road straight towards the gap between the buildings, passing a grey building with many rectangular windows on your left and a taller, dark building on your right. As you move forward, the road curves slightly to the left. Continue along this path, keeping the textured beige building on your far left in view. Proceed past the street light on the left. Keep going forward along the empty street, flanked by tall city structures, until you arrive at the Purse.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -89,7 +89,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "van",
-        "instruction": "",
+        "instruction": "Start on the open road facing a dark building with green accents and large windows. Follow the road, bearing slightly right as you pass a construction zone with a yellow vehicle visible in the distance. Continue moving forward down the street, keeping the dark, tall buildings on your left. As you approach the intersection where the cityscape opens up, turn slightly right towards the large white van parked on the side. You will arrive at the rear of the white van.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -154,7 +154,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start on the wide city street, keeping the large, dark rectangular building on your left and the tall, grid-patterned skyscraper ahead on your right. Proceed forward along the road, following the slight curve to the left. As you advance, the dark building facades will begin to dominate your view on both sides, creating a shadowy corridor. Continue straight down this darkened street. Eventually, you will approach a red bench situated on the right side of the path, marking your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -234,7 +234,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "seagull",
-        "instruction": "",
+        "instruction": "Head towards the tall green glass building in the distance, keeping the white high-rise building on your left. Follow the road straight ahead. As you approach the intersection, you will see a dark building with a shopfront labeled \"PIZZA\" on the right corner. Veer slightly right towards the dark building, passing the red traffic cone on the sidewalk. You will arrive at the storefront entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -299,7 +299,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "skateboard",
-        "instruction": "",
+        "instruction": "Head slightly left and follow the road, keeping the dark, towering building on your left and the street corner with the street lamp on your right. Continue straight down the urban canyon, passing the intersection. As you proceed forward along the dark street, you will eventually arrive at the skateboard lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -369,7 +369,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "black_office_chair",
-        "instruction": "",
+        "instruction": "Start at the city intersection, facing a tall brown building ahead and a modern glass skyscraper to your left. Move forward along the road, following the center path. As you proceed, the view of the city street expands. Continue straight, passing a white bench on your right. Keep moving forward along the road, approaching a dark, shadowed area near the buildings on the right. You will arrive at the black office chair sitting in the middle of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -424,7 +424,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "books",
-        "instruction": "",
+        "instruction": "Start by moving forward down the road, keeping the dark, tall buildings on your left. As you proceed, you'll pass a series of storefronts with awnings on your left. Continue straight ahead, following the road towards a white van parked in the distance. As you approach an intersection near a building with large green-tinted windows on the corner, make a sharp right turn. After the turn, continue forward along the side of the building with large windows and posters. You will arrive at the books.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -712,7 +712,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "rubber_duck",
-        "instruction": "",
+        "instruction": "Start by moving forward through the urban canyon, keeping the dark, shadowy buildings to your right. Continue along the road towards the tall skyscraper visible in the distance. As you proceed, pass the Grand Marquee Theatre on your right. Keep moving straight down the street, maintaining your course past the theatre and the surrounding high-rise structures. Eventually, you will arrive at the rubber_duck.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -900,7 +900,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_phone",
-        "instruction": "",
+        "instruction": "Start by following the road, keeping the towering gray skyscraper with a regular grid of windows on your right and the traffic light pole on your left. As you proceed down the street, you'll pass a vibrant red sports car parked on the left side. Continue straight past the tall, shadowed buildings. As you approach the sidewalk area on the left where a stroller is visible, you will arrive at the office phone lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -965,7 +965,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "puddle",
-        "instruction": "",
+        "instruction": "Head straight down the wide road, keeping the towering grey skyscraper on your right and the dark, blocky building on your left. Continue forward past the white street sign on the left sidewalk. Maintain your course down the center of the street as the buildings loom overhead. Eventually, slightly turn left towards the corner of the dark building. You will arrive at the puddle near the intersection.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1025,7 +1025,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Proceed straight along the road, flanked by towering office buildings with grid-like facades on your right and a grey structure on your left. Continue moving forward down the wide city street. As you advance, you will notice a dark, irregular object appearing on the ground directly in your path. Keep heading towards this object. You will arrive at the vans_shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1143,7 +1143,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "briefcase",
-        "instruction": "",
+        "instruction": "From the starting position beneath the concrete overpass with greenery visible, proceed forward following the road as it curves slightly left. Keep moving down the street, flanked by tall concrete buildings on both sides. Continue straight past the large multi-story parking structure on your left. As you move further down the open road, you will eventually arrive at the briefcase located near the intersection.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1421,7 +1421,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "rice_bowl",
-        "instruction": "",
+        "instruction": "Start facing a narrow gap between buildings, then move onto the road, passing a large building with many windows and metal grates on your right. Continue straight down the street, keeping the tall dark building on your right and the lower structures on your left. As you approach the intersection near the tall skyscraper, veer slightly right, hugging the base of the beige building on the corner. Proceed forward alongside this beige wall until you arrive at the rice bowl.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1511,7 +1511,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "water_fountain",
-        "instruction": "",
+        "instruction": "Follow the straight road flanked by tall, dark buildings, passing a large brown textured wall on your left and a towering black structure on your right. Continue forward as the street widens slightly, keeping the dark skyscrapers in view ahead. You will notice a small, green object on the sidewalk to your right. Proceed straight down the empty road, eventually passing a golden stacked-stone structure in the middle of the street. You will arrive at the water fountain shortly after passing this landmark.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1601,7 +1601,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "garden_fountain",
-        "instruction": "",
+        "instruction": "Start your journey by moving forward down the dark street flanked by tall, shadowy buildings. As you proceed, keep the large white fountain structure on your left as a guide. Continue straight, following the road ahead. You will soon notice a grey bench next to the fountain on your left. Slightly adjust your path to the left as you approach. You will arrive at the garden fountain, a large, tiered, circular white structure with gold trim.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1656,7 +1656,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dinning_chair",
-        "instruction": "",
+        "instruction": "Head towards the dining chair sitting in the dark street, keeping the building with the brown-framed window on your left. Move straight down the road, approaching the chair. You will arrive at the dining_chair.",
         "closest_goal_idx": 0,
         "goals": [
             {

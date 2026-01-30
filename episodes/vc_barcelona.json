@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Soccer_ball",
-        "instruction": "",
+        "instruction": "Head forward along the street, keeping the dilapidated, grey concrete building with arched windows on your left. As you proceed, you'll see a green truck parked further down the road and a red car parked on the right. Maintain your course straight ahead, passing the storefronts. As you approach the area near the green truck, veer slightly left towards the curb. Continue forward until you reach the water's edge near the building's entrance, where you will arrive at the soccer ball.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -84,7 +84,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cell_phone",
-        "instruction": "",
+        "instruction": "Head slightly right and follow the road down the urban street, keeping the large, gray, multi-story concrete building on your right. As you move forward, you will pass under the shadow of the building's overhang. Continue straight along the pavement until you reach the dark, recessed area beneath the building. You will arrive at the cell phone, located on the ground near the edge of the shadow.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -139,7 +139,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "headphones",
-        "instruction": "",
+        "instruction": "Navigate slightly right along the road, heading towards the large, beige building with oval-shaped windows on its facade. Continue straight down the street, keeping the modern, curved building with dark windows on your left. As you proceed, the road curves gently. Follow the path forward past the intersection with the street lights and the bicycle parked on the right sidewalk. Continue moving straight ahead, and you will arrive at the headphones.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -224,7 +224,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fleece_blankets",
-        "instruction": "",
+        "instruction": "Drive straight along the road, keeping the dark, multi-story building on your left and the lighter high-rise with many windows on your right. Continue forward as you pass a white ambulance parked on the left side of the street. Proceed until you reach the intersection where the road opens up. At this point, make a slight left turn towards the corner of the dark building. You will arrive at the fleece blankets near the intersection.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -289,7 +289,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "lilac_bike",
-        "instruction": "",
+        "instruction": "Move forward along the wide road, keeping the tall, beige, multi-story building with arched windows on your right. As you proceed, the road curves gently. Continue straight, passing the dark, shadowed buildings further down the street on both sides. Eventually, you will spot a small, dark object in the distance in the middle of the road. Keep moving towards it until you arrive at the lilac bike.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -462,7 +462,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilet_paper",
-        "instruction": "",
+        "instruction": "Start with a slight right turn and follow the main road, keeping the large, grey building with many square windows on your left. As you proceed down the wide street, you will see a white and red ambulance ahead in the distance. Continue straight towards the ambulance. As you get closer, with tall beige buildings lining the right side of the street, you will arrive near the ambulance where the target toilet paper is located.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -517,7 +517,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "beach_ball_1",
-        "instruction": "",
+        "instruction": "Proceed down the street, keeping the tall, beige building with green graffiti to your right. You will pass a bicycle parked on the sidewalk near the building's entrance. Continue straight along the road, moving past a white delivery truck visible in the distance. As you approach the corner of the building, slightly veer right. You will arrive at a red and white beach ball resting on the ground near the building's edge.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -582,7 +582,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "digital_camera",
-        "instruction": "",
+        "instruction": "Go straight down the gray asphalt road. On your left, you will pass a tall, weathered building with green-shuttered windows and a brown door. Further ahead, also on the left, is a modern, taller building with reflective glass windows. Continue forward, keeping the buildings on your left. In the distance, you can see a large, classical-style stone building. As you proceed, you will arrive at the digital camera, which appears as a small orange object on the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -637,7 +637,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_chair",
-        "instruction": "",
+        "instruction": "Start on the wide road flanked by tall, distorted buildings, heading towards the distinct beige structure with rows of dark, oval windows. Continue straight down the street, keeping the oval-windowed building on your left and the tall, pale apartment block on your right. As you proceed, the road curves slightly. Turn left towards the dark, glossy building reflecting the street. Navigate closer until you are right in front of the building's base. You will arrive at the office_chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -712,7 +712,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "glove",
-        "instruction": "",
+        "instruction": "Start slightly right and head down the road, passing a red triangular traffic sign on your left. Continue straight along the wide street, keeping the large, blocky building with dark windows on your right. As you proceed, you will pass a solitary bench on the left sidewalk. Keep moving forward towards the intersection ahead where a blue car is parked near a storefront. Just past the bench, slightly before reaching the blue car, you will arrive at the glove lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -910,7 +910,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "indian_feather_hat",
-        "instruction": "",
+        "instruction": "Start facing the street with tall, distressed buildings on both sides. Move forward down the wide road, keeping the distinctive beige building with rows of oval-shaped windows on your left. Continue straight along the road for a long distance, passing the block with the oval-windowed building. As you proceed, the road curves slightly left. Follow the road until you are past the intersection near the building with oval windows. You will arrive at the indian_feather_hat.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1098,7 +1098,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Soccer_ball",
-        "instruction": "",
+        "instruction": "Start with the city block buildings and ambulance to your right, heading down the road. Slightly turn left to align yourself with the road, keeping the tall beige building wall on your left and the large gray apartment block on your right. Continue straight ahead down the wide street, passing the traffic light and street sign on your left. Keep moving forward along the base of the beige building. Eventually, you will arrive at the soccer ball sitting on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1168,7 +1168,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "shoe_box",
-        "instruction": "",
+        "instruction": "Turn right and proceed forward along the road, keeping the row of tall, dark buildings to your right. Continue straight down the street, passing a white storefront labeled \"CAPITAL TRUST BANK\" on your right. As you move further down the road, the buildings will remain on your right side. Eventually, you will arrive at a shoe box located on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1233,7 +1233,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "seagull",
-        "instruction": "",
+        "instruction": "Head down the wide, open street flanked by dark, multi-story buildings on both sides. Continue straight, following the road as it curves slightly left past a white ambulance parked on the left. Keep going forward, passing a red sports car on your left, until you reach a large white seagull sitting on the ground near the left curb.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1318,7 +1318,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Start driving straight down the urban street, flanked by tall, textured beige buildings on the left and shadowed structures on the right. Continue forward as a red car appears further down the road on the right. Maintain your course, slightly adjusting to the right as you approach the intersection where the red car is parked. After passing the red car, veer slightly left to realign with the center of the road. Proceed forward towards the pair of white and red ambulances parked in the distance. You will arrive at the vans_shoes near the ambulances.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1383,7 +1383,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "garbage_truck",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the light-colored building on your left and the dark building with the \"The Orpheum\" storefront on your right. Continue forward along the street. As you proceed, a bright green recycling truck will become visible ahead on the right side of the road. Approach the truck. Turn slightly right towards the rear of the vehicle. You will arrive at the garbage truck.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1458,7 +1458,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "nursing_bottle",
-        "instruction": "",
+        "instruction": "Turn left and follow the road past the sleek white car parked on your right. Continue forward towards the intersection, keeping the dark, heavily damaged building on your right. As you approach the corner where the building ends, turn left to face the street-level storefront labeled \"RUSTIC CRUMBS\". Proceed straight towards the shop; you will arrive at the nursing bottle lying on the ground in front of it.",
         "closest_goal_idx": 0,
         "goals": [
             {

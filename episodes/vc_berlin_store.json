@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Head straight along the road, passing the dark mound and two ambulances on your left and a long black building on your right. As you reach the end of the black building, you will see a tall, pale building with many windows in the distance. Turn right, and you will arrive at the convenience store on your right, marked by a sign for \"snacks\" and an ATM.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -139,7 +139,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_3",
-        "instruction": "",
+        "instruction": "Head towards the black building visible in the distance, passing through the narrow alleyway formed by tall buildings on either side. Continue following the road as it opens up into a wider street. Keep moving straight, aiming for the storefronts ahead. As you get closer, you will see a shop with a green awning labeled \"NONNA'S TRATTORIA\" next to a white storefront labeled \"PUBLIC PARKING\". Proceed directly towards the entrance of the trattoria, where you will arrive at the destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -194,7 +194,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_0",
-        "instruction": "",
+        "instruction": "Head straight towards the white multi-story building with numerous rectangular windows. As you move forward along the road, you will see two distinct storefronts at the base of the building. The one on the left is white with the text \"URBAN\" visible, and the one on the right has a rustic, wooden facade with a sign reading \"The Daily Crumb.\" Continue your approach directly towards this right-hand shop. You will arrive at the cafe.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -299,7 +299,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_4",
-        "instruction": "",
+        "instruction": "From the open paved area, head towards the dark blue building on your right. As you approach the intersection, turn right onto the street, keeping the light-colored, multi-story building on your left. Follow the road straight ahead, passing a tall, dark building on your right. Continue down the street, keeping the dilapidated structures on your right side. Proceed forward until you arrive at the Quick Stop Mart with its distinctive white facade and blue sign on your right.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -389,7 +389,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start by moving forward along the road, keeping the dark, sloped terrain and the white ambulance on your left. As you proceed, head towards the dark building structure ahead. Continue straight, passing the dark building on your right. As you get closer, you will see a white tiled wall with colorful advertisements for coffee and lottery tickets. Slightly turn right to approach it. You will arrive at the convenience store entrance marked with \"ATM INSIDE - LOTTERY\".",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -524,7 +524,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_1",
-        "instruction": "",
+        "instruction": "Start facing the modern, dark grey building with horizontal glass panels. Follow the road straight, keeping the light-colored multi-story building on your right. As you move forward, you will see a white van with a yellow object on top parked on the right side of the street. Continue past the van, staying on the main road as it curves slightly. Eventually, you will pass a storefront with large windows on your left. You will arrive at the cafe located at that storefront.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -589,7 +589,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_3",
-        "instruction": "",
+        "instruction": "Move forward along the road, slightly angling right towards the black building structure ahead. As you approach, aim for the brick storefront with a green striped awning labeled \"Nonna's Trattoria,\" located just to the right of the white \"Public Parking\" entrance. Continue forward until you are directly in front of the restaurant's window box planters. You will arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -639,7 +639,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "parking_entrance_1",
-        "instruction": "",
+        "instruction": "Start facing down the street with tall, beige buildings on your left and a green truck parked further ahead on the right. Proceed straight, following the road past the storefronts. As you continue, the green truck will be on your right, and you will pass a large white trailer parked further down the road, also on the right. Keep moving forward along the building line on your left until you reach the open area near the corner storefront, where you will arrive at the parking entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -784,7 +784,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Proceed down the road, keeping the tall white building with multiple rows of windows on your left. As you move forward, the street is flanked by a darker, textured building on the right. Continue straight ahead along the pavement towards the white storefronts. You will see a brightly lit shop labeled \"URBAN PROVISIONS\" with glass doors and shelves visible inside. Approach this storefront; your destination is the \"URBAN PROVISIONS\" convenience store on the left, next to the wooden-fronted bakery.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -849,7 +849,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "library_0",
-        "instruction": "",
+        "instruction": "Starting with the brown restaurant with green awnings on your left, slightly turn right and move forward down the street. Continue straight for a while, keeping the large, multi-story building with large glass windows on your left. As you proceed, the road gently curves. Follow the road until you are past the white building section and approaching a darker brick structure on the left. You will arrive at the library, which is the brick building with large display windows on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -919,7 +919,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Follow the road towards the black modern building with a large glass facade. As you approach, you'll see two white ambulances parked nearby. Continue straight, keeping the black building on your left. Move towards the corner of the building where a large triangular window graphic is visible. Slightly adjust your path to the left as you get closer to the structure. You will arrive at the convenience store window with blue signs reading \"ATM INSIDE - LOTTERY\" and \"SNACKS - BEVERAGES\".",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -979,7 +979,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_9",
-        "instruction": "",
+        "instruction": "Head towards the blue and white \"ART\" sign visible in the distance, following the dark road flanked by tall, dark buildings on your left. Continue straight along this path until you see a restaurant with a traditional Chinese storefront, featuring red lanterns and wooden doors, on your left. Turn left towards the entrance, approaching the stone steps. You will arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1049,7 +1049,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_2",
-        "instruction": "",
+        "instruction": "Starting in a dark street with towering grey buildings on the left, proceed straight ahead. Focus on the illuminated white building labeled \"THE RUSTY ANCHOR TAVERN\" with an anchor logo, located directly in front of you. Continue moving towards this establishment, keeping it centered in your view as you approach. The path leads directly to the tavern's glass double doors, where you will arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1169,7 +1169,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_0",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the tall grey buildings on your left and the large, reflective green-glass building on your right. As you move forward, the road curves slightly. You will approach a wooden storefront on the right side of the street labeled \"HANA RAMEN HOUSE\" with a distinctive peaked entrance. Continue straight towards this shop until you arrive at the restaurant entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1229,7 +1229,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_0",
-        "instruction": "",
+        "instruction": "Head towards the small red car and the green bus parked in the distance, following the road straight ahead. As you approach the intersection where the vehicles are parked, veer slightly to the left to align with the large, white multi-story building on the left corner. Proceed towards this white building. As you get closer, look for the storefront with a wooden facade labeled \"The Daily Crumb\". You will arrive at the Daily Crumb cafe.",
         "closest_goal_idx": 0,
         "goals": [
             {

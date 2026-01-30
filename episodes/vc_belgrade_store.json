@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bureau_de_change_1",
-        "instruction": "",
+        "instruction": "Start at the center of the road, facing a white building with \"SNACKS - BEVERAGES\" written upside down. Move forward along the road, keeping the red and white \"ROCKET BURGER\" shop on your right. Continue straight past the burger shop and the adjacent buildings. As you proceed down the street, you will see a white building on your right with blue text. Approach this building, and you will arrive at the Bureau De Change.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -129,7 +129,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_0",
-        "instruction": "",
+        "instruction": "Start by moving towards the large blue office building with many windows, then veer slightly left to follow the road. Continue forward, passing a large wooden-textured building on your left with a mural. Keep following the road as it curves gently. As you proceed, you will pass a \"Rocket Burger\" diner with red siding and neon signs on your left. Continue straight along the road past the diner and the adjacent white storefronts. You will arrive at the fast_food_0, located just past the diner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -329,7 +329,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pharmacy_2",
-        "instruction": "",
+        "instruction": "Start at the corner of a large beige building with arched windows, facing a crosswalk. Move forward along the road, keeping the beige building on your right and the dark brick buildings on your left. Continue straight past a brown bench and a black chair on the sidewalk. As the road curves slightly, turn left towards a bright, modern storefront with green crosses. Move towards the glass doors, passing a red scooter parked nearby. You will arrive at the pharmacy entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -454,7 +454,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Start from the street lined with buildings and head straight, keeping the white ambulance trailer on your right. As you move forward, the road curves slightly left past a green truck parked on the left side. Continue down the road, passing a large wooden structure with a \"TIC CRUMB BAKERY & CAFE\" sign on your left. Keep going straight until you reach the small building extension labeled \"PUBLIC TOILETS\" with a blue sign on your left, which is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -584,7 +584,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "theatre_2",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the tall, grey, textured building on your left. Continue past the storefront on your right with the blue ATM sign. As you proceed, the road curves slightly. You will see a building with large drink advertisements (bottles and cans) on your left. Turn left towards the dark gap between the buildings, just past the structure featuring the beverage ads. Move into this alleyway, and you will arrive at the theatre.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -649,7 +649,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pharmacy_0",
-        "instruction": "",
+        "instruction": "Head towards the intersection and turn left onto the road. Continue straight, passing a white building with an ATM and a Rocket Burger sign on your left. As you move forward along the road, you will see a large white building with a sushi sign featuring chopsticks on your left. Keep going straight past this building. Eventually, you will arrive at the pharmacy, recognizable by its blue signage on the left side of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -729,7 +729,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_5",
-        "instruction": "",
+        "instruction": "Head straight along the road, passing the white vehicle on your right and the dark building with arched windows on your left. As you approach the intersection, turn left towards the white building featuring a sushi sign. Continue forward, keeping the dark modern building on your left. Make a right turn past the white storefront labeled \"Urban Pedal\" with bicycle graphics. Continue along the road, passing the ATM sign, and you will arrive at the red and white fast food restaurant with \"Crispy & Juicy\" written on the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -819,7 +819,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "school_0",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, keeping the large, dark brown building on your right. As you continue, a white multi-story building with large picture windows will appear ahead. Proceed towards this white building. As you get closer, you will see a brick storefront labeled \"Academy of Learning\" at the base of the white building. Approach the entrance to arrive at the school.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -944,7 +944,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_0",
-        "instruction": "",
+        "instruction": "Head straight down the road, passing a large building on your right with a blue \"LE MATIN\" billboard featuring classic typography. Keep going as the road curves slightly. You will approach a small white building on your left with grey brickwork and glass doors labeled \"PUBLIC TOILETS\". Turn left towards this building to arrive at the entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1029,7 +1029,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_0",
-        "instruction": "",
+        "instruction": "Follow the road straight, passing a green garbage truck on your right. Continue forward, keeping the large, dark grey apartment building on your right. As you approach the intersection where the Sushi restaurant sign is visible on a white building ahead, prepare to turn. Turn right towards the white storefront labeled \"ATM\" and \"Crispy & Juicy\" with images of burgers. Head directly towards the entrance of this fast food restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1114,7 +1114,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Proceed straight down the road, keeping the large \"TIC CRUM Bakery & Cafe\" building with the wooden facade on your right. As you move forward, the green truck parked next to it will come into view. Continue past the truck, veering slightly left towards the brown brick building with a \"PUBLIC TOILETS\" sign above the entrance. Approach the entrance directly, and you will arrive at the public toilets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1199,7 +1199,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_5",
-        "instruction": "",
+        "instruction": "Start by following the road forward, keeping the white buildings with large window panes on your left. As you proceed, a dark, multi-story building will become visible straight ahead. Continue towards this dark structure until you pass the light-colored wooden structures on your right. Just before reaching the dark building, veer slightly left towards the corner of the white building decorated with large murals or posters. You will arrive at the fast_food_5 restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1269,7 +1269,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pharmacy_2",
-        "instruction": "",
+        "instruction": "Head down the road with the large wooden-textured wall on your left and the tall, dark blue building on your right. Keep going straight along the street, passing the red triangle traffic sign near the building's base. Continue forward, staying parallel to the dark blue building facade. As you approach the end of the block, move towards the sidewalk on the right. You will arrive at the pharmacy, distinguishable by its bright white storefront and green cross logo, located at the base of the dark building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1344,7 +1344,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bureau_de_change_1",
-        "instruction": "",
+        "instruction": "Start facing down the street, keeping the large wooden-textured building on your left. Follow the road forward past the red storefront marked \"Rocket Burger\" on your left. Continue straight, passing a white delivery van parked on the left side of the street. As you approach a building adorned with large red banners and Asian-style architecture on the left, begin to veer slightly left. Follow the road as it curves, heading towards the white \"Bureau de Change\" booth situated next to the \"Rocket Burger\" shop. You will arrive directly in front of the exchange booth.",
         "closest_goal_idx": 0,
         "goals": [
             {

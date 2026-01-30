@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance",
-        "instruction": "",
+        "instruction": "Drive along the street flanked by tall urban buildings, keeping the white buildings on your left and the darker, older brick-style buildings on your right. As you proceed forward, you will see a white ambulance ahead in the distance. Continue straight down the road until you are directly next to the ambulance on your left. Turn slightly left towards it, and you will arrive at the side of the white ambulance with red stripes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -79,7 +79,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Purse",
-        "instruction": "",
+        "instruction": "Start with the dark building and futuristic white vehicle on your left. Move forward, passing an ambulance parked near the dark building. Continue straight on the paved surface, keeping the large dark structure to your left and shipping containers to your right. As you proceed, a blue object will appear on the ground ahead. Follow the path forward past the blue object, and you will arrive at the Purse.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -139,7 +139,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "warm_blanket",
-        "instruction": "",
+        "instruction": "Head down the road with the white ambulance on your left. Continue straight along this path, keeping the ambulance and the dark, modern building behind it on your left side. As you proceed, you will pass a large grey apartment block in the distance. Keep moving forward along the road, and you will arrive at the warm_blanket near the base of the dark building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -194,7 +194,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cell_phone",
-        "instruction": "",
+        "instruction": "Start with your back to the dark, textured wall and move onto the road. Follow the road straight ahead, keeping the tall, grey buildings to your right and the brown buildings to your left. Continue down the street, passing a white ambulance parked near a black structure on the right. As the road curves, stay centered. Eventually, you will approach an open area with a large, light-colored building in the distance. Veer slightly right towards the open space, and you will arrive at the cell phone lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -284,7 +284,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "police_van",
-        "instruction": "",
+        "instruction": "Start near the white multi-story building on the left. Move forward along the road, keeping the long, blocky beige building with many windows on your left. Continue straight past this building as the road curves slightly. You will see a dark, shadowed building further down the road. Keep moving forward towards the dark grey building complex ahead. As you approach the intersection near the dark building, veer slightly right. Continue forward until you reach the grey police van parked on the terrain.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -394,7 +394,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench_with_back",
-        "instruction": "",
+        "instruction": "Start on the road facing a white public parking entrance building on the left and a white ambulance on the right. Move forward along the road, keeping the tall, distressed white building on your left. As you proceed, the ambulance on the right will pass out of view and a dark, blocky building will become more prominent on the right side. Continue straight down the street. Eventually, you will see a wooden park bench on the left side of the road. Stop near this bench.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -459,7 +459,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench",
-        "instruction": "",
+        "instruction": "Follow the straight road, keeping the tall, grey, multi-story building with numerous windows on your left. Continue forward past the white bench-like structure on the left sidewalk. Ahead, you will see a prominent dark structure with columns resembling a historical gate or monument, and a green bus further down the road. As you approach the end of the large building block on your left, turn right towards the open area. You will arrive at a simple wooden park bench with grey concrete supports.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -534,7 +534,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance",
-        "instruction": "",
+        "instruction": "Follow the road forward, passing the tall gray buildings on your left and the structures covered in green scaffolding on your right. Continue straight down the street, keeping the road markings visible. As you proceed, the view of the buildings will shift. Eventually, you will approach a large white ambulance with red stripes parked on the side of the road. You will arrive at the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -599,7 +599,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "garbage_truck",
-        "instruction": "",
+        "instruction": "Start with the dark building on your right, slightly angling right to follow the road. Continue straight down the street, keeping the tall buildings on your left. As you proceed, a green truck will come into view ahead. Continue moving forward along the road, approaching the green garbage truck with the recycling symbol on its side. You will arrive at the garbage truck.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -669,7 +669,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "house_mailbox",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the building with the large red coffee cup graphic on your left. Continue forward past the graffiti-covered buildings on your right. As you reach the end of the block where the street opens up, make a sharp right turn towards the dark building facade. Proceed slightly forward, and you will arrive at the red house mailbox located near the corner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -739,7 +739,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench_with_back",
-        "instruction": "",
+        "instruction": "Start facing a large, grey building with many dark rectangular windows on your left. Move forward along the road, keeping this building to your left. As you proceed, you will pass a wooden bench situated on the sidewalk next to the grey building. Continue straight ahead down the street. You will arrive at the park_bench_with_back.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -789,7 +789,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "garbage_truck",
-        "instruction": "",
+        "instruction": "Head down the street with the tall, gray buildings flanking your left. Continue straight along the road, passing the dark storefronts. As you proceed, you will see a green recycling truck ahead in the distance. Keep moving forward towards it. Eventually, you will arrive at the green garbage truck parked on the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -879,7 +879,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "electric_car",
-        "instruction": "",
+        "instruction": "Move forward along the road, keeping the modern, curved glass building with a dark, flat overhanging roof on your left. As you proceed, the road curves gently. Continue straight ahead, passing the cylindrical sections of the building. You will eventually see a bright red electric car parked directly in front of you near the building's entrance. You will arrive at the electric_car.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1064,7 +1064,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "rubber_duck",
-        "instruction": "",
+        "instruction": "Slightly veer right and proceed down the wide, open street. On your right, you'll pass a series of large, blocky grey buildings, one of which has a grid-like facade. Continue straight ahead, keeping the dark, shadowed buildings to your right side. As you advance, you will eventually arrive at the rubber_duck, which is not immediately visible but lies ahead on this path.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1114,7 +1114,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "warm_blanket",
-        "instruction": "",
+        "instruction": "Head towards the large, grey, boxy building with visible scaffolding and green netting on the right. As you advance along the road, the path curves slightly left past a white van with red stripes parked on the left side. Continue straight down the road, passing the white van and dark buildings on your left. Keep moving forward until you reach the base of the dark, multi-story structure ahead, where you will arrive at the warm_blanket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1184,7 +1184,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Purse",
-        "instruction": "",
+        "instruction": "Turn slightly right from the start position with a large, dark, rectangular building on your left. Move forward along the road, keeping the dark building on your left. In the distance, you will see a white ambulance parked on the road. Continue moving forward past the building. As the scenery opens up to a more barren landscape with shipping containers in the distance, keep heading straight. You will arrive at the blue Purse lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1249,7 +1249,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench",
-        "instruction": "",
+        "instruction": "Start near the large grey pyramidal structure on your right. Proceed forward along the road, keeping the long row of tall, multi-story buildings on your left. As you advance, you will pass a dark, arch-like structure further down the street. Continue straight towards the green truck parked in the distance. As you approach the truck, look to your right near the curb. You will arrive at the wooden park bench with concrete legs.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1329,7 +1329,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Head straight along the road, keeping the dark, monolithic building on your right. As you continue, you will pass a row of white, multi-story buildings with dark windows also on your right side. Further ahead, you will approach a small red table positioned on the sidewalk near the corner of the building. You will arrive at the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1399,7 +1399,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "warm_blanket",
-        "instruction": "",
+        "instruction": "Head towards the dark, reflective building on your right, keeping the white ambulance on your left. Follow the open road straight ahead, passing between the large apartment block on the left and the modern glass structure. Continue moving forward until you reach the base of the dark building. You will arrive at the warm_blanket.",
         "closest_goal_idx": 0,
         "goals": [
             {

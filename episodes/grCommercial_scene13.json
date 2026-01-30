@@ -9,7 +9,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Navigate through the supermarket aisle, starting between the shelves with baked goods and the frozen section. Turn left past the tall wooden shelf stocked with bread and pastries.\n\nContinue forward along the wide central aisle, keeping the long refrigerated display cases filled with fresh produce and sushi on your right. You will see a person standing near the counter in the distance.\n\nAs you approach the end of the aisle where the refrigerated section meets a wall of snacks, slightly adjust your path to the right. Proceed forward past the checkout area with the digital clock display showing \"10:39\" until you arrive near the potted plant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -120,7 +120,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Start your journey facing down the aisle filled with shelves on either side, specifically noting the black hanging sign with white text above the shelves on your right. Turn right and move down the aisle.\n\nAs you proceed, you'll see shelves stocked with various packaged goods, including distinct red and yellow boxes. Continue forward past the person standing further down the aisle.\n\nWhen you reach the junction near the end of the aisle where the person in the black suit is standing, turn left. Continue moving forward down this new path.\n\nKeep going straight, passing the refrigerated section on your right which contains milk cartons and other beverages with red and white packaging. Continue until you arrive at the counter area near the shelves stocked with colorful produce and drinks.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -462,7 +462,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Navigate through the aisle between the wooden shelves, keeping the shelves stocked with colorful packaged goods on your right and the tall rack with darker boxes on your left. Continue straight ahead, passing a person in a black suit standing near the left shelf. As you approach the end of the aisle where it opens up to a wider area with white counters and a trash bin, turn left. You will arrive near the basket positioned by the counter.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -1210,7 +1210,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "microwave",
-        "instruction": "",
+        "instruction": "Beginning near the racks of pink dresses and yellow hats, turn right and move forward past the metal shelving unit filled with folded white clothes. Turn right again at the corner display of yellow and orange packaged goods.\n\nContinue straight down the aisle, keeping the shelves stocked with colorful boxes and cans on your left. As you pass the wooden endcap display, turn left into the next aisle.\n\nProceed forward through this aisle, which has shelves of drinks and snacks on the right and a man in a black T-shirt standing further down. At the end of this aisle, near the section with green and red boxes, turn left.\n\nHead straight down the long main aisle. You will pass shelves on both sides, including a section with blue and white boxes on the left. Finally, turn right into the last aisle, where you will arrive at the microwave.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1391,7 +1391,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pillow",
-        "instruction": "",
+        "instruction": "Head straight down the aisle, passing shelves of clothes on your left and general grocery shelves on your right, until you reach the end of the aisle. Turn right into the next section where you see blue and white boxes on the shelves. Make another right turn, heading back along an aisle stocked with rectangular food boxes. When you reach the wooden shelf unit displaying cakes and pastries, turn left.\n\nProceed down this aisle past the shelves filled with red and white cartons. At the end of this aisle, turn left again into a wider open area where a counter with food items is visible in the distance. Continue forward toward this counter. Just after reaching the counter area, turn right. Make a slight adjustment to the left, and you will arrive at the pillow located near the shelves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1577,7 +1577,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "chair",
-        "instruction": "",
+        "instruction": "Move forward past the transparent chairs and tables, then turn left into the grocery aisle lined with shelves of fresh produce and goods. Continue straight down the aisle, passing the displays of vegetables and packaged items on both sides. Turn left, you will arrive at the wooden shelves stocked with various products.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2184,7 +2184,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "refrigerator",
-        "instruction": "",
+        "instruction": "Head forward through the convenience store aisle, passing the shelves stocked with red and orange packaged goods on your left and the display counter on your right. Continue straight ahead, keeping the large window with white chairs visible outside on your left, until you reach the refrigerated display case directly in front of you.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2270,7 +2270,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Starting from the aisle stocked with colorful bags of chips and snacks on wooden shelves, turn left and proceed down the main aisle. Continue straight past the display counter featuring various meats and deli items on your right. As you move forward, you will see a blue shopping basket on the floor to your right; slightly turn left towards the end of the aisle. Turn left at the end, you will arrive at the shopping trolley near the shelves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2376,7 +2376,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "microwave",
-        "instruction": "",
+        "instruction": "Turn right past the shelves filled with white dishes and cookware, then proceed straight ahead down the aisle flanked by more shelves of kitchenware. At the end of that section, turn right again into the aisle stocked with colorful boxed goods and bags. Continue forward, turning left at the intersection near the shelves displaying rows of blue and red packaged items. Move down this long aisle, until you reach the end. Turn right once more, heading towards the section with shelves stocked with bottles and jars, where you will arrive at the microwave.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2557,7 +2557,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pillow",
-        "instruction": "",
+        "instruction": "Navigate through the aisle between the white wooden furniture on the left and the long bookshelf on the right. After passing the white chair and the yellow beanbag on your left, turn left towards the open office area. Proceed forward, keeping the yellow beanbag on your left, and then slightly adjust your path to the right as you approach the bookshelf. ",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2663,7 +2663,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Starting from a position near a large glass window, slightly turn left and move forward, heading towards the open office area. As you proceed, you will see a white seating area on your left and a series of dark poufs on your right. Slightly turn right to navigate between the white seat and the dark poufs, heading towards the wooden table and chairs in the background. Continue forward across the carpeted floor. You will arrive at the desk area located near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2724,7 +2724,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "laptop",
-        "instruction": "",
+        "instruction": "From your starting point, adjust your direction slightly to the right and proceed forward along the path. Continue moving until you reach the lamp on the table.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -3320,7 +3320,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "With shelves of produce on your left, slightly turn right and proceed down the aisle. Continue moving straight ahead past the wooden crates filled with red and green fruits until you reach the end of the aisle where a person is standing. Turn left near the person and move past the refrigerated display cases filled with packaged goods. After passing the refrigerated section, slightly turn right and continue forward until you arrive at the potted plant display.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3441,7 +3441,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Start facing an aisle with wooden shelves on either side, stocked with colorful drinks and snacks. Move forward down this aisle, keeping the shelves with juice bottles on your right and the shelves with canned goods on your left.\n\nContinue straight ahead until you emerge from the aisle into a more open area with a white display counter in the center.\n\nOnce past the end of the wooden shelving unit on your left, turn left to approach the large white service counter, which has some packaged food items displayed along its front edge. You will arrive directly in front of the counter.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -3678,7 +3678,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "cabinet",
-        "instruction": "",
+        "instruction": "Start by standing between the aisles, with the shelf containing red cans and bottles on your left and the shelf with green items on your right. Move straight ahead down the aisle, passing the blue and white boxes on the right. Continue forward along the path for some distance until you are near the end of the aisle where the green and yellow vegetable section is located on the left. Finally, turn left towards the shelf filled with green vegetables and juice cartons, and you will arrive at the cabinet.",
         "closest_goal_idx": 5,
         "goals": [
             {
@@ -4214,7 +4214,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "From the starting position near the white counter, head forward towards the aisle. As you proceed, navigate slightly left, passing the shelves stocked with colorful boxed goods on your right. Turn right and continue straight down the aisle, keeping the display filled with packaged food on your left and the wooden shelving unit with various brown and yellow items on your right. You will arrive at the blue shopping basket on the floor.",
         "closest_goal_idx": 0,
         "goals": [
             {

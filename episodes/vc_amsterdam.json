@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "tissue_box",
-        "instruction": "",
+        "instruction": "Start on the street facing a large church-like structure with a spire on the left. Follow the road, passing a row of tall, dark brick buildings on your right. As you move forward, you will pass a green garbage truck parked on the right side of the street. Continue straight down the road, keeping the dark buildings on your right. As you approach the end of the block, you will arrive at a red tissue box with a yellow topper sitting on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -84,7 +84,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "police_hat",
-        "instruction": "",
+        "instruction": "Start by facing the road ahead, bordered by tall, blocky buildings with gray and beige facades. Proceed forward along the street, keeping the yellow fire hydrant to your left. Continue straight down the road, passing a small yellow traffic light suspended on a pole. As you move further, you will notice a yellow object on the ground ahead. Follow the road until you arrive at the police hat.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -177,7 +177,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "police_van",
-        "instruction": "",
+        "instruction": "Proceed straight down the street, keeping the large, weathered beige building with many dark windows on your left. As you continue forward, you will pass a white camper van with red and blue stripes parked on the left side of the road. Keep moving down the center of the road. Eventually, you will see a large white vehicle with similar red and blue stripes and heavy-duty wheels ahead of you. This is the police van, your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -237,7 +237,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "shovel",
-        "instruction": "",
+        "instruction": "Start facing the lit shop window in the distance. Turn slightly left and follow the path, passing a white trash bin with a red and white object next to it on your left. Continue straight towards the large, blank grey rectangular sign ahead. As you approach the grey sign, veer left to go around it. Once past the sign, turn sharply left. You will arrive at the shovel in the darkness.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -307,7 +307,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "Purse",
-        "instruction": "",
+        "instruction": "From your starting position near the yellow traffic signal and street sign, head down the middle of the empty street. As you move forward, the tall brown buildings on the right will become clearer, particularly one with a dark storefront. Continue following the road straight ahead, keeping the buildings on your right. Proceed towards the end of the block where the street appears to narrow slightly near a building with large windows. You will arrive at the Purse.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -367,7 +367,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_chair",
-        "instruction": "",
+        "instruction": "Start with the tall, dilapidated beige building on your left and head towards the open plaza. Keep the tall, needle-like obelisk monument on your right as you proceed forward across the square. You will pass a white ambulance parked in the distance on your left. Continue straight, passing a white car on your right. As you approach the center of the open area, near a bicycle, bear slightly right. You will arrive at the black office chair situated alone in the middle of the plaza.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -447,7 +447,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "puddle",
-        "instruction": "",
+        "instruction": "Follow the road as it curves right between the dark, shadowy buildings, heading towards the large, domed classical building in the distance. Continue past a white scooter parked on the left. The path leads you towards a white trailer with red and blue stripes parked near a red triangular road sign. Keep moving forward along the pavement, aiming directly for the white trailer. You will arrive near the blue bag on the ground, just before the trailer.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -527,7 +527,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "rice_bowl",
-        "instruction": "",
+        "instruction": "Head straight towards the large, dark building with the central dome, crossing the open square. As you approach the building's facade, veer slightly left. Continue forward across the pavement. You will arrive at the rice_bowl.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -592,7 +592,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "notebook",
-        "instruction": "",
+        "instruction": "With the beige stone building on your left, slightly turn right and proceed forward along the road. Continue straight, keeping the row of large, rectangular windows on your left. As you move ahead, you will see a purple object on the sidewalk in the distance. Keep going until you arrive at the brown notebook lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -642,7 +642,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance_1",
-        "instruction": "",
+        "instruction": "Start facing the tall, beige stone buildings with arched entryways. Turn left to follow the road, keeping the distinct church-like structure with a tall, square tower on your right. Continue straight down the street, passing rows of weathered, multi-story buildings on your left. As you proceed, you will see a white ambulance with red and blue stripes parked ahead on the right side of the road. Approach it, and you will arrive at the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -722,7 +722,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "old_telephone",
-        "instruction": "",
+        "instruction": "Start facing the large stone church with the dark spire. Head straight down the road, passing a white sushi bar labeled \"SAKURA BITES\" on your left. Continue forward along the street as the buildings transition to tall, grey structures on your right. Keep moving straight, passing a blue circular sign with a white arrow pointing up on the right sidewalk. As you proceed, you will approach a red object on the ground; this is the old telephone, your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -802,7 +802,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "metal_trashcan",
-        "instruction": "",
+        "instruction": "Start by going straight down the wide, beige road, flanked by tall, worn buildings with many windows on both sides. Keep heading toward the distant white ambulance visible down the street. Continue forward for a long stretch, passing a dark shop front on your left. As you approach the area where the road curves slightly, a grey, cylindrical object will appear on the ground ahead. You will arrive at the metal trashcan.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -867,7 +867,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "beach_ball_1",
-        "instruction": "",
+        "instruction": "Start near the row of beige buildings with arched doorways on the left. Turn right slightly and proceed down the road, keeping the dark brown brick building with white window frames on your right. Continue straight past the street corner with the traffic light and the storefront labeled with Asian characters. As you pass the intersection and approach the gap between the buildings, look down; you will arrive at the red and white striped beach ball on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -927,7 +927,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bathroom_mirror",
-        "instruction": "",
+        "instruction": "Start your journey on the wide, empty road, with a row of dark grey buildings on your left and lighter, taller beige buildings on your right. Notice the red and white ambulance parked further down on the right side of the street. Move forward, following the road straight ahead. As you proceed, the ambulance will pass by on your right. Continue down the street towards the darker building facades ahead. Eventually, you will arrive at the bathroom_mirror, which appears as a circular mirror on a stand placed on the sidewalk to your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -977,7 +977,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "parking_meter",
-        "instruction": "",
+        "instruction": "Start facing the tall, dark gothic building with large windows. Follow the road slightly left, keeping the white building with a dark garage door on your right. As you pass the white building, an ambulance will come into view on your left. Continue forward past the ambulance and the red triangle road sign. Keep going straight towards the large, multi-story ornate building ahead. As you approach the dark wall on your left, turn slightly left towards the small red scooter. You will arrive at the parking meter near the scooter.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1052,7 +1052,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "white_shoes",
-        "instruction": "",
+        "instruction": "Start your journey on a wide road flanked by tall, muted-color buildings on both sides. On your left, you'll see a distinct white ambulance with red stripes parked near the curb. Continue straight down the center of the road, heading towards a modern glass building with greenish-blue reflective panels visible in the distance. As you move forward, the traditional brick buildings on your right will pass by. Keep following the road ahead until you arrive at the white_shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1102,7 +1102,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "trash_can",
-        "instruction": "",
+        "instruction": "Head down the empty city street, keeping the large, dark, blocky building with many windows on your left. Continue straight, passing a small glass bus stop shelter on the left side of the road. As the street gently curves, follow the road forward past a brown building with a prominent arched entrance on the right. Keep moving along the street towards the shop front with blue trim and gold lettering that says \"LE MATIN DORE\". You will arrive at the trash can situated directly in front of this shop.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1187,7 +1187,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "lilac_bike",
-        "instruction": "",
+        "instruction": "Start by following the road, keeping the row of weathered grey buildings with black window frames on your left. As you proceed, you'll pass a blue circular traffic sign with a white arrow. Continue along the street, navigating slightly to the right, until you spot a purple bicycle parked on the side. You will arrive at the purple bicycle.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1252,7 +1252,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance_1",
-        "instruction": "",
+        "instruction": "Start moving along the road, keeping the row of dark grey, multi-story buildings on your right. As you proceed, you will see a red and white striped ambulance in the distance. Continue forward until the road curves slightly. Follow the bend of the road to the left, heading directly towards the rear of the ambulance. You will arrive at the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1327,7 +1327,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "umbrella",
-        "instruction": "",
+        "instruction": "Turn slightly left from your starting position and follow the road straight ahead. You will pass a white \"Quick Cash Point\" shop on your right. Continue moving forward down the center of the street, heading towards the large, ruined grey building in the distance. As you proceed, you will see a white ambulance parked further down the road on the left side. Keep going straight towards the red and white umbrella visible in the distance. You will arrive at the umbrella.",
         "closest_goal_idx": 0,
         "goals": [
             {

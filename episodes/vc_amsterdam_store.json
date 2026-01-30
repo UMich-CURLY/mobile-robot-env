@@ -127,7 +127,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_7",
-        "instruction": "",
+        "instruction": "Head towards the \"GEAR & GO CYCLES\" shop with the bicycle logo, passing the bench on your right. Follow the road straight ahead, keeping the bike shop and the \"SAKURA BITES\" sushi bar on your left as you proceed down the street. Continue forward past the tall, dark buildings and the church spire visible in the distance. As you approach the storefront with intricate dragon carvings on the stone base, turn slightly left towards the \"HARVEST & HEARTH\" sign. You will arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -207,7 +207,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_0",
-        "instruction": "",
+        "instruction": "Head down the road with the white \"Chick 'n Burger Co.\" fast food restaurant on your right and a blue van parked ahead on your left. As you approach the glass storefront of the restaurant, turn right towards the entrance. You will arrive at the restaurant's glass double doors, which display a \"Crispy & Juicy\" chicken logo.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -267,7 +267,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_5",
-        "instruction": "",
+        "instruction": "From the open square with the large domed building on your left, head towards the narrow street entrance ahead. Follow the path slightly to the right as you enter the alleyway lined with tall, shadowed buildings. Continue straight down the middle of the street, passing shopfronts with red and white signage on your left. Keep moving forward through the dark corridor until you reach the brightly lit diner with red trim on the left side.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -352,7 +352,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_1",
-        "instruction": "",
+        "instruction": "Start slightly turning right and follow the road forward, passing a row of grey, multi-story buildings on your right. Continue straight for a long stretch as you approach an ambulance with red and white stripes visible in the distance. As you get closer to the ambulance, turn left towards a white building with large wooden-framed windows displaying baked goods and croissants. You will arrive at the cafe.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -442,7 +442,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_9",
-        "instruction": "",
+        "instruction": "Start moving down the road, heading straight between the tall, shadowed buildings on the left and the sunlit facades on the right. Continue forward as the street stretches ahead, passing a building with a red sign hanging above its entrance on your left. Keep following the road as it gently curves slightly to the right. Proceed past the row of grey stone structures. You will arrive at the restaurant, distinguished by its intricate wooden doors and red interior visible through the entrance on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -517,7 +517,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_5",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing the \"Gear & Go Cycles\" shop on your left. As you move forward, you will pass a large stone church with a pointed roof further down the street on the left. Continue along the road, keeping the \"Sakura Bites Sushi & Bar\" on your left. Slightly adjust your path to the right as you approach the end of the block. You will arrive at the restaurant, Sakura Bites, located on the corner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -572,7 +572,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "atm_1",
-        "instruction": "",
+        "instruction": "Start moving forward down the road, keeping the dark, multi-story buildings on your right. As you proceed, a storefront with a bright, illuminated \"METRO CASH POINT\" sign will come into view on the right side of the street. Continue towards this shop. When you get close, slightly veer right towards the entrance. You will arrive at the ATM located just inside the glass doors.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -687,7 +687,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_4",
-        "instruction": "",
+        "instruction": "Start near the brick building with the shop sign \"TRAITORIA LUNA\" on your left. Follow the road straight ahead, passing the tall grey buildings and the red and white ambulance parked on the right. Continue forward down the street, keeping the large multi-story buildings on your right and the dark storefronts on your left. As you proceed, you will eventually arrive directly in front of the convenience store window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -752,7 +752,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_2",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the tall buildings on your right and the blocky, darker structures on your left. Continue straight along the road, eventually passing a large, modern building with a black facade on the right side. As you move forward, the road curves gently to the right. Follow this curve until you approach a storefront with large glass windows revealing a brightly lit interior with bottles on shelves. You will arrive at the bar_2.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -822,7 +822,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "parking_entrance_1",
-        "instruction": "",
+        "instruction": "Start on the open paved area, slightly angling left past the tall, dark grey building corner. Continue moving forward along the street, keeping the row of multi-story buildings on your left. As you proceed, the street narrows slightly between the buildings. Keep following the road straight ahead. Eventually, on your left, you will see a white structure with a blue \"P\" parking sign. Approach this building, and you will arrive at the parking entrance located underneath the sign.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1022,7 +1022,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_0",
-        "instruction": "",
+        "instruction": "Head towards the row of brown brick buildings, keeping the tram tracks on your left. Continue forward along the street, passing a white streetlight pole with yellow traffic signals. As you approach the storefronts, you will see a building with a dark wooden facade and a sign reading \"The Barrel & Tap\" above the entrance. Move closer to the entrance of this pub, and you will arrive at the destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1092,7 +1092,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_9",
-        "instruction": "",
+        "instruction": "Start on the street flanked by tall, European-style brick buildings. Move forward along the road, keeping the buildings on your left. As you proceed, the architecture transitions to a shopfront with intricate wooden doors and red lanterns hanging above the entrance. Continue forward towards this establishment. You will arrive at the restaurant with the ornate wooden facade and red lanterns.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1152,7 +1152,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "atm_2",
-        "instruction": "",
+        "instruction": "Head down the road with the tall, dark building on your left and the white van with a red stripe parked on your right. As you continue, the path curves slightly to the right, leading you past a row of dark grey buildings. Keep following the road forward towards the white storefront labeled \"ATM\". You will arrive directly in front of the ATM entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1227,7 +1227,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_1",
-        "instruction": "",
+        "instruction": "From the starting position with a white scooter on your left and a bench on your right, follow the road forward, keeping the old brick building on your left. Continue straight, passing the building's facade with multiple dark windows. As you reach the corner of the building where a dark alleyway begins, turn right. Move forward into the shadowed area, heading towards the dark entrance. You will arrive at the toilets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1292,7 +1292,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bureau_de_change_1",
-        "instruction": "",
+        "instruction": "Head slightly left from your starting point, following the road past the grey buildings on your left. As you proceed, a white storefront labeled \"ATM\" will become visible ahead. Slightly veer right to align with the street and continue moving forward directly towards this storefront. Keep heading straight along the road, aiming for the white \"ATM\" sign. You will arrive at the bureau de change entrance, located directly under the \"ATM\" sign.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1367,7 +1367,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_2",
-        "instruction": "",
+        "instruction": "Begin by slightly turning right and proceeding forward along the empty road. You will see a tall, modern building with reflective green glass windows on your left. Continue straight ahead, passing a row of older, grey stone buildings on your right. Keep moving forward until you reach a white storefront with blue lettering that says \"QUICK STOP\" next to a shop with a wooden door and a circular window. You will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1427,7 +1427,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "community_centre_2",
-        "instruction": "",
+        "instruction": "Head down the wide, empty street, keeping the large, beige, multi-story building with many rectangular windows on your right. As you move forward, notice the white trailer with a yellow object on top parked along the curb. Continue straight ahead, following the road past the trailer. As you approach the end of the block, look for a building with a white storefront labeled \"COMMUNITY CENTRE\" with large glass windows and doors. You will arrive at the community centre entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {

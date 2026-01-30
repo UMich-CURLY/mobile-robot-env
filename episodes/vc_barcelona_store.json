@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_6",
-        "instruction": "",
+        "instruction": "Start near the large grey office building on your left and a green recycling truck. Move forward down the road, following the direction of traffic. As you proceed, the buildings on the left will transition to older, European-style architecture with cream facades. Continue straight past the streetlamp on the left. You will see a small, rustic Italian restaurant named \"Vecchio Forno Trattoria\" with a wooden door and checked tablecloths visible through the window. This is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -79,7 +79,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_1",
-        "instruction": "",
+        "instruction": "Start by facing the white \"Urban Pedal\" store. Turn left and proceed down the wide street, keeping the dark, multi-story buildings on your left and right. Continue forward for a long distance, passing a white delivery truck parked on the left side of the road. As you approach the end of the block, focus on the rustic wooden storefront on your left with large glass windows and potted plants in the window box. Slightly turn left towards this building to arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -169,7 +169,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bicycle_rental_1",
-        "instruction": "",
+        "instruction": "Start on the road and move forward toward the distinct building with oval window cutouts in the distance. Continue straight down the street, keeping the tall buildings with graffiti-like textures on your left. As you approach the \"Urban Pedal\" bicycle rental shop with its blue and white sign and large glass windows on the left, turn left towards it. You will arrive at the bicycle rental shop entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -234,7 +234,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "atm_2",
-        "instruction": "",
+        "instruction": "Move forward along the road, keeping the dark, multi-story building on your right. This building has many windows and arched entrances on the ground floor. As you proceed, you will see a white ATM booth attached to the building's facade further ahead. Continue straight towards this structure. You will arrive at the ATM, which features blue signage and glass panels.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -344,7 +344,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bicycle_rental_1",
-        "instruction": "",
+        "instruction": "Start facing the street corner with a large, classical building ahead, its windows tall and dark. Follow the road forward, keeping the grand, multi-story building to your left. As you proceed, you'll see a modern white storefront with blue \"URBAN PEDAL\" signage and bicycle graphics appear on your left. Continue straight, passing closer to the shop windows displaying bikes inside. The path leads directly towards the entrance of Urban Pedal, where you will arrive.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -419,7 +419,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "toilets_2",
-        "instruction": "",
+        "instruction": "Proceed slightly left and follow the road towards the small, white building marked with a \"PUBLIC TOILETS\" sign, which features blue male, female, and wheelchair icons. Continue moving straight ahead across the dark, textured ground until you arrive directly in front of the entrance to the public toilets.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -469,7 +469,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_0",
-        "instruction": "",
+        "instruction": "Start on the city street, facing the direction of the traffic, and head straight past the white trailer with red and blue stripes parked on the left. Keep following the road forward for a long stretch, passing several blocks of tall, shadowed buildings on both sides. As you continue, look for a small shop with a \"Quick Stop Mart\" sign and brightly colored product displays on the left sidewalk. You will arrive at this convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -544,7 +544,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "parking_entrance_3",
-        "instruction": "",
+        "instruction": "Start on the wide road with the traffic light pole to your left and head towards the tall beige buildings ahead. Continue straight down the street, keeping the dark, shadowed buildings on your left and the sunlit beige facades on your right. As you proceed, you will pass a bicycle parked on the sidewalk to your right. Keep moving forward along the road until you approach a building labeled \"MUNICIPAL GARAGE\" on the right side. Turn right towards the entrance with the roll-up gate; you will arrive at the parking entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -664,7 +664,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pharmacy_2",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing between the tall beige buildings on your left and the dark structures on your right. Continue forward as the street narrows slightly. Keep moving straight, ignoring the turn-offs, until you approach a distinct white storefront with green cross symbols and large glass windows on your right. This is the pharmacy. You will arrive directly in front of the pharmacy entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -754,7 +754,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_2",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead. You will pass a large, textured building on your right, moving towards a storefront featuring a grey awning with text and visible interior lighting. As you get closer, notice the sign reading \"The Rusty Anchor Tavern\" above the windows. Continue forward until you reach this establishment, The Rusty Anchor Tavern, which will be directly in front of you on the right side of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -864,7 +864,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bicycle_rental_1",
-        "instruction": "",
+        "instruction": "Follow the grey road straight ahead, keeping the tall, beige building block on your right. As you approach the building with green-tinted windows on your left, slightly curve left towards the storefront. Turn left to face the shop entrance marked with a bicycle icon on the glass. You will arrive at the bicycle rental shop.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -924,7 +924,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_1",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the beige, multi-story buildings with arched windows on your left. Continue forward as the path slightly curves, passing a shop with a dark awning labeled \"THE RUSTIC CRUMB\".\n\nMaintain your course along the street. You will pass a taller, modern grey building with dark windows on your left. Continue straight ahead towards the brick building corner ahead. You will arrive at the Liberty Savings Bank, identifiable by its brick facade, wooden window frames, and gold icons on the glass representing loans and investments.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -994,7 +994,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "parking_entrance_1",
-        "instruction": "",
+        "instruction": "Head straight along the road, keeping the dark, shadowed buildings to your left and the brighter, multi-story beige buildings to your right. Continue forward past the storefront with the \"PUBLIC PARKING\" sign above the entrance on your left. As you proceed, the view of the street ahead remains consistent with distant vehicles. Keep moving in this direction until you arrive at the parking entrance located on your immediate left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1049,7 +1049,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "theatre_0",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing the tall beige building with green shutters on your left and the dark, blocky structure on your right. As you proceed down the street, keep the Liberty Savings Bank on your left. Continue forward until you reach the Grand Marquee Theatre, distinguished by its large sign and wooden facade. Go through the open double doors to arrive at the theatre lobby.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1109,7 +1109,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "atm_2",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, keeping the tall, dark buildings on your left. As you proceed, you will pass a small, white structure situated against the building facade. Continue moving forward along the street. Eventually, you will arrive at the ATM booth, which is the small white structure previously seen on the left side of the path.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1184,7 +1184,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_2",
-        "instruction": "",
+        "instruction": "Start by moving straight down the road, keeping the dark city buildings on your left and right. Ahead on the right side of the street, you will see a bright red diner-style building with large windows and a sign reading \"Rocket Burger\". Gradually veer slightly to the right as you approach this landmark. Continue moving towards the red storefront until you are directly in front of the entrance doors. You will arrive at Rocket Burger.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1287,7 +1287,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Move forward along the street, keeping the tall buildings on your right and the light-colored building on your left. Continue straight ahead, passing a traffic light on your right. As you proceed, the buildings on the right will become clearer, revealing a brick storefront labeled \"TRATTORIA LUNA\" with a wooden window display and flower boxes. Keep moving towards this storefront; you will arrive at the restaurant directly in front of the window with the red flowers.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1352,7 +1352,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "theatre_0",
-        "instruction": "",
+        "instruction": "Start facing the street corner with the dark, modern building on your right and a brick \"SAVINGS BANK\" on your left. Move forward along the road, keeping the red scooter to your right as you pass it. Continue straight ahead towards the brick storefronts on the left. The path will lead you directly to the entrance of \"The GRAND MARQUEE THEATRE,\" distinguishable by its prominent sign and wooden doors with posters in the windows. You will arrive at the theatre entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {

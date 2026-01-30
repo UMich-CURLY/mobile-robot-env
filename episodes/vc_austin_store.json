@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_0",
-        "instruction": "",
+        "instruction": "Begin on the road flanked by tall, worn city buildings, moving past a white delivery van parked on your right. Continue forward down the street, keeping the red futuristic car to your left. As you proceed, the road curves slightly; navigate along it with the dark, massive buildings looming on either side. Keep moving forward along the pavement, passing storefronts on your left. Eventually, veer slightly towards the left side of the street, approaching a wooden-fronted shop with a \"CRUMB\" sign. You will arrive at the cafe.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -99,7 +99,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_0",
-        "instruction": "",
+        "instruction": "Head straight along the road, passing the dark, boxy building on your right with the small, illuminated window. Keep going until you pass the intersection with the streetlights. As you proceed, a white building with a large \"Crispy & Juicy\" burger advertisement in the window will come into view on your right. Turn slightly right towards this building. You will arrive at the fast food restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -159,7 +159,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_1",
-        "instruction": "",
+        "instruction": "Start slightly to the right, heading down the road flanked by tall, dark office buildings. Continue forward along the street, passing a white chair on the sidewalk to your left. Keep moving straight ahead for a considerable distance, staying on the main road between the towering skyscrapers. As you proceed, you will pass various storefronts on the left, including a 'Clearpath Medical Group' sign. Eventually, turn slightly right towards a building with a red and white retro diner facade featuring large windows. You will arrive at the fast food diner entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -304,7 +304,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Start on the wide, empty road facing a dark, massive building block. Move forward, keeping the tall, beige skyscraper on your left and the dark, modern building on your right. As you advance down the street, you will see a brick building with a black awning appearing on the right side. Continue straight towards this structure. As you get closer, the building reveals itself to be a restaurant named \"TRATTORIA LUNA\" with flower boxes in the window. You will arrive directly in front of this restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -534,7 +534,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_0",
-        "instruction": "",
+        "instruction": "Head slightly left from the start, following the road past the tall, dark building on your right and the tan, blocky buildings on your left. Continue straight, keeping the multi-story parking garage structure visible in the distance ahead. As you approach the intersection near the parking garage, veer slightly left towards the corner building with large glass windows and brown doors. You will arrive at the bank.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -749,7 +749,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Slightly turn left and follow the road down the empty street, flanked by tall grey skyscrapers on both sides. As you proceed, you will see a brick-faced restaurant with large windows and a sign reading \"TRATTORIA LUNA\" on your left. You will arrive at this restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -809,7 +809,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_0",
-        "instruction": "",
+        "instruction": "Proceed along the road towards the Apex Community Bank, which is part of the large beige building on your right. As you move forward, the bank's brick facade and large windows will become clearer. Keep slightly right, following the path towards the bank entrance. Continue forward, getting closer to the storefront until you are directly in front of the brick base of the window. You will arrive at the bank.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -869,7 +869,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_0",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing between the tall buildings. Keep moving forward down the street; on your right, you will pass a large, beige building with arched windows and green vines growing on the wall. Continue along the road as you approach the storefronts. You will arrive at 'The Daily Crumb' bakery, distinguished by its wooden facade and large display window on the right side of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -989,7 +989,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_0",
-        "instruction": "",
+        "instruction": "Go straight along the road, keeping the dark, shadowed buildings on your right and the taller, sunlit beige buildings on your left. As you proceed, you will pass a shop with a visible window display on your right. Continue forward down the street, and you will arrive at the restaurant_0, which is the ramen house featuring a warm, brightly lit wooden storefront and a window showing people eating inside.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1219,7 +1219,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_0",
-        "instruction": "",
+        "instruction": "Start near a tall, slender modern building and a large grey blocky building. Slightly angle right and follow the road ahead, moving towards a brick establishment embedded in the grey building's facade. Continue straight down the street. As you approach, the brick structure reveals itself as \"The Barrel & Tap,\" an old-fashioned pub with wooden window frames. You will arrive at the pub.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1359,7 +1359,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "university_1",
-        "instruction": "",
+        "instruction": "Head straight down the road, passing the red sports car parked on your left. Continue forward through the city canyon with tall, dark skyscrapers on both sides. As you proceed, you will approach a block with lower buildings on the right. Look for a shop named \"Quick Stop Mart\" with a white sign and blue lettering. Just past that is a storefront labeled \"Academic Archive\" with a wooden facade and large display windows. You will arrive at the Academic Archive shop.",
         "closest_goal_idx": 0,
         "goals": [
             {

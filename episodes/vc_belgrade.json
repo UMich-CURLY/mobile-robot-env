@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "food_truck",
-        "instruction": "",
+        "instruction": "Turn right towards the white sushi restaurant with a large blue \"S\" sign and sushi graphic. Follow the road straight, passing the white truck on your left and the restaurant on your right. Continue forward down the street, keeping the tall buildings on either side. Proceed ahead until you arrive at the white food truck parked on the left side of the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -89,7 +89,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "black_bike",
-        "instruction": "",
+        "instruction": "Start on the open road with tall buildings on your left and a large building with a croissant mural ahead. Follow the road towards the mural, then veer slightly right as you pass a dark building adorned with a cafe/bakery advertisement featuring coffee and bread. Continue straight, keeping the blue building with golden trim on your right. As you move forward, the \"Global Currency Exchange\" storefront will appear on your right. Keep following the road past this shop until you arrive at the floating black bike near the \"Le Matin\" building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -164,7 +164,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "shovel",
-        "instruction": "",
+        "instruction": "Head straight down the road, passing the dark, curved buildings on your left and the storefronts on your right. Continue forward as the street slightly curves. As you approach the intersection where the buildings open up, you will see a red and white \"Rocket Burger\" shop directly ahead. Veer slightly right towards the shop, then correct left. You will arrive at the shovel.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -239,7 +239,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bus",
-        "instruction": "",
+        "instruction": "Move forward along the road, keeping the dark, shadowed buildings on your left and the sunlit, textured facades on your right. Continue straight through the narrow alleyway. As you proceed, you will see a white vehicle with red and blue stripes parked ahead. Keep moving towards it until you arrive directly behind the bus.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -352,7 +352,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Start your journey on the road, heading straight past the building with the large red logo on your left. Continue along the street as the buildings rise on either side. Eventually, slightly veer towards the right side of the road as you approach a large grey structure. You will arrive at the brown shoe lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -422,7 +422,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "black_shoes",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead, passing between tall city buildings. Keep going, noticing a store with a large wooden sign titled \"RUSTIC CRUMBS\" on your right. As you pass this shop, veer slightly left to stay on the road. Continue forward down the street. Eventually, you will arrive at the black shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -507,7 +507,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "chair",
-        "instruction": "",
+        "instruction": "Start straight on the road, heading towards the white truck with the yellow roof sign in the distance. Pass between the tall, dilapidated beige building on your left and the dark grey buildings on your right. As you approach the white truck, veer slightly left to avoid it. Continue forward, passing the truck on your right side. Keep going straight along the dark road surface. You will arrive at the dark chair positioned near the curb on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -567,7 +567,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "strereo_camera_sensor",
-        "instruction": "",
+        "instruction": "Start by following the road slightly to the right, keeping the white SUV and the building with large windows on your left. Continue forward along the street, passing the intersection where a grey truck is parked near a 'CRUST & CAFE' sign. As you proceed, keep the large wooden-textured building with a 'SOLAR ACADEMY' storefront on your right. Slightly veer right towards the end of the block. You will arrive at the storefront directly in front of the Solar Academy entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -637,7 +637,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vest",
-        "instruction": "",
+        "instruction": "Drive straight down the urban road, keeping the dilapidated grey apartment buildings on your left and the storefronts with wooden window frames on your right. Continue forward towards the intersection where a large, green recycling truck is parked. As you approach the truck, you will notice a blue and grey building with large windows directly behind it. Keep moving towards the truck until you reach the destination, where you will find a black vest lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -697,7 +697,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "wooden_table",
-        "instruction": "",
+        "instruction": "Start facing the grey building on the left and a large white building with a sushi logo ahead. Follow the road, passing the sushi sign building and a 'Rocket Burger' shop on your right. Continue straight as the road curves slightly left past a white van with a yellow surfboard on top. Keep following the road, veering left past the dark alleyway entrance. Finally, make a sharp left turn towards the dark wall to arrive at the wooden table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -787,7 +787,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "shovel",
-        "instruction": "",
+        "instruction": "Start from the street facing a gap between tall buildings, with a ramen house featuring a red apple-like logo on your left. Proceed forward down the center of the road. As you continue, keep the tan, sunlit buildings on your right and the shadowed, dark buildings on your left. Move past the storefronts until you are near a traffic light pole on the right side of the street. You will arrive at the shovel hanging near the pole.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -847,7 +847,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "food_truck",
-        "instruction": "",
+        "instruction": "Drive straight towards the white building with large coffee and hot dog icons on its facade. As you approach the red car parked in front of this building, bear slightly right to pass it. Continue forward, following the dark road surface as it curves between the tall, shadowed buildings. A large building with blue \"E MATIN\" signage will appear ahead on the right. Keep moving forward until you are directly beside the white food truck parked on your right, under the yellow awning.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -922,7 +922,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "squirrel",
-        "instruction": "",
+        "instruction": "Start by heading slightly right down the road towards the tall white building in the distance, passing the floating white ambulances and green truck. Continue forward along the street, keeping the large apartment block with many windows on your right. As you proceed, the view of the street narrows between the buildings. Keep following the road, slightly bearing right as you pass under the dark overhanging structure. Eventually, you will arrive at the squirrel.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1012,7 +1012,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "warm_blanket",
-        "instruction": "",
+        "instruction": "From the intersection, follow the road forward, keeping the large building with the wooden facade on your left and the tall dark grey building on your right. Continue straight towards the white building in the distance with the vertical banner advertisement. As you proceed down the street, you will see a green folded object on the ground. You will arrive at the warm_blanket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1077,7 +1077,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "race_car",
-        "instruction": "",
+        "instruction": "Start slightly right and move forward down the road. As you advance, you will see a large white building with a sushi logo (an \"S\" with chopsticks and a sushi roll) on your right and a grey, textured building on your left. Continue straight, passing the sushi building. As you approach the end of the sushi building, you will spot a white trailer with red stripes and a futuristic white race car parked nearby. Approach the white race car to arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1152,7 +1152,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "single_book",
-        "instruction": "",
+        "instruction": "Follow the road as it curves right past the dark building featuring a coffee cup sign on your left. Continue straight down the road, keeping the blue and tan building labeled \"E MATIN\" straight ahead in the distance. Pass the white shop entrance on your left. As you approach the \"E MATIN\" building, a white van with a yellow object on top will appear on the right. You will arrive at the single book.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1222,7 +1222,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ambulance",
-        "instruction": "",
+        "instruction": "Start on the road between the beige building and the tall blue structure. Proceed forward, keeping the dark blue building on your right. As you advance, you'll pass a large bakery sign reading \"TIC CRUM\" on your right. Continue along the road, moving past the bakery and towards the ambulances ahead. Keep going straight down the street, passing under the hovering white trailer-like ambulances. Finally, you will arrive at the last ambulance on the right side of the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1322,7 +1322,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "paper_towel",
-        "instruction": "",
+        "instruction": "Start on the road between the dark brown, distorted buildings on the left and the beige buildings on the right. Move forward down the street. As you advance, the road gently curves; keep the tall, white multi-story building with many windows on your left. Continue past the intersection where a large, blue banner or tarp hangs vertically on a building facade. Follow the road as it bends slightly right, passing the dark, shadowy structures. Finally, approach the grassy area near the dark building ahead, and you will arrive at the paper towel roll lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1432,7 +1432,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bike_rack",
-        "instruction": "",
+        "instruction": "Go straight down the street, keeping the tall, shadowed buildings on your left and the sunlit beige facades on your right. Continue forward, passing the storefront with the brown \"RUSTIC CRUMB\" sign and arched windows on your right. As you pass the storefront, slightly adjust your path to the left. You will arrive at the bike rack near the curb.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1492,7 +1492,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "warm_blanket",
-        "instruction": "",
+        "instruction": "Head towards the multi-story blue building with a curved corner facade. As you approach, keep left, following the road past the large, prominent wooden-textured billboard on your left. Continue straight along the road, keeping the blue building on your right and the billboard on your left. You will arrive at a green folded blanket lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {

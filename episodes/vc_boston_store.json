@@ -92,7 +92,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_0",
-        "instruction": "",
+        "instruction": "Move forward along the street, passing a white building on your left. Turn slightly left and continue straight toward the \"HANA RAMEN HOUSE,\" which has a prominent wooden facade and large windows. You will arrive directly in front of the ramen restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -157,7 +157,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_0",
-        "instruction": "",
+        "instruction": "Start facing the dark, blocky buildings with an ambulance parked to the right. Move forward and turn right around the corner of the dark building, keeping the ambulance on your left. Follow the road straight ahead, passing between the dark structures on your left and a series of smaller buildings on your right. Continue down the street as it curves gently right. You will pass a green building on your right. Keep following the road towards the storefront with the blue \"QUICK STOP MART\" sign; you will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -267,7 +267,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_2",
-        "instruction": "",
+        "instruction": "Start facing the street with the grey building on your left. Turn slightly right and proceed forward along the road, keeping the \"Chuck N' Burger Co.\" and \"The Brick & Patty\" storefronts on your left. Continue straight ahead, passing the grey building facade. As you approach the end of the building block, you will arrive at the restaurant area near the stone archways.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -365,7 +365,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_1",
-        "instruction": "",
+        "instruction": "Follow the road straight ahead. You will pass a distinctive cream-colored building with large windows on your left, followed by a series of darker, industrial-style black structures lining both sides of the street. Continue forward down the center of the road, keeping the black buildings on your right. As you proceed, look for a building with a classic brick facade and a sign reading \"LIBERTY SAVINGS BANK\" on your right. Move towards the front entrance of this building. You will arrive at the Liberty Savings Bank.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -445,7 +445,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Start facing a brick building with a \"TRATTORIA LUNA\" sign on the left and a \"QUICK STOP MART\" with a blue sign on the right. Move forward along the road, slightly angling towards the left side of the street, approaching the brick building. As you get closer, focus on the display window filled with hanging meats and potted plants. Continue moving toward the front entrance of the brick trattoria until you arrive directly in front of the door.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -505,7 +505,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_2",
-        "instruction": "",
+        "instruction": "Start facing the large, dark grey wall. Follow the path forward, keeping the dark wall on your left. Continue past several white, blocky buildings that appear on your right. As you proceed, the path curves slightly right, leading you past a teal-colored wall section. Keep moving forward until you reach a storefront with large windows and a sign featuring an anchor symbol. You will arrive at the bar entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -605,7 +605,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Follow the road forward, passing the grey buildings on your left. Continue straight, keeping the large, blocky structure with glass windows to your right. As you proceed down the street, stay on the road, passing a black SUV on your right. Keep moving forward towards the white building labeled \"Urban Provisions\" ahead. You will arrive at the convenience store entrance just past the white sports car parked on the left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -690,7 +690,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Start facing a white ambulance with a red cross, flanked by blocky grey buildings. Proceed forward, keeping the ambulance to your right. Continue along the road past the grey structures.\n\nAs you advance, a shop with a blue sign reading \"QUICK STOP MA...\" will appear on your right. Keep moving forward down the street. Further ahead, on the right side, you will approach a brick building with a brown awning labeled \"TRATTORIA LUNA\". You will arrive directly in front of this restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -795,7 +795,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_3",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the dark, towering buildings on your left and the blocky white structures to your right. Continue straight along the road as it curves gently. You will pass a large, dark rectangular building on your right side. Keep moving forward until you see a white storefront labeled \"URBAN PROVISIONS\" with large glass windows and visible shelves inside. This is the convenience store, and your destination is right in front of it.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -870,7 +870,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "community_centre_0",
-        "instruction": "",
+        "instruction": "Follow the road towards the red car parked in front of the brick building with large windows. As you approach, veer slightly right to align with the storefront. Continue forward, passing the red car on your right side. You will arrive at the brick building labeled \"The Junction Community Hub\" directly ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -940,7 +940,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_0",
-        "instruction": "",
+        "instruction": "Start facing the ambulance on the right, proceed straight down the road, passing the ambulance on your right. Continue forward along the street, keeping the dark, modern building on your right and the row of shops on your left. As you move forward, you will see a 'Trattoria Luna' sign on the left. Keep going straight until you reach the 'Quick Stop Mart' with the glass storefront on your left. You will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1025,7 +1025,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_3",
-        "instruction": "",
+        "instruction": "Head towards the black awning structure in the distance, passing the white blocky building on your left. As you approach the intersection, you'll see a red sports car parked further down the street. Follow the road, veering slightly right to align with the street where the car is parked. Continue down this road, passing the dark grey building on your right. As you get closer, look to your left for a retro-style diner with a red and white checkered facade labeled \"ROCKET BURGER\". You will arrive at the fast food restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1100,7 +1100,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_1",
-        "instruction": "",
+        "instruction": "Start by looking down a street with a black building featuring a green panel on the left and tall gray buildings on the right. Follow the road straight ahead. As you proceed, the view clears up, and the black building on your left reveals a detailed storefront with large glass windows and brickwork, resembling an old-fashioned shop or pub. Continue forward along this building until you are right next to its wooden facade and large display windows. You will arrive at the bank.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1160,7 +1160,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_0",
-        "instruction": "",
+        "instruction": "Turn slightly right and proceed forward along the road, passing a large building with a poster on your right. As you continue, the path curves slightly left. Keep moving straight down the road past a white store labeled \"Urban Provisions\" on your right. Further ahead, the road leads you past another storefront. Continue forward, and you will arrive at the restaurant, which appears as a wooden-fronted building labeled \"Hana Ramen House\" on the right side.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1313,7 +1313,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start at the intersection facing the storefronts, then head straight towards the light-colored building labelled \"Quick Stop Mart\" with blue lettering. Continue moving forward, crossing the street and aiming directly for the store's entrance. As you approach, you will see a restaurant called \"Hana Ramen House\" with a wooden facade to the right of the mart. Keep going straight until you arrive directly in front of the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1448,7 +1448,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_7",
-        "instruction": "",
+        "instruction": "Head right towards the large grey building and continue straight, passing the low-lying structures on your left. As you proceed, turn right slightly to follow the wide road ahead. Continue moving forward along this path, keeping the blue and grey buildings in your peripheral view. You will arrive at the restaurant_7.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1513,7 +1513,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "fast_food_3",
-        "instruction": "",
+        "instruction": "Head down the road, passing the buildings on your left with large painted signs. Keep moving straight towards the red car parked in the distance. As you approach the black building on the left and the beige building with large windows on the right, veer slightly left. Continue forward until you are directly in front of the diner with a red and white checkered facade and large \"SHAKES\" signs in the window. You will arrive at the fast food restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {

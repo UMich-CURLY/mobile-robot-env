@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "baby_stroller",
-        "instruction": "",
+        "instruction": "Head down the straight road, keeping the beige building with numerous windows on your left and the large structure marked with \"MEN\" in bold letters on your right. Continue forward as the \"MEN\" sign recedes. As you approach a dark, blocky vehicle parked ahead in the distance, prepare to adjust your path slightly right. You will arrive at a purple baby stroller standing alone on the pavement.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -69,7 +69,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "indian_feather_hat",
-        "instruction": "",
+        "instruction": "Start facing away from the tall brick tower on the left. Move forward across the large paved plaza, keeping the modern white buildings with balconies to your left. Continue straight for a long distance, heading towards the open space between the building blocks ahead. As you advance, you will see a cluster of older, beige and grey apartment buildings directly in front of you. Slightly veer right as you approach the center of the plaza. Continue forward until you reach the location of the indian feather hat, which is located on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -164,7 +164,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cargo_pallet",
-        "instruction": "",
+        "instruction": "Start near the dark building with the glass facade. Turn right and follow the road past the tall building with the brick upper section and dark lower section. Continue straight, passing the ambulance parked near the building. Keep moving forward along the road towards the open area with the statue resembling a small hut on a pole. As you approach the statue, veer slightly left. You will arrive at the yellow cargo pallet on the ground near the statue.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -372,7 +372,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "garbage_truck",
-        "instruction": "",
+        "instruction": "Start by following the road straight ahead, keeping the dark, multi-story buildings on your right and the light-colored blocky buildings on your left. As you continue, you will see a white building with a dome roof appearing in the distance on the right. Keep moving forward along the road, passing an ambulance on the right. Eventually, you will arrive at the green garbage truck parked on the left side of the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -457,7 +457,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "robot_toy",
-        "instruction": "",
+        "instruction": "Go straight down the road, keeping the large, light-colored apartment building on your left. Continue forward past the storefronts at the base of the building. As you proceed, you will pass a white car parked in the distance on the right. Eventually, turn slightly right as you approach a large, darker stone building on the right side of the street. You will arrive at the robot_toy, which is a small grey figure with red eyes, located on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -522,7 +522,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Head down the wide road, keeping the dark, multi-story buildings on your left and the massive, beige structure with large window graphics on your right. A white and red ambulance is parked near the base of the dark buildings. Continue straight ahead, passing a tall, thin metal spire monument on your left. Keep moving forward along the pavement towards the distant end of the street, where the road curves slightly. Eventually, you will arrive at the vans_shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -592,7 +592,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "hiking_bag",
-        "instruction": "",
+        "instruction": "Proceed straight down the wide, empty road. On your right, you'll pass a long, dark building with a sign that includes \"CENTRE\". Continue forward along the road, keeping the low beige wall on your left and the modern building complex on your right. As you advance, you'll see a green dumpster or container further down the road. Follow the road as it gently curves. Eventually, after passing the main building blocks, turn left towards a brown brick wall section, where you will arrive at the hiking bag.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -707,7 +707,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "white_shoes",
-        "instruction": "",
+        "instruction": "Start at the intersection with tall, tan buildings on your left. Turn right onto the wide street, keeping the modern, white blocky building in the distance slightly to your left. Move forward down the center of the road, passing the long row of beige apartment buildings on your left. Continue straight towards the distant white structure. You will arrive at the white shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -767,7 +767,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "black_bike",
-        "instruction": "",
+        "instruction": "Start by facing the open street, flanked by tall beige buildings with rows of windows. Slightly turn left and proceed down the wide, dark road, keeping the building with the large red advertisement on your right. As you move forward, you will see a white car parked in the distance. Continue straight along the road towards the large, multi-story building ahead. You will arrive at the black bike parked on the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -822,7 +822,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "single_book",
-        "instruction": "",
+        "instruction": "Start on the dark road facing the large brown and grey block structures. Proceed forward along the road, keeping the wooden planters on your right. Continue straight past the tall brown pillars. As the road curves slightly left, follow it past the distant red sports car parked near a dark black building on the left. Keep moving forward along the dark path until you reach a lone, greyish-white cube on the ground. You will arrive at the single_book.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1110,7 +1110,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "sports_jacket",
-        "instruction": "",
+        "instruction": "Go forward along the road, keeping the beige building with multiple windows and balconies on your left. As you approach the intersection where a darker, blue-grey building appears ahead, turn right. Continue down this street, passing the large white storefront on your left. As you move forward, the road curves slightly; follow it past the building with the dark arched entrance. Turn left towards the dark doorway of the beige building, and you will arrive at the sports jacket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1185,7 +1185,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bus_stop",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the tall, multi-colored mural building on your left and the white classical building on your right. Continue past the ambulance parked on the right side. As you approach the glass bus stop shelter near the white building, veer slightly right towards it. You will arrive directly at the glass bus stop structure.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1255,7 +1255,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "food_truck",
-        "instruction": "",
+        "instruction": "Head straight along the road, driving towards the large, dark building on the right side of the street. As you advance, you will notice a white ambulance with red stripes parked in the distance, centered in the lane. Continue forward past the tall buildings on your left until you arrive directly behind the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1310,7 +1310,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "van",
-        "instruction": "",
+        "instruction": "Start on the road between the tall beige buildings on the left and the dark stone structures on the right. Move forward along the street, keeping the multi-story building with dark windows straight ahead as your guide. As you approach the intersection near the white modern building slightly peeking out in the distance, veer slightly left. Continue down the dark, shadowed street. You will arrive at the front of a dark blue van parked on the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1450,7 +1450,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "steampunk_camera",
-        "instruction": "",
+        "instruction": "Start facing the tall, arched brick tower on your left. Move forward along the open paved area, keeping the brick tower to your left. As you proceed, the path curves slightly right, passing a long, low stone wall on your right. Continue straight ahead towards the open space. Turn right, moving past the end of the stone wall. You will arrive at the steampunk camera, a metallic device on a boxy stand, located in the open square.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1530,7 +1530,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cargo_pallet",
-        "instruction": "",
+        "instruction": "Follow the grey road straight ahead, keeping the large, grey, classical-style building with a dome on your right and the row of taller, blocky apartment buildings on your left. Continue forward as you approach a green truck parked near the intersection. Turn right just before the green truck, heading toward the side of the large domed building. Move forward briefly, then make another slight right turn. You will arrive at the cargo pallet.",
         "closest_goal_idx": 0,
         "goals": [
             {

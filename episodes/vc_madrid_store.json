@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "pharmacy_2",
-        "instruction": "",
+        "instruction": "Follow the road towards the \"SOPHIE'S TRATTORIA\" storefront, passing a stone building covered in green vines on your left. Continue straight ahead, keeping the large, multi-story grey building on your left. As you proceed, the road curves slightly; maintain your course along the street, passing the storefront with arched windows. Eventually, you will approach a modern white storefront labeled \"URBAN PEDAL\" on your left. This is your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -89,7 +89,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_0",
-        "instruction": "",
+        "instruction": "Head straight towards the dark, monolithic building ahead. As you approach the massive black structure, veer slightly right, aiming for the small, illuminated storefront embedded in its base. Continue forward across the open pavement, keeping the dark building on your right. You will see a small brick storefront with large glass windows and a sign reading \"APEX COMMUNITY BANK.\" Approach the double doors to arrive at the bank.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -174,7 +174,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Start in the middle of a large, empty square surrounded by tall, dark grey apartment buildings with many windows. Move forward across the open pavement towards the center of the block. As you advance, you will see a white ambulance-style vehicle parked in the distance. Continue moving straight, passing the vehicle on your right. Keep heading towards the building facade directly ahead. As you get closer, you will see a small, white shop front labeled \"QUICK STOP MART\" embedded in the dark building. Continue straight until you arrive directly in front of the Quick Stop Mart's glass windows and door.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -309,7 +309,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_0",
-        "instruction": "",
+        "instruction": "With the \"Quick Stop Mart\" sign behind you, proceed straight down the long road. Continue forward, passing the white van on your left. Keep moving straight along the street, with tall, grey buildings lining both sides. As you approach the end of the block, look for a building with large glass windows and people visible inside on your left. You will arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -464,7 +464,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bank_2",
-        "instruction": "",
+        "instruction": "From your starting position on the road, with a tall monument to your right and a distant green vehicle ahead, proceed forward. Continue moving towards the large building on the left, which has a distinct \"CAPITAL TRUST BANK\" sign. As you get closer to the structure, make a slight left turn to align with the storefront. You will arrive directly in front of the bank entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -589,7 +589,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_2",
-        "instruction": "",
+        "instruction": "Move forward along the road, passing a large brown building with illuminated windows on your right and a dark container-like structure on your left. Continue straight, passing an ambulance parked near the building's corner. As the road curves slightly left, follow it past a large billboard featuring a stylized logo on the left. Continue forward until you reach the corner of the building where the large white wall meets the storefronts; you will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -654,7 +654,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "convenience_store_1",
-        "instruction": "",
+        "instruction": "Follow the road straight towards the tall building with the large wine bottle mural. As you get closer to the intersection, slightly veer right past the building corner with the green vegetation. Continue forward down the street lined with tall, dark buildings on your right. Keep going until you see a small shop labeled \"Quick Stop Mart\" with white brick walls on your right; you will arrive at the convenience store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -827,7 +827,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bicycle_rental_0",
-        "instruction": "",
+        "instruction": "Proceed straight ahead, following the paved ground. You will pass between stone walls on your left and a building with white stone bricks on your right. As you continue forward, you will move through a narrow alleyway flanked by weathered wooden beams and stone structures. Keep going until you exit this narrow passage. You will arrive at the bicycle rental area, marked by a metallic vending machine-like structure on your right.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -932,7 +932,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_8",
-        "instruction": "",
+        "instruction": "Start facing the multi-story grey building with horizontal dark stripes. Follow the dark asphalt road, turning slightly left to keep the building on your right side. Continue moving forward along the side of this building as you approach the storefront on the corner. You will arrive at the \"Harvest & Hearth\" shop, identifiable by its wooden facade and sign above the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -992,7 +992,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_3",
-        "instruction": "",
+        "instruction": "Start by moving forward down the road, keeping the dark, multi-story buildings on your right. As you proceed, you'll see a distinct storefront emerge on the right side of the street, labeled \"Nonna's Trattoria,\" with a green and white striped awning and brick facade. Continue along the road until you are directly in front of this shop. Finally, turn right towards the entrance, and you will arrive at the restaurant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1047,7 +1047,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bar_1",
-        "instruction": "",
+        "instruction": "Start by driving straight towards the large, pale building with a dome on top. As you approach the intersection where a white car is turning, turn left onto the main road lined with tall, grey apartment buildings on your left and a modern skyscraper ahead in the distance. Continue following the road straight past the \"Trattoria Luna\" storefront. You will eventually arrive at \"The Alchemist's Flask,\" a stone building with arched windows on your right.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1132,7 +1132,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_4",
-        "instruction": "",
+        "instruction": "Start facing an ambulance parked near the intersection. Slightly turn right and follow the road, keeping the classic white building with many windows and trees on your left, and the large wooden-textured wall on your right. Continue straight down the street, passing the side of the wooden building which has a \"Trattoria Luna\" sign and flower boxes. Move forward towards the white storefront with large blue letters and a sushi logo. You will arrive at the restaurant entrance directly ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1257,7 +1257,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "restaurant_6",
-        "instruction": "",
+        "instruction": "Head straight down the road, keeping the dark, multi-story buildings on your right and the lighter, taller buildings on your left. Continue forward as you pass a small, rectangular white sign hanging on the dark building facade. Eventually, you will see a bright, white storefront labeled \"URBAN PROVISIONS\" embedded in the dark building on your right. As you approach this shop, slightly veer right. You will arrive at the wooden door of the restaurant next to the provisions store.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1327,7 +1327,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bicycle_rental_0",
-        "instruction": "",
+        "instruction": "Start in the middle of the empty street, facing a large, pale building block. Follow the road straight ahead, passing a white car parked on the left side of the intersection. Keep moving forward, keeping the massive beige building with many windows on your right and the domed building further down the street on your left. Continue straight along the road as you approach the intersection where a white van is driving. Turn left towards the corner building with large glass windows displaying bicycles. You will arrive at the bicycle rental shop.",
         "closest_goal_idx": 0,
         "goals": [
             {

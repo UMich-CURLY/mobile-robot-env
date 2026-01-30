@@ -269,7 +269,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start from the position facing the shopping cart, then turn left and head towards the blue velvet armchair with wooden legs. Walk past the blue chairs and move deeper into the room towards the grey, textured couch. You will arrive at the couch with yellow pillows.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -571,7 +571,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Start near the white tables with blue chairs, facing towards the kitchen area. Move forward across the light-colored wooden floor. As you advance, you'll pass a seating area on your left featuring blue armchairs arranged around a small white table. Continue moving straight ahead towards the modern kitchen setup in the background, which includes a stainless steel counter and display case. You will arrive at the counter.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -861,7 +861,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Start from the living area with the large grey sofa and yellow pillow on your left, and move straight ahead across the room, passing the silver pillar. Continue forward into the open dining area, keeping the long silver counter on your left. As you pass the blue chairs clustered around the white tables, make a right turn. Move past the blue chairs, heading toward the white bookshelves in the background. You will arrive at the shelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1206,7 +1206,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Navigate through the seating area until you reach the blue chairs on the left, then turn left and proceed down the aisle. As you pass the round table with blue chairs on your left, turn right to head deeper into the room. Continue straight past the blue chair facing away from you, then turn left again, keeping the large white bookshelf on your right. Follow the path slightly to the left, moving alongside the bookshelf filled with books. Slightly turn right, and continue straight ahead. Move forward past the book section until you arrive at the tall white shelf at the end.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1342,7 +1342,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "From your starting point near the white chairs, slightly turn right and proceed across the room towards the center. As you move forward, you will pass a large, grey sofa on your left and a yellow beanbag chair on the floor.\n\nContinue straight ahead, keeping the yellow beanbag to your left. Turn left as you approach the large white bookshelf filled with books. You will arrive at the basket located near the base of the bookshelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1622,7 +1622,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Go forward with the blue armchairs on your left, passing by the central white support column. Continue straight ahead through the open space. As you approach the massive white bookshelf filled with books, veer slightly right to navigate around the low white cabinet. Proceed towards the white doors and cabinets, and you will arrive near a white basket and a blue bin.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1788,7 +1788,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Start by moving past the yellow beanbag chair on your left toward the white sectional sofa. Continue forward as you pass a clear coffee table on your left, heading towards the hallway. As you move into the open area, you'll see a white counter and blue chairs in the distance. Turn right, moving past the blue chairs and tables toward a large shelving unit filled with books against the wall. Finally, approach the shelf to arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1889,7 +1889,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Head diagonally forward towards the back of the room, passing between the blue chairs and white tables on your left and the tall white bookshelf filled with books on your right. As you advance, navigate past the blue chair directly in your path. Slightly veer right to approach the long silver service counter with glass display cases, which will be directly in front of you. You will arrive at the counter.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2689,7 +2689,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Start by slightly turning left to navigate past the large white sofa and the yellow geometric pouf on the left. Continue moving forward through the open space in the library, heading towards the area with bookshelves in the background.\n\nTurn left near the seating area with blue chairs and white tables, positioning yourself to move down the aisle between the tall white cabinets and the bookshelves.\n\nMove forward down this aisle, keeping the large white cabinets on your right and the wooden floor beneath you. As you proceed, you will pass a blue basket and a white wire trash can on the floor.\n\nSlightly turn left to align yourself with the end of the aisle. Continue moving forward past the blue basket and white trash can.\n\nMove forward a bit more, approaching the white printer or copier unit located near the wall at the end of the path. You will arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2835,7 +2835,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "decoration",
-        "instruction": "",
+        "instruction": "Start from the area near the blue armchairs. Slightly turn left and move forward past the white table and chairs on your left. Turn left to face the row of blue and white chairs, then proceed straight ahead down the aisle, keeping the long white table and the row of chairs on your right. As you approach the wall with the bookshelves and the window showing the sky, slightly turn left. You will arrive near the decoration on the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2926,7 +2926,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "With the yellow bean bag chair on your left and the blue-grey ottoman in front of you, turn left. Proceed forward, keeping the bookshelf filled with books on your right. As you move, you will pass a large black bean bag chair on your left.\n\nContinue straight ahead towards the seating area. Turn right to navigate around the cluster of orange and yellow bean bag chairs. Go forward for some distance through the open lounge space, passing a large window on your left and a dining table set further back. Finally, turn right again to approach the large tan-colored, textured chair, which is the target couch.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3017,7 +3017,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Begin by moving forward from your starting position, keeping the long white table with blue and white chairs on your left. As you proceed, angle slightly right, moving away from the wall of windows and towards the center of the room where there is a seating area with large yellow beanbag chairs.\n\nTurn right to navigate around the cluster of blue velvet chairs, heading toward the white bookshelves in the distance. Continue straight past the seating area, keeping the white sofa and yellow beanbag to your left.\n\nAs you approach the bookshelves, veer slightly left to enter the space between the sofa arrangement and the shelves. Continue forward a short distance, and you will arrive at the basket located near the base of the bookshelves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3397,7 +3397,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Walk towards the dining area with blue velvet chairs and small white tables. Pass between the tables and slightly veer right, heading towards the bright, reflective silver service counter on the right side of the room. Continue moving forward alongside the curved counter until you reach the end of the bar area.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3483,7 +3483,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Head straight towards the white bookshelf filled with books, passing a grey sofa on your left. Before reaching the bookshelf, turn right. Continue straight through the living area, keeping the white cabinet and bookshelf on your left and the dining table with blue chairs on your right. Proceed forward until you see a white printer stand near the wall, where you will arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -3589,7 +3589,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Starting from the center of the room surrounded by blue armchairs, turn slightly left and proceed forward. Continue moving straight ahead, passing between the seating areas with white tables and blue chairs on either side. Keep going straight towards the far end of the room where a low glass coffee table sits in front of a grey sofa with yellow pillows. You will arrive at the shopping trolley near the coffee table.",
         "closest_goal_idx": 1,
         "goals": [
             {

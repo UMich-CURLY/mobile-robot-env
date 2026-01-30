@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cell_phone",
-        "instruction": "",
+        "instruction": "Start moving forward on the road with the white church on your left and dark blocky buildings on your right. Keep heading straight down the road, passing the ambulance and the white bench on your right. As you continue, you will pass a fountain on your left near the church. Eventually, you will need to turn left off the road towards a dark object on the ground, where you will arrive at the cell_phone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -94,7 +94,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "lilac_bike",
-        "instruction": "",
+        "instruction": "Move forward along the road, passing the dark glass building on your left. As you approach a wide gap between the buildings, turn slightly left. Continue straight, keeping the dark, blocky structures on either side of the path. You will see a small object in the distance. Turn right towards the sidewalk area. Proceed forward, and you will arrive at the purple bicycle.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -179,7 +179,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "digital_camera",
-        "instruction": "",
+        "instruction": "Start your journey and head straight along the road, moving past the massive green recycling truck on your right, marked with the recycling symbol. As you pass the truck, the road continues between dark, blocky buildings. Keep following the path forward, maintaining your course. Eventually, as you progress down the street with another green vehicle visible further ahead, you will arrive at the digital camera.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -234,7 +234,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "soccer_ball_1",
-        "instruction": "",
+        "instruction": "Head straight down the road, passing between rows of stylized, blocky buildings. On your left, you will see a continuous facade of beige and tan structures. On your right, pass by the dark blue, cubist-style buildings. Continue forward as the perspective shifts lower, bringing you closer to the ground. As you proceed, the buildings on the right will reveal more detail, including a prominent light-colored bus stop shelter. Keep moving forward along the street until you arrive at the red traffic cone positioned on the grass.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -289,7 +289,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bottle_with_red_liquid",
-        "instruction": "",
+        "instruction": "Start by heading straight across the dark grass, keeping the dark, blocky buildings to your right. Continue forward for a significant distance, passing a white rectangular object on the left side of your path. As you approach a dark, monolithic structure ahead, the path will curve slightly left. After passing the main cluster of buildings, turn sharply to the left. You will arrive at the bottle with red liquid, which is located near a dark pillar-like object.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -349,7 +349,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "baby_stroller",
-        "instruction": "",
+        "instruction": "Start facing the white ice cream truck with a yellow kayak on top. Follow the road, veering slightly left past the truck. Continue straight down the paved path, keeping the large dark building on your right and the grey apartment blocks on your left. As you proceed, you will see a white ambulance with a red cross parked on the left side of the path. Pass the ambulance and continue forward. When the path splits near a grassy area, veer left towards the open space between the buildings. You will arrive at the baby stroller.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -439,7 +439,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "offroad_truck",
-        "instruction": "",
+        "instruction": "Turn left from the dark wall and proceed straight past the blocky buildings with painted facades. After passing a few of these mural-covered structures, veer slightly right, continuing along the open ground. As you approach a large, plain blue wall on your left, turn left and follow alongside it. Keep going straight, maintaining the blue wall to your left, until you spot a dark-colored offroad truck parked ahead. You will arrive at the offroad truck.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -514,7 +514,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "vans_shoes",
-        "instruction": "",
+        "instruction": "Start by following the road straight ahead, keeping the green truck on your left. As you proceed, you will pass a row of dark, blocky buildings on your right. Continue forward as the buildings on the right transition into a series of facades depicting brown brick structures with windows. Keep moving along the road until you reach the end of this block. You will arrive at the vans_shoes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -574,7 +574,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "indian_feather_hat",
-        "instruction": "",
+        "instruction": "Start by facing the dark wall, then turn right and follow the road. Pass the dark, looming block structures on your right and the light-colored building with a grid pattern on your left. Continue straight down the street, keeping the white building with blue window accents on your left. Move forward along the road past the tall, narrow buildings until you arrive at the Indian feather hat lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -772,7 +772,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "beach_ball_1",
-        "instruction": "",
+        "instruction": "Start near the white blocky buildings and move forward along the road, keeping the tall dark structure to your left. Continue straight as the road curves slightly right, passing a row of beige and white buildings on your left and a darker brick building on your right. Keep moving forward down the street. As you proceed past the dark brick building, you will spot a red and white beach ball on the ground ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -852,7 +852,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_phone_1",
-        "instruction": "",
+        "instruction": "Start with the dark wall on your left and the beige wall ahead, then turn right to align with the paved road stretching into the distance. Follow this road straight ahead, keeping the large, blurry gray structure on your left and the row of indistinct blocky buildings on your right. Continue forward for a long stretch as the road curves gently. Eventually, you will pass a green dumpster-like object on the right. Keep moving along the road, observing the shadow cast on the ground, until you arrive at the office_phone_1.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -937,7 +937,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bathroom_mirror",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the green vehicle in the distance as a reference point. As you proceed, you will pass a block of brown brick buildings on your right. Continue forward until you reach the cream-colored storefront with the \"QUICK STOP MART\" sign and large glass windows. Approach the store entrance, then turn slightly right. You will arrive at the round bathroom mirror on a stand.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1002,7 +1002,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "baby_stroller",
-        "instruction": "",
+        "instruction": "Begin by moving forward from the open plaza, slightly angling left past the graffiti-covered wall and the bicycle on your left. Continue along the paved path, keeping the large brick building on your left. As you proceed, the path curves gently leftward, guiding you past a red mushroom-like object floating near the building. Follow the red curb line as it bends left, leading you towards a grassy area between blocky grey structures. Turn left off the main path onto the grass, heading towards the buildings. You will arrive at the purple and white baby stroller.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1092,7 +1092,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench_with_back",
-        "instruction": "",
+        "instruction": "Go straight along the road, keeping the row of large, blocky buildings with abstract murals to your right. Continue forward, passing the dark storefronts on your left. As you proceed, you will pass a red and white umbrella in the distance on the left. Keep moving straight ahead until you reach a wooden park bench with a backrest on the left side of the path.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1167,7 +1167,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ladder",
-        "instruction": "",
+        "instruction": "Start by slightly veering left to align with the road, positioning yourself between the tall, shadowed concrete structures on the left and the beige, windowed building facades on the right. Continue straight down this urban corridor, following the road surface. Keep moving forward past the looming dark blocks on your left. Eventually, the lighting changes and you will arrive at the ladder.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1312,7 +1312,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cell_phone",
-        "instruction": "",
+        "instruction": "Head straight along the road, keeping the dark, multi-story buildings on your right. As you proceed, you will see a white ambulance with a red stripe parked ahead in the distance. Continue forward, passing a green patch of grass on your left and a wooden bench on your right. Keep moving towards the ambulance. As you get closer, you will see a dark, shadowy figure on the ground to your left. Continue past this figure, and you will arrive at the cell phone near the white ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1598,7 +1598,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "baby_stroller",
-        "instruction": "",
+        "instruction": "Start by slightly turning left and following the road alongside a long row of dark, blocky buildings on your right. Continue straight down the street, keeping the dark facades and the occasional lighter-colored wall sections to your side. As you proceed, you will see a pinkish-purple baby stroller sitting on the sidewalk near the building wall ahead. Turn right towards the sidewalk to arrive at the baby stroller.",
         "closest_goal_idx": 0,
         "goals": [
             {

@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench_with_back",
-        "instruction": "",
+        "instruction": "Navigate forward along the path, passing between large, blocky, greyish-green buildings on your left and blue structures on your right. As you emerge into a more open area, veer slightly left, keeping the tall, weathered grey buildings on your left side. Continue straight ahead across the paved surface, approaching a series of monolithic stone blocks. As you get closer to the blocks, turn slightly right. You will arrive at a wooden park bench situated near the blocks.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -109,7 +109,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "nursing_bottle",
-        "instruction": "",
+        "instruction": "Start facing the white ambulance with red stripes parked on the left. Turn slightly left and follow the road past the ambulance. Continue straight down the street, passing a storefront with a brown facade and red lanterns on your right. Keep moving forward along the road, observing the tall, dark, futuristic-looking buildings lining the street. As you proceed, keep the large green and grey building structures to your left. Continue straight ahead until you arrive at the nursing bottle lying on the ground near the wall.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -189,7 +189,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dinner_jacket",
-        "instruction": "",
+        "instruction": "Start near the white shop, moving forward on the road towards the intersection with the white ambulance parked on the right. Turn right at the ambulance, following the street flanked by dark, boxy buildings. Continue straight down the road as it curves slightly. Look for a white dinner jacket hovering near the corner of a large dark building on your right; you will arrive at the dinner jacket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -264,7 +264,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "taxi",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the large, blocky grey buildings on your left and the parked emergency vehicle on your right. Continue moving forward along the road as the scenery shifts from the grey structures to a long black building with white storefronts on the right. Eventually, angle slightly towards the white storefront labeled \"URBAN PROVISIONS.\" You will arrive at the white taxi parked near the entrance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -334,7 +334,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "wooden_table",
-        "instruction": "",
+        "instruction": "Start by following the road past the dark, blocky buildings on your left, with an ambulance visible ahead in the distance. Continue straight along the street, passing a traffic light on the right. As you move forward, the road leads you past large concrete structures and storefronts with reflective windows. Keep going straight towards the end of the street where the buildings darken. Slightly bear left as you approach the final dark area, and you will arrive at the wooden table situated in the shadows.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -419,7 +419,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "strereo_camera_sensor",
-        "instruction": "",
+        "instruction": "Start facing a large, glossy black cubic structure. Follow the road, keeping the black cube to your right as you move forward. Pass an intersection with traffic lights. As you proceed, the view opens up to a wide concrete area with a gray wall and a building featuring metallic vents on your left. Continue straight along this path until you reach the stereo_camera_sensor near the metallic vented building.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -489,7 +489,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "sun_hat",
-        "instruction": "",
+        "instruction": "Start your journey facing a row of textured, blocky buildings under a blue sky. Turn slightly left and proceed along the light grey road, keeping the large, cube-like structures on your left. As the road curves, follow it forward, passing a dark, metallic pillar standing alone on the right. Continue straight ahead towards the distant horizon. You will see a dark wooden table ahead. Approach it, and you will arrive at the sun hat resting on the ground nearby.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -554,7 +554,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dog",
-        "instruction": "",
+        "instruction": "Start on the road and move forward, keeping the large, blocky grey building with a dark entryway on your left and the brown and white building on your right. Continue straight down the road as an ambulance comes into view further ahead. Keep moving towards the white ambulance with red stripes parked on the right side of the street. As you get closer, you will see a white and black dog standing near the left curb, opposite the ambulance. You will arrive at the dog.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -634,7 +634,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "ladder",
-        "instruction": "",
+        "instruction": "Start moving along the wide road towards a large, modern grey building with visible glass windows ahead. Keep straight, passing a red sports car and a white vehicle parked on the street. As you continue, maintain your course toward the grey building with the large mural or textured facade. Stay on the road, passing a dark building on your left. Eventually, you will see a yellow pole or pipe lying horizontally on the ground near the grey building's entrance. You will arrive at the ladder near this structure.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -724,7 +724,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench",
-        "instruction": "",
+        "instruction": "Start facing a tall blue building with a construction vehicle graphic on it. Turn slightly left and follow the grey road, keeping a large, beige, windowed building on your right. Continue straight as you pass between large cubic structures; the one on your left has a house-like graphic, and the one on your right is dark grey. Proceed down the open road, keeping the dark blocky structures to your left. As the path curves slightly right, head towards the distant, complex grey building structure. Finally, turn slightly right to approach and arrive under the wooden slat park bench.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -849,7 +849,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "single_book",
-        "instruction": "",
+        "instruction": "Start by facing the black and grey building facade, then turn right and follow the road. Pass the white and red ambulance parked on the right side of the street. Continue straight down the road, keeping the dark buildings on your right. As you approach a dark blue, shadowy area near the corner of a building, make a slight right turn. You will arrive at the single_book on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -924,7 +924,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "bus",
-        "instruction": "",
+        "instruction": "Go straight along the road, keeping the white ambulance with red stripes on your left. Continue forward past the vehicle's rear wheel until you are directly underneath the ambulance's chassis. You will arrive at the underside of the ambulance.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -979,7 +979,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "taxi",
-        "instruction": "",
+        "instruction": "Start by moving forward through the paved area between the large, blocky grey buildings. Keep the mossy, dark stone wall on your immediate right. Continue straight as the path opens up, passing a large grey industrial structure on your left. As you proceed, you will see a white sedan with a red stripe and a red cross symbol on the door parked ahead. Approach the vehicle to arrive at the taxi.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1054,7 +1054,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "rice_bowl",
-        "instruction": "",
+        "instruction": "With the cube-shaped structures to your right, proceed along the paved road. Continue straight, keeping the buildings with dark, recessed windows on your right and the lighter, textured walls to your left. As you advance, the path remains clear between the rows of blocky architecture. Eventually, you will arrive at the rice_bowl.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1119,7 +1119,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "soccer_ball_1",
-        "instruction": "",
+        "instruction": "Start slightly right and proceed down the street, keeping the green truck on your left. Continue straight, passing a red stop sign and a green dumpster on your left. As you move forward, you will see a tall, modern white building on your right and an ambulance parked further down. Turn slightly right towards the curb near the ambulance. You will arrive at the soccer ball lying on the ground.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1179,7 +1179,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "office_chair",
-        "instruction": "",
+        "instruction": "Start on the wide asphalt road, slightly angling left past the cuboid building with green foliage textures on your right. Continue straight down the street, keeping the grassy shoulder and a large, dark grey, cube-like building on your left. Ahead, you will see a white ambulance parked near the intersection. Proceed forward along the road, passing the ambulance. Continue straight until you arrive at the rolling office chair sitting in the middle of the road.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1239,7 +1239,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "park_bench",
-        "instruction": "",
+        "instruction": "Follow the road as it curves gently to the left, keeping the tall, gray rectangular monoliths on your right. Continue forward, passing a dark, cylindrical structure in the distance. As you proceed along the path, you will approach a series of blocky structures lining the left side of the road. Eventually, you will arrive at a gray park bench situated near the curb on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1309,7 +1309,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "strereo_camera_sensor",
-        "instruction": "",
+        "instruction": "Move straight, passing between the large concrete blocks towards the street intersection ahead where a white car is driving. Turn left at the intersection, following the road past the large black cubic building on your right. Continue straight down the road, keeping the dark wall on your left and the open area with a moon in the sky ahead. Proceed forward along the road, and you will arrive at the target location near the grey building structure on the left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1384,7 +1384,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "single_book",
-        "instruction": "",
+        "instruction": "Start from the street corner near the streetlight, facing a row of shops with storefront awnings. Move forward along the road, keeping the dark, shadowed buildings on your left. As you proceed, you'll pass white ambulances parked further down the street on the right. Continue straight down the road, passing the blocky grey buildings. Slightly veer left to stay on the path. You will arrive at the single_book near the end of the street.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1449,7 +1449,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "dragon_ball",
-        "instruction": "",
+        "instruction": "Start by slightly turning left and moving forward on the road, passing the dark blue wall on your left. As you continue straight, you'll see a white car in the distance. The road stretches between large, blocky urban buildings, with a greyish-purple multi-story building appearing on the right. Keep moving forward down the street, maintaining your course. Eventually, you will arrive at the dragon_ball.",
         "closest_goal_idx": 0,
         "goals": [
             {

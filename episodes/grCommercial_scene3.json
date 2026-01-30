@@ -65,7 +65,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "mirror",
-        "instruction": "",
+        "instruction": "Start from your current position in the hallway with white cabinets on your left. Head straight towards the open doorway leading into the reception area. You will see a blue, curved reception desk ahead with people standing nearby. Continue forward into that room, and you will arrive at the tray.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -146,7 +146,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "desk",
-        "instruction": "",
+        "instruction": "Start from a position facing a long wooden bookshelf on the right, filled with books. To your left, there is a tall green topiary plant next to a white chair. Move forward along the carpeted floor past the plant until you reach the desk area ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -305,7 +305,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Start by facing the dark grey, rounded seating area; slightly turn left and advance past the grey armchair on your left. Continue straight through the open office space, moving towards the large windows and passing the desk area with the laptop on your left. As you approach the large wooden column and the bookshelf, turn right. Move forward, keeping the bookshelf to your left and the grey ottoman to your right, until you arrive at the shopping trolley near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -446,7 +446,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "I'm going into space......",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -517,7 +517,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "sofa_chair",
-        "instruction": "",
+        "instruction": "Start by facing the yellow sofa chair on your left, then turn slightly to the right to move away from it. Continue straight ahead, keeping the large wooden shelving unit filled with books and vases on your right. Once you are past the shelves, turn left to follow the path along the floor-to-ceiling windows. Move forward for a while down this corridor, keeping the windows on your right and the office area with desks on your right. Eventually, you will arrive near a large, textured white sofa chair.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -741,7 +741,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Start near the desk with the laptop on the left, facing towards the large windows and bookshelves. Turn slightly right and move forward across the gray carpet, passing the wooden bookshelves filled with dark books. Continue straight, keeping the orange beanbag chair to your right. You will arrive at the tray on the low shelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -857,7 +857,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Move forward from your starting position, passing the tall white kiosks on your left. As you proceed through the open area, you will see a large wooden table leg on your right and a collection of colorful beanbag chairs\u2014orange, yellow, and green\u2014further back. Slightly turn right to navigate around the table. Continue moving towards the seating area until you reach the dark wooden chair with a curved backrest situated near a desk.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -943,7 +943,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Start by positioning yourself between the person wearing checkered pants on the left and the person in the white lab coat on the right. Move forward, passing the yellow robot dog on the floor, and head towards the blue waiting area chairs in the background where a man in a dark jacket is walking. You will arrive at the waiting area.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1197,7 +1197,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start from under the long wooden table. Slightly turn left, navigating past the table leg, and move forward towards the open area. Then, turn right near the large windows, heading towards the center of the room with the yellow beanbag chairs. Slightly turn right again, passing the yellow and brown beanbag chairs, and move forward until you arrive at the wooden table near the bookshelves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1308,7 +1308,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "lamp",
-        "instruction": "",
+        "instruction": "Starting from behind the glass partition, turn slightly right and walk past the row of blue waiting chairs on your left. Continue forward across the hallway until you reach the rolling metal shelf near the wall.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1502,7 +1502,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "From your starting position in the hallway near the man in the blue jeans, turn slightly right and proceed down the corridor, passing a woman in a white lab coat standing near a wall poster. Continue forward, moving past a person wearing a black blazer and plaid pants standing near a clear plastic chair. Keep going straight towards the reception counter area, and you will arrive near a white partition or wall.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1766,7 +1766,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "desk",
-        "instruction": "",
+        "instruction": "Start with the beige storage shelf on your left and a black office chair near a window on your right. Slightly turn right and advance towards the window overlooking the city skyline. Turn left to follow the large glass window, passing behind a person in a white lab coat standing by a desk. Continue moving forward alongside the window until you reach the desk area. Turn left again to face the desk setup. You will arrive at the desk.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1945,7 +1945,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "lamp",
-        "instruction": "",
+        "instruction": "Start standing near a person in a white lab coat. Turn left to face down the hallway, keeping the coat rack with white coats on your right. Move straight ahead down the corridor, passing the wooden-paneled wall on your right and the glass-fronted room on your left. Continue forward past the entrance where people are standing. You will arrive at the destination near the counter on the right.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2064,7 +2064,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Move forward along the carpeted floor, passing between the black beanbag chairs on your left and the wooden desk with a white surface on your right. Continue straight ahead towards the large white couch located near the windows until you arrive at the area near the couch and the wooden desk.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2203,7 +2203,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "With the yellow bean bag chair on your left and the blue-grey ottoman in front of you, turn left. Proceed forward, keeping the bookshelf filled with books on your right. As you move, you will pass a large black bean bag chair on your left.\n\nContinue straight ahead towards the seating area. Turn right to navigate around the cluster of orange and yellow bean bag chairs. Go forward for some distance through the open lounge space, passing a large window on your left and a dining table set further back. Finally, turn right again to approach the large tan-colored, textured bean bag chair, which is the target couch.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2359,7 +2359,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "sofa_chair",
-        "instruction": "",
+        "instruction": "Face slightly left and head straight, passing the white chair and round table with the small green topiary on your left. Continue forward through the open space. Turn left when you are near the large yellow beanbag chair and the textured gray seating block. Move past the yellow beanbag chair, keeping it on your left. You will arrive at the sofa_chair.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2613,7 +2613,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Start from the middle of the room, facing the windowed wall and the bookshelves. Turn slightly left and head towards the large orange beanbag chair and the yellow cushion behind it. When you get closer to the seating area, turn right to navigate around the orange beanbag. Continue moving forward past the beanbag, keeping it on your left side. You will arrive at the tray situated on the low shelf near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2749,7 +2749,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Starting from the position next to the refrigerator stocked with green and red bottles, slightly turn left and move forward past the black and yellow beanbag chairs. As you approach the large wooden bookshelves filled with books, turn right. Continue moving forward, keeping the bookshelves on your left and the black beanbags on your right, until you arrive directly in front of the bookshelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2830,7 +2830,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "From your starting position near the window overlooking the city, turn slightly right and move across the grey carpeted floor, passing the white chair and the tall bookshelf filled with books on your right. Continue forward until you approach the large orange beanbag chair and the yellow seating area. Turn right and move past the orange beanbag chair towards the desk setup near the window. You will arrive at the shopping trolley located near the desk.",
         "closest_goal_idx": 0,
         "goals": [
             {
