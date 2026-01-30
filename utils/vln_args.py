@@ -12,7 +12,6 @@ def add_vln_args(parser):
     arg_group.add_argument("--disable_camera", type=bool, default=False, help="Disable camera.")
     arg_group.add_argument("--task_type", type=str, default="objnav", help="Type of task to simulate.", choices=["objnav", "vln", "locnav"])
     arg_group.add_argument("--num_envs", type=int, default=1, help="How many robots to simulate.")
-    arg_group.add_argument("--timeout", type=float, default=100.0, help="Timeout for the episode in simulation time (typically indoor 100s, outdoor 300s).")
     arg_group = parser.add_argument_group("Debug Options")
     arg_group.add_argument("--disable_termination", type=bool, default=False, help="Disable episodetermination.")
     arg_group = parser.add_argument_group("Task Generation")

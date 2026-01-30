@@ -97,9 +97,6 @@ class VLNEnvWrapper:
             "back_n_forth_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
         }
         self.terminations_cfg = VLNTerminationsCfg()
-        print(f"original max_time:", self.terminations_cfg.time_out.params["max_time"])
-        print(f"new max time:", self.args.timeout)
-        self.terminations_cfg.time_out.params["max_time"] = self.args.timeout
         self.termination_manager = TerminationManager(self.terminations_cfg, self)
 
     @property
