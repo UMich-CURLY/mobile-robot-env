@@ -1066,5 +1066,350 @@
         ],
         "ceiling_height": 1.0,
         "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "coffee_cup",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/coffee_cup_37",
+                "type": "object",
+                "location": [
+                    218.43115288575666,
+                    117.42347936444375,
+                    7.683437908753561
+                ],
+                "radius": 0.060000013560056686,
+                "path_length": 49.54277961875425,
+                "reference_path": [
+                    [
+                        211.18927001953125,
+                        159.4827880859375,
+                        7.813282012939453
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.68211364746094,
+                        159.44110107421875,
+                        7.61328125
+                    ],
+                    [
+                        205.88211059570312,
+                        132.8411102294922,
+                        7.61328125
+                    ],
+                    [
+                        218.43115234375,
+                        117.42347717285156,
+                        7.683437824249268
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.18927618575142,
+            159.482789618062,
+            7.813282012939454
+        ],
+        "start_rotation": [
+            0.9500819965100396,
+            0.0,
+            0.0,
+            0.3120003203644144
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "steampunk_camera",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/steampunk_camera_38",
+                "type": "object",
+                "location": [
+                    223.60068101484228,
+                    150.27506424998194,
+                    7.431403330577602
+                ],
+                "radius": 0.073967522845237,
+                "path_length": 22.08769212060409,
+                "reference_path": [
+                    [
+                        205.81158447265625,
+                        162.96742248535156,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        223.60067749023438,
+                        150.2750701904297,
+                        7.431403160095215
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            205.8115860733305,
+            162.9674166424195,
+            7.813282012939453
+        ],
+        "start_rotation": [
+            0.9805914738721532,
+            0.0,
+            0.0,
+            -0.19606213650074888
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 17,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "briefcase",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/briefcase_65",
+                "type": "object",
+                "location": [
+                    234.8330175296015,
+                    186.68881011869456,
+                    7.7023397750724225
+                ],
+                "radius": 0.22910236834093212,
+                "path_length": 37.4335425313199,
+                "reference_path": [
+                    [
+                        210.51425170898438,
+                        158.91249084472656,
+                        7.932900905609131
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        215.2821044921875,
+                        162.64111328125,
+                        7.61328125
+                    ],
+                    [
+                        234.88211059570312,
+                        186.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        235.05137634277344,
+                        186.57962036132812,
+                        7.61328125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.51424912247188,
+            158.91248627566284,
+            7.9329007774842015
+        ],
+        "start_rotation": [
+            0.9880256656154582,
+            0.0,
+            0.0,
+            0.1542896110732371
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 18,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "robot_toy",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/robot_toy_59",
+                "type": "object",
+                "location": [
+                    227.9135801656688,
+                    171.74618892114887,
+                    7.651697229726471
+                ],
+                "radius": 0.1999999969901105,
+                "path_length": 21.381047702853568,
+                "reference_path": [
+                    [
+                        211.12261962890625,
+                        159.6304473876953,
+                        7.813282012939453
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        227.88211059570312,
+                        171.24111938476562,
+                        7.513280868530273
+                    ],
+                    [
+                        228.2821044921875,
+                        171.64111328125,
+                        7.513280868530273
+                    ],
+                    [
+                        228.2137451171875,
+                        171.8462371826172,
+                        7.513280868530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.12261406762596,
+            159.63044821798746,
+            7.813282012939453
+        ],
+        "start_rotation": [
+            0.8422569484521818,
+            0.0,
+            0.0,
+            0.5390762773337544
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 19,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_chair",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_chair_21",
+                "type": "object",
+                "location": [
+                    243.7914893056638,
+                    149.5142550225708,
+                    8.09781354623486
+                ],
+                "radius": 0.5999999675133689,
+                "path_length": 41.98125664288872,
+                "reference_path": [
+                    [
+                        204.8818817138672,
+                        161.69375610351562,
+                        7.813282012939453
+                    ],
+                    [
+                        205.48211669921875,
+                        161.8411102294922,
+                        7.813282012939453
+                    ],
+                    [
+                        205.68211364746094,
+                        161.8411102294922,
+                        8.11328125
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        226.48211669921875,
+                        154.8411102294922,
+                        7.413280487060547
+                    ],
+                    [
+                        244.2821044921875,
+                        150.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        244.38671875,
+                        149.61346435546875,
+                        7.61328125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            204.8818849668189,
+            161.69375413594153,
+            7.813282012939454
+        ],
+        "start_rotation": [
+            0.9957397641145312,
+            0.0,
+            0.0,
+            0.09220803739987976
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
     }
 ]
