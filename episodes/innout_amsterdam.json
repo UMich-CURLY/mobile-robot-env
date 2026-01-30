@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "cafe_2",
-        "instruction": "",
+        "instruction": "Head down the street, keeping the dark building facade with the bicycle display window on your immediate left. Continue straight along the sidewalk, passing the dark grey storefronts. As you proceed, the view of the ornate wooden shopfront with blue paneling will become clear on your left. Keep moving forward alongside this wooden facade until you reach the end of the sequence, where you will arrive at the cafe.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -66,6 +66,1003 @@
             0.0,
             0.0,
             0.46476583609872035
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 1,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "camera_bag",
+        "instruction": "Start slightly angled right and move forward across the grey paved plaza. To your left is a large, dilapidated building with many arched windows and a beige facade. Further ahead on the right, you will see a white and grey armored truck parked near a dark, ruined structure. Continue straight on the pavement, keeping the large beige building on your left. As you proceed, a black object on the ground will come into view. You will arrive at the camera bag.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/camera_bag_39",
+                "type": "object",
+                "location": [
+                    224.13440549465705,
+                    149.47475457982472,
+                    7.547933818909016
+                ],
+                "radius": 0.3196361696892467,
+                "path_length": 16.920200808709183,
+                "reference_path": [
+                    [
+                        211.7426300048828,
+                        161.1511688232422,
+                        7.813282012939453
+                    ],
+                    [
+                        223.839111328125,
+                        149.32711791992188,
+                        7.413280487060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.74263385185503,
+            161.15116639109917,
+            7.813282012939451
+        ],
+        "start_rotation": [
+            0.9783093079259234,
+            0.0,
+            0.0,
+            -0.20714945818297634
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 2,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "books",
+        "instruction": "Walk past the wooden shelf filled with grey figurines and framed art on the white wall. Exit the room and move onto the paved stone street outdoors. Follow the road straight ahead, keeping the tall, weathered brown buildings on your right and the dark blue storefronts on your left. Continue down the street, passing a green recycling truck parked further ahead on the right. Keep moving forward along the stone path until you reach a small stack of books lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/books_41",
+                "type": "object",
+                "location": [
+                    242.84387235140775,
+                    193.77154588485303,
+                    7.606411163105847
+                ],
+                "radius": 0.3649364744453294,
+                "path_length": 48.50053261269007,
+                "reference_path": [
+                    [
+                        209.91893005371094,
+                        158.88092041015625,
+                        7.993134498596191
+                    ],
+                    [
+                        210.2821044921875,
+                        159.04110717773438,
+                        8.11328125
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        236.2821044921875,
+                        185.64111328125,
+                        7.513280868530273
+                    ],
+                    [
+                        242.8438720703125,
+                        193.77154541015625,
+                        7.606410980224609
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            209.91892823317076,
+            158.88091344057995,
+            7.993134419384345
+        ],
+        "start_rotation": [
+            0.9874991683094982,
+            0.0,
+            0.0,
+            0.1576242132035848
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Start by turning slightly left and moving forward past the wooden shelves filled with grey rabbit and horse toys. Continue forward, navigating through the room, then turn right to exit the indoor space. You will suddenly find yourself outdoors on a paved street. Proceed straight ahead down the wide, empty road, keeping the row of tall, grey buildings to your right and the more ornate, historic-looking buildings to your left. Continue a long distance down the center of the street until you arrive at the wooden park bench located in the middle of the open area.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_34",
+                "type": "object",
+                "location": [
+                    198.87532333780194,
+                    124.48629160563316,
+                    8.084726038743383
+                ],
+                "radius": 1.12687802600189,
+                "path_length": 46.73082135606721,
+                "reference_path": [
+                    [
+                        205.0972442626953,
+                        156.33958435058594,
+                        7.837897777557373
+                    ],
+                    [
+                        205.68211364746094,
+                        157.64111328125,
+                        7.813282012939453
+                    ],
+                    [
+                        206.88211059570312,
+                        158.64111328125,
+                        7.813282012939453
+                    ],
+                    [
+                        210.2821044921875,
+                        159.04110717773438,
+                        8.11328125
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.68211364746094,
+                        159.44110107421875,
+                        7.61328125
+                    ],
+                    [
+                        198.76119995117188,
+                        125.05692291259766,
+                        7.61328125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            205.09724398814632,
+            156.3395817910339,
+            7.837897614506522
+        ],
+        "start_rotation": [
+            0.8926342038227489,
+            0.0,
+            0.0,
+            0.4507817411627572
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_1",
+        "instruction": "Exit the room with the wooden shelves filled with animal figurines and head outside toward the street. Once outside, turn right and follow the sidewalk, keeping the large stone building with the arched windows on your left. Continue straight along the pavement past the white food truck with the yellow sign. As you proceed, you will pass a building with reflective glass windows on your right. Keep moving forward along the building's facade until you arrive at the ATM located near the entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_1_1",
+                "type": "object",
+                "location": [
+                    190.3050706629798,
+                    131.80753777613913,
+                    9.61692611790495
+                ],
+                "radius": 3.297601308640054,
+                "path_length": 45.25138362876031,
+                "reference_path": [
+                    [
+                        209.91014099121094,
+                        165.51516723632812,
+                        7.943097114562988
+                    ],
+                    [
+                        208.68211364746094,
+                        163.24111938476562,
+                        7.813282012939453
+                    ],
+                    [
+                        209.48211669921875,
+                        162.24111938476562,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.68211364746094,
+                        159.44110107421875,
+                        7.61328125
+                    ],
+                    [
+                        210.88211059570312,
+                        156.8411102294922,
+                        7.61328125
+                    ],
+                    [
+                        204.88211059570312,
+                        148.8411102294922,
+                        7.61328125
+                    ],
+                    [
+                        197.88211059570312,
+                        139.64111328125,
+                        7.61328125
+                    ],
+                    [
+                        195.2821044921875,
+                        136.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        193.08212280273438,
+                        133.4411163330078,
+                        7.61328125
+                    ],
+                    [
+                        191.08212280273438,
+                        132.24110412597656,
+                        7.713281631469727
+                    ],
+                    [
+                        190.30506896972656,
+                        131.8075408935547,
+                        9.616926193237305
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            209.91014234834392,
+            165.51517382188362,
+            7.943097002344635
+        ],
+        "start_rotation": [
+            0.6581701724405593,
+            0.0,
+            0.0,
+            -0.7528691945547809
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "seagull",
+        "instruction": "Exit the room with wooden shelves full of toys and head towards the street. Once outside on the pavement, turn right, keeping the stone building with arched windows on your left. Move straight down the road, passing a white vehicle on your left and a bus stop shelter. Continue forward along the street until you reach a wooden bench on the right side of the path, where you will arrive at the seagull.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/seagull_33",
+                "type": "object",
+                "location": [
+                    199.73480457911649,
+                    124.4873444899103,
+                    7.550289276410467
+                ],
+                "radius": 0.7896752648711356,
+                "path_length": 46.57022093075668,
+                "reference_path": [
+                    [
+                        204.72740173339844,
+                        161.97874450683594,
+                        7.813282012939453
+                    ],
+                    [
+                        205.68211364746094,
+                        161.8411102294922,
+                        8.11328125
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.68211364746094,
+                        159.44110107421875,
+                        7.61328125
+                    ],
+                    [
+                        200.2821044921875,
+                        124.24110412597656,
+                        7.61328125
+                    ],
+                    [
+                        200.08212280273438,
+                        124.04110717773438,
+                        7.61328125
+                    ],
+                    [
+                        199.83396911621094,
+                        123.9914779663086,
+                        7.61328125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            204.72740153579178,
+            161.97874220477587,
+            7.813282012939453
+        ],
+        "start_rotation": [
+            0.9999997759690418,
+            0.0,
+            0.0,
+            -0.000669374234802754
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "coffee_cup",
+        "instruction": "Move forward along the street, keeping the large, grey stone building with numerous windows on your left. As you proceed, you will see a white van with red stripes parked on the left side of the street, near a bus stop shelter. Continue past the van and the shelter. As you approach a large, textured grey wall or building facade directly ahead, turn left. Continue moving forward in this new direction. You will arrive at the coffee cup, which is located on a bench under a wooden slatted structure.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/coffee_cup_37",
+                "type": "object",
+                "location": [
+                    218.43115288575666,
+                    117.42347936444375,
+                    7.683437908753561
+                ],
+                "radius": 0.060000013560056686,
+                "path_length": 47.967483835965176,
+                "reference_path": [
+                    [
+                        213.806884765625,
+                        159.78768920898438,
+                        7.771779537200928
+                    ],
+                    [
+                        205.88211059570312,
+                        132.8411102294922,
+                        7.61328125
+                    ],
+                    [
+                        218.43115234375,
+                        117.42347717285156,
+                        7.683437824249268
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            213.80689082681354,
+            159.7876830253539,
+            7.771779319964561
+        ],
+        "start_rotation": [
+            0.5144164611764326,
+            0.0,
+            0.0,
+            -0.8575404972773681
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "camera_bag",
+        "instruction": "Start in a room featuring a large, tiered wooden shelf filled with grey animal figures. Turn left towards the open doorway leading outside. Move through the doorway into the outdoor plaza, where you will see a large, ruined beige building facade ahead and a white armored vehicle to the right. Turn slightly right, heading across the plaza pavement towards the vehicle. Continue forward past the vehicle's position. You will arrive at the camera_bag.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/camera_bag_39",
+                "type": "object",
+                "location": [
+                    224.13440549465705,
+                    149.47475457982472,
+                    7.547933818909016
+                ],
+                "radius": 0.3196361696892467,
+                "path_length": 22.8527348874884,
+                "reference_path": [
+                    [
+                        205.69178771972656,
+                        162.5368194580078,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        223.839111328125,
+                        149.32711791992188,
+                        7.413280487060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            205.6917908643588,
+            162.53681438317054,
+            7.813282012939454
+        ],
+        "start_rotation": [
+            0.9607614292605233,
+            0.0,
+            0.0,
+            -0.27737605528465586
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "single_book",
+        "instruction": "Exit the room with the paintings and turn right onto the paved street, following it forward. Continue down the road, passing a blue van parked on the right and a green truck further ahead on the left. Keep moving straight along the street, which is lined with tall, tan buildings. As you proceed, you will pass a green recycling truck parked on the right side. Continue forward until you reach a small red book standing upright on the ground near the center of the path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/single_book_42",
+                "type": "object",
+                "location": [
+                    244.49453360726136,
+                    192.27621042026055,
+                    7.599764795724511
+                ],
+                "radius": 0.19180965527158378,
+                "path_length": 48.83974876900756,
+                "reference_path": [
+                    [
+                        210.7763671875,
+                        159.3015594482422,
+                        7.825071334838867
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        227.88211059570312,
+                        172.24111938476562,
+                        7.513280868530273
+                    ],
+                    [
+                        242.2821044921875,
+                        184.04110717773438,
+                        7.413280487060547
+                    ],
+                    [
+                        244.49453735351562,
+                        192.27621459960938,
+                        7.599764823913574
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.7763600051853,
+            159.301557688896,
+            7.825071261175996
+        ],
+        "start_rotation": [
+            0.914643183842836,
+            0.0,
+            0.0,
+            0.4042621009318583
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "paper_towel",
+        "instruction": "Starting in the playroom with yellow cat posters and blue dog chairs, move forward past the shelves filled with toys on your left. Exit the room through the doorway ahead, transitioning into an outdoor city square. Follow the paved road, keeping the large, beige stone building on your left. Continue forward past the white and red ambulance parked on the right and the green van further down on the left. Proceed towards the blue van parked near the building's entrance. You will arrive at the paper towel roll lying on the ground near the trash bin.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/paper_towel_14",
+                "type": "object",
+                "location": [
+                    233.28576472106016,
+                    163.92750241993667,
+                    7.534991081635724
+                ],
+                "radius": 0.2662688388730743,
+                "path_length": 27.765231387692417,
+                "reference_path": [
+                    [
+                        206.4440155029297,
+                        158.2069549560547,
+                        7.813282012939453
+                    ],
+                    [
+                        206.88211059570312,
+                        158.64111328125,
+                        7.813282012939453
+                    ],
+                    [
+                        210.2821044921875,
+                        159.04110717773438,
+                        8.11328125
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        233.2857666015625,
+                        163.92750549316406,
+                        7.534991264343262
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            206.44401159931957,
+            158.2069571949759,
+            7.813282012939453
+        ],
+        "start_rotation": [
+            0.8543232059647188,
+            0.0,
+            0.0,
+            0.5197421088868639
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "Start by slightly turning right towards the large, dilapidated beige building with many arched windows that spans the horizon. Move forward across the paved plaza, keeping the white armored vehicle with red accents on your left and the dark, blocky building on your right. Continue straight ahead, following the open path towards the center of the large building. As you proceed, a black object will appear on the ground in front of you. You will arrive at the vans_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_7",
+                "type": "object",
+                "location": [
+                    231.13639105004603,
+                    142.67846819494872,
+                    7.530326551056589
+                ],
+                "radius": 0.31033921731552994,
+                "path_length": 26.778840366752057,
+                "reference_path": [
+                    [
+                        211.4910888671875,
+                        161.0872344970703,
+                        7.813282012939453
+                    ],
+                    [
+                        224.2821044921875,
+                        150.04110717773438,
+                        7.413280487060547
+                    ],
+                    [
+                        224.68211364746094,
+                        149.64111328125,
+                        7.413280487060547
+                    ],
+                    [
+                        230.74710083007812,
+                        142.58114624023438,
+                        7.313282012939453
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.49109453274554,
+            161.0872355992052,
+            7.813282012939453
+        ],
+        "start_rotation": [
+            0.9823110898721693,
+            0.0,
+            0.0,
+            -0.18725630220142378
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start facing a wooden shelf filled with grey horse and bunny figurines. Turn right to exit the room.\n\nHead straight down the paved road, keeping the beige stone buildings with arched windows on your right. As you move forward, pass a blue van parked on the right side of the street. Continue down the road towards the green vehicle in the distance. You will arrive at the green garbage truck with a recycling symbol on its side.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_0",
+                "type": "object",
+                "location": [
+                    250.4954237529546,
+                    183.4031181396149,
+                    8.942104518590781
+                ],
+                "radius": 3.821606975321785,
+                "path_length": 47.48800538364905,
+                "reference_path": [
+                    [
+                        210.63742065429688,
+                        158.951416015625,
+                        7.890781879425049
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        227.88211059570312,
+                        172.24111938476562,
+                        7.513280868530273
+                    ],
+                    [
+                        249.88211059570312,
+                        185.04110717773438,
+                        7.513280868530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.63741807597805,
+            158.95141627062748,
+            7.890781833784874
+        ],
+        "start_rotation": [
+            0.8998189376672366,
+            0.0,
+            0.0,
+            0.4362635435323534
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "robot_toy",
+        "instruction": "Starting near the wooden shelf filled with grey animal figurines, move forward through the doorway and out of the room. Once outside, proceed straight down the paved road, keeping the tall, beige, dilapidated buildings on your right. Continue along the road, passing a green truck parked further down on the left and a blue van parked on the right. As you approach the area between the green truck and the blue van, make a slight left turn. You will arrive at the robot toy on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/robot_toy_59",
+                "type": "object",
+                "location": [
+                    227.9135801656688,
+                    171.74618892114887,
+                    7.651697229726471
+                ],
+                "radius": 0.1999999969901105,
+                "path_length": 23.040586494712255,
+                "reference_path": [
+                    [
+                        210.10287475585938,
+                        158.29830932617188,
+                        7.902429103851318
+                    ],
+                    [
+                        211.68211364746094,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        227.88211059570312,
+                        171.24111938476562,
+                        7.513280868530273
+                    ],
+                    [
+                        228.2821044921875,
+                        171.64111328125,
+                        7.513280868530273
+                    ],
+                    [
+                        228.2137451171875,
+                        171.8462371826172,
+                        7.513280868530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.1028767146243,
+            158.29831225733034,
+            7.902428973866872
+        ],
+        "start_rotation": [
+            0.9009308359117195,
+            0.0,
+            0.0,
+            0.43396270450743846
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "camera_bag",
+        "instruction": "Start near the wooden shelf filled with grey animal figurines, with a glimpse of a large, dilapidated building outside. Exit the room and head towards the open square, keeping the white ambulance-like vehicle on your left. Move straight across the paved ground, aiming towards the center of the large, multi-story building with many arched windows ahead. As you approach the middle of the square, you will arrive at the black camera bag lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/camera_bag_39",
+                "type": "object",
+                "location": [
+                    224.13440549465705,
+                    149.47475457982472,
+                    7.547933818909016
+                ],
+                "radius": 0.3196361696892467,
+                "path_length": 18.60400980616347,
+                "reference_path": [
+                    [
+                        209.6329345703125,
+                        160.93368530273438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        223.839111328125,
+                        149.32711791992188,
+                        7.413280487060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            209.6329352825881,
+            160.93368579306602,
+            7.813282012939452
+        ],
+        "start_rotation": [
+            0.9998063514592082,
+            0.0,
+            0.0,
+            0.01967891210983023
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene1"
+    },
+    {
+        "scene_id": "innout_amsterdam",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "magician_hat",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/magician_hat_8",
+                "type": "object",
+                "location": [
+                    241.9005439506973,
+                    184.5830225478855,
+                    7.5830724501668385
+                ],
+                "radius": 0.30250686063666876,
+                "path_length": 39.83479754958988,
+                "reference_path": [
+                    [
+                        211.581298828125,
+                        160.48341369628906,
+                        7.940299987792969
+                    ],
+                    [
+                        212.88211059570312,
+                        160.24111938476562,
+                        7.813282012939453
+                    ],
+                    [
+                        213.2821044921875,
+                        160.24111938476562,
+                        7.61328125
+                    ],
+                    [
+                        227.88211059570312,
+                        172.24111938476562,
+                        7.513280868530273
+                    ],
+                    [
+                        242.2821044921875,
+                        184.04110717773438,
+                        7.413280487060547
+                    ],
+                    [
+                        242.2821044921875,
+                        184.58302307128906,
+                        7.413280487060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/magician_hat_31",
+                "type": "object",
+                "location": [
+                    188.52098179269404,
+                    126.53899572057738,
+                    7.730617258689122
+                ],
+                "radius": 0.3322257646005937,
+                "path_length": 42.47932297063043,
+                "reference_path": [
+                    [
+                        211.581298828125,
+                        160.48341369628906,
+                        7.940299987792969
+                    ],
+                    [
+                        212.48211669921875,
+                        160.04110717773438,
+                        7.813282012939453
+                    ],
+                    [
+                        212.68211364746094,
+                        159.44110107421875,
+                        7.61328125
+                    ],
+                    [
+                        210.88211059570312,
+                        156.8411102294922,
+                        7.61328125
+                    ],
+                    [
+                        188.86233520507812,
+                        126.3114242553711,
+                        7.61328125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.58129423903583,
+            160.4834084091776,
+            7.9402997612283786
+        ],
+        "start_rotation": [
+            0.9997058253666322,
+            0.0,
+            0.0,
+            0.02425412806143944
         ],
         "ceiling_height": 1.0,
         "interior_scene": "scene1"

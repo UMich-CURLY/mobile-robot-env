@@ -1,0 +1,1603 @@
+[
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 0,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Walk past the marble bar counter and the green velvet chairs on your left. Continue straight through the modern living area, passing the red table and white sofas. Exit the building through the large open doorway onto the street. Follow the road, moving past the parked white vehicle on your left. You will arrive at the green garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_0",
+                "type": "object",
+                "location": [
+                    37.85648483918907,
+                    -268.83648797842676,
+                    6.314577618466345
+                ],
+                "radius": 3.620410647329251,
+                "path_length": 20.888416331547372,
+                "reference_path": [
+                    [
+                        20.483919143676758,
+                        -265.62908935546875,
+                        5.400005340576172
+                    ],
+                    [
+                        20.1614990234375,
+                        -266.6521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        20.06149673461914,
+                        -267.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.461498260498047,
+                        -268.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        37.856483459472656,
+                        -271.4521484375,
+                        5.300006866455078
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            20.483918877337047,
+            -265.6290995881818,
+            5.400005340576172
+        ],
+        "start_rotation": [
+            0.6885524370918819,
+            0.0,
+            0.0,
+            -0.7251865562562713
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 1,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sun_hat",
+        "instruction": "Head out from the interior, passing the large red counter on your left. Once outside on the pavement, slightly turn right and proceed forward down the street. Follow the road, keeping the blue building with scaffolding on your left and the tall beige building on your right. Continue straight ahead towards the white ambulance parked further down the street. As you approach the ambulance, look on the ground; you will arrive at the brown sun hat.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sun_hat_70",
+                "type": "object",
+                "location": [
+                    30.398701090726934,
+                    -234.35885705682628,
+                    4.9917601498031985
+                ],
+                "radius": 0.4421433604681617,
+                "path_length": 38.30492517209401,
+                "reference_path": [
+                    [
+                        28.46674346923828,
+                        -272.5275573730469,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.6614990234375,
+                        -251.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        30.561500549316406,
+                        -234.95213317871094,
+                        4.900005340576172
+                    ],
+                    [
+                        30.561500549316406,
+                        -234.35885620117188,
+                        4.900005340576172
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            28.466742552599023,
+            -272.52756618879295,
+            5.400005340576173
+        ],
+        "start_rotation": [
+            0.5978287723960269,
+            0.0,
+            0.0,
+            0.8016238263022497
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 2,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinner_jacket",
+        "instruction": "Exit the room with the green recycling truck parked outside. Move forward along the road, keeping the blue building with scaffolding to your left and the white van with the yellow surfboard on top to your left. Continue down the street past the ambulance and the white trailer parked on the left. As you approach the corner of the tan building on your right, you will arrive at the dinner jacket hanging near the wall.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinner_jacket_50",
+                "type": "object",
+                "location": [
+                    31.865478231252517,
+                    -242.71227288291925,
+                    5.397876592446337
+                ],
+                "radius": 0.4926661805906267,
+                "path_length": 32.0442649459417,
+                "reference_path": [
+                    [
+                        26.37441635131836,
+                        -272.9792785644531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.6614990234375,
+                        -251.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        31.1614990234375,
+                        -242.75213623046875,
+                        5.000005722045898
+                    ],
+                    [
+                        31.533416748046875,
+                        -242.38021850585938,
+                        5.000005722045898
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            26.3744165736661,
+            -272.9792813580694,
+            5.400005340576171
+        ],
+        "start_rotation": [
+            0.9396011534378684,
+            0.0,
+            0.0,
+            0.3422713433202191
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "black_bike",
+        "instruction": "Start from the marble kitchen counter and head towards the hallway on the left. Exit the building and you will see a green recycling truck parked outside. Continue straight along the road, passing a white ambulance on your left. As you proceed down the street between the tall, dark buildings, keep going until you spot a black bike parked on the sidewalk to your right. You will arrive at the black bike.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_bike_46",
+                "type": "object",
+                "location": [
+                    64.27147535985983,
+                    -279.9109203629792,
+                    5.84748290249351
+                ],
+                "radius": 0.7765367884402394,
+                "path_length": 48.00583995668861,
+                "reference_path": [
+                    [
+                        19.818157196044922,
+                        -266.60882568359375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.06149673461914,
+                        -267.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.461498260498047,
+                        -268.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        29.761497497558594,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        52.6614990234375,
+                        -278.3521423339844,
+                        5.200006484985352
+                    ],
+                    [
+                        63.86149597167969,
+                        -278.8521423339844,
+                        5.300006866455078
+                    ],
+                    [
+                        64.59587860107422,
+                        -279.5865173339844,
+                        5.300006866455078
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_bike_72",
+                "type": "object",
+                "location": [
+                    48.303415612533826,
+                    -283.00582842375763,
+                    6.138257421150712
+                ],
+                "radius": 0.9178173272970298,
+                "path_length": 33.8125832520731,
+                "reference_path": [
+                    [
+                        19.818157196044922,
+                        -266.60882568359375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.06149673461914,
+                        -267.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.461498260498047,
+                        -268.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        29.761497497558594,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        30.361495971679688,
+                        -271.4521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        46.46150207519531,
+                        -281.25213623046875,
+                        5.700006484985352
+                    ],
+                    [
+                        47.36149597167969,
+                        -282.5521240234375,
+                        5.600006103515625
+                    ],
+                    [
+                        47.99477767944336,
+                        -283.27587890625,
+                        5.690474510192871
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            19.818157920833517,
+            -266.6088371690055,
+            5.400005340576172
+        ],
+        "start_rotation": [
+            0.5877508139342271,
+            0.0,
+            0.0,
+            -0.8090420141869354
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance",
+        "instruction": "Exit the room with the green wall and clock, entering the street. Turn left, following the road past the green recycling truck. Continue straight down the street, passing a white camper van with a yellow canoe on top on your left. Keep moving forward along the road, heading towards the buildings ahead. You will arrive at the white ambulance with red stripes parked on the right side of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_2",
+                "type": "object",
+                "location": [
+                    22.54261698178793,
+                    -232.20264499223572,
+                    5.867034507274525
+                ],
+                "radius": 4.370104365584282,
+                "path_length": 43.843446857818186,
+                "reference_path": [
+                    [
+                        25.015953063964844,
+                        -272.46673583984375,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        25.56149673461914,
+                        -256.9521484375,
+                        5.000005722045898
+                    ],
+                    [
+                        20.261497497558594,
+                        -235.15213012695312,
+                        4.600006103515625
+                    ],
+                    [
+                        20.804048538208008,
+                        -231.95428466796875,
+                        4.600006103515625
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.01595311990343,
+            -272.46674119196086,
+            5.400005340576171
+        ],
+        "start_rotation": [
+            0.9751157535947484,
+            0.0,
+            0.0,
+            0.22169633982397138
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "Exit the room with the red table and enter the street with the ambulance. Continue straight along the road, keeping the blue and grey buildings on your left. Pass the white van with the large banana on top. Proceed down the street until you reach the red and white bowl on the ground near a blue capsule-shaped object. You will arrive at the rice_bowl.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_78",
+                "type": "object",
+                "location": [
+                    22.41366438827041,
+                    -240.164675908944,
+                    4.905326127021725
+                ],
+                "radius": 0.0825068708631278,
+                "path_length": 38.09904154345687,
+                "reference_path": [
+                    [
+                        25.19234848022461,
+                        -276.4679260253906,
+                        5.691749572753906
+                    ],
+                    [
+                        25.1614990234375,
+                        -276.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        22.413663864135742,
+                        -240.1646728515625,
+                        4.905325889587402
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.192348974606695,
+            -276.4679164206241,
+            5.691749346360313
+        ],
+        "start_rotation": [
+            0.7806063597621657,
+            0.0,
+            0.0,
+            0.6250229684570482
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "recycling_bin",
+        "instruction": "Move forward along the road, keeping the tall, weathered grey building on your right. As you proceed, you will see a white food truck with a large yellow banana on its roof parked ahead. Pass the food truck, keeping it to your right. Continue straight towards the dark blue building facade in the distance. As you approach a grey cylindrical object on the ground near the building's base, you will arrive at the recycling bin.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_42",
+                "type": "object",
+                "location": [
+                    -2.5983302063120393,
+                    -250.0169933681908,
+                    5.3959035836607505
+                ],
+                "radius": 0.5500000105366536,
+                "path_length": 40.1914807473866,
+                "reference_path": [
+                    [
+                        30.157426834106445,
+                        -271.0328369140625,
+                        5.337724685668945
+                    ],
+                    [
+                        17.461498260498047,
+                        -258.6521301269531,
+                        5.200006484985352
+                    ],
+                    [
+                        12.961498260498047,
+                        -255.45213317871094,
+                        5.100006103515625
+                    ],
+                    [
+                        -2.8385009765625,
+                        -250.85214233398438,
+                        4.900005340576172
+                    ],
+                    [
+                        -3.149441719055176,
+                        -250.4893798828125,
+                        4.900005340576172
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            30.157426336439624,
+            -271.0328308045301,
+            5.337724626750091
+        ],
+        "start_rotation": [
+            0.24424132335393314,
+            0.0,
+            0.0,
+            0.969714481672992
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "umbrella",
+        "instruction": "Start indoors near a marble countertop and barstool. Turn right and move forward into a large room with a red console table and a blue exit door. Go through the exit onto the street, where you will see a green truck on your right. Turn left onto the pavement, keeping the large grey building on your right. Move forward along the building's facade. As you proceed, you will see a white food truck with a giant yellow banana on top. Continue straight ahead, and you will arrive at a red and white umbrella near the food truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_56",
+                "type": "object",
+                "location": [
+                    12.813022868932697,
+                    -255.83201101174944,
+                    5.592139672828651
+                ],
+                "radius": 0.6552692001439251,
+                "path_length": 29.08580836742365,
+                "reference_path": [
+                    [
+                        25.440034866333008,
+                        -276.6521301269531,
+                        5.800006866455078
+                    ],
+                    [
+                        25.361499786376953,
+                        -276.6521301269531,
+                        5.800006866455078
+                    ],
+                    [
+                        25.261497497558594,
+                        -276.5521240234375,
+                        5.800006866455078
+                    ],
+                    [
+                        25.1614990234375,
+                        -276.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        26.261497497558594,
+                        -267.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        23.861499786376953,
+                        -264.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        17.461498260498047,
+                        -258.6521301269531,
+                        5.200006484985352
+                    ],
+                    [
+                        13.072686195373535,
+                        -255.91856384277344,
+                        5.100006103515625
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.440033917520022,
+            -276.6521301269531,
+            5.800006866455078
+        ],
+        "start_rotation": [
+            -0.1308575561604809,
+            0.0,
+            0.0,
+            0.9914011801464161
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "Head slightly left past the white camper van with a yellow surfboard on top. Follow the road straight ahead, keeping the tall, dark tower in the distance as a guide. Continue moving forward down the street, passing the ambulance parked on the left side near the blue building. As you approach the ambulance, look for a small cat and a red bowl on the ground. You will arrive at the rice bowl.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_78",
+                "type": "object",
+                "location": [
+                    22.41366438827041,
+                    -240.164675908944,
+                    4.905326127021725
+                ],
+                "radius": 0.0825068708631278,
+                "path_length": 25.988670488443386,
+                "reference_path": [
+                    [
+                        25.94696807861328,
+                        -265.844482421875,
+                        5.369411945343018
+                    ],
+                    [
+                        25.56149673461914,
+                        -256.9521484375,
+                        5.000005722045898
+                    ],
+                    [
+                        22.413663864135742,
+                        -240.1646728515625,
+                        4.905325889587402
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.946967595139675,
+            -265.8444740837164,
+            5.369412067957896
+        ],
+        "start_rotation": [
+            0.8275979294133109,
+            0.0,
+            0.0,
+            0.5613213582528288
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Starting from inside a room with a painting on the wall, exit through the doorway and turn right onto the street. You will see a large green recycling truck parked on your left. Follow the road straight ahead, passing a white armored truck on your left. Continue down the street, keeping the tall buildings on your right and the dilapidated structures on your left. As you proceed, a grey offroad truck will come into view ahead. Move towards it until you arrive at the offroad truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_7",
+                "type": "object",
+                "location": [
+                    65.6171226557629,
+                    -291.5071932213271,
+                    5.780317407209765
+                ],
+                "radius": 2.388959797900757,
+                "path_length": 42.762328784955876,
+                "reference_path": [
+                    [
+                        26.497608184814453,
+                        -271.37030029296875,
+                        5.400005340576172
+                    ],
+                    [
+                        29.461502075195312,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        29.761497497558594,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        30.361495971679688,
+                        -271.4521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        65.0615005493164,
+                        -288.9521484375,
+                        5.200006484985352
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            26.497607928993236,
+            -271.37028504253607,
+            5.400005340576173
+        ],
+        "start_rotation": [
+            0.9996452463566641,
+            0.0,
+            0.0,
+            -0.026634215522975176
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "Start inside the room, passing under the red archway toward the open doorway. Exit onto the street where you will see a green truck parked on the right. Turn left immediately after exiting the building to follow the road.\n\nContinue straight down the street, keeping the white ambulance with red stripes on your left and the tall, distressed buildings on your right. As you move forward, navigate slightly to the right past the ambulance. You will arrive at the side of the bus.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_8",
+                "type": "object",
+                "location": [
+                    35.62231148983827,
+                    -224.03810045465008,
+                    6.041969114449699
+                ],
+                "radius": 3.146785518616568,
+                "path_length": 49.62315750310723,
+                "reference_path": [
+                    [
+                        23.27609634399414,
+                        -270.7406005859375,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        27.761497497558594,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.6614990234375,
+                        -251.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        35.57337188720703,
+                        -227.56202697753906,
+                        4.900005340576172
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            23.276097259653397,
+            -270.74061140023207,
+            5.400005340576172
+        ],
+        "start_rotation": [
+            0.9957312048594461,
+            0.0,
+            0.0,
+            -0.0923004207420304
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "food_truck",
+        "instruction": "Head towards the white ambulance parked in the distance, passing the green truck on your right. As you approach the ambulance, make a turn to the left, following the road alongside the large, weathered grey building. Continue down this street. Once you pass the ambulance, turn sharply to the right. You will arrive at the white food_truck with a large yellow banana on its roof.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/food_truck_3",
+                "type": "object",
+                "location": [
+                    23.60787582875178,
+                    -256.85229355097636,
+                    6.358248628394481
+                ],
+                "radius": 2.33856901272647,
+                "path_length": 18.144587992642798,
+                "reference_path": [
+                    [
+                        28.085384368896484,
+                        -271.18353271484375,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        21.261497497558594,
+                        -256.5521240234375,
+                        5.200006484985352
+                    ],
+                    [
+                        21.261497497558594,
+                        -256.25213623046875,
+                        5.200006484985352
+                    ],
+                    [
+                        21.361499786376953,
+                        -255.85214233398438,
+                        5.200006484985352
+                    ],
+                    [
+                        21.861499786376953,
+                        -255.45213317871094,
+                        5.200006484985352
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/food_truck_6",
+                "type": "object",
+                "location": [
+                    7.159646932270874,
+                    -249.96034952693918,
+                    6.0744800419349225
+                ],
+                "radius": 2.371537783858045,
+                "path_length": 32.80671549421435,
+                "reference_path": [
+                    [
+                        28.085384368896484,
+                        -271.18353271484375,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        26.261497497558594,
+                        -267.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        9.1614990234375,
+                        -248.55213928222656,
+                        4.800006866455078
+                    ],
+                    [
+                        7.761497497558594,
+                        -247.45213317871094,
+                        4.700006484985352
+                    ],
+                    [
+                        7.159646987915039,
+                        -247.45213317871094,
+                        4.701608657836914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            28.08538509971533,
+            -271.18353283030416,
+            5.400005340576171
+        ],
+        "start_rotation": [
+            0.8198881138169178,
+            0.0,
+            0.0,
+            0.572523781883108
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_van",
+        "instruction": "Start with the green recycling truck on your left. Move forward along the road, keeping the truck on your left side. Continue straight past the truck, moving deeper into the street lined with tall, dilapidated beige buildings. As you proceed, a white police van with red markings will appear ahead in the middle of the road. Approach the rear of the van, slightly angling towards its right side. You will arrive at the police van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_van_1",
+                "type": "object",
+                "location": [
+                    52.137634893919085,
+                    -275.5685710300594,
+                    6.079343630227996
+                ],
+                "radius": 2.8759492360287986,
+                "path_length": 28.261544137098383,
+                "reference_path": [
+                    [
+                        26.174867630004883,
+                        -272.8763427734375,
+                        5.400005340576172
+                    ],
+                    [
+                        29.461502075195312,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        29.761497497558594,
+                        -271.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        39.36149597167969,
+                        -272.5521240234375,
+                        5.200006484985352
+                    ],
+                    [
+                        51.1614990234375,
+                        -272.6521301269531,
+                        5.300006866455078
+                    ],
+                    [
+                        52.561500549316406,
+                        -273.75213623046875,
+                        5.300006866455078
+                    ],
+                    [
+                        53.057769775390625,
+                        -274.6484069824219,
+                        5.300006866455078
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            26.174867505722602,
+            -272.87634995838624,
+            5.400005340576173
+        ],
+        "start_rotation": [
+            0.9115338229311557,
+            0.0,
+            0.0,
+            0.4112251082467029
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "shoe_box",
+        "instruction": "Exit the room and turn left onto the street. Follow the road, passing a large green recycling truck on your left. Continue straight down the street. You will pass a white food truck with a large yellow banana on top parked on the right side of the road. Keep moving forward along the street. Eventually, you will approach a small black shoe box sitting on the ground near a red mailbox on a post. You will arrive at the shoe_box.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/shoe_box_76",
+                "type": "object",
+                "location": [
+                    14.923016242020623,
+                    -235.16309202839568,
+                    4.851800942224454
+                ],
+                "radius": 0.46678361323865936,
+                "path_length": 44.18418933447697,
+                "reference_path": [
+                    [
+                        22.664146423339844,
+                        -269.95465087890625,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        27.761497497558594,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        21.261497497558594,
+                        -256.5521240234375,
+                        5.200006484985352
+                    ],
+                    [
+                        14.71831226348877,
+                        -235.6748504638672,
+                        4.700006484985352
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            22.664146179819443,
+            -269.95465823963724,
+            5.400005340576173
+        ],
+        "start_rotation": [
+            0.9978413194420229,
+            0.0,
+            0.0,
+            0.0656711596837064
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Start from the living room, facing a window revealing a city view. Move forward, passing the white couch and the woman reading on your right. Exit the room through the large open doorway, which leads outside onto a city street. Continue straight down the street, keeping the tall, dilapidated beige building on your right and the blue building on your left. As you proceed, you will see a parked ambulance further down the street on the left. Continue forward until you reach the purple baby stroller sitting on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_40",
+                "type": "object",
+                "location": [
+                    29.95315410556038,
+                    -251.1516647298979,
+                    5.617457026042654
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 27.021059509108298,
+                "reference_path": [
+                    [
+                        24.55354118347168,
+                        -276.99334716796875,
+                        5.580918788909912
+                    ],
+                    [
+                        24.56149673461914,
+                        -276.75213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        30.460514068603516,
+                        -251.35459899902344,
+                        5.100006103515625
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            24.55354171347381,
+            -276.99334972861897,
+            5.580918914828268
+        ],
+        "start_rotation": [
+            0.7528231218814492,
+            0.0,
+            0.0,
+            0.6582228704327043
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinner_jacket",
+        "instruction": "Leave the apartment and step onto the street where you will see a green truck on your right. Follow the road, moving straight ahead past a white ambulance parked on the left side of the street. Continue down the street, keeping the tall building with the dark tower in the distance directly ahead of you. As you approach a white bench on the left, you will arrive at the white dinner jacket near the corner of a building on your right.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinner_jacket_50",
+                "type": "object",
+                "location": [
+                    31.865478231252517,
+                    -242.71227288291925,
+                    5.397876592446337
+                ],
+                "radius": 0.4926661805906267,
+                "path_length": 33.78890098806234,
+                "reference_path": [
+                    [
+                        26.540531158447266,
+                        -275.1693115234375,
+                        5.400005340576172
+                    ],
+                    [
+                        26.861495971679688,
+                        -274.4521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.6614990234375,
+                        -251.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        31.1614990234375,
+                        -242.75213623046875,
+                        5.000005722045898
+                    ],
+                    [
+                        31.533416748046875,
+                        -242.38021850585938,
+                        5.000005722045898
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            26.54053129634274,
+            -275.16931898306126,
+            5.400005340576171
+        ],
+        "start_rotation": [
+            0.8375650476509073,
+            0.0,
+            0.0,
+            0.5463376162717823
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus_stop",
+        "instruction": "With the white van topped by a large yellow banana on your left, move forward along the street. Pass the ambulance on your right. Continue straight down the road, keeping the buildings on your left. As you proceed, you'll see a glass bus stop shelter with a red and white umbrella inside on your left. Approach the shelter and then turn left to face the building entrance just past it. You will arrive at the bus stop.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_stop_12",
+                "type": "object",
+                "location": [
+                    18.0231390492301,
+                    -226.37213243927533,
+                    6.163768703894835
+                ],
+                "radius": 1.8770507909303191,
+                "path_length": 49.22432580466419,
+                "reference_path": [
+                    [
+                        26.444181442260742,
+                        -267.95147705078125,
+                        5.400005340576172
+                    ],
+                    [
+                        25.56149673461914,
+                        -256.9521484375,
+                        5.000005722045898
+                    ],
+                    [
+                        14.1614990234375,
+                        -235.45213317871094,
+                        4.700006484985352
+                    ],
+                    [
+                        14.1614990234375,
+                        -234.75213623046875,
+                        4.700006484985352
+                    ],
+                    [
+                        19.961498260498047,
+                        -227.55213928222656,
+                        4.700006484985352
+                    ],
+                    [
+                        20.261497497558594,
+                        -226.25213623046875,
+                        4.700006484985352
+                    ],
+                    [
+                        20.06149673461914,
+                        -225.45213317871094,
+                        4.700006484985352
+                    ],
+                    [
+                        19.56149673461914,
+                        -225.45213317871094,
+                        4.700006484985352
+                    ],
+                    [
+                        18.451231002807617,
+                        -225.99754333496094,
+                        4.797518253326416
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            26.4441806049948,
+            -267.9514769428322,
+            5.400005340576172
+        ],
+        "start_rotation": [
+            0.5304355393850427,
+            0.0,
+            0.0,
+            0.8477252730438669
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 17,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sun_hat",
+        "instruction": "Exit the room past the red table and continue straight out the door onto the street. Follow the road forward, passing a white ambulance parked on the left side of the street. Continue down the road towards the white trailer parked further ahead. As you approach the trailer, you will arrive at the sun hat lying on the ground near a white bench on the left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sun_hat_70",
+                "type": "object",
+                "location": [
+                    30.398701090726934,
+                    -234.35885705682628,
+                    4.9917601498031985
+                ],
+                "radius": 0.4421433604681617,
+                "path_length": 42.264662656385504,
+                "reference_path": [
+                    [
+                        25.7169246673584,
+                        -275.7102966308594,
+                        5.400005340576172
+                    ],
+                    [
+                        25.861499786376953,
+                        -275.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        28.6614990234375,
+                        -251.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        30.561500549316406,
+                        -234.95213317871094,
+                        4.900005340576172
+                    ],
+                    [
+                        30.561500549316406,
+                        -234.35885620117188,
+                        4.900005340576172
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.716925555804078,
+            -275.7102909010049,
+            5.400005340576173
+        ],
+        "start_rotation": [
+            0.8427888787202349,
+            0.0,
+            0.0,
+            0.5382442808850729
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 18,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "recycling_bin",
+        "instruction": "Walk past the stool on your right, then turn right out of the room towards the street. At the street, turn left and follow the road straight ahead, passing the green truck on your right. Continue forward, passing a food truck with a banana on top on your right. Keep moving straight along the sidewalk until you reach a white recycling bin near a brown bottle on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_42",
+                "type": "object",
+                "location": [
+                    -2.5983302063120393,
+                    -250.0169933681908,
+                    5.3959035836607505
+                ],
+                "radius": 0.5500000105366536,
+                "path_length": 46.52704066837297,
+                "reference_path": [
+                    [
+                        25.59505271911621,
+                        -276.6521301269531,
+                        5.800006866455078
+                    ],
+                    [
+                        25.361499786376953,
+                        -276.6521301269531,
+                        5.800006866455078
+                    ],
+                    [
+                        25.261497497558594,
+                        -276.5521240234375,
+                        5.800006866455078
+                    ],
+                    [
+                        25.1614990234375,
+                        -276.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        26.261497497558594,
+                        -267.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        23.861499786376953,
+                        -264.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        17.461498260498047,
+                        -258.6521301269531,
+                        5.200006484985352
+                    ],
+                    [
+                        12.961498260498047,
+                        -255.45213317871094,
+                        5.100006103515625
+                    ],
+                    [
+                        -2.8385009765625,
+                        -250.85214233398438,
+                        4.900005340576172
+                    ],
+                    [
+                        -3.149441719055176,
+                        -250.4893798828125,
+                        4.900005340576172
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            25.59505361139638,
+            -276.6521301269532,
+            5.800006866455078
+        ],
+        "start_rotation": [
+            -0.1341122150059879,
+            0.0,
+            0.0,
+            0.9909661516854084
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    },
+    {
+        "scene_id": "innout_paris",
+        "scene_type": "innout",
+        "episode_id": 19,
+        "path": "vc_plus/PARIS/PARIS_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sand_bucket",
+        "instruction": "Start from the living room, near the large beige chair, with the green-tiled wall on your left. Move straight past the bar area with its long marble counter and green stools on your right. Keep going forward through the large sliding glass doors, exiting the room.\n\nOnce outside, you'll be on a paved area with city buildings in the background. Move towards the white food truck topped with a giant hot dog on the left. Continue past the food truck. You will arrive at a red sand bucket and a yellow ball lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sand_bucket_62",
+                "type": "object",
+                "location": [
+                    7.349894029120955,
+                    -244.57841794219024,
+                    4.93617996250908
+                ],
+                "radius": 0.22323077016329762,
+                "path_length": 44.79991113311584,
+                "reference_path": [
+                    [
+                        19.373676300048828,
+                        -266.7347106933594,
+                        5.400005340576172
+                    ],
+                    [
+                        20.06149673461914,
+                        -267.9521484375,
+                        5.400005340576172
+                    ],
+                    [
+                        20.461498260498047,
+                        -268.3521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        27.361495971679688,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        27.761497497558594,
+                        -271.1521301269531,
+                        5.400005340576172
+                    ],
+                    [
+                        28.461502075195312,
+                        -270.8521423339844,
+                        5.400005340576172
+                    ],
+                    [
+                        28.761497497558594,
+                        -270.25213623046875,
+                        5.400005340576172
+                    ],
+                    [
+                        8.6614990234375,
+                        -245.25213623046875,
+                        4.900005340576172
+                    ],
+                    [
+                        7.349894046783447,
+                        -244.5784149169922,
+                        4.936180114746094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            19.37367582641606,
+            -266.7347209655711,
+            5.400005340576172
+        ],
+        "start_rotation": [
+            0.9459154746327048,
+            0.0,
+            0.0,
+            -0.324413185383062
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene26"
+    }
+]

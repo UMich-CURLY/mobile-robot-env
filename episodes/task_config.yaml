@@ -29,11 +29,11 @@ navmesh:
     verts_per_poly: 6.0
   vc:
     agent_height: 0.6000000238418579
-    agent_max_climb: 0.3499999940395355
+    agent_max_climb: 0.30000001192092896
     agent_max_slope: 45.0
-    agent_radius: 0.2
+    agent_radius: 0.25
     cell_height: 0.1
-    cell_size: 0.20000000298023224
+    cell_size: 0.10000000149011612
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
     edge_max_error: 1.5
@@ -299,17 +299,9 @@ scene:
     align_ground: true
     collider: true
     episodes:
-      amsterdam:
-        ceiling_height: 1.0
-        episode_number: 25
-        interior_scene: scene1
-        navmesh_exclude: []
-        navmesh_preset: vc
-        path: vc_plus/AMSTERDAM/AMSTERDAM_innout.usd
-        rule_pattern: innout
       austin:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene2
         navmesh_exclude: []
         navmesh_preset: vc
@@ -317,7 +309,7 @@ scene:
         rule_pattern: innout
       barcelona:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene6
         navmesh_exclude: []
         navmesh_preset: vc
@@ -325,7 +317,7 @@ scene:
         rule_pattern: innout
       berlin:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene8
         navmesh_exclude: []
         navmesh_preset: vc
@@ -333,7 +325,7 @@ scene:
         rule_pattern: innout
       boston:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene9
         navmesh_exclude: []
         navmesh_preset: vc
@@ -341,7 +333,7 @@ scene:
         rule_pattern: innout
       ny:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene13
         navmesh_exclude: []
         navmesh_preset: vc
@@ -349,11 +341,19 @@ scene:
         rule_pattern: innout
       paris:
         ceiling_height: 1.0
-        episode_number: 25
+        episode_number: 20
         interior_scene: scene26
         navmesh_exclude: []
         navmesh_preset: vc
         path: vc_plus/PARIS/PARIS_innout.usd
+        rule_pattern: innout
+      amsterdam:
+        ceiling_height: 1.0
+        episode_number: 20
+        interior_scene: scene1
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/AMSTERDAM/AMSTERDAM_innout.usd
         rule_pattern: innout
     scene_scale: 1.0
   nv:

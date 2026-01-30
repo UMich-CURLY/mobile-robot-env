@@ -9,7 +9,7 @@
         "align_ground": true,
         "navmesh_preset": "default",
         "objnav": "umbrella",
-        "instruction": "",
+        "instruction": "Head straight down the hospital hallway, passing a nurse in a white coat on your right and the entrance to a room on your left. Continue forward through the exit doors leading outside. Once outside, move towards the glass bus shelter structure on the left side of the plaza. You will arrive at the umbrella located inside the glass shelter, near a parked ambulance with red and white stripes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -450,6 +450,1745 @@
             0.0,
             0.0,
             -0.9700936993388379
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "black_shoes",
+        "instruction": "Exit the hospital room, passing the doctor in the white coat on your right. Move through the doorway into the outdoor area. You will enter a city street with tall buildings. Continue straight ahead on the pavement, keeping the red and white ambulance on your right side. Proceed forward towards the center of the street where a soccer ball is visible on the ground. You will arrive at the black shoes next to the soccer ball.",
+        "closest_goal_idx": 2,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_shoes_18",
+                "type": "object",
+                "location": [
+                    47.18115523181936,
+                    -30.852698149408535,
+                    8.570140518506747
+                ],
+                "radius": 0.3801722167815669,
+                "path_length": 22.02862754922115,
+                "reference_path": [
+                    [
+                        56.613861083984375,
+                        -46.906002044677734,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        47.181156158447266,
+                        -30.852697372436523,
+                        8.570140838623047
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_shoes_20",
+                "type": "object",
+                "location": [
+                    20.489782859616174,
+                    -47.88202291582943,
+                    8.25813844404513
+                ],
+                "radius": 0.43067178997463884,
+                "path_length": 37.105339240734935,
+                "reference_path": [
+                    [
+                        56.613861083984375,
+                        -46.906002044677734,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        42.484413146972656,
+                        -44.920677185058594,
+                        8.30002212524414
+                    ],
+                    [
+                        42.08441162109375,
+                        -44.920677185058594,
+                        8.200021743774414
+                    ],
+                    [
+                        25.184410095214844,
+                        -45.72067642211914,
+                        8.100021362304688
+                    ],
+                    [
+                        20.489782333374023,
+                        -47.882022857666016,
+                        8.258138656616211
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_shoes_50",
+                "type": "object",
+                "location": [
+                    41.689484402798534,
+                    -55.138180228649915,
+                    8.187999581043385
+                ],
+                "radius": 0.3719443191638092,
+                "path_length": 18.5726255365494,
+                "reference_path": [
+                    [
+                        56.613861083984375,
+                        -46.906002044677734,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        41.689483642578125,
+                        -55.138179779052734,
+                        8.187999725341797
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_shoes_61",
+                "type": "object",
+                "location": [
+                    18.882860898195585,
+                    -26.13312874116429,
+                    8.733824863643662
+                ],
+                "radius": 0.42898530254085543,
+                "path_length": 45.683011243831146,
+                "reference_path": [
+                    [
+                        56.613861083984375,
+                        -46.906002044677734,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        23.784408569335938,
+                        -35.820674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        22.784408569335938,
+                        -34.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        20.584409713745117,
+                        -27.020675659179688,
+                        8.700021743774414
+                    ],
+                    [
+                        19.684410095214844,
+                        -26.520675659179688,
+                        8.700021743774414
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            56.61385995362891,
+            -46.90600055697105,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.3308705297448549,
+            0.0,
+            0.0,
+            -0.9436761587252054
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "nursing_bottle",
+        "instruction": "Start at the ambulance door and head outside, passing the white doorframe and moving onto the paved plaza. Slightly veer right, following the red and white ambulance on your left side. Continue forward across the plaza, keeping the ambulance alongside you. As you proceed, you will see a baby bottle lying on the ground ahead. This is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/nursing_bottle_58",
+                "type": "object",
+                "location": [
+                    46.796989561066766,
+                    -38.981297482019144,
+                    8.466694049964886
+                ],
+                "radius": 0.38610014546524596,
+                "path_length": 11.46896287463577,
+                "reference_path": [
+                    [
+                        53.73884201049805,
+                        -47.455902099609375,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        46.79698944091797,
+                        -38.98129653930664,
+                        8.466693878173828
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            53.73884279280394,
+            -47.45590276469484,
+            8.50002098083496
+        ],
+        "start_rotation": [
+            -0.015361453551956734,
+            0.0,
+            0.0,
+            0.999882005911083
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "glove",
+        "instruction": "Turn right and exit the hospital building through the glass doors ahead. Once outside, follow the sidewalk past the ambulance on your right. Continue moving forward along the street, passing the white delivery van and the \"Wellspring Pharmacy\" storefront on your right. Keep going straight down the sidewalk, with the tall, dark building on your left and the lighter-colored buildings on your right. Proceed forward until you see a black top hat lying on the ground; the target glove is next to it.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/glove_14",
+                "type": "object",
+                "location": [
+                    11.031727305236867,
+                    -47.16749123551844,
+                    8.155139330293423
+                ],
+                "radius": 0.24540808011154702,
+                "path_length": 48.5539685433996,
+                "reference_path": [
+                    [
+                        58.69785690307617,
+                        -46.249515533447266,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        42.484413146972656,
+                        -44.920677185058594,
+                        8.30002212524414
+                    ],
+                    [
+                        42.08441162109375,
+                        -44.920677185058594,
+                        8.200021743774414
+                    ],
+                    [
+                        19.98440933227539,
+                        -45.920677185058594,
+                        8.200021743774414
+                    ],
+                    [
+                        11.684409141540527,
+                        -46.52067565917969,
+                        8.100021362304688
+                    ],
+                    [
+                        11.031726837158203,
+                        -47.1674919128418,
+                        8.155138969421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            58.69785619559952,
+            -46.2495140292621,
+            8.500020980834963
+        ],
+        "start_rotation": [
+            0.38078201299807524,
+            0.0,
+            0.0,
+            -0.924664835806539
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_33",
+                "type": "object",
+                "location": [
+                    56.70900339867037,
+                    -6.314061131919836,
+                    8.866712243661954
+                ],
+                "radius": 9.02057688068142,
+                "path_length": 47.62282681159862,
+                "reference_path": [
+                    [
+                        57.224693298339844,
+                        -47.82771301269531,
+                        8.500020980834961
+                    ],
+                    [
+                        56.484413146972656,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        56.70900344848633,
+                        -6.314061164855957,
+                        8.86671257019043
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_41",
+                "type": "object",
+                "location": [
+                    47.85292298098874,
+                    -83.40657767900426,
+                    7.908411253362915
+                ],
+                "radius": 9.022715683218003,
+                "path_length": 47.95015747887248,
+                "reference_path": [
+                    [
+                        57.224693298339844,
+                        -47.82771301269531,
+                        8.500020980834961
+                    ],
+                    [
+                        56.484413146972656,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        44.08441162109375,
+                        -57.52067565917969,
+                        8.100021362304688
+                    ],
+                    [
+                        40.984413146972656,
+                        -60.920677185058594,
+                        7.900020599365234
+                    ],
+                    [
+                        40.984413146972656,
+                        -61.8206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        41.484413146972656,
+                        -63.3206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        47.984413146972656,
+                        -82.12067413330078,
+                        8.000020980834961
+                    ],
+                    [
+                        47.85292434692383,
+                        -83.40657806396484,
+                        7.908411026000977
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            57.22469394646198,
+            -47.82771142673476,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.11050401458128113,
+            0.0,
+            0.0,
+            0.9938756777190093
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dog",
+        "instruction": "Starting from a hallway, exit the building and proceed straight down the street, keeping the tall modern buildings on your left and the older, darker buildings on your right. Continue along the road past the ambulance parked on the left side. As you move further down the street, you will see a bright red diner called \"Rockets Burgers\" on your right. Approach the diner, and you will arrive at the dog standing near the entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dog_32",
+                "type": "object",
+                "location": [
+                    57.25635383714854,
+                    -5.612111476433082,
+                    9.221946281660017
+                ],
+                "radius": 0.4740193132401611,
+                "path_length": 49.24773215145185,
+                "reference_path": [
+                    [
+                        57.33969497680664,
+                        -48.83623504638672,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        57.78440856933594,
+                        -6.320676803588867,
+                        8.900020599365234
+                    ],
+                    [
+                        57.984413146972656,
+                        -5.820676803588867,
+                        8.900020599365234
+                    ],
+                    [
+                        57.59855270385742,
+                        -5.338352680206299,
+                        8.948253631591797
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            57.3396950612385,
+            -48.8362342694858,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.16081929533642378,
+            0.0,
+            0.0,
+            0.9869838672681008
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "warm_blanket",
+        "instruction": "Start inside the hospital hallway, moving past the white-coated doctors. Exit the building through the automatic doors onto the city street. Follow the road straight ahead, keeping the tall grey buildings on your left and the darker structures on your right. Continue down the street, passing a white ambulance parked on the left side. Keep moving forward along the pavement until you spot a green rectangular object on the ground near a grey trash bag; you will arrive at the warm_blanket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/warm_blanket_34",
+                "type": "object",
+                "location": [
+                    52.213569790222664,
+                    -17.291774721019827,
+                    8.636032887031233
+                ],
+                "radius": 0.4710154832013487,
+                "path_length": 36.45804631132514,
+                "reference_path": [
+                    [
+                        57.38398361206055,
+                        -45.90534210205078,
+                        8.500020980834961
+                    ],
+                    [
+                        56.88440704345703,
+                        -46.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.21356964111328,
+                        -17.29177474975586,
+                        8.636033058166504
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            57.383981874424194,
+            -45.905343809133385,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.33961305549873005,
+            0.0,
+            0.0,
+            -0.9405652409773692
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_3",
+                "type": "object",
+                "location": [
+                    89.48214933548601,
+                    -71.92474272734819,
+                    10.36891045873261
+                ],
+                "radius": 3.618932477937257,
+                "path_length": 33.15758675827365,
+                "reference_path": [
+                    [
+                        64.35437774658203,
+                        -48.902809143066406,
+                        8.395427703857422
+                    ],
+                    [
+                        88.78440856933594,
+                        -71.3206787109375,
+                        8.200021743774414
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            64.35437690057987,
+            -48.902810227111125,
+            8.395427348781515
+        ],
+        "start_rotation": [
+            0.9587426732846547,
+            0.0,
+            0.0,
+            -0.2842753707639721
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cat",
+        "instruction": "Start facing the doctor in the hallway with the reception desk on your right. Move forward past the doctor and exit the building through the open doorway ahead. As you exit onto the city street, turn right. Follow the road straight ahead, passing a red and white ambulance on your left and a tall grey building further down the street. Continue forward until you reach a Siamese cat standing near a blue object on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cat_56",
+                "type": "object",
+                "location": [
+                    46.96698710815834,
+                    -39.93252495973225,
+                    8.481693990956288
+                ],
+                "radius": 0.22478859497857684,
+                "path_length": 15.608530342086786,
+                "reference_path": [
+                    [
+                        58.604679107666016,
+                        -47.96357727050781,
+                        8.500020980834961
+                    ],
+                    [
+                        56.484413146972656,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        46.96698760986328,
+                        -39.932525634765625,
+                        8.481694221496582
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            58.60467828715072,
+            -47.963578080018685,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.06622111685111905,
+            0.0,
+            0.0,
+            -0.9978049727692233
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "Start by turning right and moving down the white hospital hallway past the nurse in the white coat. Continue out the double doors into the open city square, heading towards the large white and red ambulance. As you approach the ambulance, make a right turn. Continue moving forward along the pavement, passing a small blue object on the ground. You will arrive at the red rice bowl.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_47",
+                "type": "object",
+                "location": [
+                    59.99976052785438,
+                    -14.279254536052932,
+                    8.656903989980309
+                ],
+                "radius": 0.1122464796700342,
+                "path_length": 45.88733377551654,
+                "reference_path": [
+                    [
+                        59.456790924072266,
+                        -48.45738220214844,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        53.184410095214844,
+                        -16.92067527770996,
+                        8.600021362304688
+                    ],
+                    [
+                        59.999759674072266,
+                        -14.279254913330078,
+                        8.656904220581055
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_57",
+                "type": "object",
+                "location": [
+                    48.0249484343775,
+                    -39.08945411956027,
+                    8.356694053117453
+                ],
+                "radius": 0.10187846586367755,
+                "path_length": 16.72352888919841,
+                "reference_path": [
+                    [
+                        59.456790924072266,
+                        -48.45738220214844,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        48.02494812011719,
+                        -39.089454650878906,
+                        8.356694221496582
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            59.45678992013607,
+            -48.45738366209157,
+            8.50002098083496
+        ],
+        "start_rotation": [
+            -0.2022961609752868,
+            0.0,
+            0.0,
+            0.9793243912282901
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "umbrella",
+        "instruction": "Exit the hospital room with blue curtains and turn right into the hallway. Proceed forward through the corridor until you exit the building onto a city street. Once outside, follow the paved ground slightly left, moving towards the open city square with tall buildings in the background. Continue straight past the glass bus shelter structure on your right. As you pass the shelter, bear slightly right. You will arrive at the red and white umbrella situated near the glass structure.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_26",
+                "type": "object",
+                "location": [
+                    43.109196817767014,
+                    -46.049528524250526,
+                    8.729804607203079
+                ],
+                "radius": 0.6563463650291936,
+                "path_length": 16.03797246109782,
+                "reference_path": [
+                    [
+                        55.410987854003906,
+                        -47.44145584106445,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        43.984413146972656,
+                        -49.02067565917969,
+                        8.200021743774414
+                    ],
+                    [
+                        43.58441162109375,
+                        -49.02067565917969,
+                        8.200021743774414
+                    ],
+                    [
+                        42.88440704345703,
+                        -48.52067565917969,
+                        8.200021743774414
+                    ],
+                    [
+                        42.484413146972656,
+                        -48.12067794799805,
+                        8.200021743774414
+                    ],
+                    [
+                        42.38440704345703,
+                        -46.22067642211914,
+                        8.200021743774414
+                    ],
+                    [
+                        42.58441162109375,
+                        -46.02067565917969,
+                        8.200021743774414
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_29",
+                "type": "object",
+                "location": [
+                    26.30124006051218,
+                    -34.47017484773917,
+                    9.035836455091541
+                ],
+                "radius": 0.6542529927212684,
+                "path_length": 36.42820534774081,
+                "reference_path": [
+                    [
+                        55.410987854003906,
+                        -47.44145584106445,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        44.484413146972656,
+                        -34.52067565917969,
+                        8.400020599365234
+                    ],
+                    [
+                        44.08441162109375,
+                        -34.12067794799805,
+                        8.400020599365234
+                    ],
+                    [
+                        42.38440704345703,
+                        -33.62067794799805,
+                        8.200021743774414
+                    ],
+                    [
+                        41.684410095214844,
+                        -33.62067794799805,
+                        8.200021743774414
+                    ],
+                    [
+                        26.580005645751953,
+                        -34.58168411254883,
+                        8.500020980834961
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_40",
+                "type": "object",
+                "location": [
+                    47.56752382291954,
+                    -82.30769912216483,
+                    8.458410845729802
+                ],
+                "radius": 0.6366765602604687,
+                "path_length": 44.931203011615736,
+                "reference_path": [
+                    [
+                        55.410987854003906,
+                        -47.44145584106445,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        44.08441162109375,
+                        -57.52067565917969,
+                        8.100021362304688
+                    ],
+                    [
+                        40.984413146972656,
+                        -60.920677185058594,
+                        7.900020599365234
+                    ],
+                    [
+                        40.984413146972656,
+                        -61.8206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        41.484413146972656,
+                        -63.3206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        47.984413146972656,
+                        -82.12067413330078,
+                        8.000020980834961
+                    ],
+                    [
+                        47.88661575317383,
+                        -82.4140625,
+                        8.000020980834961
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            55.41098700880885,
+            -47.441454935344815,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.360977180236049,
+            0.0,
+            0.0,
+            -0.9325746486736765
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Proceed down the road, keeping the clear glass bus stop structure on your left. As you move forward, you will pass a white building on the right with an ambulance parked in front of it. Continue straight past the bus stop until you approach a street corner near a pharmacy with a green cross sign. Turn slightly left towards the curb where a white delivery van is parked. You will arrive near the front bumper of the white van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_2",
+                "type": "object",
+                "location": [
+                    25.12665489496203,
+                    -49.06305413847408,
+                    9.419003249439044
+                ],
+                "radius": 3.1617872071684303,
+                "path_length": 28.042716982813065,
+                "reference_path": [
+                    [
+                        50.77272415161133,
+                        -46.4837760925293,
+                        8.418731689453125
+                    ],
+                    [
+                        42.484413146972656,
+                        -44.920677185058594,
+                        8.30002212524414
+                    ],
+                    [
+                        42.08441162109375,
+                        -44.920677185058594,
+                        8.200021743774414
+                    ],
+                    [
+                        25.184410095214844,
+                        -45.72067642211914,
+                        8.100021362304688
+                    ],
+                    [
+                        24.884408950805664,
+                        -45.920677185058594,
+                        8.100021362304688
+                    ],
+                    [
+                        24.48440933227539,
+                        -46.420677185058594,
+                        8.30002212524414
+                    ],
+                    [
+                        24.184410095214844,
+                        -47.52067565917969,
+                        8.200021743774414
+                    ],
+                    [
+                        24.184410095214844,
+                        -47.62067794799805,
+                        8.200021743774414
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            50.77272594431011,
+            -46.48377708183272,
+            8.418731877346946
+        ],
+        "start_rotation": [
+            0.15037003494929777,
+            0.0,
+            0.0,
+            0.9886297854047019
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fleece_blankets",
+        "instruction": "Start by turning left near the reception desk with the blue sign reading '\u5bfc\u533b\u53f0' and a person standing in front. Continue forward into a hallway where a person in a white lab coat is standing. Exit the building through the door into the street. Once outside, follow the road as you turn right, passing a red and white ambulance on your left. Continue down the street flanked by tall buildings. Turn right again at the intersection, heading towards the narrow alley between buildings. Move forward until you arrive at the green fleece blankets on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/fleece_blankets_45",
+                "type": "object",
+                "location": [
+                    61.45922295013662,
+                    -14.107886882041916,
+                    8.716903989807975
+                ],
+                "radius": 0.27820970138535017,
+                "path_length": 49.537910794667916,
+                "reference_path": [
+                    [
+                        61.50473403930664,
+                        -46.418182373046875,
+                        8.500020980834961
+                    ],
+                    [
+                        60.28440856933594,
+                        -46.02067565917969,
+                        8.500020980834961
+                    ],
+                    [
+                        59.88440704345703,
+                        -46.02067565917969,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        53.184410095214844,
+                        -16.92067527770996,
+                        8.600021362304688
+                    ],
+                    [
+                        61.459224700927734,
+                        -14.107887268066406,
+                        8.716903686523438
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            61.50473503755821,
+            -46.4181827266591,
+            8.50002098083496
+        ],
+        "start_rotation": [
+            0.21278215644665158,
+            0.0,
+            0.0,
+            0.9770996642604646
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cat",
+        "instruction": "Start inside a hospital reception area with a blue desk labeled in Chinese characters. Walk forward, passing between the reception desk and a waiting area with seating on your left. Continue straight through the glass exit doors to leave the building. Once outside on the pavement, turn right towards a large red and white ambulance parked on the street. Head towards the ambulance, and you will arrive at the small beige cat standing near a blue object on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cat_56",
+                "type": "object",
+                "location": [
+                    46.96698710815834,
+                    -39.93252495973225,
+                    8.481693990956288
+                ],
+                "radius": 0.22478859497857684,
+                "path_length": 19.640928765514158,
+                "reference_path": [
+                    [
+                        62.27238464355469,
+                        -44.76816177368164,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        46.96698760986328,
+                        -39.932525634765625,
+                        8.481694221496582
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            62.272385168878046,
+            -44.76816154427011,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            -0.005781771632859847,
+            0.0,
+            0.0,
+            -0.9999832854187041
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_33",
+                "type": "object",
+                "location": [
+                    56.70900339867037,
+                    -6.314061131919836,
+                    8.866712243661954
+                ],
+                "radius": 9.02057688068142,
+                "path_length": 45.83394318222703,
+                "reference_path": [
+                    [
+                        55.61153793334961,
+                        -48.1422004699707,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        56.70900344848633,
+                        -6.314061164855957,
+                        8.86671257019043
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_41",
+                "type": "object",
+                "location": [
+                    47.85292298098874,
+                    -83.40657767900426,
+                    7.908411253362915
+                ],
+                "radius": 9.022715683218003,
+                "path_length": 46.13832012412534,
+                "reference_path": [
+                    [
+                        55.61153793334961,
+                        -48.1422004699707,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        44.08441162109375,
+                        -57.52067565917969,
+                        8.100021362304688
+                    ],
+                    [
+                        40.984413146972656,
+                        -60.920677185058594,
+                        7.900020599365234
+                    ],
+                    [
+                        40.984413146972656,
+                        -61.8206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        41.484413146972656,
+                        -63.3206787109375,
+                        7.900020599365234
+                    ],
+                    [
+                        47.984413146972656,
+                        -82.12067413330078,
+                        8.000020980834961
+                    ],
+                    [
+                        47.85292434692383,
+                        -83.40657806396484,
+                        7.908411026000977
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            55.611539373706144,
+            -48.14219891027789,
+            8.500020980834961
+        ],
+        "start_rotation": [
+            0.3017846932460043,
+            0.0,
+            0.0,
+            0.9533761057014252
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 17,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sun_hat",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sun_hat_23",
+                "type": "object",
+                "location": [
+                    32.0033861186598,
+                    -12.094038813724215,
+                    8.787087893980953
+                ],
+                "radius": 0.4550840427913343,
+                "path_length": 48.78872928476866,
+                "reference_path": [
+                    [
+                        51.15578079223633,
+                        -44.346351623535156,
+                        8.370518684387207
+                    ],
+                    [
+                        44.484413146972656,
+                        -34.52067565917969,
+                        8.400020599365234
+                    ],
+                    [
+                        24.684410095214844,
+                        -14.320676803588867,
+                        8.700021743774414
+                    ],
+                    [
+                        24.384408950805664,
+                        -13.72067642211914,
+                        8.80002212524414
+                    ],
+                    [
+                        24.784408569335938,
+                        -13.22067642211914,
+                        8.80002212524414
+                    ],
+                    [
+                        32.003387451171875,
+                        -12.094038963317871,
+                        8.787087440490723
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            51.155780732298595,
+            -44.34635077609292,
+            8.37051834402718
+        ],
+        "start_rotation": [
+            0.32942517123576126,
+            0.0,
+            0.0,
+            0.9441816862004311
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 18,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ale_bottle",
+        "instruction": "Start facing the blue reception desk, then turn left to exit the room. Move through the white corridor with the blue wall stripe and exit the building into the open city street. Follow the road straight ahead, keeping the tall buildings on your left and the ambulance parked on the right. Continue forward down the street past the ambulance. Eventually, turn right towards the sidewalk near the building corner. You will arrive at the ale_bottle, which is on the ground near a green object and a red bowl.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ale_bottle_43",
+                "type": "object",
+                "location": [
+                    14.674648266573422,
+                    -66.175139694695,
+                    7.772359536305165
+                ],
+                "radius": 0.15999999588430036,
+                "path_length": 49.678736784133534,
+                "reference_path": [
+                    [
+                        58.85553741455078,
+                        -47.00697708129883,
+                        8.500020980834961
+                    ],
+                    [
+                        58.88440704345703,
+                        -47.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        58.38440704345703,
+                        -47.820674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        56.484413146972656,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -48.320674896240234,
+                        8.500020980834961
+                    ],
+                    [
+                        51.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        50.58441162109375,
+                        -46.72067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        14.988624572753906,
+                        -66.08543395996094,
+                        7.500020980834961
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/ale_bottle_46",
+                "type": "object",
+                "location": [
+                    60.91395223434258,
+                    -13.31453315045966,
+                    8.766903987367163
+                ],
+                "radius": 0.15999999588430036,
+                "path_length": 46.6550073648333,
+                "reference_path": [
+                    [
+                        58.85553741455078,
+                        -47.00697708129883,
+                        8.500020980834961
+                    ],
+                    [
+                        58.684410095214844,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        58.08441162109375,
+                        -46.72067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        56.08441162109375,
+                        -47.22067642211914,
+                        8.500020980834961
+                    ],
+                    [
+                        55.28440856933594,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        54.88440704345703,
+                        -47.62067794799805,
+                        8.500020980834961
+                    ],
+                    [
+                        50.78440856933594,
+                        -46.22067642211914,
+                        8.400020599365234
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        53.184410095214844,
+                        -16.92067527770996,
+                        8.600021362304688
+                    ],
+                    [
+                        60.9139518737793,
+                        -13.314533233642578,
+                        8.7669038772583
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            58.855536968633906,
+            -47.00697882982107,
+            8.50002098083496
+        ],
+        "start_rotation": [
+            0.41353325649032,
+            0.0,
+            0.0,
+            0.9104890146380192
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene2"
+    },
+    {
+        "scene_id": "innout_austin",
+        "scene_type": "innout",
+        "episode_id": 19,
+        "path": "vc_plus/AUSTIN/AUSTIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Head down the city street, keeping the large, dark buildings on your right and the taller skyscrapers on your left. Continue straight ahead, passing a white ambulance parked on the left side of the road. As you proceed, you will see a red storefront labeled \"ROCKET BURGER\" on your right. Keep moving forward along the pavement past the burger shop. Eventually, you will approach a white storefront labeled \"CAPITAL TRUST BANK\" on your right. Stop here; you will arrive at the purple baby stroller sitting on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_62",
+                "type": "object",
+                "location": [
+                    61.31724560843976,
+                    1.3837955735355951,
+                    9.642179953654203
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 48.1432501169461,
+                "reference_path": [
+                    [
+                        50.96250915527344,
+                        -45.07314682006836,
+                        8.399072647094727
+                    ],
+                    [
+                        52.88440704345703,
+                        -17.22067642211914,
+                        8.600021362304688
+                    ],
+                    [
+                        61.75306701660156,
+                        0.9479771852493286,
+                        9.100021362304688
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            50.96250746920966,
+            -45.073147865589156,
+            8.399072863987232
+        ],
+        "start_rotation": [
+            0.8731848750368929,
+            0.0,
+            0.0,
+            0.4873891402224774
         ],
         "ceiling_height": 1.0,
         "interior_scene": "scene2"

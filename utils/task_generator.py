@@ -257,11 +257,13 @@ class TaskGenerator:
         # Reset and start the episode
         print(f'[TG] Reset episode {self.current_episode.episode_id}')
         self.vln_sim.reset(self.current_episode)
-        self.env.terminations_cfg.time_out.params["max_time"] = 50.0
+        self.env.terminations_cfg.time_out.params["max_time"] = 30.0
         self.env.terminations_cfg.stuck.params["max_time"] = 5.0
-        self.env.terminations_cfg.stuck.params["max_tdist_thresholdime"] = 0.03
+        self.env.terminations_cfg.stuck.params["max_tdist_thresholdime"] = 0.04
         print(f'[TG] Set reference waypoints')
         self.vln_sim.set_ref_waypoints(self.current_episode)
+        self.vln_sim.waypoint_follower.term_dist = 0.3
+        self.vln_sim.waypoint_follower.term_yaw = np.pi/180.0*90.0
         self.check_status_callback = check_status
         self.vln_sim.add_callback('step_finished', check_status)
 
