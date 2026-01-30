@@ -17,29 +17,29 @@ navmesh:
     agent_height: 0.6
     agent_max_climb: 0.2
     agent_max_slope: 45.0
-    agent_radius: 0.3
+    agent_radius: 0.30000001192092896
     cell_height: 0.05
     cell_size: 0.05
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
-    edge_max_error: 0.0
+    edge_max_error: 1.5
     edge_max_len: 0.0
     region_merge_size: 0.0
-    region_min_size: 0.0
+    region_min_size: 8.0
     verts_per_poly: 6.0
   vc:
     agent_height: 0.6000000238418579
-    agent_max_climb: 0.2
+    agent_max_climb: 0.3499999940395355
     agent_max_slope: 45.0
-    agent_radius: 0.5
+    agent_radius: 0.2
     cell_height: 0.1
-    cell_size: 1.5
+    cell_size: 0.20000000298023224
     detail_sample_dist: 1.0
     detail_sample_max_error: 0.0
-    edge_max_error: 0.0
+    edge_max_error: 1.5
     edge_max_len: 0.0
     region_merge_size: 0.0
-    region_min_size: 0.0
+    region_min_size: 8.0
     verts_per_poly: 6.0
 scene:
   grCommercial:
@@ -295,6 +295,67 @@ scene:
         path: grscenes_home/scenes/scene67/start_result_navigation.usd
         rule_pattern: gr
     scene_scale: 0.009999999776482582
+  innout:
+    align_ground: true
+    collider: true
+    episodes:
+      amsterdam:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene1
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/AMSTERDAM/AMSTERDAM_innout.usd
+        rule_pattern: innout
+      austin:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene2
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/AUSTIN/AUSTIN_innout.usd
+        rule_pattern: innout
+      barcelona:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene6
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BARCELONA/BARCELONA_innout.usd
+        rule_pattern: innout
+      berlin:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene8
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BERLIN/BERLIN_innout.usd
+        rule_pattern: innout
+      boston:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene9
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/BOSTON/BOSTON_innout.usd
+        rule_pattern: innout
+      ny:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene13
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/NY/NY_innout.usd
+        rule_pattern: innout
+      paris:
+        ceiling_height: 1.0
+        episode_number: 25
+        interior_scene: scene26
+        navmesh_exclude: []
+        navmesh_preset: vc
+        path: vc_plus/PARIS/PARIS_innout.usd
+        rule_pattern: innout
+    scene_scale: 1.0
   nv:
     align_ground: true
     collider: true

@@ -173,12 +173,18 @@ class InstructionGenerator:
                 is_bad = loaded_data.get("is_bad", False) if loaded_data else False
             is_checked = loaded_data.get("checked", False) if loaded_data else False
 
-            if need_regen_vlm and not is_bad:
+            if need_regen_vlm:
                 print(f"Running VLM generation for episode {episode.episode_id}")
-                vlm_res = self.vlm_based_generation(episode, aligned_instructions)
-                improved_instructions = vlm_res["improved_instructions"]
-                prompt = vlm_res["prompt"]
-                used_images = vlm_res["used_images"]
+                if is_bad and force:
+                    vlm_res = self.vlm_based_generation(episode, None, full_instruction=full_instruction)
+                    improved_instructions = vlm_res["improved_instructions"]
+                    prompt = vlm_res["prompt"]
+                    used_images = vlm_res["used_images"]
+                elif not is_bad:
+                    vlm_res = self.vlm_based_generation(episode, aligned_instructions)
+                    improved_instructions = vlm_res["improved_instructions"]
+                    prompt = vlm_res["prompt"]
+                    used_images = vlm_res["used_images"]
 
             # Save results (if we changed anything)
             data_to_save = {
@@ -378,28 +384,36 @@ class InstructionGenerator:
         video_writer.release()
         print(f"Video generated and saved to {video_path}")
     
-    def vlm_based_generation(self, episode, aligned_instructions, prompt=None):
+    def vlm_based_generation(self, episode, aligned_instructions, prompt=None, full_instruction=None):
         message_content = []
         add_text = lambda text: message_content.append({"type": "text","text": text})
         add_image = lambda image_path: message_content.append({"type": "image_url","image_url": {"url": "data:image/png;base64,"+base64.b64encode(open(image_path, "rb").read()).decode()}})
         add_video = lambda video_path: message_content.append({"type": "video_url","video_url": {"url": "data:video/mp4;base64,"+base64.b64encode(open(video_path, "rb").read()).decode()}})
         # change the frame_id to when the instruction begins
-        shifted_instructions = [(1, "You start at this position. "+aligned_instructions[0][1])]
-        for i in range(1, len(aligned_instructions)):
-            shifted_instructions.append((aligned_instructions[i-1][0], aligned_instructions[i][1]))
-        image_interval = max(10, aligned_instructions[-1][0]//15)
-        image_list = list(range(1, aligned_instructions[-1][0]+1, image_interval))
-        print(f"Using {len(image_list)} images (interval={image_interval})")
-        # add image idx to the prompt
-        prompt_instruction = []
-        for i, (keyframe_id, instruction) in enumerate(shifted_instructions):
-            print(f"Add keyframe {keyframe_id//image_interval+1} at frame {keyframe_id}: {instruction}")
-            prompt_instruction.append(f"(img {keyframe_id//image_interval+1}) {instruction}")
-            # format_time = lambda x: f"{x//60:02d}:{x%60:02d}"
-            # prompt_instruction.append(f"(video {format_time(keyframe_id//10)}) {instruction}")
-        prompt_instruction = " ".join(prompt_instruction)
-        # print(prompt_instruction)
-        
+        if aligned_instructions is not None:
+            shifted_instructions = [(1, "You start at this position. "+aligned_instructions[0][1])]
+            for i in range(1, len(aligned_instructions)):
+                shifted_instructions.append((aligned_instructions[i-1][0], aligned_instructions[i][1]))
+            image_interval = max(10, aligned_instructions[-1][0]//15)
+            image_list = list(range(1, aligned_instructions[-1][0]+1, image_interval))
+            print(f"Using {len(image_list)} images (interval={image_interval})")
+            # add image idx to the prompt
+            prompt_instruction = []
+            for i, (keyframe_id, instruction) in enumerate(shifted_instructions):
+                print(f"Add keyframe {keyframe_id//image_interval+1} at frame {keyframe_id}: {instruction}")
+                prompt_instruction.append(f"(img {keyframe_id//image_interval+1}) {instruction}")
+                # format_time = lambda x: f"{x//60:02d}:{x%60:02d}"
+                # prompt_instruction.append(f"(video {format_time(keyframe_id//10)}) {instruction}")
+            prompt_instruction = " ".join(prompt_instruction)
+            # print(prompt_instruction)
+        else:
+            prompt_instruction = full_instruction
+            #check image number
+            image_folder = self.get_data_path(episode, "pov_rgb")
+            image_files = glob.glob(os.path.join(image_folder, "*.png"))
+            image_interval = max(10, len(image_files)//15)
+            image_list = list(range(1, len(image_files)+1, image_interval))
+            print(f"Using {len(image_list)} images")
         used_images = []
         for image_idx in image_list:
             image_url = self.get_data_path(episode, "pov_rgb", f"{image_idx}.png")

@@ -14,7 +14,9 @@
                 "--host",
                 "0.0.0.0",
                 "--port",
-                "11100"
+                "11100",
+                "--timeout",
+                "123",
             ],
         },
         {
@@ -30,6 +32,7 @@
                 // "nv_apartment"
                 // "grHome_scene12"
                 "innout_amsterdam",
+                // "vc_amsterdam",
                 "--tg_mode",
                 "manual"
             ],

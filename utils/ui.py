@@ -270,7 +270,7 @@ class TaskGeneratorUI(BaseUI):
                     )[0]
                 ui_utils.btn_builder("Navmesh Config", text="Save", on_clicked_fn=lambda: self.save_settings("navmesh_config"))
             with self.create_frame("Navmesh Tools"):
-                ui_utils.btn_builder("Save Geometry", text="Save", on_clicked_fn=lambda: self.task_generator.navmesh_interface.save_geometry(["/World/ground/terrain"], self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, self.scene_folder / "navmesh", scene_id=self.scene_config.get("scene_id")))
+                ui_utils.btn_builder("Save Geometry", text="Save", on_clicked_fn=lambda: self.save_geometry())
                 ui_utils.btn_builder("Setup Geometry", text="Setup", on_clicked_fn=lambda: self.setup_navmesh())
                 ui_utils.btn_builder("Build Navmesh", text="Build", on_clicked_fn=lambda: self.build_navmesh())
                 ui_utils.btn_builder("Load Navmesh", text="Load", on_clicked_fn=lambda: self.load_navmesh())
@@ -354,6 +354,9 @@ class TaskGeneratorUI(BaseUI):
         self.save_settings("scene_runtime")
         self.env.reset(self.ui_episode)
     
+    def save_geometry(self):
+        self.task_generator.navmesh_interface.save_geometry(["/World/ground/terrain"], self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, self.scene_folder / "navmesh", scene_type=self.scene_config.get("scene_type"))
+    
     def setup_navmesh(self):
         self.save_settings("scene_runtime")
         selected_paths = ["/World/ground/terrain"]
@@ -364,7 +367,10 @@ class TaskGeneratorUI(BaseUI):
     def build_navmesh(self):
         self.save_settings("navmesh_runtime")
         start_time = time.time()
-        self.task_generator.navmesh_interface.build_navmesh()
+        if self.scene_config.get("scene_type") == "innout":
+            self.task_generator.navmesh_interface.build_navmesh_innout(["/World/ground/terrain"], self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage)
+        else:
+            self.task_generator.navmesh_interface.build_navmesh()
         print(f"[INFO]: Navmesh build time: {time.time() - start_time:.2f} seconds")
 
     def load_navmesh(self):

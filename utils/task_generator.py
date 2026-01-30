@@ -124,7 +124,7 @@ class TaskGenerator:
         else:
             self.min_path_length = 5.0
         self.min_path_length = 5.0
-        self.max_path_length = 100.0
+        self.max_path_length = 50.0
         self.min_duration = 5.0
         self.timeout = 100.0
         self.total_samples = 0
@@ -140,7 +140,10 @@ class TaskGenerator:
 
     def _generate_episodes(self):
         if len(self.generated_episodes) < self.num_episodes or self.total_samples >= 5*self.num_episodes:
-            new_episodes = self.sample_episodes(self.num_episodes)
+            if "innout" in self.scene_config['scene_id']:
+                new_episodes = self.sample_episodes_innout(self.num_episodes)
+            else:
+                new_episodes = self.sample_episodes(self.num_episodes)
             print(f'[TG] Sampled {len(new_episodes)} episodes')
             self.total_samples += len(new_episodes)
             self.check_episodes(new_episodes)
@@ -254,6 +257,9 @@ class TaskGenerator:
         # Reset and start the episode
         print(f'[TG] Reset episode {self.current_episode.episode_id}')
         self.vln_sim.reset(self.current_episode)
+        self.env.terminations_cfg.time_out.params["max_time"] = 50.0
+        self.env.terminations_cfg.stuck.params["max_time"] = 5.0
+        self.env.terminations_cfg.stuck.params["max_tdist_thresholdime"] = 0.03
         print(f'[TG] Set reference waypoints')
         self.vln_sim.set_ref_waypoints(self.current_episode)
         self.check_status_callback = check_status
@@ -344,8 +350,11 @@ class TaskGenerator:
             print(f"[TG] Navmesh not found, building...")
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=scene_config.get("scene_type"))
-            navmesh_interface.build_navmesh()
+            if scene_config.get("scene_type") == "innout":
+                navmesh_interface.build_navmesh_innout(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage)
+            else:
+                navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=scene_config.get("scene_type"))
+                navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[TG] Navmesh build time: {end_time - start_time:.2f} seconds")
             navmesh_interface.save_navmesh(navmesh_path)
@@ -438,26 +447,29 @@ class TaskGenerator:
     
     def sample_episodes_innout(self, num_episodes):
         # load navmesh for interior and exterior
-        navmesh_interface_in = navmesh_utils.NavmeshInterface(up_axis='Z')
-        navmesh_interface_out = navmesh_utils.NavmeshInterface(up_axis='Z')
-        scene_folder = Path(self.args.scene_folder)
-        scene_config = self.scene_config
-        scene_id = scene_config['scene_id']
-        navmesh_path = str(scene_folder / f"navmesh/{scene_config['scene_id']}_navmesh.bin")
-        if os.path.exists(navmesh_path):
-            print(f"[TG] Outdoor navmesh found, loading...")
-            navmesh_interface_out.load_navmesh(navmesh_path)
-        interior_scene = scene_config['interior_scene']
-        navmesh_path = str(scene_folder / f"navmesh/grCommercial_{interior_scene}_navmesh.bin")
-        if os.path.exists(navmesh_path):
-            print(f"[TG] Indoor navmesh found, loading...")
-            navmesh_interface_in.load_navmesh(navmesh_path)
+        self.check_navmesh(self.scene_config['scene_id'])
+        navmesh_interface = self.navmesh_interface
         
         # get indoor scene prim
-        indoor_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/ground/terrain/start_result_navigation/")
-        indoor_pos = indoor_prim
-        door_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/Door")
+        indoor_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/ground/terrain/start_result_navigation")
+        indoor_bbox = np.array(self.env.get_prim_bounding_box(indoor_prim.GetPrimPath()))
+        center_x, center_y, center_z = (indoor_bbox[3:]+indoor_bbox[:3])/2.0
 
+        # filter goals by distance to indoor prim
+        filtered_goal_dict = {}
+        self.parse_scene()
+        for goal_name, goal_item in self.goal_dict.items():
+            filtered_goals = []
+            for prim in goal_item['prim']:
+                prim_pos = self.env.get_prim_position(prim.GetPrimPath())
+                dist = np.linalg.norm(prim_pos[:2] - np.array([center_x, center_y]))
+                if dist < 50.0:
+                    filtered_goals.append(prim.GetPrimPath())
+            if len(filtered_goals) > 0:
+                filtered_goal_dict[goal_name] = {
+                    'prim': filtered_goals,
+                }
+        self.goal_dict = filtered_goal_dict
 
         # sample goals uniformly
         unique_goals = []
@@ -478,8 +490,21 @@ class TaskGenerator:
             while not path_found and retry_count < 100:
                 goal_item = self.goal_dict[goal_name]
                 # sample random points
-                random_point = navmesh_interface_in.sample_random_points(1)
+                # print(f"[TG] Sampling random points for indoor navmesh")
+                # print(f"[TG] Min: {min_x}, {min_y}, {min_z}, Max: {max_x}, {max_y}, {max_z}")
+                random_point = None
+                retry_count1 = 0
+                while random_point is None and retry_count1 < 100:
+                    retry_count1 += 1
+                    random_points = navmesh_interface.sample_random_points(1000)
+                    if random_points is None:
+                        break
+                    for p in random_points:
+                        if indoor_bbox[0] <= p[0] <= indoor_bbox[3] and indoor_bbox[1] <= p[1] <= indoor_bbox[4] and indoor_bbox[2] <= p[2] <= indoor_bbox[5]:
+                            random_point = np.array([p])
+                            break
                 if random_point is None:
+                    self.stop_generation()
                     raise RuntimeError(f"Failed to sample random point")
                 start_pos = random_point[0]
                 goal_prim_list = goal_item['prim']
