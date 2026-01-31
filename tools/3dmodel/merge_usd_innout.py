@@ -108,7 +108,7 @@ def main(CITY):
         "coworking_space", "lab"
     ]
 
-    SEMANTIC_GROUPS_JSON = os.path.join(SCENE_DATA_DIR, "../tools/3dmodel/data/usd/semantic_groups.json")
+    SEMANTIC_GROUPS_JSON = os.path.join(SCENE_DATA_DIR, "../tools/3dmodel/semantic_groups.json")
     if not os.path.exists(SEMANTIC_GROUPS_JSON):
         # Fallback relative path
         SEMANTIC_GROUPS_JSON = os.path.join(TOOLS_DIR, "data/usd/semantic_groups.json")
