@@ -10,17 +10,18 @@ def add_vln_args(parser):
     arg_group.add_argument("--scene_folder", type=str, default=None, help="Path to the scene USD file.")
     arg_group.add_argument("--navmesh_path", type=str, default=None, help="Path to the navmesh file.")
     arg_group.add_argument("--disable_camera", type=bool, default=False, help="Disable camera.")
+    arg_group.add_argument("--task_type", type=str, default="objnav", help="Type of task to simulate.", choices=["objnav", "vln", "locnav"])
     arg_group.add_argument("--num_envs", type=int, default=1, help="How many robots to simulate.")
     arg_group = parser.add_argument_group("Debug Options")
     arg_group.add_argument("--disable_termination", type=bool, default=False, help="Disable episodetermination.")
     arg_group = parser.add_argument_group("Task Generation")
     arg_group.add_argument("--tg_config_path", type=str, default="episodes/task_config.yaml", help="Path to the task config file.")
+    arg_group.add_argument("--tg_mode", type=str, default="manual", help="Mode for task generation.", choices=["manual", "auto"])
     arg_group = parser.add_argument_group("Server", description="Arguments for socket server.")
     arg_group.add_argument("--disable_socket_server", type=bool, default=False, help="Disable socket server.")
     arg_group.add_argument("--host", type=str, default="localhost", help="Host for socket server.")
     arg_group.add_argument("--port", type=int, default=12300, help="Port for socket server.")
     arg_group.add_argument("--foxglove_port", type=int, default=0, help="Port for foxglove server.")
-    arg_group.add_argument("--task_type", type=str, default="objnav", help="")
 
 def parse_args(parser):
     arg_list = sys.argv[1:]
@@ -33,4 +34,5 @@ def parse_args(parser):
     arg_list += ["--kit_args", "--/log/level=error --/log/fileLogLevel=error --/log/outputStreamLevel=fatal"]
     print(f"Using kit args: {arg_list}")
     args = parser.parse_args(arg_list)
+    args.enable_cameras = True
     return args

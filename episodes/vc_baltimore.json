@@ -1,0 +1,1651 @@
+[
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cell_phone",
+        "instruction": "Start moving forward on the road with the white church on your left and dark blocky buildings on your right. Keep heading straight down the road, passing the ambulance and the white bench on your right. As you continue, you will pass a fountain on your left near the church. Eventually, you will need to turn left off the road towards a dark object on the ground, where you will arrive at the cell_phone.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cell_phone_373",
+                "type": "object",
+                "location": [
+                    -253.4936915705276,
+                    72.52457181255963,
+                    1.8543621823749357
+                ],
+                "radius": 0.19286522589021615,
+                "path_length": 63.76373288732305,
+                "reference_path": [
+                    [
+                        -273.1064758300781,
+                        19.99241065979004,
+                        1.6399083137512207
+                    ],
+                    [
+                        -273.0001525878906,
+                        39.000152587890625,
+                        1.8000030517578125
+                    ],
+                    [
+                        -259.5001525878906,
+                        54.000152587890625,
+                        1.700002670288086
+                    ],
+                    [
+                        -258.0001525878906,
+                        55.500152587890625,
+                        1.700002670288086
+                    ],
+                    [
+                        -252.00015258789062,
+                        60.000152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -249.00015258789062,
+                        63.000152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -249.00015258789062,
+                        64.50015258789062,
+                        1.8000030517578125
+                    ],
+                    [
+                        -250.50015258789062,
+                        67.50015258789062,
+                        1.9000015258789062
+                    ],
+                    [
+                        -253.4936981201172,
+                        72.52457427978516,
+                        1.8543621301651
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -273.10648371620476,
+            19.99240975506734,
+            1.639908327413291
+        ],
+        "start_rotation": [
+            0.8374526003131216,
+            0.0,
+            0.0,
+            0.5465099653517682
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "lilac_bike",
+        "instruction": "Move forward along the road, passing the dark glass building on your left. As you approach a wide gap between the buildings, turn slightly left. Continue straight, keeping the dark, blocky structures on either side of the path. You will see a small object in the distance. Turn right towards the sidewalk area. Proceed forward, and you will arrive at the purple bicycle.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/lilac_bike_292",
+                "type": "object",
+                "location": [
+                    -313.09376011663966,
+                    239.33998962350535,
+                    4.290150793027593
+                ],
+                "radius": 0.9661191499535562,
+                "path_length": 95.63220547721026,
+                "reference_path": [
+                    [
+                        -255.23056030273438,
+                        298.9017028808594,
+                        4.3000030517578125
+                    ],
+                    [
+                        -268.5001525878906,
+                        300.0001525878906,
+                        4.100002288818359
+                    ],
+                    [
+                        -270.0001525878906,
+                        300.0001525878906,
+                        4.100002288818359
+                    ],
+                    [
+                        -271.5001525878906,
+                        298.5001525878906,
+                        4.100002288818359
+                    ],
+                    [
+                        -280.5001525878906,
+                        283.5001525878906,
+                        3.8000030517578125
+                    ],
+                    [
+                        -298.5001525878906,
+                        240.00015258789062,
+                        3.700002670288086
+                    ],
+                    [
+                        -300.0001525878906,
+                        238.50015258789062,
+                        3.700002670288086
+                    ],
+                    [
+                        -310.5001525878906,
+                        238.50015258789062,
+                        3.8000030517578125
+                    ],
+                    [
+                        -312.0001525878906,
+                        238.50015258789062,
+                        3.8000030517578125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -255.23055309678492,
+            298.9017078609851,
+            4.300003051757812
+        ],
+        "start_rotation": [
+            -0.026652373247025688,
+            0.0,
+            0.0,
+            0.9996447624032756
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "digital_camera",
+        "instruction": "Start your journey and head straight along the road, moving past the massive green recycling truck on your right, marked with the recycling symbol. As you pass the truck, the road continues between dark, blocky buildings. Keep following the path forward, maintaining your course. Eventually, as you progress down the street with another green vehicle visible further ahead, you will arrive at the digital camera.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/digital_camera_286",
+                "type": "object",
+                "location": [
+                    180.14626136981946,
+                    121.400730726387,
+                    11.167327754314073
+                ],
+                "radius": 0.07357958540816867,
+                "path_length": 44.053065931466364,
+                "reference_path": [
+                    [
+                        219.95652770996094,
+                        108.02485656738281,
+                        12.360486030578613
+                    ],
+                    [
+                        194.99984741210938,
+                        109.50015258789062,
+                        11.400001525878906
+                    ],
+                    [
+                        180.14625549316406,
+                        121.4007339477539,
+                        11.167327880859375
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            219.95652228273988,
+            108.02486007079186,
+            12.360486459598755
+        ],
+        "start_rotation": [
+            0.2236068033982085,
+            0.0,
+            0.0,
+            0.9746794331851036
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "soccer_ball_1",
+        "instruction": "Head straight down the road, passing between rows of stylized, blocky buildings. On your left, you will see a continuous facade of beige and tan structures. On your right, pass by the dark blue, cubist-style buildings. Continue forward as the perspective shifts lower, bringing you closer to the ground. As you proceed, the buildings on the right will reveal more detail, including a prominent light-colored bus stop shelter. Keep moving forward along the street until you arrive at the red traffic cone positioned on the grass.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/soccer_ball_1_757",
+                "type": "object",
+                "location": [
+                    -79.83682229310988,
+                    290.7052111767087,
+                    6.444052390908958
+                ],
+                "radius": 0.1582793831544933,
+                "path_length": 87.73928652696614,
+                "reference_path": [
+                    [
+                        -166.3293914794922,
+                        297.875,
+                        5.961442947387695
+                    ],
+                    [
+                        -84.00015258789062,
+                        294.0001525878906,
+                        6.700002670288086
+                    ],
+                    [
+                        -79.83682250976562,
+                        290.7052001953125,
+                        6.444052219390869
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -166.32939635939147,
+            297.875008425575,
+            5.96144317375213
+        ],
+        "start_rotation": [
+            0.9949203399100806,
+            0.0,
+            0.0,
+            -0.10066537256281229
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bottle_with_red_liquid",
+        "instruction": "Start by heading straight across the dark grass, keeping the dark, blocky buildings to your right. Continue forward for a significant distance, passing a white rectangular object on the left side of your path. As you approach a dark, monolithic structure ahead, the path will curve slightly left. After passing the main cluster of buildings, turn sharply to the left. You will arrive at the bottle with red liquid, which is located near a dark pillar-like object.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bottle_with_red_liquid_787",
+                "type": "object",
+                "location": [
+                    242.23825620240692,
+                    250.8318578206912,
+                    13.347463138784736
+                ],
+                "radius": 0.1599999960991978,
+                "path_length": 19.91005883747253,
+                "reference_path": [
+                    [
+                        241.50938415527344,
+                        268.5322265625,
+                        12.149568557739258
+                    ],
+                    [
+                        239.99984741210938,
+                        265.5001525878906,
+                        12.30000114440918
+                    ],
+                    [
+                        239.99984741210938,
+                        250.50015258789062,
+                        13.000001907348633
+                    ],
+                    [
+                        241.49984741210938,
+                        250.50015258789062,
+                        13.100004196166992
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            241.5093785384231,
+            268.532228019751,
+            12.14956870525741
+        ],
+        "start_rotation": [
+            0.586164966438648,
+            0.0,
+            0.0,
+            -0.8101917255316662
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Start facing the white ice cream truck with a yellow kayak on top. Follow the road, veering slightly left past the truck. Continue straight down the paved path, keeping the large dark building on your right and the grey apartment blocks on your left. As you proceed, you will see a white ambulance with a red cross parked on the left side of the path. Pass the ambulance and continue forward. When the path splits near a grassy area, veer left towards the open space between the buildings. You will arrive at the baby stroller.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_580",
+                "type": "object",
+                "location": [
+                    150.62762989848304,
+                    68.31466790753963,
+                    10.266523192353116
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 73.37640848038058,
+                "reference_path": [
+                    [
+                        119.48739624023438,
+                        119.63028717041016,
+                        9.032920837402344
+                    ],
+                    [
+                        125.99984741210938,
+                        111.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        127.49984741210938,
+                        108.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        128.99984741210938,
+                        87.00015258789062,
+                        9.10000228881836
+                    ],
+                    [
+                        130.49984741210938,
+                        84.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        140.99984741210938,
+                        66.00015258789062,
+                        9.60000228881836
+                    ],
+                    [
+                        143.99984741210938,
+                        63.000152587890625,
+                        9.60000228881836
+                    ],
+                    [
+                        145.49984741210938,
+                        63.000152587890625,
+                        9.60000228881836
+                    ],
+                    [
+                        151.49984741210938,
+                        66.00015258789062,
+                        9.900001525878906
+                    ],
+                    [
+                        151.49984741210938,
+                        67.50015258789062,
+                        9.900001525878906
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            119.4873990925146,
+            119.6302863897086,
+            9.032920422269163
+        ],
+        "start_rotation": [
+            0.8037194883405431,
+            0.0,
+            0.0,
+            -0.5950083899085925
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Turn left from the dark wall and proceed straight past the blocky buildings with painted facades. After passing a few of these mural-covered structures, veer slightly right, continuing along the open ground. As you approach a large, plain blue wall on your left, turn left and follow alongside it. Keep going straight, maintaining the blue wall to your left, until you spot a dark-colored offroad truck parked ahead. You will arrive at the offroad truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_75",
+                "type": "object",
+                "location": [
+                    -221.62745769093743,
+                    152.05287069955483,
+                    3.908415451343615
+                ],
+                "radius": 2.356372080779778,
+                "path_length": 30.934984500975613,
+                "reference_path": [
+                    [
+                        -212.3714141845703,
+                        130.5035400390625,
+                        3.0354244709014893
+                    ],
+                    [
+                        -210.00015258789062,
+                        141.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -207.00015258789062,
+                        145.50015258789062,
+                        2.9000015258789062
+                    ],
+                    [
+                        -207.00015258789062,
+                        147.00015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -208.50015258789062,
+                        148.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -211.50015258789062,
+                        150.00015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -219.00015258789062,
+                        152.05287170410156,
+                        3.1122848987579346
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -212.3714209847637,
+            130.50353632596946,
+            3.035424506892078
+        ],
+        "start_rotation": [
+            0.9064686067527808,
+            0.0,
+            0.0,
+            0.42227321128822776
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "Start by following the road straight ahead, keeping the green truck on your left. As you proceed, you will pass a row of dark, blocky buildings on your right. Continue forward as the buildings on the right transition into a series of facades depicting brown brick structures with windows. Keep moving along the road until you reach the end of this block. You will arrive at the vans_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_11",
+                "type": "object",
+                "location": [
+                    114.45092234944006,
+                    286.8433586823734,
+                    8.768416694590968
+                ],
+                "radius": 0.30993024869516717,
+                "path_length": 75.51223696659362,
+                "reference_path": [
+                    [
+                        44.77898406982422,
+                        304.3682556152344,
+                        7.600002288818359
+                    ],
+                    [
+                        101.99984741210938,
+                        300.0001525878906,
+                        8.60000228881836
+                    ],
+                    [
+                        103.49984741210938,
+                        298.5001525878906,
+                        8.60000228881836
+                    ],
+                    [
+                        114.45092010498047,
+                        286.8433532714844,
+                        8.768416404724121
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            44.77898289917283,
+            304.3682507137804,
+            7.600002288818359
+        ],
+        "start_rotation": [
+            0.9856608411035735,
+            0.0,
+            0.0,
+            -0.16873857387982127
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "indian_feather_hat",
+        "instruction": "Start by facing the dark wall, then turn right and follow the road. Pass the dark, looming block structures on your right and the light-colored building with a grid pattern on your left. Continue straight down the street, keeping the white building with blue window accents on your left. Move forward along the road past the tall, narrow buildings until you arrive at the Indian feather hat lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/indian_feather_hat_614",
+                "type": "object",
+                "location": [
+                    -203.63796389127148,
+                    185.30656270726342,
+                    3.905016174627426
+                ],
+                "radius": 0.3249999815525735,
+                "path_length": 65.19181911875542,
+                "reference_path": [
+                    [
+                        -219.7079315185547,
+                        130.16111755371094,
+                        2.9000015258789062
+                    ],
+                    [
+                        -217.50015258789062,
+                        129.00015258789062,
+                        2.9000015258789062
+                    ],
+                    [
+                        -216.00015258789062,
+                        129.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -213.00015258789062,
+                        132.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -210.00015258789062,
+                        141.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -207.00015258789062,
+                        145.50015258789062,
+                        2.9000015258789062
+                    ],
+                    [
+                        -207.00015258789062,
+                        147.00015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -207.00015258789062,
+                        154.50015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -205.50015258789062,
+                        186.00015258789062,
+                        3.8000030517578125
+                    ],
+                    [
+                        -204.00015258789062,
+                        186.00015258789062,
+                        3.8000030517578125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -219.70793398917007,
+            130.16111769023118,
+            2.9000015258789062
+        ],
+        "start_rotation": [
+            0.9989692325088085,
+            0.0,
+            0.0,
+            -0.045392427791010034
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_32",
+                "type": "object",
+                "location": [
+                    154.68493928234105,
+                    107.2945156542313,
+                    11.305048575564811
+                ],
+                "radius": 3.08506804170338,
+                "path_length": 44.11119933916478,
+                "reference_path": [
+                    [
+                        197.55055236816406,
+                        107.38004302978516,
+                        11.563538551330566
+                    ],
+                    [
+                        179.99984741210938,
+                        105.00015258789062,
+                        11.10000228881836
+                    ],
+                    [
+                        175.49984741210938,
+                        105.00015258789062,
+                        10.900001525878906
+                    ],
+                    [
+                        158.99984741210938,
+                        111.00015258789062,
+                        10.200002670288086
+                    ],
+                    [
+                        154.6849365234375,
+                        111.00015258789062,
+                        10.027405738830566
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_40",
+                "type": "object",
+                "location": [
+                    133.6749705290168,
+                    87.66948248012764,
+                    10.862281770099287
+                ],
+                "radius": 3.2694927479704106,
+                "path_length": 77.11524421565713,
+                "reference_path": [
+                    [
+                        197.55055236816406,
+                        107.38004302978516,
+                        11.563538551330566
+                    ],
+                    [
+                        139.49984741210938,
+                        97.50015258789062,
+                        9.400001525878906
+                    ],
+                    [
+                        130.49984741210938,
+                        93.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        128.99984741210938,
+                        91.50015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        128.99984741210938,
+                        87.00015258789062,
+                        9.10000228881836
+                    ],
+                    [
+                        130.49984741210938,
+                        87.00015258789062,
+                        9.200002670288086
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            197.55055642531062,
+            107.3800450346468,
+            11.56353820677311
+        ],
+        "start_rotation": [
+            0.19188388886350788,
+            0.0,
+            0.0,
+            -0.9814176344424513
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "beach_ball_1",
+        "instruction": "Start near the white blocky buildings and move forward along the road, keeping the tall dark structure to your left. Continue straight as the road curves slightly right, passing a row of beige and white buildings on your left and a darker brick building on your right. Keep moving forward down the street. As you proceed past the dark brick building, you will spot a red and white beach ball on the ground ahead.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/beach_ball_1_166",
+                "type": "object",
+                "location": [
+                    -47.08099875961099,
+                    292.5101011954795,
+                    6.640177522550246
+                ],
+                "radius": 0.18453125892418143,
+                "path_length": 57.746051873371385,
+                "reference_path": [
+                    [
+                        -85.15435028076172,
+                        269.263916015625,
+                        6.241020679473877
+                    ],
+                    [
+                        -82.50015258789062,
+                        270.0001525878906,
+                        6.3000030517578125
+                    ],
+                    [
+                        -81.00015258789062,
+                        271.5001525878906,
+                        6.3000030517578125
+                    ],
+                    [
+                        -79.50015258789062,
+                        291.0001525878906,
+                        6.700002670288086
+                    ],
+                    [
+                        -78.00015258789062,
+                        292.5001525878906,
+                        6.700002670288086
+                    ],
+                    [
+                        -67.50015258789062,
+                        294.0001525878906,
+                        6.8000030517578125
+                    ],
+                    [
+                        -54.000152587890625,
+                        294.0001525878906,
+                        6.8000030517578125
+                    ],
+                    [
+                        -47.080997467041016,
+                        292.5101013183594,
+                        6.6401777267456055
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -85.1543524417559,
+            269.2639069387173,
+            6.241020607783718
+        ],
+        "start_rotation": [
+            0.9971654359228252,
+            0.0,
+            0.0,
+            0.07524023791058859
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone_1",
+        "instruction": "Start with the dark wall on your left and the beige wall ahead, then turn right to align with the paved road stretching into the distance. Follow this road straight ahead, keeping the large, blurry gray structure on your left and the row of indistinct blocky buildings on your right. Continue forward for a long stretch as the road curves gently. Eventually, you will pass a green dumpster-like object on the right. Keep moving along the road, observing the shadow cast on the ground, until you arrive at the office_phone_1.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_1_792",
+                "type": "object",
+                "location": [
+                    280.8476073759068,
+                    159.64015038387654,
+                    15.05312280756445
+                ],
+                "radius": 0.10595344530389639,
+                "path_length": 71.68809209717607,
+                "reference_path": [
+                    [
+                        233.43133544921875,
+                        132.82606506347656,
+                        13.000001907348633
+                    ],
+                    [
+                        232.49984741210938,
+                        133.50015258789062,
+                        13.000001907348633
+                    ],
+                    [
+                        232.49984741210938,
+                        135.00015258789062,
+                        13.100004196166992
+                    ],
+                    [
+                        233.99984741210938,
+                        136.50015258789062,
+                        13.200002670288086
+                    ],
+                    [
+                        278.9998474121094,
+                        139.50015258789062,
+                        14.30000114440918
+                    ],
+                    [
+                        280.4998474121094,
+                        141.00015258789062,
+                        14.400003433227539
+                    ],
+                    [
+                        283.4998474121094,
+                        147.00015258789062,
+                        14.80000114440918
+                    ],
+                    [
+                        283.4998474121094,
+                        148.50015258789062,
+                        14.80000114440918
+                    ],
+                    [
+                        280.84759521484375,
+                        159.64015197753906,
+                        15.053122520446777
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            233.43133197199032,
+            132.82606116165078,
+            13.000001907348633
+        ],
+        "start_rotation": [
+            0.3911598899294544,
+            0.0,
+            0.0,
+            0.9203227371473428
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bathroom_mirror",
+        "instruction": "Head down the street, keeping the green vehicle in the distance as a reference point. As you proceed, you will pass a block of brown brick buildings on your right. Continue forward until you reach the cream-colored storefront with the \"QUICK STOP MART\" sign and large glass windows. Approach the store entrance, then turn slightly right. You will arrive at the round bathroom mirror on a stand.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bathroom_mirror_125",
+                "type": "object",
+                "location": [
+                    -153.4511132331972,
+                    51.82964951067245,
+                    3.437342932388302
+                ],
+                "radius": 0.4499999721411596,
+                "path_length": 57.65115465407216,
+                "reference_path": [
+                    [
+                        -163.23895263671875,
+                        0.24111308157444,
+                        2.321726083755493
+                    ],
+                    [
+                        -162.00015258789062,
+                        49.500152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        51.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -156.00015258789062,
+                        52.500152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -154.50015258789062,
+                        52.500152587890625,
+                        3.1000022888183594
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -163.2389473830825,
+            0.24111308350184885,
+            2.3217261868961905
+        ],
+        "start_rotation": [
+            0.6379909863147472,
+            0.0,
+            0.0,
+            0.770043830818179
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Begin by moving forward from the open plaza, slightly angling left past the graffiti-covered wall and the bicycle on your left. Continue along the paved path, keeping the large brick building on your left. As you proceed, the path curves gently leftward, guiding you past a red mushroom-like object floating near the building. Follow the red curb line as it bends left, leading you towards a grassy area between blocky grey structures. Turn left off the main path onto the grass, heading towards the buildings. You will arrive at the purple and white baby stroller.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_580",
+                "type": "object",
+                "location": [
+                    150.62762989848304,
+                    68.31466790753963,
+                    10.266523192353116
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 52.326791318735985,
+                "reference_path": [
+                    [
+                        136.28378295898438,
+                        97.84912872314453,
+                        9.328534126281738
+                    ],
+                    [
+                        130.49984741210938,
+                        93.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        128.99984741210938,
+                        91.50015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        128.99984741210938,
+                        87.00015258789062,
+                        9.10000228881836
+                    ],
+                    [
+                        130.49984741210938,
+                        84.00015258789062,
+                        9.200002670288086
+                    ],
+                    [
+                        140.99984741210938,
+                        66.00015258789062,
+                        9.60000228881836
+                    ],
+                    [
+                        143.99984741210938,
+                        63.000152587890625,
+                        9.60000228881836
+                    ],
+                    [
+                        145.49984741210938,
+                        63.000152587890625,
+                        9.60000228881836
+                    ],
+                    [
+                        151.49984741210938,
+                        66.00015258789062,
+                        9.900001525878906
+                    ],
+                    [
+                        151.49984741210938,
+                        67.50015258789062,
+                        9.900001525878906
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            136.28377859199935,
+            97.8491262326475,
+            9.328534420394588
+        ],
+        "start_rotation": [
+            0.1841298962907315,
+            0.0,
+            0.0,
+            -0.9829019184496307
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Go straight along the road, keeping the row of large, blocky buildings with abstract murals to your right. Continue forward, passing the dark storefronts on your left. As you proceed, you will pass a red and white umbrella in the distance on the left. Keep moving straight ahead until you reach a wooden park bench with a backrest on the left side of the path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_707",
+                "type": "object",
+                "location": [
+                    54.7919066869839,
+                    351.4506085111932,
+                    5.708668629531999
+                ],
+                "radius": 1.107618065751673,
+                "path_length": 62.17753110536202,
+                "reference_path": [
+                    [
+                        -6.291894435882568,
+                        341.0985412597656,
+                        5.960109710693359
+                    ],
+                    [
+                        -6.000152587890625,
+                        340.5001525878906,
+                        6.000001907348633
+                    ],
+                    [
+                        -4.500152587890625,
+                        340.5001525878906,
+                        6.000001907348633
+                    ],
+                    [
+                        5.999847412109375,
+                        342.0001525878906,
+                        6.100002288818359
+                    ],
+                    [
+                        13.499847412109375,
+                        343.5001525878906,
+                        6.100002288818359
+                    ],
+                    [
+                        47.999847412109375,
+                        348.0001525878906,
+                        5.400001525878906
+                    ],
+                    [
+                        54.791908264160156,
+                        349.5001525878906,
+                        5.400001525878906
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -6.291894638335388,
+            341.0985313067149,
+            5.960109840584767
+        ],
+        "start_rotation": [
+            0.7193713043147696,
+            0.0,
+            0.0,
+            -0.6946257456562254
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ladder",
+        "instruction": "Start by slightly veering left to align with the road, positioning yourself between the tall, shadowed concrete structures on the left and the beige, windowed building facades on the right. Continue straight down this urban corridor, following the road surface. Keep moving forward past the looming dark blocks on your left. Eventually, the lighting changes and you will arrive at the ladder.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ladder_438",
+                "type": "object",
+                "location": [
+                    -108.68096386820014,
+                    289.74288570594706,
+                    6.218546194888546
+                ],
+                "radius": 2.3531163111021627,
+                "path_length": 80.90933244737133,
+                "reference_path": [
+                    [
+                        -31.237503051757812,
+                        313.14239501953125,
+                        6.577735900878906
+                    ],
+                    [
+                        -39.000152587890625,
+                        310.5001525878906,
+                        6.700002670288086
+                    ],
+                    [
+                        -108.68096160888672,
+                        289.7428894042969,
+                        6.218546390533447
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -31.237503077741554,
+            313.14238109343677,
+            6.577736137321547
+        ],
+        "start_rotation": [
+            0.04125039076353943,
+            0.0,
+            0.0,
+            -0.9991488403945907
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dragon_ball",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dragon_ball_344",
+                "type": "object",
+                "location": [
+                    -267.0439639556672,
+                    261.7058286889974,
+                    3.6034532273592847
+                ],
+                "radius": 0.07723064737285767,
+                "path_length": 83.04517329499892,
+                "reference_path": [
+                    [
+                        -268.13372802734375,
+                        218.51344299316406,
+                        3.4622156620025635
+                    ],
+                    [
+                        -276.0001525878906,
+                        225.00015258789062,
+                        3.4000015258789062
+                    ],
+                    [
+                        -277.5001525878906,
+                        226.50015258789062,
+                        3.4000015258789062
+                    ],
+                    [
+                        -280.5001525878906,
+                        244.50015258789062,
+                        3.500001907348633
+                    ],
+                    [
+                        -280.5001525878906,
+                        247.50015258789062,
+                        3.500001907348633
+                    ],
+                    [
+                        -274.5001525878906,
+                        276.0001525878906,
+                        3.6000022888183594
+                    ],
+                    [
+                        -273.0001525878906,
+                        277.5001525878906,
+                        3.8000030517578125
+                    ],
+                    [
+                        -271.5001525878906,
+                        277.5001525878906,
+                        3.8000030517578125
+                    ],
+                    [
+                        -270.0001525878906,
+                        276.0001525878906,
+                        3.9000015258789062
+                    ],
+                    [
+                        -267.0439758300781,
+                        261.7058410644531,
+                        3.6034531593322754
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -268.13373740015993,
+            218.51344470776198,
+            3.4622156027968933
+        ],
+        "start_rotation": [
+            0.5601216843182433,
+            0.0,
+            0.0,
+            0.8284103444287102
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cell_phone",
+        "instruction": "Head straight along the road, keeping the dark, multi-story buildings on your right. As you proceed, you will see a white ambulance with a red stripe parked ahead in the distance. Continue forward, passing a green patch of grass on your left and a wooden bench on your right. Keep moving towards the ambulance. As you get closer, you will see a dark, shadowy figure on the ground to your left. Continue past this figure, and you will arrive at the cell phone near the white ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cell_phone_373",
+                "type": "object",
+                "location": [
+                    -253.4936915705276,
+                    72.52457181255963,
+                    1.8543621823749357
+                ],
+                "radius": 0.19286522589021615,
+                "path_length": 98.23007727397044,
+                "reference_path": [
+                    [
+                        -321.4828186035156,
+                        64.56952667236328,
+                        2.1000022888183594
+                    ],
+                    [
+                        -322.5001525878906,
+                        64.50015258789062,
+                        2.1000022888183594
+                    ],
+                    [
+                        -322.5001525878906,
+                        63.000152587890625,
+                        2.1000022888183594
+                    ],
+                    [
+                        -316.5001525878906,
+                        57.000152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -288.0001525878906,
+                        43.500152587890625,
+                        2.000001907348633
+                    ],
+                    [
+                        -286.5001525878906,
+                        43.500152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -267.0001525878906,
+                        48.000152587890625,
+                        1.6000022888183594
+                    ],
+                    [
+                        -258.0001525878906,
+                        55.500152587890625,
+                        1.700002670288086
+                    ],
+                    [
+                        -252.00015258789062,
+                        60.000152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -249.00015258789062,
+                        63.000152587890625,
+                        1.9000015258789062
+                    ],
+                    [
+                        -249.00015258789062,
+                        64.50015258789062,
+                        1.8000030517578125
+                    ],
+                    [
+                        -250.50015258789062,
+                        67.50015258789062,
+                        1.9000015258789062
+                    ],
+                    [
+                        -253.4936981201172,
+                        72.52457427978516,
+                        1.8543621301651
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -321.482825424721,
+            64.56952880059404,
+            2.1000022888183594
+        ],
+        "start_rotation": [
+            0.06155965599678443,
+            0.0,
+            0.0,
+            -0.9981034058420789
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bike_rack",
+        "instruction": "",
+        "closest_goal_idx": 2,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bike_rack_208",
+                "type": "object",
+                "location": [
+                    -314.0742565052086,
+                    194.7579212912429,
+                    3.8628899295851653
+                ],
+                "radius": 1.5178090392315085,
+                "path_length": 71.6853119004123,
+                "reference_path": [
+                    [
+                        -290.3331298828125,
+                        240.8404083251953,
+                        3.563873529434204
+                    ],
+                    [
+                        -280.5001525878906,
+                        226.50015258789062,
+                        3.4000015258789062
+                    ],
+                    [
+                        -277.5001525878906,
+                        222.00015258789062,
+                        3.3000030517578125
+                    ],
+                    [
+                        -277.5001525878906,
+                        217.50015258789062,
+                        3.3000030517578125
+                    ],
+                    [
+                        -283.5001525878906,
+                        207.00015258789062,
+                        3.3000030517578125
+                    ],
+                    [
+                        -289.5001525878906,
+                        201.00015258789062,
+                        3.3000030517578125
+                    ],
+                    [
+                        -303.0001525878906,
+                        196.50015258789062,
+                        3.4000015258789062
+                    ],
+                    [
+                        -310.5001525878906,
+                        193.50015258789062,
+                        3.500001907348633
+                    ],
+                    [
+                        -312.0001525878906,
+                        193.50015258789062,
+                        3.500001907348633
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bike_rack_433",
+                "type": "object",
+                "location": [
+                    -245.69588048752632,
+                    182.8237536411761,
+                    3.5896481487668837
+                ],
+                "radius": 1.5242215595412034,
+                "path_length": 97.73233969056002,
+                "reference_path": [
+                    [
+                        -290.3331298828125,
+                        240.8404083251953,
+                        3.563873529434204
+                    ],
+                    [
+                        -267.0001525878906,
+                        213.00015258789062,
+                        3.4000015258789062
+                    ],
+                    [
+                        -267.0001525878906,
+                        205.50015258789062,
+                        3.3000030517578125
+                    ],
+                    [
+                        -268.5001525878906,
+                        204.00015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -277.5001525878906,
+                        195.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -277.5001525878906,
+                        193.50015258789062,
+                        2.9000015258789062
+                    ],
+                    [
+                        -276.0001525878906,
+                        192.00015258789062,
+                        2.9000015258789062
+                    ],
+                    [
+                        -258.0001525878906,
+                        184.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -247.50015258789062,
+                        180.00015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -244.50015258789062,
+                        180.00015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -244.50015258789062,
+                        181.50015258789062,
+                        3.3000030517578125
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bike_rack_526",
+                "type": "object",
+                "location": [
+                    -301.23415793826206,
+                    240.7750490705477,
+                    4.135342900557077
+                ],
+                "radius": 1.523639631510207,
+                "path_length": 9.711265093513916,
+                "reference_path": [
+                    [
+                        -290.3331298828125,
+                        240.8404083251953,
+                        3.563873529434204
+                    ],
+                    [
+                        -298.5001525878906,
+                        240.00015258789062,
+                        3.700002670288086
+                    ],
+                    [
+                        -300.0001525878906,
+                        240.00015258789062,
+                        3.700002670288086
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -290.33312663319043,
+            240.84040796487116,
+            3.5638734209221847
+        ],
+        "start_rotation": [
+            -0.06679436452868832,
+            0.0,
+            0.0,
+            -0.9977667627593177
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Start by slightly turning left and following the road alongside a long row of dark, blocky buildings on your right. Continue straight down the street, keeping the dark facades and the occasional lighter-colored wall sections to your side. As you proceed, you will see a pinkish-purple baby stroller sitting on the sidewalk near the building wall ahead. Turn right towards the sidewalk to arrive at the baby stroller.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_631",
+                "type": "object",
+                "location": [
+                    1.9217283915506922,
+                    230.5670924726179,
+                    6.7735112542561176
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 53.809839852950404,
+                "reference_path": [
+                    [
+                        -13.432988166809082,
+                        182.5051727294922,
+                        5.700002670288086
+                    ],
+                    [
+                        -1.500152587890625,
+                        199.50015258789062,
+                        5.900001525878906
+                    ],
+                    [
+                        -0.000152587890625,
+                        231.00015258789062,
+                        6.400001525878906
+                    ],
+                    [
+                        1.499847412109375,
+                        231.00015258789062,
+                        6.500001907348633
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -13.43298771728126,
+            182.50516642279362,
+            5.700002670288084
+        ],
+        "start_rotation": [
+            0.8696818569835078,
+            0.0,
+            0.0,
+            0.4936126696446491
+        ],
+        "ceiling_height": 1.0
+    }
+]

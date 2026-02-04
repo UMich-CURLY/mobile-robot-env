@@ -173,7 +173,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Face right and move towards the white chair with wooden legs, then turn left to reach the mirror.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -244,7 +244,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start from a position facing a long wooden bookshelf on the right, filled with books. To your left, there is a tall green topiary plant next to a white chair. Move forward along the carpeted floor past the plant until you reach the desk area ahead.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -403,7 +403,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pillow",
-        "instruction": "",
+        "instruction": "Start by facing the dark grey, rounded seating area; slightly turn left and advance past the grey armchair on your left. Continue straight through the open office space, moving towards the large windows and passing the desk area with the laptop on your left. As you approach the large wooden column and the bookshelf, turn right. Move forward, keeping the bookshelf to your left and the grey ottoman to your right, until you arrive at the shopping trolley near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -484,7 +484,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plate",
-        "instruction": "",
+        "instruction": "Start with the bar counter and stools on your left and a person standing behind the counter. Slightly turn right to avoid the person and head towards the open area between the bar seating and the dining tables. Move forward, passing the bar stools with green seats and gold frames on your left. Continue straight, keeping the light grey armchair on your left. You will arrive at the plate on a table near the armchair.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -708,7 +708,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "toy",
-        "instruction": "",
+        "instruction": "Start by facing the yellow sofa chair on your left, then turn slightly to the right to move away from it. Continue straight ahead, keeping the large wooden shelving unit filled with books and vases on your right. Once you are past the shelves, turn left to follow the path along the floor-to-ceiling windows. Move forward for a while down this corridor, keeping the windows on your right and the office area with desks on your right. Eventually, you will arrive near a large, textured white sofa chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -874,7 +874,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Start near the desk with the laptop on the left, facing towards the large windows and bookshelves. Turn slightly right and move forward across the gray carpet, passing the wooden bookshelves filled with dark books. Continue straight, keeping the orange beanbag chair to your right. You will arrive at the tray on the low shelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1104,7 +1104,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "blanket",
-        "instruction": "",
+        "instruction": "Start facing the bar counter with green velvet stools. Turn slightly left and head straight across the polished white floor, passing the lounge area. Continue moving forward towards the living room section until you reach the gray sofa with the orange and white patterned pillow; you will arrive near the white blanket on the floor.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1281,7 +1281,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start from the position between the chairs and turn left, moving across the white floor until you are near the large window with text on it. Slightly turn right to navigate past the table with glass top and metal legs. Then, turn right again to face the dining area with long tables. Proceed forward and you will arrive at the couch.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -1483,7 +1483,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pot",
-        "instruction": "",
+        "instruction": "Navigate through the aisle between the white wooden furniture on the left and the long bookshelf on the right. After passing the white chair and the yellow beanbag on your left, turn left towards the open office area. Proceed forward, keeping the yellow beanbag on your left, and then slightly adjust your path to the right as you approach the bookshelf. ",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1539,7 +1539,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "blanket",
-        "instruction": "",
+        "instruction": "Walk straight ahead past the dark green velvet chair on your right. Keep going until you pass the marble counter, then turn right. Head towards the woman sitting on the white sofa in the distance. You will arrive at the blanket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1610,7 +1610,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Start by facing a person in a red shirt pushing a silver stroller. Slightly turn right to navigate around a large, light grey and brown arm chair. Move forward into the open living area with white glossy floors. Continue straight past the seating area until you arrive at the metallic tray on a stand.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1681,7 +1681,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Move forward, passing the large potted palm tree on your right. As you pass the palm tree, angle slightly to the right, heading towards the white armchairs. Continue moving forward, keeping the table with the clear glass top on your left and the white armchairs on your right. Proceed straight ahead into the open area, moving past the clear ghost chairs towards the white lounge chair with a red cushion in the distance. As you approach the lounge chair, turn right to face it directly. Move a short distance forward, and you will arrive at the stool.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1900,7 +1900,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pot",
-        "instruction": "",
+        "instruction": "Start from the area near the chair with the blue pillow, facing the child. Move forward, passing the child sitting on the white pouf, and proceed towards the white sofa in the background where a person is sitting. You will arrive at the pot placed on the red table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1971,7 +1971,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "blanket",
-        "instruction": "",
+        "instruction": "With the bar counter on your left, proceed forward past the green velvet bar stools. Upon reaching the white armchair with the blue and grey pillow, turn left. Continue straight, passing between the white armchairs and the grey modern chair, heading towards the large windows at the back. When you are near the grey chair with the gold legs, turn right. You will arrive at the blanket.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2077,7 +2077,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Start by standing near a seated child in a red jacket, facing towards a white sofa in the distance. Turn slightly to the right and proceed across the open floor area towards a long marble bar counter lined with green-cushioned stools. Continue moving forward, keeping the bar stools on your right side. Adjust your path slightly to the right as you approach the end of the counter. Finally, move a short distance further to arrive next to the green bar stools.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2206,7 +2206,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "cabinet",
-        "instruction": "",
+        "instruction": "Starting from a position near the white marble counter with green velvet chairs, slightly turn right and move forward past the row of chairs. Slightly turn left to orient yourself towards the open space, then proceed forward, passing the white modern lounge chairs on your right. Turn right and head towards the large light blue shelving unit filled with various decor items. You will arrive at the cabinet.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2322,7 +2322,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Head straight, passing the row of dark green high-backed bar stools on your left. As you move forward, slightly adjust your path to the left to navigate between the bar area and the seating area. Continue straight down the aisle, keeping the light-colored dining tables and armchairs to your right. You will arrive at the white trashcan located near the back wall seating.",
         "closest_goal_idx": 0,
         "goals": [
             {

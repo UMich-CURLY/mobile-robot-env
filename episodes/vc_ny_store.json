@@ -1,0 +1,1462 @@
+[
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "university_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/university_0_2",
+                "type": "object",
+                "location": [
+                    58.42443127092855,
+                    91.57601299302559,
+                    11.717748686324118
+                ],
+                "radius": 3.527127859962121,
+                "path_length": 35.91092023797095,
+                "reference_path": [
+                    [
+                        95.51129913330078,
+                        97.9054946899414,
+                        10.14142894744873
+                    ],
+                    [
+                        61.8709716796875,
+                        90.69244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        60.3709716796875,
+                        90.69244384765625,
+                        9.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            95.51130158233195,
+            97.90549764518754,
+            10.14142876578421
+        ],
+        "start_rotation": [
+            0.08006242506972269,
+            0.0,
+            0.0,
+            -0.9967898515193436
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_0",
+        "instruction": "Start facing the Rocket Burger diner with its red and white facade. Move forward along the road, keeping the diner on your left. Continue straight, passing a white food truck parked near the diner.\n\nAs you proceed down the street, you will pass a red mailbox on your right side. Keep heading straight towards the Global Currency Exchange building, recognizable by its white exterior and large blue sign. You will arrive at the bureau de change, which is located inside that building.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_0_6",
+                "type": "object",
+                "location": [
+                    -229.2952057966528,
+                    135.60503778364256,
+                    9.022314867961231
+                ],
+                "radius": 3.3964279195568423,
+                "path_length": 81.84303510730642,
+                "reference_path": [
+                    [
+                        -263.2720031738281,
+                        94.37184143066406,
+                        6.799999237060547
+                    ],
+                    [
+                        -248.6290283203125,
+                        101.19244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -223.1290283203125,
+                        114.69244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -221.6290283203125,
+                        116.19244384765625,
+                        6.799999237060547
+                    ],
+                    [
+                        -221.6290283203125,
+                        117.69244384765625,
+                        6.799999237060547
+                    ],
+                    [
+                        -223.1290283203125,
+                        119.19244384765625,
+                        6.799999237060547
+                    ],
+                    [
+                        -238.1290283203125,
+                        134.19244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -238.1290283203125,
+                        135.69244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -236.6290283203125,
+                        137.19244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -232.1290283203125,
+                        138.69244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -230.6290283203125,
+                        138.69244384765625,
+                        7.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -263.2720154404117,
+            94.37184027257744,
+            6.799999237060547
+        ],
+        "start_rotation": [
+            0.9800075354279956,
+            0.0,
+            0.0,
+            0.19896037420638804
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_9",
+                "type": "object",
+                "location": [
+                    172.65068734658826,
+                    297.03492494122634,
+                    14.100061255214051
+                ],
+                "radius": 3.4940036968789627,
+                "path_length": 88.23344029205042,
+                "reference_path": [
+                    [
+                        176.77688598632812,
+                        276.46783447265625,
+                        12.19999885559082
+                    ],
+                    [
+                        175.8709716796875,
+                        273.69244384765625,
+                        12.19999885559082
+                    ],
+                    [
+                        174.3709716796875,
+                        272.19244384765625,
+                        11.999998092651367
+                    ],
+                    [
+                        172.8709716796875,
+                        272.19244384765625,
+                        11.999998092651367
+                    ],
+                    [
+                        154.8709716796875,
+                        281.19244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        151.8709716796875,
+                        284.19244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        151.8709716796875,
+                        285.69244384765625,
+                        11.39999771118164
+                    ],
+                    [
+                        157.8709716796875,
+                        297.69244384765625,
+                        11.69999885559082
+                    ],
+                    [
+                        166.8709716796875,
+                        314.19244384765625,
+                        11.89999771118164
+                    ],
+                    [
+                        168.3709716796875,
+                        315.69244384765625,
+                        11.999998092651367
+                    ],
+                    [
+                        169.8709716796875,
+                        315.69244384765625,
+                        11.999998092651367
+                    ],
+                    [
+                        171.3709716796875,
+                        314.19244384765625,
+                        12.19999885559082
+                    ],
+                    [
+                        171.3709716796875,
+                        308.19244384765625,
+                        12.19999885559082
+                    ],
+                    [
+                        168.3709716796875,
+                        302.19244384765625,
+                        12.100000381469727
+                    ],
+                    [
+                        168.3709716796875,
+                        299.19244384765625,
+                        12.100000381469727
+                    ],
+                    [
+                        169.8709716796875,
+                        297.69244384765625,
+                        12.100000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            176.7768915692799,
+            276.4678192386287,
+            12.19999885559082
+        ],
+        "start_rotation": [
+            0.7732544930043326,
+            0.0,
+            0.0,
+            -0.6340958043139953
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_4",
+        "instruction": "Move forward along the road, heading toward the right side of the street where the buildings are shadowed. As you approach the sidewalk, focus on the corner building with the retro red and silver storefront. This is a diner-style establishment called \"Rocket Burgers,\" featuring large glass windows, checkered floors inside, and neon-style signage above. Continue moving toward this red storefront until you are directly in front of the entrance. You will arrive at Rocket Burgers.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_4_9",
+                "type": "object",
+                "location": [
+                    20.894118960552568,
+                    215.58989415660207,
+                    11.49378572861186
+                ],
+                "radius": 3.624035689838365,
+                "path_length": 16.170906889072484,
+                "reference_path": [
+                    [
+                        33.59152603149414,
+                        227.61746215820312,
+                        9.946486473083496
+                    ],
+                    [
+                        27.3709716796875,
+                        219.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        25.8709716796875,
+                        218.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        22.8709716796875,
+                        215.5898895263672,
+                        9.668452262878418
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            33.59152570410355,
+            227.6174648149694,
+            9.946486551020165
+        ],
+        "start_rotation": [
+            0.6538654505065437,
+            0.0,
+            0.0,
+            -0.7566108462306596
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_1_4",
+                "type": "object",
+                "location": [
+                    75.58628005193628,
+                    218.35059198230505,
+                    11.854889259606125
+                ],
+                "radius": 3.4173515935734144,
+                "path_length": 9.018230949553908,
+                "reference_path": [
+                    [
+                        65.00074768066406,
+                        218.17672729492188,
+                        10.378888130187988
+                    ],
+                    [
+                        72.3709716796875,
+                        216.69244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        73.8709716796875,
+                        216.69244384765625,
+                        10.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            65.00074587131326,
+            218.17672436179936,
+            10.378888015429228
+        ],
+        "start_rotation": [
+            0.9796045657132241,
+            0.0,
+            0.0,
+            -0.20093505128226288
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_1",
+        "instruction": "Head down the dark city street, keeping the tall buildings on your left and right. You will pass a white armored truck parked on the right side of the road. Continue straight ahead along the asphalt, moving past a white trash can on the sidewalk to your left. As you proceed, look for a building with a blue neon sign labeled \"METRO CASH POINT\" on the left side of the street. Approach this building and enter through the glass doors; you will arrive at the ATM inside.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_1_5",
+                "type": "object",
+                "location": [
+                    -259.53254066976507,
+                    216.20753715764636,
+                    8.910560840330797
+                ],
+                "radius": 3.4621244019091364,
+                "path_length": 71.04441790411057,
+                "reference_path": [
+                    [
+                        -198.74978637695312,
+                        188.23744201660156,
+                        7.299999237060547
+                    ],
+                    [
+                        -214.1290283203125,
+                        200.19244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -215.6290283203125,
+                        201.69244384765625,
+                        7.299999237060547
+                    ],
+                    [
+                        -217.1290283203125,
+                        206.19244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -218.6290283203125,
+                        207.69244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -251.6290283203125,
+                        221.19244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -253.1290283203125,
+                        221.19244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -257.6290283203125,
+                        218.19244384765625,
+                        6.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -198.7497914577134,
+            188.23744580753203,
+            7.299999237060547
+        ],
+        "start_rotation": [
+            0.22754028756686623,
+            0.0,
+            0.0,
+            0.9737686673609846
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_2_1",
+                "type": "object",
+                "location": [
+                    -197.36782682788902,
+                    133.84232894191632,
+                    8.863984876219757
+                ],
+                "radius": 3.5121135078066033,
+                "path_length": 26.06824779380773,
+                "reference_path": [
+                    [
+                        -224.70700073242188,
+                        131.481201171875,
+                        6.999998092651367
+                    ],
+                    [
+                        -211.1290283203125,
+                        131.19244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -209.6290283203125,
+                        131.19244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -200.6290283203125,
+                        134.19244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -199.1290283203125,
+                        134.19244384765625,
+                        7.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -224.7070030185578,
+            131.48119771219126,
+            6.999998092651367
+        ],
+        "start_rotation": [
+            0.9998105998467444,
+            0.0,
+            0.0,
+            -0.019461871289607465
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "Start driving straight down the urban road, keeping the large building with the \"Terrace\" sign on your left. Continue forward past the intersection. As you proceed, you will see a white shop sign labeled \"Apex Community Bank\" on the right. Keep moving straight ahead along the street. Ahead on your right, look for a modern storefront with a red \"Chick'n'Burger Co.\" sign. Turn right towards the glass windows and you will arrive at the fast food restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_6",
+                "type": "object",
+                "location": [
+                    53.61741572678298,
+                    213.41434718654224,
+                    12.224453692156686
+                ],
+                "radius": 3.628308335741025,
+                "path_length": 74.95509161217284,
+                "reference_path": [
+                    [
+                        2.8305513858795166,
+                        191.15097045898438,
+                        9.334451675415039
+                    ],
+                    [
+                        9.3709716796875,
+                        188.19244384765625,
+                        9.39999771118164
+                    ],
+                    [
+                        12.3709716796875,
+                        186.69244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        18.3709716796875,
+                        182.19244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        28.8709716796875,
+                        177.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        30.3709716796875,
+                        177.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        31.8709716796875,
+                        179.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        33.3709716796875,
+                        182.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        43.8709716796875,
+                        206.19244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        49.8709716796875,
+                        215.19244384765625,
+                        10.19999885559082
+                    ],
+                    [
+                        51.3709716796875,
+                        215.19244384765625,
+                        10.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.8305514941811145,
+            191.15097563181573,
+            9.334451837507766
+        ],
+        "start_rotation": [
+            0.9587358795310023,
+            0.0,
+            0.0,
+            -0.2842982822669097
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_4",
+                "type": "object",
+                "location": [
+                    148.75036298801902,
+                    183.88733030167262,
+                    13.304903558522701
+                ],
+                "radius": 3.3202316120237754,
+                "path_length": 22.542107652269742,
+                "reference_path": [
+                    [
+                        138.09109497070312,
+                        204.61395263671875,
+                        11.299999237060547
+                    ],
+                    [
+                        138.3709716796875,
+                        203.19244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        139.8709716796875,
+                        200.19244384765625,
+                        11.099998474121094
+                    ],
+                    [
+                        148.8709716796875,
+                        186.69244384765625,
+                        11.499998092651367
+                    ],
+                    [
+                        148.8709716796875,
+                        185.19244384765625,
+                        11.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            138.0910896751509,
+            204.6139597718976,
+            11.299999237060547
+        ],
+        "start_rotation": [
+            0.9032129674181274,
+            0.0,
+            0.0,
+            -0.429192655444779
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_4",
+        "instruction": "Move forward along the road, heading straight between the tall city buildings towards the distant gap of blue sky. As you proceed, you'll pass a white fire hydrant on your right. Continue straight down the street, keeping the dark shadowed buildings on your left and the sunlit beige skyscrapers on your right. Eventually, on your left-hand side, you will see a red and white storefront with large glass windows. This is the fast_food_4.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_4_9",
+                "type": "object",
+                "location": [
+                    20.894118960552568,
+                    215.58989415660207,
+                    11.49378572861186
+                ],
+                "radius": 3.624035689838365,
+                "path_length": 57.49702102249359,
+                "reference_path": [
+                    [
+                        41.50218200683594,
+                        163.94046020507812,
+                        9.620558738708496
+                    ],
+                    [
+                        27.3709716796875,
+                        179.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        25.8709716796875,
+                        197.19244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        22.8709716796875,
+                        215.5898895263672,
+                        9.668452262878418
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            41.502181845275494,
+            163.94045595541752,
+            9.620558617290625
+        ],
+        "start_rotation": [
+            0.2359220342733935,
+            0.0,
+            0.0,
+            0.9717719864990468
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_9",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_9_8",
+                "type": "object",
+                "location": [
+                    -27.695233939673045,
+                    281.4613476849365,
+                    11.160805008342326
+                ],
+                "radius": 3.535878421021316,
+                "path_length": 74.0365124518059,
+                "reference_path": [
+                    [
+                        33.346923828125,
+                        245.6110076904297,
+                        10.046612739562988
+                    ],
+                    [
+                        28.8709716796875,
+                        252.69244384765625,
+                        10.099998474121094
+                    ],
+                    [
+                        25.8709716796875,
+                        255.69244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        21.3709716796875,
+                        258.69244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        -17.6290283203125,
+                        281.19244384765625,
+                        9.19999885559082
+                    ],
+                    [
+                        -22.1290283203125,
+                        284.19244384765625,
+                        9.19999885559082
+                    ],
+                    [
+                        -27.695234298706055,
+                        284.19244384765625,
+                        9.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            33.34692266992135,
+            245.61100444314306,
+            10.04661266652566
+        ],
+        "start_rotation": [
+            0.4791299486190408,
+            0.0,
+            0.0,
+            0.8777439788094905
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_0_9",
+                "type": "object",
+                "location": [
+                    -122.35604167174805,
+                    330.0926182892358,
+                    9.812900818865721
+                ],
+                "radius": 3.4787160595365947,
+                "path_length": 88.38909091999643,
+                "reference_path": [
+                    [
+                        -166.8666534423828,
+                        259.0635681152344,
+                        7.69999885559082
+                    ],
+                    [
+                        -167.6290283203125,
+                        260.19244384765625,
+                        7.69999885559082
+                    ],
+                    [
+                        -167.6290283203125,
+                        263.19244384765625,
+                        7.69999885559082
+                    ],
+                    [
+                        -166.1290283203125,
+                        275.19244384765625,
+                        7.69999885559082
+                    ],
+                    [
+                        -140.6290283203125,
+                        306.69244384765625,
+                        7.899997711181641
+                    ],
+                    [
+                        -136.1290283203125,
+                        321.69244384765625,
+                        7.999998092651367
+                    ],
+                    [
+                        -133.1290283203125,
+                        326.19244384765625,
+                        7.899997711181641
+                    ],
+                    [
+                        -131.6290283203125,
+                        327.69244384765625,
+                        7.799999237060547
+                    ],
+                    [
+                        -125.6290283203125,
+                        330.69244384765625,
+                        7.799999237060547
+                    ],
+                    [
+                        -124.1290283203125,
+                        330.69244384765625,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -166.86664640744263,
+            259.0635706677425,
+            7.69999885559082
+        ],
+        "start_rotation": [
+            0.3106194278034182,
+            0.0,
+            0.0,
+            0.9505343608050564
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_7",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_7_8",
+                "type": "object",
+                "location": [
+                    350.3213148195804,
+                    182.42001135081617,
+                    18.668797909249513
+                ],
+                "radius": 3.430874471128618,
+                "path_length": 20.9400250894957,
+                "reference_path": [
+                    [
+                        329.3114318847656,
+                        176.75042724609375,
+                        16.299997329711914
+                    ],
+                    [
+                        349.8709716796875,
+                        180.69244384765625,
+                        16.799997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            329.3114210870713,
+            176.75043103806868,
+            16.29999732971191
+        ],
+        "start_rotation": [
+            0.9915410574414675,
+            0.0,
+            0.0,
+            0.12979341819929285
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_2_5",
+                "type": "object",
+                "location": [
+                    -257.9100370666481,
+                    198.31357972764783,
+                    8.571022361438834
+                ],
+                "radius": 3.449886840667574,
+                "path_length": 24.89656431280591,
+                "reference_path": [
+                    [
+                        -247.72921752929688,
+                        173.02259826660156,
+                        6.999998092651367
+                    ],
+                    [
+                        -257.6290283203125,
+                        194.19244384765625,
+                        6.899997711181641
+                    ],
+                    [
+                        -257.9100341796875,
+                        195.69244384765625,
+                        6.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -247.72921238844785,
+            173.02259934948353,
+            6.999998092651366
+        ],
+        "start_rotation": [
+            0.6018088821168603,
+            0.0,
+            0.0,
+            0.7986401376122132
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_1_8",
+                "type": "object",
+                "location": [
+                    285.14852967771253,
+                    46.068390782382565,
+                    13.407378896796692
+                ],
+                "radius": 3.5515153428964688,
+                "path_length": 24.035095130121395,
+                "reference_path": [
+                    [
+                        296.7112731933594,
+                        68.06303405761719,
+                        13.399999618530273
+                    ],
+                    [
+                        286.8709716796875,
+                        57.69244384765625,
+                        12.69999885559082
+                    ],
+                    [
+                        283.8709716796875,
+                        51.69244384765625,
+                        12.299997329711914
+                    ],
+                    [
+                        283.8709716796875,
+                        48.69244384765625,
+                        12.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            296.7112676196896,
+            68.06303509845796,
+            13.399999618530273
+        ],
+        "start_rotation": [
+            0.17075122204614082,
+            0.0,
+            0.0,
+            -0.9853141733324197
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_8",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_8_8",
+                "type": "object",
+                "location": [
+                    -71.39956507129175,
+                    305.29572042255427,
+                    10.345190704606726
+                ],
+                "radius": 3.4937997252568067,
+                "path_length": 93.6536770126744,
+                "reference_path": [
+                    [
+                        -148.61416625976562,
+                        352.4371337890625,
+                        7.499998092651367
+                    ],
+                    [
+                        -146.6290283203125,
+                        351.69244384765625,
+                        7.499998092651367
+                    ],
+                    [
+                        -112.1290283203125,
+                        333.69244384765625,
+                        7.999998092651367
+                    ],
+                    [
+                        -106.1290283203125,
+                        330.69244384765625,
+                        8.19999885559082
+                    ],
+                    [
+                        -85.1290283203125,
+                        324.69244384765625,
+                        8.099998474121094
+                    ],
+                    [
+                        -83.6290283203125,
+                        323.19244384765625,
+                        8.099998474121094
+                    ],
+                    [
+                        -80.6290283203125,
+                        318.69244384765625,
+                        8.39999771118164
+                    ],
+                    [
+                        -79.1290283203125,
+                        317.19244384765625,
+                        8.499998092651367
+                    ],
+                    [
+                        -68.6290283203125,
+                        309.69244384765625,
+                        8.499998092651367
+                    ],
+                    [
+                        -68.6290283203125,
+                        308.19244384765625,
+                        8.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -148.61417263643708,
+            352.43714182838994,
+            7.499998092651366
+        ],
+        "start_rotation": [
+            0.988554784222738,
+            0.0,
+            0.0,
+            -0.15086231666766825
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_4",
+        "instruction": "Head down the straight road, passing tall buildings on your left and a series of storefronts on your right. Keep moving forward along the street, staying parallel to the sidewalk. Continue past the intersection where a grey trash can sits on the corner. Further ahead, you will pass a red mailbox on the right sidewalk. Keep going straight until you reach the red-and-white retro-style diner labeled \"Rocket Burgers\" on the right side of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_4_9",
+                "type": "object",
+                "location": [
+                    20.894118960552568,
+                    215.58989415660207,
+                    11.49378572861186
+                ],
+                "radius": 3.624035689838365,
+                "path_length": 84.13977765292128,
+                "reference_path": [
+                    [
+                        35.89568328857422,
+                        295.8085632324219,
+                        10.291468620300293
+                    ],
+                    [
+                        34.8709716796875,
+                        284.19244384765625,
+                        10.099998474121094
+                    ],
+                    [
+                        33.3709716796875,
+                        273.69244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        30.3709716796875,
+                        264.69244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        27.3709716796875,
+                        258.69244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        27.3709716796875,
+                        257.19244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        28.8709716796875,
+                        252.69244384765625,
+                        10.099998474121094
+                    ],
+                    [
+                        30.3709716796875,
+                        239.19244384765625,
+                        9.999998092651367
+                    ],
+                    [
+                        30.3709716796875,
+                        237.69244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        27.3709716796875,
+                        219.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        25.8709716796875,
+                        218.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        22.8709716796875,
+                        215.5898895263672,
+                        9.668452262878418
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            35.8956827950703,
+            295.8085624990331,
+            10.291468507882453
+        ],
+        "start_rotation": [
+            0.6226364193108601,
+            0.0,
+            0.0,
+            -0.7825112710675488
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_8",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_8_8",
+                "type": "object",
+                "location": [
+                    -71.39956507129175,
+                    305.29572042255427,
+                    10.345190704606726
+                ],
+                "radius": 3.4937997252568067,
+                "path_length": 32.842452726442886,
+                "reference_path": [
+                    [
+                        -93.90587615966797,
+                        324.7512512207031,
+                        8.168742179870605
+                    ],
+                    [
+                        -85.1290283203125,
+                        324.69244384765625,
+                        8.099998474121094
+                    ],
+                    [
+                        -83.6290283203125,
+                        323.19244384765625,
+                        8.099998474121094
+                    ],
+                    [
+                        -80.6290283203125,
+                        318.69244384765625,
+                        8.39999771118164
+                    ],
+                    [
+                        -79.1290283203125,
+                        317.19244384765625,
+                        8.499998092651367
+                    ],
+                    [
+                        -68.6290283203125,
+                        309.69244384765625,
+                        8.499998092651367
+                    ],
+                    [
+                        -68.6290283203125,
+                        308.19244384765625,
+                        8.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -93.90587756994023,
+            324.75126451145104,
+            8.168741865744206
+        ],
+        "start_rotation": [
+            0.9942454160173788,
+            0.0,
+            0.0,
+            -0.10712634003096223
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_0",
+        "instruction": "Follow the road straight ahead, keeping the tall, dark city buildings on your left and right. Ahead, you will spot a bright white, modern building labeled \"GLOBAL CURRENCY EXCHANGE\" next to a smaller, rustic shopfront called \"Nonna's Trattoria\" on the left. Continue moving towards this white building. As you get closer, you'll see a white food truck with a yellow banana on top parked nearby. Proceed directly towards the glass doors of the \"GLOBAL CURRENCY EXCHANGE,\" and you will arrive at your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_0_6",
+                "type": "object",
+                "location": [
+                    -229.2952057966528,
+                    135.60503778364256,
+                    9.022314867961231
+                ],
+                "radius": 3.3964279195568423,
+                "path_length": 22.868833824281474,
+                "reference_path": [
+                    [
+                        -246.54283142089844,
+                        154.71385192871094,
+                        7.1258015632629395
+                    ],
+                    [
+                        -245.6290283203125,
+                        152.19244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -244.1290283203125,
+                        150.69244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -230.6290283203125,
+                        138.69244384765625,
+                        7.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -246.5428309475209,
+            154.71385753906648,
+            7.125801456799535
+        ],
+        "start_rotation": [
+            0.748514786375275,
+            0.0,
+            0.0,
+            -0.6631181000225951
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "university_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/university_0_2",
+                "type": "object",
+                "location": [
+                    58.42443127092855,
+                    91.57601299302559,
+                    11.717748686324118
+                ],
+                "radius": 3.527127859962121,
+                "path_length": 27.49064024931088,
+                "reference_path": [
+                    [
+                        79.25230407714844,
+                        110.01155853271484,
+                        9.917510032653809
+                    ],
+                    [
+                        61.8709716796875,
+                        90.69244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        60.3709716796875,
+                        90.69244384765625,
+                        9.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            79.25230332075962,
+            110.0115614321462,
+            9.917510263939816
+        ],
+        "start_rotation": [
+            0.35585452879730955,
+            0.0,
+            0.0,
+            -0.9345413604193475
+        ],
+        "ceiling_height": 1.0
+    }
+]

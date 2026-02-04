@@ -33,10 +33,13 @@ task_config = yaml.load(open(args.tg_config_path, 'r'), Loader=yaml.FullLoader)
 scene_configs = task_config['scene']
 tasks = []
 port_start = args.port
-for scene_type in ["grCommercial"]:
+for scene_type in ["innout"]: # "grCommercial", "nv", "vc", "grHome"
 # for scene_type in scene_configs.keys():
     for scene_name in scene_configs[scene_type]['episodes'].keys():
+        # if not scene_name.endswith("_store"):
+        #     continue
         tasks.append(f"{scene_type}_{scene_name}")
+print(f"Running {len(tasks)} tasks: {tasks}")
 
 # Filter arguments to remove num_workers
 cmd_args = []
@@ -97,7 +100,7 @@ def worker(worker_id, port_number):
             log_file.flush()
             print(f"[worker {worker_id}] Starting task: {scene_id}")
 
-            cmd = [sys.executable, "isaac_lab_server_spot_task_generation.py"] + cmd_args + ["--test_scene_id", scene_id] + ["--port", str(port_number)]
+            cmd = [sys.executable, "isaac_lab_server_spot_task_generation.py"] + cmd_args + ["--test_scene_id", scene_id] + ["--port", str(port_number)] + ["--tg_mode", "auto"]
 
             print(f"[worker {worker_id}] Running command: {cmd}")
             log_file.write(f"[worker {worker_id}] Running command: {cmd}\n")

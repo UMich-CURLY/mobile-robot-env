@@ -50,19 +50,38 @@ class SpotCommandsCfg:
         ),
     )
 
+def robot_pose(
+    env,
+    asset_cfg = SceneEntityCfg("robot"),
+):
+    robot = env.scene[asset_cfg.name]
+    pos = robot.data.root_state_w[:, 0:3]
+    quat = robot.data.root_state_w[:, 3:7]
+    quat = torch.concat([quat[:, 1:],quat[:, :1]], dim=1)
+    return torch.concat([pos,quat], dim=1)
 
-def camera_info(
+def camera_tf(
     env,
     sensor_cfg = SceneEntityCfg("tiled_camera"),
 ):
     # extract the used quantities (to enable type-hinting)
     sensor = env.scene.sensors[sensor_cfg.name]
-    pose = sensor._view.get_world_poses()
+    pos = sensor.cfg.offset.pos
+    quat = sensor.cfg.offset.rot
+    quat = [*quat[1:],*quat[:1]]
+    num_envs = sensor.data.pos_w.shape[0]
+    return torch.tensor([[*pos,*quat]]*num_envs, device=sensor.device)
+
+def camera_pose(
+    env,
+    sensor_cfg = SceneEntityCfg("tiled_camera"),
+):
+    # extract the used quantities (to enable type-hinting)
+    sensor = env.scene.sensors[sensor_cfg.name]
     pos = sensor.data.pos_w.detach().cpu()
     quat = sensor.data.quat_w_world.detach().cpu()
     quat = torch.concat([quat[:,1:],quat[:,:1]], dim=1)
     return torch.concat([pos,quat], dim=1)
-
 
 
 @configclass
@@ -98,12 +117,16 @@ class PolicyCfg(ObsGroup):
 @configclass
 class CameraPolicyCfg(ObsGroup):
 
+    body_pose = ObsTerm(func=robot_pose, params={"asset_cfg": SceneEntityCfg("robot")})
     pov_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "rgb", "normalize": False})
-    pov_pose = ObsTerm(func=camera_info, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
     pov_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("pov_camera"), "data_type": "distance_to_image_plane"})
+    pov_tf = ObsTerm(func=camera_tf, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
+    pov_pose = ObsTerm(func=camera_pose, params={"sensor_cfg": SceneEntityCfg("pov_camera")})
     # height_scanner = ObsTerm(func=mdp.height_scan, params={"sensor_cfg": SceneEntityCfg("height_scanner")})
     third_person_rgb = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "rgb", "normalize": False})
-
+    third_person_depth = ObsTerm(func=mdp.image, params={"sensor_cfg": SceneEntityCfg("third_person_camera"), "data_type": "distance_to_image_plane"})
+    third_person_tf = ObsTerm(func=camera_tf, params={"sensor_cfg": SceneEntityCfg("third_person_camera")})
+    third_person_pose = ObsTerm(func=camera_pose, params={"sensor_cfg": SceneEntityCfg("third_person_camera")})
     def __post_init__(self):
         self.enable_corruption = False
         self.concatenate_terms = False
@@ -348,7 +371,11 @@ class SpotRoughEnvCfg(BaseEnvCfg):
         self.sim.physics_material.restitution_combine_mode = "multiply"
         self.sim.render.dlss_mode = 1
         self.sim.render.enable_reflections = True
+        self.sim.render.enable_direct_lighting = True
         self.sim.render.enable_translucency = True
+        self.sim.render.enable_shadows = True
+        self.sim.render.enable_ambient_occlusion = True
+        self.sim.render.enable_dl_denoiser = True
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         self.scene.contact_forces.update_period = self.sim.dt
@@ -427,7 +454,7 @@ class SpotRoughEnvCfg_PLAY(SpotRoughEnvCfg):
             update_latest_camera_pose=True,
             height=480,
             width=640,
-            data_types=["rgb"],
+            data_types=["rgb", "distance_to_image_plane"],
             spawn=sim_utils.PinholeCameraCfg(
                 focal_length=12.0,
                 horizontal_aperture=20.955,

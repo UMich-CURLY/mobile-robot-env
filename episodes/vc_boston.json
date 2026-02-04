@@ -1,0 +1,1512 @@
+[
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Navigate forward along the path, passing between large, blocky, greyish-green buildings on your left and blue structures on your right. As you emerge into a more open area, veer slightly left, keeping the tall, weathered grey buildings on your left side. Continue straight ahead across the paved surface, approaching a series of monolithic stone blocks. As you get closer to the blocks, turn slightly right. You will arrive at a wooden park bench situated near the blocks.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_754",
+                "type": "object",
+                "location": [
+                    272.3519351969709,
+                    196.9632550158854,
+                    28.482488039536264
+                ],
+                "radius": 1.0934199475435378,
+                "path_length": 53.38797998794623,
+                "reference_path": [
+                    [
+                        278.7547607421875,
+                        240.19943237304688,
+                        27.651443481445312
+                    ],
+                    [
+                        274.09161376953125,
+                        232.50015258789062,
+                        27.999998092651367
+                    ],
+                    [
+                        272.59161376953125,
+                        228.00015258789062,
+                        28.100000381469727
+                    ],
+                    [
+                        265.09161376953125,
+                        214.50015258789062,
+                        28.399999618530273
+                    ],
+                    [
+                        263.59161376953125,
+                        208.50015258789062,
+                        28.399999618530273
+                    ],
+                    [
+                        263.59161376953125,
+                        207.00015258789062,
+                        28.19999885559082
+                    ],
+                    [
+                        265.09161376953125,
+                        202.50015258789062,
+                        28.100000381469727
+                    ],
+                    [
+                        266.59161376953125,
+                        201.00015258789062,
+                        28.100000381469727
+                    ],
+                    [
+                        269.59161376953125,
+                        201.00015258789062,
+                        28.19999885559082
+                    ],
+                    [
+                        272.59161376953125,
+                        201.00015258789062,
+                        28.19999885559082
+                    ],
+                    [
+                        274.09161376953125,
+                        199.50015258789062,
+                        28.100000381469727
+                    ],
+                    [
+                        274.09161376953125,
+                        198.00015258789062,
+                        28.100000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            278.7547740891468,
+            240.19942871529653,
+            27.651444271342164
+        ],
+        "start_rotation": [
+            0.627640494686524,
+            0.0,
+            0.0,
+            -0.7785033136921482
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "nursing_bottle",
+        "instruction": "Start facing the white ambulance with red stripes parked on the left. Turn slightly left and follow the road past the ambulance. Continue straight down the street, passing a storefront with a brown facade and red lanterns on your right. Keep moving forward along the road, observing the tall, dark, futuristic-looking buildings lining the street. As you proceed, keep the large green and grey building structures to your left. Continue straight ahead until you arrive at the nursing bottle lying on the ground near the wall.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/nursing_bottle_685",
+                "type": "object",
+                "location": [
+                    -113.33110633671528,
+                    213.71811516526554,
+                    5.440542116133429
+                ],
+                "radius": 0.37388415482037374,
+                "path_length": 54.16586837357426,
+                "reference_path": [
+                    [
+                        -147.74072265625,
+                        250.08169555664062,
+                        4.999998092651367
+                    ],
+                    [
+                        -147.40838623046875,
+                        247.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -145.90838623046875,
+                        244.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -138.40838623046875,
+                        232.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -132.40838623046875,
+                        219.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -130.90838623046875,
+                        217.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -115.90838623046875,
+                        213.00015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -114.40838623046875,
+                        213.00015258789062,
+                        5.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -147.74072984204952,
+            250.0816986830434,
+            4.999998092651366
+        ],
+        "start_rotation": [
+            0.6315658119495291,
+            0.0,
+            0.0,
+            -0.7753222718176823
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinner_jacket",
+        "instruction": "Start near the white shop, moving forward on the road towards the intersection with the white ambulance parked on the right. Turn right at the ambulance, following the street flanked by dark, boxy buildings. Continue straight down the road as it curves slightly. Look for a white dinner jacket hovering near the corner of a large dark building on your right; you will arrive at the dinner jacket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinner_jacket_561",
+                "type": "object",
+                "location": [
+                    -149.47756664229576,
+                    217.92255955252185,
+                    5.692022310216046
+                ],
+                "radius": 0.4990542192708318,
+                "path_length": 66.66314001301082,
+                "reference_path": [
+                    [
+                        -90.8175048828125,
+                        213.00624084472656,
+                        6.043179512023926
+                    ],
+                    [
+                        -96.40838623046875,
+                        207.00015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -99.40838623046875,
+                        204.00015258789062,
+                        5.599998474121094
+                    ],
+                    [
+                        -103.90838623046875,
+                        204.00015258789062,
+                        5.399997711181641
+                    ],
+                    [
+                        -144.40838623046875,
+                        213.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -150.40838623046875,
+                        216.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -150.40838623046875,
+                        217.50015258789062,
+                        5.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -90.81750765730622,
+            213.00624817130884,
+            6.043179566927698
+        ],
+        "start_rotation": [
+            0.3230651299490212,
+            0.0,
+            0.0,
+            -0.9463767335533043
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "taxi",
+        "instruction": "Head down the street, keeping the large, blocky grey buildings on your left and the parked emergency vehicle on your right. Continue moving forward along the road as the scenery shifts from the grey structures to a long black building with white storefronts on the right. Eventually, angle slightly towards the white storefront labeled \"URBAN PROVISIONS.\" You will arrive at the white taxi parked near the entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/taxi_62",
+                "type": "object",
+                "location": [
+                    -76.31778301059751,
+                    127.04782747378688,
+                    5.431971213916128
+                ],
+                "radius": 3.0029911501500948,
+                "path_length": 46.016519251106885,
+                "reference_path": [
+                    [
+                        -96.36809539794922,
+                        161.49740600585938,
+                        4.999998092651367
+                    ],
+                    [
+                        -91.90838623046875,
+                        160.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -76.90838623046875,
+                        153.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -75.40838623046875,
+                        151.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -73.90838623046875,
+                        130.50015258789062,
+                        4.799999237060547
+                    ],
+                    [
+                        -73.90838623046875,
+                        129.00015258789062,
+                        4.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -96.36809361994735,
+            161.49741097639367,
+            4.999998092651367
+        ],
+        "start_rotation": [
+            0.9743177186971257,
+            0.0,
+            0.0,
+            -0.2251776699249476
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "wooden_table",
+        "instruction": "Start by following the road past the dark, blocky buildings on your left, with an ambulance visible ahead in the distance. Continue straight along the street, passing a traffic light on the right. As you move forward, the road leads you past large concrete structures and storefronts with reflective windows. Keep going straight towards the end of the street where the buildings darken. Slightly bear left as you approach the final dark area, and you will arrive at the wooden table situated in the shadows.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/wooden_table_758",
+                "type": "object",
+                "location": [
+                    -155.88270787771,
+                    238.56696980560588,
+                    5.476235041907387
+                ],
+                "radius": 0.8615128448881109,
+                "path_length": 39.57121285857073,
+                "reference_path": [
+                    [
+                        -135.4450225830078,
+                        213.869384765625,
+                        4.999998092651367
+                    ],
+                    [
+                        -136.90838623046875,
+                        214.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -136.90838623046875,
+                        217.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -136.90838623046875,
+                        220.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -138.40838623046875,
+                        232.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -141.40838623046875,
+                        237.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -142.90838623046875,
+                        238.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -145.90838623046875,
+                        240.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -154.90838623046875,
+                        240.00015258789062,
+                        4.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -135.4450196133943,
+            213.86938483044375,
+            4.999998092651367
+        ],
+        "start_rotation": [
+            0.02690044125830009,
+            0.0,
+            0.0,
+            0.999638117650637
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "strereo_camera_sensor",
+        "instruction": "Start facing a large, glossy black cubic structure. Follow the road, keeping the black cube to your right as you move forward. Pass an intersection with traffic lights. As you proceed, the view opens up to a wide concrete area with a gray wall and a building featuring metallic vents on your left. Continue straight along this path until you reach the stereo_camera_sensor near the metallic vented building.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/strereo_camera_sensor_373",
+                "type": "object",
+                "location": [
+                    -326.5685767166024,
+                    61.602239173887824,
+                    1.7597372110400693
+                ],
+                "radius": 0.19399142788591917,
+                "path_length": 34.95382528011181,
+                "reference_path": [
+                    [
+                        -318.9250183105469,
+                        91.38909912109375,
+                        2.299999237060547
+                    ],
+                    [
+                        -322.90838623046875,
+                        88.50015258789062,
+                        2.299999237060547
+                    ],
+                    [
+                        -324.40838623046875,
+                        87.00015258789062,
+                        2.299999237060547
+                    ],
+                    [
+                        -330.40838623046875,
+                        78.00015258789062,
+                        1.8999977111816406
+                    ],
+                    [
+                        -330.40838623046875,
+                        72.00015258789062,
+                        1.6999988555908203
+                    ],
+                    [
+                        -326.5685729980469,
+                        61.602237701416016,
+                        1.759737253189087
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -318.92502889991243,
+            91.38910157896653,
+            2.299999237060547
+        ],
+        "start_rotation": [
+            0.053881094251830415,
+            0.0,
+            0.0,
+            -0.9985473587578234
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sun_hat",
+        "instruction": "Start your journey facing a row of textured, blocky buildings under a blue sky. Turn slightly left and proceed along the light grey road, keeping the large, cube-like structures on your left. As the road curves, follow it forward, passing a dark, metallic pillar standing alone on the right. Continue straight ahead towards the distant horizon. You will see a dark wooden table ahead. Approach it, and you will arrive at the sun hat resting on the ground nearby.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sun_hat_241",
+                "type": "object",
+                "location": [
+                    153.53283983121503,
+                    300.7714887910407,
+                    28.658477551728197
+                ],
+                "radius": 0.5581895465172124,
+                "path_length": 18.82694235979811,
+                "reference_path": [
+                    [
+                        141.0565185546875,
+                        310.783447265625,
+                        28.299997329711914
+                    ],
+                    [
+                        142.09161376953125,
+                        312.0001525878906,
+                        28.299997329711914
+                    ],
+                    [
+                        145.09161376953125,
+                        312.0001525878906,
+                        28.299997329711914
+                    ],
+                    [
+                        154.09161376953125,
+                        303.0001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        154.09161376953125,
+                        301.5001525878906,
+                        28.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            141.05652295492808,
+            310.7834324183983,
+            28.299997329711918
+        ],
+        "start_rotation": [
+            0.9546881082104836,
+            0.0,
+            0.0,
+            0.2976081585600235
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dog",
+        "instruction": "Start on the road and move forward, keeping the large, blocky grey building with a dark entryway on your left and the brown and white building on your right. Continue straight down the road as an ambulance comes into view further ahead. Keep moving towards the white ambulance with red stripes parked on the right side of the street. As you get closer, you will see a white and black dog standing near the left curb, opposite the ambulance. You will arrive at the dog.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dog_132",
+                "type": "object",
+                "location": [
+                    -214.0372298792974,
+                    144.90028657120968,
+                    4.310158085272157
+                ],
+                "radius": 0.5318867865859858,
+                "path_length": 74.30804674030125,
+                "reference_path": [
+                    [
+                        -273.81036376953125,
+                        126.70731353759766,
+                        2.999998092651367
+                    ],
+                    [
+                        -271.90838623046875,
+                        132.00015258789062,
+                        3.1999988555908203
+                    ],
+                    [
+                        -268.90838623046875,
+                        139.50015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -264.40838623046875,
+                        148.50015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -262.90838623046875,
+                        150.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -261.40838623046875,
+                        150.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -217.90838623046875,
+                        144.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -214.90838623046875,
+                        144.00015258789062,
+                        3.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -273.8103529497347,
+            126.70731444248703,
+            2.999998092651367
+        ],
+        "start_rotation": [
+            0.8628108876859167,
+            0.0,
+            0.0,
+            0.5055268262818902
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ladder",
+        "instruction": "Start moving along the wide road towards a large, modern grey building with visible glass windows ahead. Keep straight, passing a red sports car and a white vehicle parked on the street. As you continue, maintain your course toward the grey building with the large mural or textured facade. Stay on the road, passing a dark building on your left. Eventually, you will see a yellow pole or pipe lying horizontally on the ground near the grey building's entrance. You will arrive at the ladder near this structure.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ladder_352",
+                "type": "object",
+                "location": [
+                    -307.24148976358936,
+                    180.0748656291494,
+                    4.124776390029112
+                ],
+                "radius": 2.3633227730236683,
+                "path_length": 89.19812743966328,
+                "reference_path": [
+                    [
+                        -244.13265991210938,
+                        220.3411865234375,
+                        3.8567001819610596
+                    ],
+                    [
+                        -244.90838623046875,
+                        204.00015258789062,
+                        4.19999885559082
+                    ],
+                    [
+                        -247.90838623046875,
+                        201.00015258789062,
+                        4.099998474121094
+                    ],
+                    [
+                        -258.40838623046875,
+                        196.50015258789062,
+                        3.999998092651367
+                    ],
+                    [
+                        -271.90838623046875,
+                        193.50015258789062,
+                        3.8999977111816406
+                    ],
+                    [
+                        -283.90838623046875,
+                        189.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -291.40838623046875,
+                        183.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -303.40838623046875,
+                        177.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -309.40838623046875,
+                        177.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -309.40838623046875,
+                        178.50015258789062,
+                        3.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -244.13266520354793,
+            220.34118552160587,
+            3.856700068918368
+        ],
+        "start_rotation": [
+            0.5796320437816276,
+            0.0,
+            0.0,
+            -0.8148783306859579
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "Start facing a tall blue building with a construction vehicle graphic on it. Turn slightly left and follow the grey road, keeping a large, beige, windowed building on your right. Continue straight as you pass between large cubic structures; the one on your left has a house-like graphic, and the one on your right is dark grey. Proceed down the open road, keeping the dark blocky structures to your left. As the path curves slightly right, head towards the distant, complex grey building structure. Finally, turn slightly right to approach and arrive under the wooden slat park bench.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_556",
+                "type": "object",
+                "location": [
+                    185.42031767996008,
+                    289.281726303512,
+                    29.26961053009262
+                ],
+                "radius": 2.222354331971445,
+                "path_length": 80.555379536743,
+                "reference_path": [
+                    [
+                        186.44630432128906,
+                        332.88446044921875,
+                        28.407711029052734
+                    ],
+                    [
+                        187.09161376953125,
+                        331.5001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        191.59161376953125,
+                        328.5001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        194.59161376953125,
+                        327.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        197.59161376953125,
+                        327.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        203.59161376953125,
+                        327.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        209.59161376953125,
+                        324.0001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        211.09161376953125,
+                        322.5001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        211.09161376953125,
+                        316.5001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        209.59161376953125,
+                        313.5001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        199.09161376953125,
+                        295.5001525878906,
+                        28.799997329711914
+                    ],
+                    [
+                        194.59161376953125,
+                        288.0001525878906,
+                        28.799997329711914
+                    ],
+                    [
+                        193.09161376953125,
+                        286.5001525878906,
+                        28.799997329711914
+                    ],
+                    [
+                        188.59161376953125,
+                        285.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        185.59161376953125,
+                        285.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        184.09161376953125,
+                        286.5001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        184.09161376953125,
+                        288.0001525878906,
+                        28.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            186.44630932955,
+            332.8844753398082,
+            28.407711317396117
+        ],
+        "start_rotation": [
+            0.713169191625585,
+            0.0,
+            0.0,
+            -0.700991942975174
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "single_book",
+        "instruction": "Start by facing the black and grey building facade, then turn right and follow the road. Pass the white and red ambulance parked on the right side of the street. Continue straight down the road, keeping the dark buildings on your right. As you approach a dark blue, shadowy area near the corner of a building, make a slight right turn. You will arrive at the single_book on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/single_book_121",
+                "type": "object",
+                "location": [
+                    -204.7416312027658,
+                    119.0849459310704,
+                    3.919934256057772
+                ],
+                "radius": 0.18238372937103975,
+                "path_length": 85.02006995453137,
+                "reference_path": [
+                    [
+                        -275.24560546875,
+                        137.45704650878906,
+                        3.3451333045959473
+                    ],
+                    [
+                        -264.40838623046875,
+                        148.50015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -262.90838623046875,
+                        150.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -261.40838623046875,
+                        150.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -229.90838623046875,
+                        139.50015258789062,
+                        3.8999977111816406
+                    ],
+                    [
+                        -204.40838623046875,
+                        121.50015258789062,
+                        3.5999984741210938
+                    ],
+                    [
+                        -204.40838623046875,
+                        120.00015258789062,
+                        3.6999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -275.24560365115195,
+            137.4570453446371,
+            3.345133374800473
+        ],
+        "start_rotation": [
+            0.8949318587648206,
+            0.0,
+            0.0,
+            0.446202832989374
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "Go straight along the road, keeping the white ambulance with red stripes on your left. Continue forward past the vehicle's rear wheel until you are directly underneath the ambulance's chassis. You will arrive at the underside of the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_15",
+                "type": "object",
+                "location": [
+                    10.265007883273594,
+                    111.6067323823155,
+                    6.182537371014419
+                ],
+                "radius": 3.0910305707514283,
+                "path_length": 8.39284250164979,
+                "reference_path": [
+                    [
+                        17.716808319091797,
+                        119.70852661132812,
+                        4.608344554901123
+                    ],
+                    [
+                        16.09161376953125,
+                        118.50015258789062,
+                        4.499998092651367
+                    ],
+                    [
+                        11.59161376953125,
+                        114.00015258789062,
+                        4.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            17.7168079873532,
+            119.70852871082843,
+            4.60834478714776
+        ],
+        "start_rotation": [
+            0.30914593908688215,
+            0.0,
+            0.0,
+            -0.9510146099540688
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "taxi",
+        "instruction": "Start by moving forward through the paved area between the large, blocky grey buildings. Keep the mossy, dark stone wall on your immediate right. Continue straight as the path opens up, passing a large grey industrial structure on your left. As you proceed, you will see a white sedan with a red stripe and a red cross symbol on the door parked ahead. Approach the vehicle to arrive at the taxi.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/taxi_5",
+                "type": "object",
+                "location": [
+                    -327.633005471483,
+                    75.32432599389244,
+                    2.691952632667139
+                ],
+                "radius": 2.9641318697793437,
+                "path_length": 66.9429502337688,
+                "reference_path": [
+                    [
+                        -335.4787292480469,
+                        124.4186782836914,
+                        3.1630442142486572
+                    ],
+                    [
+                        -340.90838623046875,
+                        117.00015258789062,
+                        3.0999984741210938
+                    ],
+                    [
+                        -346.90838623046875,
+                        103.50015258789062,
+                        2.8999977111816406
+                    ],
+                    [
+                        -346.90838623046875,
+                        82.50015258789062,
+                        2.0999984741210938
+                    ],
+                    [
+                        -336.40838623046875,
+                        72.00015258789062,
+                        1.8999977111816406
+                    ],
+                    [
+                        -334.90838623046875,
+                        72.00015258789062,
+                        1.6999988555908203
+                    ],
+                    [
+                        -330.40838623046875,
+                        75.32432556152344,
+                        1.810804009437561
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -335.47873511376145,
+            124.41867508128205,
+            3.1630441587711062
+        ],
+        "start_rotation": [
+            0.3920543777003657,
+            0.0,
+            0.0,
+            -0.9199420443299562
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "With the cube-shaped structures to your right, proceed along the paved road. Continue straight, keeping the buildings with dark, recessed windows on your right and the lighter, textured walls to your left. As you advance, the path remains clear between the rows of blocky architecture. Eventually, you will arrive at the rice_bowl.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_398",
+                "type": "object",
+                "location": [
+                    -296.781756350217,
+                    51.16786263147269,
+                    1.602922231622374
+                ],
+                "radius": 0.10149399847352925,
+                "path_length": 47.430183551129815,
+                "reference_path": [
+                    [
+                        -339.9573669433594,
+                        71.39253997802734,
+                        1.9511582851409912
+                    ],
+                    [
+                        -313.90838623046875,
+                        60.000152587890625,
+                        1.5999984741210938
+                    ],
+                    [
+                        -306.40838623046875,
+                        55.500152587890625,
+                        1.5999984741210938
+                    ],
+                    [
+                        -298.90838623046875,
+                        51.000152587890625,
+                        1.6999988555908203
+                    ],
+                    [
+                        -297.40838623046875,
+                        51.000152587890625,
+                        1.7999992370605469
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -339.95737626206255,
+            71.39253767607876,
+            1.9511582374573813
+        ],
+        "start_rotation": [
+            0.9316474171338329,
+            0.0,
+            0.0,
+            -0.36336357845532324
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "soccer_ball_1",
+        "instruction": "Start slightly right and proceed down the street, keeping the green truck on your left. Continue straight, passing a red stop sign and a green dumpster on your left. As you move forward, you will see a tall, modern white building on your right and an ambulance parked further down. Turn slightly right towards the curb near the ambulance. You will arrive at the soccer ball lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/soccer_ball_1_600",
+                "type": "object",
+                "location": [
+                    -18.16085129177424,
+                    81.76677391779026,
+                    4.09133545350965
+                ],
+                "radius": 0.21045532252990284,
+                "path_length": 33.17325626353323,
+                "reference_path": [
+                    [
+                        -39.75495910644531,
+                        58.06404495239258,
+                        3.5786261558532715
+                    ],
+                    [
+                        -36.40838623046875,
+                        64.50015258789062,
+                        3.5999984741210938
+                    ],
+                    [
+                        -19.90838623046875,
+                        82.50015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -18.40838623046875,
+                        82.50015258789062,
+                        3.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -39.7549593418144,
+            58.06404637597706,
+            3.578626269828581
+        ],
+        "start_rotation": [
+            0.7255747157260058,
+            0.0,
+            0.0,
+            0.6881433948670334
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_chair",
+        "instruction": "Start on the wide asphalt road, slightly angling left past the cuboid building with green foliage textures on your right. Continue straight down the street, keeping the grassy shoulder and a large, dark grey, cube-like building on your left. Ahead, you will see a white ambulance parked near the intersection. Proceed forward along the road, passing the ambulance. Continue straight until you arrive at the rolling office chair sitting in the middle of the road.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_chair_710",
+                "type": "object",
+                "location": [
+                    160.69150265163032,
+                    293.5497912694485,
+                    29.211750928827357
+                ],
+                "radius": 0.624322424164518,
+                "path_length": 64.20278282829527,
+                "reference_path": [
+                    [
+                        212.9745635986328,
+                        257.3402099609375,
+                        28.757604598999023
+                    ],
+                    [
+                        182.59161376953125,
+                        277.5001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        160.09161376953125,
+                        291.0001525878906,
+                        28.69999885559082
+                    ],
+                    [
+                        160.09161376953125,
+                        292.5001525878906,
+                        28.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            212.97456535049275,
+            257.34019473753403,
+            28.757605430418202
+        ],
+        "start_rotation": [
+            0.4718857721765998,
+            0.0,
+            0.0,
+            0.881659695130323
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "Follow the road as it curves gently to the left, keeping the tall, gray rectangular monoliths on your right. Continue forward, passing a dark, cylindrical structure in the distance. As you proceed along the path, you will approach a series of blocky structures lining the left side of the road. Eventually, you will arrive at a gray park bench situated near the curb on your left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_556",
+                "type": "object",
+                "location": [
+                    185.42031767996008,
+                    289.281726303512,
+                    29.26961053009262
+                ],
+                "radius": 2.222354331971445,
+                "path_length": 23.411715691192708,
+                "reference_path": [
+                    [
+                        169.90509033203125,
+                        304.6663513183594,
+                        28.66792869567871
+                    ],
+                    [
+                        170.59161376953125,
+                        300.0001525878906,
+                        28.499998092651367
+                    ],
+                    [
+                        172.09161376953125,
+                        297.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        173.59161376953125,
+                        295.5001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        182.59161376953125,
+                        288.0001525878906,
+                        28.600000381469727
+                    ],
+                    [
+                        184.09161376953125,
+                        288.0001525878906,
+                        28.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            169.9050903709763,
+            304.6663596740357,
+            28.667928516342503
+        ],
+        "start_rotation": [
+            0.6612607792734486,
+            0.0,
+            0.0,
+            -0.7501561049506106
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "strereo_camera_sensor",
+        "instruction": "Move straight, passing between the large concrete blocks towards the street intersection ahead where a white car is driving. Turn left at the intersection, following the road past the large black cubic building on your right. Continue straight down the road, keeping the dark wall on your left and the open area with a moon in the sky ahead. Proceed forward along the road, and you will arrive at the target location near the grey building structure on the left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/strereo_camera_sensor_373",
+                "type": "object",
+                "location": [
+                    -326.5685767166024,
+                    61.602239173887824,
+                    1.7597372110400693
+                ],
+                "radius": 0.19399142788591917,
+                "path_length": 43.33742250535708,
+                "reference_path": [
+                    [
+                        -312.556640625,
+                        93.29293060302734,
+                        2.499998092651367
+                    ],
+                    [
+                        -313.90838623046875,
+                        94.50015258789062,
+                        2.499998092651367
+                    ],
+                    [
+                        -316.90838623046875,
+                        94.50015258789062,
+                        2.299999237060547
+                    ],
+                    [
+                        -324.40838623046875,
+                        87.00015258789062,
+                        2.299999237060547
+                    ],
+                    [
+                        -330.40838623046875,
+                        78.00015258789062,
+                        1.8999977111816406
+                    ],
+                    [
+                        -330.40838623046875,
+                        72.00015258789062,
+                        1.6999988555908203
+                    ],
+                    [
+                        -326.5685729980469,
+                        61.602237701416016,
+                        1.759737253189087
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -312.55662570411755,
+            93.29292987435872,
+            2.499998092651367
+        ],
+        "start_rotation": [
+            0.2571787741366022,
+            0.0,
+            0.0,
+            0.9663638435566567
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "single_book",
+        "instruction": "Start from the street corner near the streetlight, facing a row of shops with storefront awnings. Move forward along the road, keeping the dark, shadowed buildings on your left. As you proceed, you'll pass white ambulances parked further down the street on the right. Continue straight down the road, passing the blocky grey buildings. Slightly veer left to stay on the path. You will arrive at the single_book near the end of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/single_book_121",
+                "type": "object",
+                "location": [
+                    -204.7416312027658,
+                    119.0849459310704,
+                    3.919934256057772
+                ],
+                "radius": 0.18238372937103975,
+                "path_length": 94.12698674476455,
+                "reference_path": [
+                    [
+                        -126.02564239501953,
+                        72.4201889038086,
+                        3.3006207942962646
+                    ],
+                    [
+                        -129.40838623046875,
+                        81.00015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -132.40838623046875,
+                        84.00015258789062,
+                        3.499998092651367
+                    ],
+                    [
+                        -202.90838623046875,
+                        120.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -204.40838623046875,
+                        120.00015258789062,
+                        3.6999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -126.0256440934768,
+            72.42018869329948,
+            3.3006207937164813
+        ],
+        "start_rotation": [
+            0.5790589392611328,
+            0.0,
+            0.0,
+            0.8152856829736259
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dragon_ball",
+        "instruction": "Start by slightly turning left and moving forward on the road, passing the dark blue wall on your left. As you continue straight, you'll see a white car in the distance. The road stretches between large, blocky urban buildings, with a greyish-purple multi-story building appearing on the right. Keep moving forward down the street, maintaining your course. Eventually, you will arrive at the dragon_ball.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dragon_ball_201",
+                "type": "object",
+                "location": [
+                    -248.8459672370807,
+                    187.34546690338465,
+                    4.189027651139302
+                ],
+                "radius": 0.08811987920736897,
+                "path_length": 30.06224580875157,
+                "reference_path": [
+                    [
+                        -222.99827575683594,
+                        194.56427001953125,
+                        4.221347332000732
+                    ],
+                    [
+                        -225.40838623046875,
+                        196.50015258789062,
+                        4.099998474121094
+                    ],
+                    [
+                        -226.90838623046875,
+                        196.50015258789062,
+                        3.999998092651367
+                    ],
+                    [
+                        -247.90838623046875,
+                        190.50015258789062,
+                        3.8999977111816406
+                    ],
+                    [
+                        -249.40838623046875,
+                        189.00015258789062,
+                        3.8999977111816406
+                    ],
+                    [
+                        -249.40838623046875,
+                        187.50015258789062,
+                        3.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -222.99827159952864,
+            194.56427130517037,
+            4.2213475544880215
+        ],
+        "start_rotation": [
+            0.4894370312885559,
+            0.0,
+            0.0,
+            0.8720386415769917
+        ],
+        "ceiling_height": 1.0
+    }
+]

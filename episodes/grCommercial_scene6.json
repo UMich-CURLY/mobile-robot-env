@@ -90,7 +90,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "blanket",
-        "instruction": "",
+        "instruction": "Face right and move towards the white chair with wooden legs, then turn left to reach the mirror.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -191,7 +191,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "faucet",
-        "instruction": "",
+        "instruction": "Start from a position facing a long wooden bookshelf on the right, filled with books. To your left, there is a tall green topiary plant next to a white chair. Move forward along the carpeted floor past the plant until you reach the desk area ahead.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -282,7 +282,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Start by facing the dark grey, rounded seating area; slightly turn left and advance past the grey armchair on your left. Continue straight through the open office space, moving towards the large windows and passing the desk area with the laptop on your left. As you approach the large wooden column and the bookshelf, turn right. Move forward, keeping the bookshelf to your left and the grey ottoman to your right, until you arrive at the shopping trolley near the window.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -816,7 +816,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pot",
-        "instruction": "",
+        "instruction": "Start by facing the yellow sofa chair on your left, then turn slightly to the right to move away from it. Continue straight ahead, keeping the large wooden shelving unit filled with books and vases on your right. Once you are past the shelves, turn left to follow the path along the floor-to-ceiling windows. Move forward for a while down this corridor, keeping the windows on your right and the office area with desks on your right. Eventually, you will arrive near a large, textured white sofa chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -907,7 +907,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "sink",
-        "instruction": "",
+        "instruction": "Start near the desk with the laptop on the left, facing towards the large windows and bookshelves. Turn slightly right and move forward across the gray carpet, passing the wooden bookshelves filled with dark books. Continue straight, keeping the orange beanbag chair to your right. You will arrive at the tray on the low shelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1029,7 +1029,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Move straight ahead, passing the grey tiled counter on your left and the counter with a coffee maker and shelves above on your right. Continue forward across the grey speckled floor, keeping the person wearing a black dress and white shirt to your right. You will arrive at the counter area in front of the windowed wall.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1115,7 +1115,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Start from the open space with the white tiered shelves on your left, slightly turn right and move forward across the grey stone floor. Continue past the lounge area with beige curved seating and brown throw pillows on your right. As you approach the counter area with black stools and people sitting at tables, turn right. Move a short distance towards the seating area with light wood tables and chairs. You will arrive at the basket placed on the floor near the seating.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1226,7 +1226,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Starting near a white shelving unit filled with square compartments, turn slightly left and proceed forward. Continue moving straight through the large open space, passing a large black counter on your left where a person is standing. Keep heading towards the white potted plant with feathery leaves in the distance. You will arrive at the tray near the plant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1287,7 +1287,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "laptop",
-        "instruction": "",
+        "instruction": "Start by turning slightly left and moving forward, keeping the large, curved, light-colored seating area on your left. Pass by the row of wooden dining tables and chairs on your right. Continue straight ahead along the walkway. As you approach the end of the walkway where the seating area curves, turn left. You will arrive at the laptop placed on a small round table next to the curved sofa.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1373,7 +1373,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bookshelf",
-        "instruction": "",
+        "instruction": "Beginning at the low wooden table near the beige armchairs, turn left. Proceed straight ahead, moving past the seating area with the long wooden table where people are conversing. Continue forward across the grey speckled floor, heading towards the large white shelving unit against the far wall. You will arrive directly in front of the empty bookshelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1449,7 +1449,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Start your journey facing the wooden counter with the coffee machine, then turn slightly right to align with the black marble counter where a woman in a black dress is standing. Move forward along the length of this black counter, passing the woman on your left. Continue straight, keeping the black counter on your left side as you pass display shelves filled with various items on the wall behind it. Keep moving forward until you reach the end of the counter area, near a white plant arrangement and a computer monitor, arriving at the plant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1525,7 +1525,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Start by facing the metal shelving unit, then turn left to face the open dining area. Move forward through the space, keeping the round wooden table and white chairs on your left. Continue straight ahead towards the black counter area where a person is standing. You will arrive at the counter.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1611,7 +1611,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "faucet",
-        "instruction": "",
+        "instruction": "Go forward, passing the white wall on the right and the woman in the black dress on the left. Continue moving forward towards the kitchen counter until you arrive at the faucet.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1707,7 +1707,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Start near the white sofa chair with the small wooden table in front of it, and head towards the gray tiled floor in the center of the room. As you proceed, keep the large circular wooden table to your left. Continue straight, passing the white potted plant with green leaves in the distance on your right.\n\nNext, turn left, moving away from the white seating area and towards the long black service counter. You will see a tall shelving unit filled with various items on the right wall. Move forward alongside the service counter, keeping the dark countertop on your right and the seating area on your left. Continue down this path until you arrive at the wooden stool positioned near the counter.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2679,7 +2679,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pot",
-        "instruction": "",
+        "instruction": "Turn right from the starting position, facing away from the dining tables where people are seated and moving towards the living area with a large circular rug. Continue forward, passing a cream-colored armchair on your left and heading towards the kitchen area visible in the background. As you approach the kitchen counter with bar stools, slightly adjust your path to the right. You will arrive at the pot located on the floor near the kitchen island.",
         "closest_goal_idx": 0,
         "goals": [
             {

@@ -1,0 +1,1437 @@
+[
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "Begin on the road flanked by tall, worn city buildings, moving past a white delivery van parked on your right. Continue forward down the street, keeping the red futuristic car to your left. As you proceed, the road curves slightly; navigate along it with the dark, massive buildings looming on either side. Keep moving forward along the pavement, passing storefronts on your left. Eventually, veer slightly towards the left side of the street, approaching a wooden-fronted shop with a \"CRUMB\" sign. You will arrive at the cafe.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_1",
+                "type": "object",
+                "location": [
+                    59.36946302353113,
+                    100.6144188815691,
+                    12.017289328138471
+                ],
+                "radius": 3.6265208996469767,
+                "path_length": 97.19012855063308,
+                "reference_path": [
+                    [
+                        38.70857620239258,
+                        15.325376510620117,
+                        9.442051887512207
+                    ],
+                    [
+                        45.076080322265625,
+                        26.28936767578125,
+                        9.599998474121094
+                    ],
+                    [
+                        61.576080322265625,
+                        44.28936767578125,
+                        9.599998474121094
+                    ],
+                    [
+                        66.07608032226562,
+                        50.28936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        66.07608032226562,
+                        51.78936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        58.576080322265625,
+                        62.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        58.576080322265625,
+                        63.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        63.076080322265625,
+                        95.28936767578125,
+                        10.69999885559082
+                    ],
+                    [
+                        63.076080322265625,
+                        96.78936767578125,
+                        10.69999885559082
+                    ],
+                    [
+                        61.576080322265625,
+                        99.78936767578125,
+                        10.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            38.70857649690386,
+            15.325376168042009,
+            9.442052034647476
+        ],
+        "start_rotation": [
+            0.9424003039026029,
+            0.0,
+            0.0,
+            0.33448717046290677
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "Head straight along the road, passing the dark, boxy building on your right with the small, illuminated window. Keep going until you pass the intersection with the streetlights. As you proceed, a white building with a large \"Crispy & Juicy\" burger advertisement in the window will come into view on your right. Turn slightly right towards this building. You will arrive at the fast food restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_1",
+                "type": "object",
+                "location": [
+                    146.66124939068487,
+                    256.6561864321971,
+                    14.856699352130208
+                ],
+                "radius": 3.554188818966793,
+                "path_length": 10.8238583020962,
+                "reference_path": [
+                    [
+                        150.41171264648438,
+                        248.49122619628906,
+                        12.761185646057129
+                    ],
+                    [
+                        147.07608032226562,
+                        249.78936767578125,
+                        12.799997329711914
+                    ],
+                    [
+                        144.07608032226562,
+                        252.78936767578125,
+                        12.799997329711914
+                    ],
+                    [
+                        144.07608032226562,
+                        255.78936767578125,
+                        12.899999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            150.41170709555914,
+            248.49121864452943,
+            12.761185481052548
+        ],
+        "start_rotation": [
+            0.20948881191709873,
+            0.0,
+            0.0,
+            0.9778110439556114
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_1",
+        "instruction": "Start slightly to the right, heading down the road flanked by tall, dark office buildings. Continue forward along the street, passing a white chair on the sidewalk to your left. Keep moving straight ahead for a considerable distance, staying on the main road between the towering skyscrapers. As you proceed, you will pass various storefronts on the left, including a 'Clearpath Medical Group' sign. Eventually, turn slightly right towards a building with a red and white retro diner facade featuring large windows. You will arrive at the fast food diner entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_1_1",
+                "type": "object",
+                "location": [
+                    158.8805789653398,
+                    288.77706748981745,
+                    15.108895785415777
+                ],
+                "radius": 3.6002129920135246,
+                "path_length": 97.13605873132775,
+                "reference_path": [
+                    [
+                        128.7107391357422,
+                        370.2101745605469,
+                        14.952408790588379
+                    ],
+                    [
+                        129.07608032226562,
+                        369.78936767578125,
+                        14.899999618530273
+                    ],
+                    [
+                        138.07608032226562,
+                        365.28936767578125,
+                        14.600000381469727
+                    ],
+                    [
+                        150.07608032226562,
+                        360.78936767578125,
+                        14.19999885559082
+                    ],
+                    [
+                        151.57608032226562,
+                        359.28936767578125,
+                        14.100000381469727
+                    ],
+                    [
+                        151.57608032226562,
+                        357.78936767578125,
+                        14.100000381469727
+                    ],
+                    [
+                        151.57608032226562,
+                        354.78936767578125,
+                        13.899999618530273
+                    ],
+                    [
+                        154.57608032226562,
+                        344.28936767578125,
+                        13.799997329711914
+                    ],
+                    [
+                        154.57608032226562,
+                        342.78936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        154.57608032226562,
+                        290.28936767578125,
+                        13.19999885559082
+                    ],
+                    [
+                        156.07608032226562,
+                        288.7770690917969,
+                        13.149589538574219
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            128.71073627926785,
+            370.2101710788214,
+            14.9524086485556
+        ],
+        "start_rotation": [
+            0.9784653073170725,
+            0.0,
+            0.0,
+            -0.2064113426556469
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_2",
+                "type": "object",
+                "location": [
+                    83.23266165037626,
+                    19.779918445124547,
+                    11.182444429752639
+                ],
+                "radius": 3.504983276417491,
+                "path_length": 12.193336746378778,
+                "reference_path": [
+                    [
+                        72.20697784423828,
+                        13.008490562438965,
+                        9.238202095031738
+                    ],
+                    [
+                        84.07608032226562,
+                        15.78936767578125,
+                        9.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            72.20697571887042,
+            13.008490417420859,
+            9.238201728914653
+        ],
+        "start_rotation": [
+            0.9948081957948811,
+            0.0,
+            0.0,
+            0.10176764505152619
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Start on the wide, empty road facing a dark, massive building block. Move forward, keeping the tall, beige skyscraper on your left and the dark, modern building on your right. As you advance down the street, you will see a brick building with a black awning appearing on the right side. Continue straight towards this structure. As you get closer, the building reveals itself to be a restaurant named \"TRATTORIA LUNA\" with flower boxes in the window. You will arrive directly in front of this restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_1",
+                "type": "object",
+                "location": [
+                    -191.3843117908838,
+                    108.38164346560438,
+                    13.009031099780877
+                ],
+                "radius": 3.5706027875405084,
+                "path_length": 81.60391345244896,
+                "reference_path": [
+                    [
+                        -261.5282897949219,
+                        151.7211151123047,
+                        10.659706115722656
+                    ],
+                    [
+                        -260.9239196777344,
+                        150.78936767578125,
+                        10.69999885559082
+                    ],
+                    [
+                        -193.42391967773438,
+                        111.78936767578125,
+                        11.39999771118164
+                    ],
+                    [
+                        -191.38430786132812,
+                        110.28936767578125,
+                        11.332011222839355
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -261.5283040928158,
+            151.72111884167646,
+            10.659706407549152
+        ],
+        "start_rotation": [
+            0.832056760353295,
+            0.0,
+            0.0,
+            -0.5546904970795691
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_4",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_4_3",
+                "type": "object",
+                "location": [
+                    110.09232411947877,
+                    105.2681328555683,
+                    12.754269976700966
+                ],
+                "radius": 3.5135759401496216,
+                "path_length": 80.25916067481303,
+                "reference_path": [
+                    [
+                        170.0330047607422,
+                        112.69776153564453,
+                        11.22075366973877
+                    ],
+                    [
+                        142.57608032226562,
+                        125.28936767578125,
+                        11.299999237060547
+                    ],
+                    [
+                        132.07608032226562,
+                        128.28936767578125,
+                        11.099998474121094
+                    ],
+                    [
+                        130.57608032226562,
+                        128.28936767578125,
+                        10.999998092651367
+                    ],
+                    [
+                        114.07608032226562,
+                        125.28936767578125,
+                        11.099998474121094
+                    ],
+                    [
+                        112.57608032226562,
+                        123.78936767578125,
+                        10.999998092651367
+                    ],
+                    [
+                        108.07608032226562,
+                        110.28936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        108.07608032226562,
+                        105.78936767578125,
+                        10.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            170.03300849198166,
+            112.69775971630727,
+            11.220753586906602
+        ],
+        "start_rotation": [
+            0.02223110643417394,
+            0.0,
+            0.0,
+            0.9997528584138744
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_1_1",
+                "type": "object",
+                "location": [
+                    -97.65223522226552,
+                    29.133334981879543,
+                    12.506855746087206
+                ],
+                "radius": 3.666065288703498,
+                "path_length": 37.59010462833153,
+                "reference_path": [
+                    [
+                        -77.44650268554688,
+                        32.95449447631836,
+                        10.19999885559082
+                    ],
+                    [
+                        -76.42391967773438,
+                        33.78936767578125,
+                        10.19999885559082
+                    ],
+                    [
+                        -74.92391967773438,
+                        41.28936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -74.92391967773438,
+                        42.78936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -76.42391967773438,
+                        44.28936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -77.92391967773438,
+                        44.28936767578125,
+                        10.299999237060547
+                    ],
+                    [
+                        -83.92391967773438,
+                        42.78936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -86.92391967773438,
+                        39.78936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -92.92391967773438,
+                        30.78936767578125,
+                        10.19999885559082
+                    ],
+                    [
+                        -94.42391967773438,
+                        29.13333511352539,
+                        10.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -77.44650076668542,
+            32.95449425387869,
+            10.19999885559082
+        ],
+        "start_rotation": [
+            0.946013927275803,
+            0.0,
+            0.0,
+            0.32412597766950396
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_0",
+        "instruction": "Head slightly left from the start, following the road past the tall, dark building on your right and the tan, blocky buildings on your left. Continue straight, keeping the multi-story parking garage structure visible in the distance ahead. As you approach the intersection near the parking garage, veer slightly left towards the corner building with large glass windows and brown doors. You will arrive at the bank.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_0_1",
+                "type": "object",
+                "location": [
+                    345.28202318194155,
+                    189.73265968023105,
+                    19.475109395437794
+                ],
+                "radius": 3.5994938714839293,
+                "path_length": 63.69704599615432,
+                "reference_path": [
+                    [
+                        295.0035095214844,
+                        224.896484375,
+                        18.670236587524414
+                    ],
+                    [
+                        319.5760803222656,
+                        195.78936767578125,
+                        18.100000381469727
+                    ],
+                    [
+                        321.0760803222656,
+                        194.28936767578125,
+                        18.100000381469727
+                    ],
+                    [
+                        339.0760803222656,
+                        188.28936767578125,
+                        17.69999885559082
+                    ],
+                    [
+                        343.5760803222656,
+                        188.28936767578125,
+                        17.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            295.00351368862346,
+            224.896481106053,
+            18.670236424078805
+        ],
+        "start_rotation": [
+            0.8987681609219799,
+            0.0,
+            0.0,
+            -0.4384242157008691
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_1_4",
+                "type": "object",
+                "location": [
+                    -57.19256044804688,
+                    64.75110842233539,
+                    12.849066255747873
+                ],
+                "radius": 3.668606382252321,
+                "path_length": 71.17247955847456,
+                "reference_path": [
+                    [
+                        -92.72468566894531,
+                        16.814937591552734,
+                        9.89999771118164
+                    ],
+                    [
+                        -92.92391967773438,
+                        17.28936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        -92.92391967773438,
+                        18.78936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        -91.42391967773438,
+                        26.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -86.92391967773438,
+                        39.78936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -67.42391967773438,
+                        60.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        -62.923919677734375,
+                        68.28936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -61.423919677734375,
+                        69.78936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -59.923919677734375,
+                        69.78936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -55.423919677734375,
+                        68.28936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -55.423919677734375,
+                        66.78936767578125,
+                        10.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -92.72468774309992,
+            16.81493760619215,
+            9.89999771118164
+        ],
+        "start_rotation": [
+            0.44974537748652843,
+            0.0,
+            0.0,
+            0.8931568145793325
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    163.94796091670037,
+                    151.3129982779328,
+                    13.134232554740954
+                ],
+                "radius": 3.6264968129214594,
+                "path_length": 43.131656564353655,
+                "reference_path": [
+                    [
+                        123.2104721069336,
+                        170.69081115722656,
+                        11.39999771118164
+                    ],
+                    [
+                        160.57608032226562,
+                        153.78936767578125,
+                        11.39999771118164
+                    ],
+                    [
+                        162.07608032226562,
+                        152.28936767578125,
+                        11.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            123.21047412782734,
+            170.69080962756507,
+            11.39999771118164
+        ],
+        "start_rotation": [
+            0.9760586990332394,
+            0.0,
+            0.0,
+            -0.2175072781346413
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Slightly turn left and follow the road down the empty street, flanked by tall grey skyscrapers on both sides. As you proceed, you will see a brick-faced restaurant with large windows and a sign reading \"TRATTORIA LUNA\" on your left. You will arrive at this restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_1",
+                "type": "object",
+                "location": [
+                    -191.3843117908838,
+                    108.38164346560438,
+                    13.009031099780877
+                ],
+                "radius": 3.5706027875405084,
+                "path_length": 23.265372914080405,
+                "reference_path": [
+                    [
+                        -172.87669372558594,
+                        98.78569793701172,
+                        10.89999771118164
+                    ],
+                    [
+                        -173.92391967773438,
+                        99.78936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -184.42391967773438,
+                        110.28936767578125,
+                        11.099998474121094
+                    ],
+                    [
+                        -191.38430786132812,
+                        110.28936767578125,
+                        11.332011222839355
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -172.87669387867783,
+            98.78569835172368,
+            10.899997711181639
+        ],
+        "start_rotation": [
+            0.3904774144458283,
+            0.0,
+            0.0,
+            0.9206125074143305
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_0",
+        "instruction": "Proceed along the road towards the Apex Community Bank, which is part of the large beige building on your right. As you move forward, the bank's brick facade and large windows will become clearer. Keep slightly right, following the path towards the bank entrance. Continue forward, getting closer to the storefront until you are directly in front of the brick base of the window. You will arrive at the bank.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_0_1",
+                "type": "object",
+                "location": [
+                    345.28202318194155,
+                    189.73265968023105,
+                    19.475109395437794
+                ],
+                "radius": 3.5994938714839293,
+                "path_length": 11.660981197755945,
+                "reference_path": [
+                    [
+                        349.4425354003906,
+                        178.57518005371094,
+                        17.255962371826172
+                    ],
+                    [
+                        345.0760803222656,
+                        183.78936767578125,
+                        17.499998092651367
+                    ],
+                    [
+                        343.5760803222656,
+                        186.78936767578125,
+                        17.600000381469727
+                    ],
+                    [
+                        343.5760803222656,
+                        188.28936767578125,
+                        17.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            349.4425412306056,
+            178.5751810615267,
+            17.255962283258075
+        ],
+        "start_rotation": [
+            0.2852734187299375,
+            0.0,
+            0.0,
+            0.9584461782312733
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "Follow the road straight ahead, passing between the tall buildings. Keep moving forward down the street; on your right, you will pass a large, beige building with arched windows and green vines growing on the wall. Continue along the road as you approach the storefronts. You will arrive at 'The Daily Crumb' bakery, distinguished by its wooden facade and large display window on the right side of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_1",
+                "type": "object",
+                "location": [
+                    59.36946302353113,
+                    100.6144188815691,
+                    12.017289328138471
+                ],
+                "radius": 3.6265208996469767,
+                "path_length": 34.44950289973976,
+                "reference_path": [
+                    [
+                        83.55062866210938,
+                        124.44180297851562,
+                        10.864968299865723
+                    ],
+                    [
+                        82.57608032226562,
+                        120.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        81.07608032226562,
+                        116.28936767578125,
+                        10.69999885559082
+                    ],
+                    [
+                        78.07608032226562,
+                        113.28936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        63.076080322265625,
+                        99.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        61.576080322265625,
+                        99.78936767578125,
+                        10.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            83.5506251648044,
+            124.44180412562504,
+            10.86496790187152
+        ],
+        "start_rotation": [
+            0.45522483950108406,
+            0.0,
+            0.0,
+            -0.8903765189520736
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_0_1",
+                "type": "object",
+                "location": [
+                    -187.10307613388966,
+                    173.26675883151194,
+                    14.048663369897781
+                ],
+                "radius": 3.65167786918623,
+                "path_length": 30.513713963652215,
+                "reference_path": [
+                    [
+                        -195.15170288085938,
+                        140.88909912109375,
+                        12.062396049499512
+                    ],
+                    [
+                        -187.1030731201172,
+                        170.28936767578125,
+                        13.451735496520996
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -195.15170449484094,
+            140.88910276522213,
+            12.06239628254199
+        ],
+        "start_rotation": [
+            0.6961208722453459,
+            0.0,
+            0.0,
+            0.7179245999576689
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "Go straight along the road, keeping the dark, shadowed buildings on your right and the taller, sunlit beige buildings on your left. As you proceed, you will pass a shop with a visible window display on your right. Continue forward down the street, and you will arrive at the restaurant_0, which is the ramen house featuring a warm, brightly lit wooden storefront and a window showing people eating inside.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_2",
+                "type": "object",
+                "location": [
+                    83.23266165037626,
+                    19.779918445124547,
+                    11.182444429752639
+                ],
+                "radius": 3.504983276417491,
+                "path_length": 13.87405520061879,
+                "reference_path": [
+                    [
+                        71.1190414428711,
+                        27.688613891601562,
+                        9.436195373535156
+                    ],
+                    [
+                        72.07608032226562,
+                        26.28936767578125,
+                        9.499998092651367
+                    ],
+                    [
+                        78.07608032226562,
+                        24.78936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        81.07608032226562,
+                        23.28936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        83.23265838623047,
+                        21.78936767578125,
+                        9.771245002746582
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            71.11904497160099,
+            27.688614576427366,
+            9.436195492553715
+        ],
+        "start_rotation": [
+            0.8392491222069471,
+            0.0,
+            0.0,
+            -0.5437471019461793
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_3_1",
+                "type": "object",
+                "location": [
+                    194.12771556490304,
+                    325.674420094301,
+                    15.639033779207805
+                ],
+                "radius": 3.6159785979093755,
+                "path_length": 51.400719302691314,
+                "reference_path": [
+                    [
+                        220.79251098632812,
+                        298.3533020019531,
+                        14.258329391479492
+                    ],
+                    [
+                        223.57608032226562,
+                        309.78936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        223.57608032226562,
+                        312.78936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        219.07608032226562,
+                        320.28936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        217.57608032226562,
+                        321.78936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        205.57608032226562,
+                        329.28936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        201.07608032226562,
+                        329.28936767578125,
+                        14.19999885559082
+                    ],
+                    [
+                        194.12771606445312,
+                        327.78936767578125,
+                        14.014708518981934
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            220.7925128969801,
+            298.3533172226272,
+            14.258329564248331
+        ],
+        "start_rotation": [
+            0.8306238209760701,
+            0.0,
+            0.0,
+            0.5568339680974155
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_1_1",
+                "type": "object",
+                "location": [
+                    158.8805789653398,
+                    288.77706748981745,
+                    15.108895785415777
+                ],
+                "radius": 3.6002129920135246,
+                "path_length": 97.35119559690027,
+                "reference_path": [
+                    [
+                        218.01071166992188,
+                        333.2953796386719,
+                        14.335050582885742
+                    ],
+                    [
+                        177.07608032226562,
+                        335.28936767578125,
+                        13.799997329711914
+                    ],
+                    [
+                        171.07608032226562,
+                        335.28936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        169.57608032226562,
+                        333.78936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        166.57608032226562,
+                        326.28936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        157.57608032226562,
+                        300.78936767578125,
+                        13.399999618530273
+                    ],
+                    [
+                        154.57608032226562,
+                        291.78936767578125,
+                        13.299997329711914
+                    ],
+                    [
+                        154.57608032226562,
+                        290.28936767578125,
+                        13.19999885559082
+                    ],
+                    [
+                        156.07608032226562,
+                        288.7770690917969,
+                        13.149589538574219
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            218.0107046531951,
+            333.29536581823186,
+            14.33505084209304
+        ],
+        "start_rotation": [
+            0.17160571862129187,
+            0.0,
+            0.0,
+            0.9851657105971918
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_0",
+        "instruction": "Start near a tall, slender modern building and a large grey blocky building. Slightly angle right and follow the road ahead, moving towards a brick establishment embedded in the grey building's facade. Continue straight down the street. As you approach, the brick structure reveals itself as \"The Barrel & Tap,\" an old-fashioned pub with wooden window frames. You will arrive at the pub.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_0_7",
+                "type": "object",
+                "location": [
+                    19.667009452785358,
+                    267.4326639098291,
+                    22.070931476707102
+                ],
+                "radius": 3.6207725195598623,
+                "path_length": 14.923360740979025,
+                "reference_path": [
+                    [
+                        10.272390365600586,
+                        280.77191162109375,
+                        20.600000381469727
+                    ],
+                    [
+                        10.576080322265625,
+                        279.78936767578125,
+                        20.600000381469727
+                    ],
+                    [
+                        19.667009353637695,
+                        269.28936767578125,
+                        20.182321548461914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            10.272390559721352,
+            280.7719007009592,
+            20.600000381469727
+        ],
+        "start_rotation": [
+            0.9254653596593209,
+            0.0,
+            0.0,
+            -0.3788322426492285
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_1_4",
+                "type": "object",
+                "location": [
+                    -57.19256044804688,
+                    64.75110842233539,
+                    12.849066255747873
+                ],
+                "radius": 3.668606382252321,
+                "path_length": 93.29990670736956,
+                "reference_path": [
+                    [
+                        -44.45330047607422,
+                        132.6194305419922,
+                        12.757293701171875
+                    ],
+                    [
+                        -23.923919677734375,
+                        122.28936767578125,
+                        12.999998092651367
+                    ],
+                    [
+                        -20.923919677734375,
+                        119.28936767578125,
+                        12.899999618530273
+                    ],
+                    [
+                        -20.923919677734375,
+                        116.28936767578125,
+                        12.799997329711914
+                    ],
+                    [
+                        -23.923919677734375,
+                        105.78936767578125,
+                        12.19999885559082
+                    ],
+                    [
+                        -29.923919677734375,
+                        87.78936767578125,
+                        11.19999885559082
+                    ],
+                    [
+                        -35.923919677734375,
+                        81.78936767578125,
+                        10.999998092651367
+                    ],
+                    [
+                        -52.423919677734375,
+                        69.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        -55.423919677734375,
+                        66.78936767578125,
+                        10.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -44.453301909082995,
+            132.61942485991588,
+            12.757293942356053
+        ],
+        "start_rotation": [
+            0.9913984607287025,
+            0.0,
+            0.0,
+            -0.1308781573248926
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "university_1",
+        "instruction": "Head straight down the road, passing the red sports car parked on your left. Continue forward through the city canyon with tall, dark skyscrapers on both sides. As you proceed, you will approach a block with lower buildings on the right. Look for a shop named \"Quick Stop Mart\" with a white sign and blue lettering. Just past that is a storefront labeled \"Academic Archive\" with a wooden facade and large display windows. You will arrive at the Academic Archive shop.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/university_1_1",
+                "type": "object",
+                "location": [
+                    36.247329377973344,
+                    22.856721917133548,
+                    11.519477120517417
+                ],
+                "radius": 3.6343492697695066,
+                "path_length": 86.3739736098927,
+                "reference_path": [
+                    [
+                        62.25315475463867,
+                        94.24754333496094,
+                        10.637840270996094
+                    ],
+                    [
+                        58.576080322265625,
+                        63.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        58.576080322265625,
+                        62.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        66.07608032226562,
+                        51.78936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        66.07608032226562,
+                        50.28936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        61.576080322265625,
+                        44.28936767578125,
+                        9.599998474121094
+                    ],
+                    [
+                        42.076080322265625,
+                        23.28936767578125,
+                        9.499998092651367
+                    ],
+                    [
+                        40.576080322265625,
+                        21.78936767578125,
+                        9.499998092651367
+                    ],
+                    [
+                        39.076080322265625,
+                        21.78936767578125,
+                        9.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            62.253153547294325,
+            94.24754066751532,
+            10.637840159033875
+        ],
+        "start_rotation": [
+            0.7023808147684287,
+            0.0,
+            0.0,
+            -0.7118013704996908
+        ],
+        "ceiling_height": 1.0
+    }
+]

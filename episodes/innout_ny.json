@@ -1,0 +1,1652 @@
+[
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 0,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Start slightly to the right down the city street, keeping the modern gray and black office building on your left. Continue forward along the road, passing a small dark car on your left and a tall dark skyscraper further down. Keep heading straight as the street narrows between the high-rise buildings. As you proceed, you will approach a white delivery van parked on the right side of the street near the sidewalk. Continue until you arrive directly behind the white van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 48.038837595263956,
+                "reference_path": [
+                    [
+                        -130.9538116455078,
+                        181.81362915039062,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -130.9538098396145,
+            181.81362329896123,
+            7.700044631958009
+        ],
+        "start_rotation": [
+            0.2507633664820977,
+            0.0,
+            0.0,
+            -0.9680484151273454
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 1,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "Exit the aisle by turning right past the wooden shelves stocked with snacks and drinks. Move towards the store entrance where you see a white ambulance parked outside through the glass doors. Continue straight, passing the display tables and chairs on your right. Exit the store through the large glass doors and head directly towards the white ambulance with red and blue stripes parked on the street. You will arrive at the side of the bus.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 26.497225995115713,
+                "reference_path": [
+                    [
+                        -129.28065490722656,
+                        191.9186553955078,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.11529541015625,
+                        190.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 17.62827087124557,
+                "reference_path": [
+                    [
+                        -129.28065490722656,
+                        191.9186553955078,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.11529541015625,
+                        190.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.28065477171643,
+            191.9186538315174,
+            7.700044631958008
+        ],
+        "start_rotation": [
+            0.8897185912810338,
+            0.0,
+            0.0,
+            -0.4565093956633233
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 2,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Exit the room with the clear plastic curtain and turn left onto the road. Follow the road straight ahead, passing a building labeled \"Old Navy\" on your left and a tall black building further down. Continue down the street, keeping the large black skyscraper to your left and the beige buildings to your right. As you proceed, you will see a white delivery van parked on the right side of the road. Approach the van to arrive at your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 49.87368442018863,
+                "reference_path": [
+                    [
+                        -129.96087646484375,
+                        183.4596710205078,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.96087112354337,
+            183.45967234158306,
+            7.700044631958008
+        ],
+        "start_rotation": [
+            0.28050898520101225,
+            0.0,
+            0.0,
+            -0.9598513995517735
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "From the interior with the glass table and transparent chairs, move towards the large window facing the street. Exit the building and approach the white bus with the red horizontal stripe parked outside. Follow the sidewalk alongside the bus until you are underneath it. You will arrive at the bus.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 18.50044700967288,
+                "reference_path": [
+                    [
+                        -130.5623321533203,
+                        185.09518432617188,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 9.749205390103828,
+                "reference_path": [
+                    [
+                        -130.5623321533203,
+                        185.09518432617188,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -130.5623285112814,
+            185.09517775194863,
+            7.700044631958009
+        ],
+        "start_rotation": [
+            0.48990160500505003,
+            0.0,
+            0.0,
+            -0.8717777339514218
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Exit the structure with the glass wall and turn left onto the street. Follow the road straight ahead, passing a large white and red bus on your left and a white shelter labeled \"PUBLIC TOILETS\" on your right. Continue down the street, keeping the tall black skyscraper ahead as a guide. You will see a white trailer being towed by a vehicle in front of you. Keep moving forward along the road until you are directly behind a white van parked on the right side of the street. You will arrive at the van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 49.68403827271328,
+                "reference_path": [
+                    [
+                        -129.18283081054688,
+                        181.20013427734375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.18283600978248,
+            181.2001294511081,
+            7.700044631958008
+        ],
+        "start_rotation": [
+            0.2207362402060435,
+            0.0,
+            0.0,
+            0.97533353898023
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "Proceed straight down the store aisle with wooden shelves stocked with colorful products on your left and white shelving units on your right. As you reach the store's exit, continue forward past the seating area with transparent modern chairs and a table. Exit the glass sliding doors onto the paved sidewalk. Head straight towards the large white camper van with red and blue stripes parked on the street. You will arrive directly at the side of the bus.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 25.256762383832022,
+                "reference_path": [
+                    [
+                        -127.70816802978516,
+                        191.2134246826172,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 16.387807259961882,
+                "reference_path": [
+                    [
+                        -127.70816802978516,
+                        191.2134246826172,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -127.7081685468702,
+            191.21341732202578,
+            7.700044631958007
+        ],
+        "start_rotation": [
+            0.4672694178388878,
+            0.0,
+            0.0,
+            -0.884114976206436
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Start with the dark building and the \"crocs\" sign on your left, facing down the street towards a tall, dark skyscraper. Proceed forward along the road, keeping the large, blocky, white and red RV on your left as you pass it. Continue straight down the road, with tall city buildings flanking both sides. As you move forward, you will approach a white van parked on the right side of the street. You will arrive at the van's rear wheel.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 48.89310915314469,
+                "reference_path": [
+                    [
+                        -129.9960174560547,
+                        181.56973266601562,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.99601359735468,
+            181.56973619645257,
+            7.700044631958008
+        ],
+        "start_rotation": [
+            0.17673087211757665,
+            0.0,
+            0.0,
+            -0.9842592132363104
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Exit the building and head toward the street, passing a white camper with red stripes on your left. Continue forward down the road, keeping the dark, tall skyscraper ahead as a guide. Proceed along the street, passing a dark grey vehicle on the left. As you move further down the road, you will approach a white van parked on the right side. You will arrive at the van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 49.84811197487037,
+                "reference_path": [
+                    [
+                        -129.04649353027344,
+                        181.6888427734375,
+                        7.714353561401367
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.04649166773788,
+            181.6888502592738,
+            7.714353564368785
+        ],
+        "start_rotation": [
+            0.007907893506361539,
+            0.0,
+            0.0,
+            -0.9999687321213059
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "Start facing the white display counter with a colorful banner. Turn left to see a store interior with clear plastic chairs and tables. Move forward, passing the white shelving unit stocked with blue and yellow packaged goods on your right. Continue straight through the open storefront towards the street outside. As you exit, you will see a large white camper trailer parked on the road. Proceed towards it; you will arrive at the side of the white trailer with red and blue stripes.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 22.0393176341772,
+                "reference_path": [
+                    [
+                        -128.35107421875,
+                        187.55682373046875,
+                        7.8131937980651855
+                    ],
+                    [
+                        -128.61529541015625,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 13.170336407333075,
+                "reference_path": [
+                    [
+                        -128.35107421875,
+                        187.55682373046875,
+                        7.8131937980651855
+                    ],
+                    [
+                        -128.61529541015625,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -128.35106842194583,
+            187.55682757326443,
+            7.813193825438883
+        ],
+        "start_rotation": [
+            0.22243493833131917,
+            0.0,
+            0.0,
+            0.9749475361318384
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_van",
+        "instruction": "Head straight along the road, keeping the tall, dark skyscrapers on your left and the tan building facades on your right. Continue forward, passing the grey vehicle with red and blue stripes parked on the left side of the street. As you move further down the road, the perspective lowers slightly. Keep going until you are directly behind the white police van ahead. You will arrive at the police_van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_van_7",
+                "type": "object",
+                "location": [
+                    -160.40706522297296,
+                    187.7860006634834,
+                    8.75567866600926
+                ],
+                "radius": 3.0556465641740402,
+                "path_length": 31.66620890104292,
+                "reference_path": [
+                    [
+                        -129.583740234375,
+                        181.16549682617188,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.51528930664062,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -159.61529541015625,
+                        187.17893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -160.58309936523438,
+                        187.38360595703125,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.58374181400828,
+            181.16549192038025,
+            7.700044631958009
+        ],
+        "start_rotation": [
+            0.020770052724920825,
+            0.0,
+            0.0,
+            0.9997842791871675
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Start near the white shelving unit and move forward, passing a silver trailer on your left. Continue straight, exiting the building onto a city street. As you move along the road, you'll see large grey buildings and a storefront with a 'D NAVY' sign. Follow the road, passing a large white trailer with red stripes on your right. Ahead, you will spot two smaller white trailers with yellow banana shapes on top. Keep moving forward on the road towards a dark grey offroad truck, which is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_3",
+                "type": "object",
+                "location": [
+                    -139.97146243339256,
+                    160.3905923433804,
+                    8.73243741629065
+                ],
+                "radius": 2.531641173299576,
+                "path_length": 33.66570044476766,
+                "reference_path": [
+                    [
+                        -128.72677612304688,
+                        187.689453125,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.51528930664062,
+                        180.178955078125,
+                        7.500043869018555
+                    ],
+                    [
+                        -127.415283203125,
+                        173.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.51528930664062,
+                        173.178955078125,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        171.07894897460938,
+                        7.500043869018555
+                    ],
+                    [
+                        -139.97146606445312,
+                        160.39059448242188,
+                        7.500043869018555
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -128.7267727010346,
+            187.68945680342233,
+            7.700044631958009
+        ],
+        "start_rotation": [
+            0.1687053648122241,
+            0.0,
+            0.0,
+            -0.9856665256990187
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Start from the aisle facing the wooden shelves. Turn right and proceed forward, passing the shelves stocked with colorful boxes and cans. Turn left to exit the aisle, then turn left again near the counter with the person in the green shirt. Head straight out of the glass sliding doors onto the sidewalk.\n\nOnce outside, turn left and follow the sidewalk alongside the building with the \"OLD NAVY\" sign. Continue straight for a while, keeping the road on your right. As you approach the street corner near the \"crocs\" store, turn right onto the road. Move forward down the street, and you will arrive at the dark offroad truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_3",
+                "type": "object",
+                "location": [
+                    -139.97146243339256,
+                    160.3905923433804,
+                    8.73243741629065
+                ],
+                "radius": 2.531641173299576,
+                "path_length": 42.02026312621358,
+                "reference_path": [
+                    [
+                        -124.93309020996094,
+                        186.88763427734375,
+                        7.700044631958008
+                    ],
+                    [
+                        -125.11528778076172,
+                        187.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -125.11528778076172,
+                        187.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -124.71528625488281,
+                        188.57894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -124.71528625488281,
+                        189.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -126.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.415283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        189.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.61529541015625,
+                        188.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.51528930664062,
+                        180.178955078125,
+                        7.500043869018555
+                    ],
+                    [
+                        -127.415283203125,
+                        173.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.51528930664062,
+                        173.178955078125,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        171.07894897460938,
+                        7.500043869018555
+                    ],
+                    [
+                        -139.97146606445312,
+                        160.39059448242188,
+                        7.500043869018555
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -124.93309004544699,
+            186.8876352438188,
+            7.700044631958007
+        ],
+        "start_rotation": [
+            0.4011397655629701,
+            0.0,
+            0.0,
+            0.9160168603710771
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Proceed straight down the street, keeping the tall, dark skyscrapers on your left and the beige buildings on your right. You will pass a large white bus with red and blue stripes parked on the left side of the road. Continue forward along the reddish-brown road surface. As you move further, the perspective shifts slightly to the right, bringing a white van into closer view ahead. Keep moving towards this white van until you arrive directly next to its rear tire.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_6",
+                "type": "object",
+                "location": [
+                    -173.97430233254926,
+                    198.08534826087407,
+                    8.633035782709356
+                ],
+                "radius": 3.1097855942176835,
+                "path_length": 46.84667648639191,
+                "reference_path": [
+                    [
+                        -132.0470733642578,
+                        181.0409698486328,
+                        7.663821697235107
+                    ],
+                    [
+                        -159.415283203125,
+                        185.47894287109375,
+                        7.200044631958008
+                    ],
+                    [
+                        -162.51528930664062,
+                        187.07894897460938,
+                        7.200044631958008
+                    ],
+                    [
+                        -163.31529235839844,
+                        187.67893981933594,
+                        7.200044631958008
+                    ],
+                    [
+                        -174.65130615234375,
+                        196.92495727539062,
+                        7.200044631958008
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -132.0470702451708,
+            181.04096882747854,
+            7.663821795089244
+        ],
+        "start_rotation": [
+            0.0800974402704673,
+            0.0,
+            0.0,
+            0.9967870384701634
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Start from the market interior, facing the noodle counter and shelves. Move forward, passing the food display and shelving units on your left. Exit the market through the large glass doors. Once outside on the city street, follow the road as it curves slightly. Continue down the street, keeping the tall buildings on your left and the large white RVs visible ahead. As you approach the dark off-road truck parked near the curb, you will arrive at the offroad_truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_3",
+                "type": "object",
+                "location": [
+                    -139.97146243339256,
+                    160.3905923433804,
+                    8.73243741629065
+                ],
+                "radius": 2.531641173299576,
+                "path_length": 39.203598349542254,
+                "reference_path": [
+                    [
+                        -125.0516586303711,
+                        189.45533752441406,
+                        7.700044631958008
+                    ],
+                    [
+                        -126.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.415283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        189.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.61529541015625,
+                        188.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.51528930664062,
+                        180.178955078125,
+                        7.500043869018555
+                    ],
+                    [
+                        -127.415283203125,
+                        173.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.51528930664062,
+                        173.178955078125,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        171.07894897460938,
+                        7.500043869018555
+                    ],
+                    [
+                        -139.97146606445312,
+                        160.39059448242188,
+                        7.500043869018555
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -125.05165558537257,
+            189.45533922166882,
+            7.700044631958007
+        ],
+        "start_rotation": [
+            0.33160198934318014,
+            0.0,
+            0.0,
+            0.943419376875229
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 24.231096954603434,
+                "reference_path": [
+                    [
+                        -127.6673355102539,
+                        190.07090759277344,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        189.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.61529541015625,
+                        188.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 15.362115727759317,
+                "reference_path": [
+                    [
+                        -127.6673355102539,
+                        190.07090759277344,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        189.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.61529541015625,
+                        188.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.415283203125,
+                        186.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -127.66733509764991,
+            190.07091176381698,
+            7.700044631958007
+        ],
+        "start_rotation": [
+            0.4036713893332325,
+            0.0,
+            0.0,
+            -0.9149040438394498
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_3",
+                "type": "object",
+                "location": [
+                    -139.97146243339256,
+                    160.3905923433804,
+                    8.73243741629065
+                ],
+                "radius": 2.531641173299576,
+                "path_length": 37.03152376694778,
+                "reference_path": [
+                    [
+                        -127.98085021972656,
+                        191.0139617919922,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.51528930664062,
+                        180.178955078125,
+                        7.500043869018555
+                    ],
+                    [
+                        -127.415283203125,
+                        173.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.51528930664062,
+                        173.178955078125,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.915283203125,
+                        171.07894897460938,
+                        7.500043869018555
+                    ],
+                    [
+                        -139.97146606445312,
+                        160.39059448242188,
+                        7.500043869018555
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -127.98085131546823,
+            191.0139662744879,
+            7.700044631958009
+        ],
+        "start_rotation": [
+            0.7924557013932092,
+            0.0,
+            0.0,
+            -0.6099294724223423
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    },
+    {
+        "scene_id": "innout_ny",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/NY/NY_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus",
+        "instruction": "",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_1",
+                "type": "object",
+                "location": [
+                    -146.38901762814194,
+                    178.15952393294066,
+                    9.228803920013007
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 26.271833787655083,
+                "reference_path": [
+                    [
+                        -129.3275146484375,
+                        191.43020629882812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.11529541015625,
+                        191.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.11529541015625,
+                        190.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -131.915283203125,
+                        181.47894287109375,
+                        7.700044631958008
+                    ],
+                    [
+                        -132.11529541015625,
+                        181.27894592285156,
+                        7.500043869018555
+                    ],
+                    [
+                        -146.40457153320312,
+                        180.9910888671875,
+                        7.348632335662842
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_5",
+                "type": "object",
+                "location": [
+                    -130.98419642417852,
+                    173.94546511781652,
+                    9.341594931955683
+                ],
+                "radius": 3.2515668176791053,
+                "path_length": 17.402878663784943,
+                "reference_path": [
+                    [
+                        -129.3275146484375,
+                        191.43020629882812,
+                        7.700044631958008
+                    ],
+                    [
+                        -129.11529541015625,
+                        191.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -128.11529541015625,
+                        190.87893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -127.915283203125,
+                        190.37893676757812,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.01528930664062,
+                        185.67893981933594,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.11529541015625,
+                        185.07894897460938,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.7152862548828,
+                        180.77894592285156,
+                        7.700044631958008
+                    ],
+                    [
+                        -130.1895751953125,
+                        175.37576293945312,
+                        7.570202827453613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -129.32751111200062,
+            191.43021059190977,
+            7.700044631958008
+        ],
+        "start_rotation": [
+            0.9956209357228379,
+            0.0,
+            0.0,
+            -0.09348236384677383
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene13"
+    }
+]

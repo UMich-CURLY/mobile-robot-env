@@ -9,7 +9,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "bed",
-        "instruction": "",
+        "instruction": "Starting near the white shelf filled with green and brown boxes, turn slightly right and proceed towards the white reception desk where a person in a pink top is standing. Turn right around the corner of the reception desk, passing a person seated on a chair to your left. Move straight down the hallway past the row of white chairs and the IV stands. Continue forward past the white partition wall on your left. You will arrive at the white examination bed situated next to a blue curtain.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -125,7 +125,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "desk",
-        "instruction": "",
+        "instruction": "Starting near the white counter with the person in the pink jacket, turn left. Move forward along the hallway, passing the white medical bed on your left and the poster on the wall. Continue straight ahead towards the white pedestal sink in the corner. You will arrive at the desk area where a person in white pants and white shoes is seated.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -206,7 +206,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Start near the white hospital bed on your left and the medicine display cabinet on your right. Move straight ahead into the hallway, passing the white medical poster on the wall to your left. Continue forward down the corridor, keeping the blue trim along the floor to your left. As you approach the white sink stand and the trash bin at the end of the short hall, you will arrive at the tray located on a rolling stand to your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -277,7 +277,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "nightstand",
-        "instruction": "",
+        "instruction": "Start by standing near the white wall and turn slightly right to enter the doorway. Move forward into the room, passing a woman in a pink jacket and black pants. Continue straight down the aisle, keeping the pharmacy counter with green and white shelves on your left and the row of white chairs on your right. As you pass the chairs where people are seated, turn slightly right towards the last chair. Move closer to the wooden furniture next to the chair, and you will arrive at the nightstand.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -383,7 +383,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "monitor",
-        "instruction": "",
+        "instruction": "Start by turning right and moving forward through the pharmacy aisle, passing the glass display counter filled with bottles on your left. Continue straight towards the double doors with black glass panels ahead. As you approach the doors, slightly veer left, passing a man sitting in a waiting chair on your right. Stop before reaching the doors; you will arrive at the monitor location near the corner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -459,7 +459,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "mouse",
-        "instruction": "",
+        "instruction": "Move forward, past the counter on your left and the woman standing nearby. Continue past the row of white chairs on your right. Once you pass the double black doors, turn left. You will arrive at the mouse on the desk chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -580,7 +580,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pillow",
-        "instruction": "",
+        "instruction": "Navigate through the hallway, keeping the white wall to your left. As you pass the doorway on your right, you'll see a woman in a pink blazer. Continue forward into the brightly lit room, approaching the grey reclining chairs lined up in a row. Follow the path between the row of chairs on your right and the shelving unit on your left. As you move further into the room, past the man seated in the first chair, turn right towards the wooden side table next to the chairs. You will arrive at the pillow resting on the chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -681,7 +681,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "picture",
-        "instruction": "",
+        "instruction": "Start by turning right and moving forward into the room with white waiting chairs and a person sitting on one. Continue straight past the person seated on the left and the glass display counter on the left. Turn left when you reach the end of the counter, passing a white trash can. Move forward slightly, keeping the white cabinet on your left. You will arrive at the abstract white picture on the wall above the chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -792,7 +792,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start near the white reclining infusion chairs and the standing water dispenser. Turn right, passing the patient beds on your left and the wall-mounted health education posters on your right. Move straight down the hallway. Continue forward, keeping the white wall on your right and the blue curtain partition on your left. You will arrive at the white pedestal sink and the transparent trashcan in the corner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -878,7 +878,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "curtain",
-        "instruction": "",
+        "instruction": "Start with the infusion room chairs and water cooler behind you, turn right and exit the room into the hallway. Proceed down the hallway, passing a hospital bed and a poster on the left wall, and a refrigerated display case on the right. Continue straight ahead towards the sink at the end of the corridor. Just before reaching the sink, slightly veer left. You will arrive at the blue curtain next to the white sink pedestal.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -974,7 +974,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Turn right slightly from the starting position, facing the waiting area with white chairs and a blue sign on the wall. Proceed forward, keeping the water dispenser and the blue sign on your right. As you move past the white infusion chairs, turn right into the hallway. Follow the hallway until you see a white medical bed with yellow accents on the right. Just past the bed, turn left towards a white desk or counter area. You will arrive at the plant.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1080,7 +1080,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Head towards the row of white medical recliner chairs, keeping the blue poster on the wall to your left. Once you pass the row of chairs, turn right into the hallway. Proceed down the hallway, keeping the white wall on your right and the hospital bed on your left. Continue straight, passing a small sink on a pedestal in the corner. You will arrive at the keyboard near the metal stool.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1196,7 +1196,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "desk",
-        "instruction": "",
+        "instruction": "Start facing the white display counter with glass shelves inside a pharmacy. Turn left, moving away from the shelves and the person in the pink coat. Proceed down the hallway, keeping the white wall with a colorful poster on your left. Continue forward past the white medical bed on your left. You will arrive at a white sink pedestal located near the end of the corridor.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1287,7 +1287,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "stool",
-        "instruction": "",
+        "instruction": "Start by standing near the white infusion chairs. Turn right and move forward down the hallway, keeping the white hospital bed on your left and the counter with snacks on your right. Continue straight towards the end of the room where a tall, white pedestal sink stands next to a blue curtain. As you approach the sink and the trash bin beside it, slightly angle left. Move closer to the white metal frame of the bed. You will arrive at the stool near the sink.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1393,7 +1393,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "curtain",
-        "instruction": "",
+        "instruction": "Start facing the person in the pink top, then turn slightly left to pass the person and the hospital bed frame on your left. Move straight down the corridor, keeping the white wall with the blue baseboard on your right. As you proceed, you will pass a white pedestal sink and a waste bin on your right. Continue forward towards the blue curtain ahead. You will arrive at the curtain.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1479,7 +1479,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "tray",
-        "instruction": "",
+        "instruction": "Face the row of grey medical recliner chairs where a man is sitting, then turn right to face the poster on the wall. Walk straight past the foot of the hospital bed with yellow accents on the headboard. Continue forward along the blue baseboard trim until you reach the corner where a white pedestal sink stands. Turn slightly left to face the sink more directly. You will arrive at the metal tray table positioned near the sink.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1585,7 +1585,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start by facing the dark door, then turn right to face the row of grey reclining chairs where a man is sitting. Move forward past the chairs and the water dispenser on your left. Continue straight down the hallway, keeping the white hospital bed on your left and the display case on your right. As you approach the end of the hall near the sink, look to your right. You will arrive at the trashcan, located next to the corner.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1686,7 +1686,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "monitor",
-        "instruction": "",
+        "instruction": "From the hallway, head straight towards the large dark doors at the end, passing the food display case on your left. Continue forward past the woman in the pink jacket and the row of chairs. As you approach the doors, you will see a man sitting on a white bench to your right. Slightly turn left to face the doors, and proceed forward until you are directly in front of the double doors; you will arrive at the destination near the wall on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1767,7 +1767,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Starting from the corner, turn right towards the open area. Move forward down the aisle, passing the refrigerated display case on your left filled with various products. As you continue, you will see a person in a pink jacket and black pants walking towards you, and further down, a waiting area with white chairs on your right where people are seated. Keep moving straight ahead past the display case. You will arrive at the end of the shelf unit on your left.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1848,7 +1848,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "mouse",
-        "instruction": "",
+        "instruction": "Turn right slightly from the starting position and move forward along the hallway, passing the pharmacy counter on your left and the waiting chairs on your right. Once you reach the end of the counter, turn left towards the double doors. Walk straight, passing the man sitting in the waiting area on your right. Slightly turn right to face the corner where a white desk meets the wall. You will arrive at the mouse on the desk.",
         "closest_goal_idx": 0,
         "goals": [
             {

@@ -1,0 +1,1477 @@
+[
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start at the center of the road, facing down the street with multi-story buildings on both sides. Move forward, keeping to the road's center, passing a series of blurred storefronts on your left. As you proceed, angle slightly left towards the sidewalk where a distinct \"Quick Stop Mart\" with a white sign and blue/red text is located. Approach the curb in front of this store. You will arrive at the convenience store entrance, near a small potted plant and a metal shopping cart on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 35.75427601327719,
+                "reference_path": [
+                    [
+                        -166.1604766845703,
+                        78.41702270507812,
+                        2.9216175079345703
+                    ],
+                    [
+                        -163.50015258789062,
+                        60.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -166.16047876649407,
+            78.41702643696539,
+            2.9216174060736053
+        ],
+        "start_rotation": [
+            0.8197596314321838,
+            0.0,
+            0.0,
+            -0.5727077323331423
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "Navigate towards the narrow passage between the tall, dark grey buildings. Continue straight through the corridor, passing a large wall with a mural on the right. As you emerge from the alleyway onto a street, look for a building on the far right with a sign that includes red and white colors. Head towards this structure, which is the convenience store, located near a small white figure or object on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    152.92433149456417,
+                    174.16959263365504,
+                    12.177343432430519
+                ],
+                "radius": 3.5937785200090815,
+                "path_length": 59.94279629942844,
+                "reference_path": [
+                    [
+                        170.56011962890625,
+                        124.75911712646484,
+                        10.927040100097656
+                    ],
+                    [
+                        166.49984741210938,
+                        142.50015258789062,
+                        10.900001525878906
+                    ],
+                    [
+                        160.49984741210938,
+                        175.50015258789062,
+                        10.700002670288086
+                    ],
+                    [
+                        158.99984741210938,
+                        177.00015258789062,
+                        10.700002670288086
+                    ],
+                    [
+                        152.92433166503906,
+                        177.00015258789062,
+                        10.463732719421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            170.56011992278394,
+            124.75911949476831,
+            10.927039822555601
+        ],
+        "start_rotation": [
+            0.40017791319597973,
+            0.0,
+            0.0,
+            0.9164374707475197
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "Start by slightly turning right and moving down the street, keeping the yellow ice cream truck to your distant left. Proceed forward past the dilapidated grey buildings. As you approach a large, textured grey wall on your right, slightly turn left to follow the road. Continue forward through the shadowed street. As you near the end of the block, turn left towards the brick-faced storefront with large glass windows. You will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    152.92433149456417,
+                    174.16959263365504,
+                    12.177343432430519
+                ],
+                "radius": 3.5937785200090815,
+                "path_length": 93.18863470270963,
+                "reference_path": [
+                    [
+                        150.57144165039062,
+                        110.05894470214844,
+                        9.869054794311523
+                    ],
+                    [
+                        136.49984741210938,
+                        121.50015258789062,
+                        9.500001907348633
+                    ],
+                    [
+                        134.99984741210938,
+                        123.00015258789062,
+                        9.500001907348633
+                    ],
+                    [
+                        133.49984741210938,
+                        129.00015258789062,
+                        9.500001907348633
+                    ],
+                    [
+                        131.99984741210938,
+                        162.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        131.99984741210938,
+                        174.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        133.49984741210938,
+                        175.50015258789062,
+                        9.800003051757812
+                    ],
+                    [
+                        140.99984741210938,
+                        177.00015258789062,
+                        10.000001907348633
+                    ],
+                    [
+                        152.92433166503906,
+                        177.00015258789062,
+                        10.463732719421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            150.5714404108106,
+            110.05894489232733,
+            9.869055098047832
+        ],
+        "start_rotation": [
+            0.10429745573551713,
+            0.0,
+            0.0,
+            0.9945461481133482
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Begin facing the ambulance with red and white stripes. Turn right and proceed down the street, keeping the tall grey buildings on your right and the construction-style barriers on your left. Follow the road forward as it curves slightly. Continue past the row of brown brick buildings on your left. As you approach the end of the block, veer slightly left towards the storefronts. You will arrive at the Quick Stop convenience store with the beige tiled facade.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 97.86890176641216,
+                "reference_path": [
+                    [
+                        -230.73672485351562,
+                        45.09174346923828,
+                        2.1061081886291504
+                    ],
+                    [
+                        -216.00015258789062,
+                        57.000152587890625,
+                        2.200002670288086
+                    ],
+                    [
+                        -214.50015258789062,
+                        58.500152587890625,
+                        2.200002670288086
+                    ],
+                    [
+                        -213.00015258789062,
+                        64.50015258789062,
+                        2.3000030517578125
+                    ],
+                    [
+                        -211.50015258789062,
+                        66.00015258789062,
+                        2.500001907348633
+                    ],
+                    [
+                        -175.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -172.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -169.50015258789062,
+                        66.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -230.73671757263378,
+            45.091742132073016,
+            2.1061082817229444
+        ],
+        "start_rotation": [
+            0.8998593315070876,
+            0.0,
+            0.0,
+            0.4361802190604444
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start near the ambulance and office chair, heading away from them down the street. Follow the road straight for a long distance, passing the buildings on your left. Continue straight, keeping the buildings on your left, until you spot a convenience store with a 'QUICK STOP MART' sign on the left side of the street. Approach the sidewalk in front of this store to arrive at your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 93.12804426847346,
+                "reference_path": [
+                    [
+                        -234.15895080566406,
+                        59.87344741821289,
+                        2.200002670288086
+                    ],
+                    [
+                        -232.50015258789062,
+                        61.500152587890625,
+                        2.200002670288086
+                    ],
+                    [
+                        -220.50015258789062,
+                        67.50015258789062,
+                        2.200002670288086
+                    ],
+                    [
+                        -175.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -172.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -169.50015258789062,
+                        66.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -234.15895379172446,
+            59.873446168275755,
+            2.200002670288086
+        ],
+        "start_rotation": [
+            0.9876497652885239,
+            0.0,
+            0.0,
+            0.15667782588970194
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start by moving forward down the street, keeping the tall grey buildings on your right. As you continue, you'll pass a series of storefronts on the left, including one with a white facade. Keep heading straight along the road.\n\nAs you approach a Quick Stop Mart with a large glass window display on your right, slightly veer left toward the sidewalk. You will arrive at the convenience store entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 68.66780252566959,
+                "reference_path": [
+                    [
+                        -211.79940795898438,
+                        69.7580337524414,
+                        2.372238874435425
+                    ],
+                    [
+                        -172.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -169.50015258789062,
+                        66.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -211.7994142321477,
+            69.75803494990762,
+            2.3722388889598824
+        ],
+        "start_rotation": [
+            0.9679724024055911,
+            0.0,
+            0.0,
+            -0.25105662345604085
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "Move forward across the paved road, keeping the dilapidated building with blue-tinted windows to your right. Continue straight ahead towards the brick building labeled \"ACADEMY OF LEARNING\" with large glass doors, which you will arrive at shortly.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    152.92433149456417,
+                    174.16959263365504,
+                    12.177343432430519
+                ],
+                "radius": 3.5937785200090815,
+                "path_length": 31.17827599121009,
+                "reference_path": [
+                    [
+                        122.0436019897461,
+                        181.1344757080078,
+                        9.400001525878906
+                    ],
+                    [
+                        128.99984741210938,
+                        180.00015258789062,
+                        9.60000228881836
+                    ],
+                    [
+                        152.92433166503906,
+                        177.00015258789062,
+                        10.463732719421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            122.04359904072419,
+            181.13446816812672,
+            9.400001525878906
+        ],
+        "start_rotation": [
+            0.9997732975941814,
+            0.0,
+            0.0,
+            0.02129209754008018
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "Follow the road and proceed straight ahead, keeping the dark buildings on your left and the lighter, tan-colored buildings on your right. Continue moving forward along the street. As you advance, you will notice a colorful object on the ground to your right. Keep going straight until you arrive at the bar.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_1",
+                "type": "object",
+                "location": [
+                    -178.47756826921673,
+                    173.82221849487985,
+                    5.747541513462075
+                ],
+                "radius": 3.5832275210055826,
+                "path_length": 67.62803077190456,
+                "reference_path": [
+                    [
+                        -164.4470977783203,
+                        105.35794830322266,
+                        3.1130197048187256
+                    ],
+                    [
+                        -166.50015258789062,
+                        112.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -171.00015258789062,
+                        165.00015258789062,
+                        3.700002670288086
+                    ],
+                    [
+                        -175.50015258789062,
+                        171.00015258789062,
+                        3.8000030517578125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -164.44709408660475,
+            105.35795165078518,
+            3.1130196343681593
+        ],
+        "start_rotation": [
+            0.37529559597382656,
+            0.0,
+            0.0,
+            0.9269051815815091
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start by slightly turning right and moving forward down the road. As you advance, you'll pass a row of buildings on your left, including a green-facaded structure and a beige building with windows. Continue straight along the street, keeping the tall dark buildings on your right and the row of storefronts on your left.\n\nEventually, you will approach an intersection with a white fountain in the distance. Turn left towards the sidewalk before reaching the intersection, aiming for the storefronts. Proceed slightly left and move forward toward the beige brick building with large glass windows. You will arrive at the Quick Stop Mart with a white sign and red lettering above the entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 43.96709520752826,
+                "reference_path": [
+                    [
+                        -180.04405212402344,
+                        81.629638671875,
+                        3.0117459297180176
+                    ],
+                    [
+                        -169.50015258789062,
+                        66.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -180.04405818658324,
+            81.62963725949696,
+            3.0117460417481925
+        ],
+        "start_rotation": [
+            0.9556254822667701,
+            0.0,
+            0.0,
+            -0.29458434724608684
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Start on the road, facing a street with buildings on both sides. Move forward, slightly veering right and then adjusting left to stay centered on the path. Continue straight down the street for a significant distance, passing a row of beige and grey buildings on your left. As you proceed, keep an eye out for a white storefront on your right labeled \"URBAN PROVISIONS\" with large glass windows and stocked shelves visible inside. As you approach this store, slightly turn right towards its entrance. You will arrive at the Urban Provisions convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -170.4518756965631,
+                    1.576958207642269,
+                    4.208114028969028
+                ],
+                "radius": 3.5843918671585904,
+                "path_length": 53.05758542397175,
+                "reference_path": [
+                    [
+                        -158.48504638671875,
+                        52.02277374267578,
+                        3.01717209815979
+                    ],
+                    [
+                        -160.50015258789062,
+                        51.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -162.00015258789062,
+                        49.500152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -165.00015258789062,
+                        3.000152587890625,
+                        2.4000015258789062
+                    ],
+                    [
+                        -166.50015258789062,
+                        1.576958179473877,
+                        2.4000015258789062
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -158.48504927807514,
+            52.02277497794445,
+            3.0171720831745894
+        ],
+        "start_rotation": [
+            0.35575631173256506,
+            0.0,
+            0.0,
+            -0.9345787535903232
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start facing the street with a building featuring green glass windows on your left. Move forward along the road, keeping the urban buildings on your left side. Continue straight down the street for a significant distance. As you proceed, you will pass a large white sign with a triangle cutout on your left. Eventually, the road will curve slightly; follow it towards the curb on the left. You will arrive at the Quick Stop Mart, which has a white facade and large glass windows.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 44.10054155237648,
+                "reference_path": [
+                    [
+                        -172.2084197998047,
+                        83.74423217773438,
+                        3.1000022888183594
+                    ],
+                    [
+                        -169.50015258789062,
+                        82.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -166.50015258789062,
+                        79.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -163.50015258789062,
+                        60.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -172.20841623289442,
+            83.74423204282016,
+            3.1000022888183594
+        ],
+        "start_rotation": [
+            0.9911122442990576,
+            0.0,
+            0.0,
+            -0.13302826466764528
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "With the yellow robot dog as your avatar, start from the grassy area next to the gray concrete wall. Move forward, transitioning onto the dark, paved road, keeping the wall on your right.\n\nContinue straight down the road, passing a series of dilapidated, blocky buildings on your left. As you proceed, keep the tall, gray concrete structure on your right side.\n\nEventually, you will approach a brick building with large, dark-framed windows on your right. Make a slight right turn towards this structure, and you will arrive at the school.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    152.92433149456417,
+                    174.16959263365504,
+                    12.177343432430519
+                ],
+                "radius": 3.5937785200090815,
+                "path_length": 75.59758796391219,
+                "reference_path": [
+                    [
+                        136.54725646972656,
+                        120.8243637084961,
+                        9.501582145690918
+                    ],
+                    [
+                        134.99984741210938,
+                        123.00015258789062,
+                        9.500001907348633
+                    ],
+                    [
+                        133.49984741210938,
+                        129.00015258789062,
+                        9.500001907348633
+                    ],
+                    [
+                        131.99984741210938,
+                        162.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        131.99984741210938,
+                        174.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        133.49984741210938,
+                        175.50015258789062,
+                        9.800003051757812
+                    ],
+                    [
+                        140.99984741210938,
+                        177.00015258789062,
+                        10.000001907348633
+                    ],
+                    [
+                        152.92433166503906,
+                        177.00015258789062,
+                        10.463732719421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            136.54725807295492,
+            120.82436363534339,
+            9.501582268738728
+        ],
+        "start_rotation": [
+            0.36456595636048295,
+            0.0,
+            0.0,
+            0.9311775681699846
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Start by slightly turning right and moving forward down the center of the empty street, flanked by multi-story urban buildings on both sides. Continue straight for a long distance, following the road as it stretches toward the horizon. As you proceed, you will pass various storefronts and buildings with muted brown and grey facades. Eventually, you will approach a white storefront on your right labeled \"URBAN PROVISIONS,\" which features large glass windows displaying stocked shelves inside. You will arrive directly in front of this convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -170.4518756965631,
+                    1.576958207642269,
+                    4.208114028969028
+                ],
+                "radius": 3.5843918671585904,
+                "path_length": 80.93366051766519,
+                "reference_path": [
+                    [
+                        -167.2031707763672,
+                        81.73542022705078,
+                        3.074464797973633
+                    ],
+                    [
+                        -166.50015258789062,
+                        79.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -165.00015258789062,
+                        21.000152587890625,
+                        2.500001907348633
+                    ],
+                    [
+                        -165.00015258789062,
+                        3.000152587890625,
+                        2.4000015258789062
+                    ],
+                    [
+                        -166.50015258789062,
+                        1.576958179473877,
+                        2.4000015258789062
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -167.20317196172402,
+            81.73542077287726,
+            3.074464711214716
+        ],
+        "start_rotation": [
+            0.8548097531298257,
+            0.0,
+            0.0,
+            -0.5189415053299615
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Navigate down the road with the tall, dark buildings on your left and the lighter-colored buildings on your right. As you proceed, the path curves slightly to the right, taking you past a row of brown brick buildings with dark windows. Continue forward along the street. You will eventually pass a large, beige building on your left with a wide glass front, which appears to be a shop, and a green truck further down the road. Keep following the road, curving slightly to the left, until you arrive directly in front of the convenience store with its brightly lit interior and large glass windows.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 72.99675969159011,
+                "reference_path": [
+                    [
+                        -216.1238250732422,
+                        68.04226684570312,
+                        2.32724928855896
+                    ],
+                    [
+                        -175.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -172.50015258789062,
+                        69.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -169.50015258789062,
+                        66.00015258789062,
+                        3.000001907348633
+                    ],
+                    [
+                        -162.00015258789062,
+                        54.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -159.00015258789062,
+                        52.500152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -216.12383015237592,
+            68.0422638116188,
+            2.3272493832437986
+        ],
+        "start_rotation": [
+            0.9787085898515201,
+            0.0,
+            0.0,
+            0.2052547104230475
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "You start on a paved road with buildings on either side, including a distinct red and white ambulance parked on the right. Move forward, passing the ambulance and proceeding down the street. As you continue, you will pass a large green recycling truck parked on the left side of the road. Keep following the road forward. As you approach the end of the block, turn slightly right towards the sidewalk. You will arrive at the cafe with a \"The Daily Crumb\" sign above the window, where people can be seen sitting inside.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_3",
+                "type": "object",
+                "location": [
+                    -153.84091245076172,
+                    93.79698183548473,
+                    5.31754770572814
+                ],
+                "radius": 3.597826938741825,
+                "path_length": 81.56963931850663,
+                "reference_path": [
+                    [
+                        -231.32945251464844,
+                        65.74689483642578,
+                        2.158444404602051
+                    ],
+                    [
+                        -195.00015258789062,
+                        72.00015258789062,
+                        2.700002670288086
+                    ],
+                    [
+                        -190.50015258789062,
+                        73.50015258789062,
+                        2.8000030517578125
+                    ],
+                    [
+                        -172.50015258789062,
+                        82.50015258789062,
+                        3.1000022888183594
+                    ],
+                    [
+                        -162.00015258789062,
+                        91.50015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -160.50015258789062,
+                        91.50015258789062,
+                        3.200002670288086
+                    ],
+                    [
+                        -156.00015258789062,
+                        91.50015258789062,
+                        3.3000030517578125
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -231.32945726811394,
+            65.74689390470438,
+            2.1584444678629375
+        ],
+        "start_rotation": [
+            0.9807731696645335,
+            0.0,
+            0.0,
+            0.19515119693761565
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start by facing a dark alleyway between buildings, then turn slightly right and proceed down the road. As you move forward, the environment opens up, revealing a long street flanked by buildings. Continue straight along the dark road, passing a row of tall, muted-colored buildings on your right. Keep heading down the street towards a bright green truck parked further ahead on the left side of the road. Eventually, you will arrive at the convenience store, which is the white building on your right with large glass windows and signs reading \"QUICK STOP MART.\"",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 24.346453378001335,
+                "reference_path": [
+                    [
+                        -157.3566436767578,
+                        35.914878845214844,
+                        2.8971590995788574
+                    ],
+                    [
+                        -156.00015258789062,
+                        36.000152587890625,
+                        2.9000015258789062
+                    ],
+                    [
+                        -156.00015258789062,
+                        48.000152587890625,
+                        3.000001907348633
+                    ],
+                    [
+                        -156.00015258789062,
+                        55.500152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -157.35663964907843,
+            35.914879670496966,
+            2.897159138671166
+        ],
+        "start_rotation": [
+            0.974116589202955,
+            0.0,
+            0.0,
+            0.22604616926548754
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_1",
+        "instruction": "Start by facing the red and white retro diner painting on the wall. Slightly turn left and proceed forward along the dark path. As you move, keep the diner mural on your right. Continue straight ahead, passing parallel to the wall with the diner artwork. Eventually, you will arrive at the fast_food_1 location near the end of the diner mural.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_1_3",
+                "type": "object",
+                "location": [
+                    -149.7486210882126,
+                    7.927855716988652,
+                    4.617171825887864
+                ],
+                "radius": 3.582689844635179,
+                "path_length": 7.252130459880545,
+                "reference_path": [
+                    [
+                        -157.32183837890625,
+                        2.580509901046753,
+                        2.500001907348633
+                    ],
+                    [
+                        -156.00015258789062,
+                        3.000152587890625,
+                        2.500001907348633
+                    ],
+                    [
+                        -154.50015258789062,
+                        4.500152587890625,
+                        2.6000022888183594
+                    ],
+                    [
+                        -153.00015258789062,
+                        7.927855491638184,
+                        2.638651132583618
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -157.32183295142994,
+            2.580509969891521,
+            2.500001907348633
+        ],
+        "start_rotation": [
+            0.9992391355257345,
+            0.0,
+            0.0,
+            -0.03900192346260432
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Start your journey on the road, facing down a street lined with buildings. Slightly turn right and move forward down the street, keeping the white building labeled \"URBAN PROVISIONS\" on your right. As you approach the building, slightly veer right towards its entrance. You will arrive at the \"URBAN PROVISIONS\" convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -170.4518756965631,
+                    1.576958207642269,
+                    4.208114028969028
+                ],
+                "radius": 3.5843918671585904,
+                "path_length": 19.967942623882863,
+                "reference_path": [
+                    [
+                        -161.95877075195312,
+                        20.640085220336914,
+                        2.423699140548706
+                    ],
+                    [
+                        -165.00015258789062,
+                        3.000152587890625,
+                        2.4000015258789062
+                    ],
+                    [
+                        -166.50015258789062,
+                        1.576958179473877,
+                        2.4000015258789062
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -161.95877184259564,
+            20.640085477034624,
+            2.4236990245475583
+        ],
+        "start_rotation": [
+            0.763172523711911,
+            0.0,
+            0.0,
+            -0.6461947841411231
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start slightly angled right and move forward down the road. As you continue straight ahead, you will pass a large green truck parked on the left side of the street. Slightly turn left and keep moving forward past the truck. You will then arrive at the Quick Stop Mart, a white storefront with a glass display window on your left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -152.31036098054568,
+                    58.985861091289124,
+                    5.215618653873562
+                ],
+                "radius": 3.5958877908452145,
+                "path_length": 49.044120199944516,
+                "reference_path": [
+                    [
+                        -158.19471740722656,
+                        12.964969635009766,
+                        2.5073928833007812
+                    ],
+                    [
+                        -159.00015258789062,
+                        13.500152587890625,
+                        2.4000015258789062
+                    ],
+                    [
+                        -162.00015258789062,
+                        22.500152587890625,
+                        2.4000015258789062
+                    ],
+                    [
+                        -162.00015258789062,
+                        49.500152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -160.50015258789062,
+                        51.000152587890625,
+                        2.8000030517578125
+                    ],
+                    [
+                        -157.50015258789062,
+                        54.000152587890625,
+                        3.1000022888183594
+                    ],
+                    [
+                        -156.00015258789062,
+                        58.985862731933594,
+                        3.158097743988037
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -158.19472107632777,
+            12.964969385224707,
+            2.5073928037509385
+        ],
+        "start_rotation": [
+            0.21090222793005564,
+            0.0,
+            0.0,
+            0.9775071612290822
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_baltimore_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BALTIMORE/BALTIMORE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "Start by moving straight along the dark path. Continue forward past the long, grey industrial-looking buildings on your right and the scattered ruins on your left. Keep heading straight until you see a building with a large glass window and a brick facade on your right. As you approach this brick building, turn slightly right towards it. You will arrive at the school.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    152.92433149456417,
+                    174.16959263365504,
+                    12.177343432430519
+                ],
+                "radius": 3.5937785200090815,
+                "path_length": 75.25376665572024,
+                "reference_path": [
+                    [
+                        132.83314514160156,
+                        120.46411895751953,
+                        9.4043550491333
+                    ],
+                    [
+                        131.99984741210938,
+                        162.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        131.99984741210938,
+                        174.00015258789062,
+                        9.700002670288086
+                    ],
+                    [
+                        133.49984741210938,
+                        175.50015258789062,
+                        9.800003051757812
+                    ],
+                    [
+                        140.99984741210938,
+                        177.00015258789062,
+                        10.000001907348633
+                    ],
+                    [
+                        152.92433166503906,
+                        177.00015258789062,
+                        10.463732719421387
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            132.83313996292947,
+            120.46412069733269,
+            9.404355355315786
+        ],
+        "start_rotation": [
+            0.7573573363012118,
+            0.0,
+            0.0,
+            0.6530006624427981
+        ],
+        "ceiling_height": 1.0
+    }
+]

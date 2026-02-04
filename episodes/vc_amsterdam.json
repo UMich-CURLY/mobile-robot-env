@@ -1,0 +1,1395 @@
+[
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "tissue_box",
+        "instruction": "Start on the street facing a large church-like structure with a spire on the left. Follow the road, passing a row of tall, dark brick buildings on your right. As you move forward, you will pass a green garbage truck parked on the right side of the street. Continue straight down the road, keeping the dark buildings on your right. As you approach the end of the block, you will arrive at a red tissue box with a yellow topper sitting on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/tissue_box_494",
+                "type": "object",
+                "location": [
+                    -66.34202965447271,
+                    66.57735837747897,
+                    7.985832000423899
+                ],
+                "radius": 0.2487284116250521,
+                "path_length": 89.53925359443345,
+                "reference_path": [
+                    [
+                        -15.054487228393555,
+                        135.30946350097656,
+                        7.360113143920898
+                    ],
+                    [
+                        -36.000152587890625,
+                        111.00015258789062,
+                        8.39999771118164
+                    ],
+                    [
+                        -54.000152587890625,
+                        70.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        -55.500152587890625,
+                        69.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        -60.000152587890625,
+                        67.50015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -64.50015258789062,
+                        66.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -66.00015258789062,
+                        66.00015258789062,
+                        7.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -15.054487138964735,
+            135.30945818836665,
+            7.360113340261639
+        ],
+        "start_rotation": [
+            0.602423288852471,
+            0.0,
+            0.0,
+            -0.7981767855858577
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_hat",
+        "instruction": "Start by facing the road ahead, bordered by tall, blocky buildings with gray and beige facades. Proceed forward along the street, keeping the yellow fire hydrant to your left. Continue straight down the road, passing a small yellow traffic light suspended on a pole. As you move further, you will notice a yellow object on the ground ahead. Follow the road until you arrive at the police hat.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_hat_719",
+                "type": "object",
+                "location": [
+                    -5.626989441849938,
+                    197.29528571479509,
+                    7.071232422960788
+                ],
+                "radius": 0.2671616590682504,
+                "path_length": 21.234777521877728,
+                "reference_path": [
+                    [
+                        -9.02742862701416,
+                        177.61676025390625,
+                        6.93035364151001
+                    ],
+                    [
+                        -3.000152587890625,
+                        193.50015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        -3.000152587890625,
+                        195.00015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        -4.500152587890625,
+                        197.2952880859375,
+                        7.153007507324219
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_hat_741",
+                "type": "object",
+                "location": [
+                    3.9768216072828437,
+                    185.7342801379359,
+                    6.954481841702714
+                ],
+                "radius": 0.2665008913736102,
+                "path_length": 15.802834505181634,
+                "reference_path": [
+                    [
+                        -9.02742862701416,
+                        177.61676025390625,
+                        6.93035364151001
+                    ],
+                    [
+                        -7.500152587890625,
+                        180.00015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -6.000152587890625,
+                        181.50015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        3.9768216609954834,
+                        185.73428344726562,
+                        6.954482078552246
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -9.027428679847898,
+            177.61675600056302,
+            6.930353582955824
+        ],
+        "start_rotation": [
+            0.9442410368668002,
+            0.0,
+            0.0,
+            0.3292550140798316
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_van",
+        "instruction": "Proceed straight down the street, keeping the large, weathered beige building with many dark windows on your left. As you continue forward, you will pass a white camper van with red and blue stripes parked on the left side of the road. Keep moving down the center of the road. Eventually, you will see a large white vehicle with similar red and blue stripes and heavy-duty wheels ahead of you. This is the police van, your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_van_59",
+                "type": "object",
+                "location": [
+                    210.90669313055577,
+                    124.39183517360595,
+                    8.829356949629442
+                ],
+                "radius": 2.9826144967629986,
+                "path_length": 60.227117104829425,
+                "reference_path": [
+                    [
+                        231.2071533203125,
+                        179.2999725341797,
+                        7.599998474121094
+                    ],
+                    [
+                        230.99984741210938,
+                        178.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        214.49984741210938,
+                        123.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        212.99984741210938,
+                        123.00015258789062,
+                        7.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            231.20714959708968,
+            179.29997021643152,
+            7.599998474121093
+        ],
+        "start_rotation": [
+            0.7668342132503198,
+            0.0,
+            0.0,
+            -0.6418452222995534
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "shovel",
+        "instruction": "Start facing the lit shop window in the distance. Turn slightly left and follow the path, passing a white trash bin with a red and white object next to it on your left. Continue straight towards the large, blank grey rectangular sign ahead. As you approach the grey sign, veer left to go around it. Once past the sign, turn sharply left. You will arrive at the shovel in the darkness.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/shovel_624",
+                "type": "object",
+                "location": [
+                    209.66055850671125,
+                    167.14907269753058,
+                    8.4731967511342
+                ],
+                "radius": 0.7750000532623424,
+                "path_length": 34.61537371616648,
+                "reference_path": [
+                    [
+                        182.52378845214844,
+                        182.5123291015625,
+                        8.599998474121094
+                    ],
+                    [
+                        182.99984741210938,
+                        181.50015258789062,
+                        8.599998474121094
+                    ],
+                    [
+                        185.99984741210938,
+                        178.50015258789062,
+                        8.39999771118164
+                    ],
+                    [
+                        208.49984741210938,
+                        165.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        209.99984741210938,
+                        165.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        209.99984741210938,
+                        166.50015258789062,
+                        7.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            182.5237943348421,
+            182.51233537960076,
+            8.599998474121094
+        ],
+        "start_rotation": [
+            0.7295687129665399,
+            0.0,
+            0.0,
+            -0.6839075179147738
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "Purse",
+        "instruction": "From your starting position near the yellow traffic signal and street sign, head down the middle of the empty street. As you move forward, the tall brown buildings on the right will become clearer, particularly one with a dark storefront. Continue following the road straight ahead, keeping the buildings on your right. Proceed towards the end of the block where the street appears to narrow slightly near a building with large windows. You will arrive at the Purse.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/Purse_670",
+                "type": "object",
+                "location": [
+                    45.805719878895545,
+                    219.48544059343203,
+                    7.15491710163535
+                ],
+                "radius": 0.15507141938198288,
+                "path_length": 47.626468430944435,
+                "reference_path": [
+                    [
+                        6.659023284912109,
+                        192.5239715576172,
+                        6.999998092651367
+                    ],
+                    [
+                        8.999847412109375,
+                        193.50015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        44.999847412109375,
+                        219.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        45.805721282958984,
+                        219.48544311523438,
+                        7.154917240142822
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            6.659023314436949,
+            192.52397486177037,
+            6.999998092651367
+        ],
+        "start_rotation": [
+            0.9296583389372504,
+            0.0,
+            0.0,
+            0.3684228180290038
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_chair",
+        "instruction": "Start with the tall, dilapidated beige building on your left and head towards the open plaza. Keep the tall, needle-like obelisk monument on your right as you proceed forward across the square. You will pass a white ambulance parked in the distance on your left. Continue straight, passing a white car on your right. As you approach the center of the open area, near a bicycle, bear slightly right. You will arrive at the black office chair situated alone in the middle of the plaza.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_chair_417",
+                "type": "object",
+                "location": [
+                    97.02895290097621,
+                    8.810942169249323,
+                    8.311748765065047
+                ],
+                "radius": 0.602749591218827,
+                "path_length": 73.90111428656641,
+                "reference_path": [
+                    [
+                        39.044105529785156,
+                        24.45413589477539,
+                        8.39999771118164
+                    ],
+                    [
+                        53.999847412109375,
+                        27.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        55.499847412109375,
+                        27.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        100.49984741210938,
+                        13.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        101.99984741210938,
+                        12.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        101.99984741210938,
+                        9.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        100.49984741210938,
+                        7.500152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        97.49984741210938,
+                        7.500152587890625,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            39.044106154107176,
+            24.45413600733918,
+            8.399997711181642
+        ],
+        "start_rotation": [
+            0.993696042784605,
+            0.0,
+            0.0,
+            0.112107870170727
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "Follow the road as it curves right between the dark, shadowy buildings, heading towards the large, domed classical building in the distance. Continue past a white scooter parked on the left. The path leads you towards a white trailer with red and blue stripes parked near a red triangular road sign. Keep moving forward along the pavement, aiming directly for the white trailer. You will arrive near the blue bag on the ground, just before the trailer.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_730",
+                "type": "object",
+                "location": [
+                    3.9430842637341543,
+                    40.38020784526199,
+                    8.293800927303668
+                ],
+                "radius": 7.383461247751353,
+                "path_length": 73.42137294007345,
+                "reference_path": [
+                    [
+                        69.64468383789062,
+                        52.9073486328125,
+                        8.799999237060547
+                    ],
+                    [
+                        68.99984741210938,
+                        51.000152587890625,
+                        8.799999237060547
+                    ],
+                    [
+                        62.999847412109375,
+                        42.000152587890625,
+                        8.799999237060547
+                    ],
+                    [
+                        59.999847412109375,
+                        39.000152587890625,
+                        8.69999885559082
+                    ],
+                    [
+                        56.999847412109375,
+                        39.000152587890625,
+                        8.799999237060547
+                    ],
+                    [
+                        17.999847412109375,
+                        42.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        10.499847412109375,
+                        42.000152587890625,
+                        8.19999885559082
+                    ],
+                    [
+                        3.943084239959717,
+                        40.500152587890625,
+                        8.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            69.64468433796948,
+            52.90735001506821,
+            8.799999237060549
+        ],
+        "start_rotation": [
+            0.6298056379533468,
+            0.0,
+            0.0,
+            -0.7767527653006315
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "Head straight towards the large, dark building with the central dome, crossing the open square. As you approach the building's facade, veer slightly left. Continue forward across the pavement. You will arrive at the rice_bowl.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_496",
+                "type": "object",
+                "location": [
+                    39.06554940109285,
+                    -0.893320632067544,
+                    8.353723044370698
+                ],
+                "radius": 0.10864097254429339,
+                "path_length": 36.72207419104086,
+                "reference_path": [
+                    [
+                        68.41352081298828,
+                        18.02110481262207,
+                        8.301395416259766
+                    ],
+                    [
+                        53.999847412109375,
+                        12.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        44.999847412109375,
+                        9.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        43.499847412109375,
+                        7.500152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        39.065547943115234,
+                        -0.893320620059967,
+                        8.35372257232666
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            68.41352305647379,
+            18.021104162162633,
+            8.301395133645691
+        ],
+        "start_rotation": [
+            0.27661297951110964,
+            0.0,
+            0.0,
+            -0.9609814043809518
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "notebook",
+        "instruction": "With the beige stone building on your left, slightly turn right and proceed forward along the road. Continue straight, keeping the row of large, rectangular windows on your left. As you move ahead, you will see a purple object on the sidewalk in the distance. Keep going until you arrive at the brown notebook lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/notebook_823",
+                "type": "object",
+                "location": [
+                    -372.2299075311169,
+                    66.62750132055425,
+                    8.114797212110046
+                ],
+                "radius": 0.5228186566878961,
+                "path_length": 22.707295629779814,
+                "reference_path": [
+                    [
+                        -395.4508972167969,
+                        60.18846893310547,
+                        7.899997711181641
+                    ],
+                    [
+                        -373.5001525878906,
+                        66.00015258789062,
+                        7.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -395.45088812684526,
+            60.1884703886344,
+            7.899997711181639
+        ],
+        "start_rotation": [
+            0.9517902760066057,
+            0.0,
+            0.0,
+            0.3067495240408195
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance_1",
+        "instruction": "Start facing the tall, beige stone buildings with arched entryways. Turn left to follow the road, keeping the distinct church-like structure with a tall, square tower on your right. Continue straight down the street, passing rows of weathered, multi-story buildings on your left. As you proceed, you will see a white ambulance with red and blue stripes parked ahead on the right side of the road. Approach it, and you will arrive at the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_1_65",
+                "type": "object",
+                "location": [
+                    247.9053265236185,
+                    178.2787728468146,
+                    8.832327072693047
+                ],
+                "radius": 3.4096894841405145,
+                "path_length": 71.92346012405498,
+                "reference_path": [
+                    [
+                        213.5004425048828,
+                        122.50990295410156,
+                        7.499998092651367
+                    ],
+                    [
+                        214.49984741210938,
+                        123.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        223.49984741210938,
+                        132.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        239.99984741210938,
+                        147.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        241.49984741210938,
+                        148.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        242.99984741210938,
+                        178.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        244.49984741210938,
+                        180.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        245.99984741210938,
+                        180.00015258789062,
+                        7.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            213.50044626334855,
+            122.50990636825901,
+            7.499998092651367
+        ],
+        "start_rotation": [
+            0.9962606259899934,
+            0.0,
+            0.0,
+            0.0863988721108467
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "old_telephone",
+        "instruction": "Start facing the large stone church with the dark spire. Head straight down the road, passing a white sushi bar labeled \"SAKURA BITES\" on your left. Continue forward along the street as the buildings transition to tall, grey structures on your right. Keep moving straight, passing a blue circular sign with a white arrow pointing up on the right sidewalk. As you proceed, you will approach a red object on the ground; this is the old telephone, your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/old_telephone_644",
+                "type": "object",
+                "location": [
+                    -21.73864625768683,
+                    134.38187440393943,
+                    7.302056676853864
+                ],
+                "radius": 0.20121460229162125,
+                "path_length": 72.56074967509636,
+                "reference_path": [
+                    [
+                        -0.9416763186454773,
+                        196.48843383789062,
+                        6.999998092651367
+                    ],
+                    [
+                        -7.500152587890625,
+                        180.00015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -7.500152587890625,
+                        177.00015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        -4.500152587890625,
+                        166.50015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        -1.500152587890625,
+                        153.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        -1.500152587890625,
+                        151.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        -3.000152587890625,
+                        150.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        -21.000152587890625,
+                        135.00015258789062,
+                        7.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -0.9416762982640604,
+            196.48842680387034,
+            6.999998092651367
+        ],
+        "start_rotation": [
+            0.6826755359839167,
+            0.0,
+            0.0,
+            -0.7307216382242091
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "metal_trashcan",
+        "instruction": "Start by going straight down the wide, beige road, flanked by tall, worn buildings with many windows on both sides. Keep heading toward the distant white ambulance visible down the street. Continue forward for a long stretch, passing a dark shop front on your left. As you approach the area where the road curves slightly, a grey, cylindrical object will appear on the ground ahead. You will arrive at the metal trashcan.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/metal_trashcan_672",
+                "type": "object",
+                "location": [
+                    21.23036277488794,
+                    185.19475342569342,
+                    7.291119222017585
+                ],
+                "radius": 0.5249999761581421,
+                "path_length": 90.60778235536458,
+                "reference_path": [
+                    [
+                        60.21162796020508,
+                        267.7265930175781,
+                        7.334527492523193
+                    ],
+                    [
+                        22.499847412109375,
+                        192.00015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        22.499847412109375,
+                        190.50015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        22.499847412109375,
+                        187.50015258789062,
+                        7.19999885559082
+                    ],
+                    [
+                        22.499847412109375,
+                        186.00015258789062,
+                        7.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            60.21162724199204,
+            267.72660813193954,
+            7.334527518051653
+        ],
+        "start_rotation": [
+            0.6241804844797049,
+            0.0,
+            0.0,
+            -0.7812801820055856
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "beach_ball_1",
+        "instruction": "Start near the row of beige buildings with arched doorways on the left. Turn right slightly and proceed down the road, keeping the dark brown brick building with white window frames on your right. Continue straight past the street corner with the traffic light and the storefront labeled with Asian characters. As you pass the intersection and approach the gap between the buildings, look down; you will arrive at the red and white striped beach ball on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/beach_ball_1_507",
+                "type": "object",
+                "location": [
+                    91.56821643466176,
+                    273.875378717745,
+                    7.418808626242992
+                ],
+                "radius": 0.24712318059627592,
+                "path_length": 26.402382229713083,
+                "reference_path": [
+                    [
+                        67.07423400878906,
+                        280.1968994140625,
+                        7.399997711181641
+                    ],
+                    [
+                        67.49984741210938,
+                        279.0001525878906,
+                        7.399997711181641
+                    ],
+                    [
+                        85.49984741210938,
+                        277.5001525878906,
+                        7.299999237060547
+                    ],
+                    [
+                        91.5682144165039,
+                        273.8753662109375,
+                        7.418808460235596
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            67.07423468932956,
+            280.19689405452806,
+            7.399997711181641
+        ],
+        "start_rotation": [
+            0.8794562763343166,
+            0.0,
+            0.0,
+            -0.4759796823564827
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bathroom_mirror",
+        "instruction": "Start your journey on the wide, empty road, with a row of dark grey buildings on your left and lighter, taller beige buildings on your right. Notice the red and white ambulance parked further down on the right side of the street. Move forward, following the road straight ahead. As you proceed, the ambulance will pass by on your right. Continue down the street towards the darker building facades ahead. Eventually, you will arrive at the bathroom_mirror, which appears as a circular mirror on a stand placed on the sidewalk to your left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bathroom_mirror_130",
+                "type": "object",
+                "location": [
+                    -5.728456336464568,
+                    194.30833930531952,
+                    7.403088127651297
+                ],
+                "radius": 0.48965321282518914,
+                "path_length": 71.34099334031986,
+                "reference_path": [
+                    [
+                        53.940792083740234,
+                        235.91539001464844,
+                        7.36837911605835
+                    ],
+                    [
+                        -4.500152587890625,
+                        195.00015258789062,
+                        6.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            53.94079122770041,
+            235.91538335255723,
+            7.368379063712902
+        ],
+        "start_rotation": [
+            0.13407573194175007,
+            0.0,
+            0.0,
+            -0.9909710884300732
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_meter",
+        "instruction": "Start facing the tall, dark gothic building with large windows. Follow the road slightly left, keeping the white building with a dark garage door on your right. As you pass the white building, an ambulance will come into view on your left. Continue forward past the ambulance and the red triangle road sign. Keep going straight towards the large, multi-story ornate building ahead. As you approach the dark wall on your left, turn slightly left towards the small red scooter. You will arrive at the parking meter near the scooter.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/parking_meter_571",
+                "type": "object",
+                "location": [
+                    -19.097989708468198,
+                    40.729666356848156,
+                    8.790692397155176
+                ],
+                "radius": 0.675000003350327,
+                "path_length": 50.4178982088571,
+                "reference_path": [
+                    [
+                        14.405963897705078,
+                        28.079776763916016,
+                        8.39999771118164
+                    ],
+                    [
+                        13.499847412109375,
+                        40.500152587890625,
+                        8.19999885559082
+                    ],
+                    [
+                        11.999847412109375,
+                        42.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -6.000152587890625,
+                        48.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        -15.000152587890625,
+                        48.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -19.500152587890625,
+                        43.500152587890625,
+                        8.19999885559082
+                    ],
+                    [
+                        -19.500152587890625,
+                        42.000152587890625,
+                        8.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            14.405964106296423,
+            28.079776834621256,
+            8.39999771118164
+        ],
+        "start_rotation": [
+            0.7932088527141469,
+            0.0,
+            0.0,
+            0.6089496826305987
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "white_shoes",
+        "instruction": "Start your journey on a wide road flanked by tall, muted-color buildings on both sides. On your left, you'll see a distinct white ambulance with red stripes parked near the curb. Continue straight down the center of the road, heading towards a modern glass building with greenish-blue reflective panels visible in the distance. As you move forward, the traditional brick buildings on your right will pass by. Keep following the road ahead until you arrive at the white_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/white_shoes_678",
+                "type": "object",
+                "location": [
+                    156.4500046130743,
+                    347.18610914494104,
+                    7.458096887165567
+                ],
+                "radius": 0.4253026796589552,
+                "path_length": 81.5508339993517,
+                "reference_path": [
+                    [
+                        93.9540023803711,
+                        293.57733154296875,
+                        7.3570451736450195
+                    ],
+                    [
+                        155.99984741210938,
+                        346.5001525878906,
+                        7.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            93.95399998076839,
+            293.5773435018239,
+            7.357045184696292
+        ],
+        "start_rotation": [
+            0.9084947550703275,
+            0.0,
+            0.0,
+            0.41789625507978123
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_can",
+        "instruction": "Head down the empty city street, keeping the large, dark, blocky building with many windows on your left. Continue straight, passing a small glass bus stop shelter on the left side of the road. As the street gently curves, follow the road forward past a brown building with a prominent arched entrance on the right. Keep moving along the street towards the shop front with blue trim and gold lettering that says \"LE MATIN DORE\". You will arrive at the trash can situated directly in front of this shop.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_can_328",
+                "type": "object",
+                "location": [
+                    -33.903487717007735,
+                    93.45355467752194,
+                    8.671393914203248
+                ],
+                "radius": 0.6358603537984706,
+                "path_length": 47.88013684789469,
+                "reference_path": [
+                    [
+                        -61.48613357543945,
+                        80.5548095703125,
+                        7.799999237060547
+                    ],
+                    [
+                        -60.000152587890625,
+                        78.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -58.500152587890625,
+                        70.50015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -57.000152587890625,
+                        69.00015258789062,
+                        7.899997711181641
+                    ],
+                    [
+                        -55.500152587890625,
+                        69.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        -54.000152587890625,
+                        70.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        -37.500152587890625,
+                        93.00015258789062,
+                        8.299999237060547
+                    ],
+                    [
+                        -36.000152587890625,
+                        94.50015258789062,
+                        8.299999237060547
+                    ],
+                    [
+                        -34.500152587890625,
+                        94.50015258789062,
+                        8.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.48613519247961,
+            80.55481093546409,
+            7.799999237060546
+        ],
+        "start_rotation": [
+            0.838380068546562,
+            0.0,
+            0.0,
+            -0.5450861038990648
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "lilac_bike",
+        "instruction": "Start by following the road, keeping the row of weathered grey buildings with black window frames on your left. As you proceed, you'll pass a blue circular traffic sign with a white arrow. Continue along the street, navigating slightly to the right, until you spot a purple bicycle parked on the side. You will arrive at the purple bicycle.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/lilac_bike_493",
+                "type": "object",
+                "location": [
+                    -27.0444543817256,
+                    151.7438404180315,
+                    7.824259080563194
+                ],
+                "radius": 0.8918514616671018,
+                "path_length": 29.922535499640993,
+                "reference_path": [
+                    [
+                        -7.264226913452148,
+                        129.50296020507812,
+                        7.584830284118652
+                    ],
+                    [
+                        -19.500152587890625,
+                        138.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        -21.000152587890625,
+                        139.50015258789062,
+                        7.19999885559082
+                    ],
+                    [
+                        -24.000152587890625,
+                        145.50015258789062,
+                        7.19999885559082
+                    ],
+                    [
+                        -25.500152587890625,
+                        151.50015258789062,
+                        7.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -7.264226777868036,
+            129.50295433076565,
+            7.584830377499782
+        ],
+        "start_rotation": [
+            0.4658231208651529,
+            0.0,
+            0.0,
+            0.8848778560159867
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance_1",
+        "instruction": "Start moving along the road, keeping the row of dark grey, multi-story buildings on your right. As you proceed, you will see a red and white striped ambulance in the distance. Continue forward until the road curves slightly. Follow the bend of the road to the left, heading directly towards the rear of the ambulance. You will arrive at the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_1_61",
+                "type": "object",
+                "location": [
+                    -164.74154066020515,
+                    166.31655414848626,
+                    9.845505611592188
+                ],
+                "radius": 3.4962871661497843,
+                "path_length": 60.31342849929821,
+                "reference_path": [
+                    [
+                        -126.55268096923828,
+                        198.597900390625,
+                        7.650764465332031
+                    ],
+                    [
+                        -142.50015258789062,
+                        201.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -144.00015258789062,
+                        201.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        -147.00015258789062,
+                        198.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -154.50015258789062,
+                        189.00015258789062,
+                        8.099998474121094
+                    ],
+                    [
+                        -168.00015258789062,
+                        169.50015258789062,
+                        8.39999771118164
+                    ],
+                    [
+                        -168.00015258789062,
+                        166.50015258789062,
+                        8.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -126.55268466576608,
+            198.59790501400872,
+            7.6507645644313795
+        ],
+        "start_rotation": [
+            0.056091638404161065,
+            0.0,
+            0.0,
+            0.9984256247218102
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "umbrella",
+        "instruction": "Turn slightly left from your starting position and follow the road straight ahead. You will pass a white \"Quick Cash Point\" shop on your right. Continue moving forward down the center of the street, heading towards the large, ruined grey building in the distance. As you proceed, you will see a white ambulance parked further down the road on the left side. Keep going straight towards the red and white umbrella visible in the distance. You will arrive at the umbrella.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_272",
+                "type": "object",
+                "location": [
+                    125.28773403219044,
+                    29.35362060392959,
+                    8.190463061753064
+                ],
+                "radius": 0.653343754254653,
+                "path_length": 87.23988723064434,
+                "reference_path": [
+                    [
+                        181.1305389404297,
+                        94.24220275878906,
+                        7.751439571380615
+                    ],
+                    [
+                        172.49984741210938,
+                        85.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        151.49984741210938,
+                        52.500152587890625,
+                        7.399997711181641
+                    ],
+                    [
+                        149.99984741210938,
+                        51.000152587890625,
+                        7.399997711181641
+                    ],
+                    [
+                        136.49984741210938,
+                        39.000152587890625,
+                        7.69999885559082
+                    ],
+                    [
+                        124.49984741210938,
+                        31.500152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        124.49984741210938,
+                        30.000152587890625,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            181.13053726669656,
+            94.24220624186773,
+            7.751439804181741
+        ],
+        "start_rotation": [
+            0.30695750845885605,
+            0.0,
+            0.0,
+            -0.9517232202698068
+        ],
+        "ceiling_height": 1.0
+    }
+]

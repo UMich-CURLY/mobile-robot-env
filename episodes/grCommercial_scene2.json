@@ -274,7 +274,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Start from a position facing a long wooden bookshelf on the right, filled with books. To your left, there is a tall green topiary plant next to a white chair. Move forward along the carpeted floor past the plant until you reach the desk area ahead.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -433,7 +433,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Start by facing the dark grey, rounded seating area; slightly turn left and advance past the grey armchair on your left. Continue straight through the open office space, moving towards the large windows and passing the desk area with the laptop on your left. As you approach the large wooden column and the bookshelf, turn right. Move forward, keeping the bookshelf to your left and the grey ottoman to your right, until you arrive at the shopping trolley near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -995,7 +995,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start near the desk with the laptop on the left, facing towards the large windows and bookshelves. Turn slightly right and move forward across the gray carpet, passing the wooden bookshelves filled with dark books. Continue straight, keeping the orange beanbag chair to your right. You will arrive at the tray on the low shelf.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1625,7 +1625,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shelf",
-        "instruction": "",
+        "instruction": "Starting from behind the glass partition, turn slightly right and walk past the row of blue waiting chairs on your left. Continue forward across the hallway until you reach the rolling metal shelf near the wall.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -1729,7 +1729,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "pen",
-        "instruction": "",
+        "instruction": "Navigate through the aisle between the white wooden furniture on the left and the long bookshelf on the right. After passing the white chair and the yellow beanbag on your left, turn left towards the open office area. Proceed forward, keeping the yellow beanbag on your left, and then slightly adjust your path to the right as you approach the bookshelf. ",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1863,7 +1863,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "mouse",
-        "instruction": "",
+        "instruction": "Starting from a position near a large glass window, slightly turn left and move forward, heading towards the open office area. As you proceed, you will see a white seating area on your left and a series of dark poufs on your right. Slightly turn right to navigate between the white seat and the dark poufs, heading towards the wooden table and chairs in the background. Continue forward across the carpeted floor. You will arrive at the desk area located near the window.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1969,7 +1969,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "cup",
-        "instruction": "",
+        "instruction": "From your starting point, adjust your direction slightly to the right and proceed forward along the path. Continue moving until you reach the lamp on the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2249,7 +2249,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "plant",
-        "instruction": "",
+        "instruction": "Start facing the hospital waiting area with blue chairs arranged in rows. Slightly turn right to bypass the man in the blue suit walking ahead of you. Move forward across the speckled floor, passing the blue reception desk on your left. Continue straight past the rows of blue waiting chairs until you reach the potted green plant in the corner near the medical cart.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2330,7 +2330,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "clothes",
-        "instruction": "",
+        "instruction": "Start at the waiting area with rows of blue chairs facing the window. Turn left so that the chairs are on your right, and proceed forward past a large blue counter labeled with white Chinese characters on your left. Continue walking down the hallway, keeping the white wall with hexagonal diagrams on your left, until you pass a man in a navy blazer and jeans walking towards you. You will arrive at the clothes.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2590,7 +2590,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Slightly turn right from your starting position, passing a counter with a blue front on your right and a person standing in the waiting area. Continue forward towards a set of blue seats. Slightly turn left to align yourself, and move forward a short distance. You will arrive at the blue airport-style seating.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -2676,7 +2676,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Start by slightly turning left from your current position near the window, facing away from the yellow robot dog. Proceed forward past the leg of the person standing near the black office chair. Turn left again and continue moving across the room. After a short distance, make another left turn. You will arrive at the keyboard.",
         "closest_goal_idx": 1,
         "goals": [
             {

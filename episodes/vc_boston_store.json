@@ -1,0 +1,1581 @@
+[
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_1",
+        "instruction": "",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_1",
+                "type": "object",
+                "location": [
+                    -53.777427716790214,
+                    117.30652305575632,
+                    6.479837635275775
+                ],
+                "radius": 3.4259872277990553,
+                "path_length": 43.25252206809953,
+                "reference_path": [
+                    [
+                        -72.2742919921875,
+                        155.44927978515625,
+                        4.9727630615234375
+                    ],
+                    [
+                        -67.90838623046875,
+                        135.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -57.40838623046875,
+                        117.00015258789062,
+                        4.599998474121094
+                    ],
+                    [
+                        -55.90838623046875,
+                        117.00015258789062,
+                        4.599998474121094
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_2",
+                "type": "object",
+                "location": [
+                    -73.93421934341768,
+                    116.30939287905173,
+                    6.62979856942389
+                ],
+                "radius": 3.4405464553846556,
+                "path_length": 36.95038090104568,
+                "reference_path": [
+                    [
+                        -72.2742919921875,
+                        155.44927978515625,
+                        4.9727630615234375
+                    ],
+                    [
+                        -72.40838623046875,
+                        118.50015258789062,
+                        4.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -72.2742953923209,
+            155.44928098467352,
+            4.9727631414562055
+        ],
+        "start_rotation": [
+            0.7368634680420454,
+            0.0,
+            0.0,
+            -0.6760415885617168
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "Move forward along the street, passing a white building on your left. Turn slightly left and continue straight toward the \"HANA RAMEN HOUSE,\" which has a prominent wooden facade and large windows. You will arrive directly in front of the ramen restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_1",
+                "type": "object",
+                "location": [
+                    -29.963299528681347,
+                    15.280217170332438,
+                    5.066686051053682
+                ],
+                "radius": 3.5552422082130093,
+                "path_length": 16.194824336359936,
+                "reference_path": [
+                    [
+                        -25.21702766418457,
+                        1.1652017831802368,
+                        2.742743492126465
+                    ],
+                    [
+                        -24.40838623046875,
+                        1.500152587890625,
+                        2.6999988555908203
+                    ],
+                    [
+                        -22.90838623046875,
+                        3.000152587890625,
+                        2.799999237060547
+                    ],
+                    [
+                        -22.90838623046875,
+                        4.500152587890625,
+                        2.799999237060547
+                    ],
+                    [
+                        -27.40838623046875,
+                        15.280217170715332,
+                        3.356264114379883
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -25.217027953115124,
+            1.1652018242957807,
+            2.7427434413711156
+        ],
+        "start_rotation": [
+            0.9685935066953736,
+            0.0,
+            0.0,
+            0.24864959036274184
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_0",
+        "instruction": "Start facing the dark, blocky buildings with an ambulance parked to the right. Move forward and turn right around the corner of the dark building, keeping the ambulance on your left. Follow the road straight ahead, passing between the dark structures on your left and a series of smaller buildings on your right. Continue down the street as it curves gently right. You will pass a green building on your right. Keep following the road towards the storefront with the blue \"QUICK STOP MART\" sign; you will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_0_1",
+                "type": "object",
+                "location": [
+                    -86.23179342505958,
+                    182.7355258704648,
+                    7.163430305657917
+                ],
+                "radius": 3.544965152815138,
+                "path_length": 93.70632052410733,
+                "reference_path": [
+                    [
+                        -25.403745651245117,
+                        167.91148376464844,
+                        5.299999237060547
+                    ],
+                    [
+                        -30.40838623046875,
+                        156.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -31.90838623046875,
+                        154.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -34.90838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -39.40838623046875,
+                        156.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -45.40838623046875,
+                        159.00015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -49.90838623046875,
+                        159.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -73.90838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -75.40838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -85.90838623046875,
+                        163.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -87.40838623046875,
+                        165.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -90.40838623046875,
+                        169.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -90.40838623046875,
+                        171.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -87.40838623046875,
+                        181.50015258789062,
+                        5.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -25.40374620141427,
+            167.9114843264201,
+            5.299999237060547
+        ],
+        "start_rotation": [
+            0.5827670937141964,
+            0.0,
+            0.0,
+            -0.812639227753564
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_2",
+        "instruction": "Start facing the street with the grey building on your left. Turn slightly right and proceed forward along the road, keeping the \"Chuck N' Burger Co.\" and \"The Brick & Patty\" storefronts on your left. Continue straight ahead, passing the grey building facade. As you approach the end of the building block, you will arrive at the restaurant area near the stone archways.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_2_2",
+                "type": "object",
+                "location": [
+                    -140.3502818051913,
+                    107.35972170414568,
+                    7.481721560573694
+                ],
+                "radius": 3.514567622996921,
+                "path_length": 36.472594592320114,
+                "reference_path": [
+                    [
+                        -169.4027557373047,
+                        81.656005859375,
+                        3.3718600273132324
+                    ],
+                    [
+                        -168.40838623046875,
+                        82.50015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -154.90838623046875,
+                        94.50015258789062,
+                        3.499998092651367
+                    ],
+                    [
+                        -141.40838623046875,
+                        105.00015258789062,
+                        3.799999237060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/restaurant_2_1",
+                "type": "object",
+                "location": [
+                    -101.95302396016186,
+                    85.51969735908469,
+                    5.637424726796944
+                ],
+                "radius": 3.5024529708813574,
+                "path_length": 68.38889000692824,
+                "reference_path": [
+                    [
+                        -169.4027557373047,
+                        81.656005859375,
+                        3.3718600273132324
+                    ],
+                    [
+                        -148.90838623046875,
+                        87.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -147.40838623046875,
+                        87.00015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -106.90838623046875,
+                        82.50015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -101.9530258178711,
+                        82.50015258789062,
+                        3.4977660179138184
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -169.40275601851576,
+            81.65600591794507,
+            3.3718599182053213
+        ],
+        "start_rotation": [
+            0.8418759674432742,
+            0.0,
+            0.0,
+            0.5396710622605692
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_1",
+        "instruction": "Follow the road straight ahead. You will pass a distinctive cream-colored building with large windows on your left, followed by a series of darker, industrial-style black structures lining both sides of the street. Continue forward down the center of the road, keeping the black buildings on your right. As you proceed, look for a building with a classic brick facade and a sign reading \"LIBERTY SAVINGS BANK\" on your right. Move towards the front entrance of this building. You will arrive at the Liberty Savings Bank.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_1_1",
+                "type": "object",
+                "location": [
+                    -67.72576830745089,
+                    66.533081025614,
+                    5.892420010370495
+                ],
+                "radius": 3.571892398257795,
+                "path_length": 89.91525509802844,
+                "reference_path": [
+                    [
+                        2.0727219581604004,
+                        16.469043731689453,
+                        2.6999988555908203
+                    ],
+                    [
+                        1.09161376953125,
+                        16.500152587890625,
+                        2.6999988555908203
+                    ],
+                    [
+                        -19.90838623046875,
+                        24.000152587890625,
+                        3.0999984741210938
+                    ],
+                    [
+                        -46.90838623046875,
+                        40.500152587890625,
+                        3.299999237060547
+                    ],
+                    [
+                        -66.40838623046875,
+                        54.000152587890625,
+                        3.3999977111816406
+                    ],
+                    [
+                        -67.90838623046875,
+                        55.500152587890625,
+                        3.3999977111816406
+                    ],
+                    [
+                        -69.40838623046875,
+                        63.000152587890625,
+                        3.499998092651367
+                    ],
+                    [
+                        -69.40838623046875,
+                        64.50015258789062,
+                        3.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            2.0727220307225065,
+            16.46904383228413,
+            2.6999988555908208
+        ],
+        "start_rotation": [
+            0.13389277247524917,
+            0.0,
+            0.0,
+            0.9909958251571452
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Start facing a brick building with a \"TRATTORIA LUNA\" sign on the left and a \"QUICK STOP MART\" with a blue sign on the right. Move forward along the road, slightly angling towards the left side of the street, approaching the brick building. As you get closer, focus on the display window filled with hanging meats and potted plants. Continue moving toward the front entrance of the brick trattoria until you arrive directly in front of the door.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_1",
+                "type": "object",
+                "location": [
+                    -91.65668323610846,
+                    191.72374044192165,
+                    7.298073127072991
+                ],
+                "radius": 3.4909764432117925,
+                "path_length": 18.070958605431077,
+                "reference_path": [
+                    [
+                        -106.31507110595703,
+                        179.02699279785156,
+                        5.229754447937012
+                    ],
+                    [
+                        -97.90838623046875,
+                        184.50015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -96.40838623046875,
+                        186.00015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -94.90838623046875,
+                        191.72373962402344,
+                        5.3271894454956055
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -106.3150677240906,
+            179.02698709139904,
+            5.22975436863087
+        ],
+        "start_rotation": [
+            0.9799431966229601,
+            0.0,
+            0.0,
+            0.19927702173701425
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "Start facing the large, dark grey wall. Follow the path forward, keeping the dark wall on your left. Continue past several white, blocky buildings that appear on your right. As you proceed, the path curves slightly right, leading you past a teal-colored wall section. Keep moving forward until you reach a storefront with large windows and a sign featuring an anchor symbol. You will arrive at the bar entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_1",
+                "type": "object",
+                "location": [
+                    -150.33970487523436,
+                    144.78590243490157,
+                    6.98666634409239
+                ],
+                "radius": 3.519300701279988,
+                "path_length": 40.238469801136816,
+                "reference_path": [
+                    [
+                        -135.0088348388672,
+                        137.78564453125,
+                        5.099998474121094
+                    ],
+                    [
+                        -138.40838623046875,
+                        135.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -141.40838623046875,
+                        133.50015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -145.90838623046875,
+                        133.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -153.40838623046875,
+                        138.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -156.40838623046875,
+                        141.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -156.40838623046875,
+                        144.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -154.90838623046875,
+                        148.50015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -153.40838623046875,
+                        150.00015258789062,
+                        5.399997711181641
+                    ],
+                    [
+                        -151.90838623046875,
+                        150.00015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -150.40838623046875,
+                        148.50015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -150.33970642089844,
+                        147.00015258789062,
+                        5.297709941864014
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -135.00883264876205,
+            137.78564846604905,
+            5.099998474121094
+        ],
+        "start_rotation": [
+            0.5482771330497066,
+            0.0,
+            0.0,
+            -0.8362967089345709
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Follow the road forward, passing the grey buildings on your left. Continue straight, keeping the large, blocky structure with glass windows to your right. As you proceed down the street, stay on the road, passing a black SUV on your right. Keep moving forward towards the white building labeled \"Urban Provisions\" ahead. You will arrive at the convenience store entrance just past the white sports car parked on the left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -77.2539157180204,
+                    122.80160925373934,
+                    6.7618140255288015
+                ],
+                "radius": 3.5584845188260275,
+                "path_length": 91.05153373799294,
+                "reference_path": [
+                    [
+                        -90.66685485839844,
+                        204.81141662597656,
+                        5.799999237060547
+                    ],
+                    [
+                        -96.40838623046875,
+                        198.00015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -96.40838623046875,
+                        195.00015258789062,
+                        5.399997711181641
+                    ],
+                    [
+                        -90.40838623046875,
+                        169.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -87.40838623046875,
+                        165.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -75.40838623046875,
+                        151.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -72.40838623046875,
+                        129.00015258789062,
+                        4.799999237060547
+                    ],
+                    [
+                        -72.40838623046875,
+                        124.50015258789062,
+                        4.799999237060547
+                    ],
+                    [
+                        -73.90838623046875,
+                        122.8016128540039,
+                        4.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -90.66685115150594,
+            204.8114109986269,
+            5.799999237060547
+        ],
+        "start_rotation": [
+            0.6388677996721319,
+            0.0,
+            0.0,
+            -0.7693165372862387
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Start facing a white ambulance with a red cross, flanked by blocky grey buildings. Proceed forward, keeping the ambulance to your right. Continue along the road past the grey structures.\n\nAs you advance, a shop with a blue sign reading \"QUICK STOP MA...\" will appear on your right. Keep moving forward down the street. Further ahead, on the right side, you will approach a brick building with a brown awning labeled \"TRATTORIA LUNA\". You will arrive directly in front of this restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_1",
+                "type": "object",
+                "location": [
+                    -91.65668323610846,
+                    191.72374044192165,
+                    7.298073127072991
+                ],
+                "radius": 3.4909764432117925,
+                "path_length": 89.8733067850726,
+                "reference_path": [
+                    [
+                        -31.697494506835938,
+                        155.40975952148438,
+                        4.960638999938965
+                    ],
+                    [
+                        -31.90838623046875,
+                        154.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -34.90838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -39.40838623046875,
+                        156.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -45.40838623046875,
+                        159.00015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -49.90838623046875,
+                        159.00015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -73.90838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -75.40838623046875,
+                        154.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -85.90838623046875,
+                        163.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -87.40838623046875,
+                        165.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -90.40838623046875,
+                        169.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -94.90838623046875,
+                        190.50015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -94.90838623046875,
+                        191.72373962402344,
+                        5.3271894454956055
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -31.697494516273277,
+            155.4097663083004,
+            4.960638857202358
+        ],
+        "start_rotation": [
+            0.5378672486978401,
+            0.0,
+            0.0,
+            -0.8430295503588328
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Head down the street, keeping the dark, towering buildings on your left and the blocky white structures to your right. Continue straight along the road as it curves gently. You will pass a large, dark rectangular building on your right side. Keep moving forward until you see a white storefront labeled \"URBAN PROVISIONS\" with large glass windows and visible shelves inside. This is the convenience store, and your destination is right in front of it.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -77.2539157180204,
+                    122.80160925373934,
+                    6.7618140255288015
+                ],
+                "radius": 3.5584845188260275,
+                "path_length": 89.3706659776655,
+                "reference_path": [
+                    [
+                        -98.76384735107422,
+                        204.95765686035156,
+                        5.599998474121094
+                    ],
+                    [
+                        -90.40838623046875,
+                        169.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -87.40838623046875,
+                        165.00015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -75.40838623046875,
+                        151.50015258789062,
+                        4.899997711181641
+                    ],
+                    [
+                        -72.40838623046875,
+                        129.00015258789062,
+                        4.799999237060547
+                    ],
+                    [
+                        -72.40838623046875,
+                        124.50015258789062,
+                        4.799999237060547
+                    ],
+                    [
+                        -73.90838623046875,
+                        122.8016128540039,
+                        4.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -98.76384965984622,
+            204.95766239754576,
+            5.599998474121093
+        ],
+        "start_rotation": [
+            0.9060661764746145,
+            0.0,
+            0.0,
+            -0.42313601105161525
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "community_centre_0",
+        "instruction": "Follow the road towards the red car parked in front of the brick building with large windows. As you approach, veer slightly right to align with the storefront. Continue forward, passing the red car on your right side. You will arrive at the brick building labeled \"The Junction Community Hub\" directly ahead.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/community_centre_0_1",
+                "type": "object",
+                "location": [
+                    148.03145436806295,
+                    38.42136393222205,
+                    5.5168157592013225
+                ],
+                "radius": 3.620058943924601,
+                "path_length": 34.75133155126011,
+                "reference_path": [
+                    [
+                        129.2678680419922,
+                        68.33689880371094,
+                        4.212356090545654
+                    ],
+                    [
+                        139.09161376953125,
+                        42.000152587890625,
+                        3.3999977111816406
+                    ],
+                    [
+                        140.59161376953125,
+                        40.500152587890625,
+                        3.299999237060547
+                    ],
+                    [
+                        142.09161376953125,
+                        40.500152587890625,
+                        3.1999988555908203
+                    ],
+                    [
+                        143.59161376953125,
+                        40.500152587890625,
+                        3.299999237060547
+                    ],
+                    [
+                        145.09161376953125,
+                        40.500152587890625,
+                        3.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            129.2678724399013,
+            68.33689514171073,
+            4.212355958055416
+        ],
+        "start_rotation": [
+            0.90910954497535,
+            0.0,
+            0.0,
+            -0.41655712121474064
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_0",
+        "instruction": "Start facing the ambulance on the right, proceed straight down the road, passing the ambulance on your right. Continue forward along the street, keeping the dark, modern building on your right and the row of shops on your left. As you move forward, you will see a 'Trattoria Luna' sign on the left. Keep going straight until you reach the 'Quick Stop Mart' with the glass storefront on your left. You will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_0_1",
+                "type": "object",
+                "location": [
+                    -86.23179342505958,
+                    182.7355258704648,
+                    7.163430305657917
+                ],
+                "radius": 3.544965152815138,
+                "path_length": 94.15313220372357,
+                "reference_path": [
+                    [
+                        -148.37486267089844,
+                        250.25064086914062,
+                        4.999998092651367
+                    ],
+                    [
+                        -147.40838623046875,
+                        247.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -145.90838623046875,
+                        244.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -138.40838623046875,
+                        232.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -132.40838623046875,
+                        219.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -130.90838623046875,
+                        217.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -105.40838623046875,
+                        196.50015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -88.90838623046875,
+                        181.50015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -87.40838623046875,
+                        181.50015258789062,
+                        5.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -148.37486867210598,
+            250.250633517574,
+            4.999998092651367
+        ],
+        "start_rotation": [
+            0.6943794467149106,
+            0.0,
+            0.0,
+            -0.7196090494010583
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_3",
+        "instruction": "Head towards the black awning structure in the distance, passing the white blocky building on your left. As you approach the intersection, you'll see a red sports car parked further down the street. Follow the road, veering slightly right to align with the street where the car is parked. Continue down this road, passing the dark grey building on your right. As you get closer, look to your left for a retro-style diner with a red and white checkered facade labeled \"ROCKET BURGER\". You will arrive at the fast food restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_3_2",
+                "type": "object",
+                "location": [
+                    -292.23165814438187,
+                    192.86067215444652,
+                    5.929029570201974
+                ],
+                "radius": 3.589149384669213,
+                "path_length": 75.32343097175955,
+                "reference_path": [
+                    [
+                        -341.4742736816406,
+                        141.08578491210938,
+                        3.6057076454162598
+                    ],
+                    [
+                        -340.90838623046875,
+                        142.50015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -313.90838623046875,
+                        169.50015258789062,
+                        3.8999977111816406
+                    ],
+                    [
+                        -291.40838623046875,
+                        183.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -288.40838623046875,
+                        186.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -288.40838623046875,
+                        189.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -289.90838623046875,
+                        190.50015258789062,
+                        3.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -341.47426424759567,
+            141.08578993089068,
+            3.6057076520998
+        ],
+        "start_rotation": [
+            0.8486004101685808,
+            0.0,
+            0.0,
+            0.5290343503608405
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_1",
+        "instruction": "Start by looking down a street with a black building featuring a green panel on the left and tall gray buildings on the right. Follow the road straight ahead. As you proceed, the view clears up, and the black building on your left reveals a detailed storefront with large glass windows and brickwork, resembling an old-fashioned shop or pub. Continue forward along this building until you are right next to its wooden facade and large display windows. You will arrive at the bank.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_1_1",
+                "type": "object",
+                "location": [
+                    -67.72576830745089,
+                    66.533081025614,
+                    5.892420010370495
+                ],
+                "radius": 3.571892398257795,
+                "path_length": 43.28526356358495,
+                "reference_path": [
+                    [
+                        -112.21397399902344,
+                        70.61769104003906,
+                        3.476066827774048
+                    ],
+                    [
+                        -108.40838623046875,
+                        70.50015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -70.90838623046875,
+                        64.50015258789062,
+                        3.499998092651367
+                    ],
+                    [
+                        -69.40838623046875,
+                        64.50015258789062,
+                        3.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -112.21397644750705,
+            70.61768947540952,
+            3.476066860294712
+        ],
+        "start_rotation": [
+            0.9998611109291069,
+            0.0,
+            0.0,
+            0.016666098872028034
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "Turn slightly right and proceed forward along the road, passing a large building with a poster on your right. As you continue, the path curves slightly left. Keep moving straight down the road past a white store labeled \"Urban Provisions\" on your right. Further ahead, the road leads you past another storefront. Continue forward, and you will arrive at the restaurant, which appears as a wooden-fronted building labeled \"Hana Ramen House\" on the right side.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_1",
+                "type": "object",
+                "location": [
+                    -29.963299528681347,
+                    15.280217170332438,
+                    5.066686051053682
+                ],
+                "radius": 3.5552422082130093,
+                "path_length": 58.14176186482469,
+                "reference_path": [
+                    [
+                        -66.82595825195312,
+                        54.65258026123047,
+                        3.3999977111816406
+                    ],
+                    [
+                        -66.40838623046875,
+                        54.000152587890625,
+                        3.3999977111816406
+                    ],
+                    [
+                        -28.90838623046875,
+                        24.000152587890625,
+                        3.1999988555908203
+                    ],
+                    [
+                        -27.40838623046875,
+                        22.500152587890625,
+                        3.1999988555908203
+                    ],
+                    [
+                        -27.40838623046875,
+                        19.500152587890625,
+                        3.299999237060547
+                    ],
+                    [
+                        -27.40838623046875,
+                        15.280217170715332,
+                        3.356264114379883
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -66.82595893572726,
+            54.65257874701518,
+            3.39999771118164
+        ],
+        "start_rotation": [
+            0.9602068022896636,
+            0.0,
+            0.0,
+            -0.27928998699677515
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_2_2",
+                "type": "object",
+                "location": [
+                    -140.3502818051913,
+                    107.35972170414568,
+                    7.481721560573694
+                ],
+                "radius": 3.514567622996921,
+                "path_length": 36.12485371445552,
+                "reference_path": [
+                    [
+                        -176.75967407226562,
+                        111.5968246459961,
+                        3.737339496612549
+                    ],
+                    [
+                        -148.90838623046875,
+                        105.00015258789062,
+                        3.5999984741210938
+                    ],
+                    [
+                        -141.40838623046875,
+                        105.00015258789062,
+                        3.799999237060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/restaurant_2_1",
+                "type": "object",
+                "location": [
+                    -101.95302396016186,
+                    85.51969735908469,
+                    5.637424726796944
+                ],
+                "radius": 3.5024529708813574,
+                "path_length": 80.62622432955455,
+                "reference_path": [
+                    [
+                        -176.75967407226562,
+                        111.5968246459961,
+                        3.737339496612549
+                    ],
+                    [
+                        -106.90838623046875,
+                        82.50015258789062,
+                        3.3999977111816406
+                    ],
+                    [
+                        -101.9530258178711,
+                        82.50015258789062,
+                        3.4977660179138184
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -176.75966719933564,
+            111.59682801273036,
+            3.7373394382910305
+        ],
+        "start_rotation": [
+            0.9773063108223391,
+            0.0,
+            0.0,
+            -0.2118310053482007
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start at the intersection facing the storefronts, then head straight towards the light-colored building labelled \"Quick Stop Mart\" with blue lettering. Continue moving forward, crossing the street and aiming directly for the store's entrance. As you approach, you will see a restaurant called \"Hana Ramen House\" with a wooden facade to the right of the mart. Keep going straight until you arrive directly in front of the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_1",
+                "type": "object",
+                "location": [
+                    -30.060095374344655,
+                    7.940391371634783,
+                    5.08023179647661
+                ],
+                "radius": 3.630243665598876,
+                "path_length": 29.782532311765532,
+                "reference_path": [
+                    [
+                        1.4894449710845947,
+                        2.4925732612609863,
+                        2.799999237060547
+                    ],
+                    [
+                        -12.40838623046875,
+                        7.500152587890625,
+                        2.799999237060547
+                    ],
+                    [
+                        -27.40838623046875,
+                        7.940391540527344,
+                        3.129347801208496
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            1.489445005633722,
+            2.4925732117815422,
+            2.799999237060547
+        ],
+        "start_rotation": [
+            -0.03454593858968003,
+            0.0,
+            0.0,
+            0.9994031109251952
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_4",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_4_1",
+                "type": "object",
+                "location": [
+                    -131.03384100466576,
+                    105.68695409457675,
+                    7.456208386040278
+                ],
+                "radius": 3.4733150629136773,
+                "path_length": 57.19240834525074,
+                "reference_path": [
+                    [
+                        -143.8107452392578,
+                        140.34304809570312,
+                        5.099998474121094
+                    ],
+                    [
+                        -135.40838623046875,
+                        145.50015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -132.40838623046875,
+                        145.50015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -129.40838623046875,
+                        142.50015258789062,
+                        5.099998474121094
+                    ],
+                    [
+                        -123.40838623046875,
+                        130.50015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -123.40838623046875,
+                        129.00015258789062,
+                        4.999998092651367
+                    ],
+                    [
+                        -132.40838623046875,
+                        108.00015258789062,
+                        4.299999237060547
+                    ],
+                    [
+                        -132.40838623046875,
+                        105.68695068359375,
+                        4.2228922843933105
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -143.81074672035638,
+            140.34305171919448,
+            5.099998474121095
+        ],
+        "start_rotation": [
+            0.9380577995969578,
+            0.0,
+            0.0,
+            0.34647880832067307
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_7",
+        "instruction": "Head right towards the large grey building and continue straight, passing the low-lying structures on your left. As you proceed, turn right slightly to follow the wide road ahead. Continue moving forward along this path, keeping the blue and grey buildings in your peripheral view. You will arrive at the restaurant_7.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_7_2",
+                "type": "object",
+                "location": [
+                    -124.86894561838156,
+                    114.76927318936474,
+                    7.499730857915088
+                ],
+                "radius": 3.4138578855210113,
+                "path_length": 28.38353588312654,
+                "reference_path": [
+                    [
+                        -127.7991943359375,
+                        142.6855926513672,
+                        11.299999237060547
+                    ],
+                    [
+                        -124.90838623046875,
+                        132.00015258789062,
+                        11.299999237060547
+                    ],
+                    [
+                        -124.90838623046875,
+                        130.50015258789062,
+                        11.299999237060547
+                    ],
+                    [
+                        -126.40838623046875,
+                        117.00015258789062,
+                        11.299999237060547
+                    ],
+                    [
+                        -126.40838623046875,
+                        114.76927185058594,
+                        11.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -127.79919448321536,
+            142.68559914573396,
+            11.299999237060547
+        ],
+        "start_rotation": [
+            0.8778182344321594,
+            0.0,
+            0.0,
+            -0.4789938906691883
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_boston_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BOSTON/BOSTON_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_3",
+        "instruction": "Head down the road, passing the buildings on your left with large painted signs. Keep moving straight towards the red car parked in the distance. As you approach the black building on the left and the beige building with large windows on the right, veer slightly left. Continue forward until you are directly in front of the diner with a red and white checkered facade and large \"SHAKES\" signs in the window. You will arrive at the fast food restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_3_2",
+                "type": "object",
+                "location": [
+                    -292.23165814438187,
+                    192.86067215444652,
+                    5.929029570201974
+                ],
+                "radius": 3.589149384669213,
+                "path_length": 65.82478631662248,
+                "reference_path": [
+                    [
+                        -310.9152526855469,
+                        129.8131561279297,
+                        3.434462308883667
+                    ],
+                    [
+                        -307.90838623046875,
+                        135.00015258789062,
+                        3.299999237060547
+                    ],
+                    [
+                        -303.40838623046875,
+                        144.00015258789062,
+                        3.299999237060547
+                    ],
+                    [
+                        -298.90838623046875,
+                        154.50015258789062,
+                        3.6999988555908203
+                    ],
+                    [
+                        -288.40838623046875,
+                        186.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -288.40838623046875,
+                        189.00015258789062,
+                        3.799999237060547
+                    ],
+                    [
+                        -289.90838623046875,
+                        190.50015258789062,
+                        3.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -310.9152579673522,
+            129.81315805441247,
+            3.434462206376915
+        ],
+        "start_rotation": [
+            0.9379135996911159,
+            0.0,
+            0.0,
+            0.34686896591429633
+        ],
+        "ceiling_height": 1.0
+    }
+]

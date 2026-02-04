@@ -1,0 +1,1588 @@
+[
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Head down the straight road, keeping the beige building with numerous windows on your left and the large structure marked with \"MEN\" in bold letters on your right. Continue forward as the \"MEN\" sign recedes. As you approach a dark, blocky vehicle parked ahead in the distance, prepare to adjust your path slightly right. You will arrive at a purple baby stroller standing alone on the pavement.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_141",
+                "type": "object",
+                "location": [
+                    267.97046197229446,
+                    160.37336293346618,
+                    87.62910572343017
+                ],
+                "radius": 0.5749999157655381,
+                "path_length": 95.75071547664372,
+                "reference_path": [
+                    [
+                        276.3034973144531,
+                        252.85299682617188,
+                        87.75228881835938
+                    ],
+                    [
+                        271.2674865722656,
+                        163.50015258789062,
+                        87.0
+                    ],
+                    [
+                        269.7674865722656,
+                        159.00015258789062,
+                        87.30000305175781
+                    ],
+                    [
+                        268.2674865722656,
+                        159.00015258789062,
+                        87.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            276.3035066548142,
+            252.853002125321,
+            87.75228932509886
+        ],
+        "start_rotation": [
+            0.7979768231467596,
+            0.0,
+            0.0,
+            -0.6026881363695533
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "indian_feather_hat",
+        "instruction": "Start facing away from the tall brick tower on the left. Move forward across the large paved plaza, keeping the modern white buildings with balconies to your left. Continue straight for a long distance, heading towards the open space between the building blocks ahead. As you advance, you will see a cluster of older, beige and grey apartment buildings directly in front of you. Slightly veer right as you approach the center of the plaza. Continue forward until you reach the location of the indian feather hat, which is located on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/indian_feather_hat_143",
+                "type": "object",
+                "location": [
+                    209.1133396331692,
+                    277.23973024148864,
+                    87.70743082657603
+                ],
+                "radius": 0.3445373416869302,
+                "path_length": 70.70546210777053,
+                "reference_path": [
+                    [
+                        207.67466735839844,
+                        218.4564971923828,
+                        84.72423553466797
+                    ],
+                    [
+                        208.26748657226562,
+                        219.00015258789062,
+                        84.80000305175781
+                    ],
+                    [
+                        208.26748657226562,
+                        222.00015258789062,
+                        85.0
+                    ],
+                    [
+                        197.76748657226562,
+                        234.00015258789062,
+                        85.30000305175781
+                    ],
+                    [
+                        197.76748657226562,
+                        237.00015258789062,
+                        85.5
+                    ],
+                    [
+                        197.76748657226562,
+                        241.50015258789062,
+                        85.80000305175781
+                    ],
+                    [
+                        194.76748657226562,
+                        250.50015258789062,
+                        86.30000305175781
+                    ],
+                    [
+                        194.76748657226562,
+                        253.50015258789062,
+                        86.5
+                    ],
+                    [
+                        211.26748657226562,
+                        276.0001525878906,
+                        87.5
+                    ],
+                    [
+                        211.26748657226562,
+                        277.5001525878906,
+                        87.5
+                    ],
+                    [
+                        209.76748657226562,
+                        277.5001525878906,
+                        87.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            207.6746733734487,
+            218.45649844942983,
+            84.72423833609635
+        ],
+        "start_rotation": [
+            0.9606902658445926,
+            0.0,
+            0.0,
+            0.27762242904968254
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cargo_pallet",
+        "instruction": "Start near the dark building with the glass facade. Turn right and follow the road past the tall building with the brick upper section and dark lower section. Continue straight, passing the ambulance parked near the building. Keep moving forward along the road towards the open area with the statue resembling a small hut on a pole. As you approach the statue, veer slightly left. You will arrive at the yellow cargo pallet on the ground near the statue.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cargo_pallet_84",
+                "type": "object",
+                "location": [
+                    61.67397579647367,
+                    274.0687816366356,
+                    84.63020332436439
+                ],
+                "radius": 0.7567955898445007,
+                "path_length": 19.140290538345006,
+                "reference_path": [
+                    [
+                        54.36384963989258,
+                        259.16241455078125,
+                        84.20000457763672
+                    ],
+                    [
+                        53.767486572265625,
+                        259.5001525878906,
+                        84.20000457763672
+                    ],
+                    [
+                        53.767486572265625,
+                        265.5001525878906,
+                        84.4000015258789
+                    ],
+                    [
+                        56.767486572265625,
+                        268.5001525878906,
+                        84.4000015258789
+                    ],
+                    [
+                        62.767486572265625,
+                        271.5001525878906,
+                        84.30000305175781
+                    ],
+                    [
+                        62.767486572265625,
+                        273.0001525878906,
+                        84.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            54.36384922817111,
+            259.16240445885325,
+            84.20000457763673
+        ],
+        "start_rotation": [
+            0.037691224338077714,
+            0.0,
+            0.0,
+            0.9992894333514674
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_4",
+                "type": "object",
+                "location": [
+                    91.45700837876903,
+                    232.78554966902874,
+                    84.78922513501588
+                ],
+                "radius": 2.5026479482746,
+                "path_length": 33.54197830855491,
+                "reference_path": [
+                    [
+                        92.72189331054688,
+                        247.79441833496094,
+                        84.20000457763672
+                    ],
+                    [
+                        91.26748657226562,
+                        249.00015258789062,
+                        84.20000457763672
+                    ],
+                    [
+                        89.76748657226562,
+                        249.00015258789062,
+                        84.0
+                    ],
+                    [
+                        88.26748657226562,
+                        247.50015258789062,
+                        84.0
+                    ],
+                    [
+                        88.26748657226562,
+                        246.00015258789062,
+                        83.9000015258789
+                    ],
+                    [
+                        95.76748657226562,
+                        235.50015258789062,
+                        83.80000305175781
+                    ],
+                    [
+                        95.76748657226562,
+                        232.50015258789062,
+                        83.80000305175781
+                    ],
+                    [
+                        94.26748657226562,
+                        229.50015258789062,
+                        83.70000457763672
+                    ],
+                    [
+                        92.76748657226562,
+                        228.00015258789062,
+                        83.70000457763672
+                    ],
+                    [
+                        91.26748657226562,
+                        228.00015258789062,
+                        83.5999984741211
+                    ],
+                    [
+                        89.76748657226562,
+                        229.50015258789062,
+                        83.80000305175781
+                    ],
+                    [
+                        89.76748657226562,
+                        231.00015258789062,
+                        83.80000305175781
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_65",
+                "type": "object",
+                "location": [
+                    64.64376298305281,
+                    289.0789538158946,
+                    85.60699710217679
+                ],
+                "radius": 2.457707656538844,
+                "path_length": 55.8985128100091,
+                "reference_path": [
+                    [
+                        92.72189331054688,
+                        247.79441833496094,
+                        84.20000457763672
+                    ],
+                    [
+                        79.26748657226562,
+                        265.5001525878906,
+                        84.5
+                    ],
+                    [
+                        61.267486572265625,
+                        286.5001525878906,
+                        84.5999984741211
+                    ],
+                    [
+                        61.267486572265625,
+                        291.0001525878906,
+                        84.5999984741211
+                    ],
+                    [
+                        62.767486572265625,
+                        291.0001525878906,
+                        84.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            92.72189082402649,
+            247.7944189095681,
+            84.2000045776367
+        ],
+        "start_rotation": [
+            0.553622454486419,
+            0.0,
+            0.0,
+            0.8327677814903941
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start by following the road straight ahead, keeping the dark, multi-story buildings on your right and the light-colored blocky buildings on your left. As you continue, you will see a white building with a dome roof appearing in the distance on the right. Keep moving forward along the road, passing an ambulance on the right. Eventually, you will arrive at the green garbage truck parked on the left side of the road.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_91",
+                "type": "object",
+                "location": [
+                    69.1536621990091,
+                    226.51466403885007,
+                    84.93911115835927
+                ],
+                "radius": 4.039050347680799,
+                "path_length": 88.70449878286519,
+                "reference_path": [
+                    [
+                        51.989925384521484,
+                        253.56637573242188,
+                        84.0999984741211
+                    ],
+                    [
+                        50.767486572265625,
+                        252.00015258789062,
+                        84.0999984741211
+                    ],
+                    [
+                        40.267486572265625,
+                        226.50015258789062,
+                        83.5999984741211
+                    ],
+                    [
+                        40.267486572265625,
+                        207.00015258789062,
+                        83.20000457763672
+                    ],
+                    [
+                        41.767486572265625,
+                        205.50015258789062,
+                        83.20000457763672
+                    ],
+                    [
+                        43.267486572265625,
+                        205.50015258789062,
+                        83.20000457763672
+                    ],
+                    [
+                        70.26748657226562,
+                        220.50015258789062,
+                        83.20000457763672
+                    ],
+                    [
+                        71.76748657226562,
+                        222.00015258789062,
+                        83.30000305175781
+                    ],
+                    [
+                        71.76748657226562,
+                        225.00015258789062,
+                        83.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            51.989925806012,
+            253.56637196198363,
+            84.0999984741211
+        ],
+        "start_rotation": [
+            0.6352403537213167,
+            0.0,
+            0.0,
+            -0.7723145039451327
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "robot_toy",
+        "instruction": "Go straight down the road, keeping the large, light-colored apartment building on your left. Continue forward past the storefronts at the base of the building. As you proceed, you will pass a white car parked in the distance on the right. Eventually, turn slightly right as you approach a large, darker stone building on the right side of the street. You will arrive at the robot_toy, which is a small grey figure with red eyes, located on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/robot_toy_130",
+                "type": "object",
+                "location": [
+                    257.2389625387781,
+                    64.76446234611757,
+                    87.8594615893602
+                ],
+                "radius": 0.1999999969901083,
+                "path_length": 40.11840195233654,
+                "reference_path": [
+                    [
+                        227.80783081054688,
+                        85.5742416381836,
+                        86.9641342163086
+                    ],
+                    [
+                        257.7674865722656,
+                        67.50015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        259.2674865722656,
+                        66.00015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        259.2674865722656,
+                        64.50015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        257.7674865722656,
+                        64.50015258789062,
+                        87.70000457763672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            227.8078238225717,
+            85.57423886686793,
+            86.96413205025857
+        ],
+        "start_rotation": [
+            0.9491047501033959,
+            0.0,
+            0.0,
+            -0.31496059012386035
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "Head down the wide road, keeping the dark, multi-story buildings on your left and the massive, beige structure with large window graphics on your right. A white and red ambulance is parked near the base of the dark buildings. Continue straight ahead, passing a tall, thin metal spire monument on your left. Keep moving forward along the pavement towards the distant end of the street, where the road curves slightly. Eventually, you will arrive at the vans_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_26",
+                "type": "object",
+                "location": [
+                    69.70426991117884,
+                    319.0570497587096,
+                    84.89586302406515
+                ],
+                "radius": 0.32455259267570113,
+                "path_length": 44.90321215352449,
+                "reference_path": [
+                    [
+                        97.53178405761719,
+                        353.378173828125,
+                        84.9829330444336
+                    ],
+                    [
+                        92.76748657226562,
+                        352.5001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        89.76748657226562,
+                        349.5001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        83.76748657226562,
+                        340.5001525878906,
+                        84.80000305175781
+                    ],
+                    [
+                        74.76748657226562,
+                        325.5001525878906,
+                        84.70000457763672
+                    ],
+                    [
+                        70.26748657226562,
+                        319.5001525878906,
+                        84.80000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            97.53178204940829,
+            353.37816623169397,
+            84.98293177460398
+        ],
+        "start_rotation": [
+            0.22548563983515324,
+            0.0,
+            0.0,
+            -0.974246491514407
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "hiking_bag",
+        "instruction": "Proceed straight down the wide, empty road. On your right, you'll pass a long, dark building with a sign that includes \"CENTRE\". Continue forward along the road, keeping the low beige wall on your left and the modern building complex on your right. As you advance, you'll see a green dumpster or container further down the road. Follow the road as it gently curves. Eventually, after passing the main building blocks, turn left towards a brown brick wall section, where you will arrive at the hiking bag.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/hiking_bag_137",
+                "type": "object",
+                "location": [
+                    120.67022231202988,
+                    278.2241701623375,
+                    84.76646609743378
+                ],
+                "radius": 0.32499999091663767,
+                "path_length": 85.21409807091956,
+                "reference_path": [
+                    [
+                        126.99635314941406,
+                        340.92742919921875,
+                        84.9017333984375
+                    ],
+                    [
+                        128.76748657226562,
+                        340.5001525878906,
+                        84.9000015258789
+                    ],
+                    [
+                        130.26748657226562,
+                        339.0001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        137.76748657226562,
+                        331.5001525878906,
+                        85.0
+                    ],
+                    [
+                        142.26748657226562,
+                        330.0001525878906,
+                        85.20000457763672
+                    ],
+                    [
+                        143.76748657226562,
+                        328.5001525878906,
+                        85.20000457763672
+                    ],
+                    [
+                        143.76748657226562,
+                        327.0001525878906,
+                        85.20000457763672
+                    ],
+                    [
+                        140.76748657226562,
+                        316.5001525878906,
+                        85.0
+                    ],
+                    [
+                        139.26748657226562,
+                        315.0001525878906,
+                        85.0
+                    ],
+                    [
+                        137.76748657226562,
+                        315.0001525878906,
+                        84.9000015258789
+                    ],
+                    [
+                        131.76748657226562,
+                        315.0001525878906,
+                        84.80000305175781
+                    ],
+                    [
+                        130.26748657226562,
+                        313.5001525878906,
+                        84.70000457763672
+                    ],
+                    [
+                        118.26748657226562,
+                        280.5001525878906,
+                        84.80000305175781
+                    ],
+                    [
+                        118.26748657226562,
+                        277.5001525878906,
+                        84.80000305175781
+                    ],
+                    [
+                        119.76748657226562,
+                        277.5001525878906,
+                        84.80000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            126.99635044469416,
+            340.92742821602184,
+            84.90173638274624
+        ],
+        "start_rotation": [
+            0.9903948228493897,
+            0.0,
+            0.0,
+            -0.13826819906661816
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "white_shoes",
+        "instruction": "Start at the intersection with tall, tan buildings on your left. Turn right onto the wide street, keeping the modern, white blocky building in the distance slightly to your left. Move forward down the center of the road, passing the long row of beige apartment buildings on your left. Continue straight towards the distant white structure. You will arrive at the white shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/white_shoes_181",
+                "type": "object",
+                "location": [
+                    261.0000836193511,
+                    101.0245027352334,
+                    87.57485657294102
+                ],
+                "radius": 0.3768251460531076,
+                "path_length": 77.4266323592057,
+                "reference_path": [
+                    [
+                        239.2921905517578,
+                        169.77584838867188,
+                        86.80000305175781
+                    ],
+                    [
+                        248.76748657226562,
+                        166.50015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        251.76748657226562,
+                        163.50015258789062,
+                        87.0
+                    ],
+                    [
+                        261.0000915527344,
+                        101.02450561523438,
+                        87.57485961914062
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            239.2921867911107,
+            169.77584898206564,
+            86.80000305175783
+        ],
+        "start_rotation": [
+            0.9931052002963933,
+            0.0,
+            0.0,
+            -0.11722653771335469
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "black_bike",
+        "instruction": "Start by facing the open street, flanked by tall beige buildings with rows of windows. Slightly turn left and proceed down the wide, dark road, keeping the building with the large red advertisement on your right. As you move forward, you will see a white car parked in the distance. Continue straight along the road towards the large, multi-story building ahead. You will arrive at the black bike parked on the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_bike_188",
+                "type": "object",
+                "location": [
+                    -7.6441102170587465,
+                    80.36501588157222,
+                    81.54897208127143
+                ],
+                "radius": 0.93663050001296,
+                "path_length": 18.79222705498558,
+                "reference_path": [
+                    [
+                        -26.312946319580078,
+                        88.0875473022461,
+                        81.30000305175781
+                    ],
+                    [
+                        -25.732513427734375,
+                        87.00015258789062,
+                        81.30000305175781
+                    ],
+                    [
+                        -9.232513427734375,
+                        81.00015258789062,
+                        81.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -26.3129463433037,
+            88.08755066277259,
+            81.30000305175783
+        ],
+        "start_rotation": [
+            0.758667219336821,
+            0.0,
+            0.0,
+            -0.6514783575098531
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "single_book",
+        "instruction": "Start on the dark road facing the large brown and grey block structures. Proceed forward along the road, keeping the wooden planters on your right. Continue straight past the tall brown pillars. As the road curves slightly left, follow it past the distant red sports car parked near a dark black building on the left. Keep moving forward along the dark path until you reach a lone, greyish-white cube on the ground. You will arrive at the single_book.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/single_book_122",
+                "type": "object",
+                "location": [
+                    54.23945086863751,
+                    363.2464495106093,
+                    85.32925299624584
+                ],
+                "radius": 0.1940383621555668,
+                "path_length": 54.60298606040657,
+                "reference_path": [
+                    [
+                        104.27275085449219,
+                        369.51165771484375,
+                        85.03291320800781
+                    ],
+                    [
+                        92.76748657226562,
+                        372.0001525878906,
+                        85.0
+                    ],
+                    [
+                        83.76748657226562,
+                        372.0001525878906,
+                        85.20000457763672
+                    ],
+                    [
+                        64.26748657226562,
+                        367.5001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        55.267486572265625,
+                        361.5001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        53.767486572265625,
+                        361.5001525878906,
+                        85.0999984741211
+                    ],
+                    [
+                        53.767486572265625,
+                        363.0001525878906,
+                        85.0999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            104.27274768909786,
+            369.5116660139344,
+            85.0329160104531
+        ],
+        "start_rotation": [
+            -0.09331140952971316,
+            0.0,
+            0.0,
+            0.9956369724209614
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance_1",
+        "instruction": "",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_1_32",
+                "type": "object",
+                "location": [
+                    40.318404144277636,
+                    296.93092537466725,
+                    86.24665208618421
+                ],
+                "radius": 3.5014698221044966,
+                "path_length": 70.95650205525273,
+                "reference_path": [
+                    [
+                        78.46693420410156,
+                        245.3837432861328,
+                        83.8589096069336
+                    ],
+                    [
+                        79.26748657226562,
+                        246.00015258789062,
+                        83.9000015258789
+                    ],
+                    [
+                        82.26748657226562,
+                        250.50015258789062,
+                        84.0
+                    ],
+                    [
+                        83.76748657226562,
+                        255.00015258789062,
+                        84.0999984741211
+                    ],
+                    [
+                        83.76748657226562,
+                        256.5001525878906,
+                        84.0999984741211
+                    ],
+                    [
+                        79.26748657226562,
+                        265.5001525878906,
+                        84.5
+                    ],
+                    [
+                        77.76748657226562,
+                        267.0001525878906,
+                        84.5
+                    ],
+                    [
+                        44.767486572265625,
+                        297.0001525878906,
+                        84.9000015258789
+                    ],
+                    [
+                        43.267486572265625,
+                        297.0001525878906,
+                        84.9000015258789
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_1_81",
+                "type": "object",
+                "location": [
+                    107.0508055591045,
+                    195.83159922844635,
+                    84.7302856911797
+                ],
+                "radius": 3.539920183724959,
+                "path_length": 58.806516871195214,
+                "reference_path": [
+                    [
+                        78.46693420410156,
+                        245.3837432861328,
+                        83.8589096069336
+                    ],
+                    [
+                        94.26748657226562,
+                        237.00015258789062,
+                        83.80000305175781
+                    ],
+                    [
+                        95.76748657226562,
+                        235.50015258789062,
+                        83.80000305175781
+                    ],
+                    [
+                        100.26748657226562,
+                        225.00015258789062,
+                        83.9000015258789
+                    ],
+                    [
+                        104.76748657226562,
+                        198.00015258789062,
+                        83.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            78.46693576801074,
+            245.38374537591022,
+            83.85890833878872
+        ],
+        "start_rotation": [
+            0.9867661009221803,
+            0.0,
+            0.0,
+            -0.1621501220191879
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_91",
+                "type": "object",
+                "location": [
+                    69.1536621990091,
+                    226.51466403885007,
+                    84.93911115835927
+                ],
+                "radius": 4.039050347680799,
+                "path_length": 59.148558549976116,
+                "reference_path": [
+                    [
+                        87.35960388183594,
+                        199.37893676757812,
+                        83.3394775390625
+                    ],
+                    [
+                        88.26748657226562,
+                        201.00015258789062,
+                        83.4000015258789
+                    ],
+                    [
+                        100.26748657226562,
+                        223.50015258789062,
+                        83.9000015258789
+                    ],
+                    [
+                        100.26748657226562,
+                        225.00015258789062,
+                        83.9000015258789
+                    ],
+                    [
+                        98.76748657226562,
+                        226.50015258789062,
+                        83.70000457763672
+                    ],
+                    [
+                        97.26748657226562,
+                        226.50015258789062,
+                        83.70000457763672
+                    ],
+                    [
+                        92.76748657226562,
+                        225.00015258789062,
+                        83.5999984741211
+                    ],
+                    [
+                        83.76748657226562,
+                        222.00015258789062,
+                        83.5
+                    ],
+                    [
+                        82.26748657226562,
+                        222.00015258789062,
+                        83.5
+                    ],
+                    [
+                        71.76748657226562,
+                        225.00015258789062,
+                        83.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            87.35960476227444,
+            199.3789390748806,
+            83.33947699542463
+        ],
+        "start_rotation": [
+            0.8506199273479498,
+            0.0,
+            0.0,
+            0.5257810753522503
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sports_jacket",
+        "instruction": "Go forward along the road, keeping the beige building with multiple windows and balconies on your left. As you approach the intersection where a darker, blue-grey building appears ahead, turn right. Continue down this street, passing the large white storefront on your left. As you move forward, the road curves slightly; follow it past the building with the dark arched entrance. Turn left towards the dark doorway of the beige building, and you will arrive at the sports jacket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sports_jacket_105",
+                "type": "object",
+                "location": [
+                    296.0745443471598,
+                    185.68745837576304,
+                    87.77296446236029
+                ],
+                "radius": 0.9038036738732558,
+                "path_length": 42.424381438016965,
+                "reference_path": [
+                    [
+                        262.5382995605469,
+                        204.73150634765625,
+                        87.63032531738281
+                    ],
+                    [
+                        266.7674865722656,
+                        207.00015258789062,
+                        87.5999984741211
+                    ],
+                    [
+                        268.2674865722656,
+                        207.00015258789062,
+                        87.5999984741211
+                    ],
+                    [
+                        286.2674865722656,
+                        195.00015258789062,
+                        87.30000305175781
+                    ],
+                    [
+                        289.2674865722656,
+                        192.00015258789062,
+                        87.30000305175781
+                    ],
+                    [
+                        293.7674865722656,
+                        184.50015258789062,
+                        87.4000015258789
+                    ],
+                    [
+                        295.2674865722656,
+                        184.50015258789062,
+                        87.4000015258789
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            262.5382905096161,
+            204.73151088939443,
+            87.63032472567173
+        ],
+        "start_rotation": [
+            0.976854260802695,
+            0.0,
+            0.0,
+            0.2139059446383397
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bus_stop",
+        "instruction": "Head straight down the road, keeping the tall, multi-colored mural building on your left and the white classical building on your right. Continue past the ambulance parked on the right side. As you approach the glass bus stop shelter near the white building, veer slightly right towards it. You will arrive directly at the glass bus stop structure.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bus_stop_66",
+                "type": "object",
+                "location": [
+                    39.4940464381127,
+                    148.10238480070987,
+                    83.5054010679155
+                ],
+                "radius": 1.9461345100231142,
+                "path_length": 42.45001531797043,
+                "reference_path": [
+                    [
+                        11.73150634765625,
+                        127.96747589111328,
+                        81.82182312011719
+                    ],
+                    [
+                        26.767486572265625,
+                        151.50015258789062,
+                        82.4000015258789
+                    ],
+                    [
+                        29.767486572265625,
+                        154.50015258789062,
+                        82.4000015258789
+                    ],
+                    [
+                        31.267486572265625,
+                        154.50015258789062,
+                        82.4000015258789
+                    ],
+                    [
+                        32.767486572265625,
+                        153.00015258789062,
+                        82.30000305175781
+                    ],
+                    [
+                        37.267486572265625,
+                        148.10238647460938,
+                        82.22449493408203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            11.731506552711537,
+            127.96747825367689,
+            81.82182374377615
+        ],
+        "start_rotation": [
+            0.8780484452733669,
+            0.0,
+            0.0,
+            0.47857175820666986
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "food_truck",
+        "instruction": "Head straight along the road, driving towards the large, dark building on the right side of the street. As you advance, you will notice a white ambulance with red stripes parked in the distance, centered in the lane. Continue forward past the tall buildings on your left until you arrive directly behind the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/food_truck_25",
+                "type": "object",
+                "location": [
+                    -6.633188389130506,
+                    -0.2543575430765834,
+                    81.13642747894633
+                ],
+                "radius": 2.3140672995717124,
+                "path_length": 77.40563058653835,
+                "reference_path": [
+                    [
+                        17.057207107543945,
+                        72.59896087646484,
+                        80.62657928466797
+                    ],
+                    [
+                        -9.232513427734375,
+                        3.000152587890625,
+                        79.5999984741211
+                    ],
+                    [
+                        -9.232513427734375,
+                        0.000152587890625,
+                        79.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            17.057206770726836,
+            72.59896196103331,
+            80.626576310146
+        ],
+        "start_rotation": [
+            0.5731620815667814,
+            0.0,
+            0.0,
+            -0.8194420225092403
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Start on the road between the tall beige buildings on the left and the dark stone structures on the right. Move forward along the street, keeping the multi-story building with dark windows straight ahead as your guide. As you approach the intersection near the white modern building slightly peeking out in the distance, veer slightly left. Continue down the dark, shadowed street. You will arrive at the front of a dark blue van parked on the road.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_46",
+                "type": "object",
+                "location": [
+                    -134.19247145850073,
+                    68.54076567662203,
+                    86.4631359453907
+                ],
+                "radius": 3.1610351626021753,
+                "path_length": 94.25716984386452,
+                "reference_path": [
+                    [
+                        -104.17566680908203,
+                        160.95089721679688,
+                        87.34456634521484
+                    ],
+                    [
+                        -123.23251342773438,
+                        120.00015258789062,
+                        86.5
+                    ],
+                    [
+                        -123.23251342773438,
+                        118.50015258789062,
+                        86.4000015258789
+                    ],
+                    [
+                        -123.23251342773438,
+                        109.50015258789062,
+                        86.0999984741211
+                    ],
+                    [
+                        -132.23251342773438,
+                        72.00015258789062,
+                        85.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -104.17566749596517,
+            160.950901417466,
+            87.34456952753577
+        ],
+        "start_rotation": [
+            0.5712500568472189,
+            0.0,
+            0.0,
+            -0.8207760794224264
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_van",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_van_10",
+                "type": "object",
+                "location": [
+                    62.6374727312712,
+                    201.40677608214196,
+                    84.25152230788134
+                ],
+                "radius": 3.0527857335058,
+                "path_length": 36.157299904498075,
+                "reference_path": [
+                    [
+                        71.2776107788086,
+                        181.96141052246094,
+                        82.9000015258789
+                    ],
+                    [
+                        53.767486572265625,
+                        196.50015258789062,
+                        83.0
+                    ],
+                    [
+                        52.267486572265625,
+                        198.00015258789062,
+                        82.80000305175781
+                    ],
+                    [
+                        52.267486572265625,
+                        201.00015258789062,
+                        82.9000015258789
+                    ],
+                    [
+                        53.767486572265625,
+                        202.50015258789062,
+                        82.9000015258789
+                    ],
+                    [
+                        55.267486572265625,
+                        202.50015258789062,
+                        83.0999984741211
+                    ],
+                    [
+                        59.767486572265625,
+                        201.40676879882812,
+                        83.0999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            71.2776082956442,
+            181.96141110710653,
+            82.9000015258789
+        ],
+        "start_rotation": [
+            0.5678263519841388,
+            0.0,
+            0.0,
+            0.8231483669378109
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "steampunk_camera",
+        "instruction": "Start facing the tall, arched brick tower on your left. Move forward along the open paved area, keeping the brick tower to your left. As you proceed, the path curves slightly right, passing a long, low stone wall on your right. Continue straight ahead towards the open space. Turn right, moving past the end of the stone wall. You will arrive at the steampunk camera, a metallic device on a boxy stand, located in the open square.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/steampunk_camera_101",
+                "type": "object",
+                "location": [
+                    149.01624368446954,
+                    243.22134083246925,
+                    87.20117533742581
+                ],
+                "radius": 0.08084274905826305,
+                "path_length": 12.233665232751065,
+                "reference_path": [
+                    [
+                        147.4813995361328,
+                        241.1516571044922,
+                        86.72528839111328
+                    ],
+                    [
+                        146.76748657226562,
+                        243.00015258789062,
+                        86.80000305175781
+                    ],
+                    [
+                        146.76748657226562,
+                        244.50015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        148.26748657226562,
+                        246.00015258789062,
+                        87.0
+                    ],
+                    [
+                        149.76748657226562,
+                        246.00015258789062,
+                        87.0
+                    ],
+                    [
+                        151.26748657226562,
+                        244.50015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        151.26748657226562,
+                        243.00015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        149.76748657226562,
+                        243.00015258789062,
+                        86.9000015258789
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            147.481394334688,
+            241.15166390609,
+            86.72528636517504
+        ],
+        "start_rotation": [
+            0.6849859207904986,
+            0.0,
+            0.0,
+            0.7285563041514312
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cargo_pallet",
+        "instruction": "Follow the grey road straight ahead, keeping the large, grey, classical-style building with a dome on your right and the row of taller, blocky apartment buildings on your left. Continue forward as you approach a green truck parked near the intersection. Turn right just before the green truck, heading toward the side of the large domed building. Move forward briefly, then make another slight right turn. You will arrive at the cargo pallet.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cargo_pallet_84",
+                "type": "object",
+                "location": [
+                    61.67397579647367,
+                    274.0687816366356,
+                    84.63020332436439
+                ],
+                "radius": 0.7567955898445007,
+                "path_length": 14.161351823524203,
+                "reference_path": [
+                    [
+                        55.23759841918945,
+                        277.83599853515625,
+                        84.5
+                    ],
+                    [
+                        62.767486572265625,
+                        277.5001525878906,
+                        84.30000305175781
+                    ],
+                    [
+                        64.26748657226562,
+                        276.0001525878906,
+                        84.30000305175781
+                    ],
+                    [
+                        64.26748657226562,
+                        273.0001525878906,
+                        84.30000305175781
+                    ],
+                    [
+                        62.767486572265625,
+                        273.0001525878906,
+                        84.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            55.237598860572255,
+            277.83599405811077,
+            84.50000000000001
+        ],
+        "start_rotation": [
+            0.9984204606715729,
+            0.0,
+            0.0,
+            -0.05618348255816987
+        ],
+        "ceiling_height": 1.0
+    }
+]

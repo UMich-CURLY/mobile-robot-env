@@ -3,7 +3,6 @@ import os
 import numpy as np
 from tqdm import tqdm
 from pxr import UsdGeom, Gf, Usd
-from utils.vis import visualize_mesh
 try:
     import PyRecastDetour as pyrecast
 except ImportError:
@@ -145,6 +144,14 @@ def convert_to_triangle_mesh(FaceVertexIndices, FaceVertexCounts):
         triangle_faces.extend(newface)
     
     return np.array(triangle_faces)
+def get_bbox_center(prim):
+    bbox_cache = UsdGeom.BBoxCache(Usd.TimeCode.Default(), [UsdGeom.Tokens.default_, UsdGeom.Tokens.proxy])
+    bound = bbox_cache.ComputeWorldBound(prim)
+    range3d = bound.ComputeAlignedBox()
+    min_point = range3d.GetMin()
+    max_point = range3d.GetMax()
+    center = (min_point + max_point) / 2.0
+    return np.array([center[0], center[1], center[2]])
 
 class NavmeshInterface:
     def __init__(self, up_axis='Y'): 
@@ -211,15 +218,15 @@ class NavmeshInterface:
             print("[WARNING]: NaNs found in input vertices")
         self.input_vert = self._convert_up_axis(self.input_vert)
 
-        # Constrain vertices with z > 10 to z = 10 (only for vc scenes)
+        # Constrain vertices with z > 5 to z = 5 (only for vc scenes)
         # Note: after _convert_up_axis, z is the third component (index 2)
         print(f"[INFO]: scene_type: {scene_type}")
         if scene_type == 'vc':
-            z_mask = self.input_vert[:, 2] > 10
+            z_mask = self.input_vert[:, 2] > 5
             if np.any(z_mask):
                 num_constrained = np.sum(z_mask)
-                self.input_vert[z_mask, 2] = 10
-                print(f"[INFO]: Constrained {num_constrained} vertices with z > 10 to z = 10")
+                self.input_vert[z_mask, 2] = 5
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 5 to z = 5")
             
             # Filter out invalid faces (degenerate triangles with zero area or collapsed vertices)
             # A triangle is invalid if all three vertices are the same or if the triangle has zero area
@@ -240,23 +247,65 @@ class NavmeshInterface:
             #     print(f"[INFO]: Removed {num_removed} degenerate faces after z constraint")
             #     self.input_tri = valid_faces
 
-        verts_flat = []
-        for vertex in tqdm(self.input_vert,desc="Loading vertices"):
-            verts_flat.extend(vertex)
-        # Convert faces to the format expected by init_by_raw
-        # The example shows faces as [3, v0, v1, v2, 3, v0, v1, v2, ...]
-        # where 3 indicates triangle (3 vertices per face)
-        faces_flat = []
-        for face in tqdm(self.input_tri,desc="Loading faces"):
-            # cur_faces_flat = np.hstack([np.full((len(face), 1), 3), face]).flatten().tolist()
-            cur_faces_flat = np.concatenate([[3], face]).tolist()
-            # print("`cur_faces_flat: ", cur_faces_flat)
-            faces_flat.extend(cur_faces_flat)
+        
+        # Optimize face flattening
+        verts_flat = self.input_vert.flatten().tolist()
+        faces_arr = np.array(self.input_tri, dtype=np.int32)
+        if faces_arr.ndim == 1:
+             faces_arr = faces_arr.reshape(-1, 3)
+             
+        threes = np.full((faces_arr.shape[0], 1), 3, dtype=np.int32)
+        faces_flat = np.hstack((threes, faces_arr)).flatten().tolist()
 
         # Initialize the navmesh with raw data
         print("[INFO]: Loading geometry from vertices and triangles. This will take a while, please wait.")
         self.nm.init_by_raw(verts_flat, faces_flat)
         print(f"[INFO]: Geometry loaded")
+
+    def save_geometry(self, selected_paths, exclude_paths, stage, output_dir, scene_type=None):
+        self.input_prim = [stage.GetPrimAtPath(x) for x in selected_paths]
+        self.input_vert, self.input_tri = get_all_stage_mesh(stage, self.input_prim, exclude_paths=exclude_paths)
+        if len(self.input_vert) == 0:
+            print('[INFO]: No mesh found')
+        self.input_vert = np.array(self.input_vert)
+        print(f"[INFO]: Loaded {len(self.input_vert)} vertices and {len(self.input_tri)} triangles")
+        print(f'[INFO]: bounding box: max={self.input_vert.max(axis=0)}, min={self.input_vert.min(axis=0)}')
+        if np.any(np.isnan(self.input_vert)):
+            print("[WARNING]: NaNs found in input vertices")
+        self.input_vert = self._convert_up_axis(self.input_vert)
+
+        # Constrain vertices with z > 5 to z = 5 (only for vc scenes)
+        # Note: after _convert_up_axis, z is the third component (index 2)
+        print(f"[INFO]: scene_type: {scene_type}")
+        if scene_type == 'vc' or scene_type == 'innout':
+            z_mask = self.input_vert[:, 2] > 5
+            if np.any(z_mask):
+                num_constrained = np.sum(z_mask)
+                self.input_vert[z_mask, 2] = 5
+                print(f"[INFO]: Constrained {num_constrained} vertices with z > 5 to z = 5")
+        
+        # Convert back to original axis (Z-up) for saving to be consistent with generate_navmesh.py
+        self.input_vert = self._convert_up_axis(self.input_vert, inverse=True)
+
+        # Save to bin files
+        output_dir = str(output_dir)
+        os.makedirs(output_dir, exist_ok=True)
+        verts_path = os.path.join(output_dir, f"{scene_type}_vertices.bin")
+        faces_path = os.path.join(output_dir, f"{scene_type}_faces.bin")
+        
+        print(f"[INFO]: Saving geometry to {verts_path}")
+        self.input_vert.astype(np.float32).tofile(verts_path)
+        
+        if len(self.input_tri) > 0:
+            # Flatten faces
+            faces_arr = np.array(self.input_tri, dtype=np.int32)
+            faces_arr.tofile(faces_path)
+        else:
+            with open(faces_path, 'wb') as f:
+                pass
+                
+        print(f"[INFO]: Geometry saved")
+
 
     def build_navmesh(self):
         print(f"[INFO]: settings: {self.settings}")
@@ -273,7 +322,92 @@ class NavmeshInterface:
         if not self.built:
             print('[WARNING]: Failed to build navmesh')
 
+    def build_navmesh_innout(self, selected_paths, exclude_paths, stage, max_dist=60.0):
+        # 1. Load geometry
+        self.input_prim = [stage.GetPrimAtPath(x) for x in selected_paths]
+        self.input_vert, self.input_tri = get_all_stage_mesh(stage, self.input_prim, exclude_paths=exclude_paths)
+        if len(self.input_vert) == 0:
+            print('[INFO]: No mesh found')
+            return
+            
+        self.input_vert = np.array(self.input_vert)
+        self.input_tri = np.array(self.input_tri)
+        print(f"[INFO]: Loaded {len(self.input_vert)} vertices and {len(self.input_tri)} triangles")
+        
+        if np.any(np.isnan(self.input_vert)):
+            print("[WARNING]: NaNs found in input vertices")
+
+        # 2. Filter by room distance
+        # Find room prim
+        room_prim = stage.GetPrimAtPath("/World/ground/terrain/start_result_navigation")
+        if not room_prim:
+             room_prim = stage.GetPrimAtPath("/start_result_navigation")
+        if not room_prim:
+             room_prim = stage.GetPrimAtPath("/World/start_result_navigation")
+             
+        if room_prim:
+            print(f"[INFO]: Filtering geometry based on room center from {room_prim.GetPath()}")
+            room_center = get_bbox_center(room_prim)
+            print(f"[INFO]: Room center: {room_center}")
+            
+            # Calculate distances (only XY)
+            # input_vert is in world coordinates (usually Z-up in Isaac Sim)
+            diff = self.input_vert[:, :2] - room_center[:2]
+            dist_sq = np.sum(diff**2, axis=1)
+            
+            valid_mask = dist_sq <= max_dist**2
+            
+            if np.sum(valid_mask) < len(self.input_vert):
+                num_removed = len(self.input_vert) - np.sum(valid_mask)
+                print(f"[INFO]: Removing {num_removed} vertices > {max_dist}m from room")
+                
+                # Re-index faces
+                old_to_new = np.full(len(self.input_vert), -1, dtype=np.int32)
+                valid_indices = np.where(valid_mask)[0]
+                old_to_new[valid_indices] = np.arange(len(valid_indices))
+                
+                # Update vertices
+                self.input_vert = self.input_vert[valid_mask]
+                
+                # Update faces
+                if len(self.input_tri) > 0:
+                    faces_arr = self.input_tri.reshape(-1, 3)
+                    new_faces = old_to_new[faces_arr]
+                    
+                    # Keep face only if all vertices are valid
+                    valid_faces_mask = np.all(new_faces != -1, axis=1)
+                    new_faces_filtered = new_faces[valid_faces_mask]
+                    self.input_tri = new_faces_filtered.flatten()
+                    
+                    print(f"[INFO]: Remaining faces: {len(new_faces_filtered)}")
+            else:
+                print(f"[INFO]: All vertices within {max_dist}m of room.")
+        else:
+            print("[WARNING]: Room prim not found for filtering")
+
+        # 3. Convert up axis
+        self.input_vert = self._convert_up_axis(self.input_vert)
+        
+        # 4. Init Navmesh
+        # Optimize face flattening
+        verts_flat = self.input_vert.flatten().tolist()
+        faces_arr = np.array(self.input_tri, dtype=np.int32)
+        if faces_arr.ndim == 1:
+             faces_arr = faces_arr.reshape(-1, 3)
+             
+        threes = np.full((faces_arr.shape[0], 1), 3, dtype=np.int32)
+        faces_flat = np.hstack((threes, faces_arr)).flatten().tolist()
+
+        print("[INFO]: Loading geometry from vertices and triangles. This will take a while, please wait.")
+        self.nm.init_by_raw(verts_flat, faces_flat)
+        print(f"[INFO]: Geometry loaded")
+        
+        # 5. Build Navmesh
+        self.build_navmesh()
+
+
     def visualize_navmesh(self):
+        from utils.vis import visualize_mesh
         if self.built:
             v, t, = self.navmesh_v, self.navmesh_t
             v = v.flatten()

@@ -125,7 +125,7 @@ def send_message(msg_type, msg, host, port):
     client_socket.sendall(message.encode())
     client_socket.close()
 
-def request_sensor_data(host, port, verbose=False):
+def request_data(host, port, request_type="GET_SENSOR_DATA", verbose=False):
     # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {host}:{port}...")
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(5.0) # Timeout for connection and operations
@@ -134,7 +134,7 @@ def request_sensor_data(host, port, verbose=False):
 
     # 1. Send request
     start_time = time.time()
-    client_socket.sendall(b"GET_SENSOR_DATA")
+    client_socket.sendall(request_type.encode())
     end_time = time.time()
     if verbose:
         print(f"[Request] Time: {end_time - start_time:.3f}s")
@@ -176,6 +176,10 @@ def request_sensor_data(host, port, verbose=False):
 
     return payload
 
+
+def request_sensor_data(host, port, verbose=False):
+    return request_data(host, port, request_type="GET_SENSOR_DATA", verbose=verbose)
+
 def request_planner_state(host, port, verbose=False):
     # print(f"\n[{time.strftime('%H:%M:%S')}] Attempting to connect to {host}:{port}...")
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -206,6 +210,37 @@ def request_planner_state(host, port, verbose=False):
     payload = json.loads(json_payload)
     return payload
 
+
+def extract_tf_dict(payload):
+    """tfs is a dict of {camera_name: {parent_frame: str, child_frame_id: str, transform: dict}}"""
+    
+    tf_payload = None
+    if "tfs" in payload and isinstance(payload.get("tfs"), dict):
+        tf_payload = payload.get("tfs")
+        tf_dict = {}
+        for camera_name, value in tf_payload.items():
+            correct_format = True
+            for key in ["parent_frame", "child_frame_id", "transform"]:
+                if key not in value:
+                    print(f"[SOCKET_CLIENT] {key} not found in {camera_name}")
+                    correct_format = False
+                    break
+            if correct_format:
+                tf_dict[camera_name] = value
+        return tf_dict
+    else:
+        print("[SOCKET_CLIENT] tfs not found")
+        return {}
+
+
+def match_tf_key(tf_dict, camera_name):
+    if camera_name in tf_dict:
+        return camera_name
+    for key in tf_dict.keys():
+        if key.endswith(camera_name) or camera_name.endswith(key):
+            return key
+    return None
+
 def main():
     print("Agent Socket Client Started")
     host = "localhost"
@@ -215,7 +250,7 @@ def main():
         payload = None # Initialize payload to None for this cycle
 
         try:
-            payload = request_sensor_data()
+            payload = request_sensor_data(host, port)
 
             # print("Successfully received and unpickled data.")
             
@@ -275,9 +310,6 @@ def main():
         except Exception as e:
             print(f"An unexpected error occurred: {e}", exc_info=True)
         finally:
-            if 'client_socket' in locals():
-                client_socket.close()
-            
             # Maintain 1Hz cycle
             elapsed_cycle_time = time.time() - start_cycle_time
             sleep_time = 1.0 - elapsed_cycle_time

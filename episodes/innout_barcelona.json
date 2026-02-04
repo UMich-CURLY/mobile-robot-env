@@ -1,0 +1,1363 @@
+[
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 0,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bottle_with_red_liquid",
+        "instruction": "Starting from the doorway, exit and immediately turn left onto the pavement. Follow the road straight ahead, keeping the dark building facade with arched windows on your right. Pass a white ambulance parked by the curb. Continue forward along the street. As you proceed, the lighting will dim. You will eventually arrive at the bottle with red liquid on the ground near the edge of the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bottle_with_red_liquid_30",
+                "type": "object",
+                "location": [
+                    -230.64081055300284,
+                    19.696659681794735,
+                    12.487596274687395
+                ],
+                "radius": 0.1599999960991978,
+                "path_length": 48.36752838695726,
+                "reference_path": [
+                    [
+                        -185.05467224121094,
+                        6.611886501312256,
+                        12.100030899047852
+                    ],
+                    [
+                        -185.41024780273438,
+                        6.94793701171875,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.61026000976562,
+                        10.547935485839844,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -230.64080810546875,
+                        19.696659088134766,
+                        12.48759651184082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -185.0546766047849,
+            6.611886526085368,
+            12.10003089904785
+        ],
+        "start_rotation": [
+            0.5571466041931771,
+            0.0,
+            0.0,
+            0.8304141505514049
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 1,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start slightly turning right and proceed down the street, keeping the dark, tall buildings on your left. Continue straight ahead along the sidewalk, passing the white RV parked on the right side of the road. Keep moving forward towards the green garbage truck visible in the distance. As you get closer, you will see a storefront labeled \"Snack & Party\" on the right. Continue until you arrive directly behind the green garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_6",
+                "type": "object",
+                "location": [
+                    -234.22581106955255,
+                    -2.7717837057057886,
+                    13.5547528541086
+                ],
+                "radius": 4.03877212789827,
+                "path_length": 42.65322188704712,
+                "reference_path": [
+                    [
+                        -190.38478088378906,
+                        10.26729965209961,
+                        12.100030899047852
+                    ],
+                    [
+                        -191.2102508544922,
+                        10.047935485839844,
+                        12.100030899047852
+                    ],
+                    [
+                        -223.01025390625,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -231.36842346191406,
+                        -0.7306305766105652,
+                        11.900030136108398
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -190.38478656363307,
+            10.267299331565559,
+            12.100030899047853
+        ],
+        "start_rotation": [
+            0.2448971635256156,
+            0.0,
+            0.0,
+            -0.9695490597680491
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 2,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinner_jacket",
+        "instruction": "Start by facing the exit of the room with the white shelves, then walk out the door towards the street. Once outside, follow the sidewalk with the large buildings on your left and the storefronts on your right. Continue straight ahead, moving past the red sports car parked near the curb. As you proceed down the sidewalk, look for a white dinner jacket displayed on a mannequin stand; you will arrive at the dinner jacket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinner_jacket_31",
+                "type": "object",
+                "location": [
+                    -175.03074241195264,
+                    23.33398463144856,
+                    12.757574361049421
+                ],
+                "radius": 0.5136825459090364,
+                "path_length": 27.370760606871087,
+                "reference_path": [
+                    [
+                        -189.0640411376953,
+                        2.4178507328033447,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.2102508544922,
+                        3.3479347229003906,
+                        12.200029373168945
+                    ],
+                    [
+                        -187.8102569580078,
+                        4.547935485839844,
+                        12.200029373168945
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -174.91024780273438,
+                        22.547935485839844,
+                        12.300027847290039
+                    ],
+                    [
+                        -174.8102569580078,
+                        22.647937774658203,
+                        12.300027847290039
+                    ],
+                    [
+                        -174.51025390625,
+                        23.147937774658203,
+                        12.300027847290039
+                    ],
+                    [
+                        -174.51025390625,
+                        23.333984375,
+                        12.323284149169922
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -189.06403992127687,
+            2.4178506636654813,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.8593636987366253,
+            0.0,
+            0.0,
+            0.5113648729563918
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "socks",
+        "instruction": "Start by keeping the dark, textured building facade on your left as you move forward along the sidewalk. As you proceed, you will pass a white camper-style vehicle parked against the building on your right. Continue straight ahead, keeping the building wall close on your left. Eventually, you will see a pair of socks standing on the ground near the wall. You will arrive at the socks.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/socks_44",
+                "type": "object",
+                "location": [
+                    -236.2451200116401,
+                    -9.074157719410922,
+                    11.978923702157928
+                ],
+                "radius": 0.12737200546236238,
+                "path_length": 49.90729276214075,
+                "reference_path": [
+                    [
+                        -190.2896270751953,
+                        10.385992050170898,
+                        12.100030899047852
+                    ],
+                    [
+                        -191.2102508544922,
+                        10.047935485839844,
+                        12.100030899047852
+                    ],
+                    [
+                        -236.2451171875,
+                        -9.07415771484375,
+                        11.978923797607422
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -190.28963002092627,
+            10.38599171272864,
+            12.10003089904785
+        ],
+        "start_rotation": [
+            -0.0744615602180973,
+            0.0,
+            0.0,
+            -0.9972238846166325
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_bag",
+        "instruction": "Start inside a shop facing a doorway, with white shelving on your right and a counter on your left. Move forward and exit through the doorway onto the paved street. Once outside, turn left, keeping the building with the large dark billboard on your left. Follow the sidewalk forward, passing a green dumpster and a grey trash bin on your left. Continue straight ahead until you reach a large black trash bag on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_bag_18",
+                "type": "object",
+                "location": [
+                    -207.14126832129804,
+                    9.123604136580186,
+                    12.568430190225333
+                ],
+                "radius": 0.474999974537619,
+                "path_length": 25.727992131706614,
+                "reference_path": [
+                    [
+                        -184.25547790527344,
+                        4.350421905517578,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.61026000976562,
+                        10.547935485839844,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -189.3102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -206.62672424316406,
+                        9.380877494812012,
+                        12.200029373168945
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -184.25547640617484,
+            4.3504219663004156,
+            12.10003089904785
+        ],
+        "start_rotation": [
+            0.2735917336557855,
+            0.0,
+            0.0,
+            0.9618459145181321
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "hiking_bag",
+        "instruction": "Start on the paved surface, turning slightly right to face the dark, towering buildings lining the street. Move straight ahead, following the road parallel to these structures. You will pass several parked ambulances; first, a white one with blue and red stripes on your left, and then another white ambulance with a red cross symbol further down on your right. Continue forward past these vehicles towards the dark shadowed area ahead. You will arrive at the blue hiking bag sitting on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/hiking_bag_29",
+                "type": "object",
+                "location": [
+                    -231.66295232911745,
+                    19.637712070915626,
+                    12.6525963227853
+                ],
+                "radius": 0.32499999091663767,
+                "path_length": 43.649259359157234,
+                "reference_path": [
+                    [
+                        -188.4085235595703,
+                        10.999011993408203,
+                        12.100030899047852
+                    ],
+                    [
+                        -231.21575927734375,
+                        19.525917053222656,
+                        12.400030136108398
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.40852703457153,
+            10.999012006595196,
+            12.100030899047853
+        ],
+        "start_rotation": [
+            -0.0771758305032185,
+            0.0,
+            0.0,
+            0.9970174979337817
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "hiking_bag",
+        "instruction": "Start at the position shown, facing down the road with dark, textured buildings on your left and white ambulances parked on your right. Move forward along the road, keeping the row of ambulances to your right. Continue straight ahead as you pass the first few ambulances. As you proceed, angle slightly towards the left side of the road, approaching the dark building facade. You will arrive at the hiking_bag, which is sitting on the ground near the building wall.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/hiking_bag_29",
+                "type": "object",
+                "location": [
+                    -231.66295232911745,
+                    19.637712070915626,
+                    12.6525963227853
+                ],
+                "radius": 0.32499999091663767,
+                "path_length": 43.705791999509216,
+                "reference_path": [
+                    [
+                        -188.41262817382812,
+                        10.69426441192627,
+                        12.100030899047852
+                    ],
+                    [
+                        -231.21575927734375,
+                        19.525917053222656,
+                        12.400030136108398
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.41262965649494,
+            10.69426401700772,
+            12.10003089904785
+        ],
+        "start_rotation": [
+            0.2524063145765152,
+            0.0,
+            0.0,
+            0.9676213372812225
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ale_bottle",
+        "instruction": "Move forward across the dark speckled floor, heading out the open doorway. Once outside, follow the paved road straight ahead. You will pass a white and red ambulance parked on the left and a red car parked further down on the right. Continue moving forward down the street, keeping the tall, dark building on your left. You will arrive at the ale bottle sitting on the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ale_bottle_34",
+                "type": "object",
+                "location": [
+                    -186.80606878973845,
+                    19.31741401200666,
+                    12.366423710368542
+                ],
+                "radius": 0.15999999588430036,
+                "path_length": 15.558437250247842,
+                "reference_path": [
+                    [
+                        -187.74667358398438,
+                        3.766247034072876,
+                        12.153724670410156
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -186.50985717773438,
+                        19.19891929626465,
+                        12.250225067138672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -187.746678936073,
+            3.7662470096348777,
+            12.153724634171889
+        ],
+        "start_rotation": [
+            0.7430501738296571,
+            0.0,
+            0.0,
+            0.6692357127139259
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Start by moving away from the white cabinet and bookshelf, heading towards the open plaza. Turn slightly left to face the street lined with tall, greenish-grey buildings covered in large advertisements. Follow the road straight ahead, keeping the dark, shadowed storefronts on your right. Continue forward, passing a red sports car parked in the distance on the left. Keep moving along the sidewalk next to the building facade featuring large window graphics of food and dining. You will arrive at the restaurant with the graphic window display on your right.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_6",
+                "type": "object",
+                "location": [
+                    -144.67573780724342,
+                    21.64014596779998,
+                    14.318858845076004
+                ],
+                "radius": 3.6924396746957058,
+                "path_length": 48.71769997488412,
+                "reference_path": [
+                    [
+                        -188.2393035888672,
+                        10.053165435791016,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -185.8102569580078,
+                        12.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -166.21026611328125,
+                        22.547935485839844,
+                        12.300027847290039
+                    ],
+                    [
+                        -160.21026611328125,
+                        25.547935485839844,
+                        12.500028610229492
+                    ],
+                    [
+                        -156.8102569580078,
+                        25.84793472290039,
+                        12.700029373168945
+                    ],
+                    [
+                        -155.61026000976562,
+                        25.84793472290039,
+                        12.500028610229492
+                    ],
+                    [
+                        -144.336669921875,
+                        22.966907501220703,
+                        12.625290870666504
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.2393062117701,
+            10.053165820366463,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.8846268760859844,
+            0.0,
+            0.0,
+            0.4662995712054134
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Walk down the wide street, keeping the tall, dark buildings on your right and the storefronts on your left. Head towards the green garbage truck parked further down the road. As you approach, you will pass an ambulance parked on the right and a trash can near the curb. Continue moving forward along the pavement, focusing on the back of the green truck. You will arrive at the garbage_truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_6",
+                "type": "object",
+                "location": [
+                    -234.22581106955255,
+                    -2.7717837057057886,
+                    13.5547528541086
+                ],
+                "radius": 4.03877212789827,
+                "path_length": 37.35010454960109,
+                "reference_path": [
+                    [
+                        -195.5010223388672,
+                        8.8546781539917,
+                        12.114350318908691
+                    ],
+                    [
+                        -223.01025390625,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -231.36842346191406,
+                        -0.7306305766105652,
+                        11.900030136108398
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -195.50102928858794,
+            8.854678423371006,
+            12.114350167290846
+        ],
+        "start_rotation": [
+            -0.005474902835362162,
+            0.0,
+            0.0,
+            -0.9999850126071607
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "sports_jacket",
+        "instruction": "Beginning on the paved sidewalk, proceed straight ahead. To your left, you will pass a brick storefront with a black awning, while an ambulance is parked on the street to your right. Continue moving forward, keeping the green garbage truck straight ahead in your view. Follow the path directly towards the truck. As you get closer, you will see a black sports jacket lying on the ground. You will arrive at the sports_jacket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/sports_jacket_23",
+                "type": "object",
+                "location": [
+                    -222.60419349291286,
+                    0.7188716084150021,
+                    12.41441437208833
+                ],
+                "radius": 0.8463290098854941,
+                "path_length": 32.11303313647324,
+                "reference_path": [
+                    [
+                        -195.22669982910156,
+                        10.798959732055664,
+                        12.116242408752441
+                    ],
+                    [
+                        -223.01025390625,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.41026306152344,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.61026000976562,
+                        -0.05206298828125,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.7102508544922,
+                        0.44793701171875,
+                        12.000028610229492
+                    ],
+                    [
+                        -222.9320831298828,
+                        1.1063878536224365,
+                        12.000028610229492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -195.22670326195353,
+            10.798959743340776,
+            12.116242224900509
+        ],
+        "start_rotation": [
+            0.26201264843978656,
+            0.0,
+            0.0,
+            -0.9650644393290889
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_bag",
+        "instruction": "Start from the wide paved area, keeping the large, dark building with many windows on your right. Follow the sidewalk forward, passing the green truck parked further down on the left. Continue straight ahead towards the ambulances parked in the distance. As you proceed, you will see a grey trash bin on your left. Move past it, and you will arrive at the black trash bag sitting on the ground next to the bin.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_bag_18",
+                "type": "object",
+                "location": [
+                    -207.14126832129804,
+                    9.123604136580186,
+                    12.568430190225333
+                ],
+                "radius": 0.474999974537619,
+                "path_length": 17.99516316066624,
+                "reference_path": [
+                    [
+                        -188.6858673095703,
+                        10.761063575744629,
+                        12.100030899047852
+                    ],
+                    [
+                        -189.3102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -206.62672424316406,
+                        9.380877494812012,
+                        12.200029373168945
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.68586471536562,
+            10.761063675982463,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            -0.15988761415959282,
+            0.0,
+            0.0,
+            -0.987135224190867
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "soccer_ball",
+        "instruction": "Turn left slightly and head straight down the paved road, keeping the dark, tall buildings on your right and the brick storefronts on your left. As you move forward, you will pass a green truck on the left side of the street and a white ambulance parked further down on the right. Continue towards the green truck. Just before you reach the truck, turn slightly right. You will arrive at the soccer ball near a figure on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/soccer_ball_22",
+                "type": "object",
+                "location": [
+                    -223.40056565935325,
+                    0.1767707229157636,
+                    12.089414374037919
+                ],
+                "radius": 0.20907480933712463,
+                "path_length": 32.608322311575094,
+                "reference_path": [
+                    [
+                        -193.03244018554688,
+                        10.182723045349121,
+                        12.11362075805664
+                    ],
+                    [
+                        -223.01025390625,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.41026306152344,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.61026000976562,
+                        -0.05206298828125,
+                        12.000028610229492
+                    ],
+                    [
+                        -223.6461944580078,
+                        0.12764714658260345,
+                        12.000028610229492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -193.03243549255444,
+            10.182722876074353,
+            12.113620976124217
+        ],
+        "start_rotation": [
+            0.04932908727531747,
+            0.0,
+            0.0,
+            -0.998782579517977
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "recycling_bin",
+        "instruction": "Starting from the interior with a metal shelving unit on your right and a potted plant ahead on the left, move forward across the dark speckled floor towards the open doorway. Pass through the doorway to exit the building. Once outside on the paved ground, continue forward, moving past a white and red ambulance parked on the left. You will see a large grey recycling bin ahead. Approach the bin; you will arrive at the recycling bin.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_11",
+                "type": "object",
+                "location": [
+                    -157.1096494165046,
+                    27.045849494794417,
+                    13.001824519687968
+                ],
+                "radius": 0.5500000105366531,
+                "path_length": 44.199692063959624,
+                "reference_path": [
+                    [
+                        -184.05111694335938,
+                        3.1081604957580566,
+                        12.100030899047852
+                    ],
+                    [
+                        -184.11026000976562,
+                        3.8479347229003906,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -185.8102569580078,
+                        12.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -166.21026611328125,
+                        22.547935485839844,
+                        12.300027847290039
+                    ],
+                    [
+                        -160.21026611328125,
+                        25.547935485839844,
+                        12.500028610229492
+                    ],
+                    [
+                        -156.8102569580078,
+                        26.247936248779297,
+                        12.700029373168945
+                    ],
+                    [
+                        -156.54054260253906,
+                        26.571592330932617,
+                        12.592143058776855
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_33",
+                "type": "object",
+                "location": [
+                    -187.9880833798529,
+                    18.99989112944965,
+                    12.756423726710604
+                ],
+                "radius": 0.5500000105366531,
+                "path_length": 16.37949398165026,
+                "reference_path": [
+                    [
+                        -184.05111694335938,
+                        3.1081604957580566,
+                        12.100030899047852
+                    ],
+                    [
+                        -184.11026000976562,
+                        3.8479347229003906,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.523193359375,
+                        18.535003662109375,
+                        12.200029373168945
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -184.05112003387669,
+            3.1081605544946496,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.5246618876783867,
+            0.0,
+            0.0,
+            0.8513106974646518
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "Start facing the street with ambulances to your left and right. Turn slightly left and move down the wide, paved road, keeping the dark buildings and the white and red ambulance on your right. As you proceed, a green dumpster truck becomes visible further down the road on the left. Continue straight ahead, passing the white trailer-like vehicle on your right. Keep moving forward along the pavement until you reach a large puddle reflecting the surroundings on the ground near the green truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_46",
+                "type": "object",
+                "location": [
+                    -214.94517019217585,
+                    4.195585091204822,
+                    12.027117857525798
+                ],
+                "radius": 7.998484320343593,
+                "path_length": 27.627996647200526,
+                "reference_path": [
+                    [
+                        -188.14437866210938,
+                        10.68523120880127,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -189.3102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -214.94517517089844,
+                        4.195585250854492,
+                        12.027117729187012
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.144381570215,
+            10.685231016925448,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.21302308097248826,
+            0.0,
+            0.0,
+            0.9770471672201853
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "recycling_bin",
+        "instruction": "Go straight down the sidewalk, keeping the large, dark building to your left and the white ambulance parked nearby. As you proceed, you'll see a white electrical box in front of you. Aim towards the right side of this box. Continue past the box, and you will arrive at the brown recycling bin situated on the sidewalk just ahead.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_11",
+                "type": "object",
+                "location": [
+                    -157.1096494165046,
+                    27.045849494794417,
+                    13.001824519687968
+                ],
+                "radius": 0.5500000105366531,
+                "path_length": 35.25553389853851,
+                "reference_path": [
+                    [
+                        -187.9252166748047,
+                        11.111446380615234,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -185.8102569580078,
+                        12.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -166.21026611328125,
+                        22.547935485839844,
+                        12.300027847290039
+                    ],
+                    [
+                        -160.21026611328125,
+                        25.547935485839844,
+                        12.500028610229492
+                    ],
+                    [
+                        -156.8102569580078,
+                        26.247936248779297,
+                        12.700029373168945
+                    ],
+                    [
+                        -156.54054260253906,
+                        26.571592330932617,
+                        12.592143058776855
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/recycling_bin_33",
+                "type": "object",
+                "location": [
+                    -187.9880833798529,
+                    18.99989112944965,
+                    12.756423726710604
+                ],
+                "radius": 0.5500000105366531,
+                "path_length": 7.43511064109392,
+                "reference_path": [
+                    [
+                        -187.9252166748047,
+                        11.111446380615234,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.523193359375,
+                        18.535003662109375,
+                        12.200029373168945
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -187.92521970405647,
+            11.111446242092432,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.8542378606960542,
+            0.0,
+            0.0,
+            0.5198823687656936
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start on the sidewalk, keeping the tall, dark buildings to your right. Continue straight ahead, following the pavement, passing a white ambulance parked further down on the right. As you proceed, a green dumpster truck becomes visible directly ahead. Move towards it, slightly adjusting your path to the right as you get closer. You will arrive at the rear of the green garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_6",
+                "type": "object",
+                "location": [
+                    -234.22581106955255,
+                    -2.7717837057057886,
+                    13.5547528541086
+                ],
+                "radius": 4.03877212789827,
+                "path_length": 44.93653694056154,
+                "reference_path": [
+                    [
+                        -188.19677734375,
+                        10.720061302185059,
+                        12.100030899047852
+                    ],
+                    [
+                        -188.8102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -189.3102569580078,
+                        10.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -223.01025390625,
+                        -0.25206756591796875,
+                        12.000028610229492
+                    ],
+                    [
+                        -231.36842346191406,
+                        -0.7306305766105652,
+                        11.900030136108398
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.19677208641428,
+            10.720061744482685,
+            12.100030899047853
+        ],
+        "start_rotation": [
+            -0.018059517003170048,
+            0.0,
+            0.0,
+            0.9998369136242231
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 17,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cargo_pallet",
+        "instruction": "Move forward down the road, heading straight towards the white ambulance parked in the distance. To your left are tall, dark, weathered buildings, and to your right is an open plaza area leading to lighter-colored structures draped in large advertisements. As you proceed, a bright red futuristic car will become more prominent further down the street on the right. Continue straight until you reach the wooden cargo pallet lying on the ground in the middle of the road.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cargo_pallet_5",
+                "type": "object",
+                "location": [
+                    -182.06587022922236,
+                    24.880021570104134,
+                    12.50970339815676
+                ],
+                "radius": 0.7389615851236755,
+                "path_length": 16.474613593255828,
+                "reference_path": [
+                    [
+                        -188.4084014892578,
+                        10.407784461975098,
+                        12.100030899047852
+                    ],
+                    [
+                        -183.11026000976562,
+                        25.247936248779297,
+                        12.200029373168945
+                    ],
+                    [
+                        -182.49114990234375,
+                        25.609079360961914,
+                        12.200029373168945
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.40840314530442,
+            10.407784258572592,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.8626085904673332,
+            0.0,
+            0.0,
+            0.5058719399729151
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 18,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Walk forward along the sidewalk, keeping the tall buildings on your left. As you proceed, you will pass a red car parked on the street to your left. Continue straight ahead, following the path beside the storefronts, which include a brick building with a \"MORTGAGES\" sign. Keep moving forward along the storefronts, passing windows displaying food images, until you arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_6",
+                "type": "object",
+                "location": [
+                    -144.67573780724342,
+                    21.64014596779998,
+                    14.318858845076004
+                ],
+                "radius": 3.6924396746957058,
+                "path_length": 48.63159094923694,
+                "reference_path": [
+                    [
+                        -188.29483032226562,
+                        10.160808563232422,
+                        12.100030899047852
+                    ],
+                    [
+                        -187.91024780273438,
+                        11.247936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -185.8102569580078,
+                        12.747936248779297,
+                        12.100030899047852
+                    ],
+                    [
+                        -166.21026611328125,
+                        22.547935485839844,
+                        12.300027847290039
+                    ],
+                    [
+                        -160.21026611328125,
+                        25.547935485839844,
+                        12.500028610229492
+                    ],
+                    [
+                        -156.8102569580078,
+                        25.84793472290039,
+                        12.700029373168945
+                    ],
+                    [
+                        -155.61026000976562,
+                        25.84793472290039,
+                        12.500028610229492
+                    ],
+                    [
+                        -144.336669921875,
+                        22.966907501220703,
+                        12.625290870666504
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -188.29482890703989,
+            10.160808252972807,
+            12.100030899047852
+        ],
+        "start_rotation": [
+            0.9349326444807449,
+            0.0,
+            0.0,
+            0.3548252390744506
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    },
+    {
+        "scene_id": "innout_barcelona",
+        "scene_type": "innout",
+        "episode_id": 19,
+        "path": "vc_plus/BARCELONA/BARCELONA_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ale_bottle",
+        "instruction": "Head straight along the sidewalk, keeping the large, dark green building on your right and the street on your left. In the distance, you will see a bright red car parked further down the road and a large building with faded green and white advertising murals on the left. Continue moving forward, passing a grey concrete trash receptacle near the curb. As you proceed, you will arrive at the ale_bottle on the ground near the edge of the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ale_bottle_34",
+                "type": "object",
+                "location": [
+                    -186.80606878973845,
+                    19.31741401200666,
+                    12.366423710368542
+                ],
+                "radius": 0.15999999588430036,
+                "path_length": 14.498059828813433,
+                "reference_path": [
+                    [
+                        -197.44610595703125,
+                        9.7350435256958,
+                        12.13623332977295
+                    ],
+                    [
+                        -186.61026000976562,
+                        18.94793701171875,
+                        12.200029373168945
+                    ],
+                    [
+                        -186.50985717773438,
+                        19.19891929626465,
+                        12.250225067138672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -197.44610876859682,
+            9.735043937282521,
+            12.136233599305987
+        ],
+        "start_rotation": [
+            0.9304102204772592,
+            0.0,
+            0.0,
+            0.36651987890352944
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene6"
+    }
+]

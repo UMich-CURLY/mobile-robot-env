@@ -1,0 +1,1425 @@
+[
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pharmacy_2",
+        "instruction": "Follow the road towards the \"SOPHIE'S TRATTORIA\" storefront, passing a stone building covered in green vines on your left. Continue straight ahead, keeping the large, multi-story grey building on your left. As you proceed, the road curves slightly; maintain your course along the street, passing the storefront with arched windows. Eventually, you will approach a modern white storefront labeled \"URBAN PEDAL\" on your left. This is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/pharmacy_2_2",
+                "type": "object",
+                "location": [
+                    -260.0980131313039,
+                    145.6929714342332,
+                    88.44099904296684
+                ],
+                "radius": 3.638607841506172,
+                "path_length": 72.97352386459738,
+                "reference_path": [
+                    [
+                        -227.63473510742188,
+                        170.5845947265625,
+                        89.01696014404297
+                    ],
+                    [
+                        -214.73251342773438,
+                        150.00015258789062,
+                        88.0
+                    ],
+                    [
+                        -214.73251342773438,
+                        148.50015258789062,
+                        87.9000015258789
+                    ],
+                    [
+                        -217.73251342773438,
+                        145.50015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        -219.23251342773438,
+                        145.50015258789062,
+                        87.80000305175781
+                    ],
+                    [
+                        -253.73251342773438,
+                        150.00015258789062,
+                        87.0
+                    ],
+                    [
+                        -255.23251342773438,
+                        150.00015258789062,
+                        87.0
+                    ],
+                    [
+                        -260.0980224609375,
+                        148.50015258789062,
+                        86.65672302246094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -227.63473517069315,
+            170.58459737933012,
+            89.01695741210585
+        ],
+        "start_rotation": [
+            0.8007612171246486,
+            0.0,
+            0.0,
+            -0.5989837002365351
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_0",
+        "instruction": "Head straight towards the dark, monolithic building ahead. As you approach the massive black structure, veer slightly right, aiming for the small, illuminated storefront embedded in its base. Continue forward across the open pavement, keeping the dark building on your right. You will see a small brick storefront with large glass windows and a sign reading \"APEX COMMUNITY BANK.\" Approach the double doors to arrive at the bank.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_0_3",
+                "type": "object",
+                "location": [
+                    2.7737675097313312,
+                    298.63376571289933,
+                    87.78334105374002
+                ],
+                "radius": 3.611008603092129,
+                "path_length": 65.61736455514294,
+                "reference_path": [
+                    [
+                        -30.52066993713379,
+                        354.4156188964844,
+                        87.60848999023438
+                    ],
+                    [
+                        -31.732513427734375,
+                        354.0001525878906,
+                        87.5
+                    ],
+                    [
+                        -31.732513427734375,
+                        352.5001525878906,
+                        87.5
+                    ],
+                    [
+                        -30.232513427734375,
+                        351.0001525878906,
+                        87.5
+                    ],
+                    [
+                        -13.732513427734375,
+                        336.0001525878906,
+                        86.9000015258789
+                    ],
+                    [
+                        -12.232513427734375,
+                        334.5001525878906,
+                        86.9000015258789
+                    ],
+                    [
+                        -10.732513427734375,
+                        331.5001525878906,
+                        86.80000305175781
+                    ],
+                    [
+                        -7.732513427734375,
+                        324.0001525878906,
+                        87.0
+                    ],
+                    [
+                        2.7737674713134766,
+                        301.5001525878906,
+                        86.16638946533203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -30.520670540258312,
+            354.4156186585295,
+            87.60848772165977
+        ],
+        "start_rotation": [
+            0.34108252873807376,
+            0.0,
+            0.0,
+            -0.9400333550410013
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start in the middle of a large, empty square surrounded by tall, dark grey apartment buildings with many windows. Move forward across the open pavement towards the center of the block. As you advance, you will see a white ambulance-style vehicle parked in the distance. Continue moving straight, passing the vehicle on your right. Keep heading towards the building facade directly ahead. As you get closer, you will see a small, white shop front labeled \"QUICK STOP MART\" embedded in the dark building. Continue straight until you arrive directly in front of the Quick Stop Mart's glass windows and door.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -288.45120453708626,
+                    154.07589465048284,
+                    87.24672166041947
+                ],
+                "radius": 3.647469208252488,
+                "path_length": 79.29346365048299,
+                "reference_path": [
+                    [
+                        -242.29156494140625,
+                        207.70677185058594,
+                        89.53138732910156
+                    ],
+                    [
+                        -259.7325134277344,
+                        190.50015258789062,
+                        88.0
+                    ],
+                    [
+                        -268.7325134277344,
+                        186.00015258789062,
+                        87.30000305175781
+                    ],
+                    [
+                        -271.7325134277344,
+                        186.00015258789062,
+                        87.0999984741211
+                    ],
+                    [
+                        -274.7325134277344,
+                        187.50015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        -277.7325134277344,
+                        187.50015258789062,
+                        86.70000457763672
+                    ],
+                    [
+                        -280.7325134277344,
+                        186.00015258789062,
+                        86.5
+                    ],
+                    [
+                        -285.2325134277344,
+                        181.50015258789062,
+                        86.0999984741211
+                    ],
+                    [
+                        -286.7325134277344,
+                        156.00015258789062,
+                        85.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -242.29156004636556,
+            207.70677367819442,
+            89.53138879519736
+        ],
+        "start_rotation": [
+            0.32403352712913924,
+            0.0,
+            0.0,
+            -0.9460455978948633
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_6",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_6_5",
+                "type": "object",
+                "location": [
+                    -318.62185591287056,
+                    220.33140869434246,
+                    88.29682712111799
+                ],
+                "radius": 3.34991586879687,
+                "path_length": 10.086483448335711,
+                "reference_path": [
+                    [
+                        -326.21923828125,
+                        229.72357177734375,
+                        86.41000366210938
+                    ],
+                    [
+                        -319.7325134277344,
+                        222.00015258789062,
+                        86.5
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -326.21922705804144,
+            229.72357589010824,
+            86.4100013205132
+        ],
+        "start_rotation": [
+            0.8125269647194854,
+            0.0,
+            0.0,
+            -0.5829236070050176
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "With the \"Quick Stop Mart\" sign behind you, proceed straight down the long road. Continue forward, passing the white van on your left. Keep moving straight along the street, with tall, grey buildings lining both sides. As you approach the end of the block, look for a building with large glass windows and people visible inside on your left. You will arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_4",
+                "type": "object",
+                "location": [
+                    -108.72346097349487,
+                    121.94020484909069,
+                    88.02684441532303
+                ],
+                "radius": 3.514299999481416,
+                "path_length": 85.14214832644555,
+                "reference_path": [
+                    [
+                        -193.99581909179688,
+                        138.99005126953125,
+                        87.5
+                    ],
+                    [
+                        -193.73251342773438,
+                        138.00015258789062,
+                        87.5
+                    ],
+                    [
+                        -186.23251342773438,
+                        135.00015258789062,
+                        87.30000305175781
+                    ],
+                    [
+                        -147.23251342773438,
+                        121.50015258789062,
+                        86.9000015258789
+                    ],
+                    [
+                        -132.23251342773438,
+                        120.00015258789062,
+                        86.70000457763672
+                    ],
+                    [
+                        -127.73251342773438,
+                        120.00015258789062,
+                        86.5999984741211
+                    ],
+                    [
+                        -121.73251342773438,
+                        121.50015258789062,
+                        86.5
+                    ],
+                    [
+                        -115.73251342773438,
+                        121.50015258789062,
+                        86.4000015258789
+                    ],
+                    [
+                        -112.73251342773438,
+                        121.50015258789062,
+                        86.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -193.9958176814276,
+            138.99005159750092,
+            87.49999999999999
+        ],
+        "start_rotation": [
+            0.6672564075437023,
+            0.0,
+            0.0,
+            -0.7448280919728207
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_8",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_8_2",
+                "type": "object",
+                "location": [
+                    -71.69944786353084,
+                    416.2756020410966,
+                    90.70851174537097
+                ],
+                "radius": 3.615330873590551,
+                "path_length": 49.63855619482149,
+                "reference_path": [
+                    [
+                        -34.61964797973633,
+                        417.8858337402344,
+                        88.95637512207031
+                    ],
+                    [
+                        -48.232513427734375,
+                        424.5001525878906,
+                        89.5999984741211
+                    ],
+                    [
+                        -57.232513427734375,
+                        426.0001525878906,
+                        89.80000305175781
+                    ],
+                    [
+                        -72.23251342773438,
+                        426.0001525878906,
+                        90.4000015258789
+                    ],
+                    [
+                        -73.73251342773438,
+                        424.5001525878906,
+                        90.4000015258789
+                    ],
+                    [
+                        -73.73251342773438,
+                        416.2756042480469,
+                        90.08668518066406
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -34.61964659351507,
+            417.88582805367605,
+            88.95637439302084
+        ],
+        "start_rotation": [
+            0.19055754158710822,
+            0.0,
+            0.0,
+            0.9816760276915585
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_2",
+        "instruction": "From your starting position on the road, with a tall monument to your right and a distant green vehicle ahead, proceed forward. Continue moving towards the large building on the left, which has a distinct \"CAPITAL TRUST BANK\" sign. As you get closer to the structure, make a slight left turn to align with the storefront. You will arrive directly in front of the bank entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_2_1",
+                "type": "object",
+                "location": [
+                    37.629861797755254,
+                    349.9888826034473,
+                    87.26414943912309
+                ],
+                "radius": 3.6242639002145793,
+                "path_length": 48.22056167073699,
+                "reference_path": [
+                    [
+                        31.373218536376953,
+                        308.1592102050781,
+                        84.94393920898438
+                    ],
+                    [
+                        32.767486572265625,
+                        309.0001525878906,
+                        85.0
+                    ],
+                    [
+                        46.267486572265625,
+                        339.0001525878906,
+                        85.0
+                    ],
+                    [
+                        46.267486572265625,
+                        340.5001525878906,
+                        84.9000015258789
+                    ],
+                    [
+                        44.767486572265625,
+                        342.0001525878906,
+                        85.0
+                    ],
+                    [
+                        35.767486572265625,
+                        346.5001525878906,
+                        85.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            31.3732178743228,
+            308.159205159946,
+            84.94393769359297
+        ],
+        "start_rotation": [
+            0.9790288679149096,
+            0.0,
+            0.0,
+            0.2037215643697311
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_6",
+                "type": "object",
+                "location": [
+                    -214.3617620717322,
+                    132.28145961305398,
+                    89.49737829501976
+                ],
+                "radius": 3.6031893297001147,
+                "path_length": 24.87048291813077,
+                "reference_path": [
+                    [
+                        -197.47186279296875,
+                        113.25216674804688,
+                        87.0999984741211
+                    ],
+                    [
+                        -214.73251342773438,
+                        129.00015258789062,
+                        87.5999984741211
+                    ],
+                    [
+                        -214.73251342773438,
+                        130.50015258789062,
+                        87.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -197.4718553444402,
+            113.25216543996254,
+            87.09999847412111
+        ],
+        "start_rotation": [
+            0.36998781112706974,
+            0.0,
+            0.0,
+            0.9290366083300484
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_2",
+        "instruction": "Move forward along the road, passing a large brown building with illuminated windows on your right and a dark container-like structure on your left. Continue straight, passing an ambulance parked near the building's corner. As the road curves slightly left, follow it past a large billboard featuring a stylized logo on the left. Continue forward until you reach the corner of the building where the large white wall meets the storefronts; you will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_2_5",
+                "type": "object",
+                "location": [
+                    -18.23899998011197,
+                    318.1312104268545,
+                    89.19807386505826
+                ],
+                "radius": 3.615973127031628,
+                "path_length": 90.07809570816298,
+                "reference_path": [
+                    [
+                        47.14356231689453,
+                        265.0878601074219,
+                        84.37251281738281
+                    ],
+                    [
+                        37.267486572265625,
+                        288.0001525878906,
+                        84.70000457763672
+                    ],
+                    [
+                        35.767486572265625,
+                        289.5001525878906,
+                        84.9000015258789
+                    ],
+                    [
+                        -15.232513427734375,
+                        321.0001525878906,
+                        87.20000457763672
+                    ],
+                    [
+                        -18.23900032043457,
+                        321.0001525878906,
+                        87.26681518554688
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            47.14356422211689,
+            265.0878661526755,
+            84.37251618293068
+        ],
+        "start_rotation": [
+            0.5164066524052364,
+            0.0,
+            0.0,
+            0.8563434879483918
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Follow the road straight towards the tall building with the large wine bottle mural. As you get closer to the intersection, slightly veer right past the building corner with the green vegetation. Continue forward down the street lined with tall, dark buildings on your right. Keep going until you see a small shop labeled \"Quick Stop Mart\" with white brick walls on your right; you will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_3",
+                "type": "object",
+                "location": [
+                    -194.81106469068578,
+                    125.96548326797185,
+                    89.2692921108169
+                ],
+                "radius": 3.64354164955283,
+                "path_length": 58.438842380971955,
+                "reference_path": [
+                    [
+                        -225.46434020996094,
+                        116.15911865234375,
+                        87.3845443725586
+                    ],
+                    [
+                        -226.73251342773438,
+                        132.00015258789062,
+                        87.5999984741211
+                    ],
+                    [
+                        -226.73251342773438,
+                        139.50015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        -225.23251342773438,
+                        141.00015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        -223.73251342773438,
+                        141.00015258789062,
+                        87.9000015258789
+                    ],
+                    [
+                        -196.73251342773438,
+                        130.50015258789062,
+                        87.5
+                    ],
+                    [
+                        -194.81106567382812,
+                        129.00015258789062,
+                        87.46797943115234
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_2",
+                "type": "object",
+                "location": [
+                    -288.45120453708626,
+                    154.07589465048284,
+                    87.24672166041947
+                ],
+                "radius": 3.647469208252488,
+                "path_length": 86.00376405479565,
+                "reference_path": [
+                    [
+                        -225.46434020996094,
+                        116.15911865234375,
+                        87.3845443725586
+                    ],
+                    [
+                        -231.23251342773438,
+                        139.50015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        -232.73251342773438,
+                        141.00015258789062,
+                        87.70000457763672
+                    ],
+                    [
+                        -249.23251342773438,
+                        156.00015258789062,
+                        87.0999984741211
+                    ],
+                    [
+                        -286.7325134277344,
+                        156.00015258789062,
+                        85.5999984741211
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -225.46434766174542,
+            116.15912004576832,
+            87.38454614611216
+        ],
+        "start_rotation": [
+            0.7569408776662462,
+            0.0,
+            0.0,
+            0.6534833645303091
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    -103.16864639193066,
+                    98.08520350044529,
+                    86.70802073597379
+                ],
+                "radius": 3.6321316847917444,
+                "path_length": 22.68913678632289,
+                "reference_path": [
+                    [
+                        -122.70784759521484,
+                        81.69630432128906,
+                        85.18213653564453
+                    ],
+                    [
+                        -121.73251342773438,
+                        82.50015258789062,
+                        85.20000457763672
+                    ],
+                    [
+                        -114.23251342773438,
+                        90.00015258789062,
+                        85.20000457763672
+                    ],
+                    [
+                        -105.23251342773438,
+                        96.00015258789062,
+                        85.0
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -122.70784846712468,
+            81.69630491114314,
+            85.18214020564304
+        ],
+        "start_rotation": [
+            0.9272237048933771,
+            0.0,
+            0.0,
+            0.3745079452879464
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_0",
+        "instruction": "Proceed straight ahead, following the paved ground. You will pass between stone walls on your left and a building with white stone bricks on your right. As you continue forward, you will move through a narrow alleyway flanked by weathered wooden beams and stone structures. Keep going until you exit this narrow passage. You will arrive at the bicycle rental area, marked by a metallic vending machine-like structure on your right.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_0_3",
+                "type": "object",
+                "location": [
+                    -65.91504139848158,
+                    266.7531805915841,
+                    90.7085592702367
+                ],
+                "radius": 3.657092182064609,
+                "path_length": 11.872696770951299,
+                "reference_path": [
+                    [
+                        -77.1453857421875,
+                        267.0635070800781,
+                        89.24541473388672
+                    ],
+                    [
+                        -70.73251342773438,
+                        270.0001525878906,
+                        89.30000305175781
+                    ],
+                    [
+                        -65.9150390625,
+                        270.0001525878906,
+                        89.1715316772461
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -77.145382897067,
+            267.06352092538776,
+            89.2454164461479
+        ],
+        "start_rotation": [
+            0.986026581035799,
+            0.0,
+            0.0,
+            0.16658805926852305
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_0_2",
+                "type": "object",
+                "location": [
+                    -221.80260022863143,
+                    102.8844525094054,
+                    89.2503053032162
+                ],
+                "radius": 3.5806653515723994,
+                "path_length": 19.185936780161175,
+                "reference_path": [
+                    [
+                        -200.4261474609375,
+                        99.09625244140625,
+                        87.0
+                    ],
+                    [
+                        -219.23251342773438,
+                        102.88445281982422,
+                        87.26473999023438
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -200.42614185504254,
+            99.09625362939282,
+            87.0
+        ],
+        "start_rotation": [
+            0.008771088004539315,
+            0.0,
+            0.0,
+            0.9999615332677636
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_8",
+        "instruction": "Start facing the multi-story grey building with horizontal dark stripes. Follow the dark asphalt road, turning slightly left to keep the building on your right side. Continue moving forward along the side of this building as you approach the storefront on the corner. You will arrive at the \"Harvest & Hearth\" shop, identifiable by its wooden facade and sign above the window.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_8_2",
+                "type": "object",
+                "location": [
+                    -71.69944786353084,
+                    416.2756020410966,
+                    90.70851174537097
+                ],
+                "radius": 3.615330873590551,
+                "path_length": 42.75083485858004,
+                "reference_path": [
+                    [
+                        -80.950927734375,
+                        374.4014892578125,
+                        89.68122863769531
+                    ],
+                    [
+                        -76.73251342773438,
+                        406.5001525878906,
+                        90.0
+                    ],
+                    [
+                        -75.23251342773438,
+                        414.0001525878906,
+                        90.0999984741211
+                    ],
+                    [
+                        -73.73251342773438,
+                        416.2756042480469,
+                        90.08668518066406
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -80.95092600303424,
+            374.40149072210795,
+            89.6812316529884
+        ],
+        "start_rotation": [
+            0.862828944344357,
+            0.0,
+            0.0,
+            0.5054960067118262
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "Start by moving forward down the road, keeping the dark, multi-story buildings on your right. As you proceed, you'll see a distinct storefront emerge on the right side of the street, labeled \"Nonna's Trattoria,\" with a green and white striped awning and brick facade. Continue along the road until you are directly in front of this shop. Finally, turn right towards the entrance, and you will arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_6",
+                "type": "object",
+                "location": [
+                    -214.3617620717322,
+                    132.28145961305398,
+                    89.49737829501976
+                ],
+                "radius": 3.6031893297001147,
+                "path_length": 41.97381709677905,
+                "reference_path": [
+                    [
+                        -249.3961181640625,
+                        157.29002380371094,
+                        87.14299774169922
+                    ],
+                    [
+                        -214.73251342773438,
+                        136.50015258789062,
+                        87.80000305175781
+                    ],
+                    [
+                        -214.36175537109375,
+                        135.00015258789062,
+                        87.70000457763672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -249.396111753606,
+            157.29002086305564,
+            87.14299670753698
+        ],
+        "start_rotation": [
+            0.9994276302884005,
+            0.0,
+            0.0,
+            -0.03382915630210525
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_1",
+        "instruction": "Start by driving straight towards the large, pale building with a dome on top. As you approach the intersection where a white car is turning, turn left onto the main road lined with tall, grey apartment buildings on your left and a modern skyscraper ahead in the distance. Continue following the road straight past the \"Trattoria Luna\" storefront. You will eventually arrive at \"The Alchemist's Flask,\" a stone building with arched windows on your right.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_1_5",
+                "type": "object",
+                "location": [
+                    -2.6309512313761765,
+                    141.51649493208507,
+                    84.17207629687061
+                ],
+                "radius": 3.544041235831921,
+                "path_length": 84.01422201936694,
+                "reference_path": [
+                    [
+                        -1.212725043296814,
+                        74.85474395751953,
+                        80.94515228271484
+                    ],
+                    [
+                        10.267486572265625,
+                        79.50015258789062,
+                        80.70000457763672
+                    ],
+                    [
+                        11.767486572265625,
+                        81.00015258789062,
+                        80.80000305175781
+                    ],
+                    [
+                        19.267486572265625,
+                        91.50015258789062,
+                        80.9000015258789
+                    ],
+                    [
+                        20.767486572265625,
+                        94.50015258789062,
+                        80.9000015258789
+                    ],
+                    [
+                        20.767486572265625,
+                        97.50015258789062,
+                        81.0
+                    ],
+                    [
+                        19.267486572265625,
+                        106.50015258789062,
+                        81.0999984741211
+                    ],
+                    [
+                        -4.732513427734375,
+                        138.00015258789062,
+                        82.30000305175781
+                    ],
+                    [
+                        -4.732513427734375,
+                        139.50015258789062,
+                        82.30000305175781
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -1.212725018714105,
+            74.85474313220836,
+            80.94515385504245
+        ],
+        "start_rotation": [
+            0.9839598785938511,
+            0.0,
+            0.0,
+            0.17838990251013026
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Start facing an ambulance parked near the intersection. Slightly turn right and follow the road, keeping the classic white building with many windows and trees on your left, and the large wooden-textured wall on your right. Continue straight down the street, passing the side of the wooden building which has a \"Trattoria Luna\" sign and flower boxes. Move forward towards the white storefront with large blue letters and a sushi logo. You will arrive at the restaurant entrance directly ahead.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_1",
+                "type": "object",
+                "location": [
+                    -48.126586112053914,
+                    330.8093214101294,
+                    90.17256102206585
+                ],
+                "radius": 3.585958968420101,
+                "path_length": 67.30665153544918,
+                "reference_path": [
+                    [
+                        -72.12074279785156,
+                        271.3966369628906,
+                        89.29051971435547
+                    ],
+                    [
+                        -72.23251342773438,
+                        274.5001525878906,
+                        89.30000305175781
+                    ],
+                    [
+                        -72.23251342773438,
+                        276.0001525878906,
+                        89.30000305175781
+                    ],
+                    [
+                        -51.232513427734375,
+                        331.5001525878906,
+                        88.5
+                    ],
+                    [
+                        -49.732513427734375,
+                        334.5001525878906,
+                        88.4000015258789
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -72.12074288992943,
+            271.3966345694103,
+            89.29051738032172
+        ],
+        "start_rotation": [
+            0.5989796107756123,
+            0.0,
+            0.0,
+            0.8007642760982134
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "library_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/library_0_1",
+                "type": "object",
+                "location": [
+                    130.59841163048407,
+                    153.1172319769787,
+                    85.08501838332384
+                ],
+                "radius": 3.646309659870397,
+                "path_length": 7.355921278713099,
+                "reference_path": [
+                    [
+                        139.91123962402344,
+                        152.09982299804688,
+                        83.10147094726562
+                    ],
+                    [
+                        139.26748657226562,
+                        153.00015258789062,
+                        83.0
+                    ],
+                    [
+                        134.76748657226562,
+                        154.50015258789062,
+                        82.9000015258789
+                    ],
+                    [
+                        133.26748657226562,
+                        154.50015258789062,
+                        82.9000015258789
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            139.91123918177064,
+            152.09981672841067,
+            83.10146817945214
+        ],
+        "start_rotation": [
+            0.6150274738090312,
+            0.0,
+            0.0,
+            0.7885056794088939
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_6",
+        "instruction": "Head straight down the road, keeping the dark, multi-story buildings on your right and the lighter, taller buildings on your left. Continue forward as you pass a small, rectangular white sign hanging on the dark building facade. Eventually, you will see a bright, white storefront labeled \"URBAN PROVISIONS\" embedded in the dark building on your right. As you approach this shop, slightly veer right. You will arrive at the wooden door of the restaurant next to the provisions store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_6_1",
+                "type": "object",
+                "location": [
+                    -91.79126233885091,
+                    94.50764980902586,
+                    86.23787208901422
+                ],
+                "radius": 3.6940938379671664,
+                "path_length": 47.788660276989106,
+                "reference_path": [
+                    [
+                        -133.079833984375,
+                        120.86131286621094,
+                        86.7113037109375
+                    ],
+                    [
+                        -132.23251342773438,
+                        120.00015258789062,
+                        86.70000457763672
+                    ],
+                    [
+                        -126.23251342773438,
+                        117.00015258789062,
+                        86.5
+                    ],
+                    [
+                        -115.73251342773438,
+                        109.50015258789062,
+                        86.0
+                    ],
+                    [
+                        -93.23251342773438,
+                        99.00015258789062,
+                        84.5
+                    ],
+                    [
+                        -91.791259765625,
+                        97.50015258789062,
+                        84.42794036865234
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -133.0798310855204,
+            120.8613104543267,
+            86.71130197401997
+        ],
+        "start_rotation": [
+            0.9524404739327725,
+            0.0,
+            0.0,
+            -0.3047247013530665
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_madrid_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/MADRID/MADRID_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_0",
+        "instruction": "Start in the middle of the empty street, facing a large, pale building block. Follow the road straight ahead, passing a white car parked on the left side of the intersection. Keep moving forward, keeping the massive beige building with many windows on your right and the domed building further down the street on your left. Continue straight along the road as you approach the intersection where a white van is driving. Turn left towards the corner building with large glass windows displaying bicycles. You will arrive at the bicycle rental shop.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_0_1",
+                "type": "object",
+                "location": [
+                    51.7872766017672,
+                    60.846667617666654,
+                    83.06275652365323
+                ],
+                "radius": 3.5794939800047842,
+                "path_length": 93.028296107695,
+                "reference_path": [
+                    [
+                        -27.5550537109375,
+                        91.4058837890625,
+                        81.30000305175781
+                    ],
+                    [
+                        -27.232513427734375,
+                        88.50015258789062,
+                        81.30000305175781
+                    ],
+                    [
+                        -25.732513427734375,
+                        87.00015258789062,
+                        81.30000305175781
+                    ],
+                    [
+                        -9.232513427734375,
+                        76.50015258789062,
+                        81.0999984741211
+                    ],
+                    [
+                        4.267486572265625,
+                        72.00015258789062,
+                        80.80000305175781
+                    ],
+                    [
+                        35.767486572265625,
+                        67.50015258789062,
+                        80.80000305175781
+                    ],
+                    [
+                        37.267486572265625,
+                        66.00015258789062,
+                        80.5999984741211
+                    ],
+                    [
+                        37.267486572265625,
+                        64.50015258789062,
+                        80.5999984741211
+                    ],
+                    [
+                        37.267486572265625,
+                        61.500152587890625,
+                        80.5
+                    ],
+                    [
+                        38.767486572265625,
+                        60.000152587890625,
+                        80.70000457763672
+                    ],
+                    [
+                        40.267486572265625,
+                        60.000152587890625,
+                        80.70000457763672
+                    ],
+                    [
+                        47.767486572265625,
+                        63.000152587890625,
+                        81.0999984741211
+                    ],
+                    [
+                        51.78727722167969,
+                        63.000152587890625,
+                        81.1893310546875
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -27.555054113957222,
+            91.40588567604826,
+            81.30000305175781
+        ],
+        "start_rotation": [
+            0.5666822676475969,
+            0.0,
+            0.0,
+            -0.823936409884754
+        ],
+        "ceiling_height": 1.0
+    }
+]

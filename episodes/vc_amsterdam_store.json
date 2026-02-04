@@ -1,0 +1,1485 @@
+[
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_2_6",
+                "type": "object",
+                "location": [
+                    -37.37183959313883,
+                    81.83754572791048,
+                    10.125961416522562
+                ],
+                "radius": 3.6421761878786967,
+                "path_length": 47.57905186811745,
+                "reference_path": [
+                    [
+                        -50.889015197753906,
+                        44.048526763916016,
+                        8.085423469543457
+                    ],
+                    [
+                        -57.000152587890625,
+                        48.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        -58.500152587890625,
+                        49.500152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        -58.500152587890625,
+                        57.000152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -40.500152587890625,
+                        81.8375473022461,
+                        8.244172096252441
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/cafe_2_9",
+                "type": "object",
+                "location": [
+                    -31.496838831954044,
+                    93.29218119751408,
+                    10.06497722599113
+                ],
+                "radius": 3.4660961062938824,
+                "path_length": 64.32759515459271,
+                "reference_path": [
+                    [
+                        -50.889015197753906,
+                        44.048526763916016,
+                        8.085423469543457
+                    ],
+                    [
+                        -57.000152587890625,
+                        48.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        -58.500152587890625,
+                        49.500152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        -58.500152587890625,
+                        57.000152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -42.000152587890625,
+                        85.50015258789062,
+                        8.299999237060547
+                    ],
+                    [
+                        -37.500152587890625,
+                        93.00015258789062,
+                        8.299999237060547
+                    ],
+                    [
+                        -34.500152587890625,
+                        96.00015258789062,
+                        8.19999885559082
+                    ],
+                    [
+                        -33.000152587890625,
+                        96.00015258789062,
+                        8.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -50.88901506483271,
+            44.04852833039432,
+            8.08542381120852
+        ],
+        "start_rotation": [
+            0.2631115290108652,
+            0.0,
+            0.0,
+            0.9647654239770228
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_7",
+        "instruction": "Head towards the \"GEAR & GO CYCLES\" shop with the bicycle logo, passing the bench on your right. Follow the road straight ahead, keeping the bike shop and the \"SAKURA BITES\" sushi bar on your left as you proceed down the street. Continue forward past the tall, dark buildings and the church spire visible in the distance. As you approach the storefront with intricate dragon carvings on the stone base, turn slightly left towards the \"HARVEST & HEARTH\" sign. You will arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_7_1",
+                "type": "object",
+                "location": [
+                    -3.730605629583068,
+                    130.01131638376017,
+                    9.56632551544327
+                ],
+                "radius": 3.4645802939073604,
+                "path_length": 51.82655002697374,
+                "reference_path": [
+                    [
+                        6.335857391357422,
+                        176.3821563720703,
+                        7.081798553466797
+                    ],
+                    [
+                        7.499847412109375,
+                        175.50015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        8.999847412109375,
+                        174.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        8.999847412109375,
+                        169.50015258789062,
+                        7.19999885559082
+                    ],
+                    [
+                        7.499847412109375,
+                        166.50015258789062,
+                        7.19999885559082
+                    ],
+                    [
+                        -7.500152587890625,
+                        135.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        -7.500152587890625,
+                        132.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        -6.000152587890625,
+                        130.01132202148438,
+                        7.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            6.3358572405641524,
+            176.38215850160262,
+            7.081798535185528
+        ],
+        "start_rotation": [
+            0.9462251208576178,
+            0.0,
+            0.0,
+            -0.32350891897749384
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "Head down the road with the white \"Chick 'n Burger Co.\" fast food restaurant on your right and a blue van parked ahead on your left. As you approach the glass storefront of the restaurant, turn right towards the entrance. You will arrive at the restaurant's glass double doors, which display a \"Crispy & Juicy\" chicken logo.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_4",
+                "type": "object",
+                "location": [
+                    -220.31523747505364,
+                    180.89996627252737,
+                    9.836656746410277
+                ],
+                "radius": 3.58759025765616,
+                "path_length": 7.657083743179565,
+                "reference_path": [
+                    [
+                        -215.48062133789062,
+                        173.46560668945312,
+                        8.099998474121094
+                    ],
+                    [
+                        -216.00015258789062,
+                        174.00015258789062,
+                        8.099998474121094
+                    ],
+                    [
+                        -220.50015258789062,
+                        177.00015258789062,
+                        8.099998474121094
+                    ],
+                    [
+                        -220.50015258789062,
+                        178.50015258789062,
+                        7.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -215.48062342793415,
+            173.46561279691753,
+            8.099998474121094
+        ],
+        "start_rotation": [
+            0.48861087471388254,
+            0.0,
+            0.0,
+            0.8725018126693689
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "From the open square with the large domed building on your left, head towards the narrow street entrance ahead. Follow the path slightly to the right as you enter the alleyway lined with tall, shadowed buildings. Continue straight down the middle of the street, passing shopfronts with red and white signage on your left. Keep moving forward through the dark corridor until you reach the brightly lit diner with red trim on the left side.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_1",
+                "type": "object",
+                "location": [
+                    77.9127607979306,
+                    69.70932486827661,
+                    10.585789660012953
+                ],
+                "radius": 2.888671724667361,
+                "path_length": 43.8218457703242,
+                "reference_path": [
+                    [
+                        70.45118713378906,
+                        32.961524963378906,
+                        8.499998092651367
+                    ],
+                    [
+                        67.49984741210938,
+                        33.000152587890625,
+                        8.499998092651367
+                    ],
+                    [
+                        65.99984741210938,
+                        34.500152587890625,
+                        8.499998092651367
+                    ],
+                    [
+                        64.49984741210938,
+                        37.500152587890625,
+                        8.599998474121094
+                    ],
+                    [
+                        64.49984741210938,
+                        40.500152587890625,
+                        8.69999885559082
+                    ],
+                    [
+                        71.99984741210938,
+                        54.000152587890625,
+                        8.799999237060547
+                    ],
+                    [
+                        77.99984741210938,
+                        64.50015258789062,
+                        8.69999885559082
+                    ],
+                    [
+                        79.49984741210938,
+                        67.50015258789062,
+                        8.69999885559082
+                    ],
+                    [
+                        79.49984741210938,
+                        69.00015258789062,
+                        8.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            70.45118997255038,
+            32.96152318093476,
+            8.499998092651367
+        ],
+        "start_rotation": [
+            -0.23674092028495478,
+            0.0,
+            0.0,
+            0.9715728159343656
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_1",
+        "instruction": "Start slightly turning right and follow the road forward, passing a row of grey, multi-story buildings on your right. Continue straight for a long stretch as you approach an ambulance with red and white stripes visible in the distance. As you get closer to the ambulance, turn left towards a white building with large wooden-framed windows displaying baked goods and croissants. You will arrive at the cafe.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_4",
+                "type": "object",
+                "location": [
+                    -174.20589665163544,
+                    170.08753843490842,
+                    10.219156864790651
+                ],
+                "radius": 3.2268408993683124,
+                "path_length": 89.4483601417675,
+                "reference_path": [
+                    [
+                        -97.97915649414062,
+                        199.21954345703125,
+                        7.0319318771362305
+                    ],
+                    [
+                        -100.50015258789062,
+                        198.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        -102.00015258789062,
+                        198.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        -142.50015258789062,
+                        201.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -144.00015258789062,
+                        201.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        -147.00015258789062,
+                        198.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -154.50015258789062,
+                        189.00015258789062,
+                        8.099998474121094
+                    ],
+                    [
+                        -168.00015258789062,
+                        172.50015258789062,
+                        8.39999771118164
+                    ],
+                    [
+                        -171.00015258789062,
+                        169.50015258789062,
+                        8.39999771118164
+                    ],
+                    [
+                        -172.50015258789062,
+                        169.50015258789062,
+                        8.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -97.97915734475589,
+            199.2195472334711,
+            7.03193186492626
+        ],
+        "start_rotation": [
+            0.25160153847596933,
+            0.0,
+            0.0,
+            -0.9678309076675147
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_9",
+        "instruction": "Start moving down the road, heading straight between the tall, shadowed buildings on the left and the sunlit facades on the right. Continue forward as the street stretches ahead, passing a building with a red sign hanging above its entrance on your left. Keep following the road as it gently curves slightly to the right. Proceed past the row of grey stone structures. You will arrive at the restaurant, distinguished by its intricate wooden doors and red interior visible through the entrance on your left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_9_3",
+                "type": "object",
+                "location": [
+                    50.99198317803871,
+                    338.8954390666272,
+                    9.388957450683858
+                ],
+                "radius": 3.3620247292468264,
+                "path_length": 34.89518186666605,
+                "reference_path": [
+                    [
+                        44.307884216308594,
+                        305.19140625,
+                        7.499998092651367
+                    ],
+                    [
+                        43.499847412109375,
+                        309.0001525878906,
+                        7.399997711181641
+                    ],
+                    [
+                        43.499847412109375,
+                        310.5001525878906,
+                        7.299999237060547
+                    ],
+                    [
+                        44.999847412109375,
+                        324.0001525878906,
+                        7.599998474121094
+                    ],
+                    [
+                        47.999847412109375,
+                        328.5001525878906,
+                        7.599998474121094
+                    ],
+                    [
+                        52.499847412109375,
+                        334.5001525878906,
+                        7.499998092651367
+                    ],
+                    [
+                        52.499847412109375,
+                        337.5001525878906,
+                        7.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            44.307885447395975,
+            305.1914051346889,
+            7.499998092651366
+        ],
+        "start_rotation": [
+            0.6359837570894314,
+            0.0,
+            0.0,
+            0.7717024431206702
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Follow the road straight ahead, passing the \"Gear & Go Cycles\" shop on your left. As you move forward, you will pass a large stone church with a pointed roof further down the street on the left. Continue along the road, keeping the \"Sakura Bites Sushi & Bar\" on your left. Slightly adjust your path to the right as you approach the end of the block. You will arrive at the restaurant, Sakura Bites, located on the corner.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_6",
+                "type": "object",
+                "location": [
+                    5.911732381437323,
+                    151.23618373769932,
+                    9.554304825642516
+                ],
+                "radius": 3.6012592388427436,
+                "path_length": 38.73928979441127,
+                "reference_path": [
+                    [
+                        -6.853786468505859,
+                        188.80393981933594,
+                        6.999998092651367
+                    ],
+                    [
+                        -3.000152587890625,
+                        180.00015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        2.999847412109375,
+                        151.50015258789062,
+                        7.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -6.8537864669658894,
+            188.80394283003744,
+            6.999998092651365
+        ],
+        "start_rotation": [
+            0.697914501757289,
+            0.0,
+            0.0,
+            -0.7161810862043726
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_1",
+        "instruction": "Start moving forward down the road, keeping the dark, multi-story buildings on your right. As you proceed, a storefront with a bright, illuminated \"METRO CASH POINT\" sign will come into view on the right side of the street. Continue towards this shop. When you get close, slightly veer right towards the entrance. You will arrive at the ATM located just inside the glass doors.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_1_1",
+                "type": "object",
+                "location": [
+                    190.3050706629798,
+                    131.80753777613913,
+                    9.61692611790495
+                ],
+                "radius": 3.297601308640054,
+                "path_length": 38.10363860464882,
+                "reference_path": [
+                    [
+                        223.6243896484375,
+                        152.30609130859375,
+                        7.430627822875977
+                    ],
+                    [
+                        194.99984741210938,
+                        132.00015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        191.99984741210938,
+                        131.8075408935547,
+                        7.695718765258789
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            223.62438235832005,
+            152.30609647070298,
+            7.430628013951196
+        ],
+        "start_rotation": [
+            0.49568945198672903,
+            0.0,
+            0.0,
+            -0.8684998371842658
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_2_1",
+                "type": "object",
+                "location": [
+                    340.02454165601944,
+                    128.11787544157193,
+                    9.442250436369923
+                ],
+                "radius": 3.0802436206006973,
+                "path_length": 82.94308746060757,
+                "reference_path": [
+                    [
+                        286.1028137207031,
+                        66.79441833496094,
+                        8.299999237060547
+                    ],
+                    [
+                        332.9998474121094,
+                        115.50015258789062,
+                        8.499998092651367
+                    ],
+                    [
+                        341.9998474121094,
+                        126.00015258789062,
+                        8.499998092651367
+                    ],
+                    [
+                        341.9998474121094,
+                        127.50015258789062,
+                        8.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            286.10280158471977,
+            66.79442101492224,
+            8.299999237060547
+        ],
+        "start_rotation": [
+            0.8512515643261613,
+            0.0,
+            0.0,
+            0.5247578243649761
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_4",
+        "instruction": "Start near the brick building with the shop sign \"TRAITORIA LUNA\" on your left. Follow the road straight ahead, passing the tall grey buildings and the red and white ambulance parked on the right. Continue forward down the street, keeping the large multi-story buildings on your right and the dark storefronts on your left. As you proceed, you will eventually arrive directly in front of the convenience store window.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_4_1",
+                "type": "object",
+                "location": [
+                    140.25500232178734,
+                    62.701888724888406,
+                    9.703471101379062
+                ],
+                "radius": 2.888635917046102,
+                "path_length": 59.25543281779897,
+                "reference_path": [
+                    [
+                        117.91923522949219,
+                        10.489373207092285,
+                        7.764993190765381
+                    ],
+                    [
+                        118.49984741210938,
+                        22.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        122.99984741210938,
+                        30.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        142.49984741210938,
+                        60.000152587890625,
+                        7.599998474121094
+                    ],
+                    [
+                        142.49984741210938,
+                        62.70188903808594,
+                        7.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            117.91923314548387,
+            10.48937359163156,
+            7.764993015515415
+        ],
+        "start_rotation": [
+            0.6547244499235868,
+            0.0,
+            0.0,
+            0.7558676436204004
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "Head down the street, keeping the tall buildings on your right and the blocky, darker structures on your left. Continue straight along the road, eventually passing a large, modern building with a black facade on the right side. As you move forward, the road curves gently to the right. Follow this curve until you approach a storefront with large glass windows revealing a brightly lit interior with bottles on shelves. You will arrive at the bar_2.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_8",
+                "type": "object",
+                "location": [
+                    377.94859389605074,
+                    8.70813949062736,
+                    9.334940682824545
+                ],
+                "radius": 3.285550273851003,
+                "path_length": 49.223948609394135,
+                "reference_path": [
+                    [
+                        411.0830078125,
+                        45.481048583984375,
+                        7.694454669952393
+                    ],
+                    [
+                        410.9998474121094,
+                        45.000152587890625,
+                        7.69999885559082
+                    ],
+                    [
+                        409.4998474121094,
+                        42.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        386.9998474121094,
+                        12.000152587890625,
+                        7.099998474121094
+                    ],
+                    [
+                        382.4998474121094,
+                        7.500152587890625,
+                        7.099998474121094
+                    ],
+                    [
+                        380.9998474121094,
+                        7.500152587890625,
+                        7.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            411.0830066210256,
+            45.48104856513597,
+            7.694454887181255
+        ],
+        "start_rotation": [
+            0.541613134521478,
+            0.0,
+            0.0,
+            -0.840627868033067
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_1",
+        "instruction": "Start on the open paved area, slightly angling left past the tall, dark grey building corner. Continue moving forward along the street, keeping the row of multi-story buildings on your left. As you proceed, the street narrows slightly between the buildings. Keep following the road straight ahead. Eventually, on your left, you will see a white structure with a blue \"P\" parking sign. Approach this building, and you will arrive at the parking entrance located underneath the sign.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_1_1",
+                "type": "object",
+                "location": [
+                    115.92432137136828,
+                    382.2512166268735,
+                    7.2281290939013365
+                ],
+                "radius": 3.242646261629318,
+                "path_length": 80.43191599994876,
+                "reference_path": [
+                    [
+                        166.0029754638672,
+                        389.7747497558594,
+                        6.754696846008301
+                    ],
+                    [
+                        167.99984741210938,
+                        399.0001525878906,
+                        7.099998474121094
+                    ],
+                    [
+                        167.99984741210938,
+                        402.0001525878906,
+                        7.19999885559082
+                    ],
+                    [
+                        164.99984741210938,
+                        405.0001525878906,
+                        7.19999885559082
+                    ],
+                    [
+                        152.99984741210938,
+                        411.0001525878906,
+                        6.999998092651367
+                    ],
+                    [
+                        149.99984741210938,
+                        411.0001525878906,
+                        6.999998092651367
+                    ],
+                    [
+                        142.49984741210938,
+                        409.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        133.49984741210938,
+                        406.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        121.49984741210938,
+                        394.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        113.99984741210938,
+                        385.5001525878906,
+                        6.69999885559082
+                    ],
+                    [
+                        113.99984741210938,
+                        384.0001525878906,
+                        6.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            166.0029696397403,
+            389.77473942196974,
+            6.754696994944773
+        ],
+        "start_rotation": [
+            0.8655007882252418,
+            0.0,
+            0.0,
+            0.5009075619128596
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_1",
+                "type": "object",
+                "location": [
+                    77.9127607979306,
+                    69.70932486827661,
+                    10.585789660012953
+                ],
+                "radius": 2.888671724667361,
+                "path_length": 80.99351193800122,
+                "reference_path": [
+                    [
+                        78.87674713134766,
+                        5.238044261932373,
+                        8.136568069458008
+                    ],
+                    [
+                        85.49984741210938,
+                        10.500152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        86.99984741210938,
+                        12.000152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        86.99984741210938,
+                        15.000152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        85.49984741210938,
+                        16.500152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        67.49984741210938,
+                        33.000152587890625,
+                        8.499998092651367
+                    ],
+                    [
+                        65.99984741210938,
+                        34.500152587890625,
+                        8.499998092651367
+                    ],
+                    [
+                        64.49984741210938,
+                        37.500152587890625,
+                        8.599998474121094
+                    ],
+                    [
+                        64.49984741210938,
+                        40.500152587890625,
+                        8.69999885559082
+                    ],
+                    [
+                        71.99984741210938,
+                        54.000152587890625,
+                        8.799999237060547
+                    ],
+                    [
+                        77.99984741210938,
+                        64.50015258789062,
+                        8.69999885559082
+                    ],
+                    [
+                        79.49984741210938,
+                        67.50015258789062,
+                        8.69999885559082
+                    ],
+                    [
+                        79.49984741210938,
+                        69.00015258789062,
+                        8.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            78.87674492155078,
+            5.238044141409136,
+            8.136567678416807
+        ],
+        "start_rotation": [
+            0.9763877566958473,
+            0.0,
+            0.0,
+            0.2160253424356757
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_0",
+        "instruction": "Head towards the row of brown brick buildings, keeping the tram tracks on your left. Continue forward along the street, passing a white streetlight pole with yellow traffic signals. As you approach the storefronts, you will see a building with a dark wooden facade and a sign reading \"The Barrel & Tap\" above the entrance. Move closer to the entrance of this pub, and you will arrive at the destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_0_3",
+                "type": "object",
+                "location": [
+                    32.77726947643588,
+                    194.27951426658151,
+                    9.141396860278096
+                ],
+                "radius": 3.4853946683623462,
+                "path_length": 31.34548890169019,
+                "reference_path": [
+                    [
+                        0.8839378952980042,
+                        186.310791015625,
+                        6.999998092651367
+                    ],
+                    [
+                        5.999847412109375,
+                        186.00015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        7.499847412109375,
+                        186.00015258789062,
+                        6.999998092651367
+                    ],
+                    [
+                        25.499847412109375,
+                        195.00015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        26.999847412109375,
+                        195.00015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        29.999847412109375,
+                        194.27951049804688,
+                        7.148041248321533
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            0.8839378690392999,
+            186.31078911494487,
+            6.999998092651367
+        ],
+        "start_rotation": [
+            0.9852978324672624,
+            0.0,
+            0.0,
+            -0.17084548965458365
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_9",
+        "instruction": "Start on the street flanked by tall, European-style brick buildings. Move forward along the road, keeping the buildings on your left. As you proceed, the architecture transitions to a shopfront with intricate wooden doors and red lanterns hanging above the entrance. Continue forward towards this establishment. You will arrive at the restaurant with the ornate wooden facade and red lanterns.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_9_3",
+                "type": "object",
+                "location": [
+                    50.99198317803871,
+                    338.8954390666272,
+                    9.388957450683858
+                ],
+                "radius": 3.3620247292468264,
+                "path_length": 6.5086585331222935,
+                "reference_path": [
+                    [
+                        49.842159271240234,
+                        332.24298095703125,
+                        7.599998474121094
+                    ],
+                    [
+                        50.999847412109375,
+                        333.0001525878906,
+                        7.599998474121094
+                    ],
+                    [
+                        52.499847412109375,
+                        334.5001525878906,
+                        7.499998092651367
+                    ],
+                    [
+                        52.499847412109375,
+                        337.5001525878906,
+                        7.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            49.84216003474481,
+            332.2429762800769,
+            7.599998474121094
+        ],
+        "start_rotation": [
+            0.9851188041589216,
+            0.0,
+            0.0,
+            0.17187478492349112
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_2",
+        "instruction": "Head down the road with the tall, dark building on your left and the white van with a red stripe parked on your right. As you continue, the path curves slightly to the right, leading you past a row of dark grey buildings. Keep following the road forward towards the white storefront labeled \"ATM\". You will arrive directly in front of the ATM entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_2_2",
+                "type": "object",
+                "location": [
+                    171.3761179880595,
+                    105.05289290548946,
+                    9.720621691843622
+                ],
+                "radius": 3.3322342910664275,
+                "path_length": 74.14077968234642,
+                "reference_path": [
+                    [
+                        240.93190002441406,
+                        121.05762481689453,
+                        7.599998474121094
+                    ],
+                    [
+                        223.49984741210938,
+                        106.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        220.49984741210938,
+                        106.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        209.99984741210938,
+                        108.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        205.49984741210938,
+                        108.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        173.99984741210938,
+                        103.50015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        172.49984741210938,
+                        103.50015258789062,
+                        7.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            240.931896758687,
+            121.05762615377623,
+            7.599998474121094
+        ],
+        "start_rotation": [
+            0.18367888143517402,
+            0.0,
+            0.0,
+            -0.9829863012853858
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_1",
+        "instruction": "From the starting position with a white scooter on your left and a bench on your right, follow the road forward, keeping the old brick building on your left. Continue straight, passing the building's facade with multiple dark windows. As you reach the corner of the building where a dark alleyway begins, turn right. Move forward into the shadowed area, heading towards the dark entrance. You will arrive at the toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_1_2",
+                "type": "object",
+                "location": [
+                    -45.74544338263665,
+                    11.606037843659742,
+                    9.997954771311722
+                ],
+                "radius": 3.5706337726944675,
+                "path_length": 20.00285597109506,
+                "reference_path": [
+                    [
+                        -62.28595733642578,
+                        23.738494873046875,
+                        8.003473281860352
+                    ],
+                    [
+                        -55.500152587890625,
+                        24.000152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        -52.500152587890625,
+                        24.000152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        -51.000152587890625,
+                        22.500152587890625,
+                        8.19999885559082
+                    ],
+                    [
+                        -48.000152587890625,
+                        15.000152587890625,
+                        8.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.2859584382664,
+            23.73849396944172,
+            8.003473625504625
+        ],
+        "start_rotation": [
+            0.9878979029908996,
+            0.0,
+            0.0,
+            0.15510555523959507
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_1",
+        "instruction": "Head slightly left from your starting point, following the road past the grey buildings on your left. As you proceed, a white storefront labeled \"ATM\" will become visible ahead. Slightly veer right to align with the street and continue moving forward directly towards this storefront. Keep heading straight along the road, aiming for the white \"ATM\" sign. You will arrive at the bureau de change entrance, located directly under the \"ATM\" sign.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_1_1",
+                "type": "object",
+                "location": [
+                    171.2008542698882,
+                    105.22136225567203,
+                    9.741068257793625
+                ],
+                "radius": 3.3174869998270182,
+                "path_length": 98.88344434534514,
+                "reference_path": [
+                    [
+                        269.6573181152344,
+                        117.51666259765625,
+                        7.599998474121094
+                    ],
+                    [
+                        223.49984741210938,
+                        106.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        220.49984741210938,
+                        106.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        209.99984741210938,
+                        108.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        205.49984741210938,
+                        108.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        173.99984741210938,
+                        103.50015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        172.49984741210938,
+                        103.50015258789062,
+                        7.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            269.65731417202755,
+            117.51666070317383,
+            7.599998474121095
+        ],
+        "start_rotation": [
+            -0.04383722453427131,
+            0.0,
+            0.0,
+            -0.9990386868110424
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_2",
+        "instruction": "Begin by slightly turning right and proceeding forward along the empty road. You will see a tall, modern building with reflective green glass windows on your left. Continue straight ahead, passing a row of older, grey stone buildings on your right. Keep moving forward until you reach a white storefront with blue lettering that says \"QUICK STOP\" next to a shop with a wooden door and a circular window. You will arrive at the convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_2_4",
+                "type": "object",
+                "location": [
+                    180.10916999137322,
+                    335.31610051677075,
+                    9.290512638719608
+                ],
+                "radius": 3.5948563043082373,
+                "path_length": 62.509845685534096,
+                "reference_path": [
+                    [
+                        120.88705444335938,
+                        320.77923583984375,
+                        6.930623531341553
+                    ],
+                    [
+                        146.99984741210938,
+                        337.5001525878906,
+                        7.099998474121094
+                    ],
+                    [
+                        149.99984741210938,
+                        337.5001525878906,
+                        7.19999885559082
+                    ],
+                    [
+                        178.49984741210938,
+                        337.5001525878906,
+                        7.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            120.8870581994651,
+            320.7792267071203,
+            6.930623361532042
+        ],
+        "start_rotation": [
+            0.935721386078768,
+            0.0,
+            0.0,
+            0.35273997169987586
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_amsterdam_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/AMSTERDAM/AMSTERDAM_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "community_centre_2",
+        "instruction": "Head down the wide, empty street, keeping the large, beige, multi-story building with many rectangular windows on your right. As you move forward, notice the white trailer with a yellow object on top parked along the curb. Continue straight ahead, following the road past the trailer. As you approach the end of the block, look for a building with a white storefront labeled \"COMMUNITY CENTRE\" with large glass windows and doors. You will arrive at the community centre entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/community_centre_2_1",
+                "type": "object",
+                "location": [
+                    312.04002302412454,
+                    242.13669108061293,
+                    9.454573900964366
+                ],
+                "radius": 3.174681025040954,
+                "path_length": 77.01021057356267,
+                "reference_path": [
+                    [
+                        246.58132934570312,
+                        200.53367614746094,
+                        7.668900966644287
+                    ],
+                    [
+                        247.49984741210938,
+                        201.00015258789062,
+                        7.69999885559082
+                    ],
+                    [
+                        286.4998474121094,
+                        228.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        308.9998474121094,
+                        243.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        310.4998474121094,
+                        243.00015258789062,
+                        7.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            246.58132500615795,
+            200.53368306864814,
+            7.668900769011987
+        ],
+        "start_rotation": [
+            0.9908978280438691,
+            0.0,
+            0.0,
+            0.13461609999529392
+        ],
+        "ceiling_height": 1.0
+    }
+]

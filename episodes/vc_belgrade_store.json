@@ -1,0 +1,1422 @@
+[
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_1",
+        "instruction": "Start at the center of the road, facing a white building with \"SNACKS - BEVERAGES\" written upside down. Move forward along the road, keeping the red and white \"ROCKET BURGER\" shop on your right. Continue straight past the burger shop and the adjacent buildings. As you proceed down the street, you will see a white building on your right with blue text. Approach this building, and you will arrive at the Bureau De Change.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_1_3",
+                "type": "object",
+                "location": [
+                    -62.124638349117774,
+                    306.1081336617267,
+                    14.662589626142822
+                ],
+                "radius": 3.5833313662965622,
+                "path_length": 54.07865426827561,
+                "reference_path": [
+                    [
+                        -97.1312255859375,
+                        268.534423828125,
+                        13.97540283203125
+                    ],
+                    [
+                        -84.00015258789062,
+                        270.8958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -82.50015258789062,
+                        272.3958435058594,
+                        13.69999885559082
+                    ],
+                    [
+                        -75.00015258789062,
+                        281.3958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -64.50015258789062,
+                        306.1081237792969,
+                        12.226256370544434
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -97.13122200667758,
+            268.53443768311183,
+            13.97540309586609
+        ],
+        "start_rotation": [
+            0.9999480157328937,
+            0.0,
+            0.0,
+            -0.010196363658113388
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_8",
+                "type": "object",
+                "location": [
+                    280.44611114176143,
+                    215.36326654210245,
+                    11.003777876844362
+                ],
+                "radius": 3.6334181804883485,
+                "path_length": 20.258230736189617,
+                "reference_path": [
+                    [
+                        281.171142578125,
+                        192.17611694335938,
+                        9.89999771118164
+                    ],
+                    [
+                        281.9998474121094,
+                        207.89584350585938,
+                        9.19999885559082
+                    ],
+                    [
+                        281.9998474121094,
+                        212.39584350585938,
+                        9.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            281.17113651007617,
+            192.17611091151403,
+            9.899997711181639
+        ],
+        "start_rotation": [
+            0.6149084723537516,
+            0.0,
+            0.0,
+            0.7885984850528027
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "Start by moving towards the large blue office building with many windows, then veer slightly left to follow the road. Continue forward, passing a large wooden-textured building on your left with a mural. Keep following the road as it curves gently. As you proceed, you will pass a \"Rocket Burger\" diner with red siding and neon signs on your left. Continue straight along the road past the diner and the adjacent white storefronts. You will arrive at the fast_food_0, located just past the diner.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_4",
+                "type": "object",
+                "location": [
+                    -103.46291379680085,
+                    282.35876203767225,
+                    16.3703558130995
+                ],
+                "radius": 3.6301467880401006,
+                "path_length": 78.2083823283765,
+                "reference_path": [
+                    [
+                        -166.93960571289062,
+                        310.9402160644531,
+                        15.19999885559082
+                    ],
+                    [
+                        -166.50015258789062,
+                        309.8958435058594,
+                        15.19999885559082
+                    ],
+                    [
+                        -163.50015258789062,
+                        306.8958435058594,
+                        15.100000381469727
+                    ],
+                    [
+                        -154.50015258789062,
+                        305.3958435058594,
+                        15.100000381469727
+                    ],
+                    [
+                        -141.00015258789062,
+                        294.8958435058594,
+                        14.799997329711914
+                    ],
+                    [
+                        -138.00015258789062,
+                        291.8958435058594,
+                        14.69999885559082
+                    ],
+                    [
+                        -135.00015258789062,
+                        282.8958435058594,
+                        14.499998092651367
+                    ],
+                    [
+                        -133.50015258789062,
+                        281.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -127.50015258789062,
+                        278.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -103.4629135131836,
+                        278.3958435058594,
+                        14.298962593078613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -166.93960534596494,
+            310.94021383427156,
+            15.199998855590819
+        ],
+        "start_rotation": [
+            0.720400089854312,
+            0.0,
+            0.0,
+            -0.6935587289753472
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_2_7",
+                "type": "object",
+                "location": [
+                    -76.92654016489348,
+                    227.22211507905712,
+                    16.55681098614665
+                ],
+                "radius": 3.632086887562977,
+                "path_length": 12.127839479205113,
+                "reference_path": [
+                    [
+                        -88.06707000732422,
+                        222.46127319335938,
+                        14.828370094299316
+                    ],
+                    [
+                        -81.00015258789062,
+                        230.39584350585938,
+                        14.600000381469727
+                    ],
+                    [
+                        -79.50015258789062,
+                        230.39584350585938,
+                        14.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -88.0670735082229,
+            222.46127069657297,
+            14.828370021958547
+        ],
+        "start_rotation": [
+            0.8661369676923201,
+            0.0,
+            0.0,
+            0.4998067158379856
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_0_1",
+                "type": "object",
+                "location": [
+                    135.72289460716547,
+                    96.04632462491384,
+                    16.722222951946293
+                ],
+                "radius": 3.4531580229200287,
+                "path_length": 17.43249298613943,
+                "reference_path": [
+                    [
+                        119.58557891845703,
+                        107.32451629638672,
+                        14.904754638671875
+                    ],
+                    [
+                        124.49984741210938,
+                        102.89584350585938,
+                        14.899999618530273
+                    ],
+                    [
+                        133.49984741210938,
+                        96.89584350585938,
+                        14.799997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            119.58557840181099,
+            107.32451561573502,
+            14.904754738646751
+        ],
+        "start_rotation": [
+            0.837857075165032,
+            0.0,
+            0.0,
+            -0.5458896606420548
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pharmacy_2",
+        "instruction": "Start at the corner of a large beige building with arched windows, facing a crosswalk. Move forward along the road, keeping the beige building on your right and the dark brick buildings on your left. Continue straight past a brown bench and a black chair on the sidewalk. As the road curves slightly, turn left towards a bright, modern storefront with green crosses. Move towards the glass doors, passing a red scooter parked nearby. You will arrive at the pharmacy entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/pharmacy_2_3",
+                "type": "object",
+                "location": [
+                    -7.594778975212026,
+                    149.97627035044306,
+                    18.5997246949829
+                ],
+                "radius": 3.4149358991704615,
+                "path_length": 24.53700756563244,
+                "reference_path": [
+                    [
+                        -22.07386016845703,
+                        141.94944763183594,
+                        16.799997329711914
+                    ],
+                    [
+                        -9.000152587890625,
+                        140.39584350585938,
+                        16.799997329711914
+                    ],
+                    [
+                        -6.000152587890625,
+                        140.39584350585938,
+                        16.799997329711914
+                    ],
+                    [
+                        -4.500152587890625,
+                        141.89584350585938,
+                        16.69999885559082
+                    ],
+                    [
+                        -4.500152587890625,
+                        143.39584350585938,
+                        16.69999885559082
+                    ],
+                    [
+                        -6.000152587890625,
+                        147.89584350585938,
+                        16.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -22.073859960802537,
+            141.94944172897434,
+            16.799997329711918
+        ],
+        "start_rotation": [
+            0.9918877023294542,
+            0.0,
+            0.0,
+            0.12711721349839328
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_0_2",
+                "type": "object",
+                "location": [
+                    14.819275820018015,
+                    27.439581807869924,
+                    21.136328719319735
+                ],
+                "radius": 3.6102487040415436,
+                "path_length": 7.778089215433035,
+                "reference_path": [
+                    [
+                        7.193424224853516,
+                        28.640430450439453,
+                        18.55035972595215
+                    ],
+                    [
+                        8.999847412109375,
+                        29.395843505859375,
+                        18.499998092651367
+                    ],
+                    [
+                        14.819275856018066,
+                        29.395843505859375,
+                        18.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            7.193424430013768,
+            28.640430785911544,
+            18.550360093316225
+        ],
+        "start_rotation": [
+            0.9987844296439287,
+            0.0,
+            0.0,
+            0.04929161288548047
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Start from the street lined with buildings and head straight, keeping the white ambulance trailer on your right. As you move forward, the road curves slightly left past a green truck parked on the left side. Continue down the road, passing a large wooden structure with a \"TIC CRUMB BAKERY & CAFE\" sign on your left. Keep going straight until you reach the small building extension labeled \"PUBLIC TOILETS\" with a blue sign on your left, which is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_1",
+                "type": "object",
+                "location": [
+                    -51.88103076631791,
+                    106.73392728480519,
+                    19.12578476262025
+                ],
+                "radius": 3.03046973269101,
+                "path_length": 49.70179203251919,
+                "reference_path": [
+                    [
+                        -30.55035400390625,
+                        71.94938659667969,
+                        18.06309700012207
+                    ],
+                    [
+                        -27.000152587890625,
+                        75.89584350585938,
+                        17.799997329711914
+                    ],
+                    [
+                        -27.000152587890625,
+                        77.39584350585938,
+                        17.799997329711914
+                    ],
+                    [
+                        -34.500152587890625,
+                        99.89584350585938,
+                        17.69999885559082
+                    ],
+                    [
+                        -37.500152587890625,
+                        102.89584350585938,
+                        17.399999618530273
+                    ],
+                    [
+                        -49.500152587890625,
+                        108.89584350585938,
+                        17.399999618530273
+                    ],
+                    [
+                        -51.000152587890625,
+                        108.89584350585938,
+                        17.399999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -30.550353760583715,
+            71.94938937420297,
+            18.06309647893619
+        ],
+        "start_rotation": [
+            0.9606610536061312,
+            0.0,
+            0.0,
+            0.2777234957369614
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_0_3",
+                "type": "object",
+                "location": [
+                    -309.64391893710007,
+                    119.12811834755135,
+                    16.461480770274335
+                ],
+                "radius": 2.994009838926047,
+                "path_length": 20.568745837984284,
+                "reference_path": [
+                    [
+                        -307.9532775878906,
+                        141.28948974609375,
+                        15.799997329711914
+                    ],
+                    [
+                        -310.5001525878906,
+                        122.39584350585938,
+                        15.399999618530273
+                    ],
+                    [
+                        -310.5001525878906,
+                        120.89584350585938,
+                        15.399999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -307.9532927883687,
+            141.28949615634332,
+            15.799997329711912
+        ],
+        "start_rotation": [
+            0.5575431834176453,
+            0.0,
+            0.0,
+            -0.8301479377945342
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "theatre_2",
+        "instruction": "Head straight down the road, keeping the tall, grey, textured building on your left. Continue past the storefront on your right with the blue ATM sign. As you proceed, the road curves slightly. You will see a building with large drink advertisements (bottles and cans) on your left. Turn left towards the dark gap between the buildings, just past the structure featuring the beverage ads. Move into this alleyway, and you will arrive at the theatre.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/theatre_2_3",
+                "type": "object",
+                "location": [
+                    -25.73931999560468,
+                    224.3464170057842,
+                    16.940718010898767
+                ],
+                "radius": 3.6266179421365496,
+                "path_length": 59.07276584482268,
+                "reference_path": [
+                    [
+                        -69.9836654663086,
+                        243.3813018798828,
+                        13.999870300292969
+                    ],
+                    [
+                        -60.000152587890625,
+                        221.39584350585938,
+                        14.600000381469727
+                    ],
+                    [
+                        -58.500152587890625,
+                        219.89584350585938,
+                        14.600000381469727
+                    ],
+                    [
+                        -57.000152587890625,
+                        219.89584350585938,
+                        14.600000381469727
+                    ],
+                    [
+                        -25.739320755004883,
+                        221.39584350585938,
+                        14.868599891662598
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -69.98366449237422,
+            243.38129746669534,
+            13.99986993770059
+        ],
+        "start_rotation": [
+            0.7632377493127502,
+            0.0,
+            0.0,
+            -0.646117743158325
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pharmacy_0",
+        "instruction": "Head towards the intersection and turn left onto the road. Continue straight, passing a white building with an ATM and a Rocket Burger sign on your left. As you move forward along the road, you will see a large white building with a sushi sign featuring chopsticks on your left. Keep going straight past this building. Eventually, you will arrive at the pharmacy, recognizable by its blue signage on the left side of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/pharmacy_0_2",
+                "type": "object",
+                "location": [
+                    -178.0105497046372,
+                    264.97041657893226,
+                    17.244926994613635
+                ],
+                "radius": 3.592112325559924,
+                "path_length": 69.40641605431115,
+                "reference_path": [
+                    [
+                        -116.50560760498047,
+                        266.2824401855469,
+                        14.667030334472656
+                    ],
+                    [
+                        -115.50015258789062,
+                        266.3958435058594,
+                        14.600000381469727
+                    ],
+                    [
+                        -115.50015258789062,
+                        267.8958435058594,
+                        14.600000381469727
+                    ],
+                    [
+                        -120.00015258789062,
+                        272.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -141.00015258789062,
+                        276.8958435058594,
+                        14.600000381469727
+                    ],
+                    [
+                        -151.50015258789062,
+                        276.8958435058594,
+                        14.899999618530273
+                    ],
+                    [
+                        -165.00015258789062,
+                        269.3958435058594,
+                        15.100000381469727
+                    ],
+                    [
+                        -178.0105438232422,
+                        267.8958435058594,
+                        15.328720092773438
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -116.50561051571238,
+            266.2824444331315,
+            14.667029887186478
+        ],
+        "start_rotation": [
+            0.9709503969502405,
+            0.0,
+            0.0,
+            0.23928085310398398
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "Head straight along the road, passing the white vehicle on your right and the dark building with arched windows on your left. As you approach the intersection, turn left towards the white building featuring a sushi sign. Continue forward, keeping the dark modern building on your left. Make a right turn past the white storefront labeled \"Urban Pedal\" with bicycle graphics. Continue along the road, passing the ATM sign, and you will arrive at the red and white fast food restaurant with \"Crispy & Juicy\" written on the window.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_3",
+                "type": "object",
+                "location": [
+                    -107.26652202730496,
+                    282.08894105366926,
+                    16.310467443515677
+                ],
+                "radius": 3.5213350685931175,
+                "path_length": 53.50451137799278,
+                "reference_path": [
+                    [
+                        -62.0865364074707,
+                        266.0171203613281,
+                        13.299997329711914
+                    ],
+                    [
+                        -69.00015258789062,
+                        269.3958435058594,
+                        13.299997329711914
+                    ],
+                    [
+                        -70.50015258789062,
+                        270.8958435058594,
+                        13.299997329711914
+                    ],
+                    [
+                        -76.50015258789062,
+                        276.8958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -78.00015258789062,
+                        276.8958435058594,
+                        13.69999885559082
+                    ],
+                    [
+                        -79.50015258789062,
+                        275.3958435058594,
+                        13.69999885559082
+                    ],
+                    [
+                        -84.00015258789062,
+                        270.8958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -85.50015258789062,
+                        270.8958435058594,
+                        13.600000381469727
+                    ],
+                    [
+                        -96.00015258789062,
+                        273.8958435058594,
+                        13.999998092651367
+                    ],
+                    [
+                        -107.26652526855469,
+                        279.8958435058594,
+                        14.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.08653760238642,
+            266.0171292905413,
+            13.299997329711914
+        ],
+        "start_rotation": [
+            0.30502198495894167,
+            0.0,
+            0.0,
+            0.9523453095866579
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "school_0",
+        "instruction": "Follow the road straight ahead, keeping the large, dark brown building on your right. As you continue, a white multi-story building with large picture windows will appear ahead. Proceed towards this white building. As you get closer, you will see a brick storefront labeled \"Academy of Learning\" at the base of the white building. Approach the entrance to arrive at the school.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/school_0_1",
+                "type": "object",
+                "location": [
+                    -267.28638217652156,
+                    253.8949594068115,
+                    19.596295427610357
+                ],
+                "radius": 3.2312921318779217,
+                "path_length": 85.60498795997542,
+                "reference_path": [
+                    [
+                        -350.26629638671875,
+                        236.56431579589844,
+                        16.411230087280273
+                    ],
+                    [
+                        -310.5001525878906,
+                        254.39584350585938,
+                        17.799997329711914
+                    ],
+                    [
+                        -271.5001525878906,
+                        254.39584350585938,
+                        17.899999618530273
+                    ],
+                    [
+                        -268.5001525878906,
+                        254.39584350585938,
+                        17.799997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -350.2662985372737,
+            236.56431738401525,
+            16.411230100001838
+        ],
+        "start_rotation": [
+            0.920465230522192,
+            0.0,
+            0.0,
+            0.3908244611071931
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_1_4",
+                "type": "object",
+                "location": [
+                    -197.3489510929906,
+                    119.63763200261064,
+                    21.060943983531388
+                ],
+                "radius": 3.5240424064745497,
+                "path_length": 18.351999540777026,
+                "reference_path": [
+                    [
+                        -181.64358520507812,
+                        129.18675231933594,
+                        19.154781341552734
+                    ],
+                    [
+                        -183.00015258789062,
+                        129.89584350585938,
+                        19.19999885559082
+                    ],
+                    [
+                        -186.00015258789062,
+                        129.89584350585938,
+                        19.19999885559082
+                    ],
+                    [
+                        -196.50015258789062,
+                        123.89584350585938,
+                        19.499998092651367
+                    ],
+                    [
+                        -197.3489532470703,
+                        122.39584350585938,
+                        19.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -181.64357808190312,
+            129.18674942097823,
+            19.154780395380712
+        ],
+        "start_rotation": [
+            0.44063515750411314,
+            0.0,
+            0.0,
+            0.8976862803737871
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_0",
+        "instruction": "Head straight down the road, passing a large building on your right with a blue \"LE MATIN\" billboard featuring classic typography. Keep going as the road curves slightly. You will approach a small white building on your left with grey brickwork and glass doors labeled \"PUBLIC TOILETS\". Turn left towards this building to arrive at the entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_0_1",
+                "type": "object",
+                "location": [
+                    -257.94940105400065,
+                    154.29273124005977,
+                    19.740169931843646
+                ],
+                "radius": 3.451203578119987,
+                "path_length": 56.693731091429456,
+                "reference_path": [
+                    [
+                        -225.39901733398438,
+                        124.61124420166016,
+                        18.32110023498535
+                    ],
+                    [
+                        -229.50015258789062,
+                        128.39584350585938,
+                        18.399999618530273
+                    ],
+                    [
+                        -231.00015258789062,
+                        129.89584350585938,
+                        18.299997329711914
+                    ],
+                    [
+                        -238.50015258789062,
+                        143.39584350585938,
+                        18.19999885559082
+                    ],
+                    [
+                        -247.50015258789062,
+                        159.89584350585938,
+                        17.899999618530273
+                    ],
+                    [
+                        -250.50015258789062,
+                        162.89584350585938,
+                        17.799997329711914
+                    ],
+                    [
+                        -253.50015258789062,
+                        162.89584350585938,
+                        17.799997329711914
+                    ],
+                    [
+                        -255.00015258789062,
+                        161.39584350585938,
+                        17.899999618530273
+                    ],
+                    [
+                        -257.94940185546875,
+                        156.89584350585938,
+                        17.899999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -225.3990135709709,
+            124.61124120835663,
+            18.32110026066975
+        ],
+        "start_rotation": [
+            0.14229265687837073,
+            0.0,
+            0.0,
+            0.9898246308303781
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_0",
+        "instruction": "Follow the road straight, passing a green garbage truck on your right. Continue forward, keeping the large, dark grey apartment building on your right. As you approach the intersection where the Sushi restaurant sign is visible on a white building ahead, prepare to turn. Turn right towards the white storefront labeled \"ATM\" and \"Crispy & Juicy\" with images of burgers. Head directly towards the entrance of this fast food restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_0_4",
+                "type": "object",
+                "location": [
+                    -103.46291379680085,
+                    282.35876203767225,
+                    16.3703558130995
+                ],
+                "radius": 3.6301467880401006,
+                "path_length": 74.54534500698075,
+                "reference_path": [
+                    [
+                        -71.65155029296875,
+                        320.7445983886719,
+                        12.012105941772461
+                    ],
+                    [
+                        -72.00015258789062,
+                        309.8958435058594,
+                        12.19999885559082
+                    ],
+                    [
+                        -73.50015258789062,
+                        293.3958435058594,
+                        12.899999618530273
+                    ],
+                    [
+                        -75.00015258789062,
+                        281.3958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -82.50015258789062,
+                        272.3958435058594,
+                        13.69999885559082
+                    ],
+                    [
+                        -84.00015258789062,
+                        270.8958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -85.50015258789062,
+                        270.8958435058594,
+                        13.600000381469727
+                    ],
+                    [
+                        -96.00015258789062,
+                        273.8958435058594,
+                        13.999998092651367
+                    ],
+                    [
+                        -103.4629135131836,
+                        278.3958435058594,
+                        14.298962593078613
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -71.65154984496657,
+            320.7445883546862,
+            12.01210614251106
+        ],
+        "start_rotation": [
+            0.649023361146941,
+            0.0,
+            0.0,
+            -0.7607684777154791
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Proceed straight down the road, keeping the large \"TIC CRUM Bakery & Cafe\" building with the wooden facade on your right. As you move forward, the green truck parked next to it will come into view. Continue past the truck, veering slightly left towards the brown brick building with a \"PUBLIC TOILETS\" sign above the entrance. Approach the entrance directly, and you will arrive at the public toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_1",
+                "type": "object",
+                "location": [
+                    -51.88103076631791,
+                    106.73392728480519,
+                    19.12578476262025
+                ],
+                "radius": 3.03046973269101,
+                "path_length": 56.792972879160246,
+                "reference_path": [
+                    [
+                        -6.028106689453125,
+                        136.135009765625,
+                        16.899999618530273
+                    ],
+                    [
+                        -12.000152587890625,
+                        135.89584350585938,
+                        16.899999618530273
+                    ],
+                    [
+                        -19.500152587890625,
+                        135.89584350585938,
+                        16.899999618530273
+                    ],
+                    [
+                        -24.000152587890625,
+                        135.89584350585938,
+                        16.69999885559082
+                    ],
+                    [
+                        -28.500152587890625,
+                        134.39584350585938,
+                        16.69999885559082
+                    ],
+                    [
+                        -33.000152587890625,
+                        129.89584350585938,
+                        16.69999885559082
+                    ],
+                    [
+                        -45.000152587890625,
+                        114.89584350585938,
+                        17.100000381469727
+                    ],
+                    [
+                        -46.500152587890625,
+                        113.39584350585938,
+                        17.19999885559082
+                    ],
+                    [
+                        -51.000152587890625,
+                        108.89584350585938,
+                        17.399999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -6.028106708374809,
+            136.135005581914,
+            16.89999961853027
+        ],
+        "start_rotation": [
+            0.05733940438055288,
+            0.0,
+            0.0,
+            -0.9983547429172075
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_5",
+        "instruction": "Start by following the road forward, keeping the white buildings with large window panes on your left. As you proceed, a dark, multi-story building will become visible straight ahead. Continue towards this dark structure until you pass the light-colored wooden structures on your right. Just before reaching the dark building, veer slightly left towards the corner of the white building decorated with large murals or posters. You will arrive at the fast_food_5 restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_5_5",
+                "type": "object",
+                "location": [
+                    -242.80693234248253,
+                    274.82135466800776,
+                    18.831293192834895
+                ],
+                "radius": 2.6957656233547596,
+                "path_length": 35.67499160499995,
+                "reference_path": [
+                    [
+                        -219.96099853515625,
+                        260.3763732910156,
+                        16.398700714111328
+                    ],
+                    [
+                        -231.00015258789062,
+                        272.3958435058594,
+                        16.69999885559082
+                    ],
+                    [
+                        -238.50015258789062,
+                        279.8958435058594,
+                        16.799997329711914
+                    ],
+                    [
+                        -241.50015258789062,
+                        279.8958435058594,
+                        16.899999618530273
+                    ],
+                    [
+                        -244.50015258789062,
+                        276.8958435058594,
+                        16.999998092651367
+                    ],
+                    [
+                        -244.50015258789062,
+                        275.3958435058594,
+                        16.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -219.9610026388666,
+            260.37638674596656,
+            16.398701199348398
+        ],
+        "start_rotation": [
+            0.38581324897266744,
+            0.0,
+            0.0,
+            0.9225769002729011
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pharmacy_2",
+        "instruction": "Head down the road with the large wooden-textured wall on your left and the tall, dark blue building on your right. Keep going straight along the street, passing the red triangle traffic sign near the building's base. Continue forward, staying parallel to the dark blue building facade. As you approach the end of the block, move towards the sidewalk on the right. You will arrive at the pharmacy, distinguishable by its bright white storefront and green cross logo, located at the base of the dark building.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/pharmacy_2_6",
+                "type": "object",
+                "location": [
+                    -106.54722285735124,
+                    259.50577155205036,
+                    16.49052552337717
+                ],
+                "radius": 3.627129729208079,
+                "path_length": 89.07908090175957,
+                "reference_path": [
+                    [
+                        -185.7630615234375,
+                        297.6190185546875,
+                        15.499998092651367
+                    ],
+                    [
+                        -181.50015258789062,
+                        290.3958435058594,
+                        15.499998092651367
+                    ],
+                    [
+                        -180.00015258789062,
+                        288.8958435058594,
+                        15.499998092651367
+                    ],
+                    [
+                        -145.50015258789062,
+                        285.8958435058594,
+                        14.600000381469727
+                    ],
+                    [
+                        -120.00015258789062,
+                        272.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -111.00015258789062,
+                        264.8958435058594,
+                        14.69999885559082
+                    ],
+                    [
+                        -108.00015258789062,
+                        263.3958435058594,
+                        14.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -185.76306815213593,
+            297.6190272310961,
+            15.499998092651365
+        ],
+        "start_rotation": [
+            0.961421528003152,
+            0.0,
+            0.0,
+            -0.27507934399384565
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_belgrade_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BELGRADE/BELGRADE_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bureau_de_change_1",
+        "instruction": "Start facing down the street, keeping the large wooden-textured building on your left. Follow the road forward past the red storefront marked \"Rocket Burger\" on your left. Continue straight, passing a white delivery van parked on the left side of the street. As you approach a building adorned with large red banners and Asian-style architecture on the left, begin to veer slightly left. Follow the road as it curves, heading towards the white \"Bureau de Change\" booth situated next to the \"Rocket Burger\" shop. You will arrive directly in front of the exchange booth.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bureau_de_change_1_3",
+                "type": "object",
+                "location": [
+                    -62.124638349117774,
+                    306.1081336617267,
+                    14.662589626142822
+                ],
+                "radius": 3.5833313662965622,
+                "path_length": 90.97637200681807,
+                "reference_path": [
+                    [
+                        -132.92306518554688,
+                        267.2863464355469,
+                        14.68019962310791
+                    ],
+                    [
+                        -127.50015258789062,
+                        270.8958435058594,
+                        14.600000381469727
+                    ],
+                    [
+                        -121.50015258789062,
+                        272.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -120.00015258789062,
+                        272.3958435058594,
+                        14.399999618530273
+                    ],
+                    [
+                        -85.50015258789062,
+                        270.8958435058594,
+                        13.600000381469727
+                    ],
+                    [
+                        -84.00015258789062,
+                        270.8958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -82.50015258789062,
+                        272.3958435058594,
+                        13.69999885559082
+                    ],
+                    [
+                        -75.00015258789062,
+                        281.3958435058594,
+                        13.499998092651367
+                    ],
+                    [
+                        -64.50015258789062,
+                        306.1081237792969,
+                        12.226256370544434
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -132.92306051267315,
+            267.2863608668684,
+            14.680199459459327
+        ],
+        "start_rotation": [
+            0.9410752280877924,
+            0.0,
+            0.0,
+            0.33819730199915754
+        ],
+        "ceiling_height": 1.0
+    }
+]

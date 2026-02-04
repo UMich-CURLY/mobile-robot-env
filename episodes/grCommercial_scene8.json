@@ -9,7 +9,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Head straight towards the grey easel with a colorful drawing, passing a large grey board on the left wall and a toy elephant on the floor. Continue forward past the elephant and a spinning top toy. As you approach the back wall, you will arrive near a white shopping trolley filled with items.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -75,7 +75,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Start by standing near a small toy house and a duck figurine; turn right. Move forward, passing between a shopping cart outline on your left and a colorful xylophone on the floor. Continue straight ahead, moving past green chairs around a white table. You will arrive at a white couch where a woman is sitting, with a large, round rabbit plush toy nearby.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -181,7 +181,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Walk towards the yellow dog statue, keeping the green chairs on your left. Turn right and proceed down the hallway past the white counter on your left. Continue straight, passing a small stuffed elephant on the floor. As you move forward, the hallway opens up slightly; maintain your course straight ahead. You will arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -252,7 +252,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Turn slightly right to face the large window pane and proceed forward across the wooden floor. Pass the colorful stacking pyramid toy and the small wooden blocks on the windowsill to your left. Continue towards the person standing by the glass door. Keep moving straight ahead until you are directly in front of the wire shopping trolley, with the view of the city visible through the window behind it. You will arrive at the shoppingtrolley.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -437,7 +437,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Head straight past the green chair with red markings, moving towards the round white table surrounded by green chairs. Continue forward, passing under the table. As you move, you will see a woman sitting on a white couch to your right. Keep going straight towards the white couch where the woman is seated, passing plush toys on the floor, including a round white one with red striped ears. You will arrive at the couch.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -518,7 +518,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Head toward the green chairs situated around a white table in the distance, passing the teddy bear and wooden car on your right. Continue moving forward into the room, keeping the large windows on your left. As you approach the dining area, navigate slightly to the right past the yellow dog toy. Proceed straight ahead until you are positioned directly under the white table surrounded by the green chairs.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -687,7 +687,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Start under the green table and chairs, near the yellow toy dog. Turn right and move out from under the table. Continue straight across the light wood floor, passing the white cabinet on your left. Move towards the back of the room where there is a grey chalkboard on the wall. You will arrive at the telephone, which is a round, grey and yellow toy sitting on the floor near a colourful ring stacker.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -783,7 +783,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Start facing the yellow toy Ferris wheel and green chairs, then turn right to face the open area of the room. Move forward across the light wooden floor, passing a white partition wall on your left. As you proceed, you will see a white whiteboard with children's drawings on an easel ahead. Slightly turn left to approach the whiteboard area, passing a beige stuffed elephant sitting on the floor to your left. Continue forward a short distance, keeping the white wall on your left, until you arrive at the keyboard.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -884,7 +884,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "From the colorful stack of rings near the large windows, proceed towards the woman standing by the window. As you move forward, keep the large glass panes on your left. You will pass a white stuffed bear on the floor. Continue straight ahead until you are directly in front of the metal shopping trolley where the woman is standing.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -955,7 +955,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Start by turning slightly right and heading past the table with green chairs. Then, turn right again to face the play area with a white easel. Move straight ahead across the light wooden floor towards the wall with whiteboards and a gray section. As you approach, you will see a stuffed elephant and a golden spinning top toy on the floor. Continue forward until you arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1051,7 +1051,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Move forward from your starting position, passing underneath the green chairs and table. As you proceed, keep the colorful rolling toy and the yellow balloon animal on your left. Continue straight across the wooden floor towards the whiteboard area. You will pass a small stuffed elephant and a spinning top toy on your right. Keep moving forward until you reach the wall; you will arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1142,7 +1142,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Start near the green chair and navigate through the rows of green chairs on your right. Move forward past the colorful toy structure on the floor. Continue straight, passing a yellow animal-shaped chair on your right. As you advance past the white reception desk on your left, slightly curve left towards the corner where a whiteboard easel stands. Move past the easel towards the shelves with toys. You will arrive at the keyboard near the shelves.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1238,7 +1238,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "couch",
-        "instruction": "",
+        "instruction": "Head straight across the wooden floor of the play area, passing a large white teddy bear on your left and a wooden toy truck in the foreground. Continue moving forward through the room, keeping the woman standing by the tall windows on your left. Pass the green chairs and table in the dining area. As you move further into the room, you will see a white couch where a woman is sitting and reading. Approach the couch to arrive at your destination.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1324,7 +1324,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Go straight ahead, passing a green chair and a small pink toy car on your left. Continue forward through the room, keeping the white wall structure on your left and the large windows on your right. You will see various toys scattered on the floor, including a stuffed animal and a small gold-topped spinning toy. Keep moving towards the far end of the room where a whiteboard is visible. You will arrive at the telephone.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1385,7 +1385,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Turn left slightly, passing the white bench on your left. Move forward across the wooden floor towards the back wall where an easel displaying a child's drawing stands. As you approach the area with the grey elephant plush and the spaceship toy, continue straight ahead. You will arrive at the shopping trolley located near the grey sphere tower.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1555,7 +1555,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "From the starting position near the green chairs, turn right and move forward past the large white structure on your left. Continue straight, keeping the white wall on your left, until you see a toy helicopter on the floor. Slightly turn left and proceed forward towards the elephant figurine. Just past the elephant, slightly turn left again. You will arrive at the keyboard.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1671,7 +1671,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "telephone",
-        "instruction": "",
+        "instruction": "Turn right and navigate past the green table and chair set. Continue forward, moving away from the area with the white sofa and artwork. As you proceed, keep the large white column or partition wall to your left. Move straight ahead into the open play area with wooden flooring. You will pass various toys scattered on the floor, including a small yellow helicopter and a stuffed elephant. You will arrive at the telephone, which is located near the wall in this play area.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1757,7 +1757,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Start from the playroom with a white counter on your left and a chalkboard and stuffed elephant on your right. Move straight ahead, keeping the rainbow ring stacker and the yellow/grey spinning top toy to your right. Pass these toys and continue towards the corner of the room. You will arrive near a pink toy car on the floor.",
         "closest_goal_idx": 0,
         "goals": [
             {

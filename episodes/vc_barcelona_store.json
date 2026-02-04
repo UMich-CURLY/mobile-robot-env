@@ -1,0 +1,1405 @@
+[
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_6",
+        "instruction": "Start near the large grey office building on your left and a green recycling truck. Move forward down the road, following the direction of traffic. As you proceed, the buildings on the left will transition to older, European-style architecture with cream facades. Continue straight past the streetlamp on the left. You will see a small, rustic Italian restaurant named \"Vecchio Forno Trattoria\" with a wooden door and checked tablecloths visible through the window. This is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_6_1",
+                "type": "object",
+                "location": [
+                    -299.2339055713413,
+                    102.39226152793917,
+                    15.925724149130952
+                ],
+                "radius": 3.221218842842248,
+                "path_length": 44.462982619411314,
+                "reference_path": [
+                    [
+                        -338.1509094238281,
+                        120.23295593261719,
+                        14.499998092651367
+                    ],
+                    [
+                        -338.0943603515625,
+                        119.4625244140625,
+                        14.499998092651367
+                    ],
+                    [
+                        -309.5943603515625,
+                        116.4625244140625,
+                        14.299997329711914
+                    ],
+                    [
+                        -308.0943603515625,
+                        114.9625244140625,
+                        14.299997329711914
+                    ],
+                    [
+                        -303.5943603515625,
+                        108.9625244140625,
+                        14.100000381469727
+                    ],
+                    [
+                        -300.5943603515625,
+                        104.4625244140625,
+                        14.100000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -338.1509169047343,
+            120.23295503744863,
+            14.499998092651364
+        ],
+        "start_rotation": [
+            0.6808394925103473,
+            0.0,
+            0.0,
+            -0.7324326490799361
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_1",
+        "instruction": "Start by facing the white \"Urban Pedal\" store. Turn left and proceed down the wide street, keeping the dark, multi-story buildings on your left and right. Continue forward for a long distance, passing a white delivery truck parked on the left side of the road. As you approach the end of the block, focus on the rustic wooden storefront on your left with large glass windows and potted plants in the window box. Slightly turn left towards this building to arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_1_5",
+                "type": "object",
+                "location": [
+                    151.30525692344773,
+                    180.05555165423488,
+                    11.187940799024382
+                ],
+                "radius": 3.606455882345813,
+                "path_length": 96.03490235188328,
+                "reference_path": [
+                    [
+                        211.63461303710938,
+                        255.29037475585938,
+                        8.599998474121094
+                    ],
+                    [
+                        210.9056396484375,
+                        252.9625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        209.4056396484375,
+                        249.9625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        203.4056396484375,
+                        242.4625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        185.4056396484375,
+                        221.4625244140625,
+                        8.69999885559082
+                    ],
+                    [
+                        182.4056396484375,
+                        218.4625244140625,
+                        8.799999237060547
+                    ],
+                    [
+                        164.4056396484375,
+                        203.4625244140625,
+                        8.999998092651367
+                    ],
+                    [
+                        161.4056396484375,
+                        200.4625244140625,
+                        8.999998092651367
+                    ],
+                    [
+                        150.9056396484375,
+                        183.9625244140625,
+                        9.299999237060547
+                    ],
+                    [
+                        150.9056396484375,
+                        182.4625244140625,
+                        9.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            211.63461916168225,
+            255.29036950244011,
+            8.599998474121094
+        ],
+        "start_rotation": [
+            0.42519674647334377,
+            0.0,
+            0.0,
+            -0.9051009483966321
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_1",
+        "instruction": "Start on the road and move forward toward the distinct building with oval window cutouts in the distance. Continue straight down the street, keeping the tall buildings with graffiti-like textures on your left. As you approach the \"Urban Pedal\" bicycle rental shop with its blue and white sign and large glass windows on the left, turn left towards it. You will arrive at the bicycle rental shop entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_1_2",
+                "type": "object",
+                "location": [
+                    199.68583920728372,
+                    253.264123209746,
+                    10.341687618971035
+                ],
+                "radius": 2.9551803027955685,
+                "path_length": 45.62813343196061,
+                "reference_path": [
+                    [
+                        188.21424865722656,
+                        209.80262756347656,
+                        8.712020874023438
+                    ],
+                    [
+                        203.4056396484375,
+                        242.4625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        203.4056396484375,
+                        243.9625244140625,
+                        8.69999885559082
+                    ],
+                    [
+                        201.9056396484375,
+                        246.9625244140625,
+                        8.89999771118164
+                    ],
+                    [
+                        200.4056396484375,
+                        251.4625244140625,
+                        8.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            188.21424395421923,
+            209.80262607627918,
+            8.712020588154363
+        ],
+        "start_rotation": [
+            0.8723828717663332,
+            0.0,
+            0.0,
+            0.4888232042862996
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_2",
+        "instruction": "Move forward along the road, keeping the dark, multi-story building on your right. This building has many windows and arched entrances on the ground floor. As you proceed, you will see a white ATM booth attached to the building's facade further ahead. Continue straight towards this structure. You will arrive at the ATM, which features blue signage and glass panels.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_2_3",
+                "type": "object",
+                "location": [
+                    -137.3299729689912,
+                    216.56504655233528,
+                    16.047792863849885
+                ],
+                "radius": 3.141288297125712,
+                "path_length": 47.6736398704237,
+                "reference_path": [
+                    [
+                        -158.22972106933594,
+                        258.70233154296875,
+                        14.274304389953613
+                    ],
+                    [
+                        -137.0943603515625,
+                        221.4625244140625,
+                        14.19999885559082
+                    ],
+                    [
+                        -135.5943603515625,
+                        218.4625244140625,
+                        14.19999885559082
+                    ],
+                    [
+                        -135.5943603515625,
+                        216.9625244140625,
+                        14.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -158.2297165302882,
+            258.70232625196144,
+            14.274304155190318
+        ],
+        "start_rotation": [
+            0.8817857735626824,
+            0.0,
+            0.0,
+            -0.47165013467872746
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_2_8",
+                "type": "object",
+                "location": [
+                    -203.19283629618735,
+                    199.49173092280654,
+                    16.30664863907632
+                ],
+                "radius": 3.004304587300723,
+                "path_length": 19.827357790561546,
+                "reference_path": [
+                    [
+                        -187.03759765625,
+                        184.01034545898438,
+                        13.78681755065918
+                    ],
+                    [
+                        -201.5943603515625,
+                        197.4625244140625,
+                        14.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -187.037590664965,
+            184.01034863685504,
+            13.786817327805522
+        ],
+        "start_rotation": [
+            0.46974884849059495,
+            0.0,
+            0.0,
+            0.8828001015755266
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_1",
+        "instruction": "Start facing the street corner with a large, classical building ahead, its windows tall and dark. Follow the road forward, keeping the grand, multi-story building to your left. As you proceed, you'll see a modern white storefront with blue \"URBAN PEDAL\" signage and bicycle graphics appear on your left. Continue straight, passing closer to the shop windows displaying bikes inside. The path leads directly towards the entrance of Urban Pedal, where you will arrive.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_1_2",
+                "type": "object",
+                "location": [
+                    199.68583920728372,
+                    253.264123209746,
+                    10.341687618971035
+                ],
+                "radius": 2.9551803027955685,
+                "path_length": 43.28265509947711,
+                "reference_path": [
+                    [
+                        212.13621520996094,
+                        214.82119750976562,
+                        8.499998092651367
+                    ],
+                    [
+                        204.9056396484375,
+                        216.9625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        203.4056396484375,
+                        218.4625244140625,
+                        8.599998474121094
+                    ],
+                    [
+                        203.4056396484375,
+                        219.9625244140625,
+                        8.39999771118164
+                    ],
+                    [
+                        203.4056396484375,
+                        243.9625244140625,
+                        8.69999885559082
+                    ],
+                    [
+                        201.9056396484375,
+                        246.9625244140625,
+                        8.89999771118164
+                    ],
+                    [
+                        200.4056396484375,
+                        251.4625244140625,
+                        8.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            212.1362113335307,
+            214.821198065645,
+            8.499998092651367
+        ],
+        "start_rotation": [
+            0.3636890266580455,
+            0.0,
+            0.0,
+            0.9315204194694411
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Proceed slightly left and follow the road towards the small, white building marked with a \"PUBLIC TOILETS\" sign, which features blue male, female, and wheelchair icons. Continue moving straight ahead across the dark, textured ground until you arrive directly in front of the entrance to the public toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_1",
+                "type": "object",
+                "location": [
+                    51.86033479811786,
+                    104.20058761608047,
+                    11.934149602191624
+                ],
+                "radius": 2.944549476596926,
+                "path_length": 21.40349208901882,
+                "reference_path": [
+                    [
+                        32.11469650268555,
+                        91.84854125976562,
+                        10.27342700958252
+                    ],
+                    [
+                        50.4056396484375,
+                        102.9625244140625,
+                        10.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            32.11469501539259,
+            91.84853749323632,
+            10.273427135684893
+        ],
+        "start_rotation": [
+            0.9948665351757237,
+            0.0,
+            0.0,
+            0.10119573700235951
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_0",
+        "instruction": "Start on the city street, facing the direction of the traffic, and head straight past the white trailer with red and blue stripes parked on the left. Keep following the road forward for a long stretch, passing several blocks of tall, shadowed buildings on both sides. As you continue, look for a small shop with a \"Quick Stop Mart\" sign and brightly colored product displays on the left sidewalk. You will arrive at this convenience store.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_0_3",
+                "type": "object",
+                "location": [
+                    131.89718919228042,
+                    170.30530734497225,
+                    11.30884662077539
+                ],
+                "radius": 3.5275235242071687,
+                "path_length": 67.20147501022475,
+                "reference_path": [
+                    [
+                        179.0367431640625,
+                        218.2715301513672,
+                        8.849562644958496
+                    ],
+                    [
+                        177.9056396484375,
+                        215.4625244140625,
+                        8.799999237060547
+                    ],
+                    [
+                        176.4056396484375,
+                        213.9625244140625,
+                        8.89999771118164
+                    ],
+                    [
+                        164.4056396484375,
+                        203.4625244140625,
+                        8.999998092651367
+                    ],
+                    [
+                        132.9056396484375,
+                        174.9625244140625,
+                        9.499998092651367
+                    ],
+                    [
+                        131.4056396484375,
+                        173.4625244140625,
+                        9.499998092651367
+                    ],
+                    [
+                        131.4056396484375,
+                        171.9625244140625,
+                        9.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            179.0367373424463,
+            218.271530809472,
+            8.84956231733676
+        ],
+        "start_rotation": [
+            0.6058280758057367,
+            0.0,
+            0.0,
+            -0.7955955898353878
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_3",
+        "instruction": "Start on the wide road with the traffic light pole to your left and head towards the tall beige buildings ahead. Continue straight down the street, keeping the dark, shadowed buildings on your left and the sunlit beige facades on your right. As you proceed, you will pass a bicycle parked on the sidewalk to your right. Keep moving forward along the road until you approach a building labeled \"MUNICIPAL GARAGE\" on the right side. Turn right towards the entrance with the roll-up gate; you will arrive at the parking entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_3_2",
+                "type": "object",
+                "location": [
+                    -72.67722087926045,
+                    326.6491366705615,
+                    15.7279734115047
+                ],
+                "radius": 3.007499771626044,
+                "path_length": 88.49964096682054,
+                "reference_path": [
+                    [
+                        -140.2912139892578,
+                        318.0071105957031,
+                        14.54496955871582
+                    ],
+                    [
+                        -143.0943603515625,
+                        312.9625244140625,
+                        14.600000381469727
+                    ],
+                    [
+                        -143.0943603515625,
+                        311.4625244140625,
+                        14.600000381469727
+                    ],
+                    [
+                        -140.0943603515625,
+                        308.4625244140625,
+                        14.399999618530273
+                    ],
+                    [
+                        -137.0943603515625,
+                        308.4625244140625,
+                        14.399999618530273
+                    ],
+                    [
+                        -125.0943603515625,
+                        318.9625244140625,
+                        13.499998092651367
+                    ],
+                    [
+                        -123.5943603515625,
+                        318.9625244140625,
+                        13.399999618530273
+                    ],
+                    [
+                        -117.5943603515625,
+                        317.4625244140625,
+                        12.999998092651367
+                    ],
+                    [
+                        -113.0943603515625,
+                        315.9625244140625,
+                        12.899999618530273
+                    ],
+                    [
+                        -111.5943603515625,
+                        315.9625244140625,
+                        12.899999618530273
+                    ],
+                    [
+                        -105.5943603515625,
+                        320.4625244140625,
+                        13.100000381469727
+                    ],
+                    [
+                        -102.5943603515625,
+                        321.9625244140625,
+                        13.19999885559082
+                    ],
+                    [
+                        -78.5943603515625,
+                        332.4625244140625,
+                        13.999998092651367
+                    ],
+                    [
+                        -77.0943603515625,
+                        332.4625244140625,
+                        13.799997329711914
+                    ],
+                    [
+                        -75.5943603515625,
+                        330.9625244140625,
+                        13.999998092651367
+                    ],
+                    [
+                        -74.0943603515625,
+                        327.9625244140625,
+                        13.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -140.29120693592102,
+            318.00710501020046,
+            14.544969541028545
+        ],
+        "start_rotation": [
+            0.7024163994288734,
+            0.0,
+            0.0,
+            -0.7117662550397971
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pharmacy_2",
+        "instruction": "Follow the road straight ahead, passing between the tall beige buildings on your left and the dark structures on your right. Continue forward as the street narrows slightly. Keep moving straight, ignoring the turn-offs, until you approach a distinct white storefront with green cross symbols and large glass windows on your right. This is the pharmacy. You will arrive directly in front of the pharmacy entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/pharmacy_2_1",
+                "type": "object",
+                "location": [
+                    57.656606215582556,
+                    311.29609648152984,
+                    13.870491823265287
+                ],
+                "radius": 3.558402649799376,
+                "path_length": 78.10631852791579,
+                "reference_path": [
+                    [
+                        19.89371109008789,
+                        364.7167663574219,
+                        12.799997329711914
+                    ],
+                    [
+                        42.9056396484375,
+                        344.4625244140625,
+                        12.399999618530273
+                    ],
+                    [
+                        47.4056396484375,
+                        341.4625244140625,
+                        12.299997329711914
+                    ],
+                    [
+                        48.9056396484375,
+                        341.4625244140625,
+                        12.19999885559082
+                    ],
+                    [
+                        53.4056396484375,
+                        341.4625244140625,
+                        11.999998092651367
+                    ],
+                    [
+                        57.9056396484375,
+                        338.4625244140625,
+                        11.999998092651367
+                    ],
+                    [
+                        63.9056396484375,
+                        332.4625244140625,
+                        11.89999771118164
+                    ],
+                    [
+                        65.4056396484375,
+                        329.4625244140625,
+                        11.69999885559082
+                    ],
+                    [
+                        65.4056396484375,
+                        327.9625244140625,
+                        11.89999771118164
+                    ],
+                    [
+                        60.9056396484375,
+                        311.29608154296875,
+                        11.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            19.893710855618973,
+            364.71677263189906,
+            12.799997329711916
+        ],
+        "start_rotation": [
+            0.9810205537261645,
+            0.0,
+            0.0,
+            -0.19390377295661265
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "Follow the road straight ahead. You will pass a large, textured building on your right, moving towards a storefront featuring a grey awning with text and visible interior lighting. As you get closer, notice the sign reading \"The Rusty Anchor Tavern\" above the windows. Continue forward until you reach this establishment, The Rusty Anchor Tavern, which will be directly in front of you on the right side of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_5",
+                "type": "object",
+                "location": [
+                    57.22119744302698,
+                    270.89863872361786,
+                    13.174084566692567
+                ],
+                "radius": 3.0752119086621796,
+                "path_length": 37.7569570406557,
+                "reference_path": [
+                    [
+                        22.309646606445312,
+                        256.5909423828125,
+                        11.999998092651367
+                    ],
+                    [
+                        54.9056396484375,
+                        272.4625244140625,
+                        11.599998474121094
+                    ],
+                    [
+                        56.4056396484375,
+                        272.4625244140625,
+                        11.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            22.309646688801774,
+            256.5909278260456,
+            11.999998092651369
+        ],
+        "start_rotation": [
+            0.9959358311327097,
+            0.0,
+            0.0,
+            0.09006564420465156
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_7",
+                "type": "object",
+                "location": [
+                    81.78856003074912,
+                    145.39267979567558,
+                    11.352004529294224
+                ],
+                "radius": 3.530272206711821,
+                "path_length": 13.426629853695287,
+                "reference_path": [
+                    [
+                        95.8252182006836,
+                        146.42861938476562,
+                        9.69999885559082
+                    ],
+                    [
+                        86.4056396484375,
+                        141.9625244140625,
+                        9.89999771118164
+                    ],
+                    [
+                        83.4056396484375,
+                        141.9625244140625,
+                        9.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            95.82521983353944,
+            146.42862620160366,
+            9.699998855590819
+        ],
+        "start_rotation": [
+            0.20361859794522702,
+            0.0,
+            0.0,
+            -0.9790502880704444
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bicycle_rental_1",
+        "instruction": "Follow the grey road straight ahead, keeping the tall, beige building block on your right. As you approach the building with green-tinted windows on your left, slightly curve left towards the storefront. Turn left to face the shop entrance marked with a bicycle icon on the glass. You will arrive at the bicycle rental shop.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bicycle_rental_1_1",
+                "type": "object",
+                "location": [
+                    -88.6373386272897,
+                    93.33573150693799,
+                    14.376716825656096
+                ],
+                "radius": 3.474824212637465,
+                "path_length": 11.876778951797894,
+                "reference_path": [
+                    [
+                        -97.57745361328125,
+                        88.73233795166016,
+                        13.183773040771484
+                    ],
+                    [
+                        -90.5943603515625,
+                        89.4625244140625,
+                        13.19999885559082
+                    ],
+                    [
+                        -87.5943603515625,
+                        90.9625244140625,
+                        13.299997329711914
+                    ],
+                    [
+                        -87.5943603515625,
+                        92.4625244140625,
+                        13.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -97.57745599156182,
+            88.73233729643562,
+            13.183772722794027
+        ],
+        "start_rotation": [
+            0.9985632675791447,
+            0.0,
+            0.0,
+            -0.053585451772486165
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bank_1",
+        "instruction": "Head straight down the road, keeping the beige, multi-story buildings with arched windows on your left. Continue forward as the path slightly curves, passing a shop with a dark awning labeled \"THE RUSTIC CRUMB\".\n\nMaintain your course along the street. You will pass a taller, modern grey building with dark windows on your left. Continue straight ahead towards the brick building corner ahead. You will arrive at the Liberty Savings Bank, identifiable by its brick facade, wooden window frames, and gold icons on the glass representing loans and investments.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bank_1_8",
+                "type": "object",
+                "location": [
+                    -159.19248294746154,
+                    104.21386926656241,
+                    14.772294837828632
+                ],
+                "radius": 3.2181562024270107,
+                "path_length": 66.21025838473696,
+                "reference_path": [
+                    [
+                        -215.87379455566406,
+                        136.23623657226562,
+                        13.651962280273438
+                    ],
+                    [
+                        -215.0943603515625,
+                        135.9625244140625,
+                        13.600000381469727
+                    ],
+                    [
+                        -180.5943603515625,
+                        110.4625244140625,
+                        12.19999885559082
+                    ],
+                    [
+                        -174.5943603515625,
+                        107.4625244140625,
+                        12.399999618530273
+                    ],
+                    [
+                        -161.0943603515625,
+                        102.9625244140625,
+                        13.100000381469727
+                    ],
+                    [
+                        -159.5943603515625,
+                        102.9625244140625,
+                        13.100000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -215.873794689662,
+            136.2362386092316,
+            13.651961877794749
+        ],
+        "start_rotation": [
+            0.9896281863827209,
+            0.0,
+            0.0,
+            -0.1436525416303052
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_1",
+        "instruction": "Head straight along the road, keeping the dark, shadowed buildings to your left and the brighter, multi-story beige buildings to your right. Continue forward past the storefront with the \"PUBLIC PARKING\" sign above the entrance on your left. As you proceed, the view of the street ahead remains consistent with distant vehicles. Keep moving in this direction until you arrive at the parking entrance located on your immediate left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_1_1",
+                "type": "object",
+                "location": [
+                    -199.8518011598385,
+                    93.59050206123138,
+                    13.637585420318388
+                ],
+                "radius": 3.1751046278811117,
+                "path_length": 10.277408445406643,
+                "reference_path": [
+                    [
+                        -190.41357421875,
+                        89.77820587158203,
+                        11.89999771118164
+                    ],
+                    [
+                        -197.0943603515625,
+                        95.4625244140625,
+                        12.100000381469727
+                    ],
+                    [
+                        -198.5943603515625,
+                        95.4625244140625,
+                        12.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -190.41357829211242,
+            89.77820395598626,
+            11.899997711181642
+        ],
+        "start_rotation": [
+            0.3428669596993044,
+            0.0,
+            0.0,
+            0.9393839725833923
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "theatre_0",
+        "instruction": "Follow the road straight ahead, passing the tall beige building with green shutters on your left and the dark, blocky structure on your right. As you proceed down the street, keep the Liberty Savings Bank on your left. Continue forward until you reach the Grand Marquee Theatre, distinguished by its large sign and wooden facade. Go through the open double doors to arrive at the theatre lobby.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/theatre_0_2",
+                "type": "object",
+                "location": [
+                    -149.83479935581462,
+                    103.59257461900015,
+                    14.894240794005295
+                ],
+                "radius": 3.112340167817507,
+                "path_length": 49.680904377462404,
+                "reference_path": [
+                    [
+                        -194.99758911132812,
+                        115.55682373046875,
+                        12.360214233398438
+                    ],
+                    [
+                        -158.0943603515625,
+                        98.4625244140625,
+                        13.100000381469727
+                    ],
+                    [
+                        -156.5943603515625,
+                        98.4625244140625,
+                        13.19999885559082
+                    ],
+                    [
+                        -150.5943603515625,
+                        102.9625244140625,
+                        13.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -194.99759175879709,
+            115.55682405479189,
+            12.36021413508264
+        ],
+        "start_rotation": [
+            0.992254165094085,
+            0.0,
+            0.0,
+            -0.12422428045048267
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "atm_2",
+        "instruction": "Follow the road straight ahead, keeping the tall, dark buildings on your left. As you proceed, you will pass a small, white structure situated against the building facade. Continue moving forward along the street. Eventually, you will arrive at the ATM booth, which is the small white structure previously seen on the left side of the path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/atm_2_3",
+                "type": "object",
+                "location": [
+                    -137.3299729689912,
+                    216.56504655233528,
+                    16.047792863849885
+                ],
+                "radius": 3.141288297125712,
+                "path_length": 95.18900705985736,
+                "reference_path": [
+                    [
+                        -62.257476806640625,
+                        162.98800659179688,
+                        12.69999885559082
+                    ],
+                    [
+                        -74.0943603515625,
+                        164.4625244140625,
+                        12.799997329711914
+                    ],
+                    [
+                        -77.0943603515625,
+                        164.4625244140625,
+                        12.899999618530273
+                    ],
+                    [
+                        -81.5943603515625,
+                        164.4625244140625,
+                        12.899999618530273
+                    ],
+                    [
+                        -83.0943603515625,
+                        165.9625244140625,
+                        12.999998092651367
+                    ],
+                    [
+                        -134.0943603515625,
+                        216.9625244140625,
+                        14.19999885559082
+                    ],
+                    [
+                        -135.5943603515625,
+                        216.9625244140625,
+                        14.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.25747580818964,
+            162.98800807725044,
+            12.69999885559082
+        ],
+        "start_rotation": [
+            0.25873544675879884,
+            0.0,
+            0.0,
+            0.9659482225205059
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fast_food_2",
+        "instruction": "Start by moving straight down the road, keeping the dark city buildings on your left and right. Ahead on the right side of the street, you will see a bright red diner-style building with large windows and a sign reading \"Rocket Burger\". Gradually veer slightly to the right as you approach this landmark. Continue moving towards the red storefront until you are directly in front of the entrance doors. You will arrive at Rocket Burger.",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/fast_food_2_1",
+                "type": "object",
+                "location": [
+                    170.09792574237804,
+                    189.52659218513583,
+                    10.753070832300253
+                ],
+                "radius": 3.481364556034123,
+                "path_length": 34.558323400190986,
+                "reference_path": [
+                    [
+                        151.3588104248047,
+                        195.4562225341797,
+                        9.250661849975586
+                    ],
+                    [
+                        164.4056396484375,
+                        203.4625244140625,
+                        8.999998092651367
+                    ],
+                    [
+                        167.4056396484375,
+                        204.9625244140625,
+                        8.999998092651367
+                    ],
+                    [
+                        170.4056396484375,
+                        204.9625244140625,
+                        8.89999771118164
+                    ],
+                    [
+                        171.9056396484375,
+                        203.4625244140625,
+                        8.89999771118164
+                    ],
+                    [
+                        171.9056396484375,
+                        198.9625244140625,
+                        9.099998474121094
+                    ],
+                    [
+                        170.09793090820312,
+                        192.9625244140625,
+                        8.999998092651367
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/store/fast_food_2_6",
+                "type": "object",
+                "location": [
+                    122.65157422063675,
+                    200.8092412390189,
+                    11.562211439214552
+                ],
+                "radius": 3.4811953817713928,
+                "path_length": 27.79391931349813,
+                "reference_path": [
+                    [
+                        151.3588104248047,
+                        195.4562225341797,
+                        9.250661849975586
+                    ],
+                    [
+                        137.4056396484375,
+                        195.9625244140625,
+                        9.39999771118164
+                    ],
+                    [
+                        123.9056396484375,
+                        198.9625244140625,
+                        9.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            151.35881476323613,
+            195.4562223336944,
+            9.250662178032124
+        ],
+        "start_rotation": [
+            -0.058664460940734124,
+            0.0,
+            0.0,
+            0.9982777574515688
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_4",
+        "instruction": "Move forward along the street, keeping the tall buildings on your right and the light-colored building on your left. Continue straight ahead, passing a traffic light on your right. As you proceed, the buildings on the right will become clearer, revealing a brick storefront labeled \"TRATTORIA LUNA\" with a wooden window display and flower boxes. Keep moving towards this storefront; you will arrive at the restaurant directly in front of the window with the red flowers.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_4_6",
+                "type": "object",
+                "location": [
+                    222.30158324067725,
+                    158.17643206725012,
+                    9.50391917304324
+                ],
+                "radius": 3.0133299001344795,
+                "path_length": 67.42141396836959,
+                "reference_path": [
+                    [
+                        191.11158752441406,
+                        219.1385040283203,
+                        8.678457260131836
+                    ],
+                    [
+                        206.4056396484375,
+                        192.9625244140625,
+                        8.69999885559082
+                    ],
+                    [
+                        219.9056396484375,
+                        165.9625244140625,
+                        8.099998474121094
+                    ],
+                    [
+                        222.9056396484375,
+                        161.4625244140625,
+                        7.899997711181641
+                    ],
+                    [
+                        222.9056396484375,
+                        159.9625244140625,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            191.11158136315646,
+            219.13850613812042,
+            8.678457515712049
+        ],
+        "start_rotation": [
+            0.8464284995700061,
+            0.0,
+            0.0,
+            -0.5325023897746077
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_barcelona_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BARCELONA/BARCELONA_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "theatre_0",
+        "instruction": "Start facing the street corner with the dark, modern building on your right and a brick \"SAVINGS BANK\" on your left. Move forward along the road, keeping the red scooter to your right as you pass it. Continue straight ahead towards the brick storefronts on the left. The path will lead you directly to the entrance of \"The GRAND MARQUEE THEATRE,\" distinguishable by its prominent sign and wooden doors with posters in the windows. You will arrive at the theatre entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/theatre_0_2",
+                "type": "object",
+                "location": [
+                    -149.83479935581462,
+                    103.59257461900015,
+                    14.894240794005295
+                ],
+                "radius": 3.112340167817507,
+                "path_length": 20.671656400090903,
+                "reference_path": [
+                    [
+                        -169.3341522216797,
+                        95.20281219482422,
+                        12.47288990020752
+                    ],
+                    [
+                        -162.5943603515625,
+                        96.9625244140625,
+                        12.799997329711914
+                    ],
+                    [
+                        -156.5943603515625,
+                        98.4625244140625,
+                        13.19999885559082
+                    ],
+                    [
+                        -150.5943603515625,
+                        102.9625244140625,
+                        13.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -169.33415579127714,
+            95.20280987172721,
+            12.472889956438753
+        ],
+        "start_rotation": [
+            0.9993641995807098,
+            0.0,
+            0.0,
+            -0.03565384406213755
+        ],
+        "ceiling_height": 1.0
+    }
+]

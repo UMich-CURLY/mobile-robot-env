@@ -1,0 +1,1472 @@
+[
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "seagull",
+        "instruction": "Head straight down the dark city street, keeping the towering, shadowed buildings on your right. Follow the road as it stretches toward the distant patch of blue sky. As you proceed, you will see a white shop front with red trim directly ahead at the end of the block. Continue forward, staying on the main road. Just before reaching the intersection near the shop, veer slightly right. You will arrive at the seagull.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/seagull_549",
+                "type": "object",
+                "location": [
+                    92.46805061566407,
+                    217.19597209432476,
+                    10.498617829551321
+                ],
+                "radius": 0.851190425523356,
+                "path_length": 31.780500702704497,
+                "reference_path": [
+                    [
+                        71.53584289550781,
+                        235.3763885498047,
+                        10.799999237060547
+                    ],
+                    [
+                        82.8709716796875,
+                        225.69244384765625,
+                        11.099998474121094
+                    ],
+                    [
+                        85.8709716796875,
+                        224.19244384765625,
+                        11.19999885559082
+                    ],
+                    [
+                        93.3709716796875,
+                        221.19244384765625,
+                        11.39999771118164
+                    ],
+                    [
+                        94.8709716796875,
+                        219.69244384765625,
+                        11.39999771118164
+                    ],
+                    [
+                        94.8709716796875,
+                        218.19244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        93.3709716796875,
+                        217.1959686279297,
+                        11.133566856384277
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            71.53584373008088,
+            235.37638992996324,
+            10.799999237060547
+        ],
+        "start_rotation": [
+            0.8514810053841134,
+            0.0,
+            0.0,
+            -0.5243854474239912
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "boxing_gloves",
+        "instruction": "Follow the dark, deserted city street, keeping the towering, shadowed buildings on your right and the lighter, textured buildings on your left. Move forward along the road, heading towards the gap between the skyscrapers in the distance where the sky is visible. As you continue down the center of the street, maintain your course. Eventually, you will arrive at the boxing gloves.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/boxing_gloves_336",
+                "type": "object",
+                "location": [
+                    137.9688422806147,
+                    242.64666348869991,
+                    11.40453887059352
+                ],
+                "radius": 0.6641143726425582,
+                "path_length": 34.29696729968399,
+                "reference_path": [
+                    [
+                        154.33203125,
+                        272.6919860839844,
+                        11.555142402648926
+                    ],
+                    [
+                        148.8709716796875,
+                        266.19244384765625,
+                        11.499998092651367
+                    ],
+                    [
+                        144.3709716796875,
+                        258.69244384765625,
+                        11.39999771118164
+                    ],
+                    [
+                        138.3709716796875,
+                        249.69244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        136.8709716796875,
+                        245.19244384765625,
+                        11.299999237060547
+                    ],
+                    [
+                        136.8709716796875,
+                        243.69244384765625,
+                        11.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            154.3320331800709,
+            272.6919715271716,
+            11.555142200590002
+        ],
+        "start_rotation": [
+            0.38255639289053683,
+            0.0,
+            0.0,
+            -0.9239321437522245
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "notebook",
+        "instruction": "Head down the city street, keeping the tall brown building on your left and the dark structure with red signage on your right. As you proceed, you'll approach an intersection with a white building featuring a \"Capital One\" logo on the corner. Turn left at this intersection, following the road past the storefronts with green trim. Continue straight along this street, passing a parked white van and an ambulance on your left. Keep moving forward down the road, and you will arrive at the notebook lying on a metal grate.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/notebook_396",
+                "type": "object",
+                "location": [
+                    76.59097399016717,
+                    133.81485171940426,
+                    9.907284527344627
+                ],
+                "radius": 0.5166063567366876,
+                "path_length": 88.80548733190548,
+                "reference_path": [
+                    [
+                        29.120346069335938,
+                        128.27134704589844,
+                        9.644442558288574
+                    ],
+                    [
+                        27.3709716796875,
+                        111.69244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        27.3709716796875,
+                        105.69244384765625,
+                        9.39999771118164
+                    ],
+                    [
+                        28.8709716796875,
+                        104.19244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        42.3709716796875,
+                        101.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        43.8709716796875,
+                        101.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        60.3709716796875,
+                        105.69244384765625,
+                        9.499998092651367
+                    ],
+                    [
+                        61.8709716796875,
+                        107.19244384765625,
+                        9.599998474121094
+                    ],
+                    [
+                        76.59097290039062,
+                        132.69244384765625,
+                        10.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            29.12034644883187,
+            128.27134018639023,
+            9.644442722175274
+        ],
+        "start_rotation": [
+            0.6442690475517738,
+            0.0,
+            0.0,
+            -0.7647989241406725
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "Proceed straight down the dark street, following the road ahead. Continue past the tall, dark buildings flanking both sides. As you move forward, you will see a white storefront with blue text on your right. Keep going straight, passing another red and white storefront labeled \"Rocket Burger\" on your right. Maintain your course down the road. You will eventually arrive at the vans_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_64",
+                "type": "object",
+                "location": [
+                    134.9832300614208,
+                    203.57869079742483,
+                    11.21147874103157
+                ],
+                "radius": 0.3203364158084696,
+                "path_length": 66.93450687380918,
+                "reference_path": [
+                    [
+                        185.5792694091797,
+                        159.9432830810547,
+                        12.154646873474121
+                    ],
+                    [
+                        180.3709716796875,
+                        168.69244384765625,
+                        12.100000381469727
+                    ],
+                    [
+                        177.3709716796875,
+                        171.69244384765625,
+                        12.100000381469727
+                    ],
+                    [
+                        141.3709716796875,
+                        198.69244384765625,
+                        11.19999885559082
+                    ],
+                    [
+                        135.3709716796875,
+                        203.19244384765625,
+                        11.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            185.57926994673457,
+            159.94328121337375,
+            12.154647006121563
+        ],
+        "start_rotation": [
+            0.4732745361775174,
+            0.0,
+            0.0,
+            0.8809149864805093
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_bag",
+        "instruction": "Head forward along the dark road, flanked by a massive, multi-story building on your left and a partially destroyed, gridded building on your right. In the distance, between the structures, you will see a pile of debris and wreckage. Continue straight, keeping the debris pile slightly to your right. As you proceed, you will see a white trash bag and a white container ahead on the ground. Maintain your course until you arrive directly at the trash bag.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_bag_840",
+                "type": "object",
+                "location": [
+                    -226.8727210688243,
+                    38.962714066916384,
+                    7.172462354468186
+                ],
+                "radius": 0.474999974537619,
+                "path_length": 83.93528257244728,
+                "reference_path": [
+                    [
+                        -148.17807006835938,
+                        70.80919647216797,
+                        7.4255475997924805
+                    ],
+                    [
+                        -226.1290283203125,
+                        39.69244384765625,
+                        6.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -148.17806379773722,
+            70.809196267511,
+            7.425547647322892
+        ],
+        "start_rotation": [
+            0.1202334986209345,
+            0.0,
+            0.0,
+            -0.9927456400354372
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "baby_stroller",
+        "instruction": "Move forward along the road, keeping the dark, shadowed building on your left and the sunlit building with arched windows on your right. Continue straight down the street, passing the intersection where the crosswalk markings are visible. As you proceed, the lighting will dim as you enter the shadows cast by the tall skyscrapers. Keep moving forward down the center of the road. Eventually, you will spot a purple baby stroller sitting alone near the sidewalk on the left side of the street. You will arrive at the baby stroller.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/baby_stroller_844",
+                "type": "object",
+                "location": [
+                    363.5683636330898,
+                    66.03572475259018,
+                    16.832080367100996
+                ],
+                "radius": 0.5749999157655346,
+                "path_length": 37.58453448438186,
+                "reference_path": [
+                    [
+                        382.6003112792969,
+                        78.2315444946289,
+                        17.100000381469727
+                    ],
+                    [
+                        382.8709716796875,
+                        78.69244384765625,
+                        17.100000381469727
+                    ],
+                    [
+                        384.3709716796875,
+                        80.19244384765625,
+                        17.19999885559082
+                    ],
+                    [
+                        387.3709716796875,
+                        80.19244384765625,
+                        17.19999885559082
+                    ],
+                    [
+                        388.8709716796875,
+                        78.69244384765625,
+                        17.19999885559082
+                    ],
+                    [
+                        388.8709716796875,
+                        77.19244384765625,
+                        17.19999885559082
+                    ],
+                    [
+                        382.8709716796875,
+                        69.69244384765625,
+                        16.799997329711914
+                    ],
+                    [
+                        381.3709716796875,
+                        68.19244384765625,
+                        16.69999885559082
+                    ],
+                    [
+                        364.8709716796875,
+                        66.69244384765625,
+                        16.799997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            382.6002998736921,
+            78.23154552946903,
+            17.100000381469727
+        ],
+        "start_rotation": [
+            0.7424541449120986,
+            0.0,
+            0.0,
+            0.6698968896052918
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "tissues",
+        "instruction": "Head straight down the city street, flanked by tall, dark grey skyscrapers on the left and a lighter beige building with rows of rectangular windows on the right. Continue forward, passing the white ambulance with red stripes parked on the right side of the road. Keep going straight towards the horizon between the buildings. As you proceed, you will arrive at a small box of tissues sitting on the road surface.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/tissues_485",
+                "type": "object",
+                "location": [
+                    -222.29353752007194,
+                    201.69010223187317,
+                    7.21490697971285
+                ],
+                "radius": 0.2010711385960775,
+                "path_length": 23.312164111274903,
+                "reference_path": [
+                    [
+                        -234.51779174804688,
+                        182.0109405517578,
+                        7.138718128204346
+                    ],
+                    [
+                        -223.1290283203125,
+                        198.69244384765625,
+                        7.299999237060547
+                    ],
+                    [
+                        -222.2935333251953,
+                        201.6901092529297,
+                        7.214907169342041
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -234.51779794262268,
+            182.0109344509829,
+            7.138718223852028
+        ],
+        "start_rotation": [
+            0.8532690400763514,
+            0.0,
+            0.0,
+            0.5214709438187153
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "stack_of_towels",
+        "instruction": "Start on the street flanked by tall, darkened city buildings and move forward down the road. Continue straight, passing the light-colored, detailed facades on your left. As the street opens up towards the brighter sky ahead, turn right. Follow the road, staying centered as you advance between the towering structures toward the distant red light. Slightly adjust your path to the right, continuing down the long avenue. You will arrive at the stack_of_towels.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/stack_of_towels_158",
+                "type": "object",
+                "location": [
+                    138.09614755837083,
+                    117.62219726902035,
+                    10.615329844303247
+                ],
+                "radius": 0.4857328377321579,
+                "path_length": 36.08870311871724,
+                "reference_path": [
+                    [
+                        113.4048843383789,
+                        117.54460906982422,
+                        10.39999771118164
+                    ],
+                    [
+                        114.3709716796875,
+                        126.69244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        115.8709716796875,
+                        128.19244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        117.3709716796875,
+                        128.19244384765625,
+                        10.499998092651367
+                    ],
+                    [
+                        138.0961456298828,
+                        117.62220001220703,
+                        10.61532974243164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            113.40488111728938,
+            117.5446089764585,
+            10.39999771118164
+        ],
+        "start_rotation": [
+            0.7696716264392466,
+            0.0,
+            0.0,
+            0.6384399638606318
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "beach_ball",
+        "instruction": "Follow the road straight ahead, passing a white storefront with red lettering on your left. Continue forward down the dark street flanked by tall skyscrapers. Keep moving straight as the street widens slightly. Eventually, you will pass a \"Capital Trust Bank\" with large glass windows on your right. Just past the bank, you will arrive at the beach ball sitting on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/beach_ball_324",
+                "type": "object",
+                "location": [
+                    77.75519811149381,
+                    184.42608542080188,
+                    10.579724158447661
+                ],
+                "radius": 0.23330740681187478,
+                "path_length": 51.76876824491273,
+                "reference_path": [
+                    [
+                        98.49272155761719,
+                        229.12132263183594,
+                        11.571406364440918
+                    ],
+                    [
+                        99.3709716796875,
+                        228.69244384765625,
+                        11.599998474121094
+                    ],
+                    [
+                        99.3709716796875,
+                        227.19244384765625,
+                        11.599998474121094
+                    ],
+                    [
+                        94.8709716796875,
+                        213.69244384765625,
+                        10.999998092651367
+                    ],
+                    [
+                        79.8709716796875,
+                        183.69244384765625,
+                        10.499998092651367
+                    ],
+                    [
+                        78.3709716796875,
+                        183.69244384765625,
+                        10.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            98.49271806477034,
+            229.12132875608557,
+            11.571406037821399
+        ],
+        "start_rotation": [
+            0.9050569165640444,
+            0.0,
+            0.0,
+            -0.42529046283638244
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dragon_ball",
+        "instruction": "Start your journey on a dark city street flanked by tall skyscrapers, moving forward along the road. As you proceed, keep an eye out for a white and red ambulance parked on the left side of the street. Continue straight down the urban canyon, maintaining your course on the asphalt. The path will lead you directly toward the end of the block. You will arrive at the dragon_ball.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dragon_ball_825",
+                "type": "object",
+                "location": [
+                    -140.32018969911212,
+                    306.8387238381564,
+                    7.626399784869651
+                ],
+                "radius": 0.10000364378129234,
+                "path_length": 55.43172935606807,
+                "reference_path": [
+                    [
+                        -187.7166290283203,
+                        287.6492614746094,
+                        7.569543838500977
+                    ],
+                    [
+                        -185.6290283203125,
+                        287.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -176.6290283203125,
+                        284.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -175.1290283203125,
+                        284.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -158.6290283203125,
+                        290.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -143.6290283203125,
+                        303.69244384765625,
+                        7.799999237060547
+                    ],
+                    [
+                        -140.3201904296875,
+                        306.8387145996094,
+                        7.626399993896484
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -187.71662216013803,
+            287.64925882094974,
+            7.569544026394139
+        ],
+        "start_rotation": [
+            0.9529527278284697,
+            0.0,
+            0.0,
+            -0.30311895111371473
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "offroad_truck",
+        "instruction": "Start on the city street, proceeding towards the red and white ambulance parked near the intersection. As you approach the ambulance, maintain your course along the road, slightly veering left to pass it. Continue forward down the avenue, keeping the tall skyscrapers on your left and right. Eventually, you will see a dark-colored offroad truck with large tires parked on the left side of the street; this is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/offroad_truck_87",
+                "type": "object",
+                "location": [
+                    80.71952476661525,
+                    175.23486652052623,
+                    11.736125157392976
+                ],
+                "radius": 2.5317942828232987,
+                "path_length": 79.40259257802143,
+                "reference_path": [
+                    [
+                        35.500640869140625,
+                        118.71050262451172,
+                        9.771736145019531
+                    ],
+                    [
+                        40.8709716796875,
+                        141.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        43.8709716796875,
+                        144.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        75.3709716796875,
+                        161.19244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        78.3709716796875,
+                        164.19244384765625,
+                        10.099998474121094
+                    ],
+                    [
+                        82.8709716796875,
+                        171.69244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        82.8709716796875,
+                        174.69244384765625,
+                        10.39999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            35.50063995606906,
+            118.71050348242449,
+            9.771735874811041
+        ],
+        "start_rotation": [
+            0.9147032958092401,
+            0.0,
+            0.0,
+            0.4041260702252624
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Start at the city street corner, with a brown-fronted shop on your left and a hot dog truck parked further down on the right. Proceed forward down the center of the road, heading towards the tall buildings in the distance. Continue straight past the initial shops. As you move further down the block, you will approach a park bench situated on the left sidewalk. You will arrive at the park_bench_with_back.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_917",
+                "type": "object",
+                "location": [
+                    175.71189142570236,
+                    310.44508797754673,
+                    13.107957197888865
+                ],
+                "radius": 1.1159915079062444,
+                "path_length": 31.836945008943452,
+                "reference_path": [
+                    [
+                        188.8682861328125,
+                        339.32916259765625,
+                        12.766486167907715
+                    ],
+                    [
+                        184.8709716796875,
+                        332.19244384765625,
+                        12.600000381469727
+                    ],
+                    [
+                        177.3709716796875,
+                        318.69244384765625,
+                        12.299997329711914
+                    ],
+                    [
+                        174.3709716796875,
+                        312.69244384765625,
+                        12.19999885559082
+                    ],
+                    [
+                        174.3709716796875,
+                        311.19244384765625,
+                        12.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            188.8682902581098,
+            339.3291518828595,
+            12.76648574629405
+        ],
+        "start_rotation": [
+            0.5876626727063482,
+            0.0,
+            0.0,
+            -0.8091060394704958
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "nursing_bottle",
+        "instruction": "Start from the shadowed street, moving forward past the ambulance parked on the left. Continue down the dark road, keeping the towering buildings on either side. As you proceed, the path curves gently left. You will pass a lit storefront labeled \"The Rusty Crumb\" on your right. Keep following the road as it bends left past the storefronts with red awnings. Continue moving forward along this street, and you will eventually arrive at the nursing bottle.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/nursing_bottle_651",
+                "type": "object",
+                "location": [
+                    -157.13922911315112,
+                    325.1783672907551,
+                    7.764941148109173
+                ],
+                "radius": 0.3875977697806263,
+                "path_length": 90.64914441295566,
+                "reference_path": [
+                    [
+                        -195.4068145751953,
+                        302.66302490234375,
+                        8.26862621307373
+                    ],
+                    [
+                        -194.6290283203125,
+                        302.19244384765625,
+                        8.299999237060547
+                    ],
+                    [
+                        -181.1290283203125,
+                        294.69244384765625,
+                        7.69999885559082
+                    ],
+                    [
+                        -178.1290283203125,
+                        293.19244384765625,
+                        7.69999885559082
+                    ],
+                    [
+                        -161.6290283203125,
+                        290.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -158.6290283203125,
+                        290.19244384765625,
+                        7.599998474121094
+                    ],
+                    [
+                        -143.6290283203125,
+                        303.69244384765625,
+                        7.799999237060547
+                    ],
+                    [
+                        -140.6290283203125,
+                        306.69244384765625,
+                        7.899997711181641
+                    ],
+                    [
+                        -140.6290283203125,
+                        308.19244384765625,
+                        7.899997711181641
+                    ],
+                    [
+                        -142.1290283203125,
+                        314.19244384765625,
+                        7.899997711181641
+                    ],
+                    [
+                        -151.1290283203125,
+                        323.19244384765625,
+                        8.099998474121094
+                    ],
+                    [
+                        -157.1290283203125,
+                        325.1783752441406,
+                        8.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -195.4068102298111,
+            302.6630384825519,
+            8.268626141722429
+        ],
+        "start_rotation": [
+            0.9835667938798709,
+            0.0,
+            0.0,
+            -0.1805446259983151
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "white_glue_bottle",
+        "instruction": "Head straight along the road, keeping the dark buildings on your left. Continue forward until you see a white ambulance with red stripes parked on the left side of the street. Pass the ambulance, staying on the main road. As you move past the dark building next to the ambulance, slightly veer left towards the curb. You will arrive at the white glue bottle near the base of the building.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/white_glue_bottle_304",
+                "type": "object",
+                "location": [
+                    -244.4343703732698,
+                    170.5775702174867,
+                    7.149854632647148
+                ],
+                "radius": 0.1599999964237213,
+                "path_length": 94.68967679049962,
+                "reference_path": [
+                    [
+                        -156.2947540283203,
+                        190.08152770996094,
+                        7.455616474151611
+                    ],
+                    [
+                        -190.1290283203125,
+                        191.19244384765625,
+                        7.19999885559082
+                    ],
+                    [
+                        -193.1290283203125,
+                        191.19244384765625,
+                        7.299999237060547
+                    ],
+                    [
+                        -212.6290283203125,
+                        186.69244384765625,
+                        7.19999885559082
+                    ],
+                    [
+                        -230.6290283203125,
+                        183.69244384765625,
+                        7.19999885559082
+                    ],
+                    [
+                        -233.6290283203125,
+                        180.69244384765625,
+                        7.099998474121094
+                    ],
+                    [
+                        -242.6290283203125,
+                        170.19244384765625,
+                        6.999998092651367
+                    ],
+                    [
+                        -244.1290283203125,
+                        170.19244384765625,
+                        6.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -156.294746724362,
+            190.08152880015348,
+            7.455616696413789
+        ],
+        "start_rotation": [
+            -0.13837944155105186,
+            0.0,
+            0.0,
+            0.9903792860091628
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance",
+        "instruction": "Head straight down the city street, keeping the tall beige buildings on your left and the modern glass skyscrapers on your right. Follow the road as it curves slightly, passing a large building with green-tinted windows on the right side. Continue moving forward through the urban canyon. You will eventually see a white and red ambulance parked on the right side of the road; that is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_21",
+                "type": "object",
+                "location": [
+                    72.01799983203418,
+                    145.45507301860357,
+                    11.159387474473178
+                ],
+                "radius": 4.320989107366394,
+                "path_length": 81.14103618400014,
+                "reference_path": [
+                    [
+                        18.689762115478516,
+                        111.58557891845703,
+                        9.358874320983887
+                    ],
+                    [
+                        30.3709716796875,
+                        143.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        31.8709716796875,
+                        144.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        33.3709716796875,
+                        144.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        36.3709716796875,
+                        144.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        67.8709716796875,
+                        149.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        75.3709716796875,
+                        149.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        75.3709716796875,
+                        147.69244384765625,
+                        9.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            18.689762924423892,
+            111.58558106177122,
+            9.358873938451167
+        ],
+        "start_rotation": [
+            0.9263592542150609,
+            0.0,
+            0.0,
+            0.3766411184803329
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Head straight down the road, keeping the dark buildings on your left and the \"PIZZA\" shop on your right. Continue forward, passing the storefront with the red \"Laundromat\" sign on your right. As you approach the intersection where a large blue van is parked on the left side of the street, begin to angle slightly left. You will arrive at the rear of the blue van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_30",
+                "type": "object",
+                "location": [
+                    69.88687270436131,
+                    328.01630918845075,
+                    11.820079440683628
+                ],
+                "radius": 3.1041877859920533,
+                "path_length": 31.85679533167658,
+                "reference_path": [
+                    [
+                        72.10625457763672,
+                        354.84051513671875,
+                        10.98235034942627
+                    ],
+                    [
+                        70.8709716796875,
+                        351.69244384765625,
+                        10.89999771118164
+                    ],
+                    [
+                        64.8709716796875,
+                        330.69244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        64.8709716796875,
+                        327.69244384765625,
+                        10.599998474121094
+                    ],
+                    [
+                        66.3709716796875,
+                        326.19244384765625,
+                        10.599998474121094
+                    ],
+                    [
+                        67.8709716796875,
+                        326.19244384765625,
+                        10.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            72.10625431504747,
+            354.84051078761314,
+            10.982350201020925
+        ],
+        "start_rotation": [
+            0.6214925316756282,
+            0.0,
+            0.0,
+            -0.7834200872274198
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "water_fountain",
+        "instruction": "Go straight along the crosswalk, keeping the large beige building with numerous windows on your left. Continue down the road past the \"Capital One\" storefront. At the intersection, turn left onto the street flanked by tall skyscrapers on both sides. Proceed forward down this avenue, passing a red ambulance parked on the right and a dark, modern building structure on your left. Continue straight ahead until you arrive at the small, tiered water fountain in the middle of the plaza.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/water_fountain_877",
+                "type": "object",
+                "location": [
+                    36.37419871243032,
+                    111.89639718431397,
+                    10.131937550359766
+                ],
+                "radius": 1.0829629642774847,
+                "path_length": 62.29832831986693,
+                "reference_path": [
+                    [
+                        6.898956775665283,
+                        78.54288482666016,
+                        8.89999771118164
+                    ],
+                    [
+                        10.8709716796875,
+                        80.19244384765625,
+                        8.69999885559082
+                    ],
+                    [
+                        12.3709716796875,
+                        80.19244384765625,
+                        8.799999237060547
+                    ],
+                    [
+                        31.8709716796875,
+                        80.19244384765625,
+                        8.999998092651367
+                    ],
+                    [
+                        33.3709716796875,
+                        81.69244384765625,
+                        9.099998474121094
+                    ],
+                    [
+                        40.8709716796875,
+                        96.69244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        40.8709716796875,
+                        98.19244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        39.3709716796875,
+                        113.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        37.8709716796875,
+                        113.19244384765625,
+                        9.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            6.898956975052962,
+            78.5428848693404,
+            8.89999771118164
+        ],
+        "start_rotation": [
+            0.9402878797310702,
+            0.0,
+            0.0,
+            0.3403802333139346
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "books",
+        "instruction": "Proceed straight down the street flanked by tall, darkened buildings, keeping the road in sight. Continue forward as the cityscape opens up slightly, revealing a clearer view of the sky ahead. Maintain your course along the road, observing the towering architecture on either side. As you move further, the perspective shifts slightly to the right. Finally, you will arrive at a stack of books placed on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/books_348",
+                "type": "object",
+                "location": [
+                    64.57676315934287,
+                    316.4181641403155,
+                    10.80125681860045
+                ],
+                "radius": 0.3656982469305774,
+                "path_length": 85.5644244415337,
+                "reference_path": [
+                    [
+                        -4.006953239440918,
+                        360.3999938964844,
+                        9.704068183898926
+                    ],
+                    [
+                        51.3709716796875,
+                        338.19244384765625,
+                        10.299999237060547
+                    ],
+                    [
+                        57.3709716796875,
+                        333.69244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        58.8709716796875,
+                        332.19244384765625,
+                        10.39999771118164
+                    ],
+                    [
+                        64.8709716796875,
+                        318.69244384765625,
+                        10.599998474121094
+                    ],
+                    [
+                        64.8709716796875,
+                        317.19244384765625,
+                        10.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -4.00695345446281,
+            360.40000245417053,
+            9.70406803330843
+        ],
+        "start_rotation": [
+            0.9966157432205869,
+            0.0,
+            0.0,
+            -0.08220134040803273
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance_1",
+        "instruction": "Starting near the white ambulance on your left, proceed forward down the street. Follow the road straight, passing the crosswalk and moving between the tall city buildings on either side. Continue ahead down the open road until you approach another white ambulance with red and blue stripes parked on the right side. You will arrive at the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_1_44",
+                "type": "object",
+                "location": [
+                    54.200006899416806,
+                    158.54142778707921,
+                    11.101591157817055
+                ],
+                "radius": 3.5130604715057387,
+                "path_length": 38.347226780695934,
+                "reference_path": [
+                    [
+                        79.72549438476562,
+                        141.25918579101562,
+                        9.704273223876953
+                    ],
+                    [
+                        76.8709716796875,
+                        147.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        75.3709716796875,
+                        149.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        52.8709716796875,
+                        150.69244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        51.3709716796875,
+                        152.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        51.3709716796875,
+                        155.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        51.3709716796875,
+                        156.69244384765625,
+                        9.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            79.7254930347741,
+            141.2591902837982,
+            9.70427287010751
+        ],
+        "start_rotation": [
+            0.4497657964204959,
+            0.0,
+            0.0,
+            0.8931465324179662
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_ny",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/NY/NY_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "seagull",
+        "instruction": "Start facing the tall, dark buildings on your left and the lighter-colored structures on your right. Follow the road, veering slightly right past the red barrier. Continue straight down the street, keeping the storefront labeled \"Santander\" with its red awning on your right. Proceed forward, passing a white concrete block lying on the road. As you approach the storefront with the sign \"APEX,\" turn right towards the entrance. You will arrive at the destination near the shop window.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/seagull_491",
+                "type": "object",
+                "location": [
+                    43.81279497680889,
+                    181.27471069058424,
+                    9.655809995477483
+                ],
+                "radius": 0.7965376127502566,
+                "path_length": 32.76628039117054,
+                "reference_path": [
+                    [
+                        30.10672378540039,
+                        156.79592895507812,
+                        9.58928108215332
+                    ],
+                    [
+                        27.3709716796875,
+                        161.19244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        27.3709716796875,
+                        162.69244384765625,
+                        9.799999237060547
+                    ],
+                    [
+                        37.8709716796875,
+                        176.19244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        40.8709716796875,
+                        180.69244384765625,
+                        9.69999885559082
+                    ],
+                    [
+                        42.3709716796875,
+                        182.19244384765625,
+                        9.89999771118164
+                    ],
+                    [
+                        43.81279373168945,
+                        182.19244384765625,
+                        9.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            30.10672454632441,
+            156.79592758348917,
+            9.589280873401506
+        ],
+        "start_rotation": [
+            0.3362562378539703,
+            0.0,
+            0.0,
+            0.9417705360141048
+        ],
+        "ceiling_height": 1.0
+    }
+]

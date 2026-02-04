@@ -334,7 +334,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "keyboard",
-        "instruction": "",
+        "instruction": "Face right and move towards the white chair with wooden legs, then turn left to reach the mirror.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -518,7 +518,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start from a position facing a long wooden bookshelf on the right, filled with books. To your left, there is a tall green topiary plant next to a white chair. Move forward along the carpeted floor past the plant until you reach the desk area ahead.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -805,7 +805,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Start by facing the dark grey, rounded seating area; slightly turn left and advance past the grey armchair on your left. Continue straight through the open office space, moving towards the large windows and passing the desk area with the laptop on your left. As you approach the large wooden column and the bookshelf, turn right. Move forward, keeping the bookshelf to your left and the grey ottoman to your right, until you arrive at the shopping trolley near the window.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -1356,7 +1356,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start by facing the yellow sofa chair on your left, then turn slightly to the right to move away from it. Continue straight ahead, keeping the large wooden shelving unit filled with books and vases on your right. Once you are past the shelves, turn left to follow the path along the floor-to-ceiling windows. Move forward for a while down this corridor, keeping the windows on your right and the office area with desks on your right. Eventually, you will arrive near a large, textured white sofa chair.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1507,7 +1507,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start by turning slightly to the right and moving forward down the aisle, passing the large grey pillar and the person with the shopping cart on your left. Continue straight ahead towards the promotional displays. Then, turn right and move a short distance forward. You will arrive at the table.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -1822,7 +1822,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "counter",
-        "instruction": "",
+        "instruction": "Starting from the aisle between the fruit stands and the refrigerated produce section, with the wooden crates of green melons to your right, move forward slightly while angling left. Proceed down the wide white path, keeping the tiered wooden display of green produce on your left. As you move forward, the aisle opens up; veer slightly right, passing the red shopping cart filled with items. Continue straight ahead towards the checkout area until you arrive at the counter near the baskets of oranges.",
         "closest_goal_idx": 2,
         "goals": [
             {
@@ -2436,7 +2436,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Start at this position and slightly turn left. Follow the red leash guide past the wooden produce bins filled with green vegetables on your left. Move straight down the aisle, passing the man in the suit on your left and the large display of watermelons on your right. Continue forward until you reach the large promotional displays with Chinese characters on them. You will arrive at the trashcan.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -2665,7 +2665,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "shoppingtrolley",
-        "instruction": "",
+        "instruction": "Starting from the shelf stocked with red, yellow, and blue boxes, move slightly left and then proceed forward down the aisle. As you pass the wooden bin filled with large orange produce on your left, turn left to face a new aisle. Continue straight ahead, moving past the wooden display now containing large green watermelons on your left, until you arrive at the shopping trolley.",
         "closest_goal_idx": 3,
         "goals": [
             {
@@ -3223,7 +3223,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "trashcan",
-        "instruction": "",
+        "instruction": "Walk past the wooden shelves stocked with various colorful drinks and packaged goods on your left, slightly angling right towards the person in dark clothing. Then, turn left into the open aisle. Proceed straight down this wide path, passing the produce section with green vegetables on your right and shelves with bottles on your left. Continue forward past the shopping carts until you arrive at the trashcan.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -3427,7 +3427,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "basket",
-        "instruction": "",
+        "instruction": "Start by facing the shopping cart with the red frame and wire mesh, and the shelves stocked with beverages in the background. Move forward down the aisle, passing the white-shelved display unit stacked with red and white items on your right.\n\nContinue straight ahead, keeping the large wooden barrel filled with bottles on your left. As you proceed, you'll see a long refrigerated display case on your right filled with various products.\n\nTurn right slightly to navigate around the end of the aisle shelves. You will arrive at the wooden basket located near the end of the aisle.",
         "closest_goal_idx": 1,
         "goals": [
             {
@@ -4075,7 +4075,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "table",
-        "instruction": "",
+        "instruction": "Start by slightly turning left and moving forward past the fruit displays on your left, heading towards the aisle with shelves full of colorful bottles and boxes on your right.\n\nNext, turn left, passing a man in jeans and a white shirt. Continue forward down the main aisle, keeping the long shelves stocked with various packaged goods on your right.\n\nTurn left again at the end of the aisle. Proceed forward, passing displays of fresh red tomatoes and green leafy vegetables on your left, while moving towards the section with bright overhead geometric lights.\n\nUpon reaching the end of that section, turn right. Move down this new aisle where you'll see promotional cardboard displays with orange Chinese characters on your left and shelves stocked with red and blue items on your right.\n\nTurn right once more into another aisle. Continue forward past a display of red boxes on your left.\n\nSlightly turn right to align yourself with the aisle, moving forward past a woman in a black and white striped shirt. You will arrive at the display table marked \"PROMOTION\" with Chinese text.",
         "closest_goal_idx": 0,
         "goals": [
             {
@@ -4476,7 +4476,7 @@
         "align_ground": false,
         "navmesh_preset": "default",
         "objnav": "cabinet",
-        "instruction": "",
+        "instruction": "Walk straight ahead along the white aisle floor, passing a silver refrigerated display case on your left filled with baked goods and a produce display on your right. Continue forward down the aisle, keeping the person in the dark jacket to your left. Once you pass the section with colorful boxes and bottles on shelves to your right, turn right. Move forward a short distance, then angle slightly left, proceeding down the narrower aisle lined with shelves of packaged goods and drinks on both sides. You will arrive at the cabinet.",
         "closest_goal_idx": 0,
         "goals": [
             {

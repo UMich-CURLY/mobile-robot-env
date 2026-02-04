@@ -1,0 +1,1523 @@
+[
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 0,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "From the sidewalk, move straight ahead, passing a golden van parked on your right. As you continue forward along the pavement, you will pass a black bin and a terracotta pot on the ground. Keep moving straight towards the large green recycling truck ahead. Once you reach the rear of the green truck, turn right to go around its back end. Proceed forward slightly to arrive at the side of the garbage_truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_1",
+                "type": "object",
+                "location": [
+                    -28.98467762285449,
+                    -3.701252637323776,
+                    3.7113553334250753
+                ],
+                "radius": 4.022651683791404,
+                "path_length": 43.17164662324945,
+                "reference_path": [
+                    [
+                        -61.704158782958984,
+                        5.057798862457275,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -42.00633239746094,
+                        2.792724609375,
+                        2.4000282287597656
+                    ],
+                    [
+                        -33.60633850097656,
+                        -0.30727386474609375,
+                        2.300029754638672
+                    ],
+                    [
+                        -25.906333923339844,
+                        -1.8072738647460938,
+                        2.000028610229492
+                    ],
+                    [
+                        -25.506332397460938,
+                        -2.4072799682617188,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.506332397460938,
+                        -4.707275390625,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.706336975097656,
+                        -4.907279968261719,
+                        2.1000289916992188
+                    ],
+                    [
+                        -27.406333923339844,
+                        -5.107276916503906,
+                        2.1000289916992188
+                    ],
+                    [
+                        -28.840482711791992,
+                        -5.215291976928711,
+                        2.144087553024292
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.70415817191971,
+            5.057798899383457,
+            2.6000289916992188
+        ],
+        "start_rotation": [
+            0.982080712611249,
+            0.0,
+            0.0,
+            -0.18846080207030175
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 1,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_chair",
+        "instruction": "Starting near a tall stack of colorful, flattened rocks, turn slightly right and proceed forward. Continue straight along the wide paved walkway, keeping the building wall on your left. You will pass a green truck parked on the right and then several dark rectangular blocks. Keep moving forward towards the grey buildings in the distance until you reach an office chair sitting on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_chair_42",
+                "type": "object",
+                "location": [
+                    -16.58890242544748,
+                    4.395901616632053,
+                    2.8121455798149246
+                ],
+                "radius": 0.5999999675133689,
+                "path_length": 44.44093074071982,
+                "reference_path": [
+                    [
+                        -61.41801452636719,
+                        5.387662887573242,
+                        2.6386587619781494
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -58.206336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -17.30633544921875,
+                        4.395901679992676,
+                        2.3147690296173096
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.418014937714105,
+            5.387662921996717,
+            2.6386586536103227
+        ],
+        "start_rotation": [
+            0.9809546362600166,
+            0.0,
+            0.0,
+            -0.19423697279348898
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 2,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "paper_towel",
+        "instruction": "Head out of the room towards the street, passing the colourful stacking toy on your left. Once outside, follow the pavement towards the large, dirty yellow van parked ahead. Continue moving straight, keeping the dark grey multi-story building on your right. As you approach the yellow van, you will see a green truck parked further down the line. Keep moving forward on the pavement; you will arrive at the paper towel roll lying on the ground near a grey bin.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/paper_towel_107",
+                "type": "object",
+                "location": [
+                    -51.34605821569297,
+                    1.2558764815868524,
+                    2.4929238529390574
+                ],
+                "radius": 0.26440313361525225,
+                "path_length": 12.800957031844709,
+                "reference_path": [
+                    [
+                        -62.996604919433594,
+                        6.38437032699585,
+                        2.6200082302093506
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -51.3460578918457,
+                        1.2558765411376953,
+                        2.4929237365722656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.99660482162892,
+            6.384370352773504,
+            2.620008200021694
+        ],
+        "start_rotation": [
+            0.961778850844155,
+            0.0,
+            0.0,
+            -0.2738273946647717
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 3,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start facing the white board, then turn right and exit the room. Outside, move forward across the wide paved area towards the large grey building with many windows in the distance. As you approach the street, veer slightly right, aiming towards the green recycling truck parked ahead. Continue moving straight, passing a red and white umbrella on your left. Follow the road as you get closer to the truck. Turn right just before reaching the green truck's rear. You will arrive at the garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_1",
+                "type": "object",
+                "location": [
+                    -28.98467762285449,
+                    -3.701252637323776,
+                    3.7113553334250753
+                ],
+                "radius": 4.022651683791404,
+                "path_length": 45.59731846060925,
+                "reference_path": [
+                    [
+                        -63.79746627807617,
+                        6.25257682800293,
+                        2.6657204627990723
+                    ],
+                    [
+                        -62.1063346862793,
+                        5.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -42.00633239746094,
+                        2.792724609375,
+                        2.4000282287597656
+                    ],
+                    [
+                        -33.60633850097656,
+                        -0.30727386474609375,
+                        2.300029754638672
+                    ],
+                    [
+                        -25.906333923339844,
+                        -1.8072738647460938,
+                        2.000028610229492
+                    ],
+                    [
+                        -25.506332397460938,
+                        -2.4072799682617188,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.506332397460938,
+                        -4.707275390625,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.706336975097656,
+                        -4.907279968261719,
+                        2.1000289916992188
+                    ],
+                    [
+                        -27.406333923339844,
+                        -5.107276916503906,
+                        2.1000289916992188
+                    ],
+                    [
+                        -28.840482711791992,
+                        -5.215291976928711,
+                        2.144087553024292
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -63.79746529204743,
+            6.252577009075347,
+            2.665720473007517
+        ],
+        "start_rotation": [
+            0.9998493419812734,
+            0.0,
+            0.0,
+            0.017357803421359334
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 4,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinning_chair",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinning_chair_17",
+                "type": "object",
+                "location": [
+                    -94.96749865638998,
+                    -16.111403225820958,
+                    3.177229051598017
+                ],
+                "radius": 0.4999999709281884,
+                "path_length": 42.59452045809612,
+                "reference_path": [
+                    [
+                        -59.84907150268555,
+                        7.2999091148376465,
+                        2.6283175945281982
+                    ],
+                    [
+                        -61.80633544921875,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.0063362121582,
+                        4.492725372314453,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -85.00633239746094,
+                        -7.207275390625,
+                        2.7000293731689453
+                    ],
+                    [
+                        -95.19691467285156,
+                        -15.652566909790039,
+                        2.500028610229492
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinning_chair_102",
+                "type": "object",
+                "location": [
+                    -55.2352255569852,
+                    -20.254396714908296,
+                    2.9935263834512096
+                ],
+                "radius": 0.4999999709281884,
+                "path_length": 43.40044010745929,
+                "reference_path": [
+                    [
+                        -59.84907150268555,
+                        7.2999091148376465,
+                        2.6283175945281982
+                    ],
+                    [
+                        -60.706336975097656,
+                        5.292724609375,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -44.10633850097656,
+                        -1.707275390625,
+                        2.4000282287597656
+                    ],
+                    [
+                        -44.00633239746094,
+                        -1.8072738647460938,
+                        2.4000282287597656
+                    ],
+                    [
+                        -43.706336975097656,
+                        -3.0072784423828125,
+                        2.2000293731689453
+                    ],
+                    [
+                        -43.706336975097656,
+                        -4.107276916503906,
+                        2.2000293731689453
+                    ],
+                    [
+                        -46.30633544921875,
+                        -13.907279968261719,
+                        2.4000282287597656
+                    ],
+                    [
+                        -46.60633850097656,
+                        -14.207275390625,
+                        2.4000282287597656
+                    ],
+                    [
+                        -54.75501251220703,
+                        -19.934263229370117,
+                        2.500028610229492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -59.8490725266543,
+            7.299909069144876,
+            2.628317590671021
+        ],
+        "start_rotation": [
+            0.21146054176136667,
+            0.0,
+            0.0,
+            -0.9773865352448791
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 5,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "umbrella",
+        "instruction": "Head towards the large grey building in the distance, passing the yellow van on your left. As you move forward across the paved plaza, continue straight ahead. You will arrive at the red and white umbrella standing in the open area.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_46",
+                "type": "object",
+                "location": [
+                    -57.14405492501714,
+                    -3.2331703897255286,
+                    2.943299455442414
+                ],
+                "radius": 0.6292896420514396,
+                "path_length": 8.53279549615808,
+                "reference_path": [
+                    [
+                        -59.94562911987305,
+                        4.57930850982666,
+                        2.543321132659912
+                    ],
+                    [
+                        -56.80633544921875,
+                        -3.0072784423828125,
+                        2.4000282287597656
+                    ],
+                    [
+                        -56.907875061035156,
+                        -3.311896324157715,
+                        2.4000282287597656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -59.94562809499233,
+            4.579308607033536,
+            2.5433210533237047
+        ],
+        "start_rotation": [
+            0.946125939341136,
+            0.0,
+            0.0,
+            -0.32379886798111723
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 6,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "magician_hat",
+        "instruction": "Start facing the white building on your right, then turn slightly left to face the open plaza. Move forward, keeping the large, dark, classical-style building with many windows on your far left. Continue straight ahead along the wide, paved walkway. As you proceed, you will pass white vehicles parked in the distance. Keep moving forward until you reach a black top hat lying on the ground, which is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/magician_hat_34",
+                "type": "object",
+                "location": [
+                    -72.89544535142784,
+                    -2.9840218071245035,
+                    2.7018005066233854
+                ],
+                "radius": 0.3189235834415882,
+                "path_length": 12.855333588079619,
+                "reference_path": [
+                    [
+                        -62.41084671020508,
+                        4.415158748626709,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -72.89544677734375,
+                        -2.9840219020843506,
+                        2.701800584793091
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/magician_hat_50",
+                "type": "object",
+                "location": [
+                    -75.42030734974189,
+                    -14.611831775088152,
+                    2.7896770508567954
+                ],
+                "radius": 0.2651795034653972,
+                "path_length": 39.25451370581503,
+                "reference_path": [
+                    [
+                        -62.41084671020508,
+                        4.415158748626709,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -85.00633239746094,
+                        -7.207275390625,
+                        2.7000293731689453
+                    ],
+                    [
+                        -85.30633544921875,
+                        -7.907279968261719,
+                        2.7000293731689453
+                    ],
+                    [
+                        -85.70633697509766,
+                        -9.007278442382812,
+                        2.500028610229492
+                    ],
+                    [
+                        -85.80633544921875,
+                        -9.607276916503906,
+                        2.500028610229492
+                    ],
+                    [
+                        -84.80633544921875,
+                        -10.107276916503906,
+                        2.500028610229492
+                    ],
+                    [
+                        -75.67020416259766,
+                        -14.469038963317871,
+                        2.7000293731689453
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.41084743661527,
+            4.415158708340853,
+            2.600028991699219
+        ],
+        "start_rotation": [
+            0.15183234559842013,
+            0.0,
+            0.0,
+            -0.9884062620350409
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 7,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone",
+        "instruction": "Start by moving past the colorful toy stack and the teddy bears in the window. Turn left to follow the sidewalk alongside the building wall on your left. Continue straight ahead for a long distance, keeping the building immediately to your left. As you proceed, you will see a green recycling truck parked further down the path. Keep moving forward along the pavement towards the open plaza area. Eventually, you will arrive at an office desk and chair setup outside; the target office phone is on the ground near the desk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_43",
+                "type": "object",
+                "location": [
+                    -17.106626326921315,
+                    5.016825769301493,
+                    2.287145614383519
+                ],
+                "radius": 0.18851279119863973,
+                "path_length": 46.399196706158975,
+                "reference_path": [
+                    [
+                        -60.281036376953125,
+                        7.592676162719727,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.706336975097656,
+                        5.292724609375,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -58.206336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -17.136926651000977,
+                        5.077427864074707,
+                        2.4000282287597656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -60.28103747531589,
+            7.592676351417651,
+            2.6000289916992188
+        ],
+        "start_rotation": [
+            0.6939208541047981,
+            0.0,
+            0.0,
+            -0.7200512816726788
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 8,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "From the window filled with toys, head straight outside toward the large grey building across the plaza. Follow the red path on the ground, passing the red and white umbrella on your left. Continue forward across the open pavement, keeping the food truck with the yellow awning to your right. As you approach the food truck, turn slightly right and move towards the street. You will arrive at the puddle near the curb.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_47",
+                "type": "object",
+                "location": [
+                    -57.76574255533258,
+                    -3.911892453953762,
+                    2.3932998630755287
+                ],
+                "radius": 8.968730752211599,
+                "path_length": 13.307551634232107,
+                "reference_path": [
+                    [
+                        -62.82938766479492,
+                        7.202262878417969,
+                        2.6698837280273438
+                    ],
+                    [
+                        -56.80633544921875,
+                        -3.0072784423828125,
+                        2.4000282287597656
+                    ],
+                    [
+                        -57.00633239746094,
+                        -3.6072769165039062,
+                        2.4000282287597656
+                    ],
+                    [
+                        -57.765743255615234,
+                        -3.9118924140930176,
+                        2.3932998180389404
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.82938898666901,
+            7.202262678727252,
+            2.669883767987157
+        ],
+        "start_rotation": [
+            0.7146721417850291,
+            0.0,
+            0.0,
+            -0.6994595983732007
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 9,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start by facing the dark grey, multi-story building. Turn slightly right and proceed across the open plaza. As you move forward, keep the large, grey building on your left. Continue straight along the pavement, passing a row of dark containers and a green truck parked on the right. Follow the road as it curves slightly. Eventually, you will approach a large green garbage truck featuring a recycling symbol on its side. Continue forward until you arrive directly at the rear of this green garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_1",
+                "type": "object",
+                "location": [
+                    -28.98467762285449,
+                    -3.701252637323776,
+                    3.7113553334250753
+                ],
+                "radius": 4.022651683791404,
+                "path_length": 43.282686117032675,
+                "reference_path": [
+                    [
+                        -60.21529769897461,
+                        5.880986213684082,
+                        2.6699821949005127
+                    ],
+                    [
+                        -60.706336975097656,
+                        5.292724609375,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -42.00633239746094,
+                        2.792724609375,
+                        2.4000282287597656
+                    ],
+                    [
+                        -33.60633850097656,
+                        -0.30727386474609375,
+                        2.300029754638672
+                    ],
+                    [
+                        -25.906333923339844,
+                        -1.8072738647460938,
+                        2.000028610229492
+                    ],
+                    [
+                        -25.506332397460938,
+                        -2.4072799682617188,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.506332397460938,
+                        -4.707275390625,
+                        2.1000289916992188
+                    ],
+                    [
+                        -25.706336975097656,
+                        -4.907279968261719,
+                        2.1000289916992188
+                    ],
+                    [
+                        -27.406333923339844,
+                        -5.107276916503906,
+                        2.1000289916992188
+                    ],
+                    [
+                        -28.840482711791992,
+                        -5.215291976928711,
+                        2.144087553024292
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -60.215298484139964,
+            5.880986286456835,
+            2.669982205209079
+        ],
+        "start_rotation": [
+            0.6337902252474278,
+            0.0,
+            0.0,
+            -0.7735049776057131
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 10,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "Start from the indoor area filled with toys and exit through the glass doors towards the city street. Move forward onto the sidewalk, keeping the large white food truck with yellow trim on your left. Continue straight along the pavement, passing a white ambulance and other parked vehicles on your left, while a row of tall white buildings lines your right. Keep heading towards the distant monument with columns. As you proceed down the open walkway, you will arrive at the park bench situated on the right side of the path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_11",
+                "type": "object",
+                "location": [
+                    -84.11864309351179,
+                    -7.335140884307771,
+                    3.0901548622427697
+                ],
+                "radius": 2.4430179277123645,
+                "path_length": 28.280436454333366,
+                "reference_path": [
+                    [
+                        -60.66889572143555,
+                        7.366211414337158,
+                        2.656092882156372
+                    ],
+                    [
+                        -61.80633544921875,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.0063362121582,
+                        4.492725372314453,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -84.11864471435547,
+                        -7.335140705108643,
+                        3.0901548862457275
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -60.66889444090877,
+            7.366211516022905,
+            2.656092892362327
+        ],
+        "start_rotation": [
+            0.3213963300370757,
+            0.0,
+            0.0,
+            -0.9469447708492291
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 11,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "paper_towel",
+        "instruction": "Start inside the room facing the large window, with the stuffed elephant to your left and the stuffed bears to your right. Move forward out of the room onto the paved area outside. As you exit, turn slightly left to follow the road, keeping the large grey building on your right and the yellow van ahead. Continue forward along the sidewalk, passing a green truck on your left and large grey containers. Proceed until you are near the yellow van. You will arrive at the paper towel roll lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/paper_towel_107",
+                "type": "object",
+                "location": [
+                    -51.34605821569297,
+                    1.2558764815868524,
+                    2.4929238529390574
+                ],
+                "radius": 0.26440313361525225,
+                "path_length": 14.01661798445045,
+                "reference_path": [
+                    [
+                        -63.76945495605469,
+                        7.381719589233398,
+                        2.7736027240753174
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -51.3460578918457,
+                        1.2558765411376953,
+                        2.4929237365722656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -63.7694556540319,
+            7.381719477267946,
+            2.773602702819084
+        ],
+        "start_rotation": [
+            0.9780038350791265,
+            0.0,
+            0.0,
+            -0.20858690891453588
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 12,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_bag",
+        "instruction": "Start near the window display with toys, then head towards the white food truck with a yellow cheese-wedge roof. Keep moving forward along the pavement, keeping the tall grey building on your right. Continue straight for a long distance, passing a white camper van on your left and heading towards the large columned gate structure in the distance. As you proceed along the building wall, you will arrive at the black trash bag near the green wallet on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_bag_31",
+                "type": "object",
+                "location": [
+                    -98.71156176196195,
+                    -1.7523511199567015,
+                    3.221201668885646
+                ],
+                "radius": 0.474999974537619,
+                "path_length": 41.709723828062444,
+                "reference_path": [
+                    [
+                        -61.010520935058594,
+                        7.4801201820373535,
+                        2.627608299255371
+                    ],
+                    [
+                        -61.80633544921875,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.0063362121582,
+                        4.492725372314453,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -64.30633544921875,
+                        3.6927261352539062,
+                        2.500028610229492
+                    ],
+                    [
+                        -99.00633239746094,
+                        -1.1072769165039062,
+                        2.800029754638672
+                    ],
+                    [
+                        -99.40633392333984,
+                        -1.5072784423828125,
+                        2.800029754638672
+                    ],
+                    [
+                        -99.26333618164062,
+                        -1.9362729787826538,
+                        2.800029754638672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.01052243159932,
+            7.480120044829096,
+            2.6276083622483397
+        ],
+        "start_rotation": [
+            0.46065794844213703,
+            0.0,
+            0.0,
+            -0.8875777456296893
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 13,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "notebook",
+        "instruction": "Start at the position near the yellow truck. Turn slightly left and head towards the distant red and white umbrella. Continue forward, passing the green recycling bin on your right and the grey bin on your left. Keep moving straight along the paved area, past the green truck parked further down. Eventually, you will arrive at the notebook lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/notebook_23",
+                "type": "object",
+                "location": [
+                    -23.786238041191687,
+                    2.2851393529688098,
+                    2.312020653560252
+                ],
+                "radius": 0.48010799562811535,
+                "path_length": 37.91604053437048,
+                "reference_path": [
+                    [
+                        -61.075740814208984,
+                        5.59867000579834,
+                        2.635549306869507
+                    ],
+                    [
+                        -60.406333923339844,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -23.786237716674805,
+                        2.285139322280884,
+                        2.3120205402374268
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.07574125777664,
+            5.5986698927440575,
+            2.6355492613484577
+        ],
+        "start_rotation": [
+            0.8692863926214472,
+            0.0,
+            0.0,
+            -0.49430877759067876
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 14,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_1",
+        "instruction": "Follow the side of the light grey building on your right, moving parallel to the wall. Keep moving straight ahead along the pavement. As you proceed, you will pass several dark doorways and windows on the building's facade. In the distance, you can see a large, dark structure with columns (like the Brandenburg Gate) and some parked vehicles, including a white camper van, on the left. Continue forward along the wall until you reach the corner near a large glass window or door. You will arrive at the toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_1_1",
+                "type": "object",
+                "location": [
+                    -90.93381177018307,
+                    1.4996128152083739,
+                    4.604621433752438
+                ],
+                "radius": 3.5973717158768252,
+                "path_length": 29.745131816996487,
+                "reference_path": [
+                    [
+                        -61.3453483581543,
+                        4.3521928787231445,
+                        2.5626983642578125
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -64.30633544921875,
+                        3.6927261352539062,
+                        2.500028610229492
+                    ],
+                    [
+                        -87.50633239746094,
+                        1.0927200317382812,
+                        2.6000289916992188
+                    ],
+                    [
+                        -90.85067749023438,
+                        0.7438473105430603,
+                        2.704472780227661
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.345347826607714,
+            4.352192785551964,
+            2.562698355507479
+        ],
+        "start_rotation": [
+            0.26544825694468205,
+            0.0,
+            0.0,
+            -0.964125107486072
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 15,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_desk",
+        "instruction": "Start with the beige van parked ahead of you. Slightly turn left to follow the road parallel to the massive building facade on your left. Continue straight down the sidewalk, passing the green truck parked further down on your right. Keep moving forward along the building's edge. As you proceed, you will eventually spot a solitary office desk and chair sitting strangely in the middle of the pavement. Continue until you arrive directly at this office desk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_desk_41",
+                "type": "object",
+                "location": [
+                    -16.182224736012746,
+                    5.171772120456319,
+                    2.6121456020449383
+                ],
+                "radius": 1.0523296357525935,
+                "path_length": 43.343950978874574,
+                "reference_path": [
+                    [
+                        -60.11299133300781,
+                        4.631802558898926,
+                        2.569568395614624
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -58.206336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -16.906333923339844,
+                        5.192722320556641,
+                        2.4000282287597656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -60.112993096569646,
+            4.63180250128345,
+            2.569568501077088
+        ],
+        "start_rotation": [
+            0.9639113216413618,
+            0.0,
+            0.0,
+            -0.2662235226489256
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 16,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "Start by facing the easel with a children's drawing. Turn right to exit the playroom, passing the stack of colorful stones and the red cone toy.\n\nOnce outside, you will be on a city street. Move forward, keeping the large grey building on your left. Continue straight along the road, passing parked white vans and street food carts. After moving past the building, turn right. You will arrive at the puddle near the sidewalk.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_47",
+                "type": "object",
+                "location": [
+                    -57.76574255533258,
+                    -3.911892453953762,
+                    2.3932998630755287
+                ],
+                "radius": 8.968730752211599,
+                "path_length": 12.664651794430739,
+                "reference_path": [
+                    [
+                        -63.07904052734375,
+                        5.723899841308594,
+                        2.6771435737609863
+                    ],
+                    [
+                        -62.1063346862793,
+                        5.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.0063362121582,
+                        5.592723846435547,
+                        2.7000293731689453
+                    ],
+                    [
+                        -61.706336975097656,
+                        5.192722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -56.80633544921875,
+                        -3.0072784423828125,
+                        2.4000282287597656
+                    ],
+                    [
+                        -57.00633239746094,
+                        -3.6072769165039062,
+                        2.4000282287597656
+                    ],
+                    [
+                        -57.765743255615234,
+                        -3.9118924140930176,
+                        2.3932998180389404
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -63.07904016749935,
+            5.723899953799677,
+            2.677143681171227
+        ],
+        "start_rotation": [
+            0.9753381726977282,
+            0.0,
+            0.0,
+            0.22071576490739517
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 17,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "trash_bag",
+        "instruction": "Head along the sidewalk, keeping the building with the \"PUBLIC TOILETS\" sign and storefronts on your right. Continue straight, passing a white camper trailer and a large, dark building across the open area on your left. As you move forward, the sidewalk runs parallel to the building facade. Keep going until you reach a black trash bag on the ground near a green object, which is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/trash_bag_31",
+                "type": "object",
+                "location": [
+                    -98.71156176196195,
+                    -1.7523511199567015,
+                    3.221201668885646
+                ],
+                "radius": 0.474999974537619,
+                "path_length": 40.47156506950539,
+                "reference_path": [
+                    [
+                        -60.018619537353516,
+                        4.743229389190674,
+                        2.6000289916992188
+                    ],
+                    [
+                        -60.10633850097656,
+                        4.692722320556641,
+                        2.6000289916992188
+                    ],
+                    [
+                        -62.80633544921875,
+                        3.992725372314453,
+                        2.500028610229492
+                    ],
+                    [
+                        -64.30633544921875,
+                        3.6927261352539062,
+                        2.500028610229492
+                    ],
+                    [
+                        -99.00633239746094,
+                        -1.1072769165039062,
+                        2.800029754638672
+                    ],
+                    [
+                        -99.40633392333984,
+                        -1.5072784423828125,
+                        2.800029754638672
+                    ],
+                    [
+                        -99.26333618164062,
+                        -1.9362729787826538,
+                        2.800029754638672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -60.01862027180335,
+            4.743229480636679,
+            2.6000289916992188
+        ],
+        "start_rotation": [
+            0.03038780334444931,
+            0.0,
+            0.0,
+            -0.9995381840669716
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 18,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone",
+        "instruction": "Proceed along the concrete sidewalk, keeping the large, tall building with reflective vertical windows close on your left. Move straight ahead, following the path parallel to the long row of dark train cars or containers in the distance. You will pass several large green trucks parked on your right side. Continue moving forward towards the black office chair and desk visible in the open area ahead. You will arrive at the office phone resting on the ground near the chair.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_43",
+                "type": "object",
+                "location": [
+                    -17.106626326921315,
+                    5.016825769301493,
+                    2.287145614383519
+                ],
+                "radius": 0.18851279119863973,
+                "path_length": 44.125713471623925,
+                "reference_path": [
+                    [
+                        -61.25297546386719,
+                        4.346288681030273,
+                        2.5589022636413574
+                    ],
+                    [
+                        -59.706336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -58.206336975097656,
+                        4.292724609375,
+                        2.500028610229492
+                    ],
+                    [
+                        -17.136926651000977,
+                        5.077427864074707,
+                        2.4000282287597656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -61.25297574832287,
+            4.3462884890621,
+            2.5589023085431903
+        ],
+        "start_rotation": [
+            0.9766700727264428,
+            0.0,
+            0.0,
+            -0.21474535860065722
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    },
+    {
+        "scene_id": "innout_berlin",
+        "scene_type": "innout",
+        "episode_id": 19,
+        "path": "vc_plus/BERLIN/BERLIN_innout.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "umbrella",
+        "instruction": "Start from the windowsill overlooking the plaza where the toys are gathered. Follow the road, heading straight towards the large, multi-story grey building in the distance. As you move across the paved square, aim for the red and white mushroom-shaped umbrella standing alone in the open space. Continue moving forward until you are directly next to the umbrella.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/umbrella_46",
+                "type": "object",
+                "location": [
+                    -57.14405492501714,
+                    -3.2331703897255286,
+                    2.943299455442414
+                ],
+                "radius": 0.6292896420514396,
+                "path_length": 12.156452609446765,
+                "reference_path": [
+                    [
+                        -62.814002990722656,
+                        7.185858726501465,
+                        2.689072847366333
+                    ],
+                    [
+                        -56.80633544921875,
+                        -3.0072784423828125,
+                        2.4000282287597656
+                    ],
+                    [
+                        -56.907875061035156,
+                        -3.311896324157715,
+                        2.4000282287597656
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -62.814003635575816,
+            7.1858588277012405,
+            2.6890727926018947
+        ],
+        "start_rotation": [
+            0.7546392339187877,
+            0.0,
+            0.0,
+            -0.6561399443948411
+        ],
+        "ceiling_height": 1.0,
+        "interior_scene": "scene8"
+    }
+]

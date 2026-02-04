@@ -11,10 +11,12 @@
             "args": [
                 "--episode_folder",
                 "${workspaceFolder}/episodes/",
-                "--foxglove_port",
-                "4934",
-                "--episode_label",
-                "nv_apartment_17"
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "11100",
+                "--timeout",
+                "123",
             ],
         },
         {
@@ -28,7 +30,11 @@
                 "${workspaceFolder}/episodes/task_config.yaml",
                 "--test_scene_id",
                 // "nv_apartment"
-                "grCommercial_scene0"
+                // "grHome_scene12"
+                "innout_amsterdam",
+                // "vc_amsterdam",
+                "--tg_mode",
+                "manual"
             ],
             "envFile": "${workspaceFolder}/.env"
         },

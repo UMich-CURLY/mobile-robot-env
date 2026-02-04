@@ -1,0 +1,1530 @@
+[
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "coffee_cup",
+        "instruction": "Starting near a white scooter parked against a building, turn slightly right and proceed down the wide road. Continue straight, keeping the tall, greyish buildings on your left. As you move forward, the environment opens up with low concrete walls visible in the distance. Keep following the road towards these walls. Eventually, you will reach an area near a red table where you will arrive at the coffee cup.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/coffee_cup_627",
+                "type": "object",
+                "location": [
+                    133.33708093212763,
+                    88.15636814873557,
+                    7.261371105942443
+                ],
+                "radius": 0.060000013560056686,
+                "path_length": 98.2106007867888,
+                "reference_path": [
+                    [
+                        95.03412628173828,
+                        27.46476173400879,
+                        5.899997711181641
+                    ],
+                    [
+                        94.1451416015625,
+                        25.500152587890625,
+                        5.899997711181641
+                    ],
+                    [
+                        92.6451416015625,
+                        24.000152587890625,
+                        6.099998474121094
+                    ],
+                    [
+                        91.1451416015625,
+                        24.000152587890625,
+                        6.099998474121094
+                    ],
+                    [
+                        89.6451416015625,
+                        25.500152587890625,
+                        5.999998092651367
+                    ],
+                    [
+                        89.6451416015625,
+                        27.000152587890625,
+                        5.999998092651367
+                    ],
+                    [
+                        89.6451416015625,
+                        30.000152587890625,
+                        5.799999237060547
+                    ],
+                    [
+                        83.6451416015625,
+                        39.000152587890625,
+                        5.69999885559082
+                    ],
+                    [
+                        83.6451416015625,
+                        43.500152587890625,
+                        5.799999237060547
+                    ],
+                    [
+                        95.6451416015625,
+                        57.000152587890625,
+                        6.299999237060547
+                    ],
+                    [
+                        110.6451416015625,
+                        72.00015258789062,
+                        7.299999237060547
+                    ],
+                    [
+                        133.1451416015625,
+                        85.50015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        134.6451416015625,
+                        87.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        134.6451416015625,
+                        88.50015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        133.3370819091797,
+                        88.50015258789062,
+                        7.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            95.03412941294027,
+            27.464762524576198,
+            5.89999771118164
+        ],
+        "start_rotation": [
+            0.593002463564297,
+            0.0,
+            0.0,
+            -0.805200644688437
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bike_rack",
+        "instruction": "Start near the weathered beige walls on the left. Move forward across the open concrete area. As you proceed, keep the large, dark, reflective structure with intricate golden patterns on your right. Follow the edge of this structure, curving slightly right as the path bends around it. Continue straight ahead, keeping the dark patterned wall close to your right. You will eventually arrive at the black metal bike rack located on the pavement.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bike_rack_930",
+                "type": "object",
+                "location": [
+                    163.5091884363801,
+                    278.75767390914893,
+                    6.788275680233923
+                ],
+                "radius": 1.6016165075270408,
+                "path_length": 85.72435562316154,
+                "reference_path": [
+                    [
+                        194.06832885742188,
+                        337.25286865234375,
+                        6.599998474121094
+                    ],
+                    [
+                        208.1451416015625,
+                        325.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        209.6451416015625,
+                        324.0001525878906,
+                        6.899997711181641
+                    ],
+                    [
+                        209.6451416015625,
+                        322.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        206.6451416015625,
+                        319.5001525878906,
+                        6.799999237060547
+                    ],
+                    [
+                        200.6451416015625,
+                        316.5001525878906,
+                        6.69999885559082
+                    ],
+                    [
+                        188.6451416015625,
+                        309.0001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        175.1451416015625,
+                        295.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        163.1451416015625,
+                        282.0001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        163.1451416015625,
+                        280.5001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            194.0683304586536,
+            337.2528683603807,
+            6.599998474121094
+        ],
+        "start_rotation": [
+            0.8834616981046403,
+            0.0,
+            0.0,
+            -0.4685033916441433
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "house_mailbox",
+        "instruction": "Move forward along the dark road, keeping the massive building covered in a detailed, classical mural on your left. As you proceed, a bright red mailbox standing alone on a post will come into view near the base of the building. Continue straight towards it. You will arrive at the house_mailbox.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/house_mailbox_661",
+                "type": "object",
+                "location": [
+                    6.566251814955331,
+                    99.24592411610386,
+                    6.774766091620532
+                ],
+                "radius": 0.6000000201930531,
+                "path_length": 5.968999876127312,
+                "reference_path": [
+                    [
+                        12.693556785583496,
+                        98.60746765136719,
+                        6.403010845184326
+                    ],
+                    [
+                        8.6451416015625,
+                        100.50015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        7.1451416015625,
+                        100.50015258789062,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            12.693556730466897,
+            98.60746440600609,
+            6.403010996447491
+        ],
+        "start_rotation": [
+            -0.004751807787232136,
+            0.0,
+            0.0,
+            0.9999887100976457
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "strereo_camera_sensor",
+        "instruction": "Start with the ambulance and the dark, towering ruin on your right. Move forward across the open ground, keeping the ruin to your right. Continue straight ahead, passing a small white pedestal or fountain on your left. As you proceed, you will see a small vertical rectangular structure in the distance. Maintain your heading towards the gap between the distant structure and the large ruin. Slightly veer right as you approach the end of the path. You will arrive near the base of the towering structure.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/strereo_camera_sensor_741",
+                "type": "object",
+                "location": [
+                    -133.58289092273213,
+                    366.448460427114,
+                    1.4756516209420818
+                ],
+                "radius": 0.20416175837684136,
+                "path_length": 75.68993312769041,
+                "reference_path": [
+                    [
+                        -180.40875244140625,
+                        314.4778137207031,
+                        1.8687695264816284
+                    ],
+                    [
+                        -180.3548583984375,
+                        318.0001525878906,
+                        1.8999977111816406
+                    ],
+                    [
+                        -162.3548583984375,
+                        337.5001525878906,
+                        1.7999992370605469
+                    ],
+                    [
+                        -160.8548583984375,
+                        339.0001525878906,
+                        1.7999992370605469
+                    ],
+                    [
+                        -141.3548583984375,
+                        354.0001525878906,
+                        1.7999992370605469
+                    ],
+                    [
+                        -139.8548583984375,
+                        355.5001525878906,
+                        1.7999992370605469
+                    ],
+                    [
+                        -139.8548583984375,
+                        357.0001525878906,
+                        1.6999988555908203
+                    ],
+                    [
+                        -141.3548583984375,
+                        361.5001525878906,
+                        1.5999984741210938
+                    ],
+                    [
+                        -141.3548583984375,
+                        363.0001525878906,
+                        1.5999984741210938
+                    ],
+                    [
+                        -138.3548583984375,
+                        366.0001525878906,
+                        1.4999980926513672
+                    ],
+                    [
+                        -133.5828857421875,
+                        366.4484558105469,
+                        1.4756516218185425
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -180.40875828695422,
+            314.47782292843607,
+            1.868769536297191
+        ],
+        "start_rotation": [
+            0.6507549535366459,
+            0.0,
+            0.0,
+            0.7592878179238212
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "pack_of_paper_towels",
+        "instruction": "Move forward along the open dirt path, keeping the row of large, textured building blocks on your right. As you advance, you will see a white block with a blue \"S\" logo on the right side. Continue straight past this landmark. Eventually, you will see a small white object on the ground in the distance to your right. Turn slightly right towards it, and you will arrive at the pack of paper towels near the white and blue block.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/pack_of_paper_towels_256",
+                "type": "object",
+                "location": [
+                    146.1108251242882,
+                    110.29207607614497,
+                    7.460300169078666
+                ],
+                "radius": 0.41860147618263,
+                "path_length": 32.512488253276196,
+                "reference_path": [
+                    [
+                        122.12852478027344,
+                        126.67739868164062,
+                        7.099998474121094
+                    ],
+                    [
+                        121.1451416015625,
+                        126.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        121.1451416015625,
+                        124.50015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        122.6451416015625,
+                        123.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        146.6451416015625,
+                        112.50015258789062,
+                        7.299999237060547
+                    ],
+                    [
+                        146.6451416015625,
+                        111.00015258789062,
+                        7.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            122.12852657518317,
+            126.67739816692962,
+            7.099998474121094
+        ],
+        "start_rotation": [
+            0.5204072488375133,
+            0.0,
+            0.0,
+            -0.8539182017953303
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone_1",
+        "instruction": "Head towards the tall, gold-framed tower resembling the Eiffel Tower, staying on the open road. As you approach the intersection where the white shop sign reads \"Sakura Bites,\" angle slightly left, moving past the shop. Continue straight down the narrow street flanked by tall, textured buildings towards the tower's base. The road will lead you directly underneath the archway of the tower structure, where you will arrive at the office phone.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_1_624",
+                "type": "object",
+                "location": [
+                    -104.90413737719356,
+                    165.22103786675444,
+                    6.114038497592844
+                ],
+                "radius": 0.13087664167848345,
+                "path_length": 84.58276011719286,
+                "reference_path": [
+                    [
+                        -183.84104919433594,
+                        149.07794189453125,
+                        6.130672454833984
+                    ],
+                    [
+                        -133.8548583984375,
+                        148.50015258789062,
+                        5.799999237060547
+                    ],
+                    [
+                        -132.3548583984375,
+                        148.50015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -112.8548583984375,
+                        156.00015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -105.3548583984375,
+                        163.50015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        -104.90413665771484,
+                        165.00015258789062,
+                        6.369950294494629
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -183.8410524065004,
+            149.07793536135978,
+            6.130672230431227
+        ],
+        "start_rotation": [
+            0.9968635178526716,
+            0.0,
+            0.0,
+            -0.07913991896885124
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bottle_with_red_liquid",
+        "instruction": "Follow the road straight ahead, keeping the large, dark, curved building with visible windows on your left. Continue forward as the road stretches out under a clear blue sky. Pass the green dumpster and white structures visible in the distance on your right. As you proceed, you will arrive at the bottle with red liquid.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bottle_with_red_liquid_755",
+                "type": "object",
+                "location": [
+                    -226.4585567278077,
+                    128.9159129606888,
+                    7.17402325453931
+                ],
+                "radius": 0.1599999960991978,
+                "path_length": 46.84817627465482,
+                "reference_path": [
+                    [
+                        -199.33555603027344,
+                        166.06536865234375,
+                        6.536392688751221
+                    ],
+                    [
+                        -199.8548583984375,
+                        165.00015258789062,
+                        6.499998092651367
+                    ],
+                    [
+                        -220.8548583984375,
+                        135.00015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        -222.3548583984375,
+                        133.50015258789062,
+                        6.599998474121094
+                    ],
+                    [
+                        -226.8548583984375,
+                        130.50015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -226.8548583984375,
+                        129.00015258789062,
+                        6.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -199.335552638516,
+            166.06537333192074,
+            6.536392563758631
+        ],
+        "start_rotation": [
+            0.5859235180459945,
+            0.0,
+            0.0,
+            -0.8103663560394182
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "coffee_cup",
+        "instruction": "Start at an open area with a tall beige building featuring a palm tree mural on your right. Follow the road straight ahead, passing between the buildings. Continue moving forward across the wide, paved ground as the view opens up to a distant horizon with low, indistinct structures. Keep going straight, maintaining your course on the dark pavement. As you approach a red bench on your left, turn left slightly towards it. You will arrive at the coffee cup near the bench.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/coffee_cup_627",
+                "type": "object",
+                "location": [
+                    133.33708093212763,
+                    88.15636814873557,
+                    7.261371105942443
+                ],
+                "radius": 0.060000013560056686,
+                "path_length": 93.89006866194876,
+                "reference_path": [
+                    [
+                        71.08531951904297,
+                        24.399551391601562,
+                        5.744020462036133
+                    ],
+                    [
+                        76.1451416015625,
+                        28.500152587890625,
+                        5.999998092651367
+                    ],
+                    [
+                        77.6451416015625,
+                        30.000152587890625,
+                        5.899997711181641
+                    ],
+                    [
+                        83.6451416015625,
+                        43.500152587890625,
+                        5.799999237060547
+                    ],
+                    [
+                        95.6451416015625,
+                        57.000152587890625,
+                        6.299999237060547
+                    ],
+                    [
+                        110.6451416015625,
+                        72.00015258789062,
+                        7.299999237060547
+                    ],
+                    [
+                        133.1451416015625,
+                        85.50015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        134.6451416015625,
+                        87.00015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        134.6451416015625,
+                        88.50015258789062,
+                        7.399997711181641
+                    ],
+                    [
+                        133.3370819091797,
+                        88.50015258789062,
+                        7.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            71.08531999548687,
+            24.399551614098637,
+            5.744020375502566
+        ],
+        "start_rotation": [
+            0.9655477033755261,
+            0.0,
+            0.0,
+            0.2602261180324662
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "water_fountain",
+        "instruction": "Proceed straight on the road, keeping the large, weathered stone building with dark windows on your left. As you move forward, the road curves slightly. You will see a low concrete structure in the distance ahead. Continue along the road, then turn right off the path towards a stack of balanced rocks. You will arrive at the water fountain near these rocks.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/water_fountain_731",
+                "type": "object",
+                "location": [
+                    -108.19968419226548,
+                    259.1085467843735,
+                    7.341192313354313
+                ],
+                "radius": 1.1341013923748164,
+                "path_length": 9.598448424651886,
+                "reference_path": [
+                    [
+                        -103.22339630126953,
+                        254.4984130859375,
+                        6.766549587249756
+                    ],
+                    [
+                        -103.8548583984375,
+                        253.50015258789062,
+                        6.69999885559082
+                    ],
+                    [
+                        -105.3548583984375,
+                        253.50015258789062,
+                        6.69999885559082
+                    ],
+                    [
+                        -109.8548583984375,
+                        256.5001525878906,
+                        6.499998092651367
+                    ],
+                    [
+                        -109.8548583984375,
+                        258.0001525878906,
+                        6.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -103.22339430996449,
+            254.49840637534703,
+            6.766549361956978
+        ],
+        "start_rotation": [
+            0.3239176321456735,
+            0.0,
+            0.0,
+            -0.9460852855769083
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "beach_ball_1",
+        "instruction": "Start near the dark cave-like structure supported by pillars. Turn left to face the open road. Proceed forward, keeping the white 'QUICK STOP' building on your right. As you continue down the road, you will pass a large grey building facade on your left. Further ahead, the path curves slightly left. Keep moving forward until you spot a red and white beach ball on the ground; this is your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/beach_ball_1_949",
+                "type": "object",
+                "location": [
+                    72.12872931572781,
+                    175.05264083644676,
+                    7.042454861764384
+                ],
+                "radius": 0.24747797123042403,
+                "path_length": 42.76588665231001,
+                "reference_path": [
+                    [
+                        97.52820587158203,
+                        201.6829071044922,
+                        6.399997711181641
+                    ],
+                    [
+                        97.1451416015625,
+                        202.50015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        95.6451416015625,
+                        202.50015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        80.6451416015625,
+                        196.50015258789062,
+                        6.499998092651367
+                    ],
+                    [
+                        73.1451416015625,
+                        189.00015258789062,
+                        6.599998474121094
+                    ],
+                    [
+                        71.6451416015625,
+                        177.00015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        71.6451416015625,
+                        175.50015258789062,
+                        6.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            97.52820658458407,
+            201.68290194513105,
+            6.399997711181641
+        ],
+        "start_rotation": [
+            0.4966186092857585,
+            0.0,
+            0.0,
+            0.8679688686301364
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "soccer_ball_1",
+        "instruction": "Head straight along the open sandy ground, following the slight curve of the path. In the distance, aim towards the group of dilapidated, grey concrete buildings and structures. As you approach these ruins, you will arrive at the soccer ball.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/soccer_ball_1_806",
+                "type": "object",
+                "location": [
+                    195.64873081921047,
+                    66.85640006037197,
+                    7.652765822056445
+                ],
+                "radius": 0.20849207036145856,
+                "path_length": 57.49830628317389,
+                "reference_path": [
+                    [
+                        161.40087890625,
+                        20.932737350463867,
+                        7.024528980255127
+                    ],
+                    [
+                        191.6451416015625,
+                        58.500152587890625,
+                        7.599998474121094
+                    ],
+                    [
+                        195.6487274169922,
+                        66.85639953613281,
+                        7.65276575088501
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            161.40088114174796,
+            20.93273689350711,
+            7.0245291207049965
+        ],
+        "start_rotation": [
+            0.8923829716495948,
+            0.0,
+            0.0,
+            0.451278884848204
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "magician_hat",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/magician_hat_595",
+                "type": "object",
+                "location": [
+                    252.43145151911926,
+                    236.44052750876912,
+                    7.657005417993233
+                ],
+                "radius": 0.3053627154533842,
+                "path_length": 60.60211494657238,
+                "reference_path": [
+                    [
+                        303.2751159667969,
+                        230.44808959960938,
+                        7.2114667892456055
+                    ],
+                    [
+                        254.6451416015625,
+                        244.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        253.1451416015625,
+                        244.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        251.6451416015625,
+                        243.00015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        251.6451416015625,
+                        241.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        253.1451416015625,
+                        238.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        253.1451416015625,
+                        237.00015258789062,
+                        7.599998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            303.2751132632822,
+            230.44809415335,
+            7.211466701165643
+        ],
+        "start_rotation": [
+            0.014435294664486082,
+            0.0,
+            0.0,
+            0.9998958057057492
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinner_jacket",
+        "instruction": "Head towards the large, tan concrete structure on your right that resembles the base of the Eiffel Tower. As you approach this massive structure with intricate latticework textures, continue moving forward across the open ground. Maintain a straight path towards the tower's base. The destination is near the entrance of this distinct landmark.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinner_jacket_333",
+                "type": "object",
+                "location": [
+                    252.6678806990173,
+                    194.48224802661275,
+                    7.92861164379309
+                ],
+                "radius": 0.5150545847449592,
+                "path_length": 78.78580961293213,
+                "reference_path": [
+                    [
+                        297.52081298828125,
+                        244.9306182861328,
+                        7.267155647277832
+                    ],
+                    [
+                        292.1451416015625,
+                        211.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        290.6451416015625,
+                        210.00015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        254.6451416015625,
+                        198.00015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        251.6451416015625,
+                        196.50015258789062,
+                        7.499998092651367
+                    ],
+                    [
+                        251.6451416015625,
+                        195.00015258789062,
+                        7.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            297.52080033063277,
+            244.93062319739244,
+            7.267155590376113
+        ],
+        "start_rotation": [
+            0.7446655646473646,
+            0.0,
+            0.0,
+            -0.6674377849870516
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_364",
+                "type": "object",
+                "location": [
+                    176.81190801132783,
+                    292.04807942130424,
+                    6.871888258759725
+                ],
+                "radius": 2.0985582963899105,
+                "path_length": 25.542251927133215,
+                "reference_path": [
+                    [
+                        192.1515655517578,
+                        309.98675537109375,
+                        6.5537800788879395
+                    ],
+                    [
+                        188.6451416015625,
+                        309.0001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        187.1451416015625,
+                        307.5001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        181.1451416015625,
+                        292.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        179.6451416015625,
+                        291.0001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        178.1451416015625,
+                        291.0001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_925",
+                "type": "object",
+                "location": [
+                    222.53039126443122,
+                    264.8017572360127,
+                    7.4812511632561325
+                ],
+                "radius": 2.4656682770904013,
+                "path_length": 59.96337710973675,
+                "reference_path": [
+                    [
+                        192.1515655517578,
+                        309.98675537109375,
+                        6.5537800788879395
+                    ],
+                    [
+                        188.6451416015625,
+                        309.0001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        187.1451416015625,
+                        307.5001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        187.1451416015625,
+                        306.0001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        221.6451416015625,
+                        268.5001525878906,
+                        6.999998092651367
+                    ],
+                    [
+                        222.5303955078125,
+                        267.0001525878906,
+                        6.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            192.15156070986455,
+            309.9867566456272,
+            6.553780121636715
+        ],
+        "start_rotation": [
+            0.12004300253984775,
+            0.0,
+            0.0,
+            -0.9927686928691991
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "gardening_hose",
+        "instruction": "Face right towards the ivy-covered beige building, then proceed forward along the dark paved road. Continue straight, keeping the tall building with blue-tinted windows and dense green ivy on your left. As you move forward, the road leads towards an opening between buildings in the distance. Maintain your course on the pavement until you reach the area near the base of the ivy-covered wall. You will arrive at the gardening_hose.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/gardening_hose_881",
+                "type": "object",
+                "location": [
+                    52.743772193820504,
+                    18.28435351078518,
+                    5.936623334838131
+                ],
+                "radius": 0.17499999701976776,
+                "path_length": 11.61081977397266,
+                "reference_path": [
+                    [
+                        51.4377555847168,
+                        6.936056137084961,
+                        5.899997711181641
+                    ],
+                    [
+                        50.6451416015625,
+                        7.500152587890625,
+                        5.899997711181641
+                    ],
+                    [
+                        50.6451416015625,
+                        9.000152587890625,
+                        5.69999885559082
+                    ],
+                    [
+                        52.1451416015625,
+                        18.000152587890625,
+                        5.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            51.43775675922312,
+            6.936056263239364,
+            5.899997711181641
+        ],
+        "start_rotation": [
+            0.08633981583666793,
+            0.0,
+            0.0,
+            0.9962657457733304
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_hat",
+        "instruction": "Start facing the stone wall and turn left onto the dark asphalt road. Follow the road straight ahead, keeping the large, textured stone building resembling the base of the Eiffel Tower on your left. Continue forward, passing the white rectangular buildings in the distance on your right. As you proceed down the road, you will arrive at the police_hat, which appears as a white object lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_hat_226",
+                "type": "object",
+                "location": [
+                    123.68454717855187,
+                    97.3210528153048,
+                    7.275463507645242
+                ],
+                "radius": 0.27601275417717375,
+                "path_length": 60.73864975555803,
+                "reference_path": [
+                    [
+                        95.94924926757812,
+                        44.899940490722656,
+                        6.575650215148926
+                    ],
+                    [
+                        113.6451416015625,
+                        64.50015258789062,
+                        7.299999237060547
+                    ],
+                    [
+                        123.6845474243164,
+                        97.32105255126953,
+                        7.275463581085205
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            95.94925293931259,
+            44.89994100933445,
+            6.575650001601757
+        ],
+        "start_rotation": [
+            0.9836316156955704,
+            0.0,
+            0.0,
+            0.18019113353359445
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "table",
+        "instruction": "Begin by moving forward across the pavement, keeping the large, blocky concrete buildings on your left and the white fountain with green trim on your right. As you proceed, veer slightly right, away from the buildings and towards the open area. Continue straight until you approach a wooden bench with metal legs. Just past the bench, make a sharp right turn towards a simple wooden table with a red top surface. You will arrive directly in front of the table.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/table_402",
+                "type": "object",
+                "location": [
+                    109.1685514784295,
+                    215.1126061229484,
+                    6.551027009211353
+                ],
+                "radius": 0.9006036054067295,
+                "path_length": 30.557698717883373,
+                "reference_path": [
+                    [
+                        101.6742935180664,
+                        231.4707489013672,
+                        6.138269424438477
+                    ],
+                    [
+                        112.1451416015625,
+                        229.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        115.1451416015625,
+                        228.00015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        116.6451416015625,
+                        226.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        116.6451416015625,
+                        225.00015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        112.1451416015625,
+                        214.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        110.6451416015625,
+                        214.50015258789062,
+                        6.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            101.67429270168192,
+            231.47075332108133,
+            6.138269612294356
+        ],
+        "start_rotation": [
+            0.9999780620533353,
+            0.0,
+            0.0,
+            -0.006623851753774119
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone",
+        "instruction": "Move straight down the road, keeping the large, abstract gold structure resembling a deconstructed Eiffel Tower on your left and the white building with arched windows on your right. Continue forward as the terrain becomes a rougher, dark grey mound. Follow the road as it curves slightly left around the base of the gold structure. Continue past the mound until you reach the red cone on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_617",
+                "type": "object",
+                "location": [
+                    -69.18325400909748,
+                    250.610966179686,
+                    6.69454837654601
+                ],
+                "radius": 0.2279971880042666,
+                "path_length": 93.4124899845402,
+                "reference_path": [
+                    [
+                        -154.51263427734375,
+                        228.8837890625,
+                        6.258908271789551
+                    ],
+                    [
+                        -103.8548583984375,
+                        232.50015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -76.8548583984375,
+                        238.50015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -73.8548583984375,
+                        240.00015258789062,
+                        6.69999885559082
+                    ],
+                    [
+                        -72.3548583984375,
+                        241.50015258789062,
+                        6.69999885559082
+                    ],
+                    [
+                        -69.3548583984375,
+                        250.50015258789062,
+                        6.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -154.51264124684414,
+            228.8837884749768,
+            6.258908139450126
+        ],
+        "start_rotation": [
+            0.9997544628412717,
+            0.0,
+            0.0,
+            0.02215883636296015
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "fleece_blankets",
+        "instruction": "Start by looking slightly right towards the Eiffel Tower replica, then follow the road straight ahead. Keep moving forward, passing the red and white ambulance on your right. As you pass the ambulance, slightly veer right and continue down the dark street lined with tall, pale buildings. Stay on the road, heading towards the shadowy area under the overhang. You will arrive at the fleece_blankets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/fleece_blankets_822",
+                "type": "object",
+                "location": [
+                    10.491892774489017,
+                    95.15322336246308,
+                    6.265522114132807
+                ],
+                "radius": 0.27742682698763144,
+                "path_length": 40.27751113817725,
+                "reference_path": [
+                    [
+                        -13.858926773071289,
+                        83.64520263671875,
+                        5.799999237060547
+                    ],
+                    [
+                        -13.8548583984375,
+                        84.00015258789062,
+                        5.799999237060547
+                    ],
+                    [
+                        -10.8548583984375,
+                        88.50015258789062,
+                        5.899997711181641
+                    ],
+                    [
+                        -7.8548583984375,
+                        99.00015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        -6.3548583984375,
+                        100.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        -4.8548583984375,
+                        100.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        -0.3548583984375,
+                        100.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        5.6451416015625,
+                        102.00015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        7.1451416015625,
+                        102.00015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        8.6451416015625,
+                        100.50015258789062,
+                        6.399997711181641
+                    ],
+                    [
+                        10.49189281463623,
+                        95.1532211303711,
+                        6.265522003173828
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -13.858926648761887,
+            83.6452001173925,
+            5.799999237060546
+        ],
+        "start_rotation": [
+            0.6950047547480022,
+            0.0,
+            0.0,
+            0.7190051396740286
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "white_bench",
+        "instruction": "From the base of the massive black, reflective tower structure, move forward across the open concrete area. As you proceed, the path curves slightly to the left, heading away from the large tower. Continue straight across the vast, flat terrain towards the distant buildings on the horizon. Keep moving forward, and you will eventually arrive at a white bench standing in the open field.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/white_bench_842",
+                "type": "object",
+                "location": [
+                    242.1354752802235,
+                    261.32773158793395,
+                    7.693729748370004
+                ],
+                "radius": 0.9704327465218938,
+                "path_length": 84.22138489211565,
+                "reference_path": [
+                    [
+                        238.08438110351562,
+                        342.07330322265625,
+                        6.9048752784729
+                    ],
+                    [
+                        236.6451416015625,
+                        342.0001525878906,
+                        6.899997711181641
+                    ],
+                    [
+                        230.6451416015625,
+                        336.0001525878906,
+                        6.899997711181641
+                    ],
+                    [
+                        230.6451416015625,
+                        331.5001525878906,
+                        6.899997711181641
+                    ],
+                    [
+                        241.1451416015625,
+                        262.5001525878906,
+                        7.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            238.08437854302178,
+            342.0733154465809,
+            6.904875253700608
+        ],
+        "start_rotation": [
+            0.09160907332487045,
+            0.0,
+            0.0,
+            -0.9957950480317516
+        ],
+        "ceiling_height": 1.0
+    }
+]

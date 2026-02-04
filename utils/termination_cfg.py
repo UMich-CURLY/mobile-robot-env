@@ -7,6 +7,7 @@ import torch
 from isaaclab.assets import RigidObject
 from isaaclab.envs import ManagerBasedRLEnv
 import isaacsim.core.utils.bounds as bounds_utils
+from scipy.spatial.transform import Rotation as R
 
 def terrain_out_of_bounds(
     env, asset_cfg = SceneEntityCfg("robot"), distance_buffer: float = 3.0
@@ -60,6 +61,13 @@ def robot_stuck(env, asset_cfg = SceneEntityCfg("robot"), label: str = "stuck", 
     """Terminate the episode when the robot is not moving even though there is a command input for a certain time."""
     robot = env.scene[asset_cfg.name]
     curr_pos = robot.data.root_pos_w
+    curr_quat = robot.data.root_quat_w
+    curr_quat = torch.concat([curr_quat[:,1:],curr_quat[:,:1]], dim=1)
+    for i in range(env.num_envs):
+        curr_heading = R.from_quat(curr_quat[i].cpu().numpy()).as_euler('ZYX', degrees=False)[0]
+        curr_pos[i, 2] = curr_heading
+
+    
 
     prev_pos = env.termination_states[f"{label}_prev_pos"]
     same_pos_count = env.termination_states[f"{label}_same_pos_count"]
@@ -67,9 +75,17 @@ def robot_stuck(env, asset_cfg = SceneEntityCfg("robot"), label: str = "stuck", 
         robot_vel = torch.norm(robot.velocity_command, dim=-1)
     else:
         robot_vel = torch.zeros(env.num_envs, dtype=torch.float32, device=env.device)
-    same_pos = torch.logical_and(torch.norm(curr_pos - prev_pos) < dist_threshold, robot_vel > vel_threshold)
+    dist = torch.norm(curr_pos - prev_pos, dim=-1)
+    dist_history = env.termination_states[f"{label}_dist_history"]
+    for i, d in enumerate(dist):
+        dist_history[i].append(d)
+        if len(dist_history[i]) > 5:
+            dist_history[i].pop(0)
+    dist = torch.stack([torch.mean(torch.tensor(d, device=env.device)) for d in dist_history])
+    same_pos = torch.logical_and(dist < dist_threshold, robot_vel > vel_threshold)
     same_pos_count[same_pos] += 1
     same_pos_count[~same_pos] = 0
+    # print(f"same_pos: {same_pos.item()}, dist: {dist.item():.3f}, robot_vel: {robot_vel.item()}, same_pos_count: {same_pos_count.item()}")
     env.termination_states[f"{label}_prev_pos"] = curr_pos
 
     # if the robot has stayed in the same location for 1000 steps
@@ -86,7 +102,7 @@ class VLNTerminationsCfg:
     Once a termination is activated, the env will put termination reason into info.
     VLNSim will receive the info in update_obs() and pause the socket server until episode resets.
     """
-    time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 100.0})
+    time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 300.0})
     bad_orientation = DoneTerm(
         func=mdp.bad_orientation,
         params={"limit_angle": float(np.deg2rad(45.0))},
@@ -100,9 +116,9 @@ class VLNTerminationsCfg:
         func=robot_stuck,
         params={
             "asset_cfg": SceneEntityCfg("robot"),
-            "max_time": 10.0,
+            "max_time": 5.0,
             "label": "stuck",
-            "dist_threshold": 0.05,
+            "dist_threshold": 0.015,
             "vel_threshold": 0.01,
         },
     )

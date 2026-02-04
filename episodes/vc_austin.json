@@ -1,0 +1,1704 @@
+[
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "Purse",
+        "instruction": "Follow the road straight towards the gap between the buildings, passing a grey building with many rectangular windows on your left and a taller, dark building on your right. As you move forward, the road curves slightly to the left. Continue along this path, keeping the textured beige building on your far left in view. Proceed past the street light on the left. Keep going forward along the empty street, flanked by tall city structures, until you arrive at the Purse.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/Purse_593",
+                "type": "object",
+                "location": [
+                    34.156938812884896,
+                    365.8306549223729,
+                    20.296349831110135
+                ],
+                "radius": 0.15776627631558426,
+                "path_length": 40.98918466564153,
+                "reference_path": [
+                    [
+                        16.312044143676758,
+                        358.29400634765625,
+                        20.9176025390625
+                    ],
+                    [
+                        15.076080322265625,
+                        354.78936767578125,
+                        20.999998092651367
+                    ],
+                    [
+                        15.076080322265625,
+                        347.28936767578125,
+                        20.999998092651367
+                    ],
+                    [
+                        16.576080322265625,
+                        345.78936767578125,
+                        20.799997329711914
+                    ],
+                    [
+                        18.076080322265625,
+                        345.78936767578125,
+                        20.799997329711914
+                    ],
+                    [
+                        25.576080322265625,
+                        351.78936767578125,
+                        20.899999618530273
+                    ],
+                    [
+                        27.076080322265625,
+                        353.28936767578125,
+                        20.899999618530273
+                    ],
+                    [
+                        34.15694046020508,
+                        365.8306579589844,
+                        20.296350479125977
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            16.31204324443186,
+            358.2940006794435,
+            20.917601821793454
+        ],
+        "start_rotation": [
+            0.5060505741545582,
+            0.0,
+            0.0,
+            -0.8625038065990445
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "Start on the open road facing a dark building with green accents and large windows. Follow the road, bearing slightly right as you pass a construction zone with a yellow vehicle visible in the distance. Continue moving forward down the street, keeping the dark, tall buildings on your left. As you approach the intersection where the cityscape opens up, turn slightly right towards the large white van parked on the side. You will arrive at the rear of the white van.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_45",
+                "type": "object",
+                "location": [
+                    51.54151074341904,
+                    20.317951546263476,
+                    10.630724215501672
+                ],
+                "radius": 3.1617718436451057,
+                "path_length": 20.827439941803203,
+                "reference_path": [
+                    [
+                        53.3238525390625,
+                        36.00236511230469,
+                        9.472040176391602
+                    ],
+                    [
+                        58.576080322265625,
+                        27.78936767578125,
+                        9.39999771118164
+                    ],
+                    [
+                        58.576080322265625,
+                        26.28936767578125,
+                        9.39999771118164
+                    ],
+                    [
+                        55.576080322265625,
+                        18.78936767578125,
+                        9.299999237060547
+                    ],
+                    [
+                        54.076080322265625,
+                        18.78936767578125,
+                        9.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            53.32385238495228,
+            36.00236383149375,
+            9.472039828464492
+        ],
+        "start_rotation": [
+            0.9692805776030735,
+            0.0,
+            0.0,
+            -0.24595764245384233
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "table",
+        "instruction": "Start on the wide city street, keeping the large, dark rectangular building on your left and the tall, grid-patterned skyscraper ahead on your right. Proceed forward along the road, following the slight curve to the left. As you advance, the dark building facades will begin to dominate your view on both sides, creating a shadowy corridor. Continue straight down this darkened street. Eventually, you will approach a red bench situated on the right side of the path, marking your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/table_224",
+                "type": "object",
+                "location": [
+                    16.225292185666163,
+                    179.32145092070652,
+                    13.665060047723642
+                ],
+                "radius": 0.947195685979513,
+                "path_length": 99.44422862184737,
+                "reference_path": [
+                    [
+                        67.93377685546875,
+                        117.37753295898438,
+                        11.057513236999512
+                    ],
+                    [
+                        76.57608032226562,
+                        126.78936767578125,
+                        11.099998474121094
+                    ],
+                    [
+                        76.57608032226562,
+                        140.28936767578125,
+                        11.299999237060547
+                    ],
+                    [
+                        75.07608032226562,
+                        141.78936767578125,
+                        11.19999885559082
+                    ],
+                    [
+                        69.07608032226562,
+                        144.78936767578125,
+                        11.499998092651367
+                    ],
+                    [
+                        37.576080322265625,
+                        159.78936767578125,
+                        12.499998092651367
+                    ],
+                    [
+                        15.076080322265625,
+                        176.28936767578125,
+                        13.499998092651367
+                    ],
+                    [
+                        15.076080322265625,
+                        177.78936767578125,
+                        13.600000381469727
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            67.93377800932221,
+            117.37753412115825,
+            11.05751312195022
+        ],
+        "start_rotation": [
+            0.9797318796635424,
+            0.0,
+            0.0,
+            0.2003133644341837
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "seagull",
+        "instruction": "Head towards the tall green glass building in the distance, keeping the white high-rise building on your left. Follow the road straight ahead. As you approach the intersection, you will see a dark building with a shopfront labeled \"PIZZA\" on the right corner. Veer slightly right towards the dark building, passing the red traffic cone on the sidewalk. You will arrive at the storefront entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/seagull_802",
+                "type": "object",
+                "location": [
+                    -201.14324400489966,
+                    113.5183898993986,
+                    10.995626649313223
+                ],
+                "radius": 0.8347663810314003,
+                "path_length": 43.854513596804246,
+                "reference_path": [
+                    [
+                        -236.3428497314453,
+                        94.38378143310547,
+                        10.337485313415527
+                    ],
+                    [
+                        -211.42391967773438,
+                        114.78936767578125,
+                        11.19999885559082
+                    ],
+                    [
+                        -205.42391967773438,
+                        116.28936767578125,
+                        11.299999237060547
+                    ],
+                    [
+                        -203.92391967773438,
+                        116.28936767578125,
+                        11.39999771118164
+                    ],
+                    [
+                        -201.14324951171875,
+                        113.51838684082031,
+                        10.995626449584961
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -236.3428469289894,
+            94.38378353114365,
+            10.337485693470354
+        ],
+        "start_rotation": [
+            0.8251758182678237,
+            0.0,
+            0.0,
+            0.564875976605509
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "skateboard",
+        "instruction": "Head slightly left and follow the road, keeping the dark, towering building on your left and the street corner with the street lamp on your right. Continue straight down the urban canyon, passing the intersection. As you proceed forward along the dark street, you will eventually arrive at the skateboard lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/skateboard_446",
+                "type": "object",
+                "location": [
+                    -33.261182032724676,
+                    155.54852705193332,
+                    13.78494073296392
+                ],
+                "radius": 0.495456802765986,
+                "path_length": 37.19702024936214,
+                "reference_path": [
+                    [
+                        -12.721304893493652,
+                        185.0905303955078,
+                        14.463321685791016
+                    ],
+                    [
+                        -26.923919677734375,
+                        171.78936767578125,
+                        14.399999618530273
+                    ],
+                    [
+                        -28.423919677734375,
+                        170.28936767578125,
+                        14.399999618530273
+                    ],
+                    [
+                        -29.923919677734375,
+                        167.28936767578125,
+                        14.299997329711914
+                    ],
+                    [
+                        -32.923919677734375,
+                        158.28936767578125,
+                        13.999998092651367
+                    ],
+                    [
+                        -33.26118087768555,
+                        155.54852294921875,
+                        13.784940719604492
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -12.7213048101174,
+            185.0905299592533,
+            14.46332180326173
+        ],
+        "start_rotation": [
+            0.2717189325665651,
+            0.0,
+            0.0,
+            -0.9623766527118612
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "black_office_chair",
+        "instruction": "Start at the city intersection, facing a tall brown building ahead and a modern glass skyscraper to your left. Move forward along the road, following the center path. As you proceed, the view of the city street expands. Continue straight, passing a white bench on your right. Keep moving forward along the road, approaching a dark, shadowed area near the buildings on the right. You will arrive at the black office chair sitting in the middle of the street.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/black_office_chair_539",
+                "type": "object",
+                "location": [
+                    -149.42144773420384,
+                    235.61449721767485,
+                    18.844648663371785
+                ],
+                "radius": 0.6000000238418579,
+                "path_length": 9.019057930732634,
+                "reference_path": [
+                    [
+                        -145.39488220214844,
+                        244.71270751953125,
+                        18.861555099487305
+                    ],
+                    [
+                        -145.42391967773438,
+                        243.78936767578125,
+                        18.799997329711914
+                    ],
+                    [
+                        -148.42391967773438,
+                        236.28936767578125,
+                        18.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -145.3948767689723,
+            244.71270532458928,
+            18.86155458186722
+        ],
+        "start_rotation": [
+            0.7672434898801128,
+            0.0,
+            0.0,
+            -0.6413559286672146
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "books",
+        "instruction": "Start by moving forward down the road, keeping the dark, tall buildings on your left. As you proceed, you'll pass a series of storefronts with awnings on your left. Continue straight ahead, following the road towards a white van parked in the distance. As you approach an intersection near a building with large green-tinted windows on the corner, make a sharp right turn. After the turn, continue forward along the side of the building with large windows and posters. You will arrive at the books.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/books_271",
+                "type": "object",
+                "location": [
+                    135.6185605400718,
+                    228.20641404926056,
+                    12.488754496035948
+                ],
+                "radius": 0.3673521020403001,
+                "path_length": 86.41652370282691,
+                "reference_path": [
+                    [
+                        132.35861206054688,
+                        290.0870056152344,
+                        13.600000381469727
+                    ],
+                    [
+                        132.07608032226562,
+                        291.78936767578125,
+                        13.600000381469727
+                    ],
+                    [
+                        132.07608032226562,
+                        293.28936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        135.07608032226562,
+                        296.28936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        136.57608032226562,
+                        296.28936767578125,
+                        13.69999885559082
+                    ],
+                    [
+                        138.07608032226562,
+                        294.78936767578125,
+                        13.499998092651367
+                    ],
+                    [
+                        142.57608032226562,
+                        266.28936767578125,
+                        12.999998092651367
+                    ],
+                    [
+                        142.57608032226562,
+                        264.78936767578125,
+                        12.999998092651367
+                    ],
+                    [
+                        141.07608032226562,
+                        252.78936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        139.57608032226562,
+                        251.28936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        133.57608032226562,
+                        249.78936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        129.07608032226562,
+                        245.28936767578125,
+                        12.499998092651367
+                    ],
+                    [
+                        129.07608032226562,
+                        240.78936767578125,
+                        12.399999618530273
+                    ],
+                    [
+                        133.57608032226562,
+                        234.78936767578125,
+                        12.399999618530273
+                    ],
+                    [
+                        135.07608032226562,
+                        228.78936767578125,
+                        12.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            132.35861191164545,
+            290.08700242020285,
+            13.600000381469727
+        ],
+        "start_rotation": [
+            0.7489672238279397,
+            0.0,
+            0.0,
+            0.6626070461679902
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bowling_ball",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/bowling_ball_646",
+                "type": "object",
+                "location": [
+                    -272.53278237275316,
+                    122.3138358762792,
+                    10.2530309659045
+                ],
+                "radius": 0.1440156566723445,
+                "path_length": 90.80283623397568,
+                "reference_path": [
+                    [
+                        -336.8803405761719,
+                        135.64669799804688,
+                        9.636236190795898
+                    ],
+                    [
+                        -323.9239196777344,
+                        137.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        -322.4239196777344,
+                        137.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -319.4239196777344,
+                        135.78936767578125,
+                        10.19999885559082
+                    ],
+                    [
+                        -317.9239196777344,
+                        135.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -313.4239196777344,
+                        137.28936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        -286.4239196777344,
+                        138.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -268.4239196777344,
+                        140.28936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -266.9239196777344,
+                        140.28936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -265.4239196777344,
+                        138.78936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -265.4239196777344,
+                        134.28936767578125,
+                        10.599998474121094
+                    ],
+                    [
+                        -269.9239196777344,
+                        125.28936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -271.4239196777344,
+                        122.31383514404297,
+                        10.43387508392334
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/bowling_ball_851",
+                "type": "object",
+                "location": [
+                    -276.275746884217,
+                    180.1870910305982,
+                    10.883519597373265
+                ],
+                "radius": 0.14452792219070432,
+                "path_length": 95.1162964712824,
+                "reference_path": [
+                    [
+                        -336.8803405761719,
+                        135.64669799804688,
+                        9.636236190795898
+                    ],
+                    [
+                        -323.9239196777344,
+                        137.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        -322.4239196777344,
+                        137.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -319.4239196777344,
+                        135.78936767578125,
+                        10.19999885559082
+                    ],
+                    [
+                        -317.9239196777344,
+                        135.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -313.4239196777344,
+                        137.28936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        -286.4239196777344,
+                        138.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -284.9239196777344,
+                        140.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -283.4239196777344,
+                        143.28936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        -275.9239196777344,
+                        161.28936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -275.9239196777344,
+                        180.1870880126953,
+                        11.129922866821289
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -336.8803519286086,
+            135.64669432667338,
+            9.63623646229924
+        ],
+        "start_rotation": [
+            0.9714940821763323,
+            0.0,
+            0.0,
+            0.2370638063820915
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rubber_duck",
+        "instruction": "Start by moving forward through the urban canyon, keeping the dark, shadowy buildings to your right. Continue along the road towards the tall skyscraper visible in the distance. As you proceed, pass the Grand Marquee Theatre on your right. Keep moving straight down the street, maintaining your course past the theatre and the surrounding high-rise structures. Eventually, you will arrive at the rubber_duck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rubber_duck_728",
+                "type": "object",
+                "location": [
+                    111.86315291634241,
+                    126.4224434455528,
+                    11.105608449768837
+                ],
+                "radius": 0.09054259210875415,
+                "path_length": 86.55252465938611,
+                "reference_path": [
+                    [
+                        70.5108871459961,
+                        51.478729248046875,
+                        9.858579635620117
+                    ],
+                    [
+                        72.07608032226562,
+                        51.78936767578125,
+                        9.89999771118164
+                    ],
+                    [
+                        73.57608032226562,
+                        53.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        75.07608032226562,
+                        56.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        97.57608032226562,
+                        105.78936767578125,
+                        10.69999885559082
+                    ],
+                    [
+                        111.86315155029297,
+                        126.42244720458984,
+                        11.105607986450195
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            70.51088963683546,
+            51.47872915385258,
+            9.858579478589535
+        ],
+        "start_rotation": [
+            0.9869165458416341,
+            0.0,
+            0.0,
+            0.16123191850256471
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "",
+        "closest_goal_idx": 1,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_4",
+                "type": "object",
+                "location": [
+                    -279.6943141636599,
+                    118.28613885761332,
+                    10.004558664325216
+                ],
+                "radius": 0.3246334397426551,
+                "path_length": 41.02513491679468,
+                "reference_path": [
+                    [
+                        -315.1134033203125,
+                        106.46875,
+                        9.802143096923828
+                    ],
+                    [
+                        -310.4239196777344,
+                        105.78936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        -308.9239196777344,
+                        105.78936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        -292.4239196777344,
+                        120.78936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        -290.9239196777344,
+                        120.78936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        -281.9239196777344,
+                        117.78936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        -280.4239196777344,
+                        117.78936767578125,
+                        9.799999237060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_59",
+                "type": "object",
+                "location": [
+                    -306.4596185392381,
+                    126.52068153041819,
+                    10.04510631502454
+                ],
+                "radius": 0.32472447895949585,
+                "path_length": 23.00758840111235,
+                "reference_path": [
+                    [
+                        -315.1134033203125,
+                        106.46875,
+                        9.802143096923828
+                    ],
+                    [
+                        -314.9239196777344,
+                        111.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -313.4239196777344,
+                        116.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -310.4239196777344,
+                        123.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -308.9239196777344,
+                        126.78936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -307.4239196777344,
+                        126.78936767578125,
+                        10.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -315.1133970193512,
+            106.46875222763255,
+            9.802143511249485
+        ],
+        "start_rotation": [
+            0.8267178519482462,
+            0.0,
+            0.0,
+            0.5626167374599494
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "office_phone",
+        "instruction": "Start by following the road, keeping the towering gray skyscraper with a regular grid of windows on your right and the traffic light pole on your left. As you proceed down the street, you'll pass a vibrant red sports car parked on the left side. Continue straight past the tall, shadowed buildings. As you approach the sidewalk area on the left where a stroller is visible, you will arrive at the office phone lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/office_phone_878",
+                "type": "object",
+                "location": [
+                    85.88612939489988,
+                    69.4310149292766,
+                    10.158318020044334
+                ],
+                "radius": 0.2145541546371419,
+                "path_length": 60.00429390097637,
+                "reference_path": [
+                    [
+                        54.48100280761719,
+                        17.774139404296875,
+                        9.266158103942871
+                    ],
+                    [
+                        55.576080322265625,
+                        18.78936767578125,
+                        9.299999237060547
+                    ],
+                    [
+                        66.07608032226562,
+                        44.28936767578125,
+                        9.599998474121094
+                    ],
+                    [
+                        73.57608032226562,
+                        53.28936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        85.57608032226562,
+                        68.28936767578125,
+                        10.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            54.48100202546463,
+            17.774139232142232,
+            9.266158159846274
+        ],
+        "start_rotation": [
+            0.9387974569882942,
+            0.0,
+            0.0,
+            0.3444696427151629
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "puddle",
+        "instruction": "Head straight down the wide road, keeping the towering grey skyscraper on your right and the dark, blocky building on your left. Continue forward past the white street sign on the left sidewalk. Maintain your course down the center of the street as the buildings loom overhead. Eventually, slightly turn left towards the corner of the dark building. You will arrive at the puddle near the intersection.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/puddle_206",
+                "type": "object",
+                "location": [
+                    -222.79746168017783,
+                    143.05628027278738,
+                    11.099943072361654
+                ],
+                "radius": 8.56200087911266,
+                "path_length": 94.86371282673902,
+                "reference_path": [
+                    [
+                        -313.6706237792969,
+                        161.91580200195312,
+                        9.086959838867188
+                    ],
+                    [
+                        -224.92391967773438,
+                        138.78936767578125,
+                        11.19999885559082
+                    ],
+                    [
+                        -223.42391967773438,
+                        138.78936767578125,
+                        11.299999237060547
+                    ],
+                    [
+                        -222.79745483398438,
+                        140.28936767578125,
+                        11.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -313.670609251898,
+            161.91580200909465,
+            9.086959472425082
+        ],
+        "start_rotation": [
+            0.9913482914750152,
+            0.0,
+            0.0,
+            0.13125762831000792
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "vans_shoes",
+        "instruction": "Proceed straight along the road, flanked by towering office buildings with grid-like facades on your right and a grey structure on your left. Continue moving forward down the wide city street. As you advance, you will notice a dark, irregular object appearing on the ground directly in your path. Keep heading towards this object. You will arrive at the vans_shoes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_4",
+                "type": "object",
+                "location": [
+                    -279.6943141636599,
+                    118.28613885761332,
+                    10.004558664325216
+                ],
+                "radius": 0.3246334397426551,
+                "path_length": 17.472518473724975,
+                "reference_path": [
+                    [
+                        -294.8233337402344,
+                        107.90242004394531,
+                        9.359959602355957
+                    ],
+                    [
+                        -280.4239196777344,
+                        117.78936767578125,
+                        9.799999237060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/vans_shoes_59",
+                "type": "object",
+                "location": [
+                    -306.4596185392381,
+                    126.52068153041819,
+                    10.04510631502454
+                ],
+                "radius": 0.32472447895949585,
+                "path_length": 36.8747987562927,
+                "reference_path": [
+                    [
+                        -294.8233337402344,
+                        107.90242004394531,
+                        9.359959602355957
+                    ],
+                    [
+                        -293.9239196777344,
+                        108.78936767578125,
+                        9.299999237060547
+                    ],
+                    [
+                        -289.4239196777344,
+                        117.78936767578125,
+                        9.499998092651367
+                    ],
+                    [
+                        -289.4239196777344,
+                        119.28936767578125,
+                        9.599998474121094
+                    ],
+                    [
+                        -290.9239196777344,
+                        120.78936767578125,
+                        9.69999885559082
+                    ],
+                    [
+                        -296.9239196777344,
+                        122.28936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        -299.9239196777344,
+                        125.28936767578125,
+                        9.799999237060547
+                    ],
+                    [
+                        -304.4239196777344,
+                        129.78936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        -305.9239196777344,
+                        129.78936767578125,
+                        9.999998092651367
+                    ],
+                    [
+                        -307.4239196777344,
+                        128.28936767578125,
+                        10.099998474121094
+                    ],
+                    [
+                        -307.4239196777344,
+                        126.78936767578125,
+                        10.099998474121094
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -294.8233452564134,
+            107.90241814875141,
+            9.359960027362806
+        ],
+        "start_rotation": [
+            0.8487202832867023,
+            0.0,
+            0.0,
+            0.5288420186953187
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "briefcase",
+        "instruction": "From the starting position beneath the concrete overpass with greenery visible, proceed forward following the road as it curves slightly left. Keep moving down the street, flanked by tall concrete buildings on both sides. Continue straight past the large multi-story parking structure on your left. As you move further down the open road, you will eventually arrive at the briefcase located near the intersection.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/briefcase_566",
+                "type": "object",
+                "location": [
+                    -80.63328477226217,
+                    361.8171997702029,
+                    21.989801799922894
+                ],
+                "radius": 0.22863734638559663,
+                "path_length": 86.62533644547246,
+                "reference_path": [
+                    [
+                        -10.219413757324219,
+                        324.4772033691406,
+                        21.373109817504883
+                    ],
+                    [
+                        -10.423919677734375,
+                        335.28936767578125,
+                        21.600000381469727
+                    ],
+                    [
+                        -11.923919677734375,
+                        336.78936767578125,
+                        21.69999885559082
+                    ],
+                    [
+                        -29.923919677734375,
+                        347.28936767578125,
+                        22.399999618530273
+                    ],
+                    [
+                        -32.923919677734375,
+                        348.78936767578125,
+                        22.499998092651367
+                    ],
+                    [
+                        -41.923919677734375,
+                        351.78936767578125,
+                        22.600000381469727
+                    ],
+                    [
+                        -80.63328552246094,
+                        361.81719970703125,
+                        21.98980140686035
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -10.219413852554194,
+            324.4772049676448,
+            21.373110089314327
+        ],
+        "start_rotation": [
+            0.7981130570113238,
+            0.0,
+            0.0,
+            0.6025077163224047
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dog",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dog_500",
+                "type": "object",
+                "location": [
+                    -83.37657532150345,
+                    70.27970929035337,
+                    11.01231789639261
+                ],
+                "radius": 0.536547981516577,
+                "path_length": 49.33126679209637,
+                "reference_path": [
+                    [
+                        -94.80967712402344,
+                        22.28200912475586,
+                        9.999998092651367
+                    ],
+                    [
+                        -86.92391967773438,
+                        47.28936767578125,
+                        10.499998092651367
+                    ],
+                    [
+                        -82.42391967773438,
+                        63.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        -82.42391967773438,
+                        69.78936767578125,
+                        10.799999237060547
+                    ]
+                ]
+            },
+            {
+                "instance": "/World/ground/terrain/Objaverse/dog_957",
+                "type": "object",
+                "location": [
+                    -24.355973678144046,
+                    75.30476229051251,
+                    10.98770840569545
+                ],
+                "radius": 0.5367157359083361,
+                "path_length": 95.25196679456852,
+                "reference_path": [
+                    [
+                        -94.80967712402344,
+                        22.28200912475586,
+                        9.999998092651367
+                    ],
+                    [
+                        -86.92391967773438,
+                        39.78936767578125,
+                        10.39999771118164
+                    ],
+                    [
+                        -67.42391967773438,
+                        60.78936767578125,
+                        10.799999237060547
+                    ],
+                    [
+                        -62.923919677734375,
+                        68.28936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -61.423919677734375,
+                        69.78936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -26.923919677734375,
+                        75.78936767578125,
+                        10.89999771118164
+                    ],
+                    [
+                        -25.423919677734375,
+                        75.78936767578125,
+                        10.89999771118164
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -94.80967999533998,
+            22.282008361357157,
+            9.999998092651365
+        ],
+        "start_rotation": [
+            0.8359062878371368,
+            0.0,
+            0.0,
+            0.5488721872661593
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "van",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/van_24",
+                "type": "object",
+                "location": [
+                    133.947986958718,
+                    242.15425770699858,
+                    13.74394192447707
+                ],
+                "radius": 3.1617446929055717,
+                "path_length": 52.158362667997515,
+                "reference_path": [
+                    [
+                        142.41749572753906,
+                        238.72596740722656,
+                        12.165085792541504
+                    ],
+                    [
+                        151.57608032226562,
+                        239.28936767578125,
+                        12.499998092651367
+                    ],
+                    [
+                        153.07608032226562,
+                        240.78936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        153.07608032226562,
+                        242.28936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        144.07608032226562,
+                        251.28936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        142.57608032226562,
+                        251.28936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        133.57608032226562,
+                        249.78936767578125,
+                        12.69999885559082
+                    ],
+                    [
+                        129.07608032226562,
+                        245.28936767578125,
+                        12.499998092651367
+                    ],
+                    [
+                        129.07608032226562,
+                        240.78936767578125,
+                        12.399999618530273
+                    ],
+                    [
+                        130.57608032226562,
+                        239.28936767578125,
+                        12.499998092651367
+                    ],
+                    [
+                        133.57608032226562,
+                        239.28936767578125,
+                        12.399999618530273
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            142.4174906466973,
+            238.72596459369217,
+            12.16508613715746
+        ],
+        "start_rotation": [
+            0.9844396379709802,
+            0.0,
+            0.0,
+            -0.17572307529623274
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rice_bowl",
+        "instruction": "Start facing a narrow gap between buildings, then move onto the road, passing a large building with many windows and metal grates on your right. Continue straight down the street, keeping the tall dark building on your right and the lower structures on your left. As you approach the intersection near the tall skyscraper, veer slightly right, hugging the base of the beige building on the corner. Proceed forward alongside this beige wall until you arrive at the rice bowl.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rice_bowl_694",
+                "type": "object",
+                "location": [
+                    338.3058277273967,
+                    189.36467856125802,
+                    17.597522215906025
+                ],
+                "radius": 0.10266453486926252,
+                "path_length": 69.81279947162628,
+                "reference_path": [
+                    [
+                        355.24169921875,
+                        229.2017059326172,
+                        18.439029693603516
+                    ],
+                    [
+                        358.5760803222656,
+                        228.78936767578125,
+                        18.299997329711914
+                    ],
+                    [
+                        361.5760803222656,
+                        227.28936767578125,
+                        18.100000381469727
+                    ],
+                    [
+                        363.0760803222656,
+                        225.78936767578125,
+                        17.899999618530273
+                    ],
+                    [
+                        363.0760803222656,
+                        222.78936767578125,
+                        17.69999885559082
+                    ],
+                    [
+                        352.5760803222656,
+                        183.78936767578125,
+                        17.19999885559082
+                    ],
+                    [
+                        351.0760803222656,
+                        182.28936767578125,
+                        17.299997329711914
+                    ],
+                    [
+                        346.5760803222656,
+                        182.28936767578125,
+                        17.399999618530273
+                    ],
+                    [
+                        339.0760803222656,
+                        188.28936767578125,
+                        17.69999885559082
+                    ],
+                    [
+                        338.3058166503906,
+                        189.36468505859375,
+                        17.597522735595703
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            355.2416840821716,
+            229.20171223120172,
+            18.43903056050674
+        ],
+        "start_rotation": [
+            0.9990154160659267,
+            0.0,
+            0.0,
+            -0.04436438281576077
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "water_fountain",
+        "instruction": "Follow the straight road flanked by tall, dark buildings, passing a large brown textured wall on your left and a towering black structure on your right. Continue forward as the street widens slightly, keeping the dark skyscrapers in view ahead. You will notice a small, green object on the sidewalk to your right. Proceed straight down the empty road, eventually passing a golden stacked-stone structure in the middle of the street. You will arrive at the water fountain shortly after passing this landmark.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/water_fountain_430",
+                "type": "object",
+                "location": [
+                    -206.54448563968057,
+                    251.4666170349735,
+                    16.578438287559294
+                ],
+                "radius": 1.0108307151865574,
+                "path_length": 94.2491245868948,
+                "reference_path": [
+                    [
+                        -214.43136596679688,
+                        339.0297546386719,
+                        21.100000381469727
+                    ],
+                    [
+                        -214.42391967773438,
+                        338.28936767578125,
+                        21.100000381469727
+                    ],
+                    [
+                        -212.92391967773438,
+                        329.28936767578125,
+                        20.600000381469727
+                    ],
+                    [
+                        -211.42391967773438,
+                        326.28936767578125,
+                        20.399999618530273
+                    ],
+                    [
+                        -211.42391967773438,
+                        305.28936767578125,
+                        19.19999885559082
+                    ],
+                    [
+                        -220.42391967773438,
+                        270.78936767578125,
+                        16.499998092651367
+                    ],
+                    [
+                        -220.42391967773438,
+                        269.28936767578125,
+                        16.399999618530273
+                    ],
+                    [
+                        -217.42391967773438,
+                        266.28936767578125,
+                        16.399999618530273
+                    ],
+                    [
+                        -205.42391967773438,
+                        254.28936767578125,
+                        16.399999618530273
+                    ],
+                    [
+                        -205.42391967773438,
+                        252.78936767578125,
+                        16.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -214.4313657899188,
+            339.0297634744243,
+            21.100000381469727
+        ],
+        "start_rotation": [
+            0.5760933433587557,
+            0.0,
+            0.0,
+            -0.8173839120864386
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garden_fountain",
+        "instruction": "Start your journey by moving forward down the dark street flanked by tall, shadowy buildings. As you proceed, keep the large white fountain structure on your left as a guide. Continue straight, following the road ahead. You will soon notice a grey bench next to the fountain on your left. Slightly adjust your path to the left as you approach. You will arrive at the garden fountain, a large, tiered, circular white structure with gold trim.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garden_fountain_532",
+                "type": "object",
+                "location": [
+                    -14.940449533822827,
+                    212.1132871562968,
+                    17.016587848185267
+                ],
+                "radius": 1.3806431321855825,
+                "path_length": 14.64205403164628,
+                "reference_path": [
+                    [
+                        -11.515946388244629,
+                        227.44998168945312,
+                        17.21070671081543
+                    ],
+                    [
+                        -16.423919677734375,
+                        215.28936767578125,
+                        16.399999618530273
+                    ],
+                    [
+                        -16.423919677734375,
+                        213.78936767578125,
+                        16.299997329711914
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -11.515946710865009,
+            227.44998515893127,
+            17.210707469273757
+        ],
+        "start_rotation": [
+            0.43283216348354,
+            0.0,
+            0.0,
+            -0.9014745244620938
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_austin",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/AUSTIN/AUSTIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "dinning_chair",
+        "instruction": "Head towards the dining chair sitting in the dark street, keeping the building with the brown-framed window on your left. Move straight down the road, approaching the chair. You will arrive at the dining_chair.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/dinning_chair_844",
+                "type": "object",
+                "location": [
+                    -89.49148274267463,
+                    48.54151297808879,
+                    10.791139361706596
+                ],
+                "radius": 0.4999999709281884,
+                "path_length": 6.864266531259062,
+                "reference_path": [
+                    [
+                        -83.97180938720703,
+                        53.99722671508789,
+                        10.69999885559082
+                    ],
+                    [
+                        -86.92391967773438,
+                        50.28936767578125,
+                        10.599998474121094
+                    ],
+                    [
+                        -88.42391967773438,
+                        48.78936767578125,
+                        10.69999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -83.97180748539292,
+            53.99722837991697,
+            10.69999885559082
+        ],
+        "start_rotation": [
+            0.3267915340222804,
+            0.0,
+            0.0,
+            -0.9450964465552523
+        ],
+        "ceiling_height": 1.0
+    }
+]

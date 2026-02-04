@@ -1,0 +1,1467 @@
+[
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Head straight towards the row of concrete buildings on the left, passing a large wall mural depicting dense green foliage on your left. Continue along the road, keeping the wall with the nature scene to your left side. As you move forward, the path curves slightly right, bringing you closer to the gray, blocky structures. Proceed past the section of the wall featuring posters or advertisements. Eventually, the path leads you directly to the entrance of a building labeled as toilets_2, distinguishable by its gray block construction and glass doors.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_4",
+                "type": "object",
+                "location": [
+                    -244.80966818446893,
+                    18.424990816185186,
+                    10.156887479539375
+                ],
+                "radius": 2.994250421328047,
+                "path_length": 65.43195571237989,
+                "reference_path": [
+                    [
+                        -249.42440795898438,
+                        74.3379135131836,
+                        7.365119457244873
+                    ],
+                    [
+                        -238.8548583984375,
+                        64.50015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        -237.3548583984375,
+                        63.000152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -237.3548583984375,
+                        61.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -249.3548583984375,
+                        21.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -249.3548583984375,
+                        19.500152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -247.8548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -246.3548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -249.42441014190467,
+            74.33791187796662,
+            7.365119315759236
+        ],
+        "start_rotation": [
+            0.874386856298503,
+            0.0,
+            0.0,
+            -0.48522945657948363
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Head down the road with the large, textured buildings on either side, keeping the fountain visible in the distance on your left. As you pass the intersection where the fountain sits, angle slightly right to follow the street. Continue forward past the tall, narrow buildings. You will see a storefront labeled \"Sakura Bites Sushi & Bar\" appearing on your left. Follow the road as it curves gently left toward the shop. You will arrive at restaurant_5.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_4",
+                "type": "object",
+                "location": [
+                    -97.60617393537854,
+                    157.18749089816384,
+                    8.144614398828972
+                ],
+                "radius": 3.242509758361834,
+                "path_length": 90.11503184992817,
+                "reference_path": [
+                    [
+                        -28.00397300720215,
+                        207.45870971679688,
+                        6.206610679626465
+                    ],
+                    [
+                        -60.3548583984375,
+                        183.00015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        -81.3548583984375,
+                        180.00015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -85.8548583984375,
+                        177.00015258789062,
+                        6.599998474121094
+                    ],
+                    [
+                        -93.3548583984375,
+                        169.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        160.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -28.00397365237289,
+            207.45871037278386,
+            6.206610637830428
+        ],
+        "start_rotation": [
+            0.1927902050407104,
+            0.0,
+            0.0,
+            -0.9812399996129187
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_1",
+        "instruction": "Go straight along the road, passing a large, textured stone pillar on your left and a series of dilapidated white buildings in the distance. As you approach a small structure labeled \"PUBLIC TOILETS\" directly ahead, veer slightly right. Continue a short distance towards the stone building with arched windows and a wooden door. You will arrive at the bar.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_1_2",
+                "type": "object",
+                "location": [
+                    153.7195387128296,
+                    292.6302821743926,
+                    8.146328431694116
+                ],
+                "radius": 2.9745349625081303,
+                "path_length": 91.4554933943053,
+                "reference_path": [
+                    [
+                        115.67810821533203,
+                        215.1124267578125,
+                        6.282734394073486
+                    ],
+                    [
+                        131.6451416015625,
+                        232.50015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        145.1451416015625,
+                        253.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        149.6451416015625,
+                        292.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        151.1451416015625,
+                        294.0001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        152.6451416015625,
+                        294.0001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            115.67810718558754,
+            215.11242206845583,
+            6.282734219874853
+        ],
+        "start_rotation": [
+            0.8792776861788764,
+            0.0,
+            0.0,
+            0.47630951133472166
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Start slightly right and head towards the public toilets, passing the worn building with the blue 'Public Toilets' sign. Continue forward, keeping the white building with the smashed glass storefront on your left. As you approach the building, angle slightly left to align with the entrance. You will arrive at the toilets, right in front of the broken glass door.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_3",
+                "type": "object",
+                "location": [
+                    217.08219641012568,
+                    97.20196443276757,
+                    9.758323035322984
+                ],
+                "radius": 2.9200391906819334,
+                "path_length": 46.627462487299255,
+                "reference_path": [
+                    [
+                        199.08621215820312,
+                        57.08615493774414,
+                        7.741866588592529
+                    ],
+                    [
+                        217.1451416015625,
+                        76.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        220.1451416015625,
+                        85.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        220.1451416015625,
+                        87.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        218.6451416015625,
+                        96.00015258789062,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            199.08621341013512,
+            57.086153961170204,
+            7.74186652581968
+        ],
+        "start_rotation": [
+            0.8089484102918142,
+            0.0,
+            0.0,
+            0.587879638605001
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Head towards the grey building with horizontal slats in the distance, keeping the tall, textured wall on your left. Continue along the road for a while. Then, make a sharp left turn into an alleyway, facing a white storefront labeled \"SAKURA BITES SUSHI & BAR\". Move towards the storefront, passing tall buildings on either side. You will arrive at the Sakura Bites sushi restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_4",
+                "type": "object",
+                "location": [
+                    -97.60617393537854,
+                    157.18749089816384,
+                    8.144614398828972
+                ],
+                "radius": 3.242509758361834,
+                "path_length": 42.3146508380721,
+                "reference_path": [
+                    [
+                        -135.912109375,
+                        162.66355895996094,
+                        5.465034484863281
+                    ],
+                    [
+                        -135.3548583984375,
+                        160.50015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -133.8548583984375,
+                        159.00015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -126.3548583984375,
+                        153.00015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -123.3548583984375,
+                        153.00015258789062,
+                        5.599998474121094
+                    ],
+                    [
+                        -112.8548583984375,
+                        156.00015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -108.3548583984375,
+                        159.00015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        -100.8548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -135.91210802011463,
+            162.66355695178274,
+            5.465034455258254
+        ],
+        "start_rotation": [
+            0.9103443570686665,
+            0.0,
+            0.0,
+            -0.41385160571542595
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_0",
+        "instruction": "Start facing the massive, dark, abstract structure with gold accents that looks like a distorted building. Move forward across the gray paved surface, keeping this large structure on your left.\n\nContinue straight ahead as the path runs parallel to the building's facade. You will pass a small, rectangular stone structure or entrance near the base of the dark wall.\n\nKeep moving forward along the pavement. As you approach the end of the dark structure, you will see a white, boxy building with gray louvered doors and a modern chair outside. You will arrive at the toilets just past this furniture.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_0_2",
+                "type": "object",
+                "location": [
+                    156.41749414578757,
+                    305.401345776337,
+                    8.310276610020324
+                ],
+                "radius": 3.0617171636959597,
+                "path_length": 51.23169613996809,
+                "reference_path": [
+                    [
+                        196.18179321289062,
+                        281.4248352050781,
+                        6.799999237060547
+                    ],
+                    [
+                        176.6451416015625,
+                        283.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        175.1451416015625,
+                        285.0001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        161.6451416015625,
+                        304.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        158.6451416015625,
+                        307.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        157.1451416015625,
+                        307.5001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            196.18179145103105,
+            281.4248465249986,
+            6.799999237060548
+        ],
+        "start_rotation": [
+            -0.10499756799455784,
+            0.0,
+            0.0,
+            0.9944724786112626
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_1",
+        "instruction": "Head straight, keeping the large, dark textured wall on your left. Continue along the road towards the grey stone building with arched windows ahead. As you approach, you will pass a white structure labeled \"PUBLIC TOILETS\" on your right. Keep moving forward until you arrive directly in front of the stone building, which is the bar.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_1_2",
+                "type": "object",
+                "location": [
+                    153.7195387128296,
+                    292.6302821743926,
+                    8.146328431694116
+                ],
+                "radius": 2.9745349625081303,
+                "path_length": 29.395789800822246,
+                "reference_path": [
+                    [
+                        160.26629638671875,
+                        269.36065673828125,
+                        6.19999885559082
+                    ],
+                    [
+                        149.6451416015625,
+                        289.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        149.6451416015625,
+                        292.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        151.1451416015625,
+                        294.0001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        152.6451416015625,
+                        294.0001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            160.26630283522385,
+            269.36064244509885,
+            6.199998855590821
+        ],
+        "start_rotation": [
+            0.39119318330317826,
+            0.0,
+            0.0,
+            0.920308585930353
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_2_7",
+                "type": "object",
+                "location": [
+                    -85.97370886675427,
+                    131.6004048594756,
+                    7.519132344592153
+                ],
+                "radius": 3.0832070408065704,
+                "path_length": 8.172089460413606,
+                "reference_path": [
+                    [
+                        -80.25901794433594,
+                        138.46424865722656,
+                        5.830938816070557
+                    ],
+                    [
+                        -81.3548583984375,
+                        138.00015258789062,
+                        5.799999237060547
+                    ],
+                    [
+                        -84.3548583984375,
+                        136.50015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -85.8548583984375,
+                        135.00015258789062,
+                        5.69999885559082
+                    ],
+                    [
+                        -85.97370910644531,
+                        133.50015258789062,
+                        5.696037292480469
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -80.25901631526631,
+            138.46425301862126,
+            5.830938793668551
+        ],
+        "start_rotation": [
+            0.1647900240243432,
+            0.0,
+            0.0,
+            -0.9863286713778812
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_8",
+                "type": "object",
+                "location": [
+                    -50.66678173568769,
+                    95.53102595083999,
+                    7.683747655001461
+                ],
+                "radius": 3.105837765176066,
+                "path_length": 7.529716408247643,
+                "reference_path": [
+                    [
+                        -52.8035888671875,
+                        104.25871276855469,
+                        5.899997711181641
+                    ],
+                    [
+                        -49.8548583984375,
+                        99.00015258789062,
+                        5.799999237060547
+                    ],
+                    [
+                        -49.8548583984375,
+                        97.50015258789062,
+                        5.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -52.803587823380695,
+            104.25871231638162,
+            5.899997711181641
+        ],
+        "start_rotation": [
+            0.8043795623413476,
+            0.0,
+            0.0,
+            -0.5941157460356881
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_1",
+        "instruction": "Head towards the graffiti-covered building on the right, keeping the open sky to your left. As you approach the structure, veer slightly right to follow the paved path. Continue straight, passing a tall, dark, textured wall on your right. Keep following the path alongside this dark wall until you see a small, light-colored building labelled \"PUBLIC TOILETS\" appearing on your left. Move past the dark wall structure and the public toilets. You will arrive at the stone building with arched windows, which is the bar.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_1_2",
+                "type": "object",
+                "location": [
+                    153.7195387128296,
+                    292.6302821743926,
+                    8.146328431694116
+                ],
+                "radius": 2.9745349625081303,
+                "path_length": 72.16406246953996,
+                "reference_path": [
+                    [
+                        165.74114990234375,
+                        314.2026062011719,
+                        5.509947299957275
+                    ],
+                    [
+                        167.6451416015625,
+                        318.0001525878906,
+                        5.69999885559082
+                    ],
+                    [
+                        169.1451416015625,
+                        319.5001525878906,
+                        5.799999237060547
+                    ],
+                    [
+                        172.1451416015625,
+                        319.5001525878906,
+                        5.999998092651367
+                    ],
+                    [
+                        176.6451416015625,
+                        316.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        182.6451416015625,
+                        310.5001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        182.6451416015625,
+                        309.0001525878906,
+                        6.599998474121094
+                    ],
+                    [
+                        173.6451416015625,
+                        300.0001525878906,
+                        6.499998092651367
+                    ],
+                    [
+                        154.1451416015625,
+                        288.0001525878906,
+                        6.499998092651367
+                    ],
+                    [
+                        151.1451416015625,
+                        288.0001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        149.6451416015625,
+                        289.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        149.6451416015625,
+                        292.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        151.1451416015625,
+                        294.0001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        152.6451416015625,
+                        294.0001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            165.7411572185537,
+            314.20260928025124,
+            5.509947207582477
+        ],
+        "start_rotation": [
+            0.8613889871314971,
+            0.0,
+            0.0,
+            0.5079458759046809
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Proceed straight along the paved path, keeping the large, vegetation-covered wall and the curved modern building on your left. Continue forward past the large grey building complex. As you approach the end of the wall structure on your left, turn sharply to the left towards the building's entrance. You will arrive at the toilets, marked by a sign with figures on the glass door.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_4",
+                "type": "object",
+                "location": [
+                    -244.80966818446893,
+                    18.424990816185186,
+                    10.156887479539375
+                ],
+                "radius": 2.994250421328047,
+                "path_length": 54.88517628277953,
+                "reference_path": [
+                    [
+                        -252.24720764160156,
+                        70.67428588867188,
+                        7.391977787017822
+                    ],
+                    [
+                        -249.3548583984375,
+                        19.500152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -247.8548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -246.3548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -252.24720021034292,
+            70.6742829434679,
+            7.391977817903644
+        ],
+        "start_rotation": [
+            0.7656769895860044,
+            0.0,
+            0.0,
+            -0.6432252697294422
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_1",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_1_2",
+                "type": "object",
+                "location": [
+                    -244.54677173328594,
+                    18.742052301560495,
+                    10.141385037322287
+                ],
+                "radius": 3.0519889678129317,
+                "path_length": 29.754057596469828,
+                "reference_path": [
+                    [
+                        -233.5289306640625,
+                        45.28968048095703,
+                        7.844936847686768
+                    ],
+                    [
+                        -229.8548583984375,
+                        37.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -229.8548583984375,
+                        34.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -232.8548583984375,
+                        30.000152587890625,
+                        7.899997711181641
+                    ],
+                    [
+                        -240.3548583984375,
+                        22.500152587890625,
+                        8.099998474121094
+                    ],
+                    [
+                        -241.8548583984375,
+                        21.000152587890625,
+                        8.19999885559082
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -233.5289334234116,
+            45.289679843551575,
+            7.844936886354247
+        ],
+        "start_rotation": [
+            0.8611605241069981,
+            0.0,
+            0.0,
+            -0.5083331109811364
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Head down the straight road, keeping the dilapidated white buildings on your right. As you continue, the streetscape will become more urban with taller, aged structures flanking the road. A distinctive blue building will appear ahead, sandwiched between the white ones. Follow the road as it curves slightly right towards this blue building. Just past the blue building, on the right side of the street, you will arrive at Sakura Bites Sushi & Bar, easily identifiable by its white storefront and large glass windows displaying sushi.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_4",
+                "type": "object",
+                "location": [
+                    -97.60617393537854,
+                    157.18749089816384,
+                    8.144614398828972
+                ],
+                "radius": 3.242509758361834,
+                "path_length": 84.11079867281279,
+                "reference_path": [
+                    [
+                        -80.279296875,
+                        105.0868148803711,
+                        5.325826168060303
+                    ],
+                    [
+                        -81.3548583984375,
+                        105.00015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -82.8548583984375,
+                        105.00015258789062,
+                        5.299999237060547
+                    ],
+                    [
+                        -105.3548583984375,
+                        112.50015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -106.8548583984375,
+                        114.00015258789062,
+                        5.499998092651367
+                    ],
+                    [
+                        -111.3548583984375,
+                        138.00015258789062,
+                        5.19999885559082
+                    ],
+                    [
+                        -111.3548583984375,
+                        156.00015258789062,
+                        5.799999237060547
+                    ],
+                    [
+                        -108.3548583984375,
+                        159.00015258789062,
+                        6.19999885559082
+                    ],
+                    [
+                        -100.8548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -80.2792939787306,
+            105.08681711320806,
+            5.325826152856503
+        ],
+        "start_rotation": [
+            0.11087077675792108,
+            0.0,
+            0.0,
+            -0.9938348307747596
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Start on the open paved area, moving towards the distant building line. Turn right to follow the path bordered by a long, textured wall with green foliage imagery on your left. Continue straight along this wall, passing various grey structures and kiosks. As the wall extends, follow the gentle curve slightly right. Keep moving forward on the paved ground, with the wall remaining on your left. Eventually, slightly angle left towards the end of the wall structure. You will arrive at the toilets, marked by a small, standalone grey building near the end of the path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_4",
+                "type": "object",
+                "location": [
+                    -244.80966818446893,
+                    18.424990816185186,
+                    10.156887479539375
+                ],
+                "radius": 2.994250421328047,
+                "path_length": 90.81159221425439,
+                "reference_path": [
+                    [
+                        -252.17466735839844,
+                        96.39498901367188,
+                        6.585688591003418
+                    ],
+                    [
+                        -247.8548583984375,
+                        97.50015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -246.3548583984375,
+                        97.50015258789062,
+                        6.899997711181641
+                    ],
+                    [
+                        -244.8548583984375,
+                        96.00015258789062,
+                        7.099998474121094
+                    ],
+                    [
+                        -237.3548583984375,
+                        63.000152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -237.3548583984375,
+                        61.500152587890625,
+                        7.799999237060547
+                    ],
+                    [
+                        -249.3548583984375,
+                        21.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -249.3548583984375,
+                        19.500152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -247.8548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -246.3548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -252.17467058801375,
+            96.39498588499677,
+            6.585688720421765
+        ],
+        "start_rotation": [
+            0.9863918244636711,
+            0.0,
+            0.0,
+            0.16441158302026693
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_0",
+        "instruction": "Go straight along the road, passing the dark, curved wall structure on your left. As you approach a white, angular building ahead, turn slightly left towards the gap between the dark wall and the white building. You will arrive at the toilets, located near a chair and a small stone object.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_0_2",
+                "type": "object",
+                "location": [
+                    156.41749414578757,
+                    305.401345776337,
+                    8.310276610020324
+                ],
+                "radius": 3.0617171636959597,
+                "path_length": 27.784304577363322,
+                "reference_path": [
+                    [
+                        174.26535034179688,
+                        286.4290466308594,
+                        6.396323204040527
+                    ],
+                    [
+                        161.6451416015625,
+                        304.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        158.6451416015625,
+                        307.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        157.1451416015625,
+                        307.5001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            174.26534666223228,
+            286.42903847641156,
+            6.396323278470561
+        ],
+        "start_rotation": [
+            0.5022086972383791,
+            0.0,
+            0.0,
+            0.8647464509427778
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Start your journey on the open road with a clear blue sky above. Proceed forward along the asphalt, keeping the distant buildings in view as you gently curve to the left. As you continue, you will notice a small, light green round object on the ground to your left. Keep moving forward, following the path as it leads you towards a white, blocky building marked with a \"PUBLIC TOILETS\" sign featuring blue gender symbols. You will arrive directly in front of the damaged entrance of this public toilet facility.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_3",
+                "type": "object",
+                "location": [
+                    217.08219641012568,
+                    97.20196443276757,
+                    9.758323035322984
+                ],
+                "radius": 2.9200391906819334,
+                "path_length": 96.884500253769,
+                "reference_path": [
+                    [
+                        142.74761962890625,
+                        62.69227600097656,
+                        7.33254337310791
+                    ],
+                    [
+                        182.6451416015625,
+                        64.50015258789062,
+                        7.599998474121094
+                    ],
+                    [
+                        205.1451416015625,
+                        70.50015258789062,
+                        7.899997711181641
+                    ],
+                    [
+                        215.6451416015625,
+                        75.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        217.1451416015625,
+                        76.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        220.1451416015625,
+                        85.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        220.1451416015625,
+                        87.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        218.6451416015625,
+                        96.00015258789062,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            142.7476129464086,
+            62.69227680593488,
+            7.332543602002748
+        ],
+        "start_rotation": [
+            0.9958650604060555,
+            0.0,
+            0.0,
+            -0.09084482077941144
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "Head slightly left along the road, moving past the tall, dilapidated grey building on your left. As you proceed, the view of the street narrows between large buildings. Continue forward, keeping the grey structures on your left. Eventually, a white storefront labeled \"SAKURA BITES\" with large glass windows and images of sushi will appear on your left. You will arrive at this restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_4",
+                "type": "object",
+                "location": [
+                    -97.60617393537854,
+                    157.18749089816384,
+                    8.144614398828972
+                ],
+                "radius": 3.242509758361834,
+                "path_length": 79.11163941826689,
+                "reference_path": [
+                    [
+                        -37.93809127807617,
+                        154.10177612304688,
+                        6.8037567138671875
+                    ],
+                    [
+                        -79.8548583984375,
+                        180.00015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -81.3548583984375,
+                        180.00015258789062,
+                        6.799999237060547
+                    ],
+                    [
+                        -85.8548583984375,
+                        177.00015258789062,
+                        6.599998474121094
+                    ],
+                    [
+                        -93.3548583984375,
+                        169.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        160.50015258789062,
+                        6.299999237060547
+                    ],
+                    [
+                        -99.3548583984375,
+                        159.00015258789062,
+                        6.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -37.938090332981396,
+            154.10177248442338,
+            6.803756779083481
+        ],
+        "start_rotation": [
+            0.4318381570912607,
+            0.0,
+            0.0,
+            0.9019511106928266
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_2",
+        "instruction": "Move forward across the wide concrete expanse towards the large, ruined, grey concrete bunker structures in the distance. The building on the right has a partially intact glass facade with a blue \"S\" symbol visible. Continue straight, aiming for the gap between the buildings ahead. As you approach the structures, you will see a large, dark opening or entrance near the white building with the \"S\". Turn slightly right towards the entrance of the building on the right side. You will arrive at the toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_2_3",
+                "type": "object",
+                "location": [
+                    217.08219641012568,
+                    97.20196443276757,
+                    9.758323035322984
+                ],
+                "radius": 2.9200391906819334,
+                "path_length": 83.07867719344905,
+                "reference_path": [
+                    [
+                        227.28561401367188,
+                        176.7100372314453,
+                        7.268548011779785
+                    ],
+                    [
+                        224.6451416015625,
+                        123.00015258789062,
+                        7.799999237060547
+                    ],
+                    [
+                        221.6451416015625,
+                        97.50015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        220.1451416015625,
+                        96.00015258789062,
+                        7.999998092651367
+                    ],
+                    [
+                        218.6451416015625,
+                        96.00015258789062,
+                        7.899997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            227.2856120203648,
+            176.71004438414315,
+            7.268547977009937
+        ],
+        "start_rotation": [
+            0.658529871497572,
+            0.0,
+            0.0,
+            -0.7525545882827314
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "toilets_1",
+        "instruction": "Start by heading towards the flat, open space, keeping the tall building with the mural of trees and a tower-like structure on your right. As you move forward, the building reveals a small structure labeled \"PUBLIC TOILETS\" with blue symbols attached to its side. Follow the road as it curves slightly towards this structure. Continue straight, aiming directly for the entrance of the public toilets, which features a glass door and window. You will arrive at the public toilets.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/toilets_1_2",
+                "type": "object",
+                "location": [
+                    -244.54677173328594,
+                    18.742052301560495,
+                    10.141385037322287
+                ],
+                "radius": 3.0519889678129317,
+                "path_length": 17.347783620830736,
+                "reference_path": [
+                    [
+                        -258.6236267089844,
+                        12.439159393310547,
+                        8.582079887390137
+                    ],
+                    [
+                        -259.8548583984375,
+                        13.500152587890625,
+                        8.499998092651367
+                    ],
+                    [
+                        -259.8548583984375,
+                        15.000152587890625,
+                        8.39999771118164
+                    ],
+                    [
+                        -258.3548583984375,
+                        16.500152587890625,
+                        8.299999237060547
+                    ],
+                    [
+                        -246.3548583984375,
+                        18.000152587890625,
+                        8.299999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -258.62363504958887,
+            12.439159309203248,
+            8.582079962357563
+        ],
+        "start_rotation": [
+            0.2899174970153519,
+            0.0,
+            0.0,
+            0.9570516417228244
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_paris_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/PARIS/PARIS_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_1",
+        "instruction": "Go straight on the road, passing a large grey rock face on your left and a series of dilapidated apartment blocks on your right. As you approach a white public restroom building ahead, veer slightly left to pass its front entrance. Then, turn right immediately after passing the structure. You will arrive at the bar, which has a distinctive blue arched window.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_1_2",
+                "type": "object",
+                "location": [
+                    153.7195387128296,
+                    292.6302821743926,
+                    8.146328431694116
+                ],
+                "radius": 2.9745349625081303,
+                "path_length": 82.82232838197972,
+                "reference_path": [
+                    [
+                        102.77802276611328,
+                        229.43197631835938,
+                        6.165336608886719
+                    ],
+                    [
+                        145.1451416015625,
+                        280.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        146.6451416015625,
+                        283.5001525878906,
+                        6.399997711181641
+                    ],
+                    [
+                        149.6451416015625,
+                        292.5001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        151.1451416015625,
+                        294.0001525878906,
+                        6.299999237060547
+                    ],
+                    [
+                        152.6451416015625,
+                        294.0001525878906,
+                        6.399997711181641
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            102.7780240357875,
+            229.43197631162494,
+            6.165336762079224
+        ],
+        "start_rotation": [
+            0.9016810221187653,
+            0.0,
+            0.0,
+            0.4324018204758839
+        ],
+        "ceiling_height": 1.0
+    }
+]

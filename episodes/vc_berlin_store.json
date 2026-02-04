@@ -1,0 +1,1302 @@
+[
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Head straight along the road, passing the dark mound and two ambulances on your left and a long black building on your right. As you reach the end of the black building, you will see a tall, pale building with many windows in the distance. Turn right, and you will arrive at the convenience store on your right, marked by a sign for \"snacks\" and an ATM.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_1",
+                "type": "object",
+                "location": [
+                    164.4200898124033,
+                    290.91438872176525,
+                    5.3054211376396685
+                ],
+                "radius": 3.624361892410576,
+                "path_length": 46.41675612847129,
+                "reference_path": [
+                    [
+                        129.91908264160156,
+                        315.5750427246094,
+                        3.0816023349761963
+                    ],
+                    [
+                        165.392333984375,
+                        296.3639831542969,
+                        3.3999977111816406
+                    ],
+                    [
+                        166.892333984375,
+                        294.8639831542969,
+                        3.299999237060547
+                    ],
+                    [
+                        166.892333984375,
+                        290.9143981933594,
+                        3.3877663612365723
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            129.9190798577759,
+            315.57502831732694,
+            3.0816022987905973
+        ],
+        "start_rotation": [
+            0.9601467673297656,
+            0.0,
+            0.0,
+            -0.27949630621208765
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_2",
+                "type": "object",
+                "location": [
+                    113.48478724464314,
+                    125.9373473677554,
+                    4.3851359117837045
+                ],
+                "radius": 3.643087159789985,
+                "path_length": 49.82852670393755,
+                "reference_path": [
+                    [
+                        131.42652893066406,
+                        161.6975555419922,
+                        2.5362048149108887
+                    ],
+                    [
+                        133.892333984375,
+                        149.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        135.392333984375,
+                        134.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        135.392333984375,
+                        132.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        133.892333984375,
+                        131.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        115.892333984375,
+                        126.86398315429688,
+                        2.5999984741210938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            131.42653247805637,
+            161.697562418079,
+            2.536204903509816
+        ],
+        "start_rotation": [
+            0.6251914953779417,
+            0.0,
+            0.0,
+            -0.7804713922413128
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "Head towards the black building visible in the distance, passing through the narrow alleyway formed by tall buildings on either side. Continue following the road as it opens up into a wider street. Keep moving straight, aiming for the storefronts ahead. As you get closer, you will see a shop with a green awning labeled \"NONNA'S TRATTORIA\" next to a white storefront labeled \"PUBLIC PARKING\". Proceed directly towards the entrance of the trattoria, where you will arrive at the destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_1",
+                "type": "object",
+                "location": [
+                    282.1981922297832,
+                    158.26384506963387,
+                    4.58567195484466
+                ],
+                "radius": 3.597079133931544,
+                "path_length": 98.17158097235554,
+                "reference_path": [
+                    [
+                        336.8741455078125,
+                        73.8689956665039,
+                        3.1759800910949707
+                    ],
+                    [
+                        316.892333984375,
+                        105.86398315429688,
+                        2.8999977111816406
+                    ],
+                    [
+                        282.19818115234375,
+                        155.36398315429688,
+                        2.5999984741210938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            336.87413640495447,
+            73.868992442921,
+            3.1759801492443276
+        ],
+        "start_rotation": [
+            0.44239948628295894,
+            0.0,
+            0.0,
+            0.8968180944520321
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "Head straight towards the white multi-story building with numerous rectangular windows. As you move forward along the road, you will see two distinct storefronts at the base of the building. The one on the left is white with the text \"URBAN\" visible, and the one on the right has a rustic, wooden facade with a sign reading \"The Daily Crumb.\" Continue your approach directly towards this right-hand shop. You will arrive at the cafe.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_2",
+                "type": "object",
+                "location": [
+                    301.95316514112733,
+                    59.51804903237941,
+                    5.150216406179133
+                ],
+                "radius": 3.6169042635631854,
+                "path_length": 26.608603403753992,
+                "reference_path": [
+                    [
+                        302.44989013671875,
+                        29.761322021484375,
+                        2.999998092651367
+                    ],
+                    [
+                        301.9531555175781,
+                        56.363983154296875,
+                        3.262228012084961
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            302.44990302546677,
+            29.761322152644208,
+            2.999998092651367
+        ],
+        "start_rotation": [
+            0.7451268733504561,
+            0.0,
+            0.0,
+            0.6669227411109725
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_2_1",
+                "type": "object",
+                "location": [
+                    249.84121151776944,
+                    60.173336671356275,
+                    5.0352202352857525
+                ],
+                "radius": 3.628188210697793,
+                "path_length": 18.464788582258674,
+                "reference_path": [
+                    [
+                        242.78721618652344,
+                        75.941162109375,
+                        2.9358937740325928
+                    ],
+                    [
+                        246.392333984375,
+                        59.363983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        247.892333984375,
+                        59.363983154296875,
+                        2.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            242.78721038596603,
+            75.94116388495195,
+            2.935893722473201
+        ],
+        "start_rotation": [
+            0.7678849956629086,
+            0.0,
+            0.0,
+            -0.6405877250117855
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_4",
+        "instruction": "From the open paved area, head towards the dark blue building on your right. As you approach the intersection, turn right onto the street, keeping the light-colored, multi-story building on your left. Follow the road straight ahead, passing a tall, dark building on your right. Continue down the street, keeping the dilapidated structures on your right side. Proceed forward until you arrive at the Quick Stop Mart with its distinctive white facade and blue sign on your right.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_4_1",
+                "type": "object",
+                "location": [
+                    283.9307083454387,
+                    179.39055693589705,
+                    4.431704533563488
+                ],
+                "radius": 3.56612139935055,
+                "path_length": 97.9227504966737,
+                "reference_path": [
+                    [
+                        208.5428009033203,
+                        166.71861267089844,
+                        2.499998092651367
+                    ],
+                    [
+                        207.392333984375,
+                        167.36398315429688,
+                        2.499998092651367
+                    ],
+                    [
+                        205.892333984375,
+                        179.36398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        205.892333984375,
+                        180.86398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        207.392333984375,
+                        182.36398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        213.392333984375,
+                        186.86398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        222.392333984375,
+                        191.36398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        235.892333984375,
+                        192.86398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        252.392333984375,
+                        192.86398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        283.9306945800781,
+                        182.36398315429688,
+                        2.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            208.54280737424398,
+            166.71861709901847,
+            2.4999980926513667
+        ],
+        "start_rotation": [
+            0.09919976588089516,
+            0.0,
+            0.0,
+            0.9950675386370392
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Start by moving forward along the road, keeping the dark, sloped terrain and the white ambulance on your left. As you proceed, head towards the dark building structure ahead. Continue straight, passing the dark building on your right. As you get closer, you will see a white tiled wall with colorful advertisements for coffee and lottery tickets. Slightly turn right to approach it. You will arrive at the convenience store entrance marked with \"ATM INSIDE - LOTTERY\".",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_1",
+                "type": "object",
+                "location": [
+                    164.4200898124033,
+                    290.91438872176525,
+                    5.3054211376396685
+                ],
+                "radius": 3.624361892410576,
+                "path_length": 57.55179772285931,
+                "reference_path": [
+                    [
+                        147.654052734375,
+                        344.8894348144531,
+                        2.640923500061035
+                    ],
+                    [
+                        166.892333984375,
+                        294.8639831542969,
+                        3.299999237060547
+                    ],
+                    [
+                        166.892333984375,
+                        290.9143981933594,
+                        3.3877663612365723
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            147.65405829430668,
+            344.889427050401,
+            2.640923524744296
+        ],
+        "start_rotation": [
+            0.9415962857059341,
+            0.0,
+            0.0,
+            -0.3367438711317384
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_2",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_2_3",
+                "type": "object",
+                "location": [
+                    363.3449136970313,
+                    126.28907645017273,
+                    5.548345223816514
+                ],
+                "radius": 3.6295754676287686,
+                "path_length": 39.15165597549776,
+                "reference_path": [
+                    [
+                        369.81573486328125,
+                        96.58984375,
+                        3.799999237060547
+                    ],
+                    [
+                        369.392333984375,
+                        95.36398315429688,
+                        3.799999237060547
+                    ],
+                    [
+                        367.892333984375,
+                        93.86398315429688,
+                        3.6999988555908203
+                    ],
+                    [
+                        363.392333984375,
+                        93.86398315429688,
+                        3.6999988555908203
+                    ],
+                    [
+                        361.892333984375,
+                        95.36398315429688,
+                        3.5999984741210938
+                    ],
+                    [
+                        360.392333984375,
+                        99.86398315429688,
+                        3.5999984741210938
+                    ],
+                    [
+                        360.392333984375,
+                        111.86398315429688,
+                        3.499998092651367
+                    ],
+                    [
+                        363.34490966796875,
+                        123.86398315429688,
+                        3.1266963481903076
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            369.81572204322464,
+            96.5898426749361,
+            3.7999992370605464
+        ],
+        "start_rotation": [
+            0.5736287737692327,
+            0.0,
+            0.0,
+            -0.8191153947424052
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_1",
+        "instruction": "Start facing the modern, dark grey building with horizontal glass panels. Follow the road straight, keeping the light-colored multi-story building on your right. As you move forward, you will see a white van with a yellow object on top parked on the right side of the street. Continue past the van, staying on the main road as it curves slightly. Eventually, you will pass a storefront with large windows on your left. You will arrive at the cafe located at that storefront.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_1_3",
+                "type": "object",
+                "location": [
+                    123.93426222955829,
+                    177.18851038826557,
+                    4.352116872780476
+                ],
+                "radius": 3.5787843822132572,
+                "path_length": 68.02899606556853,
+                "reference_path": [
+                    [
+                        191.44444274902344,
+                        181.74429321289062,
+                        2.3645355701446533
+                    ],
+                    [
+                        141.392333984375,
+                        182.36398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        138.392333984375,
+                        182.36398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        126.392333984375,
+                        180.86398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        123.93426513671875,
+                        179.36398315429688,
+                        2.383610725402832
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            191.44443875281712,
+            181.74429140710996,
+            2.364535586178671
+        ],
+        "start_rotation": [
+            -0.20456213483628274,
+            0.0,
+            0.0,
+            0.9788535809768601
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_3",
+        "instruction": "Move forward along the road, slightly angling right towards the black building structure ahead. As you approach, aim for the brick storefront with a green striped awning labeled \"Nonna's Trattoria,\" located just to the right of the white \"Public Parking\" entrance. Continue forward until you are directly in front of the restaurant's window box planters. You will arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_3_1",
+                "type": "object",
+                "location": [
+                    282.1981922297832,
+                    158.26384506963387,
+                    4.58567195484466
+                ],
+                "radius": 3.597079133931544,
+                "path_length": 29.463621323857513,
+                "reference_path": [
+                    [
+                        268.1345520019531,
+                        129.47349548339844,
+                        2.639171838760376
+                    ],
+                    [
+                        282.19818115234375,
+                        155.36398315429688,
+                        2.5999984741210938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            268.1345592771545,
+            129.47349487152445,
+            2.6391719181768756
+        ],
+        "start_rotation": [
+            0.7396641309294075,
+            0.0,
+            0.0,
+            0.6729762056837107
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "parking_entrance_1",
+        "instruction": "Start facing down the street with tall, beige buildings on your left and a green truck parked further ahead on the right. Proceed straight, following the road past the storefronts. As you continue, the green truck will be on your right, and you will pass a large white trailer parked further down the road, also on the right. Keep moving forward along the building line on your left until you reach the open area near the corner storefront, where you will arrive at the parking entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/parking_entrance_1_2",
+                "type": "object",
+                "location": [
+                    249.93092943695564,
+                    39.599520978765426,
+                    5.086548002995665
+                ],
+                "radius": 3.6296114404954807,
+                "path_length": 50.69484603133921,
+                "reference_path": [
+                    [
+                        227.93658447265625,
+                        70.23033905029297,
+                        2.836297035217285
+                    ],
+                    [
+                        229.892333984375,
+                        66.86398315429688,
+                        2.8999977111816406
+                    ],
+                    [
+                        234.392333984375,
+                        36.863983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        235.892333984375,
+                        35.363983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        246.392333984375,
+                        35.363983154296875,
+                        3.0999984741210938
+                    ],
+                    [
+                        249.93092346191406,
+                        36.863983154296875,
+                        3.1294867992401123
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            227.93658256526766,
+            70.23033658288533,
+            2.8362969357315713
+        ],
+        "start_rotation": [
+            0.7445903613897331,
+            0.0,
+            0.0,
+            -0.6675216803411756
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    294.6954738153929,
+                    58.735163077756816,
+                    5.169073719825748
+                ],
+                "radius": 3.6161664529562074,
+                "path_length": 64.02717132515569,
+                "reference_path": [
+                    [
+                        285.8271484375,
+                        112.08966827392578,
+                        2.788459300994873
+                    ],
+                    [
+                        285.392333984375,
+                        102.86398315429688,
+                        2.8999977111816406
+                    ],
+                    [
+                        285.392333984375,
+                        89.36398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        288.392333984375,
+                        56.363983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        289.892333984375,
+                        54.863983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        294.392333984375,
+                        54.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        294.6954650878906,
+                        56.363983154296875,
+                        3.202244281768799
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            285.8271440799283,
+            112.08966755297875,
+            2.788459397617859
+        ],
+        "start_rotation": [
+            0.7353532442238729,
+            0.0,
+            0.0,
+            -0.6776840017363734
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_3",
+        "instruction": "Proceed down the road, keeping the tall white building with multiple rows of windows on your left. As you move forward, the street is flanked by a darker, textured building on the right. Continue straight ahead along the pavement towards the white storefronts. You will see a brightly lit shop labeled \"URBAN PROVISIONS\" with glass doors and shelves visible inside. Approach this storefront; your destination is the \"URBAN PROVISIONS\" convenience store on the left, next to the wooden-fronted bakery.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_3_1",
+                "type": "object",
+                "location": [
+                    294.6954738153929,
+                    58.735163077756816,
+                    5.169073719825748
+                ],
+                "radius": 3.6161664529562074,
+                "path_length": 29.336380373297107,
+                "reference_path": [
+                    [
+                        277.6769104003906,
+                        32.92050552368164,
+                        3.237100601196289
+                    ],
+                    [
+                        277.892333984375,
+                        33.863983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        285.392333984375,
+                        41.363983154296875,
+                        3.499998092651367
+                    ],
+                    [
+                        294.392333984375,
+                        54.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        294.6954650878906,
+                        56.363983154296875,
+                        3.202244281768799
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            277.67689662692504,
+            32.92050624176132,
+            3.2371005362862566
+        ],
+        "start_rotation": [
+            0.601265788354268,
+            0.0,
+            0.0,
+            0.7990490922056795
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "library_0",
+        "instruction": "Starting with the brown restaurant with green awnings on your left, slightly turn right and move forward down the street. Continue straight for a while, keeping the large, multi-story building with large glass windows on your left. As you proceed, the road gently curves. Follow the road until you are past the white building section and approaching a darker brick structure on the left. You will arrive at the library, which is the brick building with large display windows on your left.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/library_0_1",
+                "type": "object",
+                "location": [
+                    287.4186960555786,
+                    172.18151417165458,
+                    4.471555355278645
+                ],
+                "radius": 3.600583548448668,
+                "path_length": 55.016129920040164,
+                "reference_path": [
+                    [
+                        260.24285888671875,
+                        132.07589721679688,
+                        3.1766300201416016
+                    ],
+                    [
+                        262.892333984375,
+                        132.86398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        288.392333984375,
+                        155.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        291.392333984375,
+                        158.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        291.392333984375,
+                        165.86398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        289.892333984375,
+                        172.1815185546875,
+                        2.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            260.24285511471726,
+            132.0758900972529,
+            3.176629944765182
+        ],
+        "start_rotation": [
+            0.9475961672181075,
+            0.0,
+            0.0,
+            0.3194706619919153
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "convenience_store_1",
+        "instruction": "Follow the road towards the black modern building with a large glass facade. As you approach, you'll see two white ambulances parked nearby. Continue straight, keeping the black building on your left. Move towards the corner of the building where a large triangular window graphic is visible. Slightly adjust your path to the left as you get closer to the structure. You will arrive at the convenience store window with blue signs reading \"ATM INSIDE - LOTTERY\" and \"SNACKS - BEVERAGES\".",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/convenience_store_1_1",
+                "type": "object",
+                "location": [
+                    164.4200898124033,
+                    290.91438872176525,
+                    5.3054211376396685
+                ],
+                "radius": 3.624361892410576,
+                "path_length": 67.99324310826546,
+                "reference_path": [
+                    [
+                        208.69281005859375,
+                        332.332763671875,
+                        2.468634843826294
+                    ],
+                    [
+                        175.892333984375,
+                        323.3639831542969,
+                        2.1999988555908203
+                    ],
+                    [
+                        174.392333984375,
+                        321.8639831542969,
+                        2.299999237060547
+                    ],
+                    [
+                        166.892333984375,
+                        290.9143981933594,
+                        3.3877663612365723
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            208.69281426286102,
+            332.33277649307587,
+            2.46863473772272
+        ],
+        "start_rotation": [
+            0.3536020327569253,
+            0.0,
+            0.0,
+            -0.9353959602383208
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_9",
+        "instruction": "Head towards the blue and white \"ART\" sign visible in the distance, following the dark road flanked by tall, dark buildings on your left. Continue straight along this path until you see a restaurant with a traditional Chinese storefront, featuring red lanterns and wooden doors, on your left. Turn left towards the entrance, approaching the stone steps. You will arrive at the restaurant.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_9_4",
+                "type": "object",
+                "location": [
+                    -84.29848164107358,
+                    234.3932181366568,
+                    5.229554139255023
+                ],
+                "radius": 3.6496095930528156,
+                "path_length": 93.61547507762059,
+                "reference_path": [
+                    [
+                        -4.79795503616333,
+                        278.1060485839844,
+                        2.6656081676483154
+                    ],
+                    [
+                        -10.107666015625,
+                        273.8639831542969,
+                        2.5999984741210938
+                    ],
+                    [
+                        -50.607666015625,
+                        258.8639831542969,
+                        2.999998092651367
+                    ],
+                    [
+                        -79.107666015625,
+                        248.36398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        -80.607666015625,
+                        246.86398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        -84.2984848022461,
+                        236.36398315429688,
+                        3.3263161182403564
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -4.79795511335922,
+            278.1060536729085,
+            2.665608126882647
+        ],
+        "start_rotation": [
+            0.30653667102741516,
+            0.0,
+            0.0,
+            -0.9518588494705663
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "bar_2",
+        "instruction": "Starting in a dark street with towering grey buildings on the left, proceed straight ahead. Focus on the illuminated white building labeled \"THE RUSTY ANCHOR TAVERN\" with an anchor logo, located directly in front of you. Continue moving towards this establishment, keeping it centered in your view as you approach. The path leads directly to the tavern's glass double doors, where you will arrive at your destination.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/bar_2_1",
+                "type": "object",
+                "location": [
+                    252.55837415180218,
+                    180.47811752945248,
+                    4.353886999136032
+                ],
+                "radius": 3.6115282231964727,
+                "path_length": 24.678369074307017,
+                "reference_path": [
+                    [
+                        275.3519592285156,
+                        194.99107360839844,
+                        2.4367358684539795
+                    ],
+                    [
+                        255.392333984375,
+                        180.47811889648438,
+                        2.5314292907714844
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            275.35195168535904,
+            194.99107831881585,
+            2.4367357602218194
+        ],
+        "start_rotation": [
+            0.44052432382396123,
+            0.0,
+            0.0,
+            -0.8977406753174559
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_5",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_5_2",
+                "type": "object",
+                "location": [
+                    113.48478724464314,
+                    125.9373473677554,
+                    4.3851359117837045
+                ],
+                "radius": 3.643087159789985,
+                "path_length": 63.76635393534336,
+                "reference_path": [
+                    [
+                        129.77825927734375,
+                        175.557861328125,
+                        2.4157137870788574
+                    ],
+                    [
+                        133.892333984375,
+                        149.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        135.392333984375,
+                        134.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        135.392333984375,
+                        132.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        133.892333984375,
+                        131.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        115.892333984375,
+                        126.86398315429688,
+                        2.5999984741210938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            129.77825165711795,
+            175.55786792724342,
+            2.4157137517395397
+        ],
+        "start_rotation": [
+            0.6170154072699765,
+            0.0,
+            0.0,
+            -0.7869510703922227
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "restaurant_0",
+        "instruction": "Head down the street, keeping the tall grey buildings on your left and the large, reflective green-glass building on your right. As you move forward, the road curves slightly. You will approach a wooden storefront on the right side of the street labeled \"HANA RAMEN HOUSE\" with a distinctive peaked entrance. Continue straight towards this shop until you arrive at the restaurant entrance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/restaurant_0_2",
+                "type": "object",
+                "location": [
+                    98.12939327814851,
+                    175.04145901985862,
+                    4.329590257475489
+                ],
+                "radius": 3.555254193669505,
+                "path_length": 37.30170540133067,
+                "reference_path": [
+                    [
+                        60.955013275146484,
+                        185.9711456298828,
+                        2.3999977111816406
+                    ],
+                    [
+                        63.392333984375,
+                        186.86398315429688,
+                        2.499998092651367
+                    ],
+                    [
+                        64.892333984375,
+                        186.86398315429688,
+                        2.499998092651367
+                    ],
+                    [
+                        96.392333984375,
+                        176.36398315429688,
+                        2.3999977111816406
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            60.95501469491782,
+            185.9711530421746,
+            2.399997711181641
+        ],
+        "start_rotation": [
+            0.9896216279895315,
+            0.0,
+            0.0,
+            0.1436977154145097
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin_store",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cafe_0",
+        "instruction": "Head towards the small red car and the green bus parked in the distance, following the road straight ahead. As you approach the intersection where the vehicles are parked, veer slightly to the left to align with the large, white multi-story building on the left corner. Proceed towards this white building. As you get closer, look for the storefront with a wooden facade labeled \"The Daily Crumb\". You will arrive at the Daily Crumb cafe.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/store/cafe_0_2",
+                "type": "object",
+                "location": [
+                    301.95316514112733,
+                    59.51804903237941,
+                    5.150216406179133
+                ],
+                "radius": 3.6169042635631854,
+                "path_length": 54.65001083853944,
+                "reference_path": [
+                    [
+                        293.2921142578125,
+                        26.113935470581055,
+                        3.0392544269561768
+                    ],
+                    [
+                        298.892333984375,
+                        23.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        300.392333984375,
+                        23.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        303.392333984375,
+                        24.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        315.392333984375,
+                        32.363983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        316.892333984375,
+                        33.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        316.892333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        301.9531555175781,
+                        56.363983154296875,
+                        3.262228012084961
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            293.29212728523777,
+            26.113935412945644,
+            3.039254439451694
+        ],
+        "start_rotation": [
+            0.9039625658308107,
+            0.0,
+            0.0,
+            -0.4276115989733875
+        ],
+        "ceiling_height": 1.0
+    }
+]

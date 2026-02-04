@@ -13,6 +13,8 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
 from isaaclab.sensors import TiledCamera, TiledCameraCfg
+from isaacsim.core.utils.stage import add_reference_to_stage
+import os
 
 def init_env_cfg(env_cfg, args, episode):
     load_scene(env_cfg, args, episode)
@@ -29,7 +31,7 @@ def load_scene(env_cfg, args, episode):
 
 def set_robot_pose(env_cfg, episode, robot=None):
     pos = list(episode["start_position"])
-    pos[2] += 0.6
+    pos[2] += 0.8
     rot = list(episode["start_rotation"]) # wxyz
     env_cfg.scene.robot.init_state.pos = pos
     env_cfg.scene.robot.init_state.rot = rot
@@ -90,6 +92,7 @@ class VLNEnvWrapper:
         self.termination_states = {
             "stuck_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "stuck_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
+            "stuck_dist_history": [[] for _ in range(self.num_envs)],
             "back_n_forth_prev_pos": torch.zeros(self.num_envs, 3, device=self.args.device),
             "back_n_forth_same_pos_count": torch.zeros(self.num_envs, dtype=torch.int32, device=self.args.device),
         }
@@ -224,17 +227,17 @@ class VLNEnvWrapper:
             self.manager_env.scene._terrain = TerrainImporter(self.manager_env.cfg.scene.terrain)
             if self.episode["path"] == "generator":
                 self.scene.terrain.terrain_prim_paths.append("/World/ground/terrain")
-            # check if skylight exists in scene
-            disable_default_light = False
+            # disable all lights in scene
             prim_list = [x for x in self.manager_env.scene.stage.Traverse()]
             for prim in prim_list:
                 from_usd = str(prim.GetPath()).startswith("/World/ground/terrain")
                 is_domelight = prim.GetTypeName() == "DomeLight"
                 if from_usd and is_domelight:
-                    disable_default_light = True
-                    break
-            dome_light = self.scene.stage.GetPrimAtPath("/World/skyLight")
-            dome_light.SetActive(not disable_default_light)
+                    prim.SetActive(False)
+            default_dome_light = self.scene.stage.GetPrimAtPath('/World/skyLight')
+            default_dome_light.SetActive(False)
+            # add ref to usd file
+            add_reference_to_stage(prim_path="/World/sky", usd_path=os.path.join(self.args.scene_folder, "nvidia", "sky", "CloudySky.usd"))
             # apply scale and translation
             terrain_prim = self.scene.stage.GetPrimAtPath('/World/ground/terrain')
             if collider:
@@ -293,7 +296,10 @@ class VLNEnvWrapper:
     def reset_termination_states(self, reset_env_ids):
         for env_id in reset_env_ids:
             for key in self.termination_states.keys():
-                self.termination_states[key][env_id] = 0
+                if "dist_history" in key:
+                    self.termination_states[key][env_id] = []
+                else:
+                    self.termination_states[key][env_id] = 0
     
     def update_command(self, command) -> None:
         """Update the command for the low-level policy."""

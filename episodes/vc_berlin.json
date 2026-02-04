@@ -1,0 +1,1447 @@
+[
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 0,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance",
+        "instruction": "Drive along the street flanked by tall urban buildings, keeping the white buildings on your left and the darker, older brick-style buildings on your right. As you proceed forward, you will see a white ambulance ahead in the distance. Continue straight down the road until you are directly next to the ambulance on your left. Turn slightly left towards it, and you will arrive at the side of the white ambulance with red stripes.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_11",
+                "type": "object",
+                "location": [
+                    -126.76707175910121,
+                    85.8015430134329,
+                    4.101361315552481
+                ],
+                "radius": 3.767378620254185,
+                "path_length": 43.93902080469865,
+                "reference_path": [
+                    [
+                        -132.14682006835938,
+                        124.71857452392578,
+                        2.799999237060547
+                    ],
+                    [
+                        -133.107666015625,
+                        123.86398315429688,
+                        2.799999237060547
+                    ],
+                    [
+                        -133.107666015625,
+                        120.86398315429688,
+                        2.799999237060547
+                    ],
+                    [
+                        -131.607666015625,
+                        84.86398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        -130.107666015625,
+                        83.36398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        -128.607666015625,
+                        83.36398315429688,
+                        2.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -132.14681609382012,
+            124.71857542792542,
+            2.799999237060547
+        ],
+        "start_rotation": [
+            0.5817074736332587,
+            0.0,
+            0.0,
+            -0.8133980668278058
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 1,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "Purse",
+        "instruction": "Start with the dark building and futuristic white vehicle on your left. Move forward, passing an ambulance parked near the dark building. Continue straight on the paved surface, keeping the large dark structure to your left and shipping containers to your right. As you proceed, a blue object will appear on the ground ahead. Follow the path forward past the blue object, and you will arrive at the Purse.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/Purse_116",
+                "type": "object",
+                "location": [
+                    150.9503843680231,
+                    319.9583908247706,
+                    2.9012846779991457
+                ],
+                "radius": 0.14768533904840808,
+                "path_length": 45.06693238342495,
+                "reference_path": [
+                    [
+                        192.1136932373047,
+                        338.922119140625,
+                        2.3999977111816406
+                    ],
+                    [
+                        190.892333984375,
+                        338.3639831542969,
+                        2.3999977111816406
+                    ],
+                    [
+                        180.392333984375,
+                        329.3639831542969,
+                        2.1999988555908203
+                    ],
+                    [
+                        151.892333984375,
+                        320.3639831542969,
+                        2.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            192.11370023448976,
+            338.9221073293747,
+            2.3999977111816406
+        ],
+        "start_rotation": [
+            0.08783358699926067,
+            0.0,
+            0.0,
+            -0.9961351620110813
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 2,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "warm_blanket",
+        "instruction": "Head down the road with the white ambulance on your left. Continue straight along this path, keeping the ambulance and the dark, modern building behind it on your left side. As you proceed, you will pass a large grey apartment block in the distance. Keep moving forward along the road, and you will arrive at the warm_blanket near the base of the dark building.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/warm_blanket_169",
+                "type": "object",
+                "location": [
+                    151.79298075312659,
+                    126.2385960759049,
+                    2.799440975874644
+                ],
+                "radius": 0.39902950131634185,
+                "path_length": 76.1015592162858,
+                "reference_path": [
+                    [
+                        221.29908752441406,
+                        104.36328125,
+                        2.790888786315918
+                    ],
+                    [
+                        202.892333984375,
+                        120.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        151.79298400878906,
+                        126.23859405517578,
+                        2.799440860748291
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            221.2990817485854,
+            104.36327960336598,
+            2.7908887670087474
+        ],
+        "start_rotation": [
+            0.433761541962805,
+            0.0,
+            0.0,
+            0.9010277047427842
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 3,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "cell_phone",
+        "instruction": "Start with your back to the dark, textured wall and move onto the road. Follow the road straight ahead, keeping the tall, grey buildings to your right and the brown buildings to your left. Continue down the street, passing a white ambulance parked near a black structure on the right. As the road curves, stay centered. Eventually, you will approach an open area with a large, light-colored building in the distance. Veer slightly right towards the open space, and you will arrive at the cell phone lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/cell_phone_153",
+                "type": "object",
+                "location": [
+                    200.60093186856784,
+                    127.52351194780675,
+                    2.7073431300791038
+                ],
+                "radius": 0.19142063219644712,
+                "path_length": 87.49199266931129,
+                "reference_path": [
+                    [
+                        213.07669067382812,
+                        178.66880798339844,
+                        2.132610559463501
+                    ],
+                    [
+                        214.892333984375,
+                        179.36398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        216.392333984375,
+                        179.36398315429688,
+                        2.299999237060547
+                    ],
+                    [
+                        217.892333984375,
+                        177.86398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        219.392333984375,
+                        168.86398315429688,
+                        2.3999977111816406
+                    ],
+                    [
+                        219.392333984375,
+                        158.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        217.892333984375,
+                        117.86398315429688,
+                        2.499998092651367
+                    ],
+                    [
+                        216.392333984375,
+                        116.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        214.892333984375,
+                        116.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        200.60093688964844,
+                        127.52351379394531,
+                        2.707343101501465
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            213.07668427713622,
+            178.66881335223852,
+            2.13261063123965
+        ],
+        "start_rotation": [
+            0.9933749421318234,
+            0.0,
+            0.0,
+            0.11491833772116816
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 4,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "police_van",
+        "instruction": "Start near the white multi-story building on the left. Move forward along the road, keeping the long, blocky beige building with many windows on your left. Continue straight past this building as the road curves slightly. You will see a dark, shadowed building further down the road. Keep moving forward towards the dark grey building complex ahead. As you approach the intersection near the dark building, veer slightly right. Continue forward until you reach the grey police van parked on the terrain.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/police_van_22",
+                "type": "object",
+                "location": [
+                    59.43436694049841,
+                    6.9330989904862355,
+                    3.3678784904224983
+                ],
+                "radius": 2.9115890902771753,
+                "path_length": 84.90545841704227,
+                "reference_path": [
+                    [
+                        24.01453399658203,
+                        -0.01515500620007515,
+                        1.9665755033493042
+                    ],
+                    [
+                        22.892333984375,
+                        2.363983154296875,
+                        1.9999980926513672
+                    ],
+                    [
+                        22.892333984375,
+                        3.863983154296875,
+                        2.1999988555908203
+                    ],
+                    [
+                        24.392333984375,
+                        5.363983154296875,
+                        2.1999988555908203
+                    ],
+                    [
+                        57.392333984375,
+                        24.863983154296875,
+                        1.6999988555908203
+                    ],
+                    [
+                        60.392333984375,
+                        24.863983154296875,
+                        1.8999977111816406
+                    ],
+                    [
+                        67.892333984375,
+                        17.363983154296875,
+                        2.1999988555908203
+                    ],
+                    [
+                        69.392333984375,
+                        14.363983154296875,
+                        2.299999237060547
+                    ],
+                    [
+                        69.392333984375,
+                        12.863983154296875,
+                        2.299999237060547
+                    ],
+                    [
+                        67.892333984375,
+                        2.363983154296875,
+                        2.299999237060547
+                    ],
+                    [
+                        64.892333984375,
+                        -0.636016845703125,
+                        2.299999237060547
+                    ],
+                    [
+                        63.392333984375,
+                        -0.636016845703125,
+                        2.299999237060547
+                    ],
+                    [
+                        61.892333984375,
+                        0.863983154296875,
+                        2.1999988555908203
+                    ],
+                    [
+                        60.392333984375,
+                        3.863983154296875,
+                        1.9999980926513672
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            24.0145332530333,
+            -0.015155005923715208,
+            1.9665754698960733
+        ],
+        "start_rotation": [
+            0.6570437949125217,
+            0.0,
+            0.0,
+            0.7538524070180794
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 5,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Start on the road facing a white public parking entrance building on the left and a white ambulance on the right. Move forward along the road, keeping the tall, distressed white building on your left. As you proceed, the ambulance on the right will pass out of view and a dark, blocky building will become more prominent on the right side. Continue straight down the street. Eventually, you will see a wooden park bench on the left side of the road. Stop near this bench.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_183",
+                "type": "object",
+                "location": [
+                    272.6271385293407,
+                    37.447553356812506,
+                    3.63699958575846
+                ],
+                "radius": 1.1210411756152894,
+                "path_length": 52.63867531557646,
+                "reference_path": [
+                    [
+                        243.6328125,
+                        -1.6114321947097778,
+                        2.929833173751831
+                    ],
+                    [
+                        247.892333984375,
+                        21.863983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        249.392333984375,
+                        23.363983154296875,
+                        2.799999237060547
+                    ],
+                    [
+                        258.392333984375,
+                        30.863983154296875,
+                        3.0999984741210938
+                    ],
+                    [
+                        272.62713623046875,
+                        35.363983154296875,
+                        3.2496612071990967
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            243.63280817625898,
+            -1.6114322256628648,
+            2.9298331446737285
+        ],
+        "start_rotation": [
+            0.8325617323928082,
+            0.0,
+            0.0,
+            0.553932271812255
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 6,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "Follow the straight road, keeping the tall, grey, multi-story building with numerous windows on your left. Continue forward past the white bench-like structure on the left sidewalk. Ahead, you will see a prominent dark structure with columns resembling a historical gate or monument, and a green bus further down the road. As you approach the end of the large building block on your left, turn right towards the open area. You will arrive at a simple wooden park bench with grey concrete supports.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_140",
+                "type": "object",
+                "location": [
+                    -335.27512026312155,
+                    40.29387546525606,
+                    3.709454087468174
+                ],
+                "radius": 2.4619876794713633,
+                "path_length": 27.383061305022668,
+                "reference_path": [
+                    [
+                        -349.9034729003906,
+                        56.949161529541016,
+                        2.84694504737854
+                    ],
+                    [
+                        -347.607666015625,
+                        50.363983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        -346.107666015625,
+                        48.863983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        -334.107666015625,
+                        44.363983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -332.607666015625,
+                        42.863983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -332.607666015625,
+                        41.363983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -334.107666015625,
+                        40.29387664794922,
+                        3.3999977111816406
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -349.90346675822815,
+            56.94916113710635,
+            2.8469451378718063
+        ],
+        "start_rotation": [
+            0.8700564819385906,
+            0.0,
+            0.0,
+            -0.4929520445607694
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 7,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "ambulance",
+        "instruction": "Follow the road forward, passing the tall gray buildings on your left and the structures covered in green scaffolding on your right. Continue straight down the street, keeping the road markings visible. As you proceed, the view of the buildings will shift. Eventually, you will approach a large white ambulance with red stripes parked on the side of the road. You will arrive at the ambulance.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/ambulance_62",
+                "type": "object",
+                "location": [
+                    198.6086917062824,
+                    116.3380343104181,
+                    3.99455362964342
+                ],
+                "radius": 3.7434019444940105,
+                "path_length": 54.68429611986986,
+                "reference_path": [
+                    [
+                        230.0715789794922,
+                        70.99397277832031,
+                        2.8591525554656982
+                    ],
+                    [
+                        228.392333984375,
+                        78.86398315429688,
+                        2.799999237060547
+                    ],
+                    [
+                        208.892333984375,
+                        111.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        207.392333984375,
+                        113.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        201.392333984375,
+                        114.86398315429688,
+                        2.6999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            230.07157973469714,
+            70.99397627855978,
+            2.859152544873248
+        ],
+        "start_rotation": [
+            0.6482802481410557,
+            0.0,
+            0.0,
+            0.761401812363335
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 8,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Start with the dark building on your right, slightly angling right to follow the road. Continue straight down the street, keeping the tall buildings on your left. As you proceed, a green truck will come into view ahead. Continue moving forward along the road, approaching the green garbage truck with the recycling symbol on its side. You will arrive at the garbage truck.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_23",
+                "type": "object",
+                "location": [
+                    -139.39252968648833,
+                    205.26362358829684,
+                    4.948459167012743
+                ],
+                "radius": 4.025273613993932,
+                "path_length": 63.02306116370353,
+                "reference_path": [
+                    [
+                        -121.14725494384766,
+                        152.91957092285156,
+                        2.5629591941833496
+                    ],
+                    [
+                        -128.607666015625,
+                        153.86398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        -139.107666015625,
+                        164.36398315429688,
+                        2.5999984741210938
+                    ],
+                    [
+                        -142.107666015625,
+                        195.86398315429688,
+                        3.1999988555908203
+                    ],
+                    [
+                        -142.107666015625,
+                        200.36398315429688,
+                        3.3999977111816406
+                    ],
+                    [
+                        -142.107666015625,
+                        204.86398315429688,
+                        3.499998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -121.14725629738199,
+            152.91956995551013,
+            2.5629592127471787
+        ],
+        "start_rotation": [
+            0.0655873428663036,
+            0.0,
+            0.0,
+            0.9978468321619997
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 9,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "house_mailbox",
+        "instruction": "Head straight down the road, keeping the building with the large red coffee cup graphic on your left. Continue forward past the graffiti-covered buildings on your right. As you reach the end of the block where the street opens up, make a sharp right turn towards the dark building facade. Proceed slightly forward, and you will arrive at the red house mailbox located near the corner.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/house_mailbox_134",
+                "type": "object",
+                "location": [
+                    -345.28927120490255,
+                    114.5246455017541,
+                    3.6357846215252723
+                ],
+                "radius": 0.6000000201930529,
+                "path_length": 84.1807857787015,
+                "reference_path": [
+                    [
+                        -330.7306213378906,
+                        37.86842727661133,
+                        3.4125661849975586
+                    ],
+                    [
+                        -347.607666015625,
+                        105.86398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -347.607666015625,
+                        114.86398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -346.107666015625,
+                        116.36398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -344.607666015625,
+                        116.36398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -344.607666015625,
+                        114.86398315429688,
+                        3.0999984741210938
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -330.7306160863632,
+            37.86842658483789,
+            3.4125660901014103
+        ],
+        "start_rotation": [
+            0.6548652264503314,
+            0.0,
+            0.0,
+            0.7557456815530977
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 10,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench_with_back",
+        "instruction": "Start facing a large, grey building with many dark rectangular windows on your left. Move forward along the road, keeping this building to your left. As you proceed, you will pass a wooden bench situated on the sidewalk next to the grey building. Continue straight ahead down the street. You will arrive at the park_bench_with_back.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_with_back_183",
+                "type": "object",
+                "location": [
+                    272.6271385293407,
+                    37.447553356812506,
+                    3.63699958575846
+                ],
+                "radius": 1.1210411756152894,
+                "path_length": 10.868561710215907,
+                "reference_path": [
+                    [
+                        262.2817077636719,
+                        32.03450012207031,
+                        3.1390159130096436
+                    ],
+                    [
+                        272.62713623046875,
+                        35.363983154296875,
+                        3.2496612071990967
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            262.28170599153924,
+            32.034499162983394,
+            3.139015823249452
+        ],
+        "start_rotation": [
+            0.9234161178796869,
+            0.0,
+            0.0,
+            0.3838003038560655
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 11,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "garbage_truck",
+        "instruction": "Head down the street with the tall, gray buildings flanking your left. Continue straight along the road, passing the dark storefronts. As you proceed, you will see a green recycling truck ahead in the distance. Keep moving forward towards it. Eventually, you will arrive at the green garbage truck parked on the road.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/garbage_truck_38",
+                "type": "object",
+                "location": [
+                    -348.88144134918593,
+                    23.746474896833675,
+                    4.701318974281406
+                ],
+                "radius": 4.031329202157773,
+                "path_length": 80.9220259252321,
+                "reference_path": [
+                    [
+                        -365.0227355957031,
+                        81.40574645996094,
+                        3.157589912414551
+                    ],
+                    [
+                        -361.107666015625,
+                        83.36398315429688,
+                        3.1999988555908203
+                    ],
+                    [
+                        -359.607666015625,
+                        83.36398315429688,
+                        3.1999988555908203
+                    ],
+                    [
+                        -355.107666015625,
+                        78.86398315429688,
+                        2.999998092651367
+                    ],
+                    [
+                        -344.607666015625,
+                        63.863983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        -332.607666015625,
+                        42.863983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -331.107666015625,
+                        38.363983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -331.107666015625,
+                        36.863983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -332.607666015625,
+                        35.363983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        -346.107666015625,
+                        23.746475219726562,
+                        3.1999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -365.02274171505627,
+            81.40574693526167,
+            3.1575899793308784
+        ],
+        "start_rotation": [
+            0.9927736563298739,
+            0.0,
+            0.0,
+            0.12000194705675998
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 12,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "electric_car",
+        "instruction": "Move forward along the road, keeping the modern, curved glass building with a dark, flat overhanging roof on your left. As you proceed, the road curves gently. Continue straight ahead, passing the cylindrical sections of the building. You will eventually see a bright red electric car parked directly in front of you near the building's entrance. You will arrive at the electric_car.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/electric_car_90",
+                "type": "object",
+                "location": [
+                    -199.12849239533398,
+                    316.19898891866194,
+                    3.7942798962466355
+                ],
+                "radius": 3.3206460235025475,
+                "path_length": 77.8046145103789,
+                "reference_path": [
+                    [
+                        -239.550048828125,
+                        257.532470703125,
+                        3.6497316360473633
+                    ],
+                    [
+                        -221.607666015625,
+                        267.8639831542969,
+                        2.999998092651367
+                    ],
+                    [
+                        -211.107666015625,
+                        276.8639831542969,
+                        3.0999984741210938
+                    ],
+                    [
+                        -209.607666015625,
+                        278.3639831542969,
+                        3.0999984741210938
+                    ],
+                    [
+                        -196.107666015625,
+                        306.8639831542969,
+                        3.0999984741210938
+                    ],
+                    [
+                        -194.607666015625,
+                        311.3639831542969,
+                        3.1999988555908203
+                    ],
+                    [
+                        -194.607666015625,
+                        312.8639831542969,
+                        3.0999984741210938
+                    ],
+                    [
+                        -196.107666015625,
+                        315.8639831542969,
+                        2.999998092651367
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -239.55005583759754,
+            257.5324672912011,
+            3.649731535274946
+        ],
+        "start_rotation": [
+            0.8689281572477774,
+            0.0,
+            0.0,
+            0.49493823608808185
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 13,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "table",
+        "instruction": "",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/table_146",
+                "type": "object",
+                "location": [
+                    261.80786022133213,
+                    36.4417869156773,
+                    3.474469402666884
+                ],
+                "radius": 0.9051453660977131,
+                "path_length": 98.49748429663883,
+                "reference_path": [
+                    [
+                        257.0877685546875,
+                        21.717267990112305,
+                        3.1565134525299072
+                    ],
+                    [
+                        258.392333984375,
+                        20.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        262.892333984375,
+                        20.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        300.392333984375,
+                        23.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        303.392333984375,
+                        24.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        306.392333984375,
+                        27.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        306.392333984375,
+                        29.363983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        304.892333984375,
+                        30.863983154296875,
+                        2.999998092651367
+                    ],
+                    [
+                        300.392333984375,
+                        33.863983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        297.392333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        291.392333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        264.392333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        262.892333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            257.0877782932248,
+            21.71726854080878,
+            3.156513500002978
+        ],
+        "start_rotation": [
+            0.8475888691105326,
+            0.0,
+            0.0,
+            -0.5306534735210244
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 14,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "rubber_duck",
+        "instruction": "Slightly veer right and proceed down the wide, open street. On your right, you'll pass a series of large, blocky grey buildings, one of which has a grid-like facade. Continue straight ahead, keeping the dark, shadowed buildings to your right side. As you advance, you will eventually arrive at the rubber_duck, which is not immediately visible but lies ahead on this path.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/rubber_duck_106",
+                "type": "object",
+                "location": [
+                    159.81284273358585,
+                    -0.7788981667533534,
+                    2.6276318709618645
+                ],
+                "radius": 0.0848383459847355,
+                "path_length": 29.36329323075611,
+                "reference_path": [
+                    [
+                        132.20172119140625,
+                        9.211385726928711,
+                        2.475425958633423
+                    ],
+                    [
+                        159.81283569335938,
+                        -0.7788981795310974,
+                        2.627631902694702
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            132.20172810634966,
+            9.211385627890486,
+            2.475425938617375
+        ],
+        "start_rotation": [
+            0.9989569287009765,
+            0.0,
+            0.0,
+            -0.04566239810075907
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 15,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "warm_blanket",
+        "instruction": "Head towards the large, grey, boxy building with visible scaffolding and green netting on the right. As you advance along the road, the path curves slightly left past a white van with red stripes parked on the left side. Continue straight down the road, passing the white van and dark buildings on your left. Keep moving forward until you reach the base of the dark, multi-story structure ahead, where you will arrive at the warm_blanket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/warm_blanket_169",
+                "type": "object",
+                "location": [
+                    151.79298075312659,
+                    126.2385960759049,
+                    2.799440975874644
+                ],
+                "radius": 0.39902950131634185,
+                "path_length": 78.6354577788042,
+                "reference_path": [
+                    [
+                        210.4790496826172,
+                        95.7213363647461,
+                        2.6999988555908203
+                    ],
+                    [
+                        210.392333984375,
+                        107.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        208.892333984375,
+                        111.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        204.392333984375,
+                        119.36398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        202.892333984375,
+                        120.86398315429688,
+                        2.6999988555908203
+                    ],
+                    [
+                        151.79298400878906,
+                        126.23859405517578,
+                        2.799440860748291
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            210.47904489793856,
+            95.72133593312745,
+            2.6999988555908194
+        ],
+        "start_rotation": [
+            0.7413405639259586,
+            0.0,
+            0.0,
+            0.671129025059967
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 16,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "Purse",
+        "instruction": "Turn slightly right from the start position with a large, dark, rectangular building on your left. Move forward along the road, keeping the dark building on your left. In the distance, you will see a white ambulance parked on the road. Continue moving forward past the building. As the scenery opens up to a more barren landscape with shipping containers in the distance, keep heading straight. You will arrive at the blue Purse lying on the ground.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/Purse_116",
+                "type": "object",
+                "location": [
+                    150.9503843680231,
+                    319.9583908247706,
+                    2.9012846779991457
+                ],
+                "radius": 0.14768533904840808,
+                "path_length": 85.96273455323488,
+                "reference_path": [
+                    [
+                        187.3865966796875,
+                        243.2020263671875,
+                        2.7277557849884033
+                    ],
+                    [
+                        180.392333984375,
+                        258.8639831542969,
+                        3.0999984741210938
+                    ],
+                    [
+                        166.892333984375,
+                        294.8639831542969,
+                        3.299999237060547
+                    ],
+                    [
+                        153.392333984375,
+                        320.3639831542969,
+                        2.799999237060547
+                    ],
+                    [
+                        151.892333984375,
+                        320.3639831542969,
+                        2.799999237060547
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            187.38660373524075,
+            243.2020290246139,
+            2.727755891541938
+        ],
+        "start_rotation": [
+            0.3481453138973969,
+            0.0,
+            0.0,
+            0.9374405796696039
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 17,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "park_bench",
+        "instruction": "Start near the large grey pyramidal structure on your right. Proceed forward along the road, keeping the long row of tall, multi-story buildings on your left. As you advance, you will pass a dark, arch-like structure further down the street. Continue straight towards the green truck parked in the distance. As you approach the truck, look to your right near the curb. You will arrive at the wooden park bench with concrete legs.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/park_bench_140",
+                "type": "object",
+                "location": [
+                    -335.27512026312155,
+                    40.29387546525606,
+                    3.709454087468174
+                ],
+                "radius": 2.4619876794713633,
+                "path_length": 96.8985880395559,
+                "reference_path": [
+                    [
+                        -380.7001647949219,
+                        119.78421783447266,
+                        3.299999237060547
+                    ],
+                    [
+                        -382.107666015625,
+                        119.36398315429688,
+                        3.299999237060547
+                    ],
+                    [
+                        -382.107666015625,
+                        117.86398315429688,
+                        3.1999988555908203
+                    ],
+                    [
+                        -380.607666015625,
+                        116.36398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -364.107666015625,
+                        99.86398315429688,
+                        3.0999984741210938
+                    ],
+                    [
+                        -332.607666015625,
+                        42.863983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -332.607666015625,
+                        41.363983154296875,
+                        3.3999977111816406
+                    ],
+                    [
+                        -334.107666015625,
+                        40.29387664794922,
+                        3.3999977111816406
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            -380.70016130151606,
+            119.78421651346996,
+            3.2999992370605473
+        ],
+        "start_rotation": [
+            0.23681684361789876,
+            0.0,
+            0.0,
+            -0.9715543127272174
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 18,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "table",
+        "instruction": "Head straight along the road, keeping the dark, monolithic building on your right. As you continue, you will pass a row of white, multi-story buildings with dark windows also on your right side. Further ahead, you will approach a small red table positioned on the sidewalk near the corner of the building. You will arrive at the table.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/table_146",
+                "type": "object",
+                "location": [
+                    261.80786022133213,
+                    36.4417869156773,
+                    3.474469402666884
+                ],
+                "radius": 0.9051453660977131,
+                "path_length": 72.30660382739642,
+                "reference_path": [
+                    [
+                        335.1547546386719,
+                        36.32321548461914,
+                        3.1448328495025635
+                    ],
+                    [
+                        315.392333984375,
+                        36.863983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        306.392333984375,
+                        36.863983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        274.892333984375,
+                        35.363983154296875,
+                        3.299999237060547
+                    ],
+                    [
+                        264.392333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ],
+                    [
+                        262.892333984375,
+                        35.363983154296875,
+                        3.1999988555908203
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            335.15476140650424,
+            36.323215508276306,
+            3.144832865908201
+        ],
+        "start_rotation": [
+            0.01244254940464383,
+            0.0,
+            0.0,
+            0.9999225884858852
+        ],
+        "ceiling_height": 1.0
+    },
+    {
+        "scene_id": "vc_berlin",
+        "scene_type": "vc",
+        "episode_id": 19,
+        "path": "vc_plus/BERLIN/BERLIN_merged.usd",
+        "scene_scale": 1.0,
+        "collider": true,
+        "align_ground": true,
+        "navmesh_preset": "default",
+        "objnav": "warm_blanket",
+        "instruction": "Head towards the dark, reflective building on your right, keeping the white ambulance on your left. Follow the open road straight ahead, passing between the large apartment block on the left and the modern glass structure. Continue moving forward until you reach the base of the dark building. You will arrive at the warm_blanket.",
+        "closest_goal_idx": 0,
+        "goals": [
+            {
+                "instance": "/World/ground/terrain/Objaverse/warm_blanket_169",
+                "type": "object",
+                "location": [
+                    151.79298075312659,
+                    126.2385960759049,
+                    2.799440975874644
+                ],
+                "radius": 0.39902950131634185,
+                "path_length": 54.62182658183775,
+                "reference_path": [
+                    [
+                        205.50088500976562,
+                        136.14036560058594,
+                        2.7406861782073975
+                    ],
+                    [
+                        202.892333984375,
+                        135.86398315429688,
+                        2.799999237060547
+                    ],
+                    [
+                        151.79298400878906,
+                        126.23859405517578,
+                        2.799440860748291
+                    ]
+                ]
+            }
+        ],
+        "start_position": [
+            205.50088606404015,
+            136.14037283264477,
+            2.7406862426462446
+        ],
+        "start_rotation": [
+            -0.19782143184742912,
+            0.0,
+            0.0,
+            -0.9802380736850783
+        ],
+        "ceiling_height": 1.0
+    }
+]

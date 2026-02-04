@@ -50,7 +50,7 @@ class TaskGenerator:
     def parse_config(self, task_config):
         self.scene_id_list = []
         self.navmesh_preset_list = [*task_config['navmesh'].keys()]
-        self.rule_pattern_list = ["path", "name", "gr", "vc"]
+        self.rule_pattern_list = ["path", "name", "gr", "vc", "vc_store", "innout"]
         for scene_type, scene in task_config['scene'].items():
             self.scene_id_list.extend([f'{scene_type}_{x}' for x in scene['episodes'].keys()])
         # set default value
@@ -106,6 +106,7 @@ class TaskGenerator:
         self.scene_config = self.get_scene_config(scene_id)
         self.rule_pattern = self.scene_config.get('rule_pattern', 'name')
         self.num_episodes = self.scene_config['episode_number']
+        self.generate_finished = False
 
         # check how many episodes to generate
         # read episode file
@@ -117,6 +118,11 @@ class TaskGenerator:
             episodes = []
 
         # requirements
+        scene_type, scene_name = self.parse_scene_id(scene_id)
+        if scene_type == "vc":
+            self.min_path_length = 15.0
+        else:
+            self.min_path_length = 5.0
         self.min_path_length = 5.0
         self.max_path_length = 50.0
         self.min_duration = 5.0
@@ -130,12 +136,14 @@ class TaskGenerator:
         print(f'[TG] Generating {self.num_episodes} episodes')
         self.vln_sim.visualize_waypoints = True
         self.generated_episodes = episodes
-        self.generate_finished = False
         self._generate_episodes()
 
     def _generate_episodes(self):
         if len(self.generated_episodes) < self.num_episodes or self.total_samples >= 5*self.num_episodes:
-            new_episodes = self.sample_episodes(self.num_episodes)
+            if "innout" in self.scene_config['scene_id']:
+                new_episodes = self.sample_episodes_innout(self.num_episodes)
+            else:
+                new_episodes = self.sample_episodes(self.num_episodes)
             print(f'[TG] Sampled {len(new_episodes)} episodes')
             self.total_samples += len(new_episodes)
             self.check_episodes(new_episodes)
@@ -168,7 +176,12 @@ class TaskGenerator:
             return
         
         self.current_episode = self.episode_queue.popleft()
-        self.current_episode['episode_id'] = len(self.generated_episodes)
+        # find first missing episode id
+        all_episode_ids = set([x["episode_id"] for x in self.generated_episodes])
+        for episode_id in range(len(self.generated_episodes)+1):
+            if episode_id not in all_episode_ids:
+                self.current_episode['episode_id'] = episode_id
+                break
         self.current_episode_start_time = time.time()
         print(f'======================')
         print(f'[TG] Checking episode {self.current_episode.episode_id}')
@@ -200,7 +213,6 @@ class TaskGenerator:
                 img_path = f"{data_folder}/third_person_rgb/{img_index}.png"
                 cv2.imwrite(img_path, self.vln_sim.obs["third_person_rgb"].cpu().numpy()[0][...,::-1])
                 # append pose to txt
-                # TODO: change this to waypoints
                 with open(pose_path, 'a') as f:
                     f.write(f"{[img_index]+self.vln_sim.obs['pov_pose'].cpu().numpy()[0].tolist()}\n")
             # check if episode is done
@@ -245,8 +257,13 @@ class TaskGenerator:
         # Reset and start the episode
         print(f'[TG] Reset episode {self.current_episode.episode_id}')
         self.vln_sim.reset(self.current_episode)
+        self.env.terminations_cfg.time_out.params["max_time"] = 30.0
+        self.env.terminations_cfg.stuck.params["max_time"] = 5.0
+        self.env.terminations_cfg.stuck.params["max_tdist_thresholdime"] = 0.04
         print(f'[TG] Set reference waypoints')
-        self.vln_sim.set_ref_waypoints(self.current_episode)    # Generate Astar waypoints here
+        self.vln_sim.set_ref_waypoints(self.current_episode)
+        self.vln_sim.waypoint_follower.term_dist = 0.3
+        self.vln_sim.waypoint_follower.term_yaw = np.pi/180.0*90.0
         self.check_status_callback = check_status
         self.vln_sim.add_callback('step_finished', check_status)
 
@@ -256,7 +273,6 @@ class TaskGenerator:
         # [x for x in self.prim_list if str(x.GetPath()).startswith("/World/ground/terrain/Brownstone03/Geometry/Specialty_Equipment/")]
         print(f'Loaded {len(self.prim_list)} prims')
         self.goal_dict = {}
-        total_goal_found = 0
         for goal, goal_rule in self.scene_config.get("goal_rules", {}).items():
             if self.rule_pattern == "path":
                 # Convert prim path to string and normalize path separators
@@ -272,7 +288,6 @@ class TaskGenerator:
                 'prim': goal_prim,
             }
             print(f'[TG] Found {len(goal_prim)} {goal}')
-            total_goal_found += len(goal_prim)
         if self.rule_pattern == "gr":
             for x in self.prim_list:
                 prim_path_str = str(x.GetPrimPath())
@@ -283,15 +298,44 @@ class TaskGenerator:
                     if goal in ["other", "box", "bottle", "person"]:
                         continue
                     self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
-                    total_goal_found += 1
             new_goal_dict = {}
             for goal, goal_item in self.goal_dict.items():
                 if len(goal_item['prim'])<=8:
                     new_goal_dict[goal] = goal_item
             self.goal_dict = new_goal_dict
-        print(f'[TG] Total goal found: {total_goal_found}')
+        elif self.rule_pattern == "vc":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/Objaverse/([^/]*?)$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    goal = "_".join(goal.split("_")[:-1])
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        elif self.rule_pattern == "vc_store":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/store/([^/]*?)_.$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        elif self.rule_pattern == "innout":
+            for x in self.prim_list:
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/store/([^/]*?)_.$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+                prim_path_str = str(x.GetPrimPath())
+                match_result = re.search(r"/Objaverse/([^/]*?)$", prim_path_str)
+                if match_result:
+                    goal = match_result.group(1)
+                    goal = "_".join(goal.split("_")[:-1])
+                    self.goal_dict.setdefault(goal, {"prim": []})["prim"].append(x)
+        total_goal_found = 0
         for goal, goal_item in self.goal_dict.items():
             print(f"  Found {len(goal_item['prim'])} {goal}")
+            total_goal_found += len(goal_item['prim'])
+        print(f'[TG] Total goal found: {total_goal_found}')
         return total_goal_found
     
     def check_navmesh(self, scene_id):
@@ -308,8 +352,11 @@ class TaskGenerator:
             print(f"[TG] Navmesh not found, building...")
             selected_paths = ["/World/ground/terrain"]
             start_time = time.time()
-            navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=scene_config.get("scene_type"))
-            navmesh_interface.build_navmesh()
+            if scene_config.get("scene_type") == "innout":
+                navmesh_interface.build_navmesh_innout(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage)
+            else:
+                navmesh_interface.setup_navmesh(selected_paths, scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, scene_type=scene_config.get("scene_type"))
+                navmesh_interface.build_navmesh()
             end_time = time.time()
             print(f"[TG] Navmesh build time: {end_time - start_time:.2f} seconds")
             navmesh_interface.save_navmesh(navmesh_path)
@@ -337,7 +384,131 @@ class TaskGenerator:
             while not path_found and retry_count < 100:
                 goal_item = self.goal_dict[goal_name]
                 # sample random points
-                start_pos = navmesh_interface.sample_random_points(1)[0]
+                random_point = navmesh_interface.sample_random_points(1)
+                if random_point is None:
+                    raise RuntimeError(f"Failed to sample random point")
+                start_pos = random_point[0]
+                goal_prim_list = goal_item['prim']
+                goals = []
+                for goal_prim in goal_prim_list:
+                    # we use the position calculated with bounding box instead
+                    prim_path = goal_prim.GetPrimPath()
+                    goal_pos = self.env.get_prim_position(prim_path)
+                    path = navmesh_interface.find_paths(start_pos, goal_pos)
+                    if len(path) > 0:
+                        dist_to_start = np.linalg.norm(start_pos - path[0])
+                        dist_to_end = np.linalg.norm(goal_pos - path[-1])
+                        obj_radius = self.env.get_prim_radius(prim_path)
+                        # skip if the path does not connect to the start or end
+                        if dist_to_start > 1.0 or dist_to_end > obj_radius+1.0:
+                            continue
+                        # skip if the path is too short or too long
+                        path_length = np.linalg.norm(path[1:] - path[:-1], axis=1).sum() + dist_to_start
+                        if path_length < self.min_path_length:
+                            continue
+                        if path_length > self.max_path_length:
+                            continue
+                        goals.append({
+                            'instance': str(prim_path),
+                            'type': 'object',
+                            'location': goal_pos,
+                            'radius': obj_radius,
+                            'path_length': path_length,
+                            'reference_path': path.tolist(),
+                        })
+                if len(goals) > 0:
+                    path_found = True
+                else:
+                    retry_count += 1
+            if path_found:
+                pbar.set_description(f'[TG] Found {len(goals)} paths for goal {goal_name}')
+                closest_goal_idx = int(np.argmin([x['path_length'] for x in goals]))
+                closest_goal = goals[closest_goal_idx]
+                # set initial yaw angle to the next waypoint and add some noise
+                yaw_angle = calc_yaw(start_pos[:2], closest_goal['reference_path'][1][:2])
+                yaw_angle += np.random.uniform(-np.deg2rad(30.0), np.deg2rad(30.0))
+                quat_xyzw = R.from_euler('z', yaw_angle).as_quat().tolist()
+                quat_wxyz = [quat_xyzw[3], quat_xyzw[0], quat_xyzw[1], quat_xyzw[2]]
+                remove_keys = ["episode_number", "goal_rules", "navmesh_exclude", "rule_pattern", "navmesh_preset"]
+                episode = VLNEpisode(
+                    data={k: v for k, v in self.scene_config.items() if k not in remove_keys},
+                    objnav=goal_name,
+                    instruction="",
+                    episode_id=len(generated_episodes),
+                    goals=goals,
+                    start_position=start_pos.tolist(),
+                    start_rotation=quat_wxyz, # wxyz
+                    closest_goal_idx=closest_goal_idx,
+                )
+                # visualize_points(random_points, prim_path="/World/RandomPoints", width=0.8)
+                # visualize_curve(path, prim_path=f"/World/Path_{goal_prim.GetName()}", width=0.4)
+                generated_episodes.append(episode)
+            else:
+                pbar.set_description(f'[TG] Failed to find paths for goal {goal_name}')
+        return generated_episodes
+    
+    def sample_episodes_innout(self, num_episodes):
+        # load navmesh for interior and exterior
+        self.check_navmesh(self.scene_config['scene_id'])
+        navmesh_interface = self.navmesh_interface
+        
+        # get indoor scene prim
+        indoor_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/ground/terrain/start_result_navigation")
+        indoor_bbox = np.array(self.env.get_prim_bounding_box(indoor_prim.GetPrimPath()))
+        center_x, center_y, center_z = (indoor_bbox[3:]+indoor_bbox[:3])/2.0
+
+        # filter goals by distance to indoor prim
+        filtered_goal_dict = {}
+        self.parse_scene()
+        for goal_name, goal_item in self.goal_dict.items():
+            filtered_goals = []
+            for prim in goal_item['prim']:
+                prim_pos = self.env.get_prim_position(prim.GetPrimPath())
+                dist = np.linalg.norm(prim_pos[:2] - np.array([center_x, center_y]))
+                if dist < 50.0:
+                    filtered_goals.append(prim.GetPrimPath())
+            if len(filtered_goals) > 0:
+                filtered_goal_dict[goal_name] = {
+                    'prim': filtered_goals,
+                }
+        self.goal_dict = filtered_goal_dict
+
+        # sample goals uniformly
+        unique_goals = []
+        sampled_goals = []
+        while len(sampled_goals) < num_episodes:
+            if len(unique_goals) == 0:
+                unique_goals = set(self.goal_dict.keys())
+            random_goal = np.random.choice(list(unique_goals))
+            sampled_goals.append(random_goal)
+            unique_goals.remove(random_goal)
+        # sampled_goals = sorted(sampled_goals)
+        # generate paths from random points to each goal
+        generated_episodes = []
+        pbar = tqdm(sampled_goals, desc="Generating episodes")
+        for goal_name in pbar:
+            path_found = False
+            retry_count = 0
+            while not path_found and retry_count < 100:
+                goal_item = self.goal_dict[goal_name]
+                # sample random points
+                # print(f"[TG] Sampling random points for indoor navmesh")
+                # print(f"[TG] Min: {min_x}, {min_y}, {min_z}, Max: {max_x}, {max_y}, {max_z}")
+                random_point = None
+                retry_count1 = 0
+                while random_point is None and retry_count1 < 100:
+                    retry_count1 += 1
+                    random_points = navmesh_interface.sample_random_points(1000)
+                    if random_points is None:
+                        break
+                    for p in random_points:
+                        if indoor_bbox[0] <= p[0] <= indoor_bbox[3] and indoor_bbox[1] <= p[1] <= indoor_bbox[4] and indoor_bbox[2] <= p[2] <= indoor_bbox[5]:
+                            random_point = np.array([p])
+                            break
+                if random_point is None:
+                    self.stop_generation()
+                    raise RuntimeError(f"Failed to sample random point")
+                start_pos = random_point[0]
                 goal_prim_list = goal_item['prim']
                 goals = []
                 for goal_prim in goal_prim_list:
@@ -432,16 +603,40 @@ class TaskGenerator:
     def create_bev_camera(self, scene_id):
         # create bev camera
         world_bb = np.array(self.get_world_bb(scene_id))
+        scene_type, scene_name = self.parse_scene_id(scene_id)
         world_center = (world_bb[:3] + world_bb[3:]) / 2
         world_size = world_bb[3:] - world_bb[:3]
+        if world_size[0] > 100.0 or world_size[1] > 100.0:
+            print(f"[TG] World size is too large, checking large prim now")
+            for prim in self.manager_env.scene.stage.Traverse():
+                prim_bb = self.env.get_prim_bounding_box(prim.GetPrimPath())
+                if prim_bb[3] - prim_bb[0] > 100.0 or prim_bb[4] - prim_bb[1] > 100.0:
+                    print(f"[TG] Found large prim: {prim.GetPrimPath()}")
+                    if "model_" in str(prim.GetPrimPath()):
+                        with open(f"large_prim.txt", 'a') as f:
+                            f.write(f"{prim.GetPrimPath()}\n")
+                        if scene_type != "vc":
+                            prim_utils.set_prim_visibility(prim, False)
+            world_bb = np.array(self.get_world_bb(scene_id))
+            world_center = (world_bb[:3] + world_bb[3:]) / 2
+            world_size = world_bb[3:] - world_bb[:3]
         camera_pos = world_center + np.array([0, 0, 10.0])
         padding = 1.0
         image_width = min(int((world_size[0]+padding*2) * 100), 3840)
         image_height = int(image_width * world_size[1] / world_size[0])
-        self.px_per_meter = image_width / (world_size[0]+padding*2)
-        self.world_center = world_center
+        self.bev_data = {
+            "px_per_meter": image_width / (world_size[0]+padding*2),
+            "world_center": world_center.tolist(),
+            "world_size": world_size.tolist(),
+            "world_bb": world_bb.tolist(),
+            "image_width": image_width,
+            "image_height": image_height,
+        }
+        if not hasattr(self, 'bev_camera_count'):
+            self.bev_camera_count = 0
+        self.bev_camera_count += 1
         self.bev_camera = self.env.create_camera(
-            prim_path="/World/bev_camera",
+            prim_path=f"/World/bev_camera_{self.bev_camera_count}",
             perspective=False,
             pos=camera_pos,
             quat_opengl=[1, 0, 0, 0],
@@ -469,17 +664,18 @@ class TaskGenerator:
                 self._create_bev_map(scene_id, file_name, clip_range, ceiling_height)
             self.vln_sim.add_callback('step_finished', check_bev_map_queue)
             self.check_bev_map_queue = check_bev_map_queue
+            self.create_bev_camera(scene_id)
         # add task to queue
         self.bev_camera_queue.put((scene_id, file_name, clip_range, ceiling_height))
 
     def _create_bev_map(self, scene_id, file_name, clip_range, ceiling_height):
         self.bev_camera_lock.acquire()
-        self.create_bev_camera(scene_id)
         # update camera
         if ceiling_height is None:
             scene_config = self.get_scene_config(scene_id)
             ceiling_height = scene_config.get("ceiling_height", 1.0)
         self.update_bev_camera_clip(scene_id, clip_range, ceiling_height)
+        self.bev_camera.reset()
         # hide robot
         robot_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/envs/env_0/Robot")
         prim_utils.set_prim_visibility(robot_prim, False)
@@ -494,20 +690,17 @@ class TaskGenerator:
                     cv2.imwrite(f"{data_folder}/{file_name}_rgb.png", rgb[...,[2,1,0,3]])
                     cv2.imwrite(f"{data_folder}/{file_name}_depth.png", depth)
                     with open(f"{data_folder}/{file_name}_info.txt", 'w') as f:
-                        info = {
-                            "px_per_meter": self.px_per_meter,
-                            "world_center": self.world_center.tolist()
-                        }
-                        json.dump(info, f)
+                        json.dump(self.bev_data, f)
                     print(f"[TG] Saved BEV map to {data_folder}/{file_name}")
                     prim_utils.set_prim_visibility(robot_prim, True)
                     self.vln_sim.remove_callback('step_finished', save_bev_map)
                     self.bev_camera_lock.release()
-                    prim_utils.delete_prim(self.bev_camera.cfg.prim_path)
+                    # prim_utils.delete_prim(self.bev_camera.cfg.prim_path)
                 else:
                     print(f"[TG] BEV camera is not initialized yet, frame: {self.bev_camera.frame}, env_step: {self.env.env_step}")
             except Exception as e:
                 print(f"[TG] Error saving BEV map: {e}")
+                raise e
         self.vln_sim.add_callback('step_finished', save_bev_map)
 
     def update_bev_camera_clip(self, scene_id, clip_range, ceiling_height):
@@ -521,7 +714,7 @@ class TaskGenerator:
             clipping_range_min = camera_pos[2] - (self.env.get_cam_pose()[0][2]+0.3)
         clipping_range_min = max(0, clipping_range_min)
         clipping_range_max = clipping_range_min+1000
-        camera_prim = self.manager_env.scene.stage.GetPrimAtPath("/World/bev_camera")
+        camera_prim = self.manager_env.scene.stage.GetPrimAtPath(f"/World/bev_camera_{self.bev_camera_count}")
         clipping_range = camera_prim.GetAttribute('clippingRange').Get()
         clipping_range[0] = clipping_range_min
         clipping_range[1] = clipping_range_max

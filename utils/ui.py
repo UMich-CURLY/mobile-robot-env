@@ -118,9 +118,10 @@ class BenchmarkUI(BaseUI):
         self.build_ui()
         # map ui_episode fields to ui_elements
         # format: {ui_name: (config_name, [getter_func, setter_func])}
+        instruction_name = "objnav" if self.vln_sim.args.task_type=="objnav" else "instruction"
         self.ui_map = {
             "episode_label": ("episode_label", choice_func(self.episode_label_list)),
-            "instruction": ("instruction", str_func),
+            "instruction": (instruction_name, str_func),
             "episode_info": ("episode_info", label_func),
             "start_position": ("start_position", xyz_func),
         }
@@ -269,6 +270,7 @@ class TaskGeneratorUI(BaseUI):
                     )[0]
                 ui_utils.btn_builder("Navmesh Config", text="Save", on_clicked_fn=lambda: self.save_settings("navmesh_config"))
             with self.create_frame("Navmesh Tools"):
+                ui_utils.btn_builder("Save Geometry", text="Save", on_clicked_fn=lambda: self.save_geometry())
                 ui_utils.btn_builder("Setup Geometry", text="Setup", on_clicked_fn=lambda: self.setup_navmesh())
                 ui_utils.btn_builder("Build Navmesh", text="Build", on_clicked_fn=lambda: self.build_navmesh())
                 ui_utils.btn_builder("Load Navmesh", text="Load", on_clicked_fn=lambda: self.load_navmesh())
@@ -289,6 +291,7 @@ class TaskGeneratorUI(BaseUI):
                 ui_utils.btn_builder("Stop Generation", text="Stop", on_clicked_fn=lambda: self.stop_generation())
                 ui_utils.btn_builder("Get Information", text="Get", on_clicked_fn=lambda: self.get_information())
                 ui_utils.btn_builder("Toggle Ceiling", text="Toggle", on_clicked_fn=lambda: self.task_generator.toggle_ceiling(self.ui_episode["scene_id"]))
+                ui_utils.btn_builder("Get World Size", text="Get", on_clicked_fn=lambda: self.task_generator.get_world_bb(self.ui_episode["scene_id"]))
                 ui_utils.btn_builder("Create BEV Map", text="Create", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="ceiling"))
                 ui_utils.btn_builder("Save Occupancy Map", text="Save", on_clicked_fn=lambda: self.task_generator.create_bev_map(self.ui_episode["scene_id"], clip_range="robot", file_name="height_map"))
             with self.create_frame("Info"):
@@ -351,6 +354,9 @@ class TaskGeneratorUI(BaseUI):
         self.save_settings("scene_runtime")
         self.env.reset(self.ui_episode)
     
+    def save_geometry(self):
+        self.task_generator.navmesh_interface.save_geometry(["/World/ground/terrain"], self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage, self.scene_folder / "navmesh", scene_type=self.scene_config.get("scene_type"))
+    
     def setup_navmesh(self):
         self.save_settings("scene_runtime")
         selected_paths = ["/World/ground/terrain"]
@@ -361,7 +367,10 @@ class TaskGeneratorUI(BaseUI):
     def build_navmesh(self):
         self.save_settings("navmesh_runtime")
         start_time = time.time()
-        self.task_generator.navmesh_interface.build_navmesh()
+        if self.scene_config.get("scene_type") == "innout":
+            self.task_generator.navmesh_interface.build_navmesh_innout(["/World/ground/terrain"], self.scene_config.get("navmesh_exclude", []), self.manager_env.scene.stage)
+        else:
+            self.task_generator.navmesh_interface.build_navmesh()
         print(f"[INFO]: Navmesh build time: {time.time() - start_time:.2f} seconds")
 
     def load_navmesh(self):

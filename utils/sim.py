@@ -137,6 +137,12 @@ class VLNSim:
                 self.init_env()
             else:
                 self.warmup_steps = 30
+            if episode["scene_type"] in ["grCommercial", "grHome"]:
+                print(f"[SIM] Setting timeout to 100s for {episode['scene_type']}")
+                self.env.terminations_cfg.time_out.params["max_time"] = 100.0
+            else:
+                print(f"[SIM] Setting timeout to 300s for {episode['scene_type']}")
+                self.env.terminations_cfg.time_out.params["max_time"] = 300.0
 
     def load_episode(self, episode_label):
         print(f"[SIM] Loading episode: {episode_label}")
@@ -171,24 +177,6 @@ class VLNSim:
             # this will trigger a reset of the vln sim
             self.load_episode(message["episode_label"])
             self.call_callbacks('client_episode_changed', message["episode_label"])
-
-    def add_callback(self, callback_name, func):
-        available_callbacks = ['client_episode_changed', 'step_finished', 'reset_finished']
-        if callback_name not in available_callbacks:
-            raise ValueError(f"Invalid callback name: {callback_name}")
-        self.callbacks.setdefault(callback_name, []).append(func)
-        return len(self.callbacks[callback_name])-1
-
-    def remove_callback(self, callback_name, func):
-        if callback_name in self.callbacks:
-            if func in self.callbacks[callback_name]:
-                self.callbacks[callback_name].remove(func)
-            else:
-                raise ValueError(f"Function {func} not found in callback {callback_name}")
-
-    def call_callbacks(self, callback_name, *args, **kwargs):
-        for func in self.callbacks.get(callback_name, []):
-            func(*args, **kwargs)
 
     def data_callback(self, request_type):
         if request_type == "GET_SENSOR_DATA":
@@ -228,6 +216,24 @@ class VLNSim:
             episode_set_list["all"] = self.episode_label_list
             return episode_set_list
 
+    def add_callback(self, callback_name, func):
+        available_callbacks = ['client_episode_changed', 'step_finished', 'reset_finished']
+        if callback_name not in available_callbacks:
+            raise ValueError(f"Invalid callback name: {callback_name}")
+        self.callbacks.setdefault(callback_name, []).append(func)
+        return len(self.callbacks[callback_name])-1
+
+    def remove_callback(self, callback_name, func):
+        if callback_name in self.callbacks:
+            if func in self.callbacks[callback_name]:
+                self.callbacks[callback_name].remove(func)
+            else:
+                raise ValueError(f"Function {func} not found in callback {callback_name}")
+
+    def call_callbacks(self, callback_name, *args, **kwargs):
+        for func in self.callbacks.get(callback_name, []):
+            func(*args, **kwargs)
+
     def update_viewer(self):
         # set viewport
         if self.viewport_third_person:
@@ -249,15 +255,20 @@ class VLNSim:
         server_thread.start()
         print("[SIM] Socket server started")
     
-    def set_waypoints(self, waypoints):
+    def set_waypoints(self, waypoints, verbose=False):
         """Waypoint should be in the format of [x, y, yaw], set yaw to inf if angle is ignored"""
+        if verbose:
+            body_pos, body_quat = self.env.get_body_pose()
+            base_xy = np.array(body_pos[:2])
+            base_yaw = R.from_quat(body_quat).as_euler('ZYX')[0]
+            print(f"current waypoint: {base_xy}, {base_yaw}")
+            print(f"next waypoint: {waypoints[0]}")
         self.waypoints = waypoints
         self.waypoint_follower.reset()
     
     def generate_astar_path(self, scene_id, ref_path):
         # load bev image
-        scene_name = "_".join(scene_id.split("_")[:-1])
-        bev_depth, info = load_bev_map(f"{self.args.scene_folder}/episode_data/{scene_name}/bev_map.npz")
+        bev_depth, info = load_bev_map(f"{self.args.scene_folder}/episode_data/{scene_id}/bev_map.npz")
         image_height, image_width = bev_depth.shape
         obstacle_map = generate_obstacle_map(bev_depth)
         px_per_meter = np.array(info["px_per_meter"])
@@ -296,8 +307,12 @@ class VLNSim:
         for i in range(len(ref_waypoints_px)-1):
             goal = ref_waypoints_px[i+1]
             path = self.astar_planner.plan(obstacle_map, start, goal, time_budget=1.0)
-            total_path.extend(path)
-            start = path[-1]
+            if path is None:
+                total_path.append(goal)
+                start = goal
+            else:
+                total_path.extend(path)
+                start = path[-1]
         return total_path
 
     def set_ref_waypoints(self, episode):
@@ -307,8 +322,9 @@ class VLNSim:
         closest_goal_idx = measurements["closest_goal"]
         ref_path = episode["goals"][closest_goal_idx]["reference_path"]
         # notice that ref_path has [x, y, z], while waypoints has [x, y, yaw]
-        # waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
-        waypoints = self.generate_astar_path(episode["scene_id"], ref_path)
+        waypoints = [[p[0], p[1], np.inf] for p in ref_path[1:]]
+        # waypoints = self.generate_astar_path(episode["scene_id"], ref_path)
+        # print current waypoint
         self.set_waypoints(waypoints)
 
     def clear_waypoints(self):
@@ -387,14 +403,45 @@ class VLNSim:
                 cam_focal_length = manager_env.scene["pov_camera"].cfg.spawn.focal_length
                 cam_horizontal_aperture = manager_env.scene["pov_camera"].cfg.spawn.horizontal_aperture
                 hfov_deg = 2 * np.arctan(cam_horizontal_aperture / 2.0 / cam_focal_length) * 180.0 / np.pi
-                self._latest_data["rgb"] = obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8)
-                depth = obs['pov_depth'][0, :, :, 0].cpu().numpy()
-                depth = np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
-                depth = np.clip(depth, 0, 65535).astype(np.uint16)
-                self._latest_data["depth"] = depth
-                obs_pose = obs['pov_pose'][self.robot_index].cpu().numpy()
-                self._latest_data["position"] = obs_pose[:3]
-                self._latest_data["quat_xyzw"] = obs_pose[3:]
+                self._latest_data["rgb"] = {
+                    "pov": obs['pov_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8),
+                    "third_person": obs['third_person_rgb'][0, :, :, :3].cpu().numpy().astype(np.uint8),
+                }
+                pov_depth = obs['pov_depth'][0, :, :, 0].cpu().numpy()
+                pov_depth = np.nan_to_num(pov_depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
+                pov_depth = np.clip(pov_depth, 0, 65535).astype(np.uint16)
+                third_person_depth = obs['third_person_depth'][0, :, :, 0].cpu().numpy()
+                third_person_depth = np.nan_to_num(third_person_depth, nan=0.0, posinf=0.0, neginf=0.0) * 1000.0
+                third_person_depth = np.clip(third_person_depth, 0, 65535).astype(np.uint16)
+                self._latest_data["depth"] = {
+                    "pov": pov_depth,
+                    "third_person": third_person_depth,
+                }
+                pos_robot, quat_robot = self.env.get_body_pose()
+                pov_tf = obs['pov_tf'][self.robot_index].cpu().numpy().tolist()
+                third_person_tf = obs['third_person_tf'][self.robot_index].cpu().numpy().tolist()
+                extract_xyz = lambda pose: {key: pose[i] for i, key in enumerate(["x", "y", "z"])}
+                extract_quat = lambda pose: {key: pose[i+3] for i, key in enumerate(["x", "y", "z", "w"])}
+                tf_dict = {
+                    "pov": {
+                        "parent_frame": "body",
+                        "child_frame_id": "pov",
+                        "transform": {
+                            "translation": extract_xyz(pov_tf),
+                            "rotation": extract_quat(pov_tf),
+                        },
+                    },
+                    "third_person": {
+                        "parent_frame": "body",
+                        "child_frame_id": "third_person",
+                        "transform": {
+                            "translation": extract_xyz(third_person_tf),
+                            "rotation": extract_quat(third_person_tf),
+                        },
+                    },
+                }
+                self._latest_data["position"] = pos_robot
+                self._latest_data["quat_xyzw"] = quat_robot
                 self._latest_data["timestamp"] = time.time_ns()
                 info = {
                     "scene_id": current_episode["scene_id"],
@@ -403,10 +450,15 @@ class VLNSim:
                     "robot_height": 0.61,
                     "hfov_deg": hfov_deg,
                     "metrics": info["measurements"],
+                    "tfs": tf_dict,
                 }
                 if self.args.task_type=="objnav":
-                    info["instruction"] = current_episode["objnav"]
-                else:
+                    if "store" in current_episode["scene_id"]:
+                        # remove the last number from store name
+                        info["instruction"] = "_".join(current_episode["objnav"].split("_")[:-1])
+                    else:
+                        info["instruction"] = current_episode["objnav"]
+                elif self.args.task_type=="vln":
                     info["instruction"] = current_episode["instruction"]
                 self._latest_data["info"] = info
             except Exception as e:
