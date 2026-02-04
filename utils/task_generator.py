@@ -246,7 +246,7 @@ class TaskGenerator:
         print(f'[TG] Reset episode {self.current_episode.episode_id}')
         self.vln_sim.reset(self.current_episode)
         print(f'[TG] Set reference waypoints')
-        self.vln_sim.set_ref_waypoints(self.current_episode)
+        self.vln_sim.set_ref_waypoints(self.current_episode)    # Generate Astar waypoints here
         self.check_status_callback = check_status
         self.vln_sim.add_callback('step_finished', check_status)
 
