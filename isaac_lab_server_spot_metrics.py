@@ -40,7 +40,7 @@ from utils.sim import VLNSim
 default_episode = "test_generator_0"
 vln_sim = VLNSim(args)
 vln_sim.load_episode(default_episode)
-vln_sim.env.env.cfg.sim.render_interval = 30
+vln_sim.env.env.cfg.sim.render_interval = 100
 vln_sim.step()
 
 # Setup UI

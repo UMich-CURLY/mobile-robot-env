@@ -43,8 +43,6 @@ _latest_base_frame = None
 _latest_odom_frame = None
 _scenario = None
 _info = None
-_host = "localhost"
-_port = 12357
 _time_sync_tolerance_sec = 0.05
 
 
@@ -73,6 +71,8 @@ def make_args():
     parser.add_argument("--hfov_deg", type=float, default=90.0)
     parser.add_argument("--metrics", type=str, default="{}")
     parser.add_argument("--dummy_llm", action="store_true")
+    parser.add_argument("--host", type=str, default="0.0.0.0")
+    parser.add_argument("--port", type=int, default=12300)
     return parser.parse_args()
 
 
@@ -712,8 +712,8 @@ def main(args=None):
     server_thread = Thread(target=run_server, kwargs={
         "data_cb": node.data_callback,
         "action_cb": node.action_callback,
-        "host": _host,
-        "port": _port
+        "host": node.args_cli.host,
+        "port": node.args_cli.port
     })
     server_thread.daemon = True
     server_thread.start()

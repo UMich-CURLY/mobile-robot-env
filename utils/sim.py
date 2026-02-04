@@ -141,8 +141,8 @@ class VLNSim:
                 print(f"[SIM] Setting timeout to 100s for {episode['scene_type']}")
                 self.env.terminations_cfg.time_out.params["max_time"] = 100.0
             else:
-                print(f"[SIM] Setting timeout to 300s for {episode['scene_type']}")
-                self.env.terminations_cfg.time_out.params["max_time"] = 300.0
+                print(f"[SIM] Setting timeout to 150s for {episode['scene_type']}")
+                self.env.terminations_cfg.time_out.params["max_time"] = 150.0
 
     def load_episode(self, episode_label):
         print(f"[SIM] Loading episode: {episode_label}")

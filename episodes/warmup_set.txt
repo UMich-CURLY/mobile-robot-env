@@ -20,3 +20,9 @@ vc_belgrade_0
 vc_berlin_0
 vc_madrid_0
 vc_ny_0
+innout_amsterdam 2
+innout_barcelona 14
+innout_paris 14
+innout_austin 14
+innout_ny 13
+innout_berlin 14
