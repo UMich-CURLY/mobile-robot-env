@@ -26,6 +26,7 @@ from utils.socket_server import run_server, format_data
 from utils.path_following_utils import WaypointFollower
 from tf2_ros import Buffer, TransformListener, TransformException
 from message_filters import Subscriber, ApproximateTimeSynchronizer
+from sensor_msgs.msg import CameraInfo
 from openai import OpenAI
 import time
 
@@ -177,16 +178,17 @@ def _lookup_transform_to_base(target_frame: str, base_frame: str, tf_dict: dict,
     return transform
 
 
-class HabitatROSBridge(Node):
+class TiamatROSBridge(Node):
     def __init__(self, args=None):
         super().__init__('habitat_ros_bridge')
-        print("[HabitatROSBridge] Initializing Habitat ROS Bridge")
+        print("[TiamatROSBridge] Initializing Habitat ROS Bridge")
         self.args_cli = args or make_args()
         self.bridge = CvBridge()
         self._ros_publishers = {}
         self.old_task = None
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
+        self.episode_label = "test"
 
 
         self.openai_api_key = "EMPTY"
@@ -209,9 +211,9 @@ class HabitatROSBridge(Node):
                     )
                     break
                 except Exception as e:
-                    print(f"[HabitatROSBridge] Waiting for OpenAI client to be initialized...")
+                    print(f"[TiamatROSBridge] Waiting for OpenAI client to be initialized...")
                     time.sleep(1)
-            print("[HabitatROSBridge] OpenAI client initialized.")
+            print("[TiamatROSBridge] OpenAI client initialized.")
 
 
         ## Cam Subscribers
@@ -257,6 +259,8 @@ class HabitatROSBridge(Node):
         self.odom_topic = f"{self.robot_topic}/platform/odom"
         self.scenario_topic = f"/scenario"
         self.sim_status_topic = f"/sim_status"
+        # once camera info is available, that means isaac is ready
+        self.isaac_status_topic = f"/spot/camera/back/camera_info"
         self.sim_control_topic = f"/sim_control"
         self.sim_settings_topic = f"/sim_settings"
         self.task_submission_topic = f"/task_submission"
@@ -287,19 +291,28 @@ class HabitatROSBridge(Node):
 
         # wait for sim control topic to be available
         sim_status_data = None
+        isaac_status_data = None
         def sim_status_callback(msg):
             nonlocal sim_status_data
             sim_status_data = msg.data
+        def isaac_status_callback(msg):
+            nonlocal isaac_status_data
+            isaac_status_data = msg
         self.sim_status_sub = self.create_subscription(String, self.sim_status_topic, sim_status_callback, 10)
+        self.isaac_status_sub = self.create_subscription(CameraInfo, self.isaac_status_topic, isaac_status_callback, 10)
         while True:
-            rclpy.spin_once(self, timeout_sec=0.01)
-            if sim_status_data is not None:
-                print(f"[HabitatROSBridge] Sim status topic available: {sim_status_data}")
+            rclpy.spin_once(self, timeout_sec=1.0)
+            if isaac_status_data is not None:
+                print(f"[TiamatROSBridge] Isaac status topic available now")
+                break
+            elif sim_status_data is not None:
+                print(f"[TiamatROSBridge] Sim status topic available now")
                 break
             else:
-                print("[HabitatROSBridge] Waiting for sim status topic to be available...")
-                time.sleep(1.0)
+                print("[TiamatROSBridge] Waiting for sim status topic to be available...")
+                time.sleep(0.1)
         self.destroy_subscription(self.sim_status_sub)
+        self.destroy_subscription(self.isaac_status_sub)
 
         # publish sim settings
         self.sim_settings_pub = self.create_publisher(String, self.sim_settings_topic, qos)
@@ -320,12 +333,14 @@ class HabitatROSBridge(Node):
         self.path_follower_timer = self.create_timer(0.05, self.path_follower_callback)
         self.follower = WaypointFollower(
             device="cpu",
-            lookahead_distance=0.5,
-            kp=[2.5, 1.0, 2.0],
-            max_vel=[2.0, 1.5, 1.5],
-            min_vel=[0.5, 0.5, 0.3],
-            arrive_dist=0.1,
-            arrive_yaw=np.pi/180.0*30.0,
+            lookahead_distance=0.2,
+            kp=[0.8, 0.8, 0.6],
+            max_vel=[0.8, 0.8, 1.0],
+            min_vel=[0.15, 0.15, 0.15],
+            prefer_forward=False
+            # min_vel=[0.5, 0.5, 0.3],
+            # arrive_dist=0.1,
+            # arrive_yaw=np.pi/180.0*30.0,
         )
 
     def init_360(self):
@@ -436,28 +451,41 @@ class HabitatROSBridge(Node):
             self.get_logger().error(f"Odom callback error: {e}")
 
     def scenario_ros_callback(self, msg):
-        global _scenario
+        global _scenario, _info
         if msg.data != self.old_task:
             print(f"New scenario received: {msg.data}")
+            if _info is None:
+                _info = {}
+            _info["terminations"] = "new task published"
             self.old_task = msg.data
             self.instruction = msg.data
             if self.args_cli.dummy_llm:
-                keyword_map = {
-                    "umbrella": "umbrella",
-                    "soda, bread, cheese, and a bowl of fruit": "soda,bread,cheese,a bowl of fruit",
-                    "hammer and something to measure length": "hammer,rule",
-                    "step on the green then red floor panels": "green floor panel;red floor panel;watch",
-                    "phone": "phone",
-                    "wallet": "wallet",
-                    "toothbrush": "toothbrush",
-                    "chair": "chair",
-                    "lunchbox": "lunchbox",
-                    "one important item for sleeping": "sleeping bag"
-                }
-                for keyword, object_list in keyword_map.items():
-                    if keyword in msg.data.lower():
-                        _scenario = object_list
-                        break
+                # keyword_map = {
+                #     "umbrella": "umbrella",
+                #     "soda, bread, cheese, and a bowl of fruit": "soda",
+                #     "hammer and something to measure length": "hammer",
+                #     "step on the green then red floor panels": "green floor panel",
+                #     "phone": "phone",
+                #     "wallet": "wallet",
+                #     "toothbrush": "toothbrush",
+                #     "chair": "chair",
+                #     "lunchbox": "lunchbox",
+                #     "one important item for sleeping": "sleeping bag",
+                #     "campfire": "campfire",
+                #     "hospital": "hospital",
+                #     "lunch": "lunch",
+                #     "sleep": "sleepbag",
+                #     "backpack": "backpack",
+                #     "button": "red button",
+                #     "trail": "trail",
+                # }
+                _scenario = 'lane'
+                # for keyword, object_list in keyword_map.items():
+                #     if keyword in self.instruction.lower():
+                #         _scenario = object_list
+                #         break
+                if _scenario is None:
+                    _scenario = self.instruction
             else:
                 llm_processed_task = self.client.chat.completions.create(
                     model="Qwen/Qwen3-4B-Instruct-2507",
@@ -468,7 +496,7 @@ class HabitatROSBridge(Node):
                 )
                 print(f"[TaskListener] Processed task: {llm_processed_task.choices[0].message.content}")
                 _scenario = llm_processed_task.choices[0].message.content
-            print(f"[HabitatROSBridge] Parsed scenario: {_scenario}")
+            print(f"[TiamatROSBridge] Parsed scenario: {_scenario}")
 
     def publish(self, topic_name, msg):
         if topic_name not in self._ros_publishers:
@@ -480,9 +508,15 @@ class HabitatROSBridge(Node):
     def data_callback(self, request_type):
         global _info
         if request_type == "GET_SENSOR_DATA":
+            if _info is not None and "terminations" in _info:
+                return {
+                    "success": False,
+                    "message": f"termination: {_info['terminations']}",
+                    "terminations": _info['terminations']
+                }
             _info = {
                 "scene_id": "test_ep",
-                "episode_id": 0,
+                "episode_id": self.episode_label.split("_")[-1],
                 "instruction": _scenario,
                 "robot_height": self.args_cli.robot_height,
                 "hfov_deg": self.args_cli.hfov_deg,
@@ -490,7 +524,7 @@ class HabitatROSBridge(Node):
             }
             if (not _latest_rgb_by_source or not _latest_depth_by_source or
                     _latest_position is None or _latest_quat_xyzw is None):
-                print("[HabitatROSBridge] Waiting for sensor data...")
+                print("[TiamatROSBridge] Waiting for sensor data...")
                 return None
             rgb_images = dict(_latest_rgb_by_source)
             depth_images = dict(_latest_depth_by_source)
@@ -589,12 +623,13 @@ class HabitatROSBridge(Node):
             )
         elif request_type == "GET_EPISODE_LIST":
             episode_set_list = {
-                "all": ["test_ep_0"]*100,
-                "mini_test": ["test_ep_0"]*100
+                "all": [f"test_ep_{i}" for i in range(100)],
+                "mini_test": [f"test_ep_{i}" for i in range(100)]
             }
             return episode_set_list
 
     def action_callback(self, msg_type, message):
+        global _info
         if msg_type == 'VEL':
             move_command = Twist()
             move_command.linear.x = float(message['vy'])
@@ -633,10 +668,10 @@ class HabitatROSBridge(Node):
             )
             self.pub_task_complete()
         elif msg_type == 'EPISODE':
-            # this will trigger a reset of the vln sim
-            #TODO: implement episode loading
-            pass
-            #self.load_episode(message["episode_label"])
+            self.episode_label = message["episode_label"]
+            if "terminations" in _info:
+                del _info["terminations"]
+            print(f"Switch to episode label {self.episode_label} for logging")
         elif msg_type == 'RESET':
             self.pub_robot_reset()
 
@@ -658,8 +693,8 @@ class HabitatROSBridge(Node):
             move_command.angular.z = float(omega)
             self.publish(self.action_topic, move_command)
 
-            if self.follower.arrived_at_goal:
-                print("[PLAN] Goal reached.")
+            # if self.follower.arrived_at_goal:
+            #     print("[PLAN] Goal reached.")
 
     # Once the simulation is running, your agent must publish task information on
     # the /task_submission topic. For example:
@@ -707,7 +742,7 @@ class HabitatROSBridge(Node):
 # Entrypoint
 def main(args=None):
     rclpy.init(args=args)
-    node = HabitatROSBridge()
+    node = TiamatROSBridge()
 
     server_thread = Thread(target=run_server, kwargs={
         "data_cb": node.data_callback,

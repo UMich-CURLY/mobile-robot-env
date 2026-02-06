@@ -11,6 +11,12 @@ ros2 topic pub /sim_settings std_msgs/msg/String "data: 'sensors: head_rgb_left 
 # # Confirm settings
 # ros2 topic pub /sim_settings std_msgs/msg/String "data: 'confirm settings'" --once
 
+# reset robot
+ros2 topic pub /sim_control std_msgs/msg/String "data: 'reset'" --once
+ros2 topic pub /sim_control std_msgs/msg/String "data: 'hard-reset'" --once
+ros2 topic pub /sim_control std_msgs/msg/String "data: 'task complete'" --once
+
+
 # original version
 ros2 topic pub /sim_settings std_msgs/msg/String "data: 'name: spot, model: hab_spot, policy: false, confirm settings'" \
   --once --qos-durability transient_local --qos-reliability reliable
