@@ -451,6 +451,7 @@ class VLNSim:
                     "hfov_deg": hfov_deg,
                     "metrics": info["measurements"],
                     "tfs": tf_dict,
+                    "gt_goal_position": self.current_episode["goals"][self.current_episode["closest_goal_idx"]]["location"],
                 }
                 if self.args.task_type=="objnav":
                     if "store" in current_episode["scene_id"]:
