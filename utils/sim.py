@@ -141,8 +141,8 @@ class VLNSim:
                 print(f"[SIM] Setting timeout to 100s for {episode['scene_type']}")
                 self.env.terminations_cfg.time_out.params["max_time"] = 100.0
             else:
-                print(f"[SIM] Setting timeout to 300s for {episode['scene_type']}")
-                self.env.terminations_cfg.time_out.params["max_time"] = 300.0
+                print(f"[SIM] Setting timeout to 150s for {episode['scene_type']}")
+                self.env.terminations_cfg.time_out.params["max_time"] = 150.0
 
     def load_episode(self, episode_label):
         print(f"[SIM] Loading episode: {episode_label}")
@@ -451,6 +451,7 @@ class VLNSim:
                     "hfov_deg": hfov_deg,
                     "metrics": info["measurements"],
                     "tfs": tf_dict,
+                    "gt_goal_position": self.current_episode["goals"][self.current_episode["closest_goal_idx"]]["location"],
                 }
                 if self.args.task_type=="objnav":
                     if "store" in current_episode["scene_id"]:

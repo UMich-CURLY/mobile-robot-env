@@ -102,7 +102,7 @@ class VLNTerminationsCfg:
     Once a termination is activated, the env will put termination reason into info.
     VLNSim will receive the info in update_obs() and pause the socket server until episode resets.
     """
-    time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 300.0})
+    time_out = DoneTerm(func=time_out, time_out=True, params={"max_time": 150.0})
     bad_orientation = DoneTerm(
         func=mdp.bad_orientation,
         params={"limit_angle": float(np.deg2rad(45.0))},
