@@ -51,7 +51,7 @@ class Measure:
         return self._metric
     
     def get_robot_position(self):
-        robot_pos_w = self._env.get_cam_pose()[0]
+        robot_pos_w = self._env.get_body_pose()[0]
         return robot_pos_w
     
 

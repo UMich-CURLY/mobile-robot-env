@@ -204,3 +204,5 @@ logs/
 outputs/
 tools/model_decimation/*.csv
 *.parquet
+tools/statistics/**/*.png
+trajectory_data/

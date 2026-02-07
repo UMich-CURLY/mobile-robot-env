@@ -360,7 +360,7 @@ class SpotRoughEnvCfg(BaseEnvCfg):
         # self.sim.dt = 0.002  # 500 Hz
 
         # general settings
-        self.decimation = 10
+        self.decimation = 10 #todo: change to 4 for better simulation
         self.episode_length_s = 40.
         # simulation settings
         self.sim.dt = 0.005
